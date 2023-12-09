@@ -1,0 +1,20 @@
+package source_files.data.models.vehicleEntities.vehicleFeatures;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import source_files.data.models.baseEntities.ItemEntity;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
+@Table(name = "brands")
+public class BrandEntity extends ItemEntity {
+
+   @Column(name = "name", unique = true)
+   private String name;
+
+}
