@@ -3,18 +3,22 @@ package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarModelEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.Brand;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarModel;
+import source_files.data.models.vehicleEntities.vehicleFeatures.Color;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-//@Table(name = "vehicles") //TODO kontrol edilecek. eğer hata yoksa vehicles tablosu iptal edilecek.
+@MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
+@Table(name = "vehicles") //TODO kontrol edilecek. eğer hata yoksa vehicles tablosu iptal edilecek.
+@Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class VehicleEntity {
 
     @Id
@@ -25,17 +29,18 @@ public class VehicleEntity {
     //@JoinColumn(name = "available_driving_license_types") //TODO Driving license sisteme eklenecek.
     //List<DrivingLicenseType> availableDrivingLicenseTypes;
 
+
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    private BrandEntity brandEntity;
+    private Brand brandEntity;
 
     @ManyToOne
     @JoinColumn(name = "model_id")
-    private CarModelEntity modelEntity;
+    private CarModel modelEntity;
 
     @ManyToOne
     @JoinColumn(name = "color_id")
-    private ColorEntity colorEntity;
+    private Color colorEntity;
 
     @Column(name = "year")
     private int year;

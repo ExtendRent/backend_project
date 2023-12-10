@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.VehicleEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarBodyTypeEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarBodyType;
 
 
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class CarEntity extends VehicleEntity {
 
     @ManyToOne
     @JoinColumn(name = "body_type_id")
-    private CarBodyTypeEntity bodyTypeEntity;
+    private CarBodyType bodyTypeEntity;
 
     @Column(name = "license_plate", unique = true)
     private String licensePlate;

@@ -1,25 +1,21 @@
 package source_files.data.models.baseEntities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-//@Table(name = "items") //TODO kontrol edilecek. eğer hata yoksa items tablosu iptal edilecek.
-public class ItemEntity {
+@Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +30,8 @@ public class ItemEntity {
     @Column(name = "last_modified")
     private Date lastModified;
 
-
     @CreatedDate
     @Column(name = "created_date")
     private Date createdDate;
+
 }
