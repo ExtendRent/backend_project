@@ -1,17 +1,18 @@
 package source_files.data.models.vehicleEntities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.VehicleEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarBodyTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarModelEntity;
 
-
+@Getter
+@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
@@ -19,13 +20,15 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarModelEntity;
 public class CarEntity extends VehicleEntity {
 
     @ManyToOne
-    @JoinColumn(name = "model_id")
-    private CarModelEntity modelEntity;
-
-    @ManyToOne
     @JoinColumn(name = "body_type_id")
     private CarBodyTypeEntity bodyTypeEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "model_id")
+    private CarModelEntity carModelEntity;
+
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
+
+
 }

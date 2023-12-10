@@ -1,19 +1,23 @@
 package source_files.data.models.vehicleEntities.vehicleFeatures;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.baseEntities.ItemEntity;
+import source_files.data.models.baseEntities.Item;
 
-@Data
+@Getter
+@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "color_entity")
-public class ColorEntity extends ItemEntity {
+@Table(name = "color_entities")
+public class ColorEntity extends Item {
 
     @Column(name = "name", unique = true)
     private String name;
