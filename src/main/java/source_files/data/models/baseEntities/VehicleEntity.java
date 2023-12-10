@@ -2,14 +2,14 @@ package source_files.data.models.baseEntities;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.vehicleEntities.vehicleFeatures.Brand;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarModel;
-import source_files.data.models.vehicleEntities.vehicleFeatures.Color;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -32,15 +32,11 @@ public class VehicleEntity {
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    private Brand brandEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "model_id")
-    private CarModel modelEntity;
+    private BrandEntity brandEntity;
 
     @ManyToOne
     @JoinColumn(name = "color_id")
-    private Color colorEntity;
+    private ColorEntity colorEntity;
 
     @Column(name = "year")
     private int year;
@@ -50,4 +46,17 @@ public class VehicleEntity {
 
     @Column(name = "rental_price")
     private double rentalPrice;
+
+    @Builder.Default
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
+
+    @LastModifiedDate
+    @Column(name = "last_modified")
+    private Date lastModified;
+
+    @CreatedDate
+    @Column(name = "created_date")
+    private Date createdDate;
+
 }
