@@ -1,9 +1,6 @@
 package source_files.data.models.baseEntities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,9 +14,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
-public class Item extends BaseEntity {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class BaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
     @Builder.Default
     @Column(name = "is_deleted")
@@ -32,5 +33,4 @@ public class Item extends BaseEntity {
     @CreatedDate
     @Column(name = "created_date")
     private Date createdDate;
-
 }

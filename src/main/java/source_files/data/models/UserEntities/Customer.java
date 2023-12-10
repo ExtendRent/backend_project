@@ -8,18 +8,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.baseEntities.UserEntity;
+import source_files.data.models.baseEntities.User;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "customers")
 @Entity
 @SuperBuilder
-@Table(name = "admins")
-public class AdminEntity extends UserEntity {
+public class Customer extends User {
 
-    @Column(name = "salary")
-    private double salary;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
 }
