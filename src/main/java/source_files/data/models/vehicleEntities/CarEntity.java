@@ -29,4 +29,6 @@ public class CarEntity extends VehicleEntity {
 
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
+
+
 }

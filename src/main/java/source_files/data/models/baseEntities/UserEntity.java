@@ -37,7 +37,7 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "user_type") //TODO alt sınıflara bağlanırken builder default kullanılacak.
+    @Column(name = "user_type")
     private UserType userType;
 
     @Builder.Default
