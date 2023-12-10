@@ -20,6 +20,7 @@ import java.util.Date;
 @SuperBuilder
 //@Table(name = "items") //TODO kontrol edilecek. eğer hata yoksa items tablosu iptal edilecek.
 public class ItemEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

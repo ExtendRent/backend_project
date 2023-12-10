@@ -1,7 +1,10 @@
 package source_files.data.models.UserEntities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.UserEntity;
 
@@ -13,6 +16,7 @@ import source_files.data.models.baseEntities.UserEntity;
 @SuperBuilder
 public class CustomerEntity extends UserEntity {
 
-
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
 }
