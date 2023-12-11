@@ -1,4 +1,4 @@
-package source_files.data.models.vehicleEntities.vehicleFeatures;
+package source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,16 +10,16 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.Item;
 
+
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "colors")
-public class ColorEntity extends Item {
+@Table(name = "car_body_types")
+public class CarBodyTypeEntity extends Item {
 
     @Column(name = "name", unique = true)
     private String name;
-
 }

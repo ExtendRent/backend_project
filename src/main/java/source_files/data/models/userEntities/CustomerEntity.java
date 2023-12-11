@@ -1,4 +1,4 @@
-package source_files.data.models.UserEntities;
+package source_files.data.models.userEntities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.UserEntity;
+import source_files.data.types.DrivingLicenseType;
 
 @Getter
 @Setter
@@ -25,4 +26,6 @@ public class CustomerEntity extends UserEntity {
     @Column(name = "driving_license_number")
     private int drivingLicenseNumber;
 
+    @Column(name = "driving_license_type")
+    private DrivingLicenseType drivingLicenseType;
 }

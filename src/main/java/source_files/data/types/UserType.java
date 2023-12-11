@@ -1,4 +1,4 @@
-package source_files.data.models.baseEntities.types;
+package source_files.data.types;
 
 public enum UserType {
     ADMIN, EMPLOYEE, CUSTOMER

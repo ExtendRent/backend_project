@@ -1,4 +1,4 @@
-package source_files.data.models.vehicleEntities.vehicleFeatures;
+package source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,11 +16,10 @@ import source_files.data.models.baseEntities.Item;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@Table(name = "car_models")
-public class CarModelEntity extends Item {
+@Table(name = "colors")
+public class ColorEntity extends Item {
 
     @Column(name = "name", unique = true)
     private String name;
-
 
 }

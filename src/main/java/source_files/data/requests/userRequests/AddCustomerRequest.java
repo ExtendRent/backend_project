@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
+import source_files.data.types.DrivingLicenseType;
 
 @Builder
 public record AddCustomerRequest(
@@ -28,5 +29,7 @@ public record AddCustomerRequest(
         int phoneNumber,
 
         @Size(max = 6)//-> Ehliyet seri numarası 6 haneli olur.
-        int drivingLicenseNumber) {
+        int drivingLicenseNumber,
+
+        DrivingLicenseType drivingLicenseType) {
 }
