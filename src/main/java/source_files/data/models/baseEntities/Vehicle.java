@@ -7,9 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.types.DrivingLicenseType;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
+import source_files.data.types.DrivingLicenseType;
 
 import java.util.List;
 
