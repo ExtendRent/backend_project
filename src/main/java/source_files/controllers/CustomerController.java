@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import source_files.data.responses.TResponse;
 import source_files.data.requests.userRequests.AddCustomerRequest;
+import source_files.data.responses.TResponse;
 import source_files.services.userServices.abstracts.CustomerService;
 
 @RestController
@@ -17,10 +17,10 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("/add/customer")
-    public ResponseEntity<TResponse<?>> addCustomer(@RequestBody AddCustomerRequest addCustomerReq) {
+    public ResponseEntity<TResponse<?>> addCustomer(@RequestBody AddCustomerRequest addCustomerRequest) {
         return ResponseEntity.ok(TResponse.builder()
                 .isSuccess(true)
-                .response(this.customerService.add(addCustomerReq))
+                .response(this.customerService.add(addCustomerRequest))
                 .message("Müşteri eklendi")
                 .build()
         );
