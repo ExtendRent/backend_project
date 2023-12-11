@@ -1,13 +1,12 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import source_files.data.models.baseEntities.types.UserType;
-
-import java.util.Date;
 
 
 @Getter
@@ -16,14 +15,8 @@ import java.util.Date;
 @NoArgsConstructor
 @SuperBuilder
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
-@Table(name = "users") //TODO kontrol edilecek. eğer hata yoksa users tablosu iptal edilecek.
 @Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
-public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+public class User extends BaseEntity {
 
     @Column(name = "name")
     private String name;
@@ -40,15 +33,4 @@ public class UserEntity {
     @Column(name = "user_type")
     private UserType userType;
 
-    @Builder.Default
-    @Column(name = "is_deleted")
-    private boolean isDeleted = false;
-
-    @LastModifiedDate
-    @Column(name = "last_modified")
-    private Date lastModified;
-
-    @CreatedDate
-    @Column(name = "created_date")
-    private Date createdDate;
 }

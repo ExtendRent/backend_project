@@ -1,12 +1,13 @@
 package source_files.data.models.baseEntities;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -15,23 +16,6 @@ import java.util.Date;
 @NoArgsConstructor
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
-public class Item {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Builder.Default
-    @Column(name = "is_deleted")
-    private boolean isDeleted = false;
-
-    @LastModifiedDate
-    @Column(name = "last_modified")
-    private Date lastModified;
-
-    @CreatedDate
-    @Column(name = "created_date")
-    private Date createdDate;
+public class Item extends BaseEntity {
 
 }
