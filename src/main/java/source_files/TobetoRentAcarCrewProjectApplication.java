@@ -7,8 +7,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class TobetoRentAcarCrewProjectApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TobetoRentAcarCrewProjectApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TobetoRentAcarCrewProjectApplication.class, args);
+        //DENEMEe
+    }
+
 
 }
