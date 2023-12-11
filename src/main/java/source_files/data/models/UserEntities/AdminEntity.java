@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.baseEntities.User;
+import source_files.data.models.baseEntities.UserEntity;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ import source_files.data.models.baseEntities.User;
 @Entity
 @SuperBuilder
 @Table(name = "admins")
-public class AdminEntity extends User {
+public class AdminEntity extends UserEntity {
 
     @Column(name = "salary")
     private double salary;

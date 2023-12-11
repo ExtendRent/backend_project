@@ -14,9 +14,11 @@ import source_files.data.models.baseEntities.types.UserType;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
-@Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
-public class User extends BaseEntity {
+//@MappedSuperclass//->Bu sınıf entity olduğu için bu anotasyonu KULLANAMAYIZ !!!
+@Inheritance(strategy = InheritanceType.JOINED)//-> kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
+@Entity
+@Table(name = "users")
+public class UserEntity extends BaseEntity {
 
     @Column(name = "name")
     private String name;

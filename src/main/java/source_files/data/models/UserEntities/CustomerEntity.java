@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.baseEntities.User;
+import source_files.data.models.baseEntities.UserEntity;
 
 @Getter
 @Setter
@@ -17,9 +17,12 @@ import source_files.data.models.baseEntities.User;
 @Entity
 @Table(name = "customers")
 @SuperBuilder
-public class CustomerEntity extends User {
+public class CustomerEntity extends UserEntity {
 
     @Column(name = "phone_number")
-    private String phoneNumber;
+    private int phoneNumber;
+
+    @Column(name = "driving_license_number")
+    private int drivingLicenseNumber;
 
 }
