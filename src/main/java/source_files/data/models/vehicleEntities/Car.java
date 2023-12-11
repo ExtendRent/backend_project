@@ -29,8 +29,4 @@ public class Car extends Vehicle {
 
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
-
-    @Column(name = "rental_price")
-    private int rentalPrice;
-
 }
