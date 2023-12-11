@@ -18,7 +18,6 @@ import source_files.data.models.baseEntities.types.UserType;
 @Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class User extends BaseEntity {
 
-
     @Column(name = "name")
     private String name;
 
@@ -33,4 +32,5 @@ public class User extends BaseEntity {
 
     @Column(name = "user_type")
     private UserType userType;
+
 }

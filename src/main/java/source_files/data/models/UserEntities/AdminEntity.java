@@ -3,10 +3,7 @@ package source_files.data.models.UserEntities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.User;
 
@@ -14,12 +11,12 @@ import source_files.data.models.baseEntities.User;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "customers")
 @Entity
 @SuperBuilder
-public class Customer extends User {
+@Table(name = "admins")
+public class AdminEntity extends User {
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    @Column(name = "salary")
+    private double salary;
 
 }
