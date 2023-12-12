@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.Vehicle;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarBodyTypeEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarModelEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 
 @Getter
 @Setter
@@ -29,6 +29,4 @@ public class Car extends Vehicle {
 
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
-
-
 }

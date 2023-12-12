@@ -1,4 +1,4 @@
-package source_files.data.models.UserEntities;
+package source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,18 +8,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.baseEntities.User;
+import source_files.data.models.baseEntities.Item;
+
 
 @Getter
 @Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "customers")
 @SuperBuilder
-public class CustomerEntity extends User {
+@Table(name = "car_body_types")
+public class CarBodyTypeEntity extends Item {
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
+    @Column(name = "name", unique = true)
+    private String name;
 }

@@ -1,11 +1,14 @@
-package source_files.data.models.UserEntities;
+package source_files.data.models.userEntities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.baseEntities.User;
+import source_files.data.models.baseEntities.UserEntity;
 
 @Getter
 @Setter
@@ -14,7 +17,8 @@ import source_files.data.models.baseEntities.User;
 @Entity
 @SuperBuilder
 @Table(name = "admins")
-public class AdminEntity extends User {
+public class AdminEntity extends UserEntity {
+
 
     @Column(name = "salary")
     private double salary;

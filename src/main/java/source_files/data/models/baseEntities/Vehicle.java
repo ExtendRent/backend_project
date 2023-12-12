@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
+import source_files.data.types.DrivingLicenseType;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,10 +21,6 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
 @Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class Vehicle extends BaseEntity {
-
-
-    //@JoinColumn(name = "available_driving_license_types") //TODO Driving license sisteme eklenecek.
-    //List<DrivingLicenseType> availableDrivingLicenseTypes;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -39,5 +38,7 @@ public class Vehicle extends BaseEntity {
 
     @Column(name = "rental_price")
     private double rentalPrice;
+
+    private List<DrivingLicenseType> expectedDrivingLicenseTypes; //-> kullanıcıdan beklenen ehliyet sınıfları.
 
 }

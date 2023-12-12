@@ -1,4 +1,4 @@
-package source_files.data.models.vehicleEntities.vehicleFeatures;
+package source_files.data.models.userEntities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,18 +8,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.UserEntity;
 
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @SuperBuilder
-@Table(name = "colors")
-public class ColorEntity extends Item {
+@Table(name = "employees")
+public class EmployeeEntity extends UserEntity {
 
-    @Column(name = "name", unique = true)
-    private String name;
-
+    @Column(name = "salary")
+    private double salary;
 }
