@@ -1,5 +1,5 @@
 # ExtendRent
-![logo]([url](https://github.com/kullaniciAdi/projeAdi/blob/main/assets/extendRentLogoV1.png))
+![logo]([url](https://github.com/GokhanAsilturk/tobeto_rentAcar_crew_project/src/main/assets/extendRentLogoV1.png))
 
 
 ExtendRent is a car rental application developed using Java, SpringBoot, and React technologies.
