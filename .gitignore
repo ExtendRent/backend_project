@@ -19,6 +19,7 @@ src/main/resources/application.properties
 *.iws
 *.iml
 *.ipr
+misc.xml
 
 ### NetBeans ###
 /nbproject/private/
@@ -29,6 +30,7 @@ src/main/resources/application.properties
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+misc.xml
+compiler.xml
 ### VS Code ###
 .vscode/

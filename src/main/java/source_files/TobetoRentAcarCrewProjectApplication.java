@@ -9,7 +9,7 @@ public class TobetoRentAcarCrewProjectApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TobetoRentAcarCrewProjectApplication.class, args);
-        //DENEMEe
+        
     }
 
 

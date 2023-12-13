@@ -17,7 +17,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarM
 @NoArgsConstructor
 @SuperBuilder
 @Table(name = "cars")
-public class Car extends Vehicle {
+public class CarEntity extends Vehicle {
 
     @ManyToOne
     @JoinColumn(name = "body_type_id")
