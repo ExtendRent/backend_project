@@ -29,4 +29,7 @@ public class CarEntity extends Vehicle {
 
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
+
+    @Column(name = "kilometer")
+    private int kilometer;
 }
