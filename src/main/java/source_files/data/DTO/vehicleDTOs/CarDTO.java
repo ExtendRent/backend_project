@@ -15,5 +15,4 @@ public record CarDTO(BrandEntity brandEntity,
                      String licensePlate,
                      String details) {
 
-
 }
