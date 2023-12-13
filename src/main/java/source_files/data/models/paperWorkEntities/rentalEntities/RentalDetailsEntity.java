@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 import source_files.data.models.baseEntities.Item;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.userEntities.CustomerEntity;
-import source_files.data.models.vehicleEntities.Car;
+import source_files.data.models.vehicleEntities.CarEntity;
 
 import java.time.LocalDateTime;
 
@@ -25,7 +25,7 @@ public class RentalDetailsEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "car_id")
-    private Car car;
+    private CarEntity carEntity;
 
     @ManyToOne
     @JoinColumn(name = "payment_detail_id")
