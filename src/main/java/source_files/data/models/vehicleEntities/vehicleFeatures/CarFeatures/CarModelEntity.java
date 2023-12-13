@@ -1,8 +1,6 @@
 package source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +20,8 @@ public class CarModelEntity extends Item {
     @Column(name = "name", unique = true)
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private BrandEntity brandEntity;
 
 }
