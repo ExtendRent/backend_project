@@ -20,6 +20,7 @@ tobeto_rentAcar_crew_project/.idea/misc.xml
 *.iws
 *.iml
 *.ipr
+misc.xml
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,6 +31,7 @@ tobeto_rentAcar_crew_project/.idea/misc.xml
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
+misc.xml
+compiler.xml
 ### VS Code ###
 .vscode/

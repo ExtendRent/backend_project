@@ -18,7 +18,7 @@ public class CustomerController {
 
     @PostMapping("/add/customer")
     public ResponseEntity<TResponse<?>> addCustomer(@RequestBody AddCustomerRequest addCustomerRequest) {
-        return ResponseEntity.ok(TResponse.builder()
+        return ResponseEntity.ok(TResponse.tResponseBuilder() //TODO Builder okunmuyor. çözülecek.
                 .isSuccess(true)
                 .response(this.customerService.add(addCustomerRequest))
                 .message("Müşteri eklendi")
