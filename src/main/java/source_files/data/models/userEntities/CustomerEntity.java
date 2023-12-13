@@ -20,10 +20,10 @@ import source_files.data.types.DrivingLicenseType;
 @SuperBuilder
 public class CustomerEntity extends UserEntity {
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true)
     private int phoneNumber;
 
-    @Column(name = "driving_license_number")
+    @Column(name = "driving_license_number", unique = true)
     private int drivingLicenseNumber;
 
     @Column(name = "driving_license_type")
