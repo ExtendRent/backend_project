@@ -7,12 +7,12 @@ import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.services.entityServices.abstracts.CustomerEntityService;
 import source_files.services.userServices.abstracts.CustomerService;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class CustomerManager implements CustomerService {
-private final CustomerEntityService customerEntityService;
+
+    private final CustomerEntityService customerEntityService;
+
     @Override
     public CustomerDTO add(AddCustomerRequest addCustomerRequest) {
         return null;
