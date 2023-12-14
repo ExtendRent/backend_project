@@ -23,3 +23,6 @@ You can find the GitHub profiles of our team members who contributed to the proj
 
 - Regularly expanding product portfolio for rentals
 - Opportunity to rent desired products anytime, anywhere
+
+## ER Diagram:
+![ERDiagram](https://github.com/GokhanAsilturk/tobeto_rentAcar_crew_project/assets/92371744/0263efcb-78ca-4254-9b60-0c9c3a646b5b)
