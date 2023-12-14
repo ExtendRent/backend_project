@@ -7,13 +7,15 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarM
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 
 @Builder
-public record CarDTO(BrandEntity brandEntity,
-                     ColorEntity Color,
+public record CarDTO(
+                     ColorEntity color,
                      int year,
                      CarBodyTypeEntity bodyType,
                      CarModelEntity model,
                      String licensePlate,
-                     String details) {
+                     String details,
+                     double rentalPrice,
+                     int kilometer) {
 
 
 }
