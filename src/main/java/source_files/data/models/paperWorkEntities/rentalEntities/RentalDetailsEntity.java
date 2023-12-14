@@ -25,6 +25,7 @@ public class RentalDetailsEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "car_id")
+
     private CarEntity carEntity;
 
     @ManyToOne
