@@ -3,5 +3,5 @@ package source_files.data.DTO.itemDTOs;
 import lombok.Builder;
 
 @Builder
-public record BrandDTO(String name) {
+public record ColorDTO(String name) {
 }

@@ -16,7 +16,8 @@ import java.util.Date;
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 public class BaseEntity {
-
+    //deneme
+    //deneme2
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
