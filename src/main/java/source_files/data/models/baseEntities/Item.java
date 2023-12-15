@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
 @AllArgsConstructor
 //@NoArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class Item extends BaseEntity {
 

@@ -15,7 +15,7 @@ import source_files.data.models.baseEntities.UserEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SuperBuilder
+//@SuperBuilder
 @Table(name = "admins")
 public class AdminEntity extends UserEntity {
 

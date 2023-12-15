@@ -17,7 +17,7 @@ import source_files.data.types.DrivingLicenseType;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-@SuperBuilder
+//@SuperBuilder
 public class CustomerEntity extends UserEntity {
 
     @Column(name = "phone_number", unique = true)

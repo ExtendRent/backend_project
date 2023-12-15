@@ -13,7 +13,7 @@ import source_files.data.models.baseEntities.Item;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SuperBuilder
+//@SuperBuilder
 @Table(name = "payment_details")
 public class PaymentDetailsEntity extends Item {
 
