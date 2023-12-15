@@ -22,5 +22,5 @@ public class AddCarRequest {
     double rentalPrice;
     String licensePlate;
     int kilometer;
-    //List<DrivingLicenseType> expectedDrivingLicenseTypes;
+    List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }
