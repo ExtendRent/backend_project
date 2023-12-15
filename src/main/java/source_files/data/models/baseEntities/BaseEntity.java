@@ -13,16 +13,15 @@ import java.util.Date;
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 public class BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Builder.Default
+    //@Builder.Default
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
 

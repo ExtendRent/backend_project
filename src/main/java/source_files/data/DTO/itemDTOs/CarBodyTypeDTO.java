@@ -7,6 +7,6 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class BrandDTO {
+public class CarBodyTypeDTO {
     String name;
 }

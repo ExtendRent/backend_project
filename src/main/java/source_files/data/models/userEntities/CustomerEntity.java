@@ -17,14 +17,14 @@ import source_files.data.types.DrivingLicenseType;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-@SuperBuilder
+//@SuperBuilder
 public class CustomerEntity extends UserEntity {
 
-    @Column(name = "phone_number")
-    private int phoneNumber;
+    @Column(name = "phone_number", unique = true)
+    private String phoneNumber;
 
-    @Column(name = "driving_license_number")
-    private int drivingLicenseNumber;
+    @Column(name = "driving_license_number", unique = true)
+    private String drivingLicenseNumber;
 
     @Column(name = "driving_license_type")
     private DrivingLicenseType drivingLicenseType;

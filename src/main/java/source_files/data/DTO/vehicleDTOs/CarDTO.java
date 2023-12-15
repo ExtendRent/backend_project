@@ -1,19 +1,25 @@
 package source_files.data.DTO.vehicleDTOs;
 
-import lombok.Builder;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
+import lombok.*;
+import source_files.data.types.DrivingLicenseType;
+
+import java.util.List;
 
 @Builder
-public record CarDTO(BrandEntity brandEntity,
-                     ColorEntity Color,
-                     int year,
-                     CarBodyTypeEntity bodyType,
-                     CarModelEntity model,
-                     String licensePlate,
-                     String details) {
-
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class CarDTO {
+    //TODO brand model color bodyType null dönüyor.
+    String brandEntityName;
+    String modelName;
+    String colorName;
+    int year;
+    String bodyTypeName;
+    String details;
+    double rentalPrice;
+    String licensePlate;
+    int kilometer;
+    List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }

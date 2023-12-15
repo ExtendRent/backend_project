@@ -15,7 +15,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarM
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 @Table(name = "cars")
 public class CarEntity extends Vehicle {
 
@@ -29,4 +29,7 @@ public class CarEntity extends Vehicle {
 
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
+
+    @Column(name = "kilometer")
+    private int kilometer;
 }
