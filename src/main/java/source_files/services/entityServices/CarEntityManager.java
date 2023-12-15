@@ -16,4 +16,15 @@ public class CarEntityManager implements CarEntityService {
     public CarEntity add(CarEntity carEntity) {
         return this.carRepository.save(carEntity);
     }
+
+    @Override
+    public CarEntity update(CarEntity carEntity) {
+        //CarEntity uptatedCar = carRepository.findById(id).orElseThrow();
+        return this.carRepository.save(carEntity);
+    }
+
+    @Override
+    public CarEntity getById(int id) {
+        return this.carRepository.findById(id).orElseThrow();
+    }
 }

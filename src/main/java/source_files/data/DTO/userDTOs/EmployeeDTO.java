@@ -1,10 +1,15 @@
 package source_files.data.DTO.userDTOs;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Builder
-public record EmployeeDTO(String name,
-                          String surname,
-                          String email,
-                          double salary) {
+@Getter
+@Setter
+public class EmployeeDTO {
+    String name;
+    String surname;
+    String email;
+    double salary;
 }

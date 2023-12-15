@@ -1,7 +1,12 @@
 package source_files.data.DTO.paperWorkDTOs;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Builder
-public record PaymentTypeDTO(String name) {
+@Getter
+@Setter
+public class PaymentTypeDTO {
+    String name;
 }

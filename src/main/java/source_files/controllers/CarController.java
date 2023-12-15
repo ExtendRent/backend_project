@@ -2,11 +2,9 @@ package source_files.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleService.abstracts.CarService;
 
@@ -26,5 +24,13 @@ public class CarController {
                 .build()
         );
     }
-
+    @PutMapping("/update/car/{id}")
+    public  ResponseEntity<TResponse<?>> updateCar(@RequestBody UpdateCarRequest updateCarRequest,@PathVariable int id) {
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.carService.update(updateCarRequest,id))
+                .message("Araba güncellendi")
+                .build()
+        );
+    }
 }
