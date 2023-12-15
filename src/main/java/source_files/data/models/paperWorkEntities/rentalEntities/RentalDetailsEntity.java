@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SuperBuilder
+//@SuperBuilder
 @Table(name = "rental_details")
 public class RentalDetailsEntity extends Item {
 
@@ -33,7 +33,7 @@ public class RentalDetailsEntity extends Item {
     private PaymentDetailsEntity paymentDetailsEntity;
 
     @Column(name = "start_date")
-    @Builder.Default
+    //@Builder.Default
     private LocalDateTime startDate = LocalDateTime.now();
 
     @Column(name = "end_date")

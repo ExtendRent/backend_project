@@ -15,7 +15,7 @@ import source_files.data.models.baseEntities.Item;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 @Table(name = "colors")
 public class ColorEntity extends Item {
 

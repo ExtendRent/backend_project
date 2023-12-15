@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class ModelMapperManager implements ModelMapperService{
+public class ModelMapperManager implements ModelMapperService {
     private ModelMapper modelMapper;
+
     @Override
     public ModelMapper forResponse() {
         this.modelMapper.getConfiguration()
@@ -21,7 +22,7 @@ public class ModelMapperManager implements ModelMapperService{
     public ModelMapper forRequest() {
         this.modelMapper.getConfiguration()
                 .setAmbiguityIgnored(true)
-                .setMatchingStrategy(MatchingStrategies.STANDARD);
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
         return this.modelMapper;
     }
 }

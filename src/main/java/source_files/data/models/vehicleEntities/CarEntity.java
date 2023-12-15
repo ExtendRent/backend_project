@@ -15,7 +15,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarM
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 @Table(name = "cars")
 public class CarEntity extends Vehicle {
 

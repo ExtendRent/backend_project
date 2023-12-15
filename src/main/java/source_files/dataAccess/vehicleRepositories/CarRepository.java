@@ -1,4 +1,7 @@
 package source_files.dataAccess.vehicleRepositories;
 
-public interface CarRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import source_files.data.models.vehicleEntities.CarEntity;
+
+public interface CarRepository extends JpaRepository<CarEntity,Integer> {
 }

@@ -7,5 +7,6 @@ public interface CustomerService {
 
     CustomerDTO add(AddCustomerRequest addCustomerRequest);
 
-    CustomerDTO getByPhoneNumber();
+    CustomerDTO getByPhoneNumber(String phoneNumber);
+    
 }

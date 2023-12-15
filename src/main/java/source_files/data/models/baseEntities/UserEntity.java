@@ -13,7 +13,7 @@ import source_files.data.types.UserType;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 //@MappedSuperclass//->Bu sınıf entity olduğu için bu anotasyonu KULLANAMAYIZ(artık bir üst sınıftaki kolonlar da bu sınıfa gelecek). !!!
 @Inheritance(strategy = InheritanceType.JOINED)
 //-> kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.

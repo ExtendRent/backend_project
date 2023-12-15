@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+//@SuperBuilder
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
 @Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class Vehicle extends BaseEntity {
@@ -33,6 +33,7 @@ public class Vehicle extends BaseEntity {
 
     @Column(name = "rental_price")
     private double rentalPrice;
+
 
     private List<DrivingLicenseType> expectedDrivingLicenseTypes; //-> kullanıcıdan beklenen ehliyet sınıfları.
 
