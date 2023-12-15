@@ -8,6 +8,7 @@ import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
+import source_files.services.BusinessRules.CarBusinessRules;
 import source_files.services.entityServices.CarEntityManager;
 import source_files.services.vehicleService.abstracts.CarService;
 
@@ -23,12 +24,13 @@ public class CarManager implements CarService {
     private final CarEntityManager carEntityManager;
 
     private final CarRepository carRepository;
-
+    private final CarBusinessRules carBusinessRules;
 
     @Override
     public CarDTO add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
-        //addCarRequest.setLicensePlate(addCarRequest.getLicensePlate().toUpperCase().replaceAll("\s", ""));
+
+        addCarRequest.setLicensePlate(carBusinessRules.licensePlateUnique(addCarRequest.getLicensePlate()));
         CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
         CarDTO carDTO = modelMapperService.forResponse().map(carEntityManager.add(carEntity),CarDTO.class);
         return carDTO;
