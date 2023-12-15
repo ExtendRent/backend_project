@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 public class AddCarRequest {
 
+    int branId;
     int bodyTypeId;
     int modelId;
     int colorId;

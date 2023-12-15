@@ -10,6 +10,6 @@ public interface CarService {
 
     CarDTO getById(int id);
 
-    CarDTO update(UpdateCarRequest updateCarRequest,int id);
+    CarDTO update(UpdateCarRequest updateCarRequest);
 
 }

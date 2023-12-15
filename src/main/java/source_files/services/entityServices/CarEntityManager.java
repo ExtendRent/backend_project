@@ -27,4 +27,9 @@ public class CarEntityManager implements CarEntityService {
     public CarEntity getById(int id) {
         return this.carRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public void delete(CarEntity carEntity) {
+        this.carRepository.delete(carEntity);
+    }
 }

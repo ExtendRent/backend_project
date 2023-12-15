@@ -24,11 +24,11 @@ public class CarController {
                 .build()
         );
     }
-    @PutMapping("/update/car/{id}")
-    public  ResponseEntity<TResponse<?>> updateCar(@RequestBody UpdateCarRequest updateCarRequest,@PathVariable int id) {
+    @PutMapping("/update/car")
+    public  ResponseEntity<TResponse<?>> updateCar(@RequestBody UpdateCarRequest updateCarRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.carService.update(updateCarRequest,id))
+                .response(this.carService.update(updateCarRequest))
                 .message("Araba güncellendi")
                 .build()
         );
