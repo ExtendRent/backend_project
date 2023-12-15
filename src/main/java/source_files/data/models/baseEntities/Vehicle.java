@@ -37,7 +37,7 @@ public class Vehicle extends BaseEntity {
     @Column(name = "is_available")
     private Boolean isAvailable;
 
-
+    @Column(name = "expected_driving_license_types")
     private List<DrivingLicenseType> expectedDrivingLicenseTypes; //-> kullanıcıdan beklenen ehliyet sınıfları.
 
 }

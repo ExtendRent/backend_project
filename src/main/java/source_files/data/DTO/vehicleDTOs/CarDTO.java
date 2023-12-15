@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CarDTO {
     //TODO brand model color bodyType null dönüyor.
+    int id;
     String brandName;
     String modelName;
     String colorName;
