@@ -11,6 +11,10 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.services.entityServices.CarEntityManager;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import javax.swing.text.html.parser.Entity;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class CarManager implements CarService {
@@ -23,10 +27,11 @@ public class CarManager implements CarService {
 
     @Override
     public CarDTO add(AddCarRequest addCarRequest) {
-        //Tek satırda yazdık. Ayrılmış hali Customer Manager sınıfında add methodunda mevcut.
-
-        return this.modelMapperService.forResponse().map(carEntityManager
-                .add(modelMapperService.forRequest().map(addCarRequest, CarEntity.class)), CarDTO.class);
+        //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
+        //addCarRequest.setLicensePlate(addCarRequest.getLicensePlate().toUpperCase().replaceAll("\s", ""));
+        CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
+        CarDTO carDTO = modelMapperService.forResponse().map(carEntityManager.add(carEntity),CarDTO.class);
+        return carDTO;
     }
 
     @Override
@@ -44,5 +49,20 @@ public class CarManager implements CarService {
 
         return modelMapperService.forResponse().map(carEntity, CarDTO.class);
 
+    }
+
+    @Override
+    public List<CarDTO> getAll() {
+        List<CarEntity> carEntityList = carEntityManager.getAll();
+        List<CarDTO> carDTOList=carEntityList.stream()
+                .map(carEntity -> this.modelMapperService.forResponse()
+                .map(carEntity,CarDTO.class)).collect(Collectors.toList());
+        return carDTOList;
+
+    }
+
+    @Override
+    public void delete(int id) {
+        this.carEntityManager.delete(this.carEntityManager.getById(id));
     }
 }
