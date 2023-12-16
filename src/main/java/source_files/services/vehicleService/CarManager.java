@@ -24,13 +24,14 @@ public class CarManager implements CarService {
     private final CarEntityManager carEntityManager;
 
     private final CarRepository carRepository;
-    private final CarBusinessRules carBusinessRules;
+    private CarBusinessRules businessRules;
 
     @Override
     public CarDTO add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
-
-        addCarRequest.setLicensePlate(carBusinessRules.licensePlateUnique(addCarRequest.getLicensePlate()));
+        //addCarRequest.setLicensePlate(addCarRequest.getLicensePlate().toUpperCase().replaceAll("\s", ""));
+        String editPlate = this.businessRules.plateUniqueness(addCarRequest.getLicensePlate());
+        addCarRequest.setLicensePlate(editPlate);
         CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
         CarDTO carDTO = modelMapperService.forResponse().map(carEntityManager.add(carEntity),CarDTO.class);
         return carDTO;
