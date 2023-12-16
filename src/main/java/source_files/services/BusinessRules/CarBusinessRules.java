@@ -7,14 +7,10 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 @Service
 public class CarBusinessRules {
     private final CarRepository carRepository;
-    public String plateUniqueness (String plate){
+
+    public String licensePlateUnique(String plate){
 
         String licensePlate = plate.replace(" ", "").toUpperCase();
-        boolean result = this.carRepository.existsByLicensePlate(licensePlate);
-        if (result) {
-            throw new IllegalArgumentException("Car Plate already exists! : " + plate);
-        }
-
         return licensePlate;
     }
 

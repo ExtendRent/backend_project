@@ -4,9 +4,6 @@ import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import source_files.data.types.DrivingLicenseType;
-
-import java.util.List;
 
 //@Builder
 @Getter
@@ -14,6 +11,7 @@ import java.util.List;
 @Builder
 public class AddCarRequest {
 
+    int id;
     int brandId;
     int bodyTypeId;
     @Min(0)
