@@ -6,6 +6,8 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Colo
 import source_files.dataAccess.vehicleFeaturesRespositories.ColorRepository;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ColorEntityManager implements ColorEntityService {
@@ -13,22 +15,27 @@ public class ColorEntityManager implements ColorEntityService {
     private final ColorRepository colorRepository;
 
     @Override
-    public ColorEntity addColor(ColorEntity colorEntity) {
-        return this.colorRepository.save(colorEntity);
+    public ColorEntity add(ColorEntity colorEntity) {
+        return colorRepository.save(colorEntity);
     }
 
     @Override
-    public ColorEntity updateColor(ColorEntity colorEntity) {
-        return this.colorRepository.save(colorEntity);
+    public ColorEntity update(ColorEntity colorEntity) {
+        return colorRepository.save(colorEntity);
     }
 
     @Override
-    public ColorEntity getColorById(int id) {
-        return this.colorRepository.findById(id).orElseThrow();
+    public ColorEntity getById(int id) {
+        return colorRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public void deleteColor(ColorEntity colorEntity) {
-        this.colorRepository.delete(colorEntity);
+    public void delete(ColorEntity colorEntity) {
+        colorRepository.delete(colorEntity);
+    }
+
+    @Override
+    public List<ColorEntity> getAll() {
+        return colorRepository.findAll();
     }
 }

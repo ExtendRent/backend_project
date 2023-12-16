@@ -18,7 +18,7 @@ public class CarController {
 
     @PostMapping("/add/car")
     public ResponseEntity<TResponse<?>> addCar(@RequestBody AddCarRequest addCarRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder() //TODO Builder okunmuyor. çözülecek.
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.add(addCarRequest))
                 .message("Araba eklendi")
