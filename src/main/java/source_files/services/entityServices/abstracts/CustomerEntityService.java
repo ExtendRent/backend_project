@@ -7,8 +7,13 @@ public interface CustomerEntityService {
 
     CustomerEntity add(CustomerEntity customerEntity);
 
+    CustomerEntity update(CustomerEntity customerEntity);
+
+    CustomerEntity getById(int id);
+
     CustomerEntity getByPhoneNumber(String phoneNumber);
 
+    void delete(CustomerEntity customerEntity);
 
 
 }
