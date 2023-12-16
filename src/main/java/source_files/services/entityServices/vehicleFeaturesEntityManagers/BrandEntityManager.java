@@ -6,29 +6,39 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Bran
 import source_files.dataAccess.vehicleFeaturesRespositories.BrandRespository;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class BrandEntityManager implements BrandEntityService {
 
     private final BrandRespository brandRespository;
 
+
     @Override
-    public BrandEntity addBrand(BrandEntity brandEntity) {
-        return this.brandRespository.save(brandEntity);
+    public BrandEntity add(BrandEntity brandEntity) {
+        return brandRespository.save(brandEntity);
     }
 
     @Override
-    public BrandEntity updateBrand(BrandEntity brandEntity) {
-        return this.brandRespository.save(brandEntity);
+    public BrandEntity update(BrandEntity brandEntity) {
+
+        return brandRespository.save(brandEntity);
     }
 
     @Override
-    public BrandEntity getBrandById(int id) {
-        return this.brandRespository.findById(id).orElseThrow();
+    public BrandEntity getById(int id) {
+
+        return brandRespository.findById(id).orElseThrow();
     }
 
     @Override
-    public void deleteBrand(BrandEntity brandEntity) {
-        this.brandRespository.delete(brandEntity);
+    public void delete(BrandEntity brandEntity) {
+        brandRespository.delete(brandEntity);
+    }
+
+    @Override
+    public List<BrandEntity> getAll() {
+        return brandRespository.findAll();
     }
 }

@@ -3,63 +3,67 @@ package source_files.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import source_files.data.DTO.vehicleDTOs.CarDTO;
-import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
-import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
+import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
+import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.responses.TResponse;
-import source_files.services.vehicleService.abstracts.CarService;
+import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
 @RestController
-@RequestMapping("api/car")
+@RequestMapping("api/color")
 @AllArgsConstructor
-public class CarController {
+public class ColorController {
+    private ColorService colorService;
 
-    private final CarService carService;
 
-    @PostMapping("/add/car")
-    public ResponseEntity<TResponse<?>> addCar(@RequestBody AddCarRequest addCarRequest) {
+    @PostMapping("/add/color")
+    public ResponseEntity<TResponse<?>> addColor(@RequestBody AddColorRequest addColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.carService.add(addCarRequest))
-                .message("Araba eklendi")
+                .response(this.colorService.add(addColorRequest))
+                .message("Renk eklendi")
                 .build()
         );
     }
-    @PutMapping("/update/car")
-    public  ResponseEntity<TResponse<?>> updateCar(@RequestBody UpdateCarRequest updateCarRequest) {
+
+    @PutMapping("/update/color")
+    public  ResponseEntity<TResponse<?>> updateColor(@RequestBody UpdateColorRequest updateColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.carService.update(updateCarRequest))
-                .message("Araba güncellendi")
+                .response(this.colorService.update(updateColorRequest))
+                .message("Renk güncellendi")
                 .build()
         );
     }
+
     @GetMapping("getById/{id}")
     public  ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.carService.getById(id))
-                .message(id+"li araba görüntülendi")
+                .response(this.colorService.getById(id))
+                .message(id+"li renk görüntülendi")
                 .build()
         );
     }
+
     @GetMapping("getAll")
     public  ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.carService.getAll())
-                .message("Araba Listesi döndü.")
+                .response(this.colorService.getAll())
+                .message("Renk Listesi döndü.")
                 .build()
         );
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id) {
 
-        this.carService.delete(id);
+        this.colorService.delete(id);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .message("Araba silindi.")
+                .message("Renk silindi.")
                 .build()
         );
     }
+
 }
