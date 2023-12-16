@@ -11,6 +11,7 @@ import lombok.Setter;
 @Builder
 public class AddCarRequest {
 
+    int id;
     int brandId;
     int bodyTypeId;
     @Min(0)
