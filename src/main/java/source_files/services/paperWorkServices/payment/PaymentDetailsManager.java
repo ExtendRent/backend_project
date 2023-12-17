@@ -10,8 +10,8 @@ public class PaymentDetailsManager {
         this.paymentMain = paymentMain;
     }
 
-    String pay(PaymentType paymentType, String kartBilgileri){
-        return paymentMain.main(paymentType,kartBilgileri);
+    String pay(PaymentType paymentType, String kartBilgileri) {
+        return paymentMain.main(paymentType, kartBilgileri);
     }
 
 

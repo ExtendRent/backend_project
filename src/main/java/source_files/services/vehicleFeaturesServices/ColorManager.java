@@ -22,14 +22,14 @@ public class ColorManager implements ColorService {
 
     @Override
     public ColorDTO add(AddColorRequest addColorRequest) {
-        ColorEntity color = modelMapperService.forRequest().map(addColorRequest,ColorEntity.class);
-        ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityManager.add(color),ColorDTO.class);
+        ColorEntity color = modelMapperService.forRequest().map(addColorRequest, ColorEntity.class);
+        ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityManager.add(color), ColorDTO.class);
         return colorDTO;
     }
 
     @Override
     public ColorDTO update(UpdateColorRequest updateColorRequest) {
-        ColorEntity color = modelMapperService.forRequest().map(updateColorRequest,ColorEntity.class);
+        ColorEntity color = modelMapperService.forRequest().map(updateColorRequest, ColorEntity.class);
         ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityManager.update(color), ColorDTO.class);
         return colorDTO;
     }
@@ -37,7 +37,7 @@ public class ColorManager implements ColorService {
     @Override
     public ColorDTO getById(int id) {
 
-        ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityManager.getById(id),ColorDTO.class);
+        ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityManager.getById(id), ColorDTO.class);
         return colorDTO;
     }
 
@@ -50,7 +50,7 @@ public class ColorManager implements ColorService {
     @Override
     public List<ColorDTO> getAll() {
         List<ColorEntity> colorList = colorEntityManager.getAll();
-        List<ColorDTO> colorDTOSList =  colorList.stream().map(color -> modelMapperService.forResponse().map(color,ColorDTO.class)).collect(Collectors.toList());
+        List<ColorDTO> colorDTOSList = colorList.stream().map(color -> modelMapperService.forResponse().map(color, ColorDTO.class)).collect(Collectors.toList());
 
         return colorDTOSList;
     }

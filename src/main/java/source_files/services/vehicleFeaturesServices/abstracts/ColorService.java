@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface ColorService {
     ColorDTO add(AddColorRequest addColorRequest);
+
     ColorDTO update(UpdateColorRequest updateColorRequest);
+
     ColorDTO getById(int id);
+
     void delete(int id);
+
     List<ColorDTO> getAll();
 
 }

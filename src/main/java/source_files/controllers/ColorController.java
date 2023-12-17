@@ -26,7 +26,7 @@ public class ColorController {
     }
 
     @PutMapping("/update/color")
-    public  ResponseEntity<TResponse<?>> updateColor(@RequestBody UpdateColorRequest updateColorRequest) {
+    public ResponseEntity<TResponse<?>> updateColor(@RequestBody UpdateColorRequest updateColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.update(updateColorRequest))
@@ -36,17 +36,17 @@ public class ColorController {
     }
 
     @GetMapping("getById/{id}")
-    public  ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
+    public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.getById(id))
-                .message(id+"li renk görüntülendi")
+                .message(id + "li renk görüntülendi")
                 .build()
         );
     }
 
     @GetMapping("getAll")
-    public  ResponseEntity<TResponse<?>> getAll() {
+    public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.getAll())

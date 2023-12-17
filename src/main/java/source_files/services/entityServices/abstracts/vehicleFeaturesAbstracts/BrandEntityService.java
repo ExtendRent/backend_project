@@ -4,7 +4,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Bran
 
 import java.util.List;
 
-public interface BrandEntityService{
+public interface BrandEntityService {
 
     BrandEntity add(BrandEntity brandEntity);
 
@@ -13,8 +13,8 @@ public interface BrandEntityService{
     BrandEntity getById(int id);
 
     void delete(BrandEntity brandEntity);
-    List<BrandEntity> getAll();
 
+    List<BrandEntity> getAll();
 
 
 }

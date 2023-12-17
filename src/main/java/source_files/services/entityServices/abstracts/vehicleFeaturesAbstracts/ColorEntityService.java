@@ -12,6 +12,7 @@ public interface ColorEntityService {
     ColorEntity getById(int id);
 
     void delete(ColorEntity colorEntity);
+
     List<ColorEntity> getAll();
 
 }

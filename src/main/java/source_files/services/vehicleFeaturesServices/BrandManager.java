@@ -22,7 +22,7 @@ public class BrandManager implements BrandService {
 
     @Override
     public BrandDTO add(AddBrandRequest addBrandRequest) {
-        BrandEntity brandEntity = modelMapperService.forRequest().map(addBrandRequest,BrandEntity.class);
+        BrandEntity brandEntity = modelMapperService.forRequest().map(addBrandRequest, BrandEntity.class);
         BrandDTO brandDTO = modelMapperService.forResponse().map(brandEntityManager.add(brandEntity), BrandDTO.class);
         return brandDTO;
     }

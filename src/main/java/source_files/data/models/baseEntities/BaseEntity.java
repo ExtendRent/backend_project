@@ -1,8 +1,10 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -23,7 +25,7 @@ public class BaseEntity {
 
     //@Builder.Default
     @Column(name = "is_deleted")
-    private Boolean isDeleted ;
+    private Boolean isDeleted;
 
     @LastModifiedDate
     @Column(name = "last_modified")

@@ -26,7 +26,7 @@ public class BrandController {
     }
 
     @PutMapping("/update/brand")
-    public  ResponseEntity<TResponse<?>> updateBrand(@RequestBody UpdateBrandRequest updateBrandRequest) {
+    public ResponseEntity<TResponse<?>> updateBrand(@RequestBody UpdateBrandRequest updateBrandRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.brandService.update(updateBrandRequest))
@@ -36,17 +36,17 @@ public class BrandController {
     }
 
     @GetMapping("getById/{id}")
-    public  ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
+    public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.brandService.getById(id))
-                .message(id+"li marka görüntülendi")
+                .message(id + "li marka görüntülendi")
                 .build()
         );
     }
 
     @GetMapping("getAll")
-    public  ResponseEntity<TResponse<?>> getAll() {
+    public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.brandService.getAll())

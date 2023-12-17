@@ -13,5 +13,6 @@ public interface CarEntityService {
     CarEntity getById(int id);
 
     List<CarEntity> getAll();
+
     void delete(CarEntity carEntity);
 }
