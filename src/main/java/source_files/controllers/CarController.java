@@ -1,5 +1,6 @@
 package source_files.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping("/add/car")
-    public ResponseEntity<TResponse<?>> addCar(@RequestBody AddCarRequest addCarRequest) {
+    public ResponseEntity<TResponse<?>> addCar(@Valid @RequestBody AddCarRequest addCarRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.add(addCarRequest))

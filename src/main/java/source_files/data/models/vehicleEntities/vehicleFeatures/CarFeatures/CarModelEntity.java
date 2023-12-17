@@ -21,6 +21,6 @@ public class CarModelEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    private BrandEntity brandEntity;
+    private BrandEntity brand;
 
 }

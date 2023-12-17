@@ -7,6 +7,7 @@ import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
+import source_files.services.BusinessRules.BrandBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 
@@ -17,11 +18,13 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BrandManager implements BrandService {
 
-    private BrandEntityService brandEntityService;
-    private ModelMapperService modelMapperService;
+    private final BrandEntityService brandEntityService;
+    private final ModelMapperService modelMapperService;
+    private final BrandBusinessRules brandBusinessRules;
 
     @Override
     public BrandDTO add(AddBrandRequest addBrandRequest) {
+        brandBusinessRules.existsByName(addBrandRequest.getName());
         BrandEntity brandEntity = modelMapperService.forRequest().map(addBrandRequest, BrandEntity.class);
         BrandDTO brandDTO = modelMapperService.forResponse().map(brandEntityService.add(brandEntity), BrandDTO.class);
         return brandDTO;

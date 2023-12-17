@@ -1,6 +1,7 @@
 package source_files.services.vehicleService;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
@@ -29,10 +30,12 @@ public class CarManager implements CarService {
     @Override
     public CarDTO add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
+
         //addCarRequest.setLicensePlate(addCarRequest.getLicensePlate().toUpperCase().replaceAll("\s", ""));
         String editPlate = this.businessRules.licensePlateUnique(addCarRequest.getLicensePlate());
         addCarRequest.setLicensePlate(editPlate);
         CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
+        businessRules.existByModelIdAndColorId(addCarRequest.getModelId(), addCarRequest.getColorId());
         CarDTO carDTO = modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
         return carDTO;
     }

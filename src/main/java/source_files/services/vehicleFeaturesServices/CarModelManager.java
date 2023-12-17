@@ -7,6 +7,8 @@ import source_files.data.DTO.itemDTOs.CarModelDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
+import source_files.services.BusinessRules.BrandBusinessRules;
+import source_files.services.BusinessRules.CarModelBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 
@@ -19,11 +21,18 @@ public class CarModelManager implements CarModelService {
 
     private final CarModelEntityService carModelEntityService;
     private final ModelMapperService modelMapperService;
-
+    private final CarModelBusinessRules carModelBusinessRules;
+    private final BrandBusinessRules brandBusinessRules;
     @Override
     public CarModelDTO add(AddCarModelRequest addCarModelRequest) {
-        CarModelEntity carModelEntity = modelMapperService.forRequest().map(addCarModelRequest, CarModelEntity.class);
-        CarModelDTO carModelDTO = modelMapperService.forResponse().map(carModelEntityService.add(carModelEntity), CarModelDTO.class);
+
+        carModelBusinessRules.existsByName(addCarModelRequest.getName());
+        CarModelEntity carModelEntity = new CarModelEntity();
+        CarModelEntity carModel = modelMapperService.forRequest().map(addCarModelRequest, CarModelEntity.class);
+        carModel.setId(carModelEntity.getId());
+
+        CarModelDTO carModelDTO = modelMapperService.forResponse().map(carModelEntityService.add(carModel), CarModelDTO.class);
+        carModelDTO.setName(carModel.getName());
         return carModelDTO;
     }
 
