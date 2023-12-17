@@ -4,6 +4,9 @@ import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import source_files.data.types.DrivingLicenseType;
+
+import java.util.List;
 
 //@Builder
 @Getter
@@ -27,7 +30,7 @@ public class AddCarRequest {
     @NotBlank(message = "License plate can not be blank")
     @Pattern(regexp = "^[0-9]{2} [A-Z]{1,3} [0-9]{3}$", message = "Invalid license plate format")
     String licensePlate;
-    @Min(value = 0,message = "Kilometre 0 dan küçük olamaz.")
+    @Min(value = 0, message = "Kilometre 0 dan küçük olamaz.")
     int kilometer;
-    //List<DrivingLicenseType> expectedDrivingLicenseTypes;
+    List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }

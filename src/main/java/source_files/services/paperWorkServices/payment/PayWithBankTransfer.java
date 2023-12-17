@@ -1,6 +1,6 @@
 package source_files.services.paperWorkServices.payment;
 
-public class PayWithBankTransfer implements PaymentMethods{
+public class PayWithBankTransfer implements PaymentMethods {
 
     @Override
     public String pay(String kartBilgileri) {

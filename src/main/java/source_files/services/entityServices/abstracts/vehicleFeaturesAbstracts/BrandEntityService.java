@@ -2,16 +2,19 @@ package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
 
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 
-public interface BrandEntityService{
+import java.util.List;
 
-    BrandEntity addBrand(BrandEntity brandEntity);
+public interface BrandEntityService {
 
-    BrandEntity updateBrand(BrandEntity brandEntity);
+    BrandEntity add(BrandEntity brandEntity);
 
-    BrandEntity getBrandById(int id);
+    BrandEntity update(BrandEntity brandEntity);
 
-    void deleteBrand(BrandEntity brandEntity);
+    BrandEntity getById(int id);
 
+    void delete(BrandEntity brandEntity);
+
+    List<BrandEntity> getAll();
 
 
 }

@@ -15,6 +15,7 @@ public interface CarService {
     CarDTO update(UpdateCarRequest updateCarRequest);
 
     List<CarDTO> getAll();
+
     void delete(int id);
 
 }

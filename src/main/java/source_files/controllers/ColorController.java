@@ -3,34 +3,34 @@ package source_files.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
+import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
+import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.responses.TResponse;
-import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
+import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
 @RestController
-@RequestMapping("api/brand")
+@RequestMapping("api/color")
 @AllArgsConstructor
-public class BrandController {
+public class ColorController {
+    private ColorService colorService;
 
-    private final BrandService brandService;
 
-    @PostMapping("/add/brand")
-    public ResponseEntity<TResponse<?>> addBrand(@RequestBody AddBrandRequest addBrandRequest) {
+    @PostMapping("/add/color")
+    public ResponseEntity<TResponse<?>> addColor(@RequestBody AddColorRequest addColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.brandService.add(addBrandRequest))
-                .message("Marka eklendi")
+                .response(this.colorService.add(addColorRequest))
+                .message("Renk eklendi")
                 .build()
         );
     }
 
-    @PutMapping("/update/brand")
-    public ResponseEntity<TResponse<?>> updateBrand(@RequestBody UpdateBrandRequest updateBrandRequest) {
+    @PutMapping("/update/color")
+    public ResponseEntity<TResponse<?>> updateColor(@RequestBody UpdateColorRequest updateColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.brandService.update(updateBrandRequest))
-                .message("Marka güncellendi")
+                .response(this.colorService.update(updateColorRequest))
+                .message("Renk güncellendi")
                 .build()
         );
     }
@@ -39,8 +39,8 @@ public class BrandController {
     public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.brandService.getById(id))
-                .message(id + "li marka görüntülendi")
+                .response(this.colorService.getById(id))
+                .message(id + "li renk görüntülendi")
                 .build()
         );
     }
@@ -49,8 +49,8 @@ public class BrandController {
     public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.brandService.getAll())
-                .message("Marka Listesi döndü.")
+                .response(this.colorService.getAll())
+                .message("Renk Listesi döndü.")
                 .build()
         );
     }
@@ -58,13 +58,12 @@ public class BrandController {
     @DeleteMapping("{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id) {
 
-        this.brandService.delete(id);
+        this.colorService.delete(id);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .message("Marka silindi.")
+                .message("Renk silindi.")
                 .build()
         );
     }
-
 
 }

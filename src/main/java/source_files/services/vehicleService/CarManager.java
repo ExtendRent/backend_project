@@ -12,7 +12,6 @@ import source_files.services.BusinessRules.CarBusinessRules;
 import source_files.services.entityServices.CarEntityManager;
 import source_files.services.vehicleService.abstracts.CarService;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +25,7 @@ public class CarManager implements CarService {
     private final CarRepository carRepository;
     private CarBusinessRules businessRules;
 
+
     @Override
     public CarDTO add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
@@ -33,7 +33,7 @@ public class CarManager implements CarService {
         String editPlate = this.businessRules.licensePlateUnique(addCarRequest.getLicensePlate());
         addCarRequest.setLicensePlate(editPlate);
         CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
-        CarDTO carDTO = modelMapperService.forResponse().map(carEntityManager.add(carEntity),CarDTO.class);
+        CarDTO carDTO = modelMapperService.forResponse().map(carEntityManager.add(carEntity), CarDTO.class);
         return carDTO;
     }
 
@@ -57,9 +57,9 @@ public class CarManager implements CarService {
     @Override
     public List<CarDTO> getAll() {
         List<CarEntity> carEntityList = carEntityManager.getAll();
-        List<CarDTO> carDTOList=carEntityList.stream()
+        List<CarDTO> carDTOList = carEntityList.stream()
                 .map(carEntity -> this.modelMapperService.forResponse()
-                .map(carEntity,CarDTO.class)).collect(Collectors.toList());
+                        .map(carEntity, CarDTO.class)).collect(Collectors.toList());
         return carDTOList;
 
     }

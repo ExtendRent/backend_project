@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
+
 @Service
 @AllArgsConstructor
 public class CarBodyTypeEntityManager implements CarBodyTypeEntityService {

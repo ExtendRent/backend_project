@@ -2,12 +2,17 @@ package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
 
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 
+import java.util.List;
+
 public interface ColorEntityService {
-    ColorEntity addColor(ColorEntity colorEntity);
+    ColorEntity add(ColorEntity colorEntity);
 
-    ColorEntity updateColor(ColorEntity colorEntity);
+    ColorEntity update(ColorEntity colorEntity);
 
-    ColorEntity getColorById(int id);
+    ColorEntity getById(int id);
 
-    void deleteColor(ColorEntity colorEntity);
+    void delete(ColorEntity colorEntity);
+
+    List<ColorEntity> getAll();
+
 }

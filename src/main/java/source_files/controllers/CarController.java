@@ -3,7 +3,6 @@ package source_files.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.data.responses.TResponse;
@@ -18,15 +17,16 @@ public class CarController {
 
     @PostMapping("/add/car")
     public ResponseEntity<TResponse<?>> addCar(@RequestBody AddCarRequest addCarRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder() //TODO Builder okunmuyor. çözülecek.
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.add(addCarRequest))
                 .message("Araba eklendi")
                 .build()
         );
     }
+
     @PutMapping("/update/car")
-    public  ResponseEntity<TResponse<?>> updateCar(@RequestBody UpdateCarRequest updateCarRequest) {
+    public ResponseEntity<TResponse<?>> updateCar(@RequestBody UpdateCarRequest updateCarRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.update(updateCarRequest))
@@ -34,17 +34,19 @@ public class CarController {
                 .build()
         );
     }
+
     @GetMapping("getById/{id}")
-    public  ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
+    public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.getById(id))
-                .message(id+"li araba görüntülendi")
+                .message(id + "li araba görüntülendi")
                 .build()
         );
     }
+
     @GetMapping("getAll")
-    public  ResponseEntity<TResponse<?>> getAll() {
+    public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.getAll())
@@ -52,6 +54,7 @@ public class CarController {
                 .build()
         );
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id) {
 
