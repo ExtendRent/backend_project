@@ -30,7 +30,7 @@ public class CarManager implements CarService {
     public CarDTO add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
         //addCarRequest.setLicensePlate(addCarRequest.getLicensePlate().toUpperCase().replaceAll("\s", ""));
-        String editPlate = this.businessRules.plateUniqueness(addCarRequest.getLicensePlate());
+        String editPlate = this.businessRules.licensePlateUnique(addCarRequest.getLicensePlate());
         addCarRequest.setLicensePlate(editPlate);
         CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
         CarDTO carDTO = modelMapperService.forResponse().map(carEntityManager.add(carEntity),CarDTO.class);
