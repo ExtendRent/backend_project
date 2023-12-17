@@ -9,7 +9,7 @@ import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.services.BusinessRules.CarBusinessRules;
-import source_files.services.entityServices.CarEntityManager;
+import source_files.services.entityServices.abstracts.CarEntityService;
 import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class CarManager implements CarService {
 
     private final ModelMapperService modelMapperService;
-    private final CarEntityManager carEntityManager;
+    private final CarEntityService carEntityService;
 
     private final CarRepository carRepository;
     private CarBusinessRules businessRules;
@@ -33,13 +33,13 @@ public class CarManager implements CarService {
         String editPlate = this.businessRules.licensePlateUnique(addCarRequest.getLicensePlate());
         addCarRequest.setLicensePlate(editPlate);
         CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
-        CarDTO carDTO = modelMapperService.forResponse().map(carEntityManager.add(carEntity), CarDTO.class);
+        CarDTO carDTO = modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
         return carDTO;
     }
 
     @Override
     public CarDTO getById(int id) {
-        return this.modelMapperService.forResponse().map(carEntityManager.getById(id), CarDTO.class);
+        return this.modelMapperService.forResponse().map(carEntityService.getById(id), CarDTO.class);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class CarManager implements CarService {
         //CarEntity carEntity = carEntityManager.getById(updateCarRequest.getId());
 
         CarEntity carEntity = modelMapperService.forRequest().map(updateCarRequest, CarEntity.class);
-        carEntity = carEntityManager.update(carEntity);
+        carEntity = carEntityService.update(carEntity);
 
         return modelMapperService.forResponse().map(carEntity, CarDTO.class);
 
@@ -56,7 +56,7 @@ public class CarManager implements CarService {
 
     @Override
     public List<CarDTO> getAll() {
-        List<CarEntity> carEntityList = carEntityManager.getAll();
+        List<CarEntity> carEntityList = carEntityService.getAll();
         List<CarDTO> carDTOList = carEntityList.stream()
                 .map(carEntity -> this.modelMapperService.forResponse()
                         .map(carEntity, CarDTO.class)).collect(Collectors.toList());
@@ -66,6 +66,6 @@ public class CarManager implements CarService {
 
     @Override
     public void delete(int id) {
-        this.carEntityManager.delete(this.carEntityManager.getById(id));
+        this.carEntityService.delete(this.carEntityService.getById(id));
     }
 }

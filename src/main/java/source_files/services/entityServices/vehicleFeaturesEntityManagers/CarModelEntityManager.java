@@ -6,6 +6,8 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarM
 import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CarModelEntityManager implements CarModelEntityService {
@@ -13,7 +15,7 @@ public class CarModelEntityManager implements CarModelEntityService {
     private final CarModelRepository carModelRepository;
 
     @Override
-    public CarModelEntity addCarModel(CarModelEntity carModelEntity) {
+    public CarModelEntity add(CarModelEntity carModelEntity) {
         return this.carModelRepository.save(carModelEntity);
     }
 
@@ -30,5 +32,10 @@ public class CarModelEntityManager implements CarModelEntityService {
     @Override
     public void deleteCarModel(CarModelEntity carModelEntity) {
         this.carModelRepository.delete(carModelEntity);
+    }
+
+    @Override
+    public List<CarModelEntity> getAllCarModel() {
+        return carModelRepository.findAll();
     }
 }
