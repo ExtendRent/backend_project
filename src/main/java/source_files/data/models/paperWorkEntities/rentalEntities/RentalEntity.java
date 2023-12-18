@@ -45,7 +45,7 @@ public class RentalEntity extends Item {
     private LocalDateTime endDate;
 
     @ManyToOne
-    @Column(name = "discount_id")
+    @JoinColumn(name = "discount_id")
     private DiscountCodeEntity discountCode;
 
     @ManyToOne

@@ -20,7 +20,6 @@ public class RentalBusinessRules {
 
     private final DiscountCodeRepository discountCodeRepository;
 
-    private PaymentBusinessRules paymentBusinessRules;
 
     public void checkRentalRequest(AddRentalRequest addRentalRequest) {
         this.checkStartDate(addRentalRequest.getStartDate());

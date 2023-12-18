@@ -6,6 +6,8 @@ import source_files.data.models.userEntities.CustomerEntity;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.services.entityServices.abstracts.CustomerEntityService;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class CustomerEntityManager implements CustomerEntityService {
@@ -36,5 +38,10 @@ public class CustomerEntityManager implements CustomerEntityService {
     @Override
     public void delete(CustomerEntity customerEntity) {
         this.customerRepository.delete(customerEntity);
+    }
+
+    @Override
+    public List<CustomerEntity> getAll() {
+        return this.customerRepository.findAll();
     }
 }
