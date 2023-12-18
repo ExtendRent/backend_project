@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-public class RentalDetailsDTO {
+public class RentalDTO {
     CustomerEntity customer;
     CarEntity car;
     PaymentDetailsEntity paymentDetails;

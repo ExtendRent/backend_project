@@ -1,6 +1,7 @@
 package source_files.data.models.paperWorkEntities.paymentEntities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +13,11 @@ import source_files.data.models.baseEntities.Item;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-//@SuperBuilder
-@Table(name = "payment_details")
-public class PaymentDetailsEntity extends Item {
+@Table(name = "discount_codes")
+public class DiscountCodeEntity extends Item {
 
-    @Column(name = "amount")
-    private double amount;
+    private String code;
+    private int discountPercentage;
+    private boolean isActive;
 
-    @ManyToOne
-    @JoinColumn(name = "payment_type_id")
-    private PaymentTypeEntity paymentType;
 }

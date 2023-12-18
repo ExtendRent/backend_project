@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.Item;
+import source_files.data.models.paperWorkEntities.paymentEntities.DiscountCodeEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
@@ -17,9 +18,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
 //@SuperBuilder
-@Table(name = "rental_details")
-public class RentalDetailsEntity extends Item {
+@Table(name = "rental")
+public class RentalEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -27,18 +29,33 @@ public class RentalDetailsEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "car_id")
-
     private CarEntity carEntity;
+
+    @Column(name = "start_kilometer") //EndKilometer ve ReturnDate null bırakılmalıdır.
+    private Integer startKilometer = null;
+
+    @Column(name = "end_kilometer")
+    private Integer endKilometer = null;
+
+    @Column(name = "start_date")
+    //@Builder.Default
+    private LocalDateTime startDate;
+
+    @Column(name = "end_date")
+    private LocalDateTime endDate;
+
+    @ManyToOne
+    @Column(name = "discount_id")
+    private DiscountCodeEntity discountCode;
 
     @ManyToOne
     @JoinColumn(name = "payment_detail_id")
     private PaymentDetailsEntity paymentDetailsEntity;
 
-    @Column(name = "start_date")
-    //@Builder.Default
-    private LocalDateTime startDate = LocalDateTime.now();
+    @Column(name = "return_date")
+    private LocalDateTime returnDate;
 
-    @Column(name = "end_date")
-    private LocalDateTime endDate;
+    @Column(name = "is_active")
+    private boolean isActive = true;
 
 }

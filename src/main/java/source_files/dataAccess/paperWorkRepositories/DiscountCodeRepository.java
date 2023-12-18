@@ -1,0 +1,16 @@
+package source_files.dataAccess.paperWorkRepositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import source_files.data.models.paperWorkEntities.paymentEntities.DiscountCodeEntity;
+
+import java.util.Optional;
+
+public interface DiscountCodeRepository extends JpaRepository<DiscountCodeEntity, Integer> {
+
+    boolean existsByCode(String code);
+
+    boolean existsById(int id);
+
+    Optional<DiscountCodeEntity> findByCode(String code);
+
+}
