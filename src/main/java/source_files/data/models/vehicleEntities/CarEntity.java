@@ -30,5 +30,5 @@ public class CarEntity extends Vehicle {
     private String licensePlate;
 
     @Column(name = "kilometer")
-    private int kilometer;
+    private Integer kilometer;
 }

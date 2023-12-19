@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.YearMonth;
 
 @Getter
@@ -16,6 +17,6 @@ public class CreditCardInformation {
     private String cardNumber;
     private String cardOwnerName;
     private String cardOwnerSurname;
-    private YearMonth expirationDate;
+    private LocalDate expirationDate;
     private String cvc;
 }

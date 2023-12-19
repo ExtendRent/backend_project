@@ -53,9 +53,11 @@ public class RentalEntity extends Item {
     private PaymentDetailsEntity paymentDetailsEntity;
 
     @Column(name = "return_date")
-    private LocalDateTime returnDate;
+    private LocalDateTime returnDate = null;
 
     @Column(name = "is_active")
     private boolean isActive = true;
+
+
 
 }

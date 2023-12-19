@@ -21,9 +21,12 @@ public class AddRentalRequest {
 
     LocalDate endDate;
 
-    String discountCode;
+    int discountCodeId;
 
     PaymentType paymentType;
     //totalPrice hesaplanarak kayıt edilmelidir (kullanıcı vermeyecek)
     CreditCardInformation creditCardInformation;
+
+    Integer startKilometer;
+
 }
