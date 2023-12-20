@@ -20,7 +20,7 @@ public class RentalController {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.rentalService.add(addRentalRequest))
-                .message("Renk eklendi")
+                .message("Kiralama işlemi başarılı")
                 .build()
         );
     }

@@ -13,7 +13,7 @@ import java.time.YearMonth;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreditCardInformation {
-
+    //TODO validasyonlar yazılacak
     private String cardNumber;
     private String cardOwnerName;
     private String cardOwnerSurname;

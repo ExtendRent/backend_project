@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountCodeEntity;
+import source_files.data.requests.itemRequests.paymentRequests.AddPaymentDetailsRequest;
 import source_files.data.types.PaymentType;
 
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class AddRentalRequest {
 
     int discountCodeId;
 
-    PaymentType paymentType;
+    int paymentTypeId;
     //totalPrice hesaplanarak kayıt edilmelidir (kullanıcı vermeyecek)
     CreditCardInformation creditCardInformation;
 

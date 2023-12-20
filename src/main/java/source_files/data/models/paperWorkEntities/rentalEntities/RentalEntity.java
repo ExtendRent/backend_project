@@ -11,6 +11,7 @@ import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetails
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -39,10 +40,10 @@ public class RentalEntity extends Item {
 
     @Column(name = "start_date")
     //@Builder.Default
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @ManyToOne
     @JoinColumn(name = "discount_id")
@@ -53,11 +54,10 @@ public class RentalEntity extends Item {
     private PaymentDetailsEntity paymentDetailsEntity;
 
     @Column(name = "return_date")
-    private LocalDateTime returnDate = null;
+    private LocalDate returnDate = null;
 
     @Column(name = "is_active")
     private boolean isActive = true;
-
 
 
 }

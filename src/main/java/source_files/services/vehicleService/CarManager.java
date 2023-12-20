@@ -1,7 +1,6 @@
 package source_files.services.vehicleService;
 
 import lombok.AllArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
@@ -59,11 +58,10 @@ public class CarManager implements CarService {
 
     @Override
     public List<CarDTO> getAll() {
-        List<CarEntity> carEntityList = carEntityService.getAll();
-        List<CarDTO> carDTOList = carEntityList.stream()
+
+        return carEntityService.getAll().stream()
                 .map(carEntity -> this.modelMapperService.forResponse()
                         .map(carEntity, CarDTO.class)).collect(Collectors.toList());
-        return carDTOList;
 
     }
 

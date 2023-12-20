@@ -21,5 +21,5 @@ public class PaymentDetailsEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "payment_type_id")
-    private PaymentTypeEntity paymentType;
+    private PaymentTypeEntity paymentTypeEntity;
 }

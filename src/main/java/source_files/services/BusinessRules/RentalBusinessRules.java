@@ -2,8 +2,11 @@ package source_files.services.BusinessRules;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountCodeEntity;
+import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.itemRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.itemRequests.RentalRequests.UpdateRentalRequest;
 import source_files.dataAccess.paperWorkRepositories.DiscountCodeRepository;
 import source_files.dataAccess.paperWorkRepositories.RentalRepository;
 import source_files.dataAccess.userRepositories.CustomerRepository;
@@ -11,7 +14,6 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -20,9 +22,8 @@ public class RentalBusinessRules {
     private final RentalRepository rentalRepository;
     private final CustomerRepository customerRepository;
     private final CarRepository carRepository;
-
     private final DiscountCodeRepository discountCodeRepository;
-
+    private PaymentBusinessRules paymentBusinessRules;
 
     public void checkRentalRequest(AddRentalRequest addRentalRequest) {
         this.checkStartDate(addRentalRequest.getStartDate());
@@ -31,20 +32,22 @@ public class RentalBusinessRules {
         this.userExists(addRentalRequest.getCustomerId());
         this.checkTotalRentalDays(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
         this.checkDiscountCode(addRentalRequest.getDiscountCodeId());
+        this.checkCreditCardInformations(addRentalRequest.getCreditCardInformation());
     }
 
 
     //---------------CHECKING METHODS--------------------------------
 
     private void checkStartDate(LocalDate startDate) {
-        LocalDate currentDate = LocalDate.now();
-        if (currentDate.isBefore(startDate)){
+
+        if (startDate.isAfter(LocalDate.now())) {
             throw new IllegalStateException("Başlangıç tarihi bugünün tarihinden küçük olamaz.");
         }
     }
 
-    private void checkEndDate(LocalDate startDate ,LocalDate endDate) {
-        if (endDate.isBefore(startDate)){
+    private void checkEndDate(LocalDate startDate, LocalDate endDate) {
+
+        if (endDate.isBefore(startDate)) {
             throw new IllegalStateException("Bitiş tarihi başlangıç tarihinden küçük olamaz.");
         }
     }
@@ -61,30 +64,79 @@ public class RentalBusinessRules {
 
     private void checkTotalRentalDays(LocalDate startDate, LocalDate endDate) {
         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        if (daysBetween > 25){
+        if (daysBetween > 25) {
             throw new IllegalStateException("Kiralama tarihi maksimum 25 gün olabilir. Lütfen tarih aralığınızı buna göre düzenleyiniz.");
         }
     }
 
-    private void checkDiscountCode(int id) {
-        if ( ! this.discountCodeRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("böyle bir indirim kodumuz bulunmamaktadır"))
-                .isActive() ) //ifin içerisi = indirim kodunun olup olmadığına, varsa ise aktifmi değilmi diye bakıyor.
-        {
-            throw new IllegalStateException("Bu indirim kodu artık geçersizdir.");
+    private void checkDiscountCode(Integer id) {
+        if (id != null) {
+            if (!this.discountCodeRepository.findById(id)
+                    .orElseThrow(() -> new IllegalStateException("böyle bir indirim kodumuz bulunmamaktadır."))
+                    .isActive()) //ifin içerisi = indirim kodunun olup olmadığına, varsa ise aktifmi değilmi diye bakıyor.
+            {
+                throw new IllegalStateException("Bu indirim kodu artık geçersizdir.");
+            }
         }
+
+    }
+
+    private void checkCreditCardInformations(CreditCardInformation creditCardInformation) {
+        this.paymentBusinessRules.checkCreditCard(creditCardInformation);
     }
 
     //-----------------------------------------------------------------
 
-    private double calculateTotalRentalDays(LocalDate startDate, LocalDate endDate,LocalDate returnDate, double rentalPrice,int id) {
-        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        this.discountCodeRepository.findById(id);
-        if (endDate.isEqual(returnDate)){
-            double amount = daysBetween * rentalPrice ;
+    public int calculateTotalRentalDays(LocalDate startDate, LocalDate endDate) {
+        return (int) ChronoUnit.DAYS.between(startDate, endDate);
+    }
+
+    public int calculateDelayDay(LocalDate endDate, LocalDate returnDate) {
+        return Math.toIntExact(ChronoUnit.DAYS.between(endDate, returnDate));
+    }
+
+    public double calculateTotalBasePrice(int totalRentalDays, double rentalPrice) {
+        return totalRentalDays * rentalPrice;
+    }
+
+    public double calculateTotalAmount(double baseTotalPrice, int discountCodeId) {
+
+        double totalPrice = baseTotalPrice;
+
+        if (this.discountCodeRepository.findById(discountCodeId).isPresent()) {
+            totalPrice = this.calculateTotalPriceWithDiscount(discountCodeId, baseTotalPrice);
         }
 
-        return 0;
+        return totalPrice;
+    }
+
+    public double calculateTotalPriceWithDiscount(int discountCodeId, double totalPrice) {
+
+        if (this.discountCodeRepository.findById(discountCodeId).isPresent()) {
+
+            DiscountCodeEntity discountCode = this.discountCodeRepository
+                    .findById(discountCodeId).orElseThrow();
+
+            totalPrice = totalPrice - (totalPrice * discountCode.getDiscountPercentage() / 100);
+        }
+        return totalPrice;
+    }
+
+    public double calculateTotalFinalAmount(UpdateRentalRequest updateRentalRequest, int totalRentalDays) {
+        RentalEntity rentalEntity = this.rentalRepository
+                .findById(updateRentalRequest.getRentalEntityId()).orElseThrow();
+
+        double baseTotalPrice = calculateTotalBasePrice(totalRentalDays, rentalEntity.getCarEntity().getRentalPrice());
+        double totalAmount = calculateTotalAmount(baseTotalPrice, rentalEntity.getDiscountCode().getId());
+
+        if (!(updateRentalRequest.isActive()) && updateRentalRequest.getReturnDate().isBefore(rentalEntity.getEndDate())) {//İlk if - zamanından erken getirirse indirim iptali.
+            return baseTotalPrice;
+
+        } else if (!(updateRentalRequest.isActive()) && updateRentalRequest.getReturnDate().isAfter(rentalEntity.getEndDate())) { ////İkinci if - zamanından sonra teslim edildiyse.
+            return baseTotalPrice + (calculateDelayDay(rentalEntity.getEndDate(), updateRentalRequest.getReturnDate()) * 100); //Gün başına 100 tl ceza ve indirim iptal.
+
+        }
+        return totalAmount; //zamanında getirirse
     }
 
 }

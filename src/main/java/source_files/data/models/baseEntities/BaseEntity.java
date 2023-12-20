@@ -25,7 +25,7 @@ public class BaseEntity {
 
     //@Builder.Default
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 
     @LastModifiedDate
     @Column(name = "last_modified")
