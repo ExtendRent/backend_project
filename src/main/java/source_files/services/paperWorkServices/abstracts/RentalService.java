@@ -16,6 +16,11 @@ public interface RentalService {
 
     void delete(int id);
 
+    void softDelete(int id);
+
     List<RentalDTO> getAll();
 
+    List<RentalDTO> getAllByIsDeletedFalse();
+
+    List<RentalDTO> getAllByIsDeletedTrue();
 }

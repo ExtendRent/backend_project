@@ -1,5 +1,6 @@
 package source_files.services.vehicleService.abstracts;
 
+import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
@@ -16,6 +17,14 @@ public interface CarService {
 
     List<CarDTO> getAll();
 
-    void delete(int id);
+    List<CarDTO> getAllByIsDeletedFalse();
+
+    List<CarDTO> getAllByIsDeletedTrue();
+
+    void delete(int id, boolean hardDelete);
+
+    void hardDelete(int id);
+
+    void softDelete(int id);
 
 }

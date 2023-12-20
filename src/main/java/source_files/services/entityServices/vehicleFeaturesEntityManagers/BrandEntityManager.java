@@ -41,4 +41,14 @@ public class BrandEntityManager implements BrandEntityService {
     public List<BrandEntity> getAll() {
         return brandRespository.findAll();
     }
+
+    @Override
+    public List<BrandEntity> getAllByIsDeletedFalse() {
+        return null;
+    }
+
+    @Override
+    public List<BrandEntity> getAllByIsDeletedTrue() {
+        return null;
+    }
 }

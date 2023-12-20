@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
+import source_files.data.DTO.itemDTOs.ColorDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
@@ -40,27 +41,52 @@ public class CarModelManager implements CarModelService {
     @Override
     public CarModelDTO update(UpdateCarModelRequest updateCarModelRequest) {
         CarModelEntity carModelEntity = modelMapperService.forRequest().map(updateCarModelRequest, CarModelEntity.class);
-        carModelEntity = carModelEntityService.updateCarModel(carModelEntity);
+        carModelEntity = carModelEntityService.update(carModelEntity);
         return modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class);
     }
 
     @Override
     public CarModelDTO getById(int id) {
-        CarModelDTO carModelDTO = modelMapperService.forResponse().map(carModelEntityService.getCarModelById(id), CarModelDTO.class);
-        return carModelDTO;
-    }
-
-    @Override
-    public void delete(int id) {
-        carModelEntityService.deleteCarModel(carModelEntityService.getCarModelById(id));
+        return modelMapperService.forResponse().map(carModelEntityService.getById(id), CarModelDTO.class);
     }
 
     @Override
     public List<CarModelDTO> getAll() {
-        List<CarModelEntity> carModelEntities = carModelEntityService.getAllCarModel();
-        List<CarModelDTO> carModelDTOS = carModelEntities.stream().map(carModel ->
+        List<CarModelEntity> carModelEntities = carModelEntityService.getAll();
+        return carModelEntities.stream().map(carModel ->
                 modelMapperService.forResponse().map(carModel, CarModelDTO.class)).collect(Collectors.toList());
-        return carModelDTOS;
+    }
+
+    @Override
+    public List<CarModelDTO> getAllByIsDeletedFalse() {
+        return this.carModelEntityService.getAllByIsDeletedFalse()
+                .stream().map(carModelEntity ->  modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarModelDTO> getAllByIsDeletedTrue() {
+        return this.carModelEntityService.getAllByIsDeletedTrue()
+                .stream().map(carModelEntity ->  modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
+    }
+
+    @Override
+    public void delete(int id, boolean hardDelete) {
+
+        if(hardDelete){
+            this.hardDelete(id);
+        }else{
+            this.softDelete(id);
+        }
+    }
+
+    @Override
+    public void hardDelete(int id) {
+    this.carModelEntityService.delete(this.carModelEntityService.getById(id));
+    }
+
+    @Override
+    public void softDelete(int id) {
+
     }
 
 }

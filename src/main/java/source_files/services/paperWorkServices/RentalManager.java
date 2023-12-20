@@ -84,8 +84,23 @@ public class RentalManager implements RentalService {
     }
 
     @Override
+    public void softDelete(int id) {
+
+    }
+
+    @Override
     public List<RentalDTO> getAll() {
         return this.rentalEntityService.getAll().stream()
                 .map(rentalEntity -> modelMapperService.forResponse().map(rentalEntity, RentalDTO.class)).toList();
+    }
+
+    @Override
+    public List<RentalDTO> getAllByIsDeletedFalse() {
+        return null;
+    }
+
+    @Override
+    public List<RentalDTO> getAllByIsDeletedTrue() {
+        return null;
     }
 }

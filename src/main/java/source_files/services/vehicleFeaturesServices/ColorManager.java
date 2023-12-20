@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.ColorDTO;
+import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
@@ -26,35 +27,58 @@ public class ColorManager implements ColorService {
     public ColorDTO add(AddColorRequest addColorRequest) {
         colorBusinessRules.existsByName(addColorRequest.getName());
         ColorEntity color = modelMapperService.forRequest().map(addColorRequest, ColorEntity.class);
-        ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityService.add(color), ColorDTO.class);
-        return colorDTO;
+        return modelMapperService.forResponse().map(colorEntityService.add(color), ColorDTO.class);
     }
 
     @Override
     public ColorDTO update(UpdateColorRequest updateColorRequest) {
         ColorEntity color = modelMapperService.forRequest().map(updateColorRequest, ColorEntity.class);
-        ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityService.update(color), ColorDTO.class);
-        return colorDTO;
+        return modelMapperService.forResponse().map(colorEntityService.update(color), ColorDTO.class);
     }
 
     @Override
     public ColorDTO getById(int id) {
 
-        ColorDTO colorDTO = modelMapperService.forResponse().map(colorEntityService.getById(id), ColorDTO.class);
-        return colorDTO;
-    }
-
-    @Override
-    public void delete(int id) {
-
-        colorEntityService.delete(colorEntityService.getById(id));
+        return modelMapperService.forResponse().map(colorEntityService.getById(id), ColorDTO.class);
     }
 
     @Override
     public List<ColorDTO> getAll() {
         List<ColorEntity> colorList = colorEntityService.getAll();
-        List<ColorDTO> colorDTOSList = colorList.stream().map(color -> modelMapperService.forResponse().map(color, ColorDTO.class)).collect(Collectors.toList());
 
-        return colorDTOSList;
+        return colorList.stream().map(color -> modelMapperService.forResponse().map(color, ColorDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ColorDTO> getAllByIsDeletedFalse() {
+        return this.colorEntityService.getAllByIsDeletedFalse()
+                .stream().map(colorEntity ->  modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
+    }
+
+    @Override
+    public List<ColorDTO> getAllByIsDeletedTrue() {
+        return this.colorEntityService.getAllByIsDeletedTrue()
+                .stream().map(colorEntity ->  modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
+    }
+
+    @Override
+    public void delete(int id, boolean hardDelete) {
+        if (hardDelete) {
+            this.hardDelete(id);
+        } else {
+            this.softDelete(id);
+        }
+    }
+
+    @Override
+    public void hardDelete(int id) {
+
+    }
+
+    @Override
+    public void softDelete(int id) {
+        ColorEntity colorEntity = this.colorEntityService.getById(id);
+        colorEntity.setIsDeleted(true);
+        this.colorEntityService.update(colorEntity);
     }
 }

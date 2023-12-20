@@ -2,6 +2,7 @@ package source_files.services.entityServices.vehicleFeaturesEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
@@ -14,28 +15,39 @@ public class CarBodyTypeEntityManager implements CarBodyTypeEntityService {
 
     private final CarBodyTypeRepository carBodyTypeRepository;
 
+
     @Override
-    public CarBodyTypeEntity addCarBodyType(CarBodyTypeEntity carBodyTypeEntity) {
-        return this.carBodyTypeRepository.save(carBodyTypeEntity);
+    public CarBodyTypeEntity add(CarBodyTypeEntity carBodyTypeEntity) {
+        return null;
     }
 
     @Override
-    public CarBodyTypeEntity updateCarBodyType(CarBodyTypeEntity carBodyTypeEntity) {
-        return this.carBodyTypeRepository.save(carBodyTypeEntity);
+    public CarBodyTypeEntity update(CarBodyTypeEntity carBodyTypeEntity) {
+        return null;
     }
 
     @Override
-    public CarBodyTypeEntity getCarBodyTypeById(int id) {
-        return this.carBodyTypeRepository.findById(id).orElseThrow();
+    public CarBodyTypeEntity getById(int id) {
+        return null;
     }
 
     @Override
-    public void deleteCarBodyType(CarBodyTypeEntity carBodyTypeEntity) {
-        this.carBodyTypeRepository.delete(carBodyTypeEntity);
+    public void delete(CarBodyTypeEntity carBodyTypeEntity) {
+
     }
 
     @Override
-    public List<CarBodyTypeEntity> getAllCarBodyType() {
-        return this.carBodyTypeRepository.findAll();
+    public List<CarBodyTypeEntity> getAll() {
+        return null;
+    }
+
+    @Override
+    public List<AdminEntity> getAllByIsDeletedFalse() {
+        return null;
+    }
+
+    @Override
+    public List<AdminEntity> getAllByIsDeletedTrue() {
+        return null;
     }
 }

@@ -38,4 +38,14 @@ public class ColorEntityManager implements ColorEntityService {
     public List<ColorEntity> getAll() {
         return colorRepository.findAll();
     }
+
+    @Override
+    public List<ColorEntity> getAllByIsDeletedFalse() {
+        return null;
+    }
+
+    @Override
+    public List<ColorEntity> getAllByIsDeletedTrue() {
+        return null;
+    }
 }

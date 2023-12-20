@@ -20,22 +20,34 @@ public class CarModelEntityManager implements CarModelEntityService {
     }
 
     @Override
-    public CarModelEntity updateCarModel(CarModelEntity carModelEntity) {
-        return this.carModelRepository.save(carModelEntity);
+    public CarModelEntity update(CarModelEntity carModelEntity) {
+        return null;
     }
 
     @Override
-    public CarModelEntity getCarModelById(int id) {
-        return this.carModelRepository.findById(id).orElseThrow();
+    public CarModelEntity getById(int id) {
+        return null;
     }
 
     @Override
-    public void deleteCarModel(CarModelEntity carModelEntity) {
-        this.carModelRepository.delete(carModelEntity);
+    public List<CarModelEntity> getAll() {
+        return null;
     }
 
     @Override
-    public List<CarModelEntity> getAllCarModel() {
-        return carModelRepository.findAll();
+    public List<CarModelEntity> getAllByIsDeletedFalse() {
+        return null;
     }
+
+    @Override
+    public List<CarModelEntity> getAllByIsDeletedTrue() {
+        return null;
+    }
+
+    @Override
+    public void delete(CarModelEntity carModelEntity) {
+
+    }
+
+
 }

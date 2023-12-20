@@ -66,7 +66,37 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public void delete(int id) {
+    public List<CarDTO> getAllByIsDeletedFalse() {
+        return this.carEntityService.getAllByIsDeletedFalse()
+                .stream().map(carEntity ->  modelMapperService.forResponse().map(carEntity,CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByIsDeletedTrue() {
+        return this.carEntityService.getAllByIsDeletedTrue()
+                .stream().map(carEntity ->  modelMapperService.forResponse().map(carEntity,CarDTO.class)).toList();
+    }
+
+    @Override
+    public void delete(int id, boolean hardDelete) {
+
+    if(hardDelete){
+        this.hardDelete(id);
+    }else{
+        this.softDelete(id);
+    }
+    }
+
+
+    @Override
+    public void hardDelete(int id) {
         this.carEntityService.delete(this.carEntityService.getById(id));
+    }
+
+    @Override
+    public void softDelete(int id) {
+        CarEntity carEntity = this.carEntityService.getById(id);
+        carEntity.setIsDeleted(true);
+        this.carEntityService.update(carEntity);
     }
 }
