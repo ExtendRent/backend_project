@@ -10,10 +10,15 @@ public interface AdminEntityService {
 
     AdminEntity update(AdminEntity adminEntity);
 
-    void delete(AdminEntity adminEntity);
-
     AdminEntity getById(int id);
 
     List<AdminEntity> getAll();
+
+    List<AdminEntity> getAllByIsDeletedFalse();
+
+    List<AdminEntity> getAllByIsDeletedTrue();
+
+    void delete(AdminEntity adminEntity);
+
 
 }

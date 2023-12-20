@@ -36,6 +36,16 @@ public class CarEntityManager implements CarEntityService {
     }
 
     @Override
+    public List<CarEntity> getAllByIsDeletedFalse() {
+        return null;
+    }
+
+    @Override
+    public List<CarEntity> getAllByIsDeletedTrue() {
+        return null;
+    }
+
+    @Override
     public void delete(CarEntity carEntity) {
         this.carRepository.delete(carEntity);
     }

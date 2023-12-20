@@ -1,5 +1,6 @@
 package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
 
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 
 import java.util.List;
@@ -11,8 +12,13 @@ public interface ColorEntityService {
 
     ColorEntity getById(int id);
 
+    List<ColorEntity> getAll();
+
+    List<ColorEntity> getAllByIsDeletedFalse();
+
+    List<ColorEntity> getAllByIsDeletedTrue();
+
     void delete(ColorEntity colorEntity);
 
-    List<ColorEntity> getAll();
 
 }

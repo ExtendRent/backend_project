@@ -1,5 +1,6 @@
 package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
 
+import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 
 import java.util.List;
@@ -7,11 +8,19 @@ import java.util.List;
 public interface CarModelEntityService {
     CarModelEntity add(CarModelEntity carModelEntity);
 
-    CarModelEntity updateCarModel(CarModelEntity carModelEntity);
+    CarModelEntity update(CarModelEntity carModelEntity);
 
-    CarModelEntity getCarModelById(int id);
+    CarModelEntity getById(int id);
 
-    void deleteCarModel(CarModelEntity carModelEntity);
+    List<CarModelEntity> getAll();
 
-    List<CarModelEntity> getAllCarModel();
+    List<CarModelEntity> getAllByIsDeletedFalse();
+
+    List<CarModelEntity> getAllByIsDeletedTrue();
+
+    void delete(CarModelEntity carModelEntity);
 }
+
+
+
+

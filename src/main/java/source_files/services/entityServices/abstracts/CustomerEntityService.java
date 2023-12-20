@@ -15,8 +15,13 @@ public interface CustomerEntityService {
 
     CustomerEntity getByPhoneNumber(String phoneNumber);
 
+    List<CustomerEntity> getAll();
+
+    List<CustomerEntity> getAllByIsDeletedFalse();
+
+    List<CustomerEntity> getAllByIsDeletedTrue();
+
     void delete(CustomerEntity customerEntity);
 
-    List<CustomerEntity> getAll();
 
 }

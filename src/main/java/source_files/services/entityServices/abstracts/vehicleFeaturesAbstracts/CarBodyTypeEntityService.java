@@ -1,17 +1,22 @@
 package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
 
+import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 
 import java.util.List;
 
 public interface CarBodyTypeEntityService {
-    CarBodyTypeEntity addCarBodyType(CarBodyTypeEntity carBodyTypeEntity);
+    CarBodyTypeEntity add(CarBodyTypeEntity carBodyTypeEntity);
 
-    CarBodyTypeEntity updateCarBodyType(CarBodyTypeEntity carBodyTypeEntity);
+    CarBodyTypeEntity update(CarBodyTypeEntity carBodyTypeEntity);
 
-    CarBodyTypeEntity getCarBodyTypeById(int id);
+    CarBodyTypeEntity getById(int id);
 
-    void deleteCarBodyType(CarBodyTypeEntity carBodyTypeEntity);
+    void delete(CarBodyTypeEntity carBodyTypeEntity);
 
-    List<CarBodyTypeEntity> getAllCarBodyType();
+    List<CarBodyTypeEntity> getAll();
+
+    List<AdminEntity> getAllByIsDeletedFalse();
+
+    List<AdminEntity> getAllByIsDeletedTrue();
 }

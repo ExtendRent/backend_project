@@ -44,4 +44,14 @@ public class CustomerEntityManager implements CustomerEntityService {
     public List<CustomerEntity> getAll() {
         return this.customerRepository.findAll();
     }
+
+    @Override
+    public List<CustomerEntity> getAllByIsDeletedFalse() {
+        return null;
+    }
+
+    @Override
+    public List<CustomerEntity> getAllByIsDeletedTrue() {
+        return null;
+    }
 }
