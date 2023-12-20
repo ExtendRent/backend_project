@@ -16,7 +16,7 @@ public class CarModelController {
     private CarModelService carModelService;
 
     @PostMapping("/add/carModel")
-    public ResponseEntity<TResponse<?>> addCarModel(@RequestBody AddCarModelRequest addCarModelRequest){
+    public ResponseEntity<TResponse<?>> addCarModel(@RequestBody AddCarModelRequest addCarModelRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carModelService.add(addCarModelRequest))
@@ -26,7 +26,7 @@ public class CarModelController {
     }
 
     @PutMapping("/update/carModel")
-    public ResponseEntity<TResponse<?>> updateCarModel(@RequestBody UpdateCarModelRequest updateCarModelRequest){
+    public ResponseEntity<TResponse<?>> updateCarModel(@RequestBody UpdateCarModelRequest updateCarModelRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carModelService.update(updateCarModelRequest))
@@ -36,7 +36,7 @@ public class CarModelController {
     }
 
     @GetMapping("/getByCarModelId/{id}")
-    public ResponseEntity<TResponse<?>> getByCarModelId(@PathVariable int id){
+    public ResponseEntity<TResponse<?>> getByCarModelId(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carModelService.getById(id))
@@ -46,7 +46,7 @@ public class CarModelController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<TResponse<?>> getAll(){
+    public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carModelService.getAll())
@@ -56,7 +56,7 @@ public class CarModelController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id){
+    public ResponseEntity<TResponse<?>> delete(@PathVariable int id) {
         this.carModelService.delete(id);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)

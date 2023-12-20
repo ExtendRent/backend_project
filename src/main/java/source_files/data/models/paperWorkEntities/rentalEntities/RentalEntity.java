@@ -12,7 +12,6 @@ import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

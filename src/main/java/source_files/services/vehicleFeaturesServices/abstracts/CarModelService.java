@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface CarModelService {
     CarModelDTO add(AddCarModelRequest addCarModelRequest);
+
     CarModelDTO update(UpdateCarModelRequest updateCarModelRequest);
+
     CarModelDTO getById(int id);
-    void delete (int id);
+
+    void delete(int id);
+
     List<CarModelDTO> getAll();
 
 }

@@ -23,6 +23,7 @@ public class CarModelManager implements CarModelService {
     private final ModelMapperService modelMapperService;
     private final CarModelBusinessRules carModelBusinessRules;
     private final BrandBusinessRules brandBusinessRules;
+
     @Override
     public CarModelDTO add(AddCarModelRequest addCarModelRequest) {
 
@@ -38,7 +39,7 @@ public class CarModelManager implements CarModelService {
 
     @Override
     public CarModelDTO update(UpdateCarModelRequest updateCarModelRequest) {
-        CarModelEntity  carModelEntity = modelMapperService.forRequest().map(updateCarModelRequest, CarModelEntity.class);
+        CarModelEntity carModelEntity = modelMapperService.forRequest().map(updateCarModelRequest, CarModelEntity.class);
         carModelEntity = carModelEntityService.updateCarModel(carModelEntity);
         return modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class);
     }

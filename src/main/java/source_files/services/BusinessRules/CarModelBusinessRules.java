@@ -10,8 +10,9 @@ import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 public class CarModelBusinessRules {
     private final CarModelRepository carModelRepository;
     private final BrandRespository brandRespository;
-    public void existsByName(String name){
-        if (carModelRepository.existsByName(name)){
+
+    public void existsByName(String name) {
+        if (carModelRepository.existsByName(name)) {
             throw new IllegalStateException("This model already exist");
         }
     }

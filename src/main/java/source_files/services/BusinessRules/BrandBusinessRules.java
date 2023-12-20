@@ -8,13 +8,15 @@ import source_files.dataAccess.vehicleFeaturesRespositories.BrandRespository;
 @Service
 public class BrandBusinessRules {
     private final BrandRespository brandRespository;
-    public void existsByName(String name){
-        if (brandRespository.existsByName(name)){
+
+    public void existsByName(String name) {
+        if (brandRespository.existsByName(name)) {
             throw new IllegalStateException("This brand already exist");
         }
     }
+
     public void existById(int brandId) {
-        if (!(brandRespository.existsById(brandId))){
+        if (!(brandRespository.existsById(brandId))) {
             throw new IllegalStateException("Brand does not exist");
         }
     }

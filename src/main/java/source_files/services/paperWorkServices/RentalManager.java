@@ -23,10 +23,10 @@ public class RentalManager implements RentalService {
 
     private final RentalEntityService rentalEntityService;
     private final ModelMapperService modelMapperService;
-    private RentalBusinessRules rentalBusinessRules;
     private final CarService carService;
     private final PaymentDetailsRepository paymentDetailsRepository;
     private final PaymentTypeEntityRepository paymentTypeEntityRepository;
+    private RentalBusinessRules rentalBusinessRules;
 
     @Override
     public RentalDTO add(AddRentalRequest addRentalRequest) {

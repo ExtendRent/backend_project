@@ -2,10 +2,11 @@ package source_files.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import source_files.data.DTO.paperWorkDTOs.RentalDTO;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import source_files.data.requests.itemRequests.RentalRequests.AddRentalRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 

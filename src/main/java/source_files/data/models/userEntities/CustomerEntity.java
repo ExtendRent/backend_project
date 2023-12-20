@@ -1,6 +1,9 @@
 package source_files.data.models.userEntities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,15 +23,12 @@ import java.util.List;
 //@SuperBuilder
 public class CustomerEntity extends UserEntity {
 
+    @OneToMany(mappedBy = "customerEntity")
+    List<RentalEntity> rentalHistory;
     @Column(name = "phone_number", unique = true)
     private String phoneNumber;
-
     @Column(name = "driving_license_number", unique = true)
     private String drivingLicenseNumber;
-
     @Column(name = "driving_license_type")
     private DrivingLicenseType drivingLicenseType;
-
-    @OneToMany(mappedBy ="customerEntity")
-    List<RentalEntity> rentalHistory;
 }

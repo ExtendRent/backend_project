@@ -20,6 +20,8 @@ public class TobetoRentAcarCrewProjectApplication {
     }
 
     @Bean
-    public PaymentMain getPaymentMain() {return new PaymentMain();}
-   
+    public PaymentMain getPaymentMain() {
+        return new PaymentMain();
+    }
+
 }
