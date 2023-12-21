@@ -1,6 +1,7 @@
 package source_files.controllers;
 
 import lombok.AllArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class RentalController {
     private RentalService rentalService;
 
     @PostMapping("/add/rental")
-    public ResponseEntity<TResponse<?>> addRental(@RequestBody AddRentalRequest addRentalRequest) {
+    public ResponseEntity<TResponse<?>> addRental(@RequestBody AddRentalRequest addRentalRequest) throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.rentalService.add(addRentalRequest))
