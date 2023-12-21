@@ -3,6 +3,7 @@ package source_files.data.requests.vehicleRequests.CarRequests;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import source_files.data.requests.BaseRequest;
 import source_files.data.types.DrivingLicenseType;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class UpdateCarRequest {
+public class UpdateCarRequest extends BaseRequest {
 
     int id;
     int brandId;

@@ -41,10 +41,13 @@ public enum NotFoundExceptionType {
     CAR_LIST_NOT_FOUND(1018, "Car List is Empty!"),
 
     RENTAL_DATA_NOT_FOUND(1019, "Rental Not Found!"),
-    RENTAL_LIST_NOT_FOUND(1020,"Rental List is Empty!"),
+    RENTAL_LIST_NOT_FOUND(1020, "Rental List is Empty!"),
 
-    PAYMENT_DETAILS_DATA_NOT_FOUND(1021,"Payment Details Not found!"),
-    PAYMENT_DETAILS_LIST_NOT_FOUND(1022,"Payment Details List is Empty!");
+    PAYMENT_DETAILS_DATA_NOT_FOUND(1021, "Payment Details Not found!"),
+    PAYMENT_DETAILS_LIST_NOT_FOUND(1022, "Payment Details List is Empty!"),
+
+    DISCOUNT_CODE_NOT_FOUND(1023, "Discount Code Not Found!"),
+    DISCOUNT_CODE_LIST_NOT_FOUND(1024, "Discount Code List is Empty!");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

@@ -3,6 +3,7 @@ package source_files.data.responses;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.exception.AlreadyExistsExceptionType;
 import source_files.exception.NotFoundExceptionType;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,12 @@ public class ErrorResponse {
     public ErrorResponse(NotFoundExceptionType notFoundExceptionType, String details) {
         this.errorCode = notFoundExceptionType.getErrorCode();
         this.message = notFoundExceptionType.getMessage();
+        this.details = details;
+    }
+
+    public ErrorResponse(AlreadyExistsExceptionType alreadyExistsExceptionType, String details) {
+        this.errorCode = alreadyExistsExceptionType.getErrorCode();
+        this.message = alreadyExistsExceptionType.getMessage();
         this.details = details;
     }
 

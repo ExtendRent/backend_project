@@ -47,7 +47,7 @@ public class CarController {
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<TResponse<?>> getAll() {
+    public ResponseEntity<TResponse<?>> getAll() throws Exception {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.getAll())
@@ -57,9 +57,9 @@ public class CarController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id) {
+    public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
-        this.carService.delete(id);
+        this.carService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .message("Araba silindi.")

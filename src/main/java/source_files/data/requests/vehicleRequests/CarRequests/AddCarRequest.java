@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import source_files.data.requests.BaseRequest;
 import source_files.data.types.DrivingLicenseType;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class AddCarRequest {
+public class AddCarRequest extends BaseRequest {
 
 
     int brandId;

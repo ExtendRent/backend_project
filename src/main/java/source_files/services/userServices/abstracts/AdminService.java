@@ -12,6 +12,7 @@ public interface AdminService {
     AdminDTO getById(int id);
 
     List<AdminDTO> getAll();
+
     List<AdminDTO> getAllByIsDeletedFalse();
 
     List<AdminDTO> getAllByIsDeletedTrue();

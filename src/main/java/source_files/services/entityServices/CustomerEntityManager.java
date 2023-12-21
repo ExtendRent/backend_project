@@ -31,14 +31,14 @@ public class CustomerEntityManager implements CustomerEntityService {
     @Override
     public CustomerEntity getById(int id) {
         return this.customerRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(CUSTOMER_DATA_NOT_FOUND,"Müşteri bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(CUSTOMER_DATA_NOT_FOUND, "Müşteri bulunamadı"));
     }
 
     @Override
     public CustomerEntity getByPhoneNumber(String phoneNumber) {
         return this.customerRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new DataNotFoundException(
-                        CUSTOMER_DATA_NOT_FOUND,"Bu telefon numarasına kayıtlı müşteri bulunamadı"));
+                        CUSTOMER_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı müşteri bulunamadı"));
     }
 
     @Override

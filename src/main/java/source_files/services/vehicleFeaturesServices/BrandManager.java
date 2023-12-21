@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
-import source_files.data.DTO.itemDTOs.CarModelDTO;
-import source_files.data.models.baseEntities.BaseEntity;
-import source_files.data.models.userEntities.EmployeeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
@@ -52,21 +49,21 @@ public class BrandManager implements BrandService {
     @Override
     public List<BrandDTO> getAllByIsDeletedFalse() {
         return this.brandEntityService.getAllByIsDeletedFalse()
-                .stream().map(brandEntity ->  modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
+                .stream().map(brandEntity -> modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
     }
 
     @Override
     public List<BrandDTO> getAllByIsDeletedTrue() {
         return this.brandEntityService.getAllByIsDeletedTrue()
-                .stream().map(brandEntity ->  modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
+                .stream().map(brandEntity -> modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
 
-        if(hardDelete){
+        if (hardDelete) {
             this.hardDelete(id);
-        }else{
+        } else {
             this.softDelete(id);
         }
     }

@@ -1,6 +1,5 @@
 package source_files.services.vehicleService.abstracts;
 
-import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
@@ -15,7 +14,7 @@ public interface CarService {
 
     CarDTO update(UpdateCarRequest updateCarRequest);
 
-    List<CarDTO> getAll();
+    List<CarDTO> getAll() throws Exception;
 
     List<CarDTO> getAllByIsDeletedFalse();
 

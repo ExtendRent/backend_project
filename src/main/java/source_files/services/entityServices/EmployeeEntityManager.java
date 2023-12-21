@@ -33,10 +33,8 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     }
 
     @Override
-    public EmployeeEntity getByPhoneNumber(String phoneNumber) {
-        return this.employeeRepository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new DataNotFoundException(
-                        EMPLOYEE_DATA_NOT_FOUND, "Bu telefon numarasına ait çalışan bulunamadı"));
+    public List<EmployeeEntity> getAllBySalaryBetween(double salary1, double salary2) {
+        return this.employeeRepository.findAllBySalaryBetween(salary1, salary2);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
 
-import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 
 import java.util.List;
@@ -20,8 +19,6 @@ public interface BrandEntityService {
     List<BrandEntity> getAllByIsDeletedTrue();
 
     void delete(BrandEntity brandEntity);
-
-
 
 
 }

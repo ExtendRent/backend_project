@@ -3,11 +3,12 @@ package source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModel
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import source_files.data.requests.BaseRequest;
 
 @Getter
 @Setter
 @Builder
-public class UpdateCarModelRequest {
+public class UpdateCarModelRequest extends BaseRequest {
 
     int id;
     String name;

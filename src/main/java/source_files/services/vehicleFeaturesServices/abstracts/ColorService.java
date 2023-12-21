@@ -1,7 +1,6 @@
 package source_files.services.vehicleFeaturesServices.abstracts;
 
 import source_files.data.DTO.itemDTOs.ColorDTO;
-import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 
@@ -14,7 +13,7 @@ public interface ColorService {
 
     ColorDTO getById(int id);
 
-    List<ColorDTO> getAll();
+    List<ColorDTO> getAll() throws Exception;
 
     List<ColorDTO> getAllByIsDeletedFalse();
 

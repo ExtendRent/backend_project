@@ -56,9 +56,9 @@ public class BrandController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id) {
+    public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
-        this.brandService.delete(id);
+        this.brandService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .message("Marka silindi.")

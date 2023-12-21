@@ -61,12 +61,12 @@ public class CarEntityManager implements CarEntityService {
 
     @Override
     public List<CarEntity> getAllByColorId(int id) {
-        return this.carRepository.findAllByColorId(id);
+        return this.carRepository.findAllByColorEntity_Id(id);
     }
 
     @Override
     public List<CarEntity> getAllByModelId(int id) {
-        return this.carRepository.findAllByModelId(id);
+        return this.carRepository.findAllByCarModelEntity_Id(id);
     }
 
     @Override

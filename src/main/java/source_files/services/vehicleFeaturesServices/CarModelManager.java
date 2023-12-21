@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
-import source_files.data.DTO.itemDTOs.ColorDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
@@ -60,28 +59,28 @@ public class CarModelManager implements CarModelService {
     @Override
     public List<CarModelDTO> getAllByIsDeletedFalse() {
         return this.carModelEntityService.getAllByIsDeletedFalse()
-                .stream().map(carModelEntity ->  modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
+                .stream().map(carModelEntity -> modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
     }
 
     @Override
     public List<CarModelDTO> getAllByIsDeletedTrue() {
         return this.carModelEntityService.getAllByIsDeletedTrue()
-                .stream().map(carModelEntity ->  modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
+                .stream().map(carModelEntity -> modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
 
-        if(hardDelete){
+        if (hardDelete) {
             this.hardDelete(id);
-        }else{
+        } else {
             this.softDelete(id);
         }
     }
 
     @Override
     public void hardDelete(int id) {
-    this.carModelEntityService.delete(this.carModelEntityService.getById(id));
+        this.carModelEntityService.delete(this.carModelEntityService.getById(id));
     }
 
     @Override

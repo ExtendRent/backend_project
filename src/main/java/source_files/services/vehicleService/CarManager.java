@@ -7,7 +7,6 @@ import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
-import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.services.BusinessRules.CarBusinessRules;
 import source_files.services.entityServices.abstracts.CarEntityService;
 import source_files.services.vehicleService.abstracts.CarService;
@@ -21,8 +20,6 @@ public class CarManager implements CarService {
 
     private final ModelMapperService modelMapperService;
     private final CarEntityService carEntityService;
-
-    private final CarRepository carRepository;
     private CarBusinessRules businessRules;
 
 
@@ -30,13 +27,12 @@ public class CarManager implements CarService {
     public CarDTO add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
 
-        //addCarRequest.setLicensePlate(addCarRequest.getLicensePlate().toUpperCase().replaceAll("\s", ""));
-        String editPlate = this.businessRules.licensePlateUnique(addCarRequest.getLicensePlate());
-        addCarRequest.setLicensePlate(editPlate);
-        CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class);
-        businessRules.existByModelIdAndColorId(addCarRequest.getModelId(), addCarRequest.getColorId());
-        CarDTO carDTO = modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
-        return carDTO;
+        //CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class); //ESKİ KOD !
+
+        CarEntity carEntity = modelMapperService.forRequest().map(this.businessRules                 //YENİ KOD
+                .checkAddCarRequest(businessRules.fixAddCarRequest(addCarRequest)), CarEntity.class);
+
+        return modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
     }
 
     @Override
@@ -57,34 +53,38 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<CarDTO> getAll() {
+    public List<CarDTO> getAll() throws Exception {
+        try {
+            return carEntityService.getAll().stream()
+                    .map(carEntity -> this.modelMapperService.forResponse()
+                            .map(carEntity, CarDTO.class)).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
 
-        return carEntityService.getAll().stream()
-                .map(carEntity -> this.modelMapperService.forResponse()
-                        .map(carEntity, CarDTO.class)).collect(Collectors.toList());
 
     }
 
     @Override
     public List<CarDTO> getAllByIsDeletedFalse() {
         return this.carEntityService.getAllByIsDeletedFalse()
-                .stream().map(carEntity ->  modelMapperService.forResponse().map(carEntity,CarDTO.class)).toList();
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByIsDeletedTrue() {
         return this.carEntityService.getAllByIsDeletedTrue()
-                .stream().map(carEntity ->  modelMapperService.forResponse().map(carEntity,CarDTO.class)).toList();
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
 
-    if(hardDelete){
-        this.hardDelete(id);
-    }else{
-        this.softDelete(id);
-    }
+        if (hardDelete) {
+            this.hardDelete(id);
+        } else {
+            this.softDelete(id);
+        }
     }
 
 

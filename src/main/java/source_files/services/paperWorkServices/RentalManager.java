@@ -32,9 +32,9 @@ public class RentalManager implements RentalService {
     public RentalDTO add(AddRentalRequest addRentalRequest) {
         //todo: indirim işlemleri sonucu totalPrice hesaplama
 
-        this.rentalBusinessRules.checkRentalRequest(addRentalRequest);
 
-        addRentalRequest.setStartKilometer(carService.getById(addRentalRequest.getCarId()).getKilometer());
+        rentalBusinessRules.checkAddRentalRequest(addRentalRequest) //businessRule ile check ederken sıkıntı çıkmazsa requesti geri dönüyoruz.
+                .setStartKilometer(carService.getById(addRentalRequest.getCarId()).getKilometer());
 
         RentalEntity rentalEntity = modelMapperService.forRequest().map(addRentalRequest, RentalEntity.class);
 

@@ -2,10 +2,11 @@ package source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandReq
 
 import lombok.Getter;
 import lombok.Setter;
+import source_files.data.requests.BaseRequest;
 
 @Getter
 @Setter
-public class UpdateBrandRequest {
+public class UpdateBrandRequest extends BaseRequest {
     int id;
     String name;
 }

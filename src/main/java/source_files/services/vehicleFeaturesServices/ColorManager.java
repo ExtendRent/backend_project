@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.ColorDTO;
-import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
@@ -43,22 +42,26 @@ public class ColorManager implements ColorService {
     }
 
     @Override
-    public List<ColorDTO> getAll() {
-        List<ColorEntity> colorList = colorEntityService.getAll();
+    public List<ColorDTO> getAll() throws Exception {
 
-        return colorList.stream().map(color -> modelMapperService.forResponse().map(color, ColorDTO.class)).collect(Collectors.toList());
+
+        //TODO bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
+        return colorBusinessRules.checkDataList(colorEntityService.getAll()).stream().map(color -> modelMapperService.forResponse()
+                .map(color, ColorDTO.class)).collect(Collectors.toList());
+
+
     }
 
     @Override
     public List<ColorDTO> getAllByIsDeletedFalse() {
         return this.colorEntityService.getAllByIsDeletedFalse()
-                .stream().map(colorEntity ->  modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
+                .stream().map(colorEntity -> modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
     }
 
     @Override
     public List<ColorDTO> getAllByIsDeletedTrue() {
         return this.colorEntityService.getAllByIsDeletedTrue()
-                .stream().map(colorEntity ->  modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
+                .stream().map(colorEntity -> modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
     }
 
     @Override
@@ -72,7 +75,7 @@ public class ColorManager implements ColorService {
 
     @Override
     public void hardDelete(int id) {
-
+        this.colorEntityService.delete(this.colorEntityService.getById(id));
     }
 
     @Override

@@ -1,9 +1,6 @@
 package source_files.services.userServices.abstracts;
 
-import source_files.data.DTO.paperWorkDTOs.RentalDTO;
-import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.DTO.userDTOs.EmployeeDTO;
-import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.models.userEntities.EmployeeEntity;
 
 import java.util.List;
@@ -15,6 +12,7 @@ public interface EmployeeService {
     EmployeeDTO getById(int id);
 
     List<EmployeeDTO> getAll();
+
     List<EmployeeDTO> getAllByIsDeletedFalse();
 
     List<EmployeeDTO> getAllByIsDeletedTrue();

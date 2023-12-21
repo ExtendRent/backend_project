@@ -1,6 +1,8 @@
 package source_files.data.requests.itemRequests.paymentRequests;
 
-public class AddPaymentDetailsRequest {
+import source_files.data.requests.BaseRequest;
+
+public class AddPaymentDetailsRequest extends BaseRequest {
 
 
 }

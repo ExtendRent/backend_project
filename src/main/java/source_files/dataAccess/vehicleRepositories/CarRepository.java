@@ -1,9 +1,7 @@
 package source_files.dataAccess.vehicleRepositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 
 import java.util.List;
 
@@ -18,9 +16,9 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
     List<CarEntity> findAllByIsAvailableFalse();
 
-    List<CarEntity> findAllByColorId(int id);
+    List<CarEntity> findAllByColorEntity_Id(int id);
 
-    List<CarEntity> findAllByModelId(int id);
+    List<CarEntity> findAllByCarModelEntity_Id(int id);
 
     List<CarEntity> findAllByYearBetween(int year1, int year2);
 }

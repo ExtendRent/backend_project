@@ -11,13 +11,18 @@ import source_files.dataAccess.paperWorkRepositories.DiscountCodeRepository;
 import source_files.dataAccess.paperWorkRepositories.RentalRepository;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
+import source_files.exception.DataNotFoundException;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import static source_files.exception.NotFoundExceptionType.DISCOUNT_CODE_NOT_FOUND;
+import static source_files.exception.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
-public class RentalBusinessRules {
+public class RentalBusinessRules implements BaseBusinessRulesService {
 
     private final RentalRepository rentalRepository;
     private final CustomerRepository customerRepository;
@@ -25,7 +30,14 @@ public class RentalBusinessRules {
     private final DiscountCodeRepository discountCodeRepository;
     private PaymentBusinessRules paymentBusinessRules;
 
-    public void checkRentalRequest(AddRentalRequest addRentalRequest) {
+    public AddRentalRequest fixAddRentalRequest(AddRentalRequest addRentalRequest) {
+        addRentalRequest.setCreditCardInformation(this.paymentBusinessRules
+                .fixCreditCardInformation(addRentalRequest.getCreditCardInformation()));
+
+        return addRentalRequest;
+    }
+
+    public AddRentalRequest checkAddRentalRequest(AddRentalRequest addRentalRequest) {
         this.checkStartDate(addRentalRequest.getStartDate());
         this.checkEndDate(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
         this.carExists(addRentalRequest.getCarId());
@@ -33,10 +45,11 @@ public class RentalBusinessRules {
         this.checkTotalRentalDays(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
         this.checkDiscountCode(addRentalRequest.getDiscountCodeId());
         this.checkCreditCardInformations(addRentalRequest.getCreditCardInformation());
+        return addRentalRequest;
     }
 
 
-    //---------------CHECKING METHODS--------------------------------
+    //---------------AUTO CHECKING METHODS--------------------------------
 
     private void checkStartDate(LocalDate startDate) {
 
@@ -72,7 +85,7 @@ public class RentalBusinessRules {
     private void checkDiscountCode(Integer id) {
         if (id != null) {
             if (!this.discountCodeRepository.findById(id)
-                    .orElseThrow(() -> new IllegalStateException("böyle bir indirim kodumuz bulunmamaktadır."))
+                    .orElseThrow(() -> new DataNotFoundException(DISCOUNT_CODE_NOT_FOUND, "böyle bir indirim kodumuz bulunmamaktadır."))
                     .isActive()) //ifin içerisi = indirim kodunun olup olmadığına, varsa ise aktifmi değilmi diye bakıyor.
             {
                 throw new IllegalStateException("Bu indirim kodu artık geçersizdir.");
@@ -139,4 +152,12 @@ public class RentalBusinessRules {
         return totalAmount; //zamanında getirirse
     }
 
+
+    @Override
+    public List<?> checkDataList(List<?> list) {
+        if (list.isEmpty()) {
+            throw new DataNotFoundException(RENTAL_LIST_NOT_FOUND, "Aradığınız kriterlere uygun kiralama kaydı bulunamadı");
+        }
+        return list;
+    }
 }

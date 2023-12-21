@@ -56,8 +56,8 @@ public class CarModelController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id) {
-        this.carModelService.delete(id);
+    public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
+        this.carModelService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .message(id + " id li araba modeli silindi.")
