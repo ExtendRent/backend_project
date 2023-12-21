@@ -29,7 +29,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
 
     public AddCarRequest fixAddCarRequest(AddCarRequest addCarRequest) {
-        addCarRequest.setLicensePlate(this.licensePlateUnique(addCarRequest.getLicensePlate()));
+        addCarRequest.setLicensePlate(this.fixLicensePlate(addCarRequest.getLicensePlate()));
         return addCarRequest;
     }
 
@@ -50,8 +50,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
-    private String licensePlateUnique(String plate) {
-
+    private String fixLicensePlate(String plate) {
         return plate.replace(" ", "").toUpperCase();
     }
 

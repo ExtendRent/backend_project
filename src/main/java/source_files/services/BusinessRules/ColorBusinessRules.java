@@ -17,18 +17,20 @@ import static source_files.exception.NotFoundExceptionType.COLOR_LIST_NOT_FOUND;
 public class ColorBusinessRules implements BaseBusinessRulesService {
     private final ColorRepository colorRepository;
 
-    AddColorRequest checkAddColorRequest(AddColorRequest addColorRequest) {
-        this.existsByName(addColorRequest.getName());
+    public AddColorRequest fixAddColorRequest(AddColorRequest addColorRequest){
+        addColorRequest.setName(this.fixColorName(addColorRequest.getName()));
         return addColorRequest;
     }
 
-    //---------------AUTO CHECKING METHODS--------------------------------
-    public void existsByName(String name) {
-        if (colorRepository.existsByName(name)) {
-            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist");
-        }
+    public AddColorRequest checkAddColorRequest(AddColorRequest addColorRequest) {
+        this.existsByName(addColorRequest.getName());
+        return addColorRequest;
     }
-//----------------------------------------------------------------------
+    //----------------------------------------------------------------------
+
+    private String fixColorName(String colorName){
+        return colorName.replace(" ", "").toLowerCase();
+    }
 
     @Override
     public List<?> checkDataList(List<?> list) {
@@ -37,6 +39,16 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
         }
         return list;
     }
+
+    //---------------AUTO CHECKING METHODS--------------------------------
+    private void existsByName(String name) {
+        if (colorRepository.existsByName(name)) {
+            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist");
+        }
+    }
+
+
+
 
 }
 

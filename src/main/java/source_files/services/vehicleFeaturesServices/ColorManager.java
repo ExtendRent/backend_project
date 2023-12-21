@@ -24,8 +24,11 @@ public class ColorManager implements ColorService {
 
     @Override
     public ColorDTO add(AddColorRequest addColorRequest) {
-        colorBusinessRules.existsByName(addColorRequest.getName());
-        ColorEntity color = modelMapperService.forRequest().map(addColorRequest, ColorEntity.class);
+
+        ColorEntity color = modelMapperService.forRequest()
+                .map(colorBusinessRules.checkAddColorRequest( // önce fixle, sonra check et.
+                        colorBusinessRules.fixAddColorRequest(addColorRequest)), ColorEntity.class);
+
         return modelMapperService.forResponse().map(colorEntityService.add(color), ColorDTO.class);
     }
 
@@ -44,23 +47,21 @@ public class ColorManager implements ColorService {
     @Override
     public List<ColorDTO> getAll() throws Exception {
 
-
         //TODO bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
-        return colorBusinessRules.checkDataList(colorEntityService.getAll()).stream().map(color -> modelMapperService.forResponse()
-                .map(color, ColorDTO.class)).collect(Collectors.toList());
-
-
+        return colorBusinessRules.checkDataList(colorEntityService.getAll())
+                .stream().map(color -> modelMapperService.forResponse()
+                        .map(color, ColorDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<ColorDTO> getAllByIsDeletedFalse() {
-        return this.colorEntityService.getAllByIsDeletedFalse()
+        return colorBusinessRules.checkDataList(colorEntityService.getAllByIsDeletedFalse())
                 .stream().map(colorEntity -> modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
     }
 
     @Override
     public List<ColorDTO> getAllByIsDeletedTrue() {
-        return this.colorEntityService.getAllByIsDeletedTrue()
+        return colorBusinessRules.checkDataList(colorEntityService.getAllByIsDeletedTrue())
                 .stream().map(colorEntity -> modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
     }
 

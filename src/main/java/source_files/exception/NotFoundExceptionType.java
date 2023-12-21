@@ -48,9 +48,10 @@ public enum NotFoundExceptionType {
 
     DISCOUNT_CODE_NOT_FOUND(1023, "Discount Code Not Found!"),
     DISCOUNT_CODE_LIST_NOT_FOUND(1024, "Discount Code List is Empty!");
-
+    
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;
+
 
 }
