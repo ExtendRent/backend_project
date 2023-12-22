@@ -30,5 +30,5 @@ public class CustomerEntity extends UserEntity {
     @Column(name = "driving_license_number", unique = true)
     private String drivingLicenseNumber;
     @Column(name = "driving_license_type")
-    private DrivingLicenseType drivingLicenseType;
+    private List<DrivingLicenseType> drivingLicenseTypes;
 }

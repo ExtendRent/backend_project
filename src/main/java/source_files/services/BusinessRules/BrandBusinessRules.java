@@ -33,4 +33,9 @@ public class BrandBusinessRules implements BaseBusinessRulesService {
         }
         return list;
     }
+
+    @Override
+    public String fixName(String name) {
+        return name.replace(" ", "").toLowerCase();
+    }
 }

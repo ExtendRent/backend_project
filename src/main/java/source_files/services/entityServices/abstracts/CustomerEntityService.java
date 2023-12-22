@@ -13,9 +13,9 @@ public interface CustomerEntityService {
 
     CustomerEntity getById(int id);
 
-    CustomerEntity getByPhoneNumber(String phoneNumber);
-
     List<CustomerEntity> getAll();
+
+    CustomerEntity getByPhoneNumber(String phoneNumber);
 
     List<CustomerEntity> getAllByIsDeletedFalse();
 
@@ -23,5 +23,7 @@ public interface CustomerEntityService {
 
     void delete(CustomerEntity customerEntity);
 
+    void hardDelete(int id);
+    void softDelete(int id);
 
 }

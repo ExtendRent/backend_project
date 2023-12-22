@@ -3,6 +3,8 @@ package source_files.data.DTO.userDTOs;
 import lombok.*;
 import source_files.data.types.DrivingLicenseType;
 
+import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -12,7 +14,7 @@ public class CustomerDTO {
 
     String phoneNumber;
     String drivingLicenseNumber;
-    DrivingLicenseType drivingLicenseType;
+    List<DrivingLicenseType> drivingLicenseTypes;
     String name;
     String surname;
     String emailAddress;

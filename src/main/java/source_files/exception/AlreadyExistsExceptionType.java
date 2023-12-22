@@ -34,7 +34,14 @@ public enum AlreadyExistsExceptionType {
 
     DISCOUNT_ALREADY_EXISTS(2012, "Discount Code Already Exists"),
 
-    LICENSE_PLATE_ALREADT_EXISTS(2013, "License Plate Already Exists");
+    LICENSE_PLATE_ALREADY_EXISTS(2013, "License Plate Already Exists"),
+
+    PHONE_NUMBER_ALREADY_EXISTS(2014,"Phone Number Already Exists"),
+
+    DRIVING_LICENSE_NUMBER_ALREADY_EXISTS(2015,"Driving License Number Already Exists"),
+
+    EMAIL_ADDRESS_ALREADY_EXISTS(2016,"Email Address Already Exists");
+
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;

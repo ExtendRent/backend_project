@@ -1,5 +1,7 @@
 package source_files.data.requests.userRequests;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-//@Builder
-public class AddCustomerRequest {
+public class UpdateCustomerRequest {
+    int id;
     @NotBlank(message = "Müşteri adı boş geçilemez")
     @Size(min = 2, max = 20)
     String name;

@@ -57,4 +57,9 @@ public class PaymentBusinessRules implements BaseBusinessRulesService {
         }
         return list;
     }
+
+    @Override
+    public String fixName(String name) {
+        return null;
+    }
 }

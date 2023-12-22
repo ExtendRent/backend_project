@@ -43,5 +43,10 @@ public class CarModelBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
+    @Override
+    public String fixName(String name) {
+        return null;
+    }
+
 
 }

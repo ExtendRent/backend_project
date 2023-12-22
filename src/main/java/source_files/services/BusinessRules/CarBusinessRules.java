@@ -13,7 +13,7 @@ import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.C
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.LICENSE_PLATE_ALREADT_EXISTS;
+import static source_files.exception.AlreadyExistsExceptionType.LICENSE_PLATE_ALREADY_EXISTS;
 import static source_files.exception.NotFoundExceptionType.CAR_DATA_NOT_FOUND;
 
 @AllArgsConstructor
@@ -50,6 +50,11 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
+    @Override
+    public String fixName(String name) {
+        return name.replace(" ", "").toLowerCase();
+    }
+
     private String fixLicensePlate(String plate) {
         return plate.replace(" ", "").toUpperCase();
     }
@@ -58,7 +63,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
     private void checkLicensePlate(String licensePlate) {
         if (this.carRepository.existsByLicensePlate(licensePlate)) {
-            throw new AlreadyExistsException(LICENSE_PLATE_ALREADT_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
+            throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
         }
     }
 

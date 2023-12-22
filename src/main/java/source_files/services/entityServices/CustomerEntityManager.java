@@ -25,7 +25,7 @@ public class CustomerEntityManager implements CustomerEntityService {
 
     @Override
     public CustomerEntity update(CustomerEntity customerEntity) {
-        return null;
+        return this.add(customerEntity);
     }
 
     @Override
@@ -44,6 +44,21 @@ public class CustomerEntityManager implements CustomerEntityService {
     @Override
     public void delete(CustomerEntity customerEntity) {
         this.customerRepository.delete(customerEntity);
+    }
+
+    @Override
+    public void hardDelete(int id) {
+        this.customerRepository.delete(customerRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(CUSTOMER_DATA_NOT_FOUND, "Bu müşteri sistemde bulunamadı")));
+
+    }
+
+    @Override
+    public void softDelete(int id) {
+        CustomerEntity customerEntity = this.customerRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(CUSTOMER_DATA_NOT_FOUND, "Bu müşteri sistemde bulunamadı"));
+        customerEntity.setIsDeleted(true);
+        customerRepository.save(customerEntity);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
     private final ColorRepository colorRepository;
 
     public AddColorRequest fixAddColorRequest(AddColorRequest addColorRequest){
-        addColorRequest.setName(this.fixColorName(addColorRequest.getName()));
+        addColorRequest.setName(this.fixName(addColorRequest.getName()));
         return addColorRequest;
     }
 
@@ -28,9 +28,7 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
     }
     //----------------------------------------------------------------------
 
-    private String fixColorName(String colorName){
-        return colorName.replace(" ", "").toLowerCase();
-    }
+
 
     @Override
     public List<?> checkDataList(List<?> list) {
@@ -38,6 +36,11 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
             throw new DataNotFoundException(COLOR_LIST_NOT_FOUND, "Aradığınız kriterlere uygun renk bulunamadı");
         }
         return list;
+    }
+
+    @Override
+    public String fixName(String name) {
+        return name.replace(" ", "").toLowerCase();
     }
 
     //---------------AUTO CHECKING METHODS--------------------------------
