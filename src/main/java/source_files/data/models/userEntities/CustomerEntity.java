@@ -25,8 +25,7 @@ public class CustomerEntity extends UserEntity {
 
     @OneToMany(mappedBy = "customerEntity")
     List<RentalEntity> rentalHistory;
-    @Column(name = "phone_number", unique = true)
-    private String phoneNumber;
+
     @Column(name = "driving_license_number", unique = true)
     private String drivingLicenseNumber;
     @Column(name = "driving_license_type")

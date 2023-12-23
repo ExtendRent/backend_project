@@ -98,6 +98,7 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public void softDelete(int id) {
+
         customerEntityService.softDelete(id);
     }
 
