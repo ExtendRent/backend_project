@@ -1,5 +1,6 @@
 package source_files.services.vehicleFeaturesServices.abstracts;
 
+import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
@@ -13,6 +14,7 @@ public interface CarModelService {
 
     CarModelDTO getById(int id);
 
+    CarModelDTO getByModelName(String modelName);
 
     List<CarModelDTO> getAll();
 
@@ -25,5 +27,6 @@ public interface CarModelService {
     void hardDelete(int id);
 
     void softDelete(int id);
-
+    //--------------------GETBYID METHODS-----------------------------------------------------------------
+    List<BrandDTO> getAllByBrandId(int brandId);
 }

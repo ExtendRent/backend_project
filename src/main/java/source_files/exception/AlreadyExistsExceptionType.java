@@ -40,7 +40,8 @@ public enum AlreadyExistsExceptionType {
 
     DRIVING_LICENSE_NUMBER_ALREADY_EXISTS(2015,"Driving License Number Already Exists"),
 
-    EMAIL_ADDRESS_ALREADY_EXISTS(2016,"Email Address Already Exists");
+    EMAIL_ADDRESS_ALREADY_EXISTS(2016,"Email Address Already Exists"),
+    NAME_ALREADY_EXISTS(2017,"Name Already Exists");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

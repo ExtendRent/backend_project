@@ -31,4 +31,7 @@ public class CarEntity extends Vehicle {
 
     @Column(name = "kilometer")
     private Integer kilometer;
+
+    //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş
+    //todo : imagePath eklenecek yada birden fazla resim varsa başka tabloda tut
 }

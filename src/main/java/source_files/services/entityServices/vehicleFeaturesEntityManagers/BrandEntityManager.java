@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.BrandRespository;
+import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
 
 import java.util.List;
+
+import static source_files.exception.NotFoundExceptionType.BRAND_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +32,14 @@ public class BrandEntityManager implements BrandEntityService {
     @Override
     public BrandEntity getById(int id) {
 
-        return brandRespository.findById(id).orElseThrow();
+        return brandRespository.findById(id).orElseThrow(
+                () -> new DataNotFoundException(BRAND_DATA_NOT_FOUND, "Marka bulunamadı")
+        );
+    }
+
+    @Override
+    public BrandEntity getByName(String brandName) {
+        return brandRespository.findByName(brandName);
     }
 
     @Override
@@ -44,11 +54,11 @@ public class BrandEntityManager implements BrandEntityService {
 
     @Override
     public List<BrandEntity> getAllByIsDeletedFalse() {
-        return null;
+        return brandRespository.findAllByIsDeletedFalse();
     }
 
     @Override
     public List<BrandEntity> getAllByIsDeletedTrue() {
-        return null;
+        return brandRespository.findAllByIsDeletedTrue();
     }
 }

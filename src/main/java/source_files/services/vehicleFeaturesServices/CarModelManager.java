@@ -3,7 +3,9 @@ package source_files.services.vehicleFeaturesServices;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
+import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
@@ -22,26 +24,29 @@ public class CarModelManager implements CarModelService {
     private final CarModelEntityService carModelEntityService;
     private final ModelMapperService modelMapperService;
     private final CarModelBusinessRules carModelBusinessRules;
-    private final BrandBusinessRules brandBusinessRules;
+    private final CarModelEntity carModelEntity;
 
     @Override
     public CarModelDTO add(AddCarModelRequest addCarModelRequest) {
 
-        carModelBusinessRules.existsByName(addCarModelRequest.getName());
-        CarModelEntity carModelEntity = new CarModelEntity();
-        CarModelEntity carModel = modelMapperService.forRequest().map(addCarModelRequest, CarModelEntity.class);
+        CarModelEntity carModel = modelMapperService.forRequest()
+                .map(carModelBusinessRules.checkAddCarModelRequest(
+                        carModelBusinessRules.fixAddCarModelRequest(addCarModelRequest)), CarModelEntity.class);
+        //todo:Fk larda id ler karıştığı için ekleme yaparken fk nın id sine ekleme yapıyor
         carModel.setId(carModelEntity.getId());
-
-        CarModelDTO carModelDTO = modelMapperService.forResponse().map(carModelEntityService.add(carModel), CarModelDTO.class);
-        carModelDTO.setName(carModel.getName());
-        return carModelDTO;
+        //CarModelDTO carModelDTO = modelMapperService.forResponse().map(carModelEntityService.add(carModel), CarModelDTO.class);
+        //carModelDTO.setName(carModel.getName());
+        //return carModelDTO;
+        return modelMapperService.forResponse().map(carModelEntityService.add(carModel),CarModelDTO.class);
     }
 
     @Override
     public CarModelDTO update(UpdateCarModelRequest updateCarModelRequest) {
-        CarModelEntity carModelEntity = modelMapperService.forRequest().map(updateCarModelRequest, CarModelEntity.class);
-        carModelEntity = carModelEntityService.update(carModelEntity);
-        return modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class);
+        CarModelEntity carModelEntity = modelMapperService.forRequest()
+                .map(carModelBusinessRules.checkUpdateCarModelRequest(
+                        carModelBusinessRules.fixUpdateCarModelRequest(updateCarModelRequest)
+                ), CarModelEntity.class);
+        return modelMapperService.forRequest().map(carModelEntityService.update(carModelEntity),CarModelDTO.class);
     }
 
     @Override
@@ -50,21 +55,27 @@ public class CarModelManager implements CarModelService {
     }
 
     @Override
+    public CarModelDTO getByModelName(String modelName) {
+        return modelMapperService.forResponse().map(carModelEntityService.getByModelName(modelName),CarModelDTO.class);
+    }
+
+    @Override
     public List<CarModelDTO> getAll() {
-        List<CarModelEntity> carModelEntities = carModelEntityService.getAll();
-        return carModelEntities.stream().map(carModel ->
-                modelMapperService.forResponse().map(carModel, CarModelDTO.class)).collect(Collectors.toList());
+        return carModelBusinessRules.checkDataList(carModelEntityService.getAll())
+         .stream().map(carModel ->
+                modelMapperService.forResponse().map(carModel, CarModelDTO.class))
+                    .collect(Collectors.toList());
     }
 
     @Override
     public List<CarModelDTO> getAllByIsDeletedFalse() {
-        return this.carModelEntityService.getAllByIsDeletedFalse()
+        return carModelBusinessRules.checkDataList(this.carModelEntityService.getAllByIsDeletedFalse())
                 .stream().map(carModelEntity -> modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
     }
 
     @Override
     public List<CarModelDTO> getAllByIsDeletedTrue() {
-        return this.carModelEntityService.getAllByIsDeletedTrue()
+        return carModelBusinessRules.checkDataList(this.carModelEntityService.getAllByIsDeletedTrue())
                 .stream().map(carModelEntity -> modelMapperService.forResponse().map(carModelEntity, CarModelDTO.class)).toList();
     }
 
@@ -85,6 +96,16 @@ public class CarModelManager implements CarModelService {
 
     @Override
     public void softDelete(int id) {
+        CarModelEntity carModelEntity = this.carModelEntityService.getById(id);
+        carModelEntity.setIsDeleted(true);
+        this.carModelEntityService.update(carModelEntity);
+    }
+
+    @Override
+    public List<BrandDTO> getAllByBrandId(int brandId) {
+        return carModelEntityService.getAllByBrandId(brandId).stream().map(
+                model -> modelMapperService.forResponse().map(model,BrandDTO.class)
+        ).collect(Collectors.toList());
 
     }
 
