@@ -16,7 +16,9 @@ public interface CarBodyTypeEntityService {
 
     List<CarBodyTypeEntity> getAll();
 
-    List<AdminEntity> getAllByIsDeletedFalse();
+    List<CarBodyTypeEntity> getAllByIsDeletedFalse();
 
-    List<AdminEntity> getAllByIsDeletedTrue();
+    List<CarBodyTypeEntity> getAllByIsDeletedTrue();
+    void hardDelete(int id);
+    void softDelete(int id);
 }

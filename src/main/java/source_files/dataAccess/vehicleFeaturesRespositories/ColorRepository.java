@@ -6,7 +6,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Colo
 import java.util.List;
 
 public interface ColorRepository extends JpaRepository<ColorEntity, Integer> {
-    boolean existsByName(String colorName);
+    boolean existsByName(String name);
 
     List<ColorEntity> findAllByIsDeletedFalse();
 

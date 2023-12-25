@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.ColorRepository;
+import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
 
 import java.util.List;
+
+import static source_files.exception.NotFoundExceptionType.COLOR_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor
@@ -21,17 +24,33 @@ public class ColorEntityManager implements ColorEntityService {
 
     @Override
     public ColorEntity update(ColorEntity colorEntity) {
-        return colorRepository.save(colorEntity);
+        return this.add(colorEntity);
     }
 
     @Override
     public ColorEntity getById(int id) {
-        return colorRepository.findById(id).orElseThrow();
+        return this.colorRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(COLOR_DATA_NOT_FOUND, "Renk bulunamadı"));
     }
 
     @Override
     public void delete(ColorEntity colorEntity) {
         colorRepository.delete(colorEntity);
+    }
+
+    @Override
+    public void hardDelete(int id) {
+        this.colorRepository.delete(this.colorRepository.findById(id).orElseThrow(
+                () -> new DataNotFoundException(COLOR_DATA_NOT_FOUND, "Renk bulunamadı.")
+        ));
+    }
+
+    @Override
+    public void softDelete(int id) {
+        ColorEntity colorEntity = this.colorRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(COLOR_DATA_NOT_FOUND, "Bu renk sistemde bulunamadı"));
+        colorEntity.setIsDeleted(true);
+        this.add(colorEntity);
     }
 
     @Override
@@ -41,11 +60,11 @@ public class ColorEntityManager implements ColorEntityService {
 
     @Override
     public List<ColorEntity> getAllByIsDeletedFalse() {
-        return null;
+        return this.colorRepository.findAllByIsDeletedFalse();
     }
 
     @Override
     public List<ColorEntity> getAllByIsDeletedTrue() {
-        return null;
+        return this.colorRepository.findAllByIsDeletedTrue();
     }
 }
