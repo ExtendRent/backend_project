@@ -35,17 +35,17 @@ public class BrandController {
         );
     }
 
-    @GetMapping("getById/{id}")
-    public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
+    @GetMapping("/getById")
+    public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.brandService.getById(id))
-                .message(id + "li marka görüntülendi")
+                .message(id + " li marka görüntülendi")
                 .build()
         );
     }
 
-    @GetMapping("getAll")
+    @GetMapping("/getAll")
     public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
@@ -54,7 +54,33 @@ public class BrandController {
                 .build()
         );
     }
-
+    @GetMapping("/getByBrandName")
+    public ResponseEntity<TResponse<?>> getByBrandName(@RequestParam String brandName) {
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.brandService.getByName(brandName))
+                .message("Marka görüntülendi")
+                .build()
+        );
+    }
+    @GetMapping("/getAllByIsDeletedFalse")
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.brandService.getAllByIsDeletedFalse())
+                .message("Mevcut Marka Listesi Getirildi.")
+                .build()
+        );
+    }
+    @GetMapping("/getAllByIsDeletedTrue")
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.brandService.getAllByIsDeletedTrue())
+                .message("Soft Delete ile Silinen Marka Listesi Getirildi.")
+                .build()
+        );
+    }
     @DeleteMapping("{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 

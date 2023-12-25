@@ -72,13 +72,13 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public List<CustomerDTO> getAllByIsDeletedFalse() {
-        return customerBusinessRules.checkDataList(this.customerRepository.findAllByIsDeletedFalse())
+        return customerBusinessRules.checkDataList(this.customerEntityService.getAllByIsDeletedFalse())
                 .stream().map(customerEntity -> modelMapperService.forResponse().map(customerEntity, CustomerDTO.class)).toList();
     }
 
     @Override
     public List<CustomerDTO> getAllByIsDeletedTrue() {
-        return customerBusinessRules.checkDataList(this.customerRepository.findAllByIsDeletedTrue())
+        return customerBusinessRules.checkDataList(this.customerEntityService.getAllByIsDeletedTrue())
                 .stream().map(customerEntity -> modelMapperService.forResponse().map(customerEntity, CustomerDTO.class)).toList();
     }
 

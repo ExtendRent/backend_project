@@ -35,8 +35,8 @@ public class CarModelController {
         );
     }
 
-    @GetMapping("/getByCarModelId/{id}")
-    public ResponseEntity<TResponse<?>> getByCarModelId(@PathVariable int id) {
+    @GetMapping("/getByCarModelId")
+    public ResponseEntity<TResponse<?>> getByCarModelId(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carModelService.getById(id))
@@ -51,6 +51,41 @@ public class CarModelController {
                 .isSuccess(true)
                 .response(this.carModelService.getAll())
                 .message("Araba modeli listesi getirildi.")
+                .build()
+        );
+    }
+    @GetMapping("/getByModelName")
+    public ResponseEntity<TResponse<?>> getByModelName(@RequestParam String modelName) {
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.carModelService.getByModelName(modelName))
+                .message("Model görüntülendi")
+                .build()
+        );
+    }
+    @GetMapping("/getByBrandId")
+    public ResponseEntity<TResponse<?>> getByBrandId(@RequestParam int brandId) {
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.carModelService.getAllByBrandId(brandId))
+                .message("Model görüntülendi")
+                .build()
+        );
+    }
+    @GetMapping("/getAllByIsDeletedFalse")
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.carModelService.getAllByIsDeletedFalse())
+                .message("Mevcut Model Listesi Getirildi.")
+                .build()
+        );
+    }@GetMapping("/getAllByIsDeletedTrue")
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.carModelService.getAllByIsDeletedTrue())
+                .message("Soft Delete ile Silinen Model Listesi Getirildi.")
                 .build()
         );
     }

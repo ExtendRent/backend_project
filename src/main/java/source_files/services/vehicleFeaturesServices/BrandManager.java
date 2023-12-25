@@ -24,14 +24,17 @@ public class BrandManager implements BrandService {
 
     @Override
     public BrandDTO add(AddBrandRequest addBrandRequest) {
-        brandBusinessRules.existsByName(addBrandRequest.getName());
-        BrandEntity brandEntity = modelMapperService.forRequest().map(addBrandRequest, BrandEntity.class);
+        BrandEntity brandEntity = modelMapperService.forRequest()
+                .map(brandBusinessRules.checkAddBrandRequest(
+                    brandBusinessRules.fixAddBrandRequest(addBrandRequest)), BrandEntity.class);
         return modelMapperService.forResponse().map(brandEntityService.add(brandEntity), BrandDTO.class);
     }
 
     @Override
     public BrandDTO update(UpdateBrandRequest updateBrandRequest) {
-        BrandEntity brandEntity = modelMapperService.forRequest().map(updateBrandRequest, BrandEntity.class);
+        BrandEntity brandEntity = modelMapperService.forRequest()
+                .map(brandBusinessRules.checkUpdateBrandRequest(
+                        brandBusinessRules.fixUpdateBrandRequest(updateBrandRequest)), BrandEntity.class);
         return modelMapperService.forResponse().map(brandEntityService.update(brandEntity), BrandDTO.class);
     }
 
@@ -41,20 +44,26 @@ public class BrandManager implements BrandService {
     }
 
     @Override
+    public BrandDTO getByName(String brandName) {
+        return modelMapperService.forResponse().map(brandEntityService.getByName(brandName),BrandDTO.class);
+    }
+
+    @Override
     public List<BrandDTO> getAll() {
-        List<BrandEntity> brandList = brandEntityService.getAll();
-        return brandList.stream().map(brand -> modelMapperService.forResponse().map(brand, BrandDTO.class)).collect(Collectors.toList());
+        return brandBusinessRules.checkDataList(brandEntityService.getAll())
+                .stream().map(brand -> modelMapperService.forResponse()
+                        .map(brand,BrandDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     public List<BrandDTO> getAllByIsDeletedFalse() {
-        return this.brandEntityService.getAllByIsDeletedFalse()
+        return brandBusinessRules.checkDataList(this.brandEntityService.getAllByIsDeletedFalse())
                 .stream().map(brandEntity -> modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
     }
 
     @Override
     public List<BrandDTO> getAllByIsDeletedTrue() {
-        return this.brandEntityService.getAllByIsDeletedTrue()
+        return brandBusinessRules.checkDataList(this.brandEntityService.getAllByIsDeletedTrue())
                 .stream().map(brandEntity -> modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
     }
 

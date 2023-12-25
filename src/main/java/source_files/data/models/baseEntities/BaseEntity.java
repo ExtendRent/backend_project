@@ -8,14 +8,17 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
 @Setter
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
-@AllArgsConstructor
-@NoArgsConstructor
-//@SuperBuilder
+
+//todo: baseentity abstract olacak
+//todo: bir logo ekleyebilriz img eklersek manager da yapacağız
+//todo: base entity de construction gerek yok
+//todo: logopath eklenebilir
 @Inheritance(strategy = InheritanceType.JOINED)
 public class BaseEntity {
     @Id
@@ -27,11 +30,22 @@ public class BaseEntity {
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
 
-    @LastModifiedDate
-    @Column(name = "last_modified")
-    private Date lastModified;
+    //todo:  null geliyor
 
-    @CreatedDate
+    @Column(name = "last_modified",nullable = true)
+    private LocalDate lastModified;
+
+
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDate createdDate;
+    @PrePersist //classlar oluşmadan çalısır
+    private void beforeAdd(){
+        createdDate =LocalDate.now();
+    }
+    @PreUpdate //classlar oluşmadan çalısır
+    private void beforeUpdate(){
+        lastModified =LocalDate.now();
+    }
+
+
 }
