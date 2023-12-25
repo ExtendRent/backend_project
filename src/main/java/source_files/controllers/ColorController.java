@@ -1,5 +1,6 @@
 package source_files.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ColorController {
 
 
     @PostMapping("/add/color")
-    public ResponseEntity<TResponse<?>> addColor(@RequestBody AddColorRequest addColorRequest) {
+    public ResponseEntity<TResponse<?>> addColor(@RequestBody @Valid AddColorRequest addColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.add(addColorRequest))
@@ -26,7 +27,7 @@ public class ColorController {
     }
 
     @PutMapping("/update/color")
-    public ResponseEntity<TResponse<?>> updateColor(@RequestBody UpdateColorRequest updateColorRequest) {
+    public ResponseEntity<TResponse<?>> updateColor(@RequestBody @Valid UpdateColorRequest updateColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.update(updateColorRequest))
@@ -40,7 +41,7 @@ public class ColorController {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.getById(id))
-                .message(id + "li renk görüntülendi")
+                .message(id + " id' li renk görüntülendi")
                 .build()
         );
     }
@@ -51,6 +52,26 @@ public class ColorController {
                 .isSuccess(true)
                 .response(this.colorService.getAll())
                 .message("Renk Listesi döndü.")
+                .build()
+        );
+    }
+
+    @GetMapping("/getAllByIsDeletedFalse")
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.colorService.getAllByIsDeletedFalse())
+                .message("Mevcut Renk Listesi Getirildi.")
+                .build()
+        );
+    }
+
+    @GetMapping("/getAllByIsDeletedTrue")
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.colorService.getAllByIsDeletedTrue())
+                .message("Soft Delete ile Silinen Renk Listesi Getirildi.")
                 .build()
         );
     }

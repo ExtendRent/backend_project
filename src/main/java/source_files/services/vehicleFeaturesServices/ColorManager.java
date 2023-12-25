@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.ColorDTO;
+import source_files.data.DTO.userDTOs.CustomerDTO;
+import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
+import source_files.data.types.ItemType;
+import source_files.data.types.UserType;
 import source_files.services.BusinessRules.ColorBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
@@ -25,17 +29,22 @@ public class ColorManager implements ColorService {
     @Override
     public ColorDTO add(AddColorRequest addColorRequest) {
 
-        ColorEntity color = modelMapperService.forRequest()
-                .map(colorBusinessRules.checkAddColorRequest( // önce fixle, sonra check et.
-                        colorBusinessRules.fixAddColorRequest(addColorRequest)), ColorEntity.class);
+        ColorEntity colorEntity = modelMapperService.forRequest()
+                .map(colorBusinessRules.checkAddColorRequest(
+                        colorBusinessRules.fixAddColorRequest(addColorRequest)),ColorEntity.class
+                );
 
-        return modelMapperService.forResponse().map(colorEntityService.add(color), ColorDTO.class);
+        colorEntity.setItemType(ItemType.COLOR);
+
+        return this.modelMapperService.forResponse().map(this.colorEntityService.add(colorEntity), ColorDTO.class);
     }
 
     @Override
     public ColorDTO update(UpdateColorRequest updateColorRequest) {
-        ColorEntity color = modelMapperService.forRequest().map(updateColorRequest, ColorEntity.class);
-        return modelMapperService.forResponse().map(colorEntityService.update(color), ColorDTO.class);
+        ColorEntity color = modelMapperService.forRequest().map(colorBusinessRules.checkUpdateColorRequest(
+                colorBusinessRules.fixUpdateColorRequest(updateColorRequest)), ColorEntity.class);
+        color.setItemType(ItemType.COLOR);
+        return modelMapperService.forResponse().map(colorEntityService.add(color), ColorDTO.class);
     }
 
     @Override
@@ -76,13 +85,11 @@ public class ColorManager implements ColorService {
 
     @Override
     public void hardDelete(int id) {
-        this.colorEntityService.delete(this.colorEntityService.getById(id));
+        colorEntityService.hardDelete(id);
     }
 
     @Override
     public void softDelete(int id) {
-        ColorEntity colorEntity = this.colorEntityService.getById(id);
-        colorEntity.setIsDeleted(true);
-        this.colorEntityService.update(colorEntity);
+        colorEntityService.softDelete(id);
     }
 }

@@ -13,7 +13,6 @@ public interface CarModelService {
 
     CarModelDTO getById(int id);
 
-
     List<CarModelDTO> getAll();
 
     List<CarModelDTO> getAllByIsDeletedFalse();

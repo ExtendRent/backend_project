@@ -19,5 +19,8 @@ public interface ColorEntityService {
 
     void delete(ColorEntity colorEntity);
 
+    void hardDelete(int id);
+    void softDelete(int id);
+
 
 }
