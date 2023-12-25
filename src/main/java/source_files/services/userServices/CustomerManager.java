@@ -9,15 +9,12 @@ import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.data.types.UserType;
 import source_files.dataAccess.userRepositories.CustomerRepository;
-import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.CustomerBusinessRules;
 import source_files.services.entityServices.abstracts.CustomerEntityService;
 import source_files.services.userServices.abstracts.CustomerService;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static source_files.exception.NotFoundExceptionType.CUSTOMER_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor
@@ -31,9 +28,9 @@ public class CustomerManager implements CustomerService {
     @Override
     public CustomerDTO add(AddCustomerRequest addCustomerRequest) {
         CustomerEntity customerEntity = modelMapperService.forRequest()
-                        .map(customerBusinessRules.checkAddCustomerRequest(
-                                customerBusinessRules.fixAddCustomerRequest(addCustomerRequest)),CustomerEntity.class
-                        );
+                .map(customerBusinessRules.checkAddCustomerRequest(
+                        customerBusinessRules.fixAddCustomerRequest(addCustomerRequest)), CustomerEntity.class
+                );
 
         customerEntity.setUserType(UserType.CUSTOMER);
 
@@ -44,7 +41,7 @@ public class CustomerManager implements CustomerService {
     public CustomerDTO update(UpdateCustomerRequest updateCustomerRequest) {
         CustomerEntity customerEntity = modelMapperService.forRequest()
                 .map(customerBusinessRules.checkUpdateCustomerRequest(
-                        customerBusinessRules.fixUpdateCustomerRequest(updateCustomerRequest)),CustomerEntity.class
+                        customerBusinessRules.fixUpdateCustomerRequest(updateCustomerRequest)), CustomerEntity.class
                 );
 
         customerEntity.setUserType(UserType.CUSTOMER);
@@ -54,7 +51,7 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public CustomerDTO getById(int id) {
-        return this.modelMapperService.forResponse().map(customerEntityService.getById(id),CustomerDTO.class);
+        return this.modelMapperService.forResponse().map(customerEntityService.getById(id), CustomerDTO.class);
 
     }
 
@@ -67,8 +64,8 @@ public class CustomerManager implements CustomerService {
     public List<CustomerDTO> getAll() {
         return customerBusinessRules.checkDataList(customerEntityService.getAll())
                 .stream().map(customer -> modelMapperService.forResponse()
-                        .map(customer,CustomerDTO.class )).collect(Collectors.toList());
-        }
+                        .map(customer, CustomerDTO.class)).collect(Collectors.toList());
+    }
 
     @Override
     public List<CustomerDTO> getAllByIsDeletedFalse() {

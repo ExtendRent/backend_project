@@ -54,6 +54,7 @@ public class BrandController {
                 .build()
         );
     }
+
     @GetMapping("/getByBrandName")
     public ResponseEntity<TResponse<?>> getByBrandName(@RequestParam String brandName) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
@@ -63,8 +64,9 @@ public class BrandController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.brandService.getAllByIsDeletedFalse())
@@ -72,8 +74,9 @@ public class BrandController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.brandService.getAllByIsDeletedTrue())
@@ -81,6 +84,7 @@ public class BrandController {
                 .build()
         );
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 

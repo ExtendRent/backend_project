@@ -1,7 +1,6 @@
 package source_files.services.BusinessRules;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.sql.Update;
 import org.springframework.stereotype.Service;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
@@ -18,6 +17,7 @@ import static source_files.exception.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
 public class CarModelBusinessRules implements BaseBusinessRulesService {
     private final CarModelRepository carModelRepository;
     private final BrandEntityService brandEntityService;
+
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
@@ -25,28 +25,34 @@ public class CarModelBusinessRules implements BaseBusinessRulesService {
         }
         return list;
     }
-    public AddCarModelRequest fixAddCarModelRequest(AddCarModelRequest addCarModelRequest){
+
+    public AddCarModelRequest fixAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
         addCarModelRequest.setName(this.fixName(addCarModelRequest.getName()));
         return addCarModelRequest;
     }
+
     public AddCarModelRequest checkAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
         this.existsByName(addCarModelRequest.getName());
         this.checkBrand(addCarModelRequest.getBrandId());
         return addCarModelRequest;
     }
-    public UpdateCarModelRequest fixUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest){
+
+    public UpdateCarModelRequest fixUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
         updateCarModelRequest.setName(this.fixName(updateCarModelRequest.getName()));
         return updateCarModelRequest;
     }
-    public UpdateCarModelRequest checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest){
+
+    public UpdateCarModelRequest checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
         this.existsByName(updateCarModelRequest.getName());
         this.checkBrand(updateCarModelRequest.getBrandId());
         return updateCarModelRequest;
     }
+
     @Override
     public String fixName(String name) {
         return name.trim().toLowerCase();
     }
+
     //---------------AUTO CHECKING METHODS--------------------------------
     public void existsByName(String name) {
         if (carModelRepository.existsByName(name)) {

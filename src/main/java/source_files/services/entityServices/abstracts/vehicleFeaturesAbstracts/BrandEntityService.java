@@ -11,6 +11,7 @@ public interface BrandEntityService {
     BrandEntity update(BrandEntity brandEntity);
 
     BrandEntity getById(int id);
+
     BrandEntity getByName(String brandName);
 
     List<BrandEntity> getAll();

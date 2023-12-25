@@ -13,6 +13,7 @@ public interface BrandService {
     BrandDTO update(UpdateBrandRequest updateBrandRequest);
 
     BrandDTO getById(int id);
+
     BrandDTO getByName(String brandName);
 
     List<BrandDTO> getAll();

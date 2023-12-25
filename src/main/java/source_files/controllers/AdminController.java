@@ -2,13 +2,11 @@ package source_files.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.requests.userRequests.AddAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.data.responses.TResponse;
-import source_files.services.userServices.AdminManager;
 import source_files.services.userServices.abstracts.AdminService;
 
 @RestController
@@ -49,7 +47,7 @@ public class AdminController {
     }
 
     @GetMapping("/getById")
-    public ResponseEntity<TResponse<?>> getById(@RequestParam int id){
+    public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.adminService.getById(id))
@@ -73,14 +71,14 @@ public class AdminController {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.adminService.getAllBySalaryGreaterThanEqual(salary))
-                .message("Minimum " +salary +"TL Aylık Ücrete Göre Getirildi.")
+                .message("Minimum " + salary + "TL Aylık Ücrete Göre Getirildi.")
                 .build()
         );
     }
 
 
     @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.adminService.getAllByIsDeletedFalse())
@@ -88,8 +86,9 @@ public class AdminController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.adminService.getAllByIsDeletedTrue())

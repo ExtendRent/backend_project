@@ -1,7 +1,10 @@
 package source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests;
 
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import source_files.data.requests.BaseRequest;
 
 @Getter

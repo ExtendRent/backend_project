@@ -26,7 +26,7 @@ public class BrandManager implements BrandService {
     public BrandDTO add(AddBrandRequest addBrandRequest) {
         BrandEntity brandEntity = modelMapperService.forRequest()
                 .map(brandBusinessRules.checkAddBrandRequest(
-                    brandBusinessRules.fixAddBrandRequest(addBrandRequest)), BrandEntity.class);
+                        brandBusinessRules.fixAddBrandRequest(addBrandRequest)), BrandEntity.class);
         return modelMapperService.forResponse().map(brandEntityService.add(brandEntity), BrandDTO.class);
     }
 
@@ -45,14 +45,14 @@ public class BrandManager implements BrandService {
 
     @Override
     public BrandDTO getByName(String brandName) {
-        return modelMapperService.forResponse().map(brandEntityService.getByName(brandName),BrandDTO.class);
+        return modelMapperService.forResponse().map(brandEntityService.getByName(brandName), BrandDTO.class);
     }
 
     @Override
     public List<BrandDTO> getAll() {
         return brandBusinessRules.checkDataList(brandEntityService.getAll())
                 .stream().map(brand -> modelMapperService.forResponse()
-                        .map(brand,BrandDTO.class)).collect(Collectors.toList());
+                        .map(brand, BrandDTO.class)).collect(Collectors.toList());
     }
 
     @Override

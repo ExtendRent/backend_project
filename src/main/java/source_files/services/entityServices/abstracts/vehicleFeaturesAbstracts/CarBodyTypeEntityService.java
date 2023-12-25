@@ -1,6 +1,5 @@
 package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
 
-import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 
 import java.util.List;
@@ -19,6 +18,8 @@ public interface CarBodyTypeEntityService {
     List<CarBodyTypeEntity> getAllByIsDeletedFalse();
 
     List<CarBodyTypeEntity> getAllByIsDeletedTrue();
+
     void hardDelete(int id);
+
     void softDelete(int id);
 }

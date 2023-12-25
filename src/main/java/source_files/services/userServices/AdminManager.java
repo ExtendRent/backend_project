@@ -24,24 +24,22 @@ public class AdminManager implements AdminService {
     private final AdminBusinessRules adminBusinessRules;
 
 
-
-
     @Override
     public AdminDTO add(AddAdminRequest addAdminRequest) {
-        AdminEntity adminEntity= modelMapperService.forRequest()
+        AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkAddAdminRequest
-                        (adminBusinessRules.fixAddAdminRequest(addAdminRequest)),AdminEntity.class);
+                        (adminBusinessRules.fixAddAdminRequest(addAdminRequest)), AdminEntity.class);
         adminEntity.setUserType(UserType.ADMIN);
-        return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity),AdminDTO.class);
+        return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
     }
 
     @Override
     public AdminDTO update(UpdateAdminRequest updateAdminRequest) {
-        AdminEntity adminEntity= modelMapperService.forRequest()
+        AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkUpdateAdminRequest
-                        (adminBusinessRules.fixUpdateAdminRequest(updateAdminRequest)),AdminEntity.class);
+                        (adminBusinessRules.fixUpdateAdminRequest(updateAdminRequest)), AdminEntity.class);
         adminEntity.setUserType(UserType.ADMIN);
-        return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity),AdminDTO.class);
+        return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
 
     }
 
@@ -56,7 +54,7 @@ public class AdminManager implements AdminService {
 
         return adminBusinessRules.checkDataList(adminEntityService.getAll())
                 .stream().map(admin -> modelMapperService.forResponse()
-                        .map(admin,AdminDTO.class )).collect(Collectors.toList());
+                        .map(admin, AdminDTO.class)).collect(Collectors.toList());
     }
 
 

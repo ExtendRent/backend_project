@@ -1,8 +1,8 @@
 package source_files.data.requests.userRequests;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,10 +34,10 @@ public class UpdateCustomerRequest {
     String password;
 
     @NotBlank(message = "Müşteri telefon numarası boş geçilemez")
-    @Size(min = 10, max = 10,message = "Telefon numarası 10 hane olmalıdır.")
+    @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     String phoneNumber;
 
-    @Size(max = 6,message = "Ehliyet seri numarası 6 haneli olmalıdır.")
+    @Size(max = 6, message = "Ehliyet seri numarası 6 haneli olmalıdır.")
     String drivingLicenseNumber;
 
     @Size(min = 1, max = 16, message = "Sürücü belgesi türü listesi 1 ile 16 arasında olmalıdır.")

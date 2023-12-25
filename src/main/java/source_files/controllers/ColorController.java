@@ -57,7 +57,7 @@ public class ColorController {
     }
 
     @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.getAllByIsDeletedFalse())
@@ -67,7 +67,7 @@ public class ColorController {
     }
 
     @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.colorService.getAllByIsDeletedTrue())

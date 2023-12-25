@@ -67,22 +67,22 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     @Override
     public EmployeeEntity getByPhoneNumber(String phoneNumber) {
         return this.employeeRepository.findByPhoneNumber(phoneNumber).orElseThrow(
-                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND,"Bu telefon numarasına kayıtlı çalışan bulunamadı")
+                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı çalışan bulunamadı")
         );
     }
 
     @Override
     public void hardDelete(int id) {
-       this.employeeRepository.delete(employeeRepository.findById(id).orElseThrow(
-               () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND,"Bu çalışan sistemde bulunamadı")
-       ));
+        this.employeeRepository.delete(employeeRepository.findById(id).orElseThrow(
+                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Bu çalışan sistemde bulunamadı")
+        ));
     }
 
     @Override
     public void softDelete(int id) {
-      EmployeeEntity employeeEntity=employeeRepository.findById(id).orElseThrow(
-              () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND,"Bu çalışan sistemde bulunamadı"));
-      employeeEntity.setIsDeleted(true);
-      this.add(employeeEntity);
+        EmployeeEntity employeeEntity = employeeRepository.findById(id).orElseThrow(
+                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu çalışan sistemde bulunamadı"));
+        employeeEntity.setIsDeleted(true);
+        this.add(employeeEntity);
     }
 }

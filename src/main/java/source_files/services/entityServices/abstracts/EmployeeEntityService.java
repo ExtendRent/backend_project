@@ -22,8 +22,11 @@ public interface EmployeeEntityService {
     List<EmployeeEntity> getAllByIsDeletedTrue();
 
     void delete(EmployeeEntity employeeEntity);
+
     EmployeeEntity getByPhoneNumber(String phoneNumber);
+
     void hardDelete(int id);
+
     void softDelete(int id);
 
 }

@@ -24,6 +24,7 @@ public class CustomerController {
                 .build()
         );
     }
+
     @PutMapping("/update/customer")
     public ResponseEntity<TResponse<?>> updateCustomer(@RequestBody @Valid UpdateCustomerRequest updateCustomerRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
@@ -33,8 +34,9 @@ public class CustomerController {
                 .build()
         );
     }
+
     @GetMapping("/getAll")
-    public ResponseEntity<TResponse<?>> getAll(){
+    public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.customerService.getAll())
@@ -42,8 +44,9 @@ public class CustomerController {
                 .build()
         );
     }
+
     @GetMapping("/getById")
-    public ResponseEntity<TResponse<?>> getById(@RequestParam int id){
+    public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.customerService.getById(id))
@@ -51,6 +54,7 @@ public class CustomerController {
                 .build()
         );
     }
+
     @GetMapping("/getPhoneNumber")
     public ResponseEntity<TResponse<?>> getByPhoneNumber(@RequestParam String phoneNumber) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
@@ -60,8 +64,9 @@ public class CustomerController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.customerService.getAllByIsDeletedFalse())
@@ -69,8 +74,9 @@ public class CustomerController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.customerService.getAllByIsDeletedTrue())
@@ -78,6 +84,7 @@ public class CustomerController {
                 .build()
         );
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 

@@ -17,7 +17,7 @@ public class CarBodyTypeController {
     private final CarBodyTypeService carBodyTypeService;
 
     @PostMapping("/add/carBodyType")
-    public ResponseEntity<TResponse<?>> addCarBodyType(@RequestBody @Valid AddCarBodyTypeRequest addCarBodyTypeRequest){
+    public ResponseEntity<TResponse<?>> addCarBodyType(@RequestBody @Valid AddCarBodyTypeRequest addCarBodyTypeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carBodyTypeService.add(addCarBodyTypeRequest))
@@ -27,7 +27,7 @@ public class CarBodyTypeController {
     }
 
     @PutMapping("/update/carBodyType")
-    public ResponseEntity<TResponse<?>> updateCarBodyType(@RequestBody @Valid UpdateCarBodyTypeRequest updateCarBodyTypeRequest){
+    public ResponseEntity<TResponse<?>> updateCarBodyType(@RequestBody @Valid UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carBodyTypeService.update(updateCarBodyTypeRequest))
@@ -37,7 +37,7 @@ public class CarBodyTypeController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<TResponse<?>> getAll(){
+    public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carBodyTypeService.getAll())
@@ -45,8 +45,9 @@ public class CarBodyTypeController {
                 .build()
         );
     }
+
     @GetMapping("/getById")
-    public ResponseEntity<TResponse<?>> getById(@RequestParam int id){
+    public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carBodyTypeService.getById(id))
@@ -56,7 +57,7 @@ public class CarBodyTypeController {
     }
 
     @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carBodyTypeService.getAllByIsDeletedFalse())
@@ -64,8 +65,9 @@ public class CarBodyTypeController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carBodyTypeService.getAllByIsDeletedTrue())
@@ -73,6 +75,7 @@ public class CarBodyTypeController {
                 .build()
         );
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 

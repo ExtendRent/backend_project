@@ -26,20 +26,20 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public EmployeeDTO add(AddEmployeeRequest addEmployeeRequest) {
-        EmployeeEntity employeeEntity= modelMapperService.forRequest()
+        EmployeeEntity employeeEntity = modelMapperService.forRequest()
                 .map(employeeBusinessRules.checkAddEmployeeRequest
-                        (employeeBusinessRules.fixAddEmployeeRequest(addEmployeeRequest)),EmployeeEntity.class);
+                        (employeeBusinessRules.fixAddEmployeeRequest(addEmployeeRequest)), EmployeeEntity.class);
         employeeEntity.setUserType(UserType.EMPLOYEE);
-        return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity),EmployeeDTO.class);
+        return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity), EmployeeDTO.class);
     }
 
     @Override
     public EmployeeDTO update(UpdateEmployeeRequest updateEmployeeRequest) {
-        EmployeeEntity employeeEntity= modelMapperService.forRequest()
+        EmployeeEntity employeeEntity = modelMapperService.forRequest()
                 .map(employeeBusinessRules.checkUpdateEmployeeRequest
-                        (employeeBusinessRules.fixUpdateEmployeeRequest(updateEmployeeRequest)),EmployeeEntity.class);
+                        (employeeBusinessRules.fixUpdateEmployeeRequest(updateEmployeeRequest)), EmployeeEntity.class);
         employeeEntity.setUserType(UserType.EMPLOYEE);
-        return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity),EmployeeDTO.class);
+        return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity), EmployeeDTO.class);
     }
 
     @Override
@@ -56,20 +56,20 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public List<EmployeeDTO> findAllBySalaryBetween(double salary1, double salary2) {
-        return this.employeeBusinessRules.checkDataList(this.employeeEntityService.getAllBySalaryBetween(salary1,salary2))
+        return this.employeeBusinessRules.checkDataList(this.employeeEntityService.getAllBySalaryBetween(salary1, salary2))
                 .stream().map(employeeEntity -> modelMapperService.forResponse().map(employeeEntity, EmployeeDTO.class)).toList();
     }
 
     @Override
     public List<EmployeeDTO> getAllByIsDeletedFalse() {
         return this.employeeBusinessRules.checkDataList(this.employeeEntityService.getAllByIsDeletedFalse())
-                .stream().map(employeeEntity -> modelMapperService.forResponse().map(employeeEntity,EmployeeDTO.class)).toList();
+                .stream().map(employeeEntity -> modelMapperService.forResponse().map(employeeEntity, EmployeeDTO.class)).toList();
     }
 
     @Override
     public List<EmployeeDTO> getAllByIsDeletedTrue() {
         return this.employeeBusinessRules.checkDataList(this.employeeEntityService.getAllByIsDeletedTrue())
-                .stream().map(employeeEntity -> modelMapperService.forResponse().map(employeeEntity,EmployeeDTO.class)).toList();
+                .stream().map(employeeEntity -> modelMapperService.forResponse().map(employeeEntity, EmployeeDTO.class)).toList();
     }
 
     @Override

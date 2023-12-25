@@ -54,6 +54,7 @@ public class CarModelController {
                 .build()
         );
     }
+
     @GetMapping("/getByModelName")
     public ResponseEntity<TResponse<?>> getByModelName(@RequestParam String modelName) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
@@ -63,6 +64,7 @@ public class CarModelController {
                 .build()
         );
     }
+
     @GetMapping("/getByBrandId")
     public ResponseEntity<TResponse<?>> getByBrandId(@RequestParam int brandId) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
@@ -72,16 +74,19 @@ public class CarModelController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carModelService.getAllByIsDeletedFalse())
                 .message("Mevcut Model Listesi Getirildi.")
                 .build()
         );
-    }@GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+    }
+
+    @GetMapping("/getAllByIsDeletedTrue")
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carModelService.getAllByIsDeletedTrue())

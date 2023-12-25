@@ -2,7 +2,6 @@ package source_files.services.entityServices.vehicleFeaturesEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
 import source_files.exception.DataNotFoundException;
@@ -32,7 +31,7 @@ public class CarBodyTypeEntityManager implements CarBodyTypeEntityService {
     @Override
     public CarBodyTypeEntity getById(int id) {
         return carBodyTypeRepository.findById(id).orElseThrow(
-                ()-> new DataNotFoundException(BODY_TYPE_DATA_NOT_FOUND, "Body Type bulunamadı.")
+                () -> new DataNotFoundException(BODY_TYPE_DATA_NOT_FOUND, "Body Type bulunamadı.")
         );
     }
 

@@ -12,8 +12,8 @@ import source_files.services.entityServices.vehicleFeaturesEntityManagers.CarBod
 import java.util.List;
 
 import static source_files.exception.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
-import static source_files.exception.NotFoundExceptionType.BODY_TYPE_DATA_NOT_FOUND;
 import static source_files.exception.NotFoundExceptionType.BODY_TYPE_LIST_NOT_FOUND;
+
 @AllArgsConstructor
 @Service
 public class CarBodyTypeBusinessRules implements BaseBusinessRulesService {
@@ -21,22 +21,22 @@ public class CarBodyTypeBusinessRules implements BaseBusinessRulesService {
     private final CarBodyTypeEntityManager carBodyTypeEntityManager;
     private final CarBodyTypeRepository carBodyTypeRepository;
 
-    public AddCarBodyTypeRequest fixAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest){
+    public AddCarBodyTypeRequest fixAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest) {
         addCarBodyTypeRequest.setCarBodyTypeEntityName(this.fixName(addCarBodyTypeRequest.getCarBodyTypeEntityName()));
         return addCarBodyTypeRequest;
     }
 
-    public UpdateCarBodyTypeRequest fixUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest){
+    public UpdateCarBodyTypeRequest fixUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         updateCarBodyTypeRequest.setName(this.fixName(updateCarBodyTypeRequest.getName()));
         return updateCarBodyTypeRequest;
     }
 
-    public AddCarBodyTypeRequest checkAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest){
+    public AddCarBodyTypeRequest checkAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest) {
         this.existsByName(addCarBodyTypeRequest.getCarBodyTypeEntityName());
         return addCarBodyTypeRequest;
     }
 
-    public UpdateCarBodyTypeRequest checkUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest){
+    public UpdateCarBodyTypeRequest checkUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         this.existsByName(updateCarBodyTypeRequest.getName());
         updateCarBodyTypeRequest.setId(this.carBodyTypeEntityManager.getById(updateCarBodyTypeRequest.getId()).getId());
         return updateCarBodyTypeRequest;
@@ -55,8 +55,8 @@ public class CarBodyTypeBusinessRules implements BaseBusinessRulesService {
         return name.replace(" ", "").toLowerCase();
     }
 
-    public void existsByName(String name){
-        if(this.carBodyTypeRepository.existsByName(name)){
+    public void existsByName(String name) {
+        if (this.carBodyTypeRepository.existsByName(name)) {
             throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS, "This body type already exist");
         }
     }

@@ -8,7 +8,9 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Integer> {
     Optional<EmployeeEntity> findByPhoneNumber(String phoneNumber);
+
     boolean existsByPhoneNumber(String phoneNumber);
+
     boolean existsByEmailAddress(String email);
 
     List<EmployeeEntity> findAllBySalaryBetween(double salary1, double salary2);

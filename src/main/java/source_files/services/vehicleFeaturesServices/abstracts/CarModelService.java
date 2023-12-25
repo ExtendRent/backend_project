@@ -27,6 +27,7 @@ public interface CarModelService {
     void hardDelete(int id);
 
     void softDelete(int id);
+
     //--------------------GETBYID METHODS-----------------------------------------------------------------
     List<BrandDTO> getAllByBrandId(int brandId);
 }

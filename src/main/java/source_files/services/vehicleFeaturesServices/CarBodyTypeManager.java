@@ -57,7 +57,7 @@ public class CarBodyTypeManager implements CarBodyTypeService {
 
     @Override
     public void delete(int id, boolean hardDelete) {
-        if(hardDelete)
+        if (hardDelete)
             this.hardDelete(id);
         else
             this.softDelete(id);

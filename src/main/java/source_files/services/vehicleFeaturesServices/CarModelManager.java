@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
-import source_files.services.BusinessRules.BrandBusinessRules;
 import source_files.services.BusinessRules.CarModelBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
@@ -37,7 +35,7 @@ public class CarModelManager implements CarModelService {
         //CarModelDTO carModelDTO = modelMapperService.forResponse().map(carModelEntityService.add(carModel), CarModelDTO.class);
         //carModelDTO.setName(carModel.getName());
         //return carModelDTO;
-        return modelMapperService.forResponse().map(carModelEntityService.add(carModel),CarModelDTO.class);
+        return modelMapperService.forResponse().map(carModelEntityService.add(carModel), CarModelDTO.class);
     }
 
     @Override
@@ -46,7 +44,7 @@ public class CarModelManager implements CarModelService {
                 .map(carModelBusinessRules.checkUpdateCarModelRequest(
                         carModelBusinessRules.fixUpdateCarModelRequest(updateCarModelRequest)
                 ), CarModelEntity.class);
-        return modelMapperService.forRequest().map(carModelEntityService.update(carModelEntity),CarModelDTO.class);
+        return modelMapperService.forRequest().map(carModelEntityService.update(carModelEntity), CarModelDTO.class);
     }
 
     @Override
@@ -56,15 +54,15 @@ public class CarModelManager implements CarModelService {
 
     @Override
     public CarModelDTO getByModelName(String modelName) {
-        return modelMapperService.forResponse().map(carModelEntityService.getByModelName(modelName),CarModelDTO.class);
+        return modelMapperService.forResponse().map(carModelEntityService.getByModelName(modelName), CarModelDTO.class);
     }
 
     @Override
     public List<CarModelDTO> getAll() {
         return carModelBusinessRules.checkDataList(carModelEntityService.getAll())
-         .stream().map(carModel ->
-                modelMapperService.forResponse().map(carModel, CarModelDTO.class))
-                    .collect(Collectors.toList());
+                .stream().map(carModel ->
+                        modelMapperService.forResponse().map(carModel, CarModelDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -104,7 +102,7 @@ public class CarModelManager implements CarModelService {
     @Override
     public List<BrandDTO> getAllByBrandId(int brandId) {
         return carModelEntityService.getAllByBrandId(brandId).stream().map(
-                model -> modelMapperService.forResponse().map(model,BrandDTO.class)
+                model -> modelMapperService.forResponse().map(model, BrandDTO.class)
         ).collect(Collectors.toList());
 
     }

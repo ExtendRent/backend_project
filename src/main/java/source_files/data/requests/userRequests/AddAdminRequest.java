@@ -31,7 +31,7 @@ public class AddAdminRequest {
     String password;
 
     @NotBlank(message = "Müşteri telefon numarası boş geçilemez")
-    @Size(min = 10, max = 10,message = "Telefon numarası 10 hane olmalıdır.")
+    @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     String phoneNumber;
     @Min(0)
     Double salary;

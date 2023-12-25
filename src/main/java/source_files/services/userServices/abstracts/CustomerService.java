@@ -9,6 +9,7 @@ import java.util.List;
 public interface CustomerService {
 
     CustomerDTO add(AddCustomerRequest addCustomerRequest);
+
     CustomerDTO update(UpdateCustomerRequest updateCustomerRequest);
 
     CustomerDTO getById(int id);

@@ -14,6 +14,7 @@ import source_files.services.userServices.abstracts.EmployeeService;
 @AllArgsConstructor
 public class EmployeeController {
     private final EmployeeService employeeService;
+
     @PostMapping("/add/employee")
     public ResponseEntity<TResponse<?>> addEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
@@ -34,48 +35,48 @@ public class EmployeeController {
         );
     }
 
-        @GetMapping("/getAll")
-        public ResponseEntity<TResponse<?>> getAll() {
-            return ResponseEntity.ok(TResponse.tResponseBuilder()
-                    .isSuccess(true)
-                    .response(this.employeeService.getAll())
-                    .message("Çalışan listesi getirildi.")
-                    .build()
-            );
-        }
+    @GetMapping("/getAll")
+    public ResponseEntity<TResponse<?>> getAll() {
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.employeeService.getAll())
+                .message("Çalışan listesi getirildi.")
+                .build()
+        );
+    }
 
-        @GetMapping("/getById")
-        public ResponseEntity<TResponse<?>> getById(@RequestParam int id){
-            return ResponseEntity.ok(TResponse.tResponseBuilder()
-                    .isSuccess(true)
-                    .response(this.employeeService.getById(id))
-                    .message("Çalışan getirildi.")
-                    .build()
-            );
-        }
+    @GetMapping("/getById")
+    public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.employeeService.getById(id))
+                .message("Çalışan getirildi.")
+                .build()
+        );
+    }
 
-        @GetMapping("/getPhoneNumber")
-        public ResponseEntity<TResponse<?>> getByPhoneNumber(@RequestParam String phoneNumber) {
-            return ResponseEntity.ok(TResponse.tResponseBuilder()
-                    .isSuccess(true)
-                    .response(this.employeeService.getByPhoneNumber(phoneNumber))
-                    .message("Telefon Numarasına Göre Getirildi")
-                    .build()
-            );
-        }
+    @GetMapping("/getPhoneNumber")
+    public ResponseEntity<TResponse<?>> getByPhoneNumber(@RequestParam String phoneNumber) {
+        return ResponseEntity.ok(TResponse.tResponseBuilder()
+                .isSuccess(true)
+                .response(this.employeeService.getByPhoneNumber(phoneNumber))
+                .message("Telefon Numarasına Göre Getirildi")
+                .build()
+        );
+    }
 
     @GetMapping("/getAllBySalaryBetween")
     public ResponseEntity<TResponse<?>> getAllBySalaryBetween(@RequestParam Double salary1, Double salary2) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
-                .response(this.employeeService.findAllBySalaryBetween(salary1,salary2))
-                .message(salary1 + "TL ve "+ salary2 +"TL Arasındaki Aylık Ücrete Göre Getirildi.")
+                .response(this.employeeService.findAllBySalaryBetween(salary1, salary2))
+                .message(salary1 + "TL ve " + salary2 + "TL Arasındaki Aylık Ücrete Göre Getirildi.")
                 .build()
         );
     }
 
     @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.employeeService.getAllByIsDeletedFalse())
@@ -83,8 +84,9 @@ public class EmployeeController {
                 .build()
         );
     }
+
     @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue(){
+    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.employeeService.getAllByIsDeletedTrue())
@@ -104,5 +106,5 @@ public class EmployeeController {
         );
     }
 
-    }
+}
 

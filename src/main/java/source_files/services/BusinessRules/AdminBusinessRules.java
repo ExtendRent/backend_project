@@ -11,8 +11,10 @@ import source_files.services.entityServices.AdminEntityManager;
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.*;
-import static source_files.exception.NotFoundExceptionType.*;
+import static source_files.exception.AlreadyExistsExceptionType.EMAIL_ADDRESS_ALREADY_EXISTS;
+import static source_files.exception.AlreadyExistsExceptionType.PHONE_NUMBER_ALREADY_EXISTS;
+import static source_files.exception.NotFoundExceptionType.ADMIN_LIST_NOT_FOUND;
+
 @AllArgsConstructor
 @Service
 public class AdminBusinessRules implements BaseBusinessRulesService {
@@ -21,19 +23,21 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
 
     @Override
     public List<?> checkDataList(List<?> list) {
-        if (list.isEmpty()){
-            throw new DataNotFoundException(ADMIN_LIST_NOT_FOUND,"Aradığınız kriterlere uygun admin bulunamadı");
+        if (list.isEmpty()) {
+            throw new DataNotFoundException(ADMIN_LIST_NOT_FOUND, "Aradığınız kriterlere uygun admin bulunamadı");
         }
         return list;
     }
-    public AddAdminRequest fixAddAdminRequest(AddAdminRequest addAdminRequest){
+
+    public AddAdminRequest fixAddAdminRequest(AddAdminRequest addAdminRequest) {
         addAdminRequest.setPhoneNumber(this.fixName(addAdminRequest.getPhoneNumber()));
         addAdminRequest.setName(this.fixName(addAdminRequest.getName()));
         addAdminRequest.setSurname(this.fixName(addAdminRequest.getSurname()));
         addAdminRequest.setEmailAddress(this.fixName(addAdminRequest.getEmailAddress()));
         return addAdminRequest;
     }
-    public UpdateAdminRequest fixUpdateAdminRequest(UpdateAdminRequest updateAdminRequest){
+
+    public UpdateAdminRequest fixUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
         updateAdminRequest.setPhoneNumber(this.fixName(updateAdminRequest.getPhoneNumber()));
         updateAdminRequest.setName(this.fixName(updateAdminRequest.getName()));
         updateAdminRequest.setSurname(this.fixName(updateAdminRequest.getSurname()));
@@ -41,16 +45,17 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
         return updateAdminRequest;
     }
 
-    public AddAdminRequest checkAddAdminRequest (AddAdminRequest addAdminRequest) {
+    public AddAdminRequest checkAddAdminRequest(AddAdminRequest addAdminRequest) {
         this.existsByEmailAddress(addAdminRequest.getEmailAddress());
         this.existsByPhoneNumber(addAdminRequest.getPhoneNumber());
         return addAdminRequest;
     }
-    public UpdateAdminRequest checkUpdateAdminRequest (UpdateAdminRequest updateAdminRequest) {
+
+    public UpdateAdminRequest checkUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
         this.existsByEmailAddress(updateAdminRequest.getEmailAddress());
         this.existsByPhoneNumber(updateAdminRequest.getPhoneNumber());
         updateAdminRequest.setId(this.adminEntityManager.getById(updateAdminRequest.getId()).getId());
-        return updateAdminRequest ;
+        return updateAdminRequest;
     }
 
 
@@ -65,9 +70,10 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
             throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number already exist");
         }
     }
-    public void existsByEmailAddress(String email){
-        if (adminRepository.existsByEmailAddress(email)){
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS,"This email address already exist");
+
+    public void existsByEmailAddress(String email) {
+        if (adminRepository.existsByEmailAddress(email)) {
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist");
         }
     }
 

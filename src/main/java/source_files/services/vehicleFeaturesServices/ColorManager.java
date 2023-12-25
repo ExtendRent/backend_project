@@ -4,13 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.ColorDTO;
-import source_files.data.DTO.userDTOs.CustomerDTO;
-import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.types.ItemType;
-import source_files.data.types.UserType;
 import source_files.services.BusinessRules.ColorBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
@@ -31,7 +28,7 @@ public class ColorManager implements ColorService {
 
         ColorEntity colorEntity = modelMapperService.forRequest()
                 .map(colorBusinessRules.checkAddColorRequest(
-                        colorBusinessRules.fixAddColorRequest(addColorRequest)),ColorEntity.class
+                        colorBusinessRules.fixAddColorRequest(addColorRequest)), ColorEntity.class
                 );
 
         colorEntity.setItemType(ItemType.COLOR);

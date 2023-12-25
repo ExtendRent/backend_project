@@ -8,8 +8,11 @@ import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
     Optional<CustomerEntity> findByPhoneNumber(String phoneNumber);
+
     boolean existsByPhoneNumber(String phoneNumber);
+
     boolean existsByDrivingLicenseNumber(String drivingLicenseNumber);
+
     boolean existsByEmailAddress(String email);
 
     List<CustomerEntity> findAllByIsDeletedFalse();

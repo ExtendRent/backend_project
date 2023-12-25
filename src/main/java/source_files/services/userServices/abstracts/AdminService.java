@@ -9,13 +9,16 @@ import java.util.List;
 public interface AdminService {
 
     AdminDTO add(AddAdminRequest addAdminRequest);
+
     AdminDTO update(UpdateAdminRequest updateAdminRequest);
 
     AdminDTO getById(int id);
 
     List<AdminDTO> getAll();
+
     List<AdminDTO> getAllBySalaryGreaterThanEqual(Double salary);
-    AdminDTO getByPhoneNumber (String phoneNumber);
+
+    AdminDTO getByPhoneNumber(String phoneNumber);
 
     List<AdminDTO> getAllByIsDeletedFalse();
 

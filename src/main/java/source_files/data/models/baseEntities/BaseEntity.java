@@ -1,15 +1,10 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -32,19 +27,21 @@ public class BaseEntity {
 
     //todo:  null geliyor
 
-    @Column(name = "last_modified",nullable = true)
+    @Column(name = "last_modified", nullable = true)
     private LocalDate lastModified;
 
 
     @Column(name = "created_date")
     private LocalDate createdDate;
+
     @PrePersist //classlar oluşmadan çalısır
-    private void beforeAdd(){
-        createdDate =LocalDate.now();
+    private void beforeAdd() {
+        createdDate = LocalDate.now();
     }
+
     @PreUpdate //classlar oluşmadan çalısır
-    private void beforeUpdate(){
-        lastModified =LocalDate.now();
+    private void beforeUpdate() {
+        lastModified = LocalDate.now();
     }
 
 

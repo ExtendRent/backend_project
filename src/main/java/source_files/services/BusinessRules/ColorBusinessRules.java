@@ -20,12 +20,12 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
     private final ColorRepository colorRepository;
     private final ColorEntityManager colorEntityManager;
 
-    public AddColorRequest fixAddColorRequest(AddColorRequest addColorRequest){
+    public AddColorRequest fixAddColorRequest(AddColorRequest addColorRequest) {
         addColorRequest.setColorEntityName(this.fixName(addColorRequest.getColorEntityName()));
         return addColorRequest;
     }
 
-    public UpdateColorRequest fixUpdateColorRequest(UpdateColorRequest updateColorRequest){
+    public UpdateColorRequest fixUpdateColorRequest(UpdateColorRequest updateColorRequest) {
         updateColorRequest.setName(this.fixName(updateColorRequest.getName()));
         return updateColorRequest;
     }
@@ -35,13 +35,12 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
         return addColorRequest;
     }
 
-    public UpdateColorRequest checkUpdateColorRequest(UpdateColorRequest updateColorRequest){
+    public UpdateColorRequest checkUpdateColorRequest(UpdateColorRequest updateColorRequest) {
         this.existsByName(updateColorRequest.getName());
         updateColorRequest.setId(this.colorEntityManager.getById(updateColorRequest.getId()).getId());
         return updateColorRequest;
     }
     //----------------------------------------------------------------------
-
 
 
     @Override
@@ -63,8 +62,6 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
             throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist");
         }
     }
-
-
 
 
 }

@@ -6,8 +6,10 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarM
 import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarModelEntityService;
-import static source_files.exception.NotFoundExceptionType.MODEL_DATA_NOT_FOUND;
+
 import java.util.List;
+
+import static source_files.exception.NotFoundExceptionType.MODEL_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor
@@ -28,7 +30,7 @@ public class CarModelEntityManager implements CarModelEntityService {
     @Override
     public CarModelEntity getById(int id) {
         return this.carModelRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(MODEL_DATA_NOT_FOUND,"Model bulunamadı")
+                () -> new DataNotFoundException(MODEL_DATA_NOT_FOUND, "Model bulunamadı")
         );
     }
 
