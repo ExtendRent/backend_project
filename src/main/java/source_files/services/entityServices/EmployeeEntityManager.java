@@ -9,6 +9,7 @@ import source_files.services.entityServices.abstracts.EmployeeEntityService;
 
 import java.util.List;
 
+import static source_files.exception.NotFoundExceptionType.ADMIN_DATA_NOT_FOUND;
 import static source_files.exception.NotFoundExceptionType.EMPLOYEE_DATA_NOT_FOUND;
 
 @Service
@@ -18,11 +19,13 @@ public class EmployeeEntityManager implements EmployeeEntityService {
 
     @Override
     public EmployeeEntity add(EmployeeEntity employeeEntity) {
+
         return this.employeeRepository.save(employeeEntity);
     }
 
     @Override
     public EmployeeEntity update(EmployeeEntity employeeEntity) {
+
         return this.add(employeeEntity);
     }
 
@@ -39,21 +42,47 @@ public class EmployeeEntityManager implements EmployeeEntityService {
 
     @Override
     public List<EmployeeEntity> getAll() {
+
         return this.employeeRepository.findAll();
     }
 
     @Override
     public List<EmployeeEntity> getAllByIsDeletedFalse() {
+
         return this.employeeRepository.findAllByIsDeletedFalse();
     }
 
     @Override
     public List<EmployeeEntity> getAllByIsDeletedTrue() {
+
         return this.employeeRepository.findAllByIsDeletedTrue();
     }
 
     @Override
     public void delete(EmployeeEntity employeeEntity) {
+
         this.employeeRepository.delete(employeeEntity);
+    }
+
+    @Override
+    public EmployeeEntity getByPhoneNumber(String phoneNumber) {
+        return this.employeeRepository.findByPhoneNumber(phoneNumber).orElseThrow(
+                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND,"Bu telefon numarasına kayıtlı çalışan bulunamadı")
+        );
+    }
+
+    @Override
+    public void hardDelete(int id) {
+       this.employeeRepository.delete(employeeRepository.findById(id).orElseThrow(
+               () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND,"Bu çalışan sistemde bulunamadı")
+       ));
+    }
+
+    @Override
+    public void softDelete(int id) {
+      EmployeeEntity employeeEntity=employeeRepository.findById(id).orElseThrow(
+              () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND,"Bu çalışan sistemde bulunamadı"));
+      employeeEntity.setIsDeleted(true);
+      this.add(employeeEntity);
     }
 }

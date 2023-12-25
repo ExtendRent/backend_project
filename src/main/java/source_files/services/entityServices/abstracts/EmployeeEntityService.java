@@ -1,5 +1,6 @@
 package source_files.services.entityServices.abstracts;
 
+
 import source_files.data.models.userEntities.EmployeeEntity;
 
 import java.util.List;
@@ -21,5 +22,8 @@ public interface EmployeeEntityService {
     List<EmployeeEntity> getAllByIsDeletedTrue();
 
     void delete(EmployeeEntity employeeEntity);
+    EmployeeEntity getByPhoneNumber(String phoneNumber);
+    void hardDelete(int id);
+    void softDelete(int id);
 
 }

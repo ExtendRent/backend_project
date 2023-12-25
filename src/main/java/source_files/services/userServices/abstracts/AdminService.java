@@ -1,7 +1,6 @@
 package source_files.services.userServices.abstracts;
 
 import source_files.data.DTO.userDTOs.AdminDTO;
-import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.AddAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 
