@@ -23,4 +23,5 @@ public class TobetoRentAcarCrewProjectApplication {
     public CarModelEntity getCarModelEntity() {
         return new CarModelEntity();
     }
+    //DENEME
 }
