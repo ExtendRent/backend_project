@@ -9,7 +9,6 @@ import source_files.services.entityServices.abstracts.EmployeeEntityService;
 
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.ADMIN_DATA_NOT_FOUND;
 import static source_files.exception.NotFoundExceptionType.EMPLOYEE_DATA_NOT_FOUND;
 
 @Service
@@ -69,20 +68,5 @@ public class EmployeeEntityManager implements EmployeeEntityService {
         return this.employeeRepository.findByPhoneNumber(phoneNumber).orElseThrow(
                 () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı çalışan bulunamadı")
         );
-    }
-
-    @Override
-    public void hardDelete(int id) {
-        this.employeeRepository.delete(employeeRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Bu çalışan sistemde bulunamadı")
-        ));
-    }
-
-    @Override
-    public void softDelete(int id) {
-        EmployeeEntity employeeEntity = employeeRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu çalışan sistemde bulunamadı"));
-        employeeEntity.setIsDeleted(true);
-        this.add(employeeEntity);
     }
 }

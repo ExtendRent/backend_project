@@ -72,19 +72,4 @@ public class AdminEntityManager implements AdminEntityService {
         );
     }
 
-    @Override
-    public void hardDelete(int id) {
-        this.adminRepository.delete(adminRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu admin sistemde bulunamadı")
-
-        ));
-    }
-
-    @Override
-    public void softDelete(int id) {
-        AdminEntity adminEntity = adminRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu admin sistemde bulunamadı"));
-        adminEntity.setIsDeleted(true);
-        this.add(adminEntity);
-    }
 }

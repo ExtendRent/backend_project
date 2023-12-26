@@ -25,8 +25,4 @@ public interface EmployeeEntityService {
 
     EmployeeEntity getByPhoneNumber(String phoneNumber);
 
-    void hardDelete(int id);
-
-    void softDelete(int id);
-
 }

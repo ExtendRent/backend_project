@@ -36,7 +36,8 @@ public class CarModelEntityManager implements CarModelEntityService {
 
     @Override
     public CarModelEntity getByModelName(String modelName) {
-        return this.carModelRepository.findByName(modelName);
+        return this.carModelRepository.findByName(modelName)
+                .orElseThrow(() -> new DataNotFoundException(MODEL_DATA_NOT_FOUND, "Bu isimde model bulunamadı"));
     }
 
 

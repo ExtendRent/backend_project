@@ -79,11 +79,13 @@ public class CarBodyTypeManager implements CarBodyTypeService {
 
     @Override
     public void hardDelete(int id) {
-        this.carBodyTypeEntityService.hardDelete(id);
+        this.carBodyTypeEntityService.delete(this.carBodyTypeEntityService.getById(id));
     }
 
     @Override
     public void softDelete(int id) {
-        this.carBodyTypeEntityService.softDelete(id);
+        CarBodyTypeEntity carBodyTypeEntity = this.carBodyTypeEntityService.getById(id);
+        carBodyTypeEntity.setIsDeleted(true);
+        this.carBodyTypeEntityService.update(carBodyTypeEntity);
     }
 }

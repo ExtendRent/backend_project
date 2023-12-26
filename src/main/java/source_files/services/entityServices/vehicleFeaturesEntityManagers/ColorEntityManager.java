@@ -38,20 +38,6 @@ public class ColorEntityManager implements ColorEntityService {
         colorRepository.delete(colorEntity);
     }
 
-    @Override
-    public void hardDelete(int id) {
-        this.colorRepository.delete(this.colorRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(COLOR_DATA_NOT_FOUND, "Renk bulunamadı.")
-        ));
-    }
-
-    @Override
-    public void softDelete(int id) {
-        ColorEntity colorEntity = this.colorRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(COLOR_DATA_NOT_FOUND, "Bu renk sistemde bulunamadı"));
-        colorEntity.setIsDeleted(true);
-        this.add(colorEntity);
-    }
 
     @Override
     public List<ColorEntity> getAll() {

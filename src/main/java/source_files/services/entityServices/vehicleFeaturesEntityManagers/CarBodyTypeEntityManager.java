@@ -55,18 +55,4 @@ public class CarBodyTypeEntityManager implements CarBodyTypeEntityService {
         return this.carBodyTypeRepository.findAllByIsDeletedTrue();
     }
 
-    @Override
-    public void hardDelete(int id) {
-        this.carBodyTypeRepository.delete(this.carBodyTypeRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(BODY_TYPE_DATA_NOT_FOUND, "Body Type bulunamadı.")
-        ));
-    }
-
-    @Override
-    public void softDelete(int id) {
-        CarBodyTypeEntity carBodyTypeEntity = this.carBodyTypeRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(BODY_TYPE_DATA_NOT_FOUND, "Body Type bulunamadı."));
-        carBodyTypeEntity.setIsDeleted(true);
-        this.add(carBodyTypeEntity);
-    }
 }

@@ -18,6 +18,9 @@ public class TobetoRentAcarCrewProjectApplication {
     public PaymentMain getPaymentMain() {
         return new PaymentMain();
     }
+
     @Bean
-    public CarModelEntity getCarModelEntity(){return new CarModelEntity();}
+    public CarModelEntity getCarModelEntity() {
+        return new CarModelEntity();
+    }
 }

@@ -23,8 +23,5 @@ public interface CustomerEntityService {
 
     void delete(CustomerEntity customerEntity);
 
-    void hardDelete(int id);
-
-    void softDelete(int id);
 
 }

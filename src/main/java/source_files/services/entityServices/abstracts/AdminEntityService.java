@@ -24,9 +24,4 @@ public interface AdminEntityService {
 
     AdminEntity getByPhoneNumber(String phoneNumber);
 
-    void hardDelete(int id);
-
-    void softDelete(int id);
-
-
 }

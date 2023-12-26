@@ -96,12 +96,13 @@ public class AdminManager implements AdminService {
 
     @Override
     public void hardDelete(int id) {
-
-        this.adminEntityService.hardDelete(id);
+        this.adminEntityService.delete(adminEntityService.getById(id));
     }
 
     @Override
     public void softDelete(int id) {
-        this.adminEntityService.softDelete(id);
+        AdminEntity adminEntity = adminEntityService.getById(id);
+        adminEntity.setIsDeleted(true);
+        this.adminEntityService.update(adminEntity);
     }
 }
