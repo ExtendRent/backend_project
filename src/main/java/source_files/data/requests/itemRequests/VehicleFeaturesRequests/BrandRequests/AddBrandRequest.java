@@ -11,7 +11,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddBrandRequest extends BaseRequest {
+public class AddBrandRequest implements BaseRequest {
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")
     String name;
 }

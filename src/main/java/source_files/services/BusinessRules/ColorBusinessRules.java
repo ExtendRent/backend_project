@@ -20,6 +20,7 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
     private final ColorRepository colorRepository;
     private final ColorEntityManager colorEntityManager;
 
+    //--------------------- AUTO FIX METHODS ---------------------
     public AddColorRequest fixAddColorRequest(AddColorRequest addColorRequest) {
         addColorRequest.setColorEntityName(this.fixName(addColorRequest.getColorEntityName()));
         return addColorRequest;
@@ -30,13 +31,15 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
         return updateColorRequest;
     }
 
+    //--------------------- AUTO CHECK METHODS ---------------------
     public AddColorRequest checkAddColorRequest(AddColorRequest addColorRequest) {
         this.existsByName(addColorRequest.getColorEntityName());
         return addColorRequest;
     }
 
     public UpdateColorRequest checkUpdateColorRequest(UpdateColorRequest updateColorRequest) {
-        this.existsByName(updateColorRequest.getName());
+
+        this.existsByNameAndIdNot(updateColorRequest.getName(), updateColorRequest.getId());
         updateColorRequest.setId(this.colorEntityManager.getById(updateColorRequest.getId()).getId());
         return updateColorRequest;
     }
@@ -56,10 +59,18 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
         return name.replace(" ", "").toLowerCase();
     }
 
+
     //---------------AUTO CHECKING METHODS--------------------------------
+    private void existsByNameAndIdNot(String name, int id) {
+        //Kendisi hariç başka bir rengin ismi ile aynı olup olmadığını kontrol etmek için
+        if (colorRepository.existsByNameAndIdNot(name, id)) {
+            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist !");
+        }
+    }
+
     private void existsByName(String name) {
         if (colorRepository.existsByName(name)) {
-            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist");
+            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist :)");
         }
     }
 

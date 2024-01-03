@@ -1,6 +1,6 @@
 package source_files.data.types;
 
-public enum DrivingLicenseType {
+public enum DrivingLicenseType implements BaseType {
 
     //-----------Motorcycles----------
     M,   //Motorlu Bisiklet

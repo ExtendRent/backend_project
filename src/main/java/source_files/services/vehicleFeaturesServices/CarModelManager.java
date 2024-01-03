@@ -15,6 +15,8 @@ import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.data.types.ItemType.CAR_MODEL;
+
 @Service
 @AllArgsConstructor
 public class CarModelManager implements CarModelService {
@@ -22,20 +24,15 @@ public class CarModelManager implements CarModelService {
     private final CarModelEntityService carModelEntityService;
     private final ModelMapperService modelMapperService;
     private final CarModelBusinessRules carModelBusinessRules;
-    private final CarModelEntity carModelEntity;
 
     @Override
     public CarModelDTO add(AddCarModelRequest addCarModelRequest) {
 
-        CarModelEntity carModel = modelMapperService.forRequest()
+        CarModelEntity carModelEntity = modelMapperService.forRequest()
                 .map(carModelBusinessRules.checkAddCarModelRequest(
                         carModelBusinessRules.fixAddCarModelRequest(addCarModelRequest)), CarModelEntity.class);
-        //todo:Fk larda id ler karıştığı için ekleme yaparken fk nın id sine ekleme yapıyor
-        carModel.setId(carModelEntity.getId());
-        //CarModelDTO carModelDTO = modelMapperService.forResponse().map(carModelEntityService.add(carModel), CarModelDTO.class);
-        //carModelDTO.setName(carModel.getName());
-        //return carModelDTO;
-        return modelMapperService.forResponse().map(carModelEntityService.add(carModel), CarModelDTO.class);
+        carModelEntity.setItemType(CAR_MODEL);
+        return modelMapperService.forResponse().map(carModelEntityService.add(carModelEntity), CarModelDTO.class);
     }
 
     @Override
@@ -44,6 +41,7 @@ public class CarModelManager implements CarModelService {
                 .map(carModelBusinessRules.checkUpdateCarModelRequest(
                         carModelBusinessRules.fixUpdateCarModelRequest(updateCarModelRequest)
                 ), CarModelEntity.class);
+        carModelEntity.setItemType(CAR_MODEL);
         return modelMapperService.forRequest().map(carModelEntityService.update(carModelEntity), CarModelDTO.class);
     }
 

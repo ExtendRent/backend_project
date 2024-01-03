@@ -11,7 +11,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateColorRequest extends BaseRequest {
+public class UpdateColorRequest implements BaseRequest {
     int id;
     @Size(min = 2, message = "Renk en az 2 karakter olmalıdır.")
     String name;

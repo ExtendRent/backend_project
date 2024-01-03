@@ -12,7 +12,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateBrandRequest extends BaseRequest {
+public class UpdateBrandRequest implements BaseRequest {
     int id;
     @NotBlank(message = "Marka adı boş geçilemez")
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")

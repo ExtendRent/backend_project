@@ -83,7 +83,6 @@ public class ColorManager implements ColorService {
     @Override
     public void hardDelete(int id) {
         this.colorEntityService.delete(this.colorEntityService.getById(id));
-
     }
 
     @Override
@@ -92,4 +91,6 @@ public class ColorManager implements ColorService {
         colorEntity.setIsDeleted(true);
         this.colorEntityService.update(colorEntity);
     }
+
+
 }

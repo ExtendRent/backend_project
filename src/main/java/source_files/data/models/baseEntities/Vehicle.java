@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 import source_files.data.types.DrivingLicenseType;
+import source_files.data.types.VehicleType;
 
 import java.util.List;
 
@@ -39,4 +40,6 @@ public class Vehicle extends BaseEntity {
     @Column(name = "expected_driving_license_types")
     private List<DrivingLicenseType> expectedDrivingLicenseTypes; //-> kullanıcıdan beklenen ehliyet sınıfları.
 
+    @Column(name = "vehicle_type")
+    private VehicleType vehicleType;
 }

@@ -17,6 +17,8 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.List;
 
+import static source_files.data.types.ItemType.RENTAL;
+
 @Service
 @AllArgsConstructor
 public class RentalManager implements RentalService {
@@ -49,6 +51,7 @@ public class RentalManager implements RentalService {
 
         rentalEntity.setPaymentDetailsEntity(paymentDetailsEntity);
 
+        rentalEntity.setItemType(RENTAL);
 
         return this.modelMapperService.forResponse().map(rentalEntityService.add(rentalEntity), RentalDTO.class);
     }
@@ -67,6 +70,8 @@ public class RentalManager implements RentalService {
                         , rentalBusinessRules.calculateTotalRentalDays(rentalEntity.getStartDate(), rentalEntity.getEndDate())));
 
         rentalEntity.setPaymentDetailsEntity(paymentDetailsEntity);
+
+        rentalEntity.setItemType(RENTAL);
 
         this.rentalEntityService.update(rentalEntity);
 

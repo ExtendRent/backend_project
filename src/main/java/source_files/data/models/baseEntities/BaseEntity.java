@@ -25,7 +25,6 @@ public class BaseEntity {
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
 
-    //todo:  null geliyor
 
     @Column(name = "last_modified", nullable = true)
     private LocalDate lastModified;
@@ -33,6 +32,7 @@ public class BaseEntity {
 
     @Column(name = "created_date")
     private LocalDate createdDate;
+
 
     @PrePersist //classlar oluşmadan çalısır
     private void beforeAdd() {

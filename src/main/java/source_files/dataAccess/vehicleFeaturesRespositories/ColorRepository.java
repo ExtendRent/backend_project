@@ -11,4 +11,6 @@ public interface ColorRepository extends JpaRepository<ColorEntity, Integer> {
     List<ColorEntity> findAllByIsDeletedFalse();
 
     List<ColorEntity> findAllByIsDeletedTrue();
+
+    boolean existsByNameAndIdNot(String name, int id);
 }

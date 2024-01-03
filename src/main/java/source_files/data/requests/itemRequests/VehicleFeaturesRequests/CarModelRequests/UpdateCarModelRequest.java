@@ -10,14 +10,14 @@ import source_files.data.requests.BaseRequest;
 @Getter
 @Setter
 @Builder
-public class UpdateCarModelRequest extends BaseRequest {
+public class UpdateCarModelRequest implements BaseRequest {
 
-    int id;
+    int carModelEntityId;
 
     @NotBlank(message = "Model adı boş geçilemez")
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")
-    String name;
+    String carModelEntityName;
 
     @NotBlank(message = "Marka boş geçilemez")
-    int brandId;
+    int brandEntityId;
 }

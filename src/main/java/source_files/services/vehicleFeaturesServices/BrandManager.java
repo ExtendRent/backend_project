@@ -14,6 +14,8 @@ import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.data.types.ItemType.BRAND;
+
 @Service
 @AllArgsConstructor
 public class BrandManager implements BrandService {
@@ -27,6 +29,7 @@ public class BrandManager implements BrandService {
         BrandEntity brandEntity = modelMapperService.forRequest()
                 .map(brandBusinessRules.checkAddBrandRequest(
                         brandBusinessRules.fixAddBrandRequest(addBrandRequest)), BrandEntity.class);
+        brandEntity.setItemType(BRAND);
         return modelMapperService.forResponse().map(brandEntityService.add(brandEntity), BrandDTO.class);
     }
 
@@ -35,6 +38,7 @@ public class BrandManager implements BrandService {
         BrandEntity brandEntity = modelMapperService.forRequest()
                 .map(brandBusinessRules.checkUpdateBrandRequest(
                         brandBusinessRules.fixUpdateBrandRequest(updateBrandRequest)), BrandEntity.class);
+        brandEntity.setItemType(BRAND);
         return modelMapperService.forResponse().map(brandEntityService.update(brandEntity), BrandDTO.class);
     }
 
