@@ -11,9 +11,16 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
     boolean existsByPhoneNumber(String phoneNumber);
 
+    boolean existsByPhoneNumberAndIdNot(String phoneNumber, int id);
+
+
     boolean existsByDrivingLicenseNumber(String drivingLicenseNumber);
 
+    boolean existsByDrivingLicenseNumberAndIdNot(String drivingLicenseNumber, int id);
+
     boolean existsByEmailAddress(String email);
+
+    boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
 
     List<CustomerEntity> findAllByIsDeletedFalse();
 

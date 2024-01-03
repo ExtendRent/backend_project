@@ -30,13 +30,11 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     private final DiscountCodeRepository discountCodeRepository;
     private PaymentBusinessRules paymentBusinessRules;
 
-    public AddRentalRequest fixAddRentalRequest(AddRentalRequest addRentalRequest) {
-        addRentalRequest.setCreditCardInformation(this.paymentBusinessRules
-                .fixCreditCardInformation(addRentalRequest.getCreditCardInformation()));
 
-        return addRentalRequest;
-    }
+    //--------------------- AUTO FIX METHODS ---------------------
 
+
+    //---------------AUTO CHECKING METHODS--------------------------------
     public AddRentalRequest checkAddRentalRequest(AddRentalRequest addRentalRequest) {
         this.checkStartDate(addRentalRequest.getStartDate());
         this.checkEndDate(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
@@ -50,6 +48,13 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
 
     //---------------AUTO CHECKING METHODS--------------------------------
+
+    public AddRentalRequest fixAddRentalRequest(AddRentalRequest addRentalRequest) {
+        addRentalRequest.setCreditCardInformation(this.paymentBusinessRules
+                .fixCreditCardInformation(addRentalRequest.getCreditCardInformation()));
+
+        return addRentalRequest;
+    }
 
     private void checkStartDate(LocalDate startDate) {
 

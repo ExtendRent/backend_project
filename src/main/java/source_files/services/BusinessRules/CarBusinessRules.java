@@ -3,6 +3,7 @@ package source_files.services.BusinessRules;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
@@ -27,21 +28,40 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
     private final BrandEntityService brandEntityService;
 
+    //--------------------- AUTO FIX METHODS ---------------------
 
     public AddCarRequest fixAddCarRequest(AddCarRequest addCarRequest) {
         addCarRequest.setLicensePlate(this.fixLicensePlate(addCarRequest.getLicensePlate()));
         return addCarRequest;
     }
 
+    public UpdateCarRequest fixUpdateCarRequest(UpdateCarRequest updateCarRequest) {
+        updateCarRequest.setLicensePlate(this.fixLicensePlate(updateCarRequest.getLicensePlate()));
+
+        return updateCarRequest;
+    }
+
+    //--------------------- AUTO CHECK METHODS ---------------------
     public AddCarRequest checkAddCarRequest(AddCarRequest addCarRequest) {
+        this.checkLicensePlate(addCarRequest.getLicensePlate());
         this.checkModel(addCarRequest.getModelId());
         this.checkColor(addCarRequest.getColorId());
         this.checkBodyType(addCarRequest.getBodyTypeId());
         this.checkBrand(addCarRequest.getBrandId());
-        this.checkLicensePlate(addCarRequest.getLicensePlate());
         return addCarRequest;
     }
 
+    public UpdateCarRequest checkUpdateCarRequest(UpdateCarRequest updateCarRequest) {
+        this.checkLicensePlateAndIdNot(updateCarRequest.getLicensePlate(), updateCarRequest.getId());
+        this.checkModel(updateCarRequest.getModelId());
+        this.checkColor(updateCarRequest.getColorId());
+        this.checkBodyType(updateCarRequest.getBodyTypeId());
+        this.checkBrand(updateCarRequest.getBrandId());
+        this.checkLicensePlate(updateCarRequest.getLicensePlate());
+        return updateCarRequest;
+    }
+
+    //----------------------------METHODS--------------------------------
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
@@ -59,13 +79,19 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return plate.replace(" ", "").toUpperCase();
     }
 
-    //---------------AUTO CHECKING METHODS--------------------------------
 
     private void checkLicensePlate(String licensePlate) {
         if (this.carRepository.existsByLicensePlate(licensePlate)) {
             throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
         }
     }
+
+    private void checkLicensePlateAndIdNot(String licensePlate, int id) {
+        if (this.carRepository.existsByLicensePlateAndIdNot(licensePlate, id)) {
+            throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
+        }
+    }
+
 
     private void checkBrand(int brandId) {
         brandEntityService.getById(brandId);

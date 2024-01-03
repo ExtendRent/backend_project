@@ -8,6 +8,8 @@ import java.util.List;
 public interface CarRepository extends JpaRepository<CarEntity, Integer> {
     boolean existsByLicensePlate(String plate);
 
+    boolean existsByLicensePlateAndIdNot(String plate, int id);
+
     List<CarEntity> findAllByIsDeletedFalse();
 
     List<CarEntity> findAllByIsDeletedTrue();

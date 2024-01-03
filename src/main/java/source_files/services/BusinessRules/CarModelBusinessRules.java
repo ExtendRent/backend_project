@@ -5,18 +5,49 @@ import org.springframework.stereotype.Service;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
+import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
 
 import java.util.List;
 
+import static source_files.exception.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
 import static source_files.exception.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
-public class CarModelBusinessRules implements BaseBusinessRulesService {
+public class CarModelBusinessRules implements BaseItemBusinessRulesService {
     private final CarModelRepository carModelRepository;
     private final BrandEntityService brandEntityService;
+
+
+    //--------------------- AUTO FIX METHODS ---------------------
+    public AddCarModelRequest fixAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
+        addCarModelRequest.setCarModelEntityName(this.fixName(addCarModelRequest.getCarModelEntityName()));
+        return addCarModelRequest;
+    }
+
+    public UpdateCarModelRequest fixUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
+        updateCarModelRequest.setCarModelEntityName(this.fixName(updateCarModelRequest.getCarModelEntityName()));
+        return updateCarModelRequest;
+    }
+
+    //--------------------- AUTO CHECK METHODS ---------------------
+    public AddCarModelRequest checkAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
+        this.existsByName(addCarModelRequest.getCarModelEntityName());
+        this.checkBrand(addCarModelRequest.getBrandEntityId());
+        return addCarModelRequest;
+    }
+
+
+    public UpdateCarModelRequest checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
+        this.existsByName(updateCarModelRequest.getCarModelEntityName());
+        this.checkBrand(updateCarModelRequest.getBrandEntityId());
+        return updateCarModelRequest;
+    }
+
+
+    //----------------------------METHODS--------------------------------
 
     @Override
     public List<?> checkDataList(List<?> list) {
@@ -26,37 +57,22 @@ public class CarModelBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
-    public AddCarModelRequest fixAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
-        addCarModelRequest.setCarModelEntityName(this.fixName(addCarModelRequest.getCarModelEntityName()));
-        return addCarModelRequest;
-    }
-
-    public AddCarModelRequest checkAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
-        this.existsByName(addCarModelRequest.getCarModelEntityName());
-        this.checkBrand(addCarModelRequest.getBrandEntityId());
-        return addCarModelRequest;
-    }
-
-    public UpdateCarModelRequest fixUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
-        updateCarModelRequest.setCarModelEntityName(this.fixName(updateCarModelRequest.getCarModelEntityName()));
-        return updateCarModelRequest;
-    }
-
-    public UpdateCarModelRequest checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
-        this.existsByName(updateCarModelRequest.getCarModelEntityName());
-        this.checkBrand(updateCarModelRequest.getBrandEntityId());
-        return updateCarModelRequest;
-    }
-
     @Override
     public String fixName(String name) {
         return name.trim().toLowerCase();
     }
 
-    //---------------AUTO CHECKING METHODS--------------------------------
+    @Override
     public void existsByName(String name) {
         if (carModelRepository.existsByName(name)) {
             throw new IllegalStateException("This model already exist");
+        }
+    }
+
+    @Override
+    public void existsByNameAndIdNot(String name, int id) {
+        if (carModelRepository.existsByNameAndIdNot(name, id)) {
+            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS, "This body type already exist !");
         }
     }
 

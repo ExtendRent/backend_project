@@ -15,17 +15,22 @@ import static source_files.exception.NotFoundExceptionType.PAYMENT_DETAILS_LIST_
 public class PaymentBusinessRules implements BaseBusinessRulesService {
 
 
+    //--------------------- AUTO FIX METHODS ---------------------
     public CreditCardInformation fixCreditCardInformation(CreditCardInformation creditCardInformation) {
         creditCardInformation.setCardOwnerName(this.fixCreditCardOwnerName(creditCardInformation.getCardOwnerName()));
         creditCardInformation.setCardOwnerSurname(this.fixCreditCardOwnerSurname(creditCardInformation.getCardOwnerSurname()));
         return creditCardInformation;
     }
 
+    //---------------AUTO CHECKING METHODS--------------------------------
     public CreditCardInformation checkCreditCard(CreditCardInformation creditCardInformation) {
         this.checkCreditCardNumber(creditCardInformation.getCardNumber());
         this.checkOwnerOfCreditCardFullName(creditCardInformation.getCardOwnerName(), creditCardInformation.getCardOwnerSurname());
         return creditCardInformation;
     }
+
+
+    //----------------------------METHODS--------------------------------
 
     public String fixCreditCardOwnerName(String name) {
         return name.replace(" ", "").toUpperCase();
@@ -34,7 +39,7 @@ public class PaymentBusinessRules implements BaseBusinessRulesService {
     public String fixCreditCardOwnerSurname(String surname) {
         return surname.replace(" ", "").toUpperCase();
     }
-    //---------------AUTO CHECKING METHODS--------------------------------
+
 
     private void checkCreditCardNumber(String cardNumber) {
     }
@@ -48,7 +53,6 @@ public class PaymentBusinessRules implements BaseBusinessRulesService {
         }
     }
 
-    //-----------------------------------------------------------------
 
     @Override
     public List<?> checkDataList(List<?> list) {

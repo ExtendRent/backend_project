@@ -13,13 +13,13 @@ import source_files.data.requests.BaseRequest;
 @Setter
 public class AddAdminRequest implements BaseRequest {
     @NotBlank(message = "isim boş geçilemez")
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     @Size(min = 2, max = 20)
     String name;
 
     @NotBlank(message = "Soyisim boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.

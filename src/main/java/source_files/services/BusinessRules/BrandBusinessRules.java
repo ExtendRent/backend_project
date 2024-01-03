@@ -10,12 +10,12 @@ import source_files.exception.DataNotFoundException;
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.NAME_ALREADY_EXISTS;
+import static source_files.exception.AlreadyExistsExceptionType.BRAND_ALREADY_EXISTS;
 import static source_files.exception.NotFoundExceptionType.BRAND_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
-public class BrandBusinessRules implements BaseBusinessRulesService {
+public class BrandBusinessRules implements BaseItemBusinessRulesService {
     private final BrandRespository brandRespository;
 
     @Override
@@ -26,13 +26,10 @@ public class BrandBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
+    //--------------------- AUTO FIX METHODS ---------------------
+
     public AddBrandRequest fixAddBrandRequest(AddBrandRequest addBrandRequest) {
         addBrandRequest.setName(this.fixName(addBrandRequest.getName()));
-        return addBrandRequest;
-    }
-
-    public AddBrandRequest checkAddBrandRequest(AddBrandRequest addBrandRequest) {
-        this.existsByName(addBrandRequest.getName());
         return addBrandRequest;
     }
 
@@ -41,27 +38,38 @@ public class BrandBusinessRules implements BaseBusinessRulesService {
         return updateBrandRequest;
     }
 
+    //--------------------- AUTO CHECK METHODS ---------------------
+    public AddBrandRequest checkAddBrandRequest(AddBrandRequest addBrandRequest) {
+        this.existsByName(addBrandRequest.getName());
+        return addBrandRequest;
+    }
+
     public UpdateBrandRequest checkUpdateBrandRequest(UpdateBrandRequest updateBrandRequest) {
-        this.existsByName(updateBrandRequest.getName());
+        this.existsByNameAndIdNot(updateBrandRequest.getName(), updateBrandRequest.getId());
         return updateBrandRequest;
     }
+
+
+    //----------------------------METHODS--------------------------------
 
     @Override
     public String fixName(String name) {
         return name.trim().toLowerCase();
     }
 
-    //---------------AUTO CHECKING METHODS--------------------------------
     public void existsByName(String name) {
         if (brandRespository.existsByName(name)) {
-            throw new AlreadyExistsException(NAME_ALREADY_EXISTS, "This brand name already exist");
+            throw new AlreadyExistsException(BRAND_ALREADY_EXISTS, "This brand name already exist");
         }
     }
 
-//    public void existById(int brandId) {
-//        if (!(brandRespository.existsById(brandId))) {
-//            throw new IllegalStateException("Brand does not exist");
-//        }
-//    }
+    @Override
+    public void existsByNameAndIdNot(String name, int id) {
+        //Kendisi hariç başka bir isim ile aynı olup olmadığını kontrol etmek için
+        if (brandRespository.existsByNameAndIdNot(name, id)) {
+            throw new AlreadyExistsException(BRAND_ALREADY_EXISTS, "This brand already exist !");
+        }
+    }
+
 
 }

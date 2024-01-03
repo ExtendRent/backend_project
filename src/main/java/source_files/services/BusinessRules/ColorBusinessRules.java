@@ -16,7 +16,7 @@ import static source_files.exception.NotFoundExceptionType.COLOR_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
-public class ColorBusinessRules implements BaseBusinessRulesService {
+public class ColorBusinessRules implements BaseItemBusinessRulesService {
     private final ColorRepository colorRepository;
     private final ColorEntityManager colorEntityManager;
 
@@ -43,8 +43,9 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
         updateColorRequest.setId(this.colorEntityManager.getById(updateColorRequest.getId()).getId());
         return updateColorRequest;
     }
-    //----------------------------------------------------------------------
 
+
+    //----------------------------METHODS--------------------------------
 
     @Override
     public List<?> checkDataList(List<?> list) {
@@ -59,16 +60,16 @@ public class ColorBusinessRules implements BaseBusinessRulesService {
         return name.replace(" ", "").toLowerCase();
     }
 
-
-    //---------------AUTO CHECKING METHODS--------------------------------
-    private void existsByNameAndIdNot(String name, int id) {
+    @Override
+    public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir rengin ismi ile aynı olup olmadığını kontrol etmek için
         if (colorRepository.existsByNameAndIdNot(name, id)) {
             throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist !");
         }
     }
 
-    private void existsByName(String name) {
+    @Override
+    public void existsByName(String name) {
         if (colorRepository.existsByName(name)) {
             throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist :)");
         }

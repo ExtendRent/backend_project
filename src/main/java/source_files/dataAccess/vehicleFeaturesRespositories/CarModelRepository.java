@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface CarModelRepository extends JpaRepository<CarModelEntity, Integer> {
     boolean existsByName(String modelName);
 
+    boolean existsByNameAndIdNot(String name, int id);
+
     Optional<CarModelEntity> findByName(String modelName);
 
     List<CarModelEntity> findAllByBrandId(int id);

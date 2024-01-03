@@ -17,7 +17,7 @@ import static source_files.exception.NotFoundExceptionType.ADMIN_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
-public class AdminBusinessRules implements BaseBusinessRulesService {
+public class AdminBusinessRules implements BaseUserBusinessRulesService {
     private final AdminRepository adminRepository;
     private final AdminEntityManager adminEntityManager;
 
@@ -62,32 +62,38 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
     }
 
 
+    //----------------------------METHODS--------------------------------
+
     @Override
     public String fixName(String name) {
         return name.trim().toLowerCase();
     }
 
-    //---------------AUTO CHECKING METHODS--------------------------------
-    private void existsByPhoneNumber(String phoneNumber) {
+    @Override
+    public void existsByPhoneNumber(String phoneNumber) {
         if (adminRepository.existsByPhoneNumber(phoneNumber)) {
             throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number already exist");
         }
     }
 
-    private void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
+
+    @Override
+    public void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
         if (adminRepository.existsByPhoneNumberAndIdNot(phoneNumber, id)) {
             throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This email address already exist !");
         }
     }
 
-    private void existsByEmailAddressAndIdNot(String emailAddress, int id) {
+    @Override
+    public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
         //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
         if (adminRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist !");
         }
     }
 
-    private void existsByEmailAddress(String emailAddress) {
+    @Override
+    public void existsByEmailAddress(String emailAddress) {
         if (adminRepository.existsByEmailAddress(emailAddress)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist :)");
         }

@@ -16,11 +16,12 @@ import static source_files.exception.NotFoundExceptionType.BODY_TYPE_LIST_NOT_FO
 
 @AllArgsConstructor
 @Service
-public class CarBodyTypeBusinessRules implements BaseBusinessRulesService {
+public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
 
     private final CarBodyTypeEntityManager carBodyTypeEntityManager;
     private final CarBodyTypeRepository carBodyTypeRepository;
 
+    //--------------------- AUTO FIX METHODS ---------------------
     public AddCarBodyTypeRequest fixAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest) {
         addCarBodyTypeRequest.setCarBodyTypeEntityName(this.fixName(addCarBodyTypeRequest.getCarBodyTypeEntityName()));
         return addCarBodyTypeRequest;
@@ -31,6 +32,7 @@ public class CarBodyTypeBusinessRules implements BaseBusinessRulesService {
         return updateCarBodyTypeRequest;
     }
 
+    //--------------------- AUTO CHECK METHODS ---------------------
     public AddCarBodyTypeRequest checkAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest) {
         this.existsByName(addCarBodyTypeRequest.getCarBodyTypeEntityName());
         return addCarBodyTypeRequest;
@@ -42,6 +44,13 @@ public class CarBodyTypeBusinessRules implements BaseBusinessRulesService {
         return updateCarBodyTypeRequest;
     }
 
+    //----------------------------METHODS--------------------------------
+
+    @Override
+    public String fixName(String name) {
+        return name.replace(" ", "").toLowerCase();
+    }
+
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
@@ -51,13 +60,17 @@ public class CarBodyTypeBusinessRules implements BaseBusinessRulesService {
     }
 
     @Override
-    public String fixName(String name) {
-        return name.replace(" ", "").toLowerCase();
-    }
-
     public void existsByName(String name) {
         if (this.carBodyTypeRepository.existsByName(name)) {
             throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS, "This body type already exist");
+        }
+    }
+
+    @Override
+    public void existsByNameAndIdNot(String name, int id) {
+        //Kendisi hariç başka bir isim ile aynı olup olmadığını kontrol etmek için
+        if (carBodyTypeRepository.existsByNameAndIdNot(name, id)) {
+            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS, "This body type already exist !");
         }
     }
 }

@@ -14,12 +14,12 @@ import source_files.data.requests.BaseRequest;
 public class AddEmployeeRequest implements BaseRequest {
     @NotBlank(message = "Çalışan adı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String name;
 
     @NotBlank(message = "Çalışan soyadı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.

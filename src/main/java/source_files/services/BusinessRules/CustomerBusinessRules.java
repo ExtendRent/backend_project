@@ -16,17 +16,12 @@ import static source_files.exception.NotFoundExceptionType.CUSTOMER_LIST_NOT_FOU
 
 @AllArgsConstructor
 @Service
-public class CustomerBusinessRules implements BaseBusinessRulesService {
+public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     private final CustomerRepository customerRepository;
     private final CustomerEntityManager customerEntityManager;
 
-    @Override
-    public List<?> checkDataList(List<?> list) {
-        if (list.isEmpty()) {
-            throw new DataNotFoundException(CUSTOMER_LIST_NOT_FOUND, "Aradığınız kriterlere uygun müşteri bulunamadı");
-        }
-        return list;
-    }
+
+    //--------------------- AUTO FIX METHODS ---------------------
 
     public AddCustomerRequest fixAddCustomerRequest(AddCustomerRequest addCustomerRequest) {
         addCustomerRequest.setPhoneNumber(this.fixName(addCustomerRequest.getPhoneNumber()));
@@ -34,13 +29,6 @@ public class CustomerBusinessRules implements BaseBusinessRulesService {
         addCustomerRequest.setSurname(this.fixName(addCustomerRequest.getSurname()));
         addCustomerRequest.setEmailAddress(this.fixName(addCustomerRequest.getEmailAddress()));
         addCustomerRequest.setDrivingLicenseNumber(this.fixName(addCustomerRequest.getDrivingLicenseNumber()));
-        return addCustomerRequest;
-    }
-
-    public AddCustomerRequest checkAddCustomerRequest(AddCustomerRequest addCustomerRequest) {
-        this.existsByPhoneNumber(addCustomerRequest.getPhoneNumber());
-        this.existsByDrivingLicenseNumber(addCustomerRequest.getDrivingLicenseNumber());
-        this.existsByEmailAddress(addCustomerRequest.getEmailAddress());
         return addCustomerRequest;
     }
 
@@ -53,23 +41,50 @@ public class CustomerBusinessRules implements BaseBusinessRulesService {
         return updateCustomerRequest;
     }
 
+    //--------------------- AUTO CHECK METHODS ---------------------
+
+    public AddCustomerRequest checkAddCustomerRequest(AddCustomerRequest addCustomerRequest) {
+        this.existsByPhoneNumber(addCustomerRequest.getPhoneNumber());
+        this.existsByDrivingLicenseNumber(addCustomerRequest.getDrivingLicenseNumber());
+        this.existsByEmailAddress(addCustomerRequest.getEmailAddress());
+        return addCustomerRequest;
+    }
+
     public UpdateCustomerRequest checkUpdateCustomerRequest(UpdateCustomerRequest updateCustomerRequest) {
-        this.existsByPhoneNumber(updateCustomerRequest.getPhoneNumber());
-        this.existsByDrivingLicenseNumber(updateCustomerRequest.getDrivingLicenseNumber());
-        this.existsByEmailAddress(updateCustomerRequest.getEmailAddress());
-        updateCustomerRequest.setId(this.customerEntityManager.getById(updateCustomerRequest.getId()).getId());
+        this.existsByPhoneNumberAndIdNot(updateCustomerRequest.getPhoneNumber(), updateCustomerRequest.getId());
+        this.existsByDrivingLicenseNumberAndIdNot(updateCustomerRequest.getDrivingLicenseNumber(), updateCustomerRequest.getId());
+        this.existsByEmailAddressAndIdNot(updateCustomerRequest.getEmailAddress(), updateCustomerRequest.getId());
         return updateCustomerRequest;
     }
+
+
+    //----------------------------METHODS--------------------------------
+
+    @Override
+    public List<?> checkDataList(List<?> list) {
+        if (list.isEmpty()) {
+            throw new DataNotFoundException(CUSTOMER_LIST_NOT_FOUND, "Aradığınız kriterlere uygun müşteri bulunamadı");
+        }
+        return list;
+    }
+
 
     @Override
     public String fixName(String name) {
         return name.trim().toLowerCase();
     }
 
-    //---------------AUTO CHECKING METHODS--------------------------------
-    private void existsByPhoneNumber(String phoneNumber) {
+    @Override
+    public void existsByPhoneNumber(String phoneNumber) {
         if (customerRepository.existsByPhoneNumber(phoneNumber)) {
             throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number already exist");
+        }
+    }
+
+    @Override
+    public void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
+        if (customerRepository.existsByPhoneNumberAndIdNot(phoneNumber, id)) {
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number address already exist !");
         }
     }
 
@@ -80,9 +95,24 @@ public class CustomerBusinessRules implements BaseBusinessRulesService {
         }
     }
 
+    private void existsByDrivingLicenseNumberAndIdNot(String drivingLicenseNumber, int id) {
+        if (customerRepository.existsByDrivingLicenseNumberAndIdNot(drivingLicenseNumber, id)) {
+            throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS, "This driving license number already exist");
+        }
+    }
+
+    @Override
     public void existsByEmailAddress(String email) {
         if (customerRepository.existsByEmailAddress(email)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist");
+        }
+    }
+
+    @Override
+    public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
+        //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
+        if (customerRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist !");
         }
     }
 }

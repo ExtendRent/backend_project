@@ -10,6 +10,8 @@ public interface CarBodyTypeRepository extends JpaRepository<CarBodyTypeEntity, 
 
     List<CarBodyTypeEntity> findAllByIsDeletedTrue();
 
+    boolean existsByNameAndIdNot(String name, int id);
+
     boolean existsByName(String name);
 
 }
