@@ -27,24 +27,24 @@ public class CarModelBusinessRules implements BaseBusinessRulesService {
     }
 
     public AddCarModelRequest fixAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
-        addCarModelRequest.setName(this.fixName(addCarModelRequest.getName()));
+        addCarModelRequest.setCarModelEntityName(this.fixName(addCarModelRequest.getCarModelEntityName()));
         return addCarModelRequest;
     }
 
     public AddCarModelRequest checkAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
-        this.existsByName(addCarModelRequest.getName());
-        this.checkBrand(addCarModelRequest.getBrandId());
+        this.existsByName(addCarModelRequest.getCarModelEntityName());
+        this.checkBrand(addCarModelRequest.getBrandEntityId());
         return addCarModelRequest;
     }
 
     public UpdateCarModelRequest fixUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
-        updateCarModelRequest.setName(this.fixName(updateCarModelRequest.getName()));
+        updateCarModelRequest.setCarModelEntityName(this.fixName(updateCarModelRequest.getCarModelEntityName()));
         return updateCarModelRequest;
     }
 
     public UpdateCarModelRequest checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
-        this.existsByName(updateCarModelRequest.getName());
-        this.checkBrand(updateCarModelRequest.getBrandId());
+        this.existsByName(updateCarModelRequest.getCarModelEntityName());
+        this.checkBrand(updateCarModelRequest.getBrandEntityId());
         return updateCarModelRequest;
     }
 

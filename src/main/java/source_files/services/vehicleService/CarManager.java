@@ -14,6 +14,8 @@ import source_files.services.vehicleService.abstracts.CarService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.data.types.VehicleType.CAR;
+
 @Service
 @AllArgsConstructor
 public class CarManager implements CarService {
@@ -32,6 +34,7 @@ public class CarManager implements CarService {
         CarEntity carEntity = modelMapperService.forRequest().map(this.businessRules                 //YENİ KOD
                 .checkAddCarRequest(businessRules.fixAddCarRequest(addCarRequest)), CarEntity.class);
 
+        carEntity.setVehicleType(CAR);
         return modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
     }
 
@@ -43,10 +46,9 @@ public class CarManager implements CarService {
     @Override
     public CarDTO update(UpdateCarRequest updateCarRequest) {
 
-        //CarEntity carEntity = carEntityManager.getById(updateCarRequest.getId());
-
         CarEntity carEntity = modelMapperService.forRequest().map(updateCarRequest, CarEntity.class);
         carEntity = carEntityService.update(carEntity);
+        carEntity.setVehicleType(CAR);
 
         return modelMapperService.forResponse().map(carEntity, CarDTO.class);
 

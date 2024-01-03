@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class UpdateRentalRequest extends BaseRequest {
+public class UpdateRentalRequest implements BaseRequest {
     int rentalEntityId;
     LocalDate returnDate;
     boolean isActive;

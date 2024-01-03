@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
+import source_files.data.types.CustomerType;
 import source_files.data.types.DrivingLicenseType;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class CustomerEntity extends UserEntity {
 
     @OneToMany(mappedBy = "customerEntity")
     List<RentalEntity> rentalHistory;
-
+    @Column(name = "customer_type")
+    CustomerType customerType;
     @Column(name = "driving_license_number", unique = true)
     private String drivingLicenseNumber;
     @Column(name = "driving_license_type")

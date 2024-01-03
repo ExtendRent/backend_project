@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class AddRentalRequest extends BaseRequest {
+public class AddRentalRequest implements BaseRequest {
 
     int customerId;
 

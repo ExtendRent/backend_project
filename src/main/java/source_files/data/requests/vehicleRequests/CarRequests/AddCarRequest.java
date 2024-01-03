@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class AddCarRequest extends BaseRequest {
+public class AddCarRequest implements BaseRequest {
 
 
     int brandId;

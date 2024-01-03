@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class UpdateCarRequest extends BaseRequest {
+public class UpdateCarRequest implements BaseRequest {
 
     int id;
     int brandId;

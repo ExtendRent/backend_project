@@ -7,13 +7,14 @@ import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.AddAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
-import source_files.data.types.UserType;
 import source_files.services.BusinessRules.AdminBusinessRules;
 import source_files.services.entityServices.abstracts.AdminEntityService;
 import source_files.services.userServices.abstracts.AdminService;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static source_files.data.types.UserType.ADMIN;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +30,7 @@ public class AdminManager implements AdminService {
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkAddAdminRequest
                         (adminBusinessRules.fixAddAdminRequest(addAdminRequest)), AdminEntity.class);
-        adminEntity.setUserType(UserType.ADMIN);
+        adminEntity.setUserType(ADMIN);
         return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
     }
 
@@ -38,9 +39,8 @@ public class AdminManager implements AdminService {
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkUpdateAdminRequest
                         (adminBusinessRules.fixUpdateAdminRequest(updateAdminRequest)), AdminEntity.class);
-        adminEntity.setUserType(UserType.ADMIN);
+        adminEntity.setUserType(ADMIN);
         return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
-
     }
 
     @Override
@@ -105,4 +105,5 @@ public class AdminManager implements AdminService {
         adminEntity.setIsDeleted(true);
         this.adminEntityService.update(adminEntity);
     }
+
 }

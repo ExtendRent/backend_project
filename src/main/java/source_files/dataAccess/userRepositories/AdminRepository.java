@@ -14,9 +14,15 @@ public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
 
     boolean existsByEmailAddress(String email);
 
+    boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
+
+    boolean existsByPhoneNumberAndIdNot(String phoneNumber, int id);
+
     List<AdminEntity> findBySalaryGreaterThanEqual(Double salary);
 
     List<AdminEntity> findAllByIsDeletedFalse();
 
     List<AdminEntity> findAllByIsDeletedTrue();
+
+
 }

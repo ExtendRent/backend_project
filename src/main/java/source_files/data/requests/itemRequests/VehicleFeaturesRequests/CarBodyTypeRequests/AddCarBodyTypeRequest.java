@@ -11,7 +11,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddCarBodyTypeRequest extends BaseRequest {
+public class AddCarBodyTypeRequest implements BaseRequest {
     @Size(min = 2, message = "Body Type en az 2 karakter olmalıdır.")
     String carBodyTypeEntityName;
 }

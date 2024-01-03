@@ -29,6 +29,7 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
+    //--------------------- AUTO FIX METHODS ---------------------
     public AddAdminRequest fixAddAdminRequest(AddAdminRequest addAdminRequest) {
         addAdminRequest.setPhoneNumber(this.fixName(addAdminRequest.getPhoneNumber()));
         addAdminRequest.setName(this.fixName(addAdminRequest.getName()));
@@ -45,6 +46,7 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
         return updateAdminRequest;
     }
 
+    //--------------------- AUTO CHECK METHODS ---------------------
     public AddAdminRequest checkAddAdminRequest(AddAdminRequest addAdminRequest) {
         this.existsByEmailAddress(addAdminRequest.getEmailAddress());
         this.existsByPhoneNumber(addAdminRequest.getPhoneNumber());
@@ -52,9 +54,10 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
     }
 
     public UpdateAdminRequest checkUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
-        this.existsByEmailAddress(updateAdminRequest.getEmailAddress());
-        this.existsByPhoneNumber(updateAdminRequest.getPhoneNumber());
-        updateAdminRequest.setId(this.adminEntityManager.getById(updateAdminRequest.getId()).getId());
+
+        this.existsByEmailAddressAndIdNot(updateAdminRequest.getEmailAddress(), updateAdminRequest.getId());
+        this.existsByPhoneNumberAndIdNot(updateAdminRequest.getPhoneNumber(), updateAdminRequest.getId());
+
         return updateAdminRequest;
     }
 
@@ -71,11 +74,23 @@ public class AdminBusinessRules implements BaseBusinessRulesService {
         }
     }
 
-    public void existsByEmailAddress(String email) {
-        if (adminRepository.existsByEmailAddress(email)) {
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist");
+    private void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
+        if (adminRepository.existsByPhoneNumberAndIdNot(phoneNumber, id)) {
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This email address already exist !");
         }
     }
 
+    private void existsByEmailAddressAndIdNot(String emailAddress, int id) {
+        //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
+        if (adminRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist !");
+        }
+    }
+
+    private void existsByEmailAddress(String emailAddress) {
+        if (adminRepository.existsByEmailAddress(emailAddress)) {
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist :)");
+        }
+    }
 
 }

@@ -2,11 +2,13 @@ package source_files.data.requests.userRequests;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.requests.BaseRequest;
 import source_files.data.types.DrivingLicenseType;
 
 import java.util.List;
@@ -16,13 +18,15 @@ import java.util.List;
 @Getter
 @Setter
 //@Builder
-public class AddCustomerRequest {
+public class AddCustomerRequest implements BaseRequest {
     @NotBlank(message = "Müşteri adı boş geçilemez")
     @Size(min = 2, max = 20)
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String name;
 
     @NotBlank(message = "Müşteri soyadı boş geçilemez")
     @Size(min = 2, max = 20)
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.
@@ -35,6 +39,7 @@ public class AddCustomerRequest {
 
     @NotBlank(message = "Müşteri telefon numarası boş geçilemez")
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
+    @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")
     String phoneNumber;
 
     @Size(max = 6, message = "Ehliyet seri numarası 6 haneli olmalıdır.")
