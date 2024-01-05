@@ -119,8 +119,8 @@ public class CarController {
         );
     }
 
-    @GetMapping("/getAllByYearBetween")
-    public ResponseEntity<TResponse<?>> getAllByYearBetween(@Valid @PathVariable int year1, int year2) throws Exception {
+    @GetMapping("/getAllByYearBetween/{year1}/{year2}")
+    public ResponseEntity<TResponse<?>> getAllByYearBetween(@Valid @PathVariable int year1, @PathVariable int year2) throws Exception {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.carService.getAllByYearBetween(year1, year2))
