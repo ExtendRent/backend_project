@@ -17,8 +17,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.DISCOUNT_CODE_NOT_FOUND;
-import static source_files.exception.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.DISCOUNT_CODE_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service

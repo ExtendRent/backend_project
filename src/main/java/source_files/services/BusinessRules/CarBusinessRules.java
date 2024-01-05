@@ -14,8 +14,8 @@ import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.C
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.LICENSE_PLATE_ALREADY_EXISTS;
-import static source_files.exception.NotFoundExceptionType.CAR_DATA_NOT_FOUND;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.LICENSE_PLATE_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
@@ -31,12 +31,12 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     //--------------------- AUTO FIX METHODS ---------------------
 
     public AddCarRequest fixAddCarRequest(AddCarRequest addCarRequest) {
-        addCarRequest.setLicensePlate(this.fixLicensePlate(addCarRequest.getLicensePlate()));
+        addCarRequest.setLicensePlate(this.fixName(addCarRequest.getLicensePlate()));
         return addCarRequest;
     }
 
     public UpdateCarRequest fixUpdateCarRequest(UpdateCarRequest updateCarRequest) {
-        updateCarRequest.setLicensePlate(this.fixLicensePlate(updateCarRequest.getLicensePlate()));
+        updateCarRequest.setLicensePlate(this.fixName(updateCarRequest.getLicensePlate()));
 
         return updateCarRequest;
     }
@@ -44,19 +44,19 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     //--------------------- AUTO CHECK METHODS ---------------------
     public AddCarRequest checkAddCarRequest(AddCarRequest addCarRequest) {
         this.checkLicensePlate(addCarRequest.getLicensePlate());
-        this.checkModel(addCarRequest.getModelId());
-        this.checkColor(addCarRequest.getColorId());
-        this.checkBodyType(addCarRequest.getBodyTypeId());
-        this.checkBrand(addCarRequest.getBrandId());
+        this.checkModel(addCarRequest.getModelEntityId());
+        this.checkColor(addCarRequest.getColorEntityId());
+        this.checkBodyType(addCarRequest.getCarBodyTypeEntityId());
+        this.checkBrand(addCarRequest.getBrandEntityId());
         return addCarRequest;
     }
 
     public UpdateCarRequest checkUpdateCarRequest(UpdateCarRequest updateCarRequest) {
         this.checkLicensePlateAndIdNot(updateCarRequest.getLicensePlate(), updateCarRequest.getId());
-        this.checkModel(updateCarRequest.getModelId());
-        this.checkColor(updateCarRequest.getColorId());
-        this.checkBodyType(updateCarRequest.getBodyTypeId());
-        this.checkBrand(updateCarRequest.getBrandId());
+        this.checkModel(updateCarRequest.getCarModelEntityId());
+        this.checkColor(updateCarRequest.getColorEntityId());
+        this.checkBodyType(updateCarRequest.getCarBodyTypeEntityId());
+        this.checkBrand(updateCarRequest.getBrandEntityId());
         this.checkLicensePlate(updateCarRequest.getLicensePlate());
         return updateCarRequest;
     }
@@ -65,18 +65,14 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(CAR_DATA_NOT_FOUND, "Aradığınız kriterlere uygun araç bulunamadı");
+            throw new DataNotFoundException(CAR_LIST_NOT_FOUND, "Aradığınız kriterlere uygun araç bulunamadı");
         }
         return list;
     }
 
     @Override
-    public String fixName(String name) {
-        return name.replace(" ", "").toLowerCase();
-    }
-
-    private String fixLicensePlate(String plate) {
-        return plate.replace(" ", "").toUpperCase();
+    public String fixName(String licensePLate) {
+        return licensePLate.replace(" ", "").toLowerCase();
     }
 
 

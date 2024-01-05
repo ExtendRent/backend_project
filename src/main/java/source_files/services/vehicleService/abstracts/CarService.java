@@ -20,6 +20,18 @@ public interface CarService {
 
     List<CarDTO> getAllByIsDeletedTrue();
 
+    List<CarDTO> getAllByIsAvailableTrue();
+
+    List<CarDTO> getAllByIsAvailableFalse();
+
+    List<CarDTO> getAllByColorId(int id);
+
+    List<CarDTO> getAllByModelId(int id);
+
+    List<CarDTO> getAllByBrandId(int id);
+
+    List<CarDTO> getAllByYearBetween(int year1, int year2);
+
     void delete(int id, boolean hardDelete);
 
     void hardDelete(int id);

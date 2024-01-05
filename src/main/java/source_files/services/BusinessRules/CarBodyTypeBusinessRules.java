@@ -11,8 +11,8 @@ import source_files.services.entityServices.vehicleFeaturesEntityManagers.CarBod
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
-import static source_files.exception.NotFoundExceptionType.BODY_TYPE_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.BODY_TYPE_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service

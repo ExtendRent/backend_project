@@ -11,9 +11,9 @@ import source_files.services.entityServices.AdminEntityManager;
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.EMAIL_ADDRESS_ALREADY_EXISTS;
-import static source_files.exception.AlreadyExistsExceptionType.PHONE_NUMBER_ALREADY_EXISTS;
-import static source_files.exception.NotFoundExceptionType.ADMIN_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.EMAIL_ADDRESS_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.PHONE_NUMBER_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service

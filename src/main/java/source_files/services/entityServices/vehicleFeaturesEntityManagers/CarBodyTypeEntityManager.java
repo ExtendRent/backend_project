@@ -9,7 +9,7 @@ import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.C
 
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.BODY_TYPE_DATA_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.BODY_TYPE_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor

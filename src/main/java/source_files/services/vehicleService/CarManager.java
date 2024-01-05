@@ -35,6 +35,7 @@ public class CarManager implements CarService {
                 .checkAddCarRequest(businessRules.fixAddCarRequest(addCarRequest)), CarEntity.class);
 
         carEntity.setVehicleType(CAR);
+
         return modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
     }
 
@@ -46,36 +47,70 @@ public class CarManager implements CarService {
     @Override
     public CarDTO update(UpdateCarRequest updateCarRequest) {
 
-        CarEntity carEntity = modelMapperService.forRequest().map(updateCarRequest, CarEntity.class);
-        carEntity = carEntityService.update(carEntity);
-        carEntity.setVehicleType(CAR);
-
-        return modelMapperService.forResponse().map(carEntity, CarDTO.class);
+        return modelMapperService.forResponse().map(
+                carEntityService.update(modelMapperService.forRequest().map(
+                        this.businessRules.checkUpdateCarRequest(
+                                this.businessRules.fixUpdateCarRequest(updateCarRequest)
+                        ), CarEntity.class
+                )), CarDTO.class
+        );
 
     }
 
     @Override
     public List<CarDTO> getAll() throws Exception {
-        try {
-            return carEntityService.getAll().stream()
-                    .map(carEntity -> this.modelMapperService.forResponse()
-                            .map(carEntity, CarDTO.class)).collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-
-
+        //bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
+        return businessRules.checkDataList(carEntityService.getAll())
+                .stream()
+                .map(car -> modelMapperService.forResponse().map(car, CarDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<CarDTO> getAllByIsDeletedFalse() {
-        return this.carEntityService.getAllByIsDeletedFalse()
+        return this.businessRules.checkDataList(this.carEntityService.getAllByIsDeletedFalse())
                 .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByIsDeletedTrue() {
-        return this.carEntityService.getAllByIsDeletedTrue()
+        return this.businessRules.checkDataList(this.carEntityService.getAllByIsDeletedTrue())
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByIsAvailableTrue() {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByIsAvailableTrue())
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByIsAvailableFalse() {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByIsAvailableFalse())
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByColorId(int id) {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByColorId(id))
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByModelId(int id) {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByModelId(id))
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByBrandId(int brandId) {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByBrandId(brandId))
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByYearBetween(int year1, int year2) {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByYearBetween(year1, year2))
                 .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
@@ -99,6 +134,7 @@ public class CarManager implements CarService {
     public void softDelete(int id) {
         CarEntity carEntity = this.carEntityService.getById(id);
         carEntity.setIsDeleted(true);
+        carEntity.setIsAvailable(false);
         this.carEntityService.update(carEntity);
     }
 }

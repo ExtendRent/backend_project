@@ -9,7 +9,7 @@ import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.B
 
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.BRAND_DATA_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.BRAND_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor

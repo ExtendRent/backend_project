@@ -9,7 +9,7 @@ import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.C
 
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.MODEL_DATA_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.MODEL_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor
@@ -58,7 +58,7 @@ public class CarModelEntityManager implements CarModelEntityService {
 
     @Override
     public List<CarModelEntity> getAllByBrandId(int id) {
-        return this.carModelRepository.findAllByBrandId(id);
+        return this.carModelRepository.findAllByBrandEntity_Id(id);
     }
 
     @Override

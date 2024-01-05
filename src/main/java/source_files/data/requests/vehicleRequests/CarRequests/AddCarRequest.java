@@ -16,14 +16,15 @@ import java.util.List;
 public class AddCarRequest implements BaseRequest {
 
 
-    int brandId;
-    int bodyTypeId;
+    int brandEntityId;
+
+    int carBodyTypeEntityId;
     @Min(0)
-    int modelId;
+    int modelEntityId;
     @Min(0)
-    int colorId;
+    int colorEntityId;
     @Min(value = 2005, message = "Yıl en küçük 2005 olmalıdır.")
-    @Max(value = 2024, message = "Yıl en çok 2024 olmalıdır.")
+    @Max(value = 2024, message = "Yıl en yüksek 2024 olmalıdır.")
     int year;
     String details;
     @DecimalMin(value = "0.0", message = "Kiralama ücreti 0 dan küçük olamaz.")

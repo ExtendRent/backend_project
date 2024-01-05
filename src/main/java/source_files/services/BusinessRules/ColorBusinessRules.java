@@ -11,8 +11,8 @@ import source_files.services.entityServices.vehicleFeaturesEntityManagers.ColorE
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.COLOR_ALREADY_EXISTS;
-import static source_files.exception.NotFoundExceptionType.COLOR_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.COLOR_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.COLOR_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service

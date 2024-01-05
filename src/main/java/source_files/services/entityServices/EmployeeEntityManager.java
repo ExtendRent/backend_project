@@ -9,7 +9,7 @@ import source_files.services.entityServices.abstracts.EmployeeEntityService;
 
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.EMPLOYEE_DATA_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.EMPLOYEE_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor

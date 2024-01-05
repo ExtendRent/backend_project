@@ -11,8 +11,8 @@ import source_files.services.entityServices.CustomerEntityManager;
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.*;
-import static source_files.exception.NotFoundExceptionType.CUSTOMER_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.*;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service

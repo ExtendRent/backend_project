@@ -3,31 +3,38 @@ package source_files.data.responses;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.exception.AlreadyExistsExceptionType;
-import source_files.exception.NotFoundExceptionType;
+import source_files.exception.exceptionTypes.AlreadyExistsExceptionType;
+import source_files.exception.exceptionTypes.NotFoundExceptionType;
+import source_files.exception.exceptionTypes.ValidationExceptionType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ErrorResponse {
+
     private int errorCode;
-    private String message;
+
     private LocalDateTime timestamp = LocalDateTime.now();
-    private String details;
+    private List<String> details;
 
     //TODO bilgi: CUSTOM Exception Handler ile error response dönüyoruz.
-    public ErrorResponse(NotFoundExceptionType notFoundExceptionType, String details) {
+    public ErrorResponse(NotFoundExceptionType notFoundExceptionType, List<String> details) {
         this.errorCode = notFoundExceptionType.getErrorCode();
-        this.message = notFoundExceptionType.getMessage();
         this.details = details;
     }
 
-    public ErrorResponse(AlreadyExistsExceptionType alreadyExistsExceptionType, String details) {
+    public ErrorResponse(AlreadyExistsExceptionType alreadyExistsExceptionType, List<String> details) {
         this.errorCode = alreadyExistsExceptionType.getErrorCode();
-        this.message = alreadyExistsExceptionType.getMessage();
         this.details = details;
     }
+
+    public ErrorResponse(ValidationExceptionType validationExceptionType, List<String> details) {
+        this.errorCode = validationExceptionType.getErrorCode();
+        this.details = details;
+    }
+
 
 }

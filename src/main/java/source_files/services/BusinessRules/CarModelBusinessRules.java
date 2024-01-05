@@ -11,8 +11,8 @@ import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.B
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
-import static source_files.exception.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
@@ -59,7 +59,7 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
 
     @Override
     public String fixName(String name) {
-        return name.trim().toLowerCase();
+        return name.replace(" ", "").toLowerCase();
     }
 
     @Override

@@ -25,7 +25,8 @@ public class BrandEntity extends Item {
     @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brandEntity", orphanRemoval = true)
+    // orphanRemoval özelliği sayesinde, koleksiyondan çıkan varlıkların veritabanından otomatik olarak silinmesi gerçekleşir.
     @JsonIgnore
     private List<CarModelEntity> carModelEntities;
 

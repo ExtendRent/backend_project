@@ -13,7 +13,7 @@ public interface CarModelRepository extends JpaRepository<CarModelEntity, Intege
 
     Optional<CarModelEntity> findByName(String modelName);
 
-    List<CarModelEntity> findAllByBrandId(int id);
+    List<CarModelEntity> findAllByBrandEntity_Id(int brandId);
 
     List<CarModelEntity> findAllByIsDeletedFalse();
 

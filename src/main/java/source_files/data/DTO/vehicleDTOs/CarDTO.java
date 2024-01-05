@@ -13,11 +13,11 @@ import java.util.List;
 public class CarDTO {
     //TODO brand model color bodyType null dönüyor.
     int id;
-    String brandName;
-    String modelName;
-    String colorName;
+    String brandEntityName;
+    String modelEntityName;
+    String colorEntityName;
     int year;
-    String bodyTypeName;
+    String carBodyTypeEntityName;
     String details;
     double rentalPrice;
     String licensePlate;

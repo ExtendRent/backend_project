@@ -28,5 +28,7 @@ public interface CarEntityService {
 
     List<CarEntity> getAllByYearBetween(int year1, int year2);
 
+    List<CarEntity> getAllByBrandId(int id);
+
     void delete(CarEntity carEntity);
 }

@@ -9,7 +9,7 @@ import source_files.services.entityServices.abstracts.CustomerEntityService;
 
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.CUSTOMER_DATA_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_DATA_NOT_FOUND;
 
 @AllArgsConstructor
 @Service

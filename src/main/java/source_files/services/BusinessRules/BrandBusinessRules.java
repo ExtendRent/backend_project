@@ -10,8 +10,8 @@ import source_files.exception.DataNotFoundException;
 
 import java.util.List;
 
-import static source_files.exception.AlreadyExistsExceptionType.BRAND_ALREADY_EXISTS;
-import static source_files.exception.NotFoundExceptionType.BRAND_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.BRAND_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.BRAND_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service

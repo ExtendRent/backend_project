@@ -15,7 +15,7 @@ public class UpdateCarModelRequest implements BaseRequest {
     int carModelEntityId;
 
     @NotBlank(message = "Model adı boş geçilemez")
-    @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")
+    @Size(min = 2, message = "Model en az 2 karakter olmalıdır.")
     String carModelEntityName;
 
     @NotBlank(message = "Marka boş geçilemez")

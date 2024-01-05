@@ -1,4 +1,4 @@
-package source_files.exception;
+package source_files.exception.exceptionTypes;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

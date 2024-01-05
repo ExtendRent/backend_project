@@ -9,7 +9,7 @@ import source_files.services.entityServices.abstracts.CarEntityService;
 
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.CAR_DATA_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_DATA_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
@@ -72,6 +72,11 @@ public class CarEntityManager implements CarEntityService {
     @Override
     public List<CarEntity> getAllByYearBetween(int year1, int year2) {
         return this.carRepository.findAllByYearBetween(year1, year2);
+    }
+
+    @Override
+    public List<CarEntity> getAllByBrandId(int id) {
+        return this.carRepository.findAllByCarModelEntity_BrandEntity_Id(id);
     }
 
     @Override

@@ -52,7 +52,10 @@ public class CarModelManager implements CarModelService {
 
     @Override
     public CarModelDTO getByModelName(String modelName) {
-        return modelMapperService.forResponse().map(carModelEntityService.getByModelName(modelName), CarModelDTO.class);
+
+        return modelMapperService.forResponse()
+                .map(carModelEntityService
+                        .getByModelName(this.carModelBusinessRules.fixName(modelName)), CarModelDTO.class);
     }
 
     @Override
@@ -99,7 +102,7 @@ public class CarModelManager implements CarModelService {
 
     @Override
     public List<BrandDTO> getAllByBrandId(int brandId) {
-        return carModelEntityService.getAllByBrandId(brandId).stream().map(
+        return this.carModelBusinessRules.checkDataList(carModelEntityService.getAllByBrandId(brandId)).stream().map(
                 model -> modelMapperService.forResponse().map(model, BrandDTO.class)
         ).collect(Collectors.toList());
 

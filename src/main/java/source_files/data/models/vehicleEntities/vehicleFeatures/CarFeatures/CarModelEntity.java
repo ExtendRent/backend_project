@@ -20,7 +20,7 @@ public class CarModelEntity extends Item {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id")
-    private BrandEntity brand;
+    @JoinColumn(name = "brandEntity_id")
+    private BrandEntity brandEntity;
 
 }

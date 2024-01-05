@@ -8,7 +8,7 @@ import source_files.exception.DataNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 
-import static source_files.exception.NotFoundExceptionType.PAYMENT_DETAILS_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_LIST_NOT_FOUND;
 
 @AllArgsConstructor
 @Service
