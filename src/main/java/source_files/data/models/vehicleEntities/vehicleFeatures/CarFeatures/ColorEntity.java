@@ -14,7 +14,6 @@ import source_files.data.models.baseEntities.Item;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-//todo:color code ekleyebilirz
 @Table(name = "colors")
 public class ColorEntity extends Item {
 

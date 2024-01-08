@@ -18,4 +18,9 @@ public interface DiscountCodeRepository extends JpaRepository<DiscountCodeEntity
     List<DiscountCodeEntity> findAllByIsDeletedFalse();
 
     List<DiscountCodeEntity> findAllByIsDeletedTrue();
+
+    List<DiscountCodeEntity> findAllByIsActiveTrue();
+
+    List<DiscountCodeEntity> findAllByIsActiveFalse();
+
 }

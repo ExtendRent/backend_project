@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarDTO {
-    //TODO brand model color bodyType null dönüyor.
+
     int id;
     String brandEntityName;
     String modelEntityName;

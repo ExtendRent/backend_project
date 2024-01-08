@@ -46,8 +46,10 @@ public enum NotFoundExceptionType {
     PAYMENT_DETAILS_DATA_NOT_FOUND(1021, "Payment Details Not found!"),
     PAYMENT_DETAILS_LIST_NOT_FOUND(1022, "Payment Details List is Empty!"),
 
-    DISCOUNT_CODE_NOT_FOUND(1023, "Discount Code Not Found!"),
-    DISCOUNT_CODE_LIST_NOT_FOUND(1024, "Discount Code List is Empty!");
+    PAYMENT_TYPE_NOT_FOUND(1023, "Payment Type Not Found"),
+    PAYMENT_TYPE_LIST_NOT_FOUND(1024, "Payment Type List is EMpty"),
+    DISCOUNT_CODE_NOT_FOUND(1025, "Discount Code Not Found!"),
+    DISCOUNT_CODE_LIST_NOT_FOUND(1026, "Discount Code List is Empty!");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

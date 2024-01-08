@@ -46,7 +46,7 @@ public class RentalEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "discount_id")
-    private DiscountCodeEntity discountCode;
+    private DiscountCodeEntity discountCodeEntity;
 
     @ManyToOne
     @JoinColumn(name = "payment_detail_id")

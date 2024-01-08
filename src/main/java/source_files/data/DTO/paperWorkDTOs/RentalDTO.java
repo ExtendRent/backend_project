@@ -1,21 +1,18 @@
 package source_files.data.DTO.paperWorkDTOs;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
-import source_files.data.models.userEntities.CustomerEntity;
-import source_files.data.models.vehicleEntities.CarEntity;
+import source_files.data.DTO.userDTOs.CustomerDTO;
+import source_files.data.DTO.vehicleDTOs.CarDTO;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-@Builder
 @Getter
 @Setter
 public class RentalDTO {
-    CustomerEntity customer;
-    CarEntity car;
-    PaymentDetailsEntity paymentDetails;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    CustomerDTO customerDTO;
+    CarDTO carDTO;
+    LocalDate startDate;
+    LocalDate endDate;
+    PaymentDetailsDTO paymentDetailsDTO;
 }

@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.requests.BaseRequest;
+import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddPaymentDetailsRequest implements BaseRequest {
+public class PayWithCreditCardRequest {
+    int paymentDetailsId;
+    CreditCardInformation creditCardInformation;
 
-    private double amount;
-    private int paymentTypeEntityId;
 }

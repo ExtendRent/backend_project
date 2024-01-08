@@ -53,7 +53,7 @@ public class ColorManager implements ColorService {
     @Override
     public List<ColorDTO> getAll() throws Exception {
 
-        //TODO bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
+        //bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
         return colorBusinessRules.checkDataList(colorEntityService.getAll())
                 .stream().map(color -> modelMapperService.forResponse()
                         .map(color, ColorDTO.class)).collect(Collectors.toList());

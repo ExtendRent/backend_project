@@ -1,14 +1,15 @@
 package source_files.data.DTO.paperWorkDTOs;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 
-@Builder
+import java.time.LocalDate;
+
+
 @Getter
 @Setter
 public class PaymentDetailsDTO {
-    int amount;
-    PaymentTypeEntity paymentType;
+    double amount;
+    PaymentTypeDTO paymentTypeDTO;
+    LocalDate createdDate;
 }

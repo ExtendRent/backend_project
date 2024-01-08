@@ -2,8 +2,10 @@ package source_files.services.BusinessRules;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.exception.DataNotFoundException;
+import source_files.services.systemServices.SysPaymentDetailsManager;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +16,8 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMEN
 @Service
 public class PaymentBusinessRules implements BaseBusinessRulesService {
 
+    private final ModelMapperService modelMapperService;
+    private final SysPaymentDetailsManager sysPaymentDetailsManager;
 
     //--------------------- AUTO FIX METHODS ---------------------
     public CreditCardInformation fixCreditCardInformation(CreditCardInformation creditCardInformation) {

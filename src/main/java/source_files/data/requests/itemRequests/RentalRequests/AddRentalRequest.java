@@ -1,31 +1,42 @@
 package source_files.data.requests.itemRequests.RentalRequests;
 
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
-import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.requests.BaseRequest;
 
 import java.time.LocalDate;
-
 
 @Getter
 @Setter
 public class AddRentalRequest implements BaseRequest {
 
-    int customerId;
+    @Min(value = 1, message = "CustomerId must be greater than 0")
+    private int customerEntityId;
 
-    int carId;
+    @Min(value = 1, message = "CarId must be greater than 0")
+    private int carEntityId;
 
-    LocalDate startDate;
+    @NotNull(message = "StartDate cannot be null")
+    @FutureOrPresent(message = "StartDate must be a future or present date")
+    private LocalDate startDate;
 
-    LocalDate endDate;
+    @NotNull(message = "EndDate cannot be null")
+    @FutureOrPresent(message = "EndDate must be a future or present date")
+    private LocalDate endDate;
 
-    int discountCodeId;
+    @Nullable
+    private String discountCode;
 
-    int paymentTypeId;
-    //totalPrice hesaplanarak kayıt edilmelidir (kullanıcı vermeyecek)
-    CreditCardInformation creditCardInformation;
 
-    Integer startKilometer;
+    @Min(value = 0, message = "StartKilometer must be greater than or equal to 0")
+    @Pattern(regexp = "^[0-9]+$", message = "Kilometre sadece sayılardan oluşmalıdır.")
+    private int startKilometer;
 
+    @Min(value = 1, message = "PaymentTypeId must be greater than 0")
+    private int paymentTypeEntityId;
 }

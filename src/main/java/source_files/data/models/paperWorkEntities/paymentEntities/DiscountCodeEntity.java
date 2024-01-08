@@ -18,9 +18,11 @@ import source_files.data.models.baseEntities.Item;
 public class DiscountCodeEntity extends Item {
     @Column(name = "discount_code")
     private String discountCode;
+
     @Column(name = "discount_percentage")
     private int discountPercentage;
+
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean isActive = true;
 
 }

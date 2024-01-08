@@ -1,10 +1,13 @@
 package source_files.services.paperWorkServices.payment;
 
-public class PayWithCreditCard implements PaymentMethods {
-    @Override
-    public String pay(String kartBilgileri) {
+import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
+import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
+
+public class PayWithCreditCard {
+
+    public boolean pay(PaymentDetailsEntity paymentDetailsEntity, CreditCardInformation creditCardInformation, double amount) {
 
         //ÖDEME İŞLEMLERİ...
-        return "kredi kartı ile ödendi";
+        return true;
     }
 }

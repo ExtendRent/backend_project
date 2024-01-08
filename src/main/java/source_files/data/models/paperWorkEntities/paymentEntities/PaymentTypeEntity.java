@@ -18,6 +18,8 @@ import source_files.data.types.PaymentType;
 @Entity
 @Table(name = "payment_type")
 public class PaymentTypeEntity extends Item {
+    @Column(name = "name")
+    private String name;
     @Column(name = "paymentType")
     private PaymentType paymentType;
 }
