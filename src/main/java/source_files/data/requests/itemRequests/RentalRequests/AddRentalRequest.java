@@ -4,7 +4,6 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
@@ -31,11 +30,6 @@ public class AddRentalRequest implements BaseRequest {
 
     @Nullable
     private String discountCode;
-
-
-    @Min(value = 0, message = "StartKilometer must be greater than or equal to 0")
-    @Pattern(regexp = "^[0-9]+$", message = "Kilometre sadece sayılardan oluşmalıdır.")
-    private int startKilometer;
 
     @Min(value = 1, message = "PaymentTypeId must be greater than 0")
     private int paymentTypeEntityId;

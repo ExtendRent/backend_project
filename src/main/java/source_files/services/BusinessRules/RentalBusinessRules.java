@@ -72,14 +72,18 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     //----------------------------METHODS--------------------------------
 
     public AddPaymentDetailsRequest createAddPaymentDetailsRequest(AddRentalRequest addRentalRequest) {
+
         AddPaymentDetailsRequest addPaymentDetailsRequest = new AddPaymentDetailsRequest();
 
-        addPaymentDetailsRequest.setAmount(this.calculateTotalAmount(
-                this.calculateTotalBasePrice(
-                        this.calculateTotalRentalDays(addRentalRequest.getStartDate(), addRentalRequest.getEndDate())
-                        , this.carService.getById(addRentalRequest.getCarEntityId()).getRentalPrice())
-                , this.discountCodeService.getByDiscountCode(
-                        addRentalRequest.getDiscountCode()).getDiscountPercentage()));
+        addPaymentDetailsRequest.setAmount(
+                this.calculateTotalAmount(
+
+                        this.calculateTotalBasePrice(
+                                this.calculateTotalRentalDays(addRentalRequest.getStartDate(), addRentalRequest.getEndDate())
+                                , this.carService.getById(addRentalRequest.getCarEntityId()).getRentalPrice())
+                        , this.discountCodeService.getByDiscountCode(
+                                addRentalRequest.getDiscountCode()).getDiscountPercentage())
+        );
 
         addPaymentDetailsRequest.setPaymentTypeEntityId(addRentalRequest.getPaymentTypeEntityId());
 
@@ -93,12 +97,13 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         PaymentDetailsEntity paymentDetailsEntity = rentalEntity.getPaymentDetailsEntity();
 
         updatePaymentDetailsRequest.setPaymentDetailsId(paymentDetailsEntity.getId());
+
         updatePaymentDetailsRequest.setPaymentType(paymentDetailsEntity.getPaymentTypeEntity().getPaymentType());
         //TODO  calculate total final amount kısmında hata var. cezalı hesaplamayı yanlış yapıyor.
-        updatePaymentDetailsRequest.setAmount(
-                this.calculateTotalFinalAmount(returnRentalRequest
-                        , this.calculateTotalRentalDays(rentalEntity.getStartDate(), rentalEntity.getEndDate())));
 
+        updatePaymentDetailsRequest.setAmount(
+                this.calculateReturnFinalAmount(returnRentalRequest
+                        , this.calculateTotalRentalDays(rentalEntity.getStartDate(), rentalEntity.getEndDate())));
 
         return updatePaymentDetailsRequest;
     }
@@ -119,9 +124,9 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
     private void checkEndDate(LocalDate startDate, LocalDate endDate) {
 
-        if (endDate.isBefore(startDate)) {
+        if (endDate.isBefore(startDate) && endDate.isEqual(startDate)) {
             throw new ValidationException(
-                    VALIDATION_EXCEPTION, "Bitiş tarihi başlangıç tarihinden küçük olamaz.");
+                    VALIDATION_EXCEPTION, "Başlangıç tarihi ile biriş tarihi arasında en az bir gün olmalıdır.");
         }
     }
 
@@ -177,18 +182,19 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         return baseTotalPrice - (baseTotalPrice * discountPercent / 100);
     }
 
-    public double calculateTotalFinalAmount(ReturnRentalRequest returnRentalRequest, int totalRentalDays) {
+    public double calculateReturnFinalAmount(ReturnRentalRequest returnRentalRequest, int totalRentalDays) {
         RentalEntity rentalEntity = this.rentalEntityManager
                 .getById(returnRentalRequest.getRentalEntityId());
 
         double baseTotalPrice = calculateTotalBasePrice(totalRentalDays, rentalEntity.getCarEntity().getRentalPrice());
 
-        if (!(returnRentalRequest.isActive()) && returnRentalRequest.getReturnDate().isBefore(rentalEntity.getEndDate())) {//İlk if - zamanından erken getirirse indirim iptali.
+        if (returnRentalRequest.getReturnDate().isBefore(rentalEntity.getEndDate())) {//İlk if - zamanından erken getirirse indirim iptali.
             return baseTotalPrice;
 
-        } else if (!(returnRentalRequest.isActive()) && returnRentalRequest.getReturnDate().isAfter(rentalEntity.getEndDate())) { ////İkinci if - zamanından sonra teslim edildiyse.
+        } else if (returnRentalRequest.getReturnDate().isAfter(rentalEntity.getEndDate())) { ////İkinci if - zamanından sonra teslim edildiyse.
             return baseTotalPrice + (calculateDelayDay(rentalEntity.getEndDate(), returnRentalRequest.getReturnDate()) * 100); //Gün başına 100 tl ceza ve indirim iptal.
         }
+
         return rentalEntity.getPaymentDetailsEntity().getAmount(); //zamanında getirirse
     }
 

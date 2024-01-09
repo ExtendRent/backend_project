@@ -38,7 +38,7 @@ public class RentalEntity extends Item {
     private Integer endKilometer = null;
 
     @Column(name = "start_date")
-    //@Builder.Default
+
     private LocalDate startDate;
 
     @Column(name = "end_date")
@@ -57,6 +57,4 @@ public class RentalEntity extends Item {
 
     @Column(name = "is_active")
     private boolean isActive = true;
-
-
 }

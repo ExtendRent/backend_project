@@ -13,7 +13,6 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
     boolean existsByPhoneNumberAndIdNot(String phoneNumber, int id);
 
-
     boolean existsByDrivingLicenseNumber(String drivingLicenseNumber);
 
     boolean existsByDrivingLicenseNumberAndIdNot(String drivingLicenseNumber, int id);

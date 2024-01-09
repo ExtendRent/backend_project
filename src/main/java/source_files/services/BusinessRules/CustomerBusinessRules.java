@@ -91,7 +91,6 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     private void existsByDrivingLicenseNumber(String drivingLicenseNumber) {
         if (customerRepository.existsByDrivingLicenseNumber(drivingLicenseNumber)) {
             throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS, "This driving license number already exist");
-
         }
     }
 

@@ -32,15 +32,16 @@ public class RentalManager implements RentalService {
     @Override
     public RentalDTO add(AddRentalRequest addRentalRequest) {
         // indirim işlemleri sonucu totalPrice hesaplama
-        //TODO ekleme işleminde null gelme problemleri var.
+
         RentalEntity rentalEntity = modelMapperService.forRequest()
                 .map(rentalBusinessRules.checkAddRentalRequest(
                         rentalBusinessRules.fixAddRentalRequest(addRentalRequest)), RentalEntity.class);
 
         rentalEntity.setStartKilometer(carService.getById(addRentalRequest.getCarEntityId()).getKilometer());
 
-        rentalEntity.setPaymentDetailsEntity(this.sysPaymentDetailsService
-                .add(this.rentalBusinessRules.createAddPaymentDetailsRequest(addRentalRequest)));
+        rentalEntity.setPaymentDetailsEntity(
+                this.sysPaymentDetailsService.add(
+                        this.rentalBusinessRules.createAddPaymentDetailsRequest(addRentalRequest)));
 
         rentalEntity.setItemType(RENTAL);
 
@@ -50,15 +51,14 @@ public class RentalManager implements RentalService {
     @Override
     public RentalDTO returnCar(ReturnRentalRequest returnRentalRequest) {
         // ceza işlemleri , indirim işlemleri iptali kontrol edilecek sonuçta da totalPrice güncelleme
-        //TODO update işleminde paymentDetail bulunamıyor
 
-        RentalEntity rentalEntity = this.modelMapperService.forRequest().map(returnRentalRequest, RentalEntity.class);
+        RentalEntity rentalEntity = this.rentalEntityService.getById(returnRentalRequest.getRentalEntityId());
 
         rentalEntity.setPaymentDetailsEntity(this.sysPaymentDetailsService.update(
                 this.rentalBusinessRules.createUpdatePaymentDetailsRequest(returnRentalRequest)));
 
         rentalEntity.setItemType(RENTAL);
-
+        rentalEntity.setActive(false);
         return this.modelMapperService.forResponse().map(this.rentalEntityService.update(rentalEntity), RentalDTO.class);
     }
 

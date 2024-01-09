@@ -21,7 +21,7 @@ public class BaseEntity {
     @Column(name = "id")
     private int id;
 
-    //@Builder.Default
+
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
 
@@ -29,10 +29,8 @@ public class BaseEntity {
     @Column(name = "last_modified", nullable = true)
     private LocalDate lastModified;
 
-
     @Column(name = "created_date")
     private LocalDate createdDate;
-
 
     @PrePersist //classlar oluşmadan çalısır
     private void beforeAdd() {

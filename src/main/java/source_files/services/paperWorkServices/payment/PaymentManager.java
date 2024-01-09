@@ -2,8 +2,9 @@ package source_files.services.paperWorkServices.payment;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
-import source_files.data.requests.itemRequests.paymentRequests.PayWithCreditCardRequest;
+import source_files.services.BusinessRules.PaymentBusinessRules;
 import source_files.services.paperWorkServices.abstracts.PaymentService;
 import source_files.services.systemServices.SysPaymentDetailsService;
 
@@ -14,17 +15,21 @@ public class PaymentManager implements PaymentService {
     private final PayWithCreditCard payWithCreditCard;
     private final SysPaymentDetailsService sysPaymentDetailsService;
 
+    private final PaymentBusinessRules paymentBusinessRules;
 
     @Override
-    public boolean payWithCreditCard(PayWithCreditCardRequest payWithCreditCardRequest) {
+    public boolean payWithCreditCard(int paymentDetailsId,
+                                     CreditCardInformation creditCardInformation) {
 
         PaymentDetailsEntity paymentDetailsEntity =
-                this.sysPaymentDetailsService.getById(payWithCreditCardRequest.getPaymentDetailsId());
+                this.sysPaymentDetailsService.getById(paymentDetailsId);
 
         return payWithCreditCard.pay(
                 paymentDetailsEntity
-                , payWithCreditCardRequest.getCreditCardInformation()
-                , paymentDetailsEntity.getAmount()
+                , this.paymentBusinessRules
+                        .checkCreditCard(
+                                this.paymentBusinessRules.fixCreditCardInformation(creditCardInformation)
+                        )
         );
     }
 

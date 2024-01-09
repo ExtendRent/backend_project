@@ -23,6 +23,4 @@ public class ReturnRentalRequest implements BaseRequest {
     @Pattern(regexp = "^[0-9]+$", message = "Kilometre sadece sayılardan oluşmalıdır.")
     @NotBlank(message = "Bitiş kilometresi boş bırakılamaz")
     private int endKilometer;
-    @Nullable
-    private boolean isActive;
 }
