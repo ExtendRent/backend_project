@@ -1,7 +1,6 @@
 package source_files.data.requests.vehicleRequests.CarRequests;
 
 import jakarta.validation.constraints.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
@@ -11,13 +10,17 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
 public class UpdateCarRequest implements BaseRequest {
 
+    @Min(0)
     int id;
+    @Min(0)
     int brandEntityId;
+    @Min(0)
     int carModelEntityId;
+    @Min(0)
     int carBodyTypeEntityId;
+    @Min(0)
     int colorEntityId;
     @Min(value = 2005, message = "Yıl en küçük 2005 olmalıdır.")
     @Max(value = 2024, message = "Yıl en yüksek 2024 olmalıdır.")
@@ -30,5 +33,9 @@ public class UpdateCarRequest implements BaseRequest {
     String licensePlate;
     @Min(value = 0, message = "Kilometre 0 dan küçük olamaz.")
     int kilometer;
+    @NotNull
+    List<String> imagesEntityImagePath;
+    @NotNull
+    @NotEmpty
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }

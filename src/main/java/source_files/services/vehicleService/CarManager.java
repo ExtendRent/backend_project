@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.vehicleEntities.CarEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.CarBusinessRules;
@@ -24,7 +25,6 @@ public class CarManager implements CarService {
     private final CarEntityService carEntityService;
     private CarBusinessRules businessRules;
 
-
     @Override
     public CarDTO add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
@@ -35,6 +35,11 @@ public class CarManager implements CarService {
                 .checkAddCarRequest(businessRules.fixAddCarRequest(addCarRequest)), CarEntity.class);
 
         carEntity.setVehicleType(CAR);
+
+        //ImagesEntity içerisinde kullandığımız oneToOne bağlantısındaki cascade sayesinde, CarEntity üzerinden
+        //yapılan ImagesEntity değişiklikleri ana klastaki(ImagesEntity) de de değişecek.
+        //Yani carEntity ye ImagesEntity set ettiğimizde, database e de eklenecek ve içindeki CarEntity otomatik oluşacak.
+        carEntity.setImagesEntity(new ImagesEntity(carEntity, addCarRequest.getImagePaths()));
 
         return modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
     }

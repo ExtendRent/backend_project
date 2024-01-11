@@ -15,6 +15,7 @@ import source_files.data.models.baseEntities.Item;
 @Table(name = "payment_details")
 public class PaymentDetailsEntity extends Item {
 
+
     @Column(name = "amount")
     private double amount;
 

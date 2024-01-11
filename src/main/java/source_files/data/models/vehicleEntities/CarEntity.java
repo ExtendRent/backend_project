@@ -8,13 +8,13 @@ import lombok.Setter;
 import source_files.data.models.baseEntities.Vehicle;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-//@SuperBuilder
 @Table(name = "cars")
 public class CarEntity extends Vehicle {
 
@@ -32,6 +32,11 @@ public class CarEntity extends Vehicle {
     @Column(name = "kilometer")
     private Integer kilometer;
 
+    @OneToOne(mappedBy = "carEntity"
+            , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    private ImagesEntity imagesEntity;
+
     //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş
     //todo : imagePath eklenecek yada birden fazla resim varsa başka tabloda tut
+
 }

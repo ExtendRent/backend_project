@@ -4,8 +4,6 @@ import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInfo
 
 public interface PaymentService {
 
-    boolean payWithCreditCard(int paymentDetailsId,
+    boolean payWithCreditCard(double amount,
                               CreditCardInformation creditCardInformation);
-
-
 }

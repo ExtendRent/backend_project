@@ -7,13 +7,13 @@ import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetails
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.itemRequests.RentalRequests.AddRentalRequest;
 import source_files.data.requests.itemRequests.RentalRequests.ReturnRentalRequest;
-import source_files.data.requests.itemRequests.paymentRequests.AddPaymentDetailsRequest;
 import source_files.data.requests.itemRequests.paymentRequests.UpdatePaymentDetailsRequest;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityManager;
 import source_files.services.paperWorkServices.abstracts.DiscountCodeService;
+import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import source_files.services.vehicleService.abstracts.CarService;
 
 import java.time.LocalDate;
@@ -32,6 +32,8 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
     private final DiscountCodeService discountCodeService;
     private final CarService carService;
+
+    private final PaymentTypeService paymentTypeService;
     private PaymentBusinessRules paymentBusinessRules;
 
 
@@ -71,11 +73,11 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
     //----------------------------METHODS--------------------------------
 
-    public AddPaymentDetailsRequest createAddPaymentDetailsRequest(AddRentalRequest addRentalRequest) {
+    public PaymentDetailsEntity createAddPaymentDetailsRequest(AddRentalRequest addRentalRequest) {
 
-        AddPaymentDetailsRequest addPaymentDetailsRequest = new AddPaymentDetailsRequest();
+        PaymentDetailsEntity paymentDetailsEntity = new PaymentDetailsEntity();
 
-        addPaymentDetailsRequest.setAmount(
+        paymentDetailsEntity.setAmount(
                 this.calculateTotalAmount(
 
                         this.calculateTotalBasePrice(
@@ -85,9 +87,8 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
                                 addRentalRequest.getDiscountCode()).getDiscountPercentage())
         );
 
-        addPaymentDetailsRequest.setPaymentTypeEntityId(addRentalRequest.getPaymentTypeEntityId());
 
-        return addPaymentDetailsRequest;
+        return paymentDetailsEntity;
     }
 
     public UpdatePaymentDetailsRequest createUpdatePaymentDetailsRequest(ReturnRentalRequest returnRentalRequest) {

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
-import source_files.data.requests.itemRequests.paymentRequests.AddPaymentDetailsRequest;
 import source_files.data.requests.itemRequests.paymentRequests.UpdatePaymentDetailsRequest;
 import source_files.dataAccess.paperWorkRepositories.PaymentDetailsRepository;
 import source_files.exception.DataNotFoundException;
@@ -21,9 +20,8 @@ public class SysPaymentDetailsManager implements SysPaymentDetailsService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public PaymentDetailsEntity add(AddPaymentDetailsRequest addPaymentDetailsRequest) {
-        return this.paymentDetailsRepository.save
-                (this.modelMapperService.forRequest().map(addPaymentDetailsRequest, PaymentDetailsEntity.class));
+    public PaymentDetailsEntity add(PaymentDetailsEntity paymentDetailsEntity) {
+        return this.paymentDetailsRepository.save(paymentDetailsEntity);
     }
 
     @Override

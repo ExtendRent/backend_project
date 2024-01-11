@@ -22,5 +22,6 @@ public class CarDTO {
     double rentalPrice;
     String licensePlate;
     int kilometer;
+    List<String> imagesEntityImagePaths;
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }

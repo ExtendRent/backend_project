@@ -8,6 +8,7 @@ import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.itemRequests.RentalRequests.AddRentalRequest;
 import source_files.data.requests.itemRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.itemRequests.RentalRequests.UpdateRentalRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
@@ -39,9 +40,10 @@ public class RentalManager implements RentalService {
 
         rentalEntity.setStartKilometer(carService.getById(addRentalRequest.getCarEntityId()).getKilometer());
 
-        rentalEntity.setPaymentDetailsEntity(
-                this.sysPaymentDetailsService.add(
-                        this.rentalBusinessRules.createAddPaymentDetailsRequest(addRentalRequest)));
+//        PaymentDetailsEntity paymentDetailsEntity =
+//        rentalEntity.setPaymentDetailsEntity(
+//                this.sysPaymentDetailsService.add(
+//                        this.rentalBusinessRules.createAddPaymentDetailsRequest(addRentalRequest)));
 
         rentalEntity.setItemType(RENTAL);
 
@@ -57,8 +59,9 @@ public class RentalManager implements RentalService {
         rentalEntity.setPaymentDetailsEntity(this.sysPaymentDetailsService.update(
                 this.rentalBusinessRules.createUpdatePaymentDetailsRequest(returnRentalRequest)));
 
-        rentalEntity.setItemType(RENTAL);
         rentalEntity.setActive(false);
+        rentalEntity.getCarEntity().setKilometer(rentalEntity.getEndKilometer());
+        this.carService.update(this.modelMapperService.forResponse().map(rentalEntity.getCarEntity(), UpdateCarRequest.class));
         return this.modelMapperService.forResponse().map(this.rentalEntityService.update(rentalEntity), RentalDTO.class);
     }
 
