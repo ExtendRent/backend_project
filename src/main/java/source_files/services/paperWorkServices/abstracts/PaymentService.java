@@ -6,4 +6,6 @@ public interface PaymentService {
 
     boolean payWithCreditCard(double amount,
                               CreditCardInformation creditCardInformation);
+
+
 }

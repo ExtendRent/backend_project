@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDTO {
+    int id;
     String name;
     String surname;
     String email;

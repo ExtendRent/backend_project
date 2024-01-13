@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
 
@@ -76,7 +76,7 @@ public class CarBodyTypeController {
         );
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
         this.carBodyTypeService.delete(id, isHardDelete);

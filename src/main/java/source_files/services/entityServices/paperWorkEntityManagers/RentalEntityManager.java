@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.dataAccess.paperWorkRepositories.RentalRepository;
+import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 
 import java.util.List;
+
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
 
 @Service
 @AllArgsConstructor
@@ -32,7 +35,9 @@ public class RentalEntityManager implements RentalEntityService {
 
     @Override
     public RentalEntity getById(int id) {
-        return this.rentalRepository.findById(id).orElseThrow();
+        return this.rentalRepository
+                .findById(id).orElseThrow(() ->
+                        new DataNotFoundException(RENTAL_DATA_NOT_FOUND, "Kiralama kaydı bulunamadı"));
     }
 
     @Override

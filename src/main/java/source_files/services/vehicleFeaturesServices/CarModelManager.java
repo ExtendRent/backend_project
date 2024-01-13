@@ -6,9 +6,9 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
-import source_files.services.BusinessRules.CarModelBusinessRules;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarModelBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 

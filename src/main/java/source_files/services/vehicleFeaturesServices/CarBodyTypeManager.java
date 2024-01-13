@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.CarBodyTypeDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
 import source_files.data.types.ItemType;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
-import source_files.services.BusinessRules.CarBodyTypeBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarBodyTypeBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
 

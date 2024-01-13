@@ -3,14 +3,20 @@ package source_files.services.paperWorkServices;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
+import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
+import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
+import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
+import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.requests.itemRequests.RentalRequests.AddRentalRequest;
-import source_files.data.requests.itemRequests.RentalRequests.ReturnRentalRequest;
-import source_files.data.requests.itemRequests.RentalRequests.UpdateRentalRequest;
+import source_files.data.models.paperWorkEntities.rentalEntities.ShowRental;
+import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
-import source_files.services.BusinessRules.RentalBusinessRules;
+import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
+import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.vehicleService.abstracts.CarService;
@@ -28,23 +34,38 @@ public class RentalManager implements RentalService {
     private final CarService carService;
     private final SysPaymentDetailsService sysPaymentDetailsService;
     private RentalBusinessRules rentalBusinessRules;
-
+    private PaymentTypeService paymentTypeService;
 
     @Override
-    public RentalDTO add(AddRentalRequest addRentalRequest) {
+    public ShowRentalResponse showRentalDetails(AddRentalRequest addRentalRequest) {
+
+        ShowRental showRental = this.modelMapperService.forRequest()
+                .map(this.rentalBusinessRules.checkAddRentalRequest(addRentalRequest), ShowRental.class);
+
+        showRental.setAmount(this.rentalBusinessRules.calculateAmount(addRentalRequest));
+
+        return this.modelMapperService.forResponse()
+                .map(showRental, ShowRentalResponse.class);
+    }
+
+    @Override
+    public RentalDTO add(AddRentalRequest addRentalRequest, PaymentDetailsDTO paymentDetailsDTO) {
         // indirim işlemleri sonucu totalPrice hesaplama
 
         RentalEntity rentalEntity = modelMapperService.forRequest()
                 .map(rentalBusinessRules.checkAddRentalRequest(
                         rentalBusinessRules.fixAddRentalRequest(addRentalRequest)), RentalEntity.class);
 
+        PaymentDetailsEntity paymentDetailsEntity = new PaymentDetailsEntity(
+
+                paymentDetailsDTO.getAmount()
+                , new PaymentTypeEntity(
+                paymentDetailsDTO.getPaymentTypeDTO().getPaymentTypeEntityName()
+                , paymentDetailsDTO.getPaymentTypeDTO().getPaymentTypeEntityPaymentType())
+        );
+
+        rentalEntity.setPaymentDetailsEntity(paymentDetailsEntity);
         rentalEntity.setStartKilometer(carService.getById(addRentalRequest.getCarEntityId()).getKilometer());
-
-//        PaymentDetailsEntity paymentDetailsEntity =
-//        rentalEntity.setPaymentDetailsEntity(
-//                this.sysPaymentDetailsService.add(
-//                        this.rentalBusinessRules.createAddPaymentDetailsRequest(addRentalRequest)));
-
         rentalEntity.setItemType(RENTAL);
 
         return this.modelMapperService.forResponse().map(rentalEntityService.add(rentalEntity), RentalDTO.class);

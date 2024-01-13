@@ -95,7 +95,7 @@ public class EmployeeController {
         );
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
         this.employeeService.delete(id, isHardDelete);

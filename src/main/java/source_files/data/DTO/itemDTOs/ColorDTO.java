@@ -9,5 +9,6 @@ import source_files.data.DTO.BaseDTO;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ColorDTO implements BaseDTO {
+    int id;
     String name;
 }

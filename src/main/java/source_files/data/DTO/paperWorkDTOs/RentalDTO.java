@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class RentalDTO {
-
+    int id;
     String customerEntityName;
     String customerEntitySurname;
 

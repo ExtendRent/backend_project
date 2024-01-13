@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.exception.exceptionTypes.AlreadyExistsExceptionType;
 import source_files.exception.exceptionTypes.NotFoundExceptionType;
+import source_files.exception.exceptionTypes.PaymentExceptionType;
 import source_files.exception.exceptionTypes.ValidationExceptionType;
 
 import java.time.LocalDateTime;
@@ -33,6 +34,11 @@ public class ErrorResponse {
 
     public ErrorResponse(ValidationExceptionType validationExceptionType, List<String> details) {
         this.errorCode = validationExceptionType.getErrorCode();
+        this.details = details;
+    }
+
+    public ErrorResponse(PaymentExceptionType paymentExceptionType, List<String> details) {
+        this.errorCode = paymentExceptionType.getErrorCode();
         this.details = details;
     }
 

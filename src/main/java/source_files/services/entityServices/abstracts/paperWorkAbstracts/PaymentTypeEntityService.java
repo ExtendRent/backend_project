@@ -15,4 +15,8 @@ public interface PaymentTypeEntityService {
 
     List<PaymentTypeEntity> getAll();
 
+    List<PaymentTypeEntity> getAllByIsDeletedFalse();
+
+    List<PaymentTypeEntity> getAllByIsDeletedTrue();
+
 }

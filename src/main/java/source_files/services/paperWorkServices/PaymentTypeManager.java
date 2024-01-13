@@ -1,13 +1,12 @@
 package source_files.services.paperWorkServices;
 
 import lombok.AllArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
-import source_files.data.requests.itemRequests.paymentRequests.AddPaymentTypeRequest;
-import source_files.data.requests.itemRequests.paymentRequests.UpdatePaymentTypeRequest;
+import source_files.data.requests.paperworkRequests.paymentRequests.AddPaymentTypeRequest;
+import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 
@@ -20,7 +19,7 @@ public class PaymentTypeManager implements PaymentTypeService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public PaymentTypeDTO add(AddPaymentTypeRequest addPaymentTypeRequest) throws BadRequestException {
+    public PaymentTypeDTO add(AddPaymentTypeRequest addPaymentTypeRequest) {
         return this.modelMapperService.forResponse().map(this.paymentTypeEntityService.add(
                 this.modelMapperService.forRequest()
                         .map(addPaymentTypeRequest, PaymentTypeEntity.class)), PaymentTypeDTO.class);
@@ -54,16 +53,23 @@ public class PaymentTypeManager implements PaymentTypeService {
     public List<PaymentTypeDTO> getAll() {
         return this.paymentTypeEntityService.getAll().stream()
                 .map(paymentTypeEntity -> this.modelMapperService.forResponse()
-                        .map(paymentTypeEntity, PaymentTypeDTO.class)).toList();
+                        .map(paymentTypeEntity, PaymentTypeDTO.class)
+                ).toList();
     }
 
     @Override
     public List<PaymentTypeDTO> getAllByIsDeletedFalse() {
-        return null;
+        return this.paymentTypeEntityService.getAllByIsDeletedFalse().stream()
+                .map(paymentTypeEntity -> this.modelMapperService.forResponse()
+                        .map(paymentTypeEntity, PaymentTypeDTO.class)
+                ).toList();
     }
 
     @Override
     public List<PaymentTypeDTO> getAllByIsDeletedTrue() {
-        return null;
+        return this.paymentTypeEntityService.getAllByIsDeletedTrue().stream()
+                .map(paymentTypeEntity -> this.modelMapperService.forResponse()
+                        .map(paymentTypeEntity, PaymentTypeDTO.class)
+                ).toList();
     }
 }

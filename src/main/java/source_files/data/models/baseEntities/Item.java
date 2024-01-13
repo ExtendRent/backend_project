@@ -15,7 +15,6 @@ import source_files.data.types.ItemType;
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
 @AllArgsConstructor
 @NoArgsConstructor
-//@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class Item extends BaseEntity {
 

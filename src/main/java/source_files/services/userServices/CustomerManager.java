@@ -9,7 +9,7 @@ import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.data.types.UserType;
 import source_files.dataAccess.userRepositories.CustomerRepository;
-import source_files.services.BusinessRules.CustomerBusinessRules;
+import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRules;
 import source_files.services.entityServices.abstracts.CustomerEntityService;
 import source_files.services.userServices.abstracts.CustomerService;
 

@@ -32,6 +32,12 @@ public class CarEntity extends Vehicle {
     @Column(name = "kilometer")
     private Integer kilometer;
 
+    @Column(name = "seat")
+    private int seat;
+
+    @Column(name = "luggage")
+    private int luggage;
+
     @OneToOne(mappedBy = "carEntity"
             , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private ImagesEntity imagesEntity;

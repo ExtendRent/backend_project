@@ -8,7 +8,7 @@ import source_files.data.models.userEntities.EmployeeEntity;
 import source_files.data.requests.userRequests.AddEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 import source_files.data.types.UserType;
-import source_files.services.BusinessRules.EmployeeBusinessRules;
+import source_files.services.BusinessRules.userBusinessRuless.EmployeeBusinessRules;
 import source_files.services.entityServices.abstracts.EmployeeEntityService;
 import source_files.services.userServices.abstracts.EmployeeService;
 

@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerDTO {
-
+    int id;
     String phoneNumber;
     String drivingLicenseNumber;
     List<DrivingLicenseType> drivingLicenseTypes;

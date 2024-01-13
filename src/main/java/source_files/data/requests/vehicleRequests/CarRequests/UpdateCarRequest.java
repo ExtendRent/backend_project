@@ -12,15 +12,15 @@ import java.util.List;
 @Setter
 public class UpdateCarRequest implements BaseRequest {
 
-    @Min(0)
+    @Min(1)
     int id;
-    @Min(0)
+    @Min(1)
     int brandEntityId;
-    @Min(0)
+    @Min(1)
     int carModelEntityId;
-    @Min(0)
+    @Min(1)
     int carBodyTypeEntityId;
-    @Min(0)
+    @Min(1)
     int colorEntityId;
     @Min(value = 2005, message = "Yıl en küçük 2005 olmalıdır.")
     @Max(value = 2024, message = "Yıl en yüksek 2024 olmalıdır.")
@@ -38,4 +38,10 @@ public class UpdateCarRequest implements BaseRequest {
     @NotNull
     @NotEmpty
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
+    @Min(1)
+    @Max(15)
+    private int seat;
+    @Min(1)
+    @Max(15)
+    private int luggage;
 }

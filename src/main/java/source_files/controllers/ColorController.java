@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
@@ -76,7 +76,7 @@ public class ColorController {
         );
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
         this.colorService.delete(id, isHardDelete);

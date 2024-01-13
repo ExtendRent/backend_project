@@ -21,7 +21,7 @@ public class PaymentController {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .isSuccess(true)
                 .response(this.paymentService.payWithCreditCard(amount, creditCardInformation))
-                .message("Ödeme tipi güncelleme işlemi başarılı")
+                .message("Ödeme işlemi başarılı")
                 .build()
         );
     }

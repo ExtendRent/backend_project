@@ -85,7 +85,7 @@ public class CustomerController {
         );
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
         this.customerService.delete(id, isHardDelete);

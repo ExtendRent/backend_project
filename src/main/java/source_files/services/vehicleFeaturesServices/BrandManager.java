@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
-import source_files.services.BusinessRules.BrandBusinessRules;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.BrandBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 

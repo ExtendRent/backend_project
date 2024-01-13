@@ -6,7 +6,7 @@ import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInfo
 
 @Service
 @AllArgsConstructor
-public class PayWithCreditCard {
+public class PayWithCreditCard implements PayService {
 
     public boolean pay(double amount, CreditCardInformation creditCardInformation) {
 

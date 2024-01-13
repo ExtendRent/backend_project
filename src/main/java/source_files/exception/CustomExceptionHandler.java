@@ -21,6 +21,7 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public TResponse<?> handleException(Exception e) {
         return TResponse.tResponseBuilder()
+                .message("Unknown error!")
                 .isSuccess(false)
                 .response(new ErrorResponse(NotFoundExceptionType.GENERIC_EXCEPTION, Collections.singletonList(e.getMessage())))
                 .build();
@@ -45,6 +46,17 @@ public class CustomExceptionHandler {
                 .response(new ErrorResponse(e.getAlreadyExistsExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
+
+    @ExceptionHandler(PaymentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public TResponse<?> handleAlreadyExistsException(PaymentException e) {
+        return TResponse.tResponseBuilder()
+                .message(e.getPaymentExceptionType().getMessage())
+                .isSuccess(false)
+                .response(new ErrorResponse(e.getPaymentExceptionType(), Collections.singletonList(e.getDetail())))
+                .build();
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

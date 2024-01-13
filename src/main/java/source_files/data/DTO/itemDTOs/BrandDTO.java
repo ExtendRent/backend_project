@@ -8,5 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BrandDTO {
+    int id;
     String name;
 }

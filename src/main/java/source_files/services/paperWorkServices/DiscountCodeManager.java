@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.DiscountCodeDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountCodeEntity;
-import source_files.data.requests.itemRequests.discountRequests.AddDiscountCodeRequest;
-import source_files.data.requests.itemRequests.discountRequests.UpdateDiscountCodeRequest;
+import source_files.data.requests.paperworkRequests.discountRequests.AddDiscountCodeRequest;
+import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountCodeRequest;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountCodeEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountCodeService;
 
@@ -48,7 +48,7 @@ public class DiscountCodeManager implements DiscountCodeService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id, boolean harDelete) {
         this.discountCodeEntityService.delete(this.discountCodeEntityService.getById(id));
     }
 

@@ -14,10 +14,10 @@ import source_files.data.types.PaymentType;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@SuperBuilder
 @Entity
 @Table(name = "payment_type")
 public class PaymentTypeEntity extends Item {
+
     @Column(name = "name")
     private String name;
     @Column(name = "paymentType")

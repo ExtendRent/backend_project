@@ -8,7 +8,7 @@ import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
-import source_files.services.BusinessRules.CarBusinessRules;
+import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
 import source_files.services.entityServices.abstracts.CarEntityService;
 import source_files.services.vehicleService.abstracts.CarService;
 

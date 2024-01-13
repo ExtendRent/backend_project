@@ -8,5 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarBodyTypeDTO {
+    int id;
     String name;
 }

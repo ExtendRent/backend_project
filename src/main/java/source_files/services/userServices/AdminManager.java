@@ -7,7 +7,7 @@ import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.AddAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
-import source_files.services.BusinessRules.AdminBusinessRules;
+import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules;
 import source_files.services.entityServices.abstracts.AdminEntityService;
 import source_files.services.userServices.abstracts.AdminService;
 

@@ -3,8 +3,8 @@ package source_files.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 
@@ -85,7 +85,7 @@ public class BrandController {
         );
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
         this.brandService.delete(id, isHardDelete);

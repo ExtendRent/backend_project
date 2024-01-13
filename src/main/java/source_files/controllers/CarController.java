@@ -140,7 +140,7 @@ public class CarController {
     }
 
 
-    @DeleteMapping("/deleteById/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
 
         this.carService.delete(id, isHardDelete);

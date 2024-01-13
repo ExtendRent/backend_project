@@ -48,8 +48,8 @@ public class RentalEntity extends Item {
     @JoinColumn(name = "discount_id")
     private DiscountCodeEntity discountCodeEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "payment_detail_id")
+    @OneToOne(mappedBy = "rentalEntity"
+            , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private PaymentDetailsEntity paymentDetailsEntity;
 
     @Column(name = "return_date")

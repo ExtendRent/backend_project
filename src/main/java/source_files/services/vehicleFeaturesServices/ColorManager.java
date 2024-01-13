@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.ColorDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
-import source_files.data.requests.itemRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.types.ItemType;
-import source_files.services.BusinessRules.ColorBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 

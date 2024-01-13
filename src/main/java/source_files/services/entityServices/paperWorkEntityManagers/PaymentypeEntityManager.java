@@ -42,4 +42,15 @@ public class PaymentypeEntityManager implements PaymentTypeEntityService {
     public List<PaymentTypeEntity> getAll() {
         return this.paymentTypeEntityRepository.findAll();
     }
+
+    @Override
+    public List<PaymentTypeEntity> getAllByIsDeletedFalse() {
+        return this.paymentTypeEntityRepository.findAllByIsDeletedFalse();
+
+    }
+
+    @Override
+    public List<PaymentTypeEntity> getAllByIsDeletedTrue() {
+        return this.paymentTypeEntityRepository.findAllByIsDeletedTrue();
+    }
 }

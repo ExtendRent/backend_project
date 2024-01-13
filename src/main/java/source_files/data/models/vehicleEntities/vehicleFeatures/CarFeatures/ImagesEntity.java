@@ -17,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "images")
 public class ImagesEntity extends Item {
-
     @JoinColumn(name = "car_id", unique = true)
     @OneToOne
     private CarEntity carEntity;

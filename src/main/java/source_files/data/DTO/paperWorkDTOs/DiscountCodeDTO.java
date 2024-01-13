@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class DiscountCodeDTO {
 
+    int id;
+
     String discountCode;
 
     int discountPercentage;
