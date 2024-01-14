@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CarService {
 
-    CarDTO add(AddCarRequest addCarRequest);
+    void add(AddCarRequest addCarRequest);
 
     CarDTO getById(int id);
 
@@ -16,13 +16,9 @@ public interface CarService {
 
     List<CarDTO> getAll() throws Exception;
 
-    List<CarDTO> getAllByIsDeletedFalse();
+    List<CarDTO> getAllByDeletedState(boolean isDeleted);
 
-    List<CarDTO> getAllByIsDeletedTrue();
-
-    List<CarDTO> getAllByIsAvailableTrue();
-
-    List<CarDTO> getAllByIsAvailableFalse();
+    List<CarDTO> getAllByAvailableState(boolean isAvailable);
 
     List<CarDTO> getAllByColorId(int id);
 

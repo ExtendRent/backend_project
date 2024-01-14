@@ -18,7 +18,6 @@ public class EmployeeController {
     @PostMapping("/add/employee")
     public ResponseEntity<TResponse<?>> addEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.add(addEmployeeRequest))
                 .message("Çalışan eklendi.")
                 .build()
@@ -28,7 +27,6 @@ public class EmployeeController {
     @PutMapping("/update/employee")
     public ResponseEntity<TResponse<?>> updateEmployee(@RequestBody @Valid UpdateEmployeeRequest updateEmployeeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.update(updateEmployeeRequest))
                 .message("Çalışan güncellendi.")
                 .build()
@@ -38,7 +36,6 @@ public class EmployeeController {
     @GetMapping("/getAll")
     public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.getAll())
                 .message("Çalışan listesi getirildi.")
                 .build()
@@ -48,7 +45,6 @@ public class EmployeeController {
     @GetMapping("/getById")
     public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.getById(id))
                 .message("Çalışan getirildi.")
                 .build()
@@ -58,7 +54,6 @@ public class EmployeeController {
     @GetMapping("/getPhoneNumber")
     public ResponseEntity<TResponse<?>> getByPhoneNumber(@RequestParam String phoneNumber) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.getByPhoneNumber(phoneNumber))
                 .message("Telefon Numarasına Göre Getirildi")
                 .build()
@@ -68,17 +63,15 @@ public class EmployeeController {
     @GetMapping("/getAllBySalaryBetween")
     public ResponseEntity<TResponse<?>> getAllBySalaryBetween(@RequestParam Double salary1, Double salary2) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.findAllBySalaryBetween(salary1, salary2))
                 .message(salary1 + "TL ve " + salary2 + "TL Arasındaki Aylık Ücrete Göre Getirildi.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByIsDeletedFalse")
+    @GetMapping("/getAllByDeletedState")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.getAllByIsDeletedFalse())
                 .message("Mevcut Çalışan Listesi Getirildi.")
                 .build()
@@ -88,7 +81,6 @@ public class EmployeeController {
     @GetMapping("/getAllByIsDeletedTrue")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.employeeService.getAllByIsDeletedTrue())
                 .message("Soft Delete ile Silinen Çalışan Listesi Getirildi.")
                 .build()
@@ -100,7 +92,6 @@ public class EmployeeController {
 
         this.employeeService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message("Çalışan silindi.")
                 .build()
         );

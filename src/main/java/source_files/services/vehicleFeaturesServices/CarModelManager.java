@@ -31,7 +31,9 @@ public class CarModelManager implements CarModelService {
         CarModelEntity carModelEntity = modelMapperService.forRequest()
                 .map(carModelBusinessRules.checkAddCarModelRequest(
                         carModelBusinessRules.fixAddCarModelRequest(addCarModelRequest)), CarModelEntity.class);
+
         carModelEntity.setItemType(CAR_MODEL);
+
         return modelMapperService.forResponse().map(carModelEntityService.add(carModelEntity), CarModelDTO.class);
     }
 

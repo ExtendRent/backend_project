@@ -1,8 +1,11 @@
 package source_files.data.DTO.itemDTOs;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Builder
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -10,5 +13,5 @@ import lombok.*;
 public class CarModelDTO {
     int id;
     String name;
-    String brandName;
+    String brandEntityName;
 }

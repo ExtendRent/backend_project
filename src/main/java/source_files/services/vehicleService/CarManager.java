@@ -26,7 +26,7 @@ public class CarManager implements CarService {
     private CarBusinessRules businessRules;
 
     @Override
-    public CarDTO add(AddCarRequest addCarRequest) {
+    public void add(AddCarRequest addCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
 
         //CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class); //ESKİ KOD !
@@ -41,7 +41,7 @@ public class CarManager implements CarService {
         //Yani carEntity ye ImagesEntity set ettiğimizde, database e de eklenecek ve içindeki CarEntity otomatik oluşacak.
         carEntity.setImagesEntity(new ImagesEntity(carEntity, addCarRequest.getImagePaths()));
 
-        return modelMapperService.forResponse().map(carEntityService.add(carEntity), CarDTO.class);
+        this.carEntityService.add(carEntity);
     }
 
     @Override
@@ -72,27 +72,16 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<CarDTO> getAllByIsDeletedFalse() {
-        return this.businessRules.checkDataList(this.carEntityService.getAllByIsDeletedFalse())
+    public List<CarDTO> getAllByDeletedState(boolean isDeleted) {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByDeletedState(isDeleted))
                 .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
-    public List<CarDTO> getAllByIsDeletedTrue() {
-        return this.businessRules.checkDataList(this.carEntityService.getAllByIsDeletedTrue())
-                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
-    }
-
-    @Override
-    public List<CarDTO> getAllByIsAvailableTrue() {
-        return this.businessRules.checkDataList(this.carEntityService.getAllByIsAvailableTrue())
-                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
-    }
-
-    @Override
-    public List<CarDTO> getAllByIsAvailableFalse() {
-        return this.businessRules.checkDataList(this.carEntityService.getAllByIsAvailableFalse())
-                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    public List<CarDTO> getAllByAvailableState(boolean isAvailable) {
+        return this.businessRules.checkDataList(
+                        this.carEntityService.getAllByAvailability(isAvailable)).stream()
+                .map(o -> modelMapperService.forResponse().map(o, CarDTO.class)).toList();
     }
 
     @Override
@@ -142,4 +131,6 @@ public class CarManager implements CarService {
         carEntity.setIsAvailable(false);
         this.carEntityService.update(carEntity);
     }
+
+
 }

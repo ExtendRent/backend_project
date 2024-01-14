@@ -19,7 +19,6 @@ public class CarBodyTypeController {
     @PostMapping("/add/carBodyType")
     public ResponseEntity<TResponse<?>> addCarBodyType(@RequestBody @Valid AddCarBodyTypeRequest addCarBodyTypeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carBodyTypeService.add(addCarBodyTypeRequest))
                 .message("Body Type eklendi.")
                 .build()
@@ -29,7 +28,6 @@ public class CarBodyTypeController {
     @PutMapping("/update/carBodyType")
     public ResponseEntity<TResponse<?>> updateCarBodyType(@RequestBody @Valid UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carBodyTypeService.update(updateCarBodyTypeRequest))
                 .message("Body Type güncellendi.")
                 .build()
@@ -39,7 +37,6 @@ public class CarBodyTypeController {
     @GetMapping("/getAll")
     public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carBodyTypeService.getAll())
                 .message("Body Type listesi getirildi.")
                 .build()
@@ -49,17 +46,15 @@ public class CarBodyTypeController {
     @GetMapping("/getById")
     public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carBodyTypeService.getById(id))
                 .message(id + " id' li body type getirildi.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByIsDeletedFalse")
+    @GetMapping("/getAllByDeletedState")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carBodyTypeService.getAllByIsDeletedFalse())
                 .message("Mevcut Body Type Listesi Getirildi.")
                 .build()
@@ -69,7 +64,6 @@ public class CarBodyTypeController {
     @GetMapping("/getAllByIsDeletedTrue")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carBodyTypeService.getAllByIsDeletedTrue())
                 .message("Soft Delete ile Silinen Body Type Listesi Getirildi.")
                 .build()
@@ -81,7 +75,6 @@ public class CarBodyTypeController {
 
         this.carBodyTypeService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message(id + " id' li body type silindi.")
                 .build()
         );

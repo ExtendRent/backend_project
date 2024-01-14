@@ -45,7 +45,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     //--------------------- AUTO CHECK METHODS ---------------------
     public AddCarRequest checkAddCarRequest(AddCarRequest addCarRequest) {
         this.checkLicensePlate(addCarRequest.getLicensePlate());
-        this.checkModel(addCarRequest.getModelEntityId());
+        this.checkModel(addCarRequest.getCarModelEntityId());
         this.checkColor(addCarRequest.getColorEntityId());
         this.checkBodyType(addCarRequest.getCarBodyTypeEntityId());
         this.checkBrand(addCarRequest.getBrandEntityId());

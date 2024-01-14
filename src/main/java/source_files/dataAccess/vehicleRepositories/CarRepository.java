@@ -13,13 +13,9 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
     boolean existsByLicensePlateAndIdNot(String plate, int id);
 
-    List<CarEntity> findAllByIsDeletedFalse();
+    List<CarEntity> findAllByIsDeleted(boolean isDeleted);
 
-    List<CarEntity> findAllByIsDeletedTrue();
-
-    List<CarEntity> findAllByIsAvailableTrue();
-
-    List<CarEntity> findAllByIsAvailableFalse();
+    List<CarEntity> findAllByIsAvailable(boolean isAvailable);
 
     List<CarEntity> findAllByColorEntity_Id(int id);
 

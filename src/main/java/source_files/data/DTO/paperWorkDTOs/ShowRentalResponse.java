@@ -2,6 +2,8 @@ package source_files.data.DTO.paperWorkDTOs;
 
 import lombok.Getter;
 import lombok.Setter;
+import source_files.data.DTO.userDTOs.CustomerDTO;
+import source_files.data.DTO.vehicleDTOs.CarDTO;
 
 import java.time.LocalDate;
 
@@ -9,20 +11,11 @@ import java.time.LocalDate;
 @Setter
 public class ShowRentalResponse {
 
-    int customerEntityId;
-    int carEntityId;
-
-    String carEntityBrandEntityName;
-    String carEntityModelEntityName;
-    String carEntityColorEntityName;
-    String carBodyTypeEntityName;
-    int carEntityYear;
-    double carEntityRentalPrice;
-    String carEntityLicensePlate;
+    CustomerDTO customerDTO;
+    CarDTO carDTO;
 
     LocalDate startDate;
     LocalDate endDate;
 
     double amount;
-    LocalDate createdDate;
 }

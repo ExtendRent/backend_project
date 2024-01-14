@@ -19,7 +19,6 @@ public class AdminController {
     @PostMapping("/add/admin")
     public ResponseEntity<TResponse<?>> addAdmin(@RequestBody @Valid AddAdminRequest addAdminRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.add(addAdminRequest))
                 .message("Admin eklendi.")
                 .build()
@@ -29,7 +28,6 @@ public class AdminController {
     @PutMapping("/update/admin")
     public ResponseEntity<TResponse<?>> updateAdmin(@RequestBody @Valid UpdateAdminRequest updateAdminRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.update(updateAdminRequest))
                 .message("Admin güncellendi.")
                 .build()
@@ -39,7 +37,6 @@ public class AdminController {
     @GetMapping("/getAll")
     public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.getAll())
                 .message("Admin listesi getirildi.")
                 .build()
@@ -49,7 +46,6 @@ public class AdminController {
     @GetMapping("/getById")
     public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.getById(id))
                 .message("Admin getirildi.")
                 .build()
@@ -59,7 +55,6 @@ public class AdminController {
     @GetMapping("/getPhoneNumber")
     public ResponseEntity<TResponse<?>> getByPhoneNumber(@RequestParam String phoneNumber) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.getByPhoneNumber(phoneNumber))
                 .message("Telefon Numarasına Göre Getirildi")
                 .build()
@@ -69,7 +64,6 @@ public class AdminController {
     @GetMapping("/getAllBySalaryGreaterThanEqual")
     public ResponseEntity<TResponse<?>> getAllBySalaryGreaterThanEqual(@RequestParam Double salary) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.getAllBySalaryGreaterThanEqual(salary))
                 .message("Minimum " + salary + "TL Aylık Ücrete Göre Getirildi.")
                 .build()
@@ -77,10 +71,9 @@ public class AdminController {
     }
 
 
-    @GetMapping("/getAllByIsDeletedFalse")
+    @GetMapping("/getAllByDeletedState")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.getAllByIsDeletedFalse())
                 .message("Mevcut Admin Listesi Getirildi.")
                 .build()
@@ -90,7 +83,6 @@ public class AdminController {
     @GetMapping("/getAllByIsDeletedTrue")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.adminService.getAllByIsDeletedTrue())
                 .message("Soft Delete ile Silinen Admin Listesi Getirildi.")
                 .build()
@@ -102,7 +94,6 @@ public class AdminController {
 
         this.adminService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message("Admin silindi.")
                 .build()
         );

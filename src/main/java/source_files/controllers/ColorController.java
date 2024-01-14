@@ -19,7 +19,6 @@ public class ColorController {
     @PostMapping("/add/color")
     public ResponseEntity<TResponse<?>> addColor(@RequestBody @Valid AddColorRequest addColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.colorService.add(addColorRequest))
                 .message("Renk eklendi")
                 .build()
@@ -29,7 +28,6 @@ public class ColorController {
     @PutMapping("/update/color")
     public ResponseEntity<TResponse<?>> updateColor(@RequestBody @Valid UpdateColorRequest updateColorRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.colorService.update(updateColorRequest))
                 .message("Renk güncellendi")
                 .build()
@@ -39,7 +37,6 @@ public class ColorController {
     @GetMapping("getById/{id}")
     public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.colorService.getById(id))
                 .message(id + " id' li renk görüntülendi")
                 .build()
@@ -49,17 +46,15 @@ public class ColorController {
     @GetMapping("getAll")
     public ResponseEntity<TResponse<?>> getAll() throws Exception {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.colorService.getAll())
                 .message("Renk Listesi döndü.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByIsDeletedFalse")
+    @GetMapping("/getAllByDeletedState")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.colorService.getAllByIsDeletedFalse())
                 .message("Mevcut Renk Listesi Getirildi.")
                 .build()
@@ -69,7 +64,6 @@ public class ColorController {
     @GetMapping("/getAllByIsDeletedTrue")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.colorService.getAllByIsDeletedTrue())
                 .message("Soft Delete ile Silinen Renk Listesi Getirildi.")
                 .build()
@@ -81,7 +75,6 @@ public class ColorController {
 
         this.colorService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message("Renk silindi.")
                 .build()
         );

@@ -18,8 +18,8 @@ public class CarEntityManager implements CarEntityService {
     private final CarRepository carRepository;
 
     @Override
-    public CarEntity add(CarEntity carEntity) {
-        return this.carRepository.save(carEntity);
+    public void add(CarEntity carEntity) {
+        this.carRepository.save(carEntity);
     }
 
     @Override
@@ -40,23 +40,13 @@ public class CarEntityManager implements CarEntityService {
     }
 
     @Override
-    public List<CarEntity> getAllByIsDeletedFalse() {
-        return this.carRepository.findAllByIsDeletedFalse();
+    public List<CarEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.carRepository.findAllByIsDeleted(isDeleted);
     }
 
     @Override
-    public List<CarEntity> getAllByIsDeletedTrue() {
-        return this.carRepository.findAllByIsDeletedTrue();
-    }
-
-    @Override
-    public List<CarEntity> getAllByIsAvailableTrue() {
-        return this.carRepository.findAllByIsAvailableTrue();
-    }
-
-    @Override
-    public List<CarEntity> getAllByIsAvailableFalse() {
-        return this.carRepository.findAllByIsAvailableFalse();
+    public List<CarEntity> getAllByAvailability(boolean isAvailable) {
+        return this.carRepository.findAllByIsAvailable(isAvailable);
     }
 
     @Override

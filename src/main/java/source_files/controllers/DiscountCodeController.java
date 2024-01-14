@@ -6,6 +6,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.paperWorkDTOs.DiscountCodeDTO;
 import source_files.data.requests.paperworkRequests.discountRequests.AddDiscountCodeRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountCodeRequest;
 import source_files.data.responses.TResponse;
@@ -20,9 +21,8 @@ public class DiscountCodeController {
     private DiscountCodeService discountCodeService;
 
     @PostMapping("/add")
-    public ResponseEntity<TResponse<?>> addDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) throws BadRequestException {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
+    public ResponseEntity<TResponse<DiscountCodeDTO>> addDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) throws BadRequestException {
+        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
                 .response(this.discountCodeService.add(addDiscountCodeRequest))
                 .message("Ödeme tipi ekleme işlemi başarılı")
                 .build()
@@ -32,7 +32,6 @@ public class DiscountCodeController {
     @PutMapping("/update")
     public ResponseEntity<TResponse<?>> updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.discountCodeService.update(updateDiscountCodeRequest))
                 .message("Ödeme tipi güncelleme işlemi başarılı")
                 .build()
@@ -42,7 +41,6 @@ public class DiscountCodeController {
     @GetMapping("/getAll")
     public ResponseEntity<TResponse<?>> getAllDiscountCodes() throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.discountCodeService.getAll())
                 .message("Kiralama kayıtları görüntülendi")
                 .build()
@@ -54,7 +52,6 @@ public class DiscountCodeController {
 
         this.discountCodeService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message("Müşteri silindi.")
                 .build()
         );

@@ -18,7 +18,6 @@ public class BrandController {
     @PostMapping("/add/brand")
     public ResponseEntity<TResponse<?>> addBrand(@RequestBody AddBrandRequest addBrandRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.brandService.add(addBrandRequest))
                 .message("Marka eklendi")
                 .build()
@@ -28,7 +27,6 @@ public class BrandController {
     @PutMapping("/update/brand")
     public ResponseEntity<TResponse<?>> updateBrand(@RequestBody UpdateBrandRequest updateBrandRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.brandService.update(updateBrandRequest))
                 .message("Marka güncellendi")
                 .build()
@@ -38,7 +36,6 @@ public class BrandController {
     @GetMapping("/getById")
     public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.brandService.getById(id))
                 .message(id + " li marka görüntülendi")
                 .build()
@@ -48,7 +45,6 @@ public class BrandController {
     @GetMapping("/getAll")
     public ResponseEntity<TResponse<?>> getAll() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.brandService.getAll())
                 .message("Marka Listesi döndü.")
                 .build()
@@ -58,17 +54,15 @@ public class BrandController {
     @GetMapping("/getByBrandName")
     public ResponseEntity<TResponse<?>> getByBrandName(@RequestParam String brandName) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.brandService.getByName(brandName))
                 .message("Marka görüntülendi")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByIsDeletedFalse")
+    @GetMapping("/getAllByDeletedState")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.brandService.getAllByIsDeletedFalse())
                 .message("Mevcut Marka Listesi Getirildi.")
                 .build()
@@ -78,7 +72,6 @@ public class BrandController {
     @GetMapping("/getAllByIsDeletedTrue")
     public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.brandService.getAllByIsDeletedTrue())
                 .message("Soft Delete ile Silinen Marka Listesi Getirildi.")
                 .build()
@@ -90,7 +83,6 @@ public class BrandController {
 
         this.brandService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message("Marka silindi.")
                 .build()
         );

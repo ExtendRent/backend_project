@@ -16,7 +16,7 @@ public class AddCarRequest implements BaseRequest {
     @Min(1)
     int brandEntityId;
     @Min(1)
-    int modelEntityId;
+    int carModelEntityId;
     @Min(1)
     int carBodyTypeEntityId;
     @Min(1)
@@ -39,9 +39,8 @@ public class AddCarRequest implements BaseRequest {
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
     @Min(1)
     @Max(15)
-    private int seat;
+    int seat;
     @Min(1)
     @Max(15)
-    private int luggage;
-
+    int luggage;
 }

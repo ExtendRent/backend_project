@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CarEntityService {
 
-    CarEntity add(CarEntity carEntity);
+    void add(CarEntity carEntity);
 
     CarEntity update(CarEntity carEntity);
 
@@ -14,13 +14,9 @@ public interface CarEntityService {
 
     List<CarEntity> getAll();
 
-    List<CarEntity> getAllByIsDeletedFalse();
+    List<CarEntity> getAllByDeletedState(boolean isDeleted);
 
-    List<CarEntity> getAllByIsDeletedTrue();
-
-    List<CarEntity> getAllByIsAvailableTrue();
-
-    List<CarEntity> getAllByIsAvailableFalse();
+    List<CarEntity> getAllByAvailability(boolean isAvailable);
 
     List<CarEntity> getAllByColorId(int id);
 

@@ -6,9 +6,7 @@ import lombok.Builder;
 public record TResponse<T>(
 
         String message, //-> Mesajımızı buraya giriyoruz.
-        T response, //-> DTO nesnesini buraya göndereceğiz.
-        boolean isSuccess//-> işlemin durumunu buradan döneceğiz.
-
+        T response //-> DTO nesnesini buraya göndereceğiz.
 ) {
 
 }

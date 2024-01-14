@@ -8,20 +8,23 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class CarDTO {
 
     int id;
-    String brandEntityName;
-    String modelEntityName;
+    String carModelEntityBrandEntityName;
+    String carModelEntityName;
     String colorEntityName;
     int year;
     String carBodyTypeEntityName;
+    int seat;
+    int luggage;
     String details;
     double rentalPrice;
     String licensePlate;
     int kilometer;
     List<String> imagesEntityImagePaths;
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
+
 }

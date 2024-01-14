@@ -23,7 +23,6 @@ public class RentalController {
     @PostMapping("/add")
     public ResponseEntity<TResponse<?>> addRental(@Valid @RequestBody AddRentalRequest addRentalRequest, @RequestBody PaymentDetailsDTO paymentDetailsDTO) throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.rentalService.add(addRentalRequest, paymentDetailsDTO))
                 .message("Kiralama işlemi başarılı")
                 .build()
@@ -33,7 +32,6 @@ public class RentalController {
     @PostMapping("/showRental")
     public ResponseEntity<TResponse<?>> showRental(@Valid @RequestBody AddRentalRequest addRentalRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.rentalService.showRentalDetails(addRentalRequest))
                 .message("Kiralama kaydı görüntülendi")
                 .build()
@@ -43,7 +41,6 @@ public class RentalController {
     @PutMapping("/update")
     public ResponseEntity<TResponse<?>> updateRental(@RequestBody UpdateRentalRequest updateRentalRequest) throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.rentalService.update(updateRentalRequest))
                 .message("Kiralama işlemi başarılı")
                 .build()
@@ -53,7 +50,6 @@ public class RentalController {
     @PutMapping("/returnCar")
     public ResponseEntity<TResponse<?>> updateRental(@RequestBody ReturnRentalRequest returnRentalRequest) throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.rentalService.returnCar(returnRentalRequest))
                 .message("Kiralama işlemi başarılı")
                 .build()
@@ -63,7 +59,6 @@ public class RentalController {
     @GetMapping("/getAll")
     public ResponseEntity<TResponse<?>> getAllRentals() throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.rentalService.getAll())
                 .message("Kiralama kayıtları görüntülendi")
                 .build()
@@ -74,7 +69,6 @@ public class RentalController {
     public ResponseEntity<TResponse<?>> deleteRental(@Valid @PathVariable int id) throws BadRequestException {
         this.rentalService.delete(id);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message("Kiralama kaydı silindi")
                 .build()
         );

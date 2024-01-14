@@ -31,6 +31,12 @@ public class Vehicle extends BaseEntity {
     @Column(name = "details")
     private String details;
 
+    @Column(name = "seat")
+    private int seat;
+
+    @Column(name = "luggage")
+    private int luggage;
+
     @Column(name = "rental_price")
     private double rentalPrice;
 

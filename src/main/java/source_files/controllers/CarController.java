@@ -2,56 +2,53 @@ package source_files.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/car")
+@RequestMapping("api/v1/cars")
 @AllArgsConstructor
 @Validated
 public class CarController {
 
     private final CarService carService;
 
-    @PostMapping("/add")
-    public ResponseEntity<TResponse<?>> addCar(@Valid @RequestBody AddCarRequest addCarRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.add(addCarRequest))
-                .message("Araba eklendi")
-                .build()
-        );
+    @PostMapping
+    public ResponseEntity<TResponse<CarDTO>> addCar(@Valid @RequestBody AddCarRequest addCarRequest) {
+        this.carService.add(addCarRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<TResponse<?>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carService.update(updateCarRequest))
                 .message("Araba güncellendi")
                 .build()
         );
     }
 
-    @GetMapping("/getById/{id}")
-    public ResponseEntity<TResponse<?>> getById(@Valid @PathVariable int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carService.getById(id))
                 .message("ID: " + id + " araba görüntülendi")
                 .build()
         );
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public ResponseEntity<TResponse<?>> getAll() throws Exception {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.carService.getAll())
                 .message("Araba Listesi döndü.")
                 .build()
@@ -59,81 +56,58 @@ public class CarController {
     }
 
 
-    @GetMapping("/getAllByIsDeletedFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByIsDeletedFalse())
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByDeletedState(@RequestParam(value = "isDeleted") boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByDeletedState(isDeleted))
                 .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByIsDeletedTrue())
-                .message("Silinen Araba Listesi döndü.")
-                .build()
-        );
-    }
-
-    @GetMapping("/getAllByIsAvailableTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsAvailableTrue() throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByIsAvailableTrue())
+    @GetMapping(params = "isAvailable")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailableState(@RequestParam(value = "isAvailable") boolean isAvailable) {
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByAvailableState(isAvailable))
                 .message("Listelenen Araba Listesi döndü.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByIsAvailableFalse")
-    public ResponseEntity<TResponse<?>> getAllByIsAvailableFalse() throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByIsAvailableFalse())
-                .message("Listelenmeyen Araba Listesi döndü.")
-                .build()
-        );
-    }
 
-    @GetMapping("/getAllByColorId/{id}")
-    public ResponseEntity<TResponse<?>> getAllByColorId(@Valid @PathVariable int id) throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByColorId(id))
+    @GetMapping(params = "colorId")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByColorId(@RequestParam(value = "colorId") int colorId) {
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByColorId(colorId))
                 .message("Renge Göre Araba Listesi döndü.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByModelId/{id}")
-    public ResponseEntity<TResponse<?>> getAllByModelId(@Valid @PathVariable int id) throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByModelId(id))
+    @GetMapping("/models/{modelId}")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByModelId(@PathVariable int modelId) {
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByModelId(modelId))
                 .message("Modele Göre Araba Listesi döndü.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByYearBetween/{year1}/{year2}")
-    public ResponseEntity<TResponse<?>> getAllByYearBetween(@Valid @PathVariable int year1, @PathVariable int year2) throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByYearBetween(year1, year2))
+    @GetMapping(params = {"startDate", "endDate"})
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByYearBetween(
+            @RequestParam(name = "startDate") int startDate, @RequestParam(value = "endDate") int endDate) {
+
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByYearBetween(startDate, endDate))
                 .message("Araba Listesi döndü.")
                 .build()
         );
     }
 
-    @GetMapping("/getAllByBrandId/{id}")
-    public ResponseEntity<TResponse<?>> getAllByBrandId(@Valid @PathVariable int id) throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
-                .response(this.carService.getAllByBrandId(id))
+    @GetMapping("/brands/{branId}")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByBrandId(@PathVariable int brandId) {
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByBrandId(brandId))
                 .message("Modele Göre Araba Listesi döndü.")
                 .build()
         );
@@ -145,7 +119,6 @@ public class CarController {
 
         this.carService.delete(id, isHardDelete);
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .message("Araba silindi.")
                 .build()
         );

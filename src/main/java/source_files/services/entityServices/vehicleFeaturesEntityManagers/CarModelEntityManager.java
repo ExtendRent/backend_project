@@ -2,6 +2,7 @@ package source_files.services.entityServices.vehicleFeaturesEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 import source_files.exception.DataNotFoundException;
@@ -19,6 +20,10 @@ public class CarModelEntityManager implements CarModelEntityService {
 
     @Override
     public CarModelEntity add(CarModelEntity carModelEntity) {
+        carModelEntity.setId(0);
+        BrandEntity brandEntity = new BrandEntity();
+        brandEntity.setId(carModelEntity.getBrandEntity().getId());
+        carModelEntity.setBrandEntity(brandEntity);
         return this.carModelRepository.save(carModelEntity);
     }
 

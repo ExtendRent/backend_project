@@ -19,7 +19,6 @@ public class PaymentController {
     @PutMapping("/payWithCreditCard")
     public ResponseEntity<TResponse<?>> payWithCreditCard(@Valid @RequestParam double amount, @RequestBody CreditCardInformation creditCardInformation) throws BadRequestException {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .isSuccess(true)
                 .response(this.paymentService.payWithCreditCard(amount, creditCardInformation))
                 .message("Ödeme işlemi başarılı")
                 .build()

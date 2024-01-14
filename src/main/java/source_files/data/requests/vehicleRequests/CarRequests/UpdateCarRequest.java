@@ -1,7 +1,9 @@
 package source_files.data.requests.vehicleRequests.CarRequests;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.DrivingLicenseType;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UpdateCarRequest implements BaseRequest {
 
     @Min(1)

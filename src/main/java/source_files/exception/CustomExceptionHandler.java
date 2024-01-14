@@ -22,7 +22,6 @@ public class CustomExceptionHandler {
     public TResponse<?> handleException(Exception e) {
         return TResponse.tResponseBuilder()
                 .message("Unknown error!")
-                .isSuccess(false)
                 .response(new ErrorResponse(NotFoundExceptionType.GENERIC_EXCEPTION, Collections.singletonList(e.getMessage())))
                 .build();
     }
@@ -32,7 +31,6 @@ public class CustomExceptionHandler {
     public TResponse<?> handleDataNotFoundException(DataNotFoundException e) {
         return TResponse.tResponseBuilder()
                 .message(e.getNotFoundExceptionType().getMessage())
-                .isSuccess(false)
                 .response(new ErrorResponse(e.getNotFoundExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
@@ -42,7 +40,6 @@ public class CustomExceptionHandler {
     public TResponse<?> handleAlreadyExistsException(AlreadyExistsException e) {
         return TResponse.tResponseBuilder()
                 .message(e.getAlreadyExistsExceptionType().getMessage())
-                .isSuccess(false)
                 .response(new ErrorResponse(e.getAlreadyExistsExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
@@ -52,7 +49,6 @@ public class CustomExceptionHandler {
     public TResponse<?> handleAlreadyExistsException(PaymentException e) {
         return TResponse.tResponseBuilder()
                 .message(e.getPaymentExceptionType().getMessage())
-                .isSuccess(false)
                 .response(new ErrorResponse(e.getPaymentExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
@@ -78,7 +74,6 @@ public class CustomExceptionHandler {
 
         return TResponse.tResponseBuilder()
                 .message("Validation error")
-                .isSuccess(false)
                 .response(errorResponse)
                 .build();
     }
