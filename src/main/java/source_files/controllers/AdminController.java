@@ -4,10 +4,13 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.requests.userRequests.AddAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.userServices.abstracts.AdminService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/admin")
@@ -71,20 +74,12 @@ public class AdminController {
     }
 
 
-    @GetMapping("/getAllByDeletedState")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.adminService.getAllByIsDeletedFalse())
-                .message("Mevcut Admin Listesi Getirildi.")
-                .build()
-        );
-    }
-
-    @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.adminService.getAllByIsDeletedTrue())
-                .message("Soft Delete ile Silinen Admin Listesi Getirildi.")
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<AdminDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<AdminDTO>>tResponseBuilder()
+                .response(this.adminService.getAllByDeletedState(isDeleted))
+                .message("Admin listesi döndü.")
                 .build()
         );
     }

@@ -8,9 +8,8 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarB
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
 import source_files.data.types.ItemType;
-import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarBodyTypeBusinessRules;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
 
 import java.util.List;
@@ -23,7 +22,6 @@ public class CarBodyTypeManager implements CarBodyTypeService {
     private final CarBodyTypeEntityService carBodyTypeEntityService;
     private final CarBodyTypeBusinessRules carBodyTypeBusinessRules;
     private final ModelMapperService modelMapperService;
-    private final CarBodyTypeRepository carBodyTypeRepository;
 
     @Override
     public CarBodyTypeDTO add(AddCarBodyTypeRequest addCarBodyTypeRequest) {
@@ -64,17 +62,10 @@ public class CarBodyTypeManager implements CarBodyTypeService {
     }
 
     @Override
-    public List<CarBodyTypeDTO> getAllByIsDeletedFalse() {
-        return carBodyTypeBusinessRules.checkDataList(this.carBodyTypeRepository.findAllByIsDeletedFalse())
-                .stream().map(carBodyTypeEntity -> modelMapperService.forResponse()
-                        .map(carBodyTypeEntity, CarBodyTypeDTO.class)).toList();
-    }
-
-    @Override
-    public List<CarBodyTypeDTO> getAllByIsDeletedTrue() {
-        return carBodyTypeBusinessRules.checkDataList(this.carBodyTypeRepository.findAllByIsDeletedTrue())
-                .stream().map(carBodyTypeEntity -> modelMapperService.forResponse()
-                        .map(carBodyTypeEntity, CarBodyTypeDTO.class)).toList();
+    public List<CarBodyTypeDTO> getAllByDeletedState(boolean isDeleted) {
+        return this.carBodyTypeBusinessRules.checkDataList(carBodyTypeEntityService.getAllByDeletedState(isDeleted))
+                .stream().map(carBodyType -> modelMapperService.forResponse()
+                        .map(carBodyType, CarBodyTypeDTO.class)).collect(Collectors.toList());
     }
 
     @Override

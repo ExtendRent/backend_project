@@ -17,9 +17,7 @@ public interface CarBodyTypeService {
 
     void delete(int id, boolean hardDelete);
 
-    List<CarBodyTypeDTO> getAllByIsDeletedFalse();
-
-    List<CarBodyTypeDTO> getAllByIsDeletedTrue();
+    List<CarBodyTypeDTO> getAllByDeletedState(boolean isDeleted);
 
     void hardDelete(int id);
 

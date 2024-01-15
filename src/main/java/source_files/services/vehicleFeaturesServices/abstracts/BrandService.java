@@ -18,9 +18,7 @@ public interface BrandService {
 
     List<BrandDTO> getAll();
 
-    List<BrandDTO> getAllByIsDeletedFalse();
-
-    List<BrandDTO> getAllByIsDeletedTrue();
+    List<BrandDTO> getAllByDeletedState(boolean isDeleted);
 
     void delete(int id, boolean hardDelete);
 

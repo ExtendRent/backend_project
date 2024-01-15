@@ -6,10 +6,13 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
 import source_files.data.requests.paperworkRequests.paymentRequests.AddPaymentTypeRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/paymentType")
@@ -45,20 +48,12 @@ public class PaymentTypeController {
         );
     }
 
-    @GetMapping("/getAllByDeletedState")
-    public ResponseEntity<TResponse<?>> GetAllPaymentTypesByIsDeletedFalse() throws BadRequestException {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.paymentTypeService.getAllByIsDeletedFalse())
-                .message("Ödeme tipleri görüntülendi")
-                .build()
-        );
-    }
-
-    @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> GetAllPaymentTypesByIsDeletedTrue() throws BadRequestException {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.paymentTypeService.getAllByIsDeletedTrue())
-                .message("Ödeme tipleri görüntülendi")
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<PaymentTypeDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<PaymentTypeDTO>>tResponseBuilder()
+                .response(this.paymentTypeService.getAllByDeletedState(isDeleted))
+                .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }

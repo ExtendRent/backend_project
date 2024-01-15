@@ -1,6 +1,5 @@
 package source_files.services.paperWorkServices.abstracts;
 
-import org.apache.coyote.BadRequestException;
 import source_files.data.DTO.paperWorkDTOs.DiscountCodeDTO;
 import source_files.data.requests.paperworkRequests.discountRequests.AddDiscountCodeRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountCodeRequest;
@@ -8,7 +7,7 @@ import source_files.data.requests.paperworkRequests.discountRequests.UpdateDisco
 import java.util.List;
 
 public interface DiscountCodeService {
-    DiscountCodeDTO add(AddDiscountCodeRequest addDiscountCodeRequest) throws BadRequestException;
+    DiscountCodeDTO add(AddDiscountCodeRequest addDiscountCodeRequest);
 
     DiscountCodeDTO update(UpdateDiscountCodeRequest updateDiscountCodeRequest);
 
@@ -22,12 +21,7 @@ public interface DiscountCodeService {
 
     List<DiscountCodeDTO> getAll();
 
-    List<DiscountCodeDTO> getAllByIsActiveTrue();
+    List<DiscountCodeDTO> getAllByDeletedState(boolean isDeleted);
 
-    List<DiscountCodeDTO> getAllByIsActiveFalse();
-
-    List<DiscountCodeDTO> getAllByIsDeletedFalse();
-
-    List<DiscountCodeDTO> getAllByIsDeletedTrue();
 
 }

@@ -8,7 +8,7 @@ import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.AddAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules;
-import source_files.services.entityServices.abstracts.AdminEntityService;
+import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
 import source_files.services.userServices.abstracts.AdminService;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class AdminManager implements AdminService {
     @Override
     public List<AdminDTO> getAll() {
 
-        return adminBusinessRules.checkDataList(adminEntityService.getAll())
+        return adminEntityService.getAll()
                 .stream().map(admin -> modelMapperService.forResponse()
                         .map(admin, AdminDTO.class)).collect(Collectors.toList());
     }
@@ -72,16 +72,15 @@ public class AdminManager implements AdminService {
     }
 
     @Override
-    public List<AdminDTO> getAllByIsDeletedFalse() {
-        return this.adminBusinessRules.checkDataList(this.adminEntityService.getAllByIsDeletedFalse())
-                .stream().map(adminEntity -> modelMapperService.forResponse().map(adminEntity, AdminDTO.class)).toList();
+    public AdminDTO getByEmailAddress(String emailAddress) {
+        return this.modelMapperService.forResponse()
+                .map(adminEntityService.getByEmailAddress(emailAddress), AdminDTO.class);
     }
 
-
     @Override
-    public List<AdminDTO> getAllByIsDeletedTrue() {
-        return this.adminBusinessRules.checkDataList(this.adminEntityService.getAllByIsDeletedTrue())
-                .stream().map(adminEntity -> modelMapperService.forResponse().map(adminEntity, AdminDTO.class)).toList();
+    public List<AdminDTO> getAllByDeletedState(boolean isDeleted) {
+        return adminEntityService.getAllByDeletedState(isDeleted).stream()
+                .map(admin -> modelMapperService.forResponse().map(admin, AdminDTO.class)).toList();
     }
 
     @Override

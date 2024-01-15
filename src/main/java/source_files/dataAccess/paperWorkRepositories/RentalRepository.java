@@ -7,7 +7,6 @@ import java.util.List;
 
 
 public interface RentalRepository extends JpaRepository<RentalEntity, Integer> {
-    List<RentalEntity> findAllByIsDeletedFalse();
 
-    List<RentalEntity> findAllByIsDeletedTrue();
+    List<RentalEntity> findAllByIsDeleted(boolean isDeleted);
 }

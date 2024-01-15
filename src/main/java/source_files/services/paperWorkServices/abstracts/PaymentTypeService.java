@@ -20,7 +20,5 @@ public interface PaymentTypeService {
 
     List<PaymentTypeDTO> getAll();
 
-    List<PaymentTypeDTO> getAllByIsDeletedFalse();
-
-    List<PaymentTypeDTO> getAllByIsDeletedTrue();
+    List<PaymentTypeDTO> getAllByDeletedState(boolean isDeleted);
 }

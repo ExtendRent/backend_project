@@ -23,14 +23,14 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping
-    public ResponseEntity<TResponse<CarDTO>> addCar(@Valid @RequestBody AddCarRequest addCarRequest) {
+    public ResponseEntity<HttpStatus> addCar(@Valid @RequestBody AddCarRequest addCarRequest) {
         this.carService.add(addCarRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
-    public ResponseEntity<TResponse<?>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    public ResponseEntity<TResponse<CarDTO>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) {
+        return ResponseEntity.ok(TResponse.<CarDTO>tResponseBuilder()
                 .response(this.carService.update(updateCarRequest))
                 .message("Araba güncellendi")
                 .build()
@@ -38,8 +38,8 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    public ResponseEntity<TResponse<CarDTO>> getById(@PathVariable int id) {
+        return ResponseEntity.ok(TResponse.<CarDTO>tResponseBuilder()
                 .response(this.carService.getById(id))
                 .message("ID: " + id + " araba görüntülendi")
                 .build()
@@ -47,8 +47,8 @@ public class CarController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<TResponse<?>> getAll() throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    public ResponseEntity<TResponse<List<CarDTO>>> getAll() throws Exception {
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAll())
                 .message("Araba Listesi döndü.")
                 .build()
@@ -57,7 +57,8 @@ public class CarController {
 
 
     @GetMapping(params = "isDeleted")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByDeletedState(@RequestParam(value = "isDeleted") boolean isDeleted) {
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
         return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAllByDeletedState(isDeleted))
                 .message("Silinmeyen Araba Listesi döndü.")
@@ -66,7 +67,8 @@ public class CarController {
     }
 
     @GetMapping(params = "isAvailable")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailableState(@RequestParam(value = "isAvailable") boolean isAvailable) {
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailableState(
+            @RequestParam(value = "isAvailable", required = false) boolean isAvailable) {
         return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAllByAvailableState(isAvailable))
                 .message("Listelenen Araba Listesi döndü.")
@@ -75,8 +77,8 @@ public class CarController {
     }
 
 
-    @GetMapping(params = "colorId")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByColorId(@RequestParam(value = "colorId") int colorId) {
+    @GetMapping("/colors/{colorId}")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByColorId(@PathVariable int colorId) {
         return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAllByColorId(colorId))
                 .message("Renge Göre Araba Listesi döndü.")
@@ -95,7 +97,7 @@ public class CarController {
 
     @GetMapping(params = {"startDate", "endDate"})
     public ResponseEntity<TResponse<List<CarDTO>>> getAllByYearBetween(
-            @RequestParam(name = "startDate") int startDate, @RequestParam(value = "endDate") int endDate) {
+            @RequestParam(name = "startDate", required = false) int startDate, @RequestParam(value = "endDate") int endDate) {
 
         return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAllByYearBetween(startDate, endDate))
@@ -104,7 +106,7 @@ public class CarController {
         );
     }
 
-    @GetMapping("/brands/{branId}")
+    @GetMapping("/brands/{brandId}")
     public ResponseEntity<TResponse<List<CarDTO>>> getAllByBrandId(@PathVariable int brandId) {
         return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAllByBrandId(brandId))
@@ -114,13 +116,10 @@ public class CarController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
-
+    @DeleteMapping(params = {"id", "isHardDelete"})
+    public ResponseEntity<HttpStatus> delete(
+            @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
         this.carService.delete(id, isHardDelete);
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .message("Araba silindi.")
-                .build()
-        );
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

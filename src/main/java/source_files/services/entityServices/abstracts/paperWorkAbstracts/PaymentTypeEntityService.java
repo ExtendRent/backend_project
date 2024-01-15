@@ -15,8 +15,6 @@ public interface PaymentTypeEntityService {
 
     List<PaymentTypeEntity> getAll();
 
-    List<PaymentTypeEntity> getAllByIsDeletedFalse();
-
-    List<PaymentTypeEntity> getAllByIsDeletedTrue();
+    List<PaymentTypeEntity> getAllByDeletedState(boolean isDeleted);
 
 }

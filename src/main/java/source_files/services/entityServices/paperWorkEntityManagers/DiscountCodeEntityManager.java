@@ -51,22 +51,14 @@ public class DiscountCodeEntityManager implements DiscountCodeEntityService {
     }
 
     @Override
-    public List<DiscountCodeEntity> getAllByIsActiveTrue() {
-        return this.discountCodeRepository.findAllByIsActiveTrue();
+    public List<DiscountCodeEntity> getAllByActiveState(boolean isActive) {
+        return this.discountCodeRepository.findAllByIsActive(isActive);
     }
 
     @Override
-    public List<DiscountCodeEntity> getAllByIsActiveFalse() {
-        return this.discountCodeRepository.findAllByIsActiveFalse();
+    public List<DiscountCodeEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.discountCodeRepository.findAllByIsDeleted(isDeleted);
     }
 
-    @Override
-    public List<DiscountCodeEntity> getAllByIsDeletedFalse() {
-        return this.discountCodeRepository.findAllByIsDeletedFalse();
-    }
 
-    @Override
-    public List<DiscountCodeEntity> getAllByIsDeletedTrue() {
-        return this.discountCodeRepository.findAllByIsDeletedTrue();
-    }
 }

@@ -6,9 +6,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarB
 import java.util.List;
 
 public interface CarBodyTypeRepository extends JpaRepository<CarBodyTypeEntity, Integer> {
-    List<CarBodyTypeEntity> findAllByIsDeletedFalse();
-
-    List<CarBodyTypeEntity> findAllByIsDeletedTrue();
+    List<CarBodyTypeEntity> findAllByIsDeleted(boolean isDeleted);
 
     boolean existsByNameAndIdNot(String name, int id);
 

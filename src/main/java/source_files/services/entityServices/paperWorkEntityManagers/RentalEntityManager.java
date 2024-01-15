@@ -46,12 +46,9 @@ public class RentalEntityManager implements RentalEntityService {
     }
 
     @Override
-    public List<RentalEntity> getAllByIsDeletedFalse() {
-        return this.rentalRepository.findAllByIsDeletedFalse();
+    public List<RentalEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.rentalRepository.findAllByIsDeleted(isDeleted);
     }
 
-    @Override
-    public List<RentalEntity> getAllByIsDeletedTrue() {
-        return this.rentalRepository.findAllByIsDeletedTrue();
-    }
+
 }

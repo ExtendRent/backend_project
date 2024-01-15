@@ -1,7 +1,6 @@
 package source_files.services.paperWorkServices;
 
 import lombok.AllArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.DiscountCodeDTO;
@@ -20,7 +19,7 @@ public class DiscountCodeManager implements DiscountCodeService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public DiscountCodeDTO add(AddDiscountCodeRequest addDiscountCodeRequest) throws BadRequestException {
+    public DiscountCodeDTO add(AddDiscountCodeRequest addDiscountCodeRequest) {
         return this.modelMapperService.forResponse()
                 .map(this.discountCodeEntityService.add(
                         this.modelMapperService.forRequest()
@@ -54,31 +53,23 @@ public class DiscountCodeManager implements DiscountCodeService {
 
     @Override
     public void softDelete(int id) {
-
+        DiscountCodeEntity discountCode = this.discountCodeEntityService.getById(id);
+        discountCode.setIsDeleted(true);
+        this.discountCodeEntityService.update(discountCode);
     }
 
     @Override
     public List<DiscountCodeDTO> getAll() {
-        return null;
+        return this.discountCodeEntityService.getAll().stream()
+                .map(discountCode -> this.modelMapperService.forResponse()
+                        .map(discountCode, DiscountCodeDTO.class)).toList();
     }
 
     @Override
-    public List<DiscountCodeDTO> getAllByIsActiveTrue() {
-        return null;
+    public List<DiscountCodeDTO> getAllByDeletedState(boolean isDeleted) {
+        return this.discountCodeEntityService.getAllByDeletedState(isDeleted)
+                .stream().map(discountCode -> this.modelMapperService.forResponse()
+                        .map(discountCode, DiscountCodeDTO.class)).toList();
     }
 
-    @Override
-    public List<DiscountCodeDTO> getAllByIsActiveFalse() {
-        return null;
-    }
-
-    @Override
-    public List<DiscountCodeDTO> getAllByIsDeletedFalse() {
-        return null;
-    }
-
-    @Override
-    public List<DiscountCodeDTO> getAllByIsDeletedTrue() {
-        return null;
-    }
 }

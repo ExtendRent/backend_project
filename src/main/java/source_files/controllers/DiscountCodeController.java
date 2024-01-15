@@ -2,7 +2,6 @@ package source_files.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +10,8 @@ import source_files.data.requests.paperworkRequests.discountRequests.AddDiscount
 import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountCodeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWorkServices.abstracts.DiscountCodeService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/discountCode")
@@ -21,7 +22,7 @@ public class DiscountCodeController {
     private DiscountCodeService discountCodeService;
 
     @PostMapping("/add")
-    public ResponseEntity<TResponse<DiscountCodeDTO>> addDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) throws BadRequestException {
+    public ResponseEntity<TResponse<DiscountCodeDTO>> addDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) {
         return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
                 .response(this.discountCodeService.add(addDiscountCodeRequest))
                 .message("Ödeme tipi ekleme işlemi başarılı")
@@ -30,7 +31,7 @@ public class DiscountCodeController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<TResponse<?>> updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) throws BadRequestException {
+    public ResponseEntity<TResponse<?>> updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .response(this.discountCodeService.update(updateDiscountCodeRequest))
                 .message("Ödeme tipi güncelleme işlemi başarılı")
@@ -39,10 +40,20 @@ public class DiscountCodeController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<TResponse<?>> getAllDiscountCodes() throws BadRequestException {
+    public ResponseEntity<TResponse<?>> getAllDiscountCodes() {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .response(this.discountCodeService.getAll())
                 .message("Kiralama kayıtları görüntülendi")
+                .build()
+        );
+    }
+
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<DiscountCodeDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<DiscountCodeDTO>>tResponseBuilder()
+                .response(this.discountCodeService.getAllByDeletedState(isDeleted))
+                .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }

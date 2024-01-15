@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
+
+    Optional<AdminEntity> findByEmailAddress(String emailAddress);
+
     Optional<AdminEntity> findByPhoneNumber(String phoneNumber);
 
     boolean existsByPhoneNumber(String phoneNumber);
@@ -20,9 +23,7 @@ public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
 
     List<AdminEntity> findBySalaryGreaterThanEqual(Double salary);
 
-    List<AdminEntity> findAllByIsDeletedFalse();
-
-    List<AdminEntity> findAllByIsDeletedTrue();
+    List<AdminEntity> findAllByIsDeleted(boolean isDeleted);
 
 
 }

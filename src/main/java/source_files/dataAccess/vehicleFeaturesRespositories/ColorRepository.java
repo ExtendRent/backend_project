@@ -8,9 +8,7 @@ import java.util.List;
 public interface ColorRepository extends JpaRepository<ColorEntity, Integer> {
     boolean existsByName(String name);
 
-    List<ColorEntity> findAllByIsDeletedFalse();
-
-    List<ColorEntity> findAllByIsDeletedTrue();
+    List<ColorEntity> findAllByIsDeleted(boolean isDeleted);
 
     boolean existsByNameAndIdNot(String name, int id);
 }

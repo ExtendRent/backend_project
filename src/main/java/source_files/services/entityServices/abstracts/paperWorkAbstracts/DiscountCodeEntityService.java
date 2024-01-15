@@ -18,12 +18,8 @@ public interface DiscountCodeEntityService {
 
     List<DiscountCodeEntity> getAll();
 
-    List<DiscountCodeEntity> getAllByIsActiveTrue();
+    List<DiscountCodeEntity> getAllByActiveState(boolean isActive);
 
-    List<DiscountCodeEntity> getAllByIsActiveFalse();
-
-    List<DiscountCodeEntity> getAllByIsDeletedFalse();
-
-    List<DiscountCodeEntity> getAllByIsDeletedTrue();
+    List<DiscountCodeEntity> getAllByDeletedState(boolean isDeleted);
 
 }

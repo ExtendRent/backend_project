@@ -28,7 +28,5 @@ public interface RentalService {
 
     List<RentalDTO> getAll();
 
-    List<RentalDTO> getAllByIsDeletedFalse();
-
-    List<RentalDTO> getAllByIsDeletedTrue();
+    List<RentalDTO> getAllByDeletedState(boolean isDeleted);
 }

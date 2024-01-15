@@ -1,11 +1,11 @@
-package source_files.services.entityServices;
+package source_files.services.entityServices.userEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.userEntities.EmployeeEntity;
 import source_files.dataAccess.userRepositories.EmployeeRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.entityServices.abstracts.EmployeeEntityService;
+import source_files.services.entityServices.abstracts.userAbstract.EmployeeEntityService;
 
 import java.util.List;
 
@@ -46,16 +46,10 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     }
 
     @Override
-    public List<EmployeeEntity> getAllByIsDeletedFalse() {
-
-        return this.employeeRepository.findAllByIsDeletedFalse();
+    public List<EmployeeEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.employeeRepository.findAllByIsDeleted(isDeleted);
     }
 
-    @Override
-    public List<EmployeeEntity> getAllByIsDeletedTrue() {
-
-        return this.employeeRepository.findAllByIsDeletedTrue();
-    }
 
     @Override
     public void delete(EmployeeEntity employeeEntity) {
@@ -68,5 +62,12 @@ public class EmployeeEntityManager implements EmployeeEntityService {
         return this.employeeRepository.findByPhoneNumber(phoneNumber).orElseThrow(
                 () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı çalışan bulunamadı")
         );
+    }
+
+    @Override
+    public EmployeeEntity getByEmailAddress(String emailAddress) {
+        return this.employeeRepository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
+                EMPLOYEE_DATA_NOT_FOUND, "Bu email adresine kayıtlı çalışan bulunamadı"
+        ));
     }
 }

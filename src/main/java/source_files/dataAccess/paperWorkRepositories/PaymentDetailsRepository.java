@@ -8,7 +8,6 @@ import java.util.List;
 public interface PaymentDetailsRepository extends JpaRepository<PaymentDetailsEntity, Integer> {
 
 
-    List<PaymentDetailsEntity> findAllByIsDeletedFalse();
+    List<PaymentDetailsEntity> findAllByIsDeleted(boolean isDeleted);
 
-    List<PaymentDetailsEntity> findAllByIsDeletedTrue();
 }

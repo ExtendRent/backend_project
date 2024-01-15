@@ -8,7 +8,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Bran
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.BrandBusinessRules;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 
 import java.util.List;
@@ -60,15 +60,11 @@ public class BrandManager implements BrandService {
     }
 
     @Override
-    public List<BrandDTO> getAllByIsDeletedFalse() {
-        return brandBusinessRules.checkDataList(this.brandEntityService.getAllByIsDeletedFalse())
-                .stream().map(brandEntity -> modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
-    }
+    public List<BrandDTO> getAllByDeletedState(boolean isDeleted) {
 
-    @Override
-    public List<BrandDTO> getAllByIsDeletedTrue() {
-        return brandBusinessRules.checkDataList(this.brandEntityService.getAllByIsDeletedTrue())
-                .stream().map(brandEntity -> modelMapperService.forResponse().map(brandEntity, BrandDTO.class)).toList();
+        return brandBusinessRules.checkDataList(brandEntityService.getAllByDeletedState(isDeleted))
+                .stream().map(brand -> modelMapperService.forResponse()
+                        .map(brand, BrandDTO.class)).collect(Collectors.toList());
     }
 
     @Override

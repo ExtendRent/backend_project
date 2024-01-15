@@ -1,11 +1,11 @@
-package source_files.services.entityServices;
+package source_files.services.entityServices.userEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.entityServices.abstracts.CustomerEntityService;
+import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
 
 import java.util.List;
 
@@ -44,6 +44,18 @@ public class CustomerEntityManager implements CustomerEntityService {
     }
 
     @Override
+    public CustomerEntity getByEmailAddress(String emailAddress) {
+        return this.customerRepository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
+                CUSTOMER_DATA_NOT_FOUND, "Bu email adresine kayıtlı müşteri bulunamadı"
+        ));
+    }
+
+    @Override
+    public List<CustomerEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.customerRepository.findAllByIsDeleted(isDeleted);
+    }
+
+    @Override
     public void delete(CustomerEntity customerEntity) {
         this.customerRepository.delete(customerEntity);
     }
@@ -54,13 +66,5 @@ public class CustomerEntityManager implements CustomerEntityService {
         return this.customerRepository.findAll();
     }
 
-    @Override
-    public List<CustomerEntity> getAllByIsDeletedFalse() {
-        return this.customerRepository.findAllByIsDeletedFalse();
-    }
 
-    @Override
-    public List<CustomerEntity> getAllByIsDeletedTrue() {
-        return this.customerRepository.findAllByIsDeletedTrue();
-    }
 }

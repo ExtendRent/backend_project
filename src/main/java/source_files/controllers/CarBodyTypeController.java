@@ -4,10 +4,13 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.itemDTOs.CarBodyTypeDTO;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/carBodyType")
@@ -52,20 +55,12 @@ public class CarBodyTypeController {
         );
     }
 
-    @GetMapping("/getAllByDeletedState")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.carBodyTypeService.getAllByIsDeletedFalse())
-                .message("Mevcut Body Type Listesi Getirildi.")
-                .build()
-        );
-    }
-
-    @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.carBodyTypeService.getAllByIsDeletedTrue())
-                .message("Soft Delete ile Silinen Body Type Listesi Getirildi.")
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<CarBodyTypeDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<CarBodyTypeDTO>>tResponseBuilder()
+                .response(this.carBodyTypeService.getAllByDeletedState(isDeleted))
+                .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }

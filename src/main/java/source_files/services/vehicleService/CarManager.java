@@ -9,7 +9,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Imag
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
-import source_files.services.entityServices.abstracts.CarEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.List;

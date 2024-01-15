@@ -1,11 +1,12 @@
-package source_files.services.entityServices;
+package source_files.services.entityServices.userEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.userEntities.AdminEntity;
 import source_files.dataAccess.userRepositories.AdminRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.entityServices.abstracts.AdminEntityService;
+import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules;
+import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_
 public class AdminEntityManager implements AdminEntityService {
 
     private final AdminRepository adminRepository;
+    AdminBusinessRules adminBusinessRules;
 
     @Override
     public AdminEntity add(AdminEntity adminEntity) {
@@ -38,7 +40,7 @@ public class AdminEntityManager implements AdminEntityService {
     @Override
     public List<AdminEntity> getAll() {
 
-        return this.adminRepository.findAll();
+        return this.adminBusinessRules.checkDataList(this.adminRepository.findAll());
     }
 
     @Override
@@ -46,18 +48,11 @@ public class AdminEntityManager implements AdminEntityService {
         return this.adminRepository.findBySalaryGreaterThanEqual(salary);
     }
 
-
     @Override
-    public List<AdminEntity> getAllByIsDeletedFalse() {
-
-        return this.adminRepository.findAllByIsDeletedFalse();
+    public List<AdminEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.adminRepository.findAllByIsDeleted(isDeleted);
     }
 
-    @Override
-    public List<AdminEntity> getAllByIsDeletedTrue() {
-
-        return this.adminRepository.findAllByIsDeletedTrue();
-    }
 
     @Override
     public void delete(AdminEntity adminEntity) {
@@ -69,6 +64,13 @@ public class AdminEntityManager implements AdminEntityService {
     public AdminEntity getByPhoneNumber(String phoneNumber) {
         return this.adminRepository.findByPhoneNumber(phoneNumber).orElseThrow(
                 () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı admin bulunamadı")
+        );
+    }
+
+    @Override
+    public AdminEntity getByEmailAddress(String emailAddress) {
+        return this.adminRepository.findByEmailAddress(emailAddress).orElseThrow(
+                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu email adresine kayıtlı admin bulunamadı")
         );
     }
 

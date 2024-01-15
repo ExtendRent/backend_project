@@ -17,12 +17,11 @@ public interface CustomerService {
 
     CustomerDTO getByPhoneNumber(String phoneNumber);
 
+    CustomerDTO getByEmailAddress(String emailAddress);
+
     List<CustomerDTO> getAll();
 
-
-    List<CustomerDTO> getAllByIsDeletedFalse();
-
-    List<CustomerDTO> getAllByIsDeletedTrue();
+    List<CustomerDTO> getAllByDeletedState(boolean isDeleted);
 
     void delete(int id, boolean hardDelete);
 

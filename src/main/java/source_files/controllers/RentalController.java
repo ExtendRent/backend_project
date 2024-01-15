@@ -7,11 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
+import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWorkServices.abstracts.RentalService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/rental")
@@ -61,6 +64,16 @@ public class RentalController {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .response(this.rentalService.getAll())
                 .message("Kiralama kayıtları görüntülendi")
+                .build()
+        );
+    }
+
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<RentalDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<RentalDTO>>tResponseBuilder()
+                .response(this.rentalService.getAllByDeletedState(isDeleted))
+                .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }

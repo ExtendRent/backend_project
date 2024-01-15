@@ -16,7 +16,5 @@ public interface RentalEntityService {
 
     List<RentalEntity> getAll();
 
-    List<RentalEntity> getAllByIsDeletedFalse();
-
-    List<RentalEntity> getAllByIsDeletedTrue();
+    List<RentalEntity> getAllByDeletedState(boolean isDeleted);
 }

@@ -106,14 +106,12 @@ public class RentalManager implements RentalService {
     }
 
     @Override
-    public List<RentalDTO> getAllByIsDeletedFalse() {
-        return null;
+    public List<RentalDTO> getAllByDeletedState(boolean isDeleted) {
+        return this.rentalEntityService.getAllByDeletedState(isDeleted).stream()
+                .map(rentalEntity -> modelMapperService.forResponse()
+                        .map(rentalEntity, RentalDTO.class)).toList();
     }
 
-    @Override
-    public List<RentalDTO> getAllByIsDeletedTrue() {
-        return null;
-    }
 
     public ShowRentalResponse convertToShowRentalResponse(AddRentalRequest addRentalRequest) {
 

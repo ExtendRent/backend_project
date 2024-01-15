@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Integer> {
+
+    Optional<EmployeeEntity> findByEmailAddress(String emailAddress);
+
     Optional<EmployeeEntity> findByPhoneNumber(String phoneNumber);
 
     boolean existsByPhoneNumber(String phoneNumber);
@@ -19,7 +22,5 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Intege
 
     List<EmployeeEntity> findAllBySalaryBetween(double salary1, double salary2);
 
-    List<EmployeeEntity> findAllByIsDeletedFalse();
-
-    List<EmployeeEntity> findAllByIsDeletedTrue();
+    List<EmployeeEntity> findAllByIsDeleted(boolean isDeleted);
 }

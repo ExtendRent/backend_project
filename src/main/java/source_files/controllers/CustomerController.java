@@ -4,10 +4,13 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.userServices.abstracts.CustomerService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/customer")
@@ -60,20 +63,12 @@ public class CustomerController {
         );
     }
 
-    @GetMapping("/getAllByDeletedState")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.customerService.getAllByIsDeletedFalse())
-                .message("Mevcut Müşteri Listesi Getirildi.")
-                .build()
-        );
-    }
-
-    @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.customerService.getAllByIsDeletedTrue())
-                .message("Soft Delete ile Silinen Müşteri Listesi Getirildi.")
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<CustomerDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<CustomerDTO>>tResponseBuilder()
+                .response(this.customerService.getAllByDeletedState(isDeleted))
+                .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }

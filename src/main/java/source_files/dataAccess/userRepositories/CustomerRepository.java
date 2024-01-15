@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
+    Optional<CustomerEntity> findByEmailAddress(String emailAddress);
+
     Optional<CustomerEntity> findByPhoneNumber(String phoneNumber);
 
     boolean existsByPhoneNumber(String phoneNumber);
@@ -21,7 +23,5 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
     boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
 
-    List<CustomerEntity> findAllByIsDeletedFalse();
-
-    List<CustomerEntity> findAllByIsDeletedTrue();
+    List<CustomerEntity> findAllByIsDeleted(boolean isDeleted);
 }

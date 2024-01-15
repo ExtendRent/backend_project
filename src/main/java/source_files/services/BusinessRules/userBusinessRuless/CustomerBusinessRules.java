@@ -8,7 +8,7 @@ import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
-import source_files.services.entityServices.CustomerEntityManager;
+import source_files.services.entityServices.userEntityManagers.CustomerEntityManager;
 
 import java.util.List;
 

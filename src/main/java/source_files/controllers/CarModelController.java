@@ -3,10 +3,13 @@ package source_files.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.itemDTOs.CarModelDTO;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/carModel")
@@ -69,20 +72,12 @@ public class CarModelController {
         );
     }
 
-    @GetMapping("/getAllByDeletedState")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.carModelService.getAllByIsDeletedFalse())
-                .message("Mevcut Model Listesi Getirildi.")
-                .build()
-        );
-    }
-
-    @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.carModelService.getAllByIsDeletedTrue())
-                .message("Soft Delete ile Silinen Model Listesi Getirildi.")
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<CarModelDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<CarModelDTO>>tResponseBuilder()
+                .response(this.carModelService.getAllByDeletedState(isDeleted))
+                .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }

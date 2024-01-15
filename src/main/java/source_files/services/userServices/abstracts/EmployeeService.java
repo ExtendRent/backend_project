@@ -19,11 +19,11 @@ public interface EmployeeService {
 
     List<EmployeeDTO> findAllBySalaryBetween(double salary1, double salary2);
 
-    List<EmployeeDTO> getAllByIsDeletedFalse();
-
-    List<EmployeeDTO> getAllByIsDeletedTrue();
+    List<EmployeeDTO> getAllByDeletedState(boolean isDeleted);
 
     EmployeeDTO getByPhoneNumber(String phoneNumber);
+
+    EmployeeDTO getByEmailAddress(String emailAddress);
 
     void delete(int id, boolean hardDelete);
 

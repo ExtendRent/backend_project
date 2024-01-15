@@ -6,9 +6,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Bran
 import java.util.List;
 
 public interface BrandRespository extends JpaRepository<BrandEntity, Integer> {
-    List<BrandEntity> findAllByIsDeletedFalse();
-
-    List<BrandEntity> findAllByIsDeletedTrue();
+    List<BrandEntity> findAllByIsDeleted(boolean isDeleted);
 
     boolean existsByName(String brandName);
 

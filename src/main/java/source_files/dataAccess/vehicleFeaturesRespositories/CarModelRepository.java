@@ -15,7 +15,5 @@ public interface CarModelRepository extends JpaRepository<CarModelEntity, Intege
 
     List<CarModelEntity> findAllByBrandEntity_Id(int brandId);
 
-    List<CarModelEntity> findAllByIsDeletedFalse();
-
-    List<CarModelEntity> findAllByIsDeletedTrue();
+    List<CarModelEntity> findAllByIsDeleted(boolean isDeleted);
 }

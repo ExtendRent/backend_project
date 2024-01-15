@@ -58,18 +58,11 @@ public class PaymentTypeManager implements PaymentTypeService {
     }
 
     @Override
-    public List<PaymentTypeDTO> getAllByIsDeletedFalse() {
-        return this.paymentTypeEntityService.getAllByIsDeletedFalse().stream()
+    public List<PaymentTypeDTO> getAllByDeletedState(boolean isDeleted) {
+        return this.paymentTypeEntityService.getAllByDeletedState(isDeleted).stream()
                 .map(paymentTypeEntity -> this.modelMapperService.forResponse()
                         .map(paymentTypeEntity, PaymentTypeDTO.class)
                 ).toList();
     }
 
-    @Override
-    public List<PaymentTypeDTO> getAllByIsDeletedTrue() {
-        return this.paymentTypeEntityService.getAllByIsDeletedTrue().stream()
-                .map(paymentTypeEntity -> this.modelMapperService.forResponse()
-                        .map(paymentTypeEntity, PaymentTypeDTO.class)
-                ).toList();
-    }
 }

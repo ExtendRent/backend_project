@@ -1,11 +1,11 @@
-package source_files.services.entityServices;
+package source_files.services.entityServices.vehicleEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.entityServices.abstracts.CarEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 
 import java.util.List;
 
@@ -65,8 +65,8 @@ public class CarEntityManager implements CarEntityService {
     }
 
     @Override
-    public List<CarEntity> getAllByBrandId(int id) {
-        return this.carRepository.findAllByCarModelEntity_BrandEntity_Id(id);
+    public List<CarEntity> getAllByBrandId(int brandId) {
+        return this.carRepository.findAllByCarModelEntity_BrandEntity_Id(brandId);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package source_files.services.entityServices.abstracts;
+package source_files.services.entityServices.abstracts.userAbstract;
 
 import source_files.data.models.userEntities.AdminEntity;
 
@@ -12,16 +12,17 @@ public interface AdminEntityService {
 
     AdminEntity getById(int id);
 
+    AdminEntity getByPhoneNumber(String phoneNumber);
+
+    AdminEntity getByEmailAddress(String emailAddress);
+
     List<AdminEntity> getAll();
 
     List<AdminEntity> getAllBySalaryGreaterThanEqual(Double salary);
 
-    List<AdminEntity> getAllByIsDeletedFalse();
-
-    List<AdminEntity> getAllByIsDeletedTrue();
+    List<AdminEntity> getAllByDeletedState(boolean isDeleted);
 
     void delete(AdminEntity adminEntity);
 
-    AdminEntity getByPhoneNumber(String phoneNumber);
 
 }

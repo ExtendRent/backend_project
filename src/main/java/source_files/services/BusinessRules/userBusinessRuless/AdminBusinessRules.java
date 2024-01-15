@@ -2,13 +2,13 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.AddAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.dataAccess.userRepositories.AdminRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
-import source_files.services.entityServices.AdminEntityManager;
 
 import java.util.List;
 
@@ -20,14 +20,14 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_
 @Service
 public class AdminBusinessRules implements BaseUserBusinessRulesService {
     private final AdminRepository adminRepository;
-    private final AdminEntityManager adminEntityManager;
 
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public List<AdminEntity> checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(ADMIN_LIST_NOT_FOUND, "Aradığınız kriterlere uygun admin bulunamadı");
         }
-        return list;
+
+        return list.stream().map(adminEntity -> (AdminEntity) adminEntity).toList();
     }
 
     //--------------------- AUTO FIX METHODS ---------------------

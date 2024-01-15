@@ -4,10 +4,13 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.userDTOs.EmployeeDTO;
 import source_files.data.requests.userRequests.AddEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.userServices.abstracts.EmployeeService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/employee")
@@ -69,20 +72,12 @@ public class EmployeeController {
         );
     }
 
-    @GetMapping("/getAllByDeletedState")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedFalse() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.employeeService.getAllByIsDeletedFalse())
-                .message("Mevcut Çalışan Listesi Getirildi.")
-                .build()
-        );
-    }
-
-    @GetMapping("/getAllByIsDeletedTrue")
-    public ResponseEntity<TResponse<?>> getAllByIsDeletedTrue() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.employeeService.getAllByIsDeletedTrue())
-                .message("Soft Delete ile Silinen Çalışan Listesi Getirildi.")
+    @GetMapping(params = "isDeleted")
+    public ResponseEntity<TResponse<List<EmployeeDTO>>> getAllByDeletedState(
+            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+        return ResponseEntity.ok(TResponse.<List<EmployeeDTO>>tResponseBuilder()
+                .response(this.employeeService.getAllByDeletedState(isDeleted))
+                .message("Silinmeyen Araba Listesi döndü.")
                 .build()
         );
     }

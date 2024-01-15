@@ -1,4 +1,4 @@
-package source_files.services.entityServices.vehicleFeaturesEntityManagers;
+package source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Bran
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarModelEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 
 import java.util.List;
 
@@ -52,13 +52,8 @@ public class CarModelEntityManager implements CarModelEntityService {
     }
 
     @Override
-    public List<CarModelEntity> getAllByIsDeletedFalse() {
-        return this.carModelRepository.findAllByIsDeletedFalse();
-    }
-
-    @Override
-    public List<CarModelEntity> getAllByIsDeletedTrue() {
-        return this.carModelRepository.findAllByIsDeletedTrue();
+    public List<CarModelEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.carModelRepository.findAllByIsDeleted(isDeleted);
     }
 
     @Override

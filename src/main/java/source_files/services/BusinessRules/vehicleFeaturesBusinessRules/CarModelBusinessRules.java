@@ -8,7 +8,7 @@ import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 
 import java.util.List;
 

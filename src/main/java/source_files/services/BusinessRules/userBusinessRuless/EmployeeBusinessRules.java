@@ -8,7 +8,7 @@ import source_files.dataAccess.userRepositories.EmployeeRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
-import source_files.services.entityServices.EmployeeEntityManager;
+import source_files.services.entityServices.userEntityManagers.EmployeeEntityManager;
 
 import java.util.List;
 

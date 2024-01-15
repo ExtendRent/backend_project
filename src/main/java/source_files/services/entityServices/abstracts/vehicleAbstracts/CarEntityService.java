@@ -1,4 +1,4 @@
-package source_files.services.entityServices.abstracts;
+package source_files.services.entityServices.abstracts.vehicleAbstracts;
 
 import source_files.data.models.vehicleEntities.CarEntity;
 

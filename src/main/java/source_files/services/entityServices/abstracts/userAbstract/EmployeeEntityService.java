@@ -1,4 +1,4 @@
-package source_files.services.entityServices.abstracts;
+package source_files.services.entityServices.abstracts.userAbstract;
 
 
 import source_files.data.models.userEntities.EmployeeEntity;
@@ -13,16 +13,17 @@ public interface EmployeeEntityService {
 
     EmployeeEntity getById(int id);
 
+    EmployeeEntity getByPhoneNumber(String phoneNumber);
+
+    EmployeeEntity getByEmailAddress(String emailAddress);
+
     List<EmployeeEntity> getAllBySalaryBetween(double salary1, double salary2);
 
     List<EmployeeEntity> getAll();
 
-    List<EmployeeEntity> getAllByIsDeletedFalse();
-
-    List<EmployeeEntity> getAllByIsDeletedTrue();
+    List<EmployeeEntity> getAllByDeletedState(boolean isDeleted);
 
     void delete(EmployeeEntity employeeEntity);
 
-    EmployeeEntity getByPhoneNumber(String phoneNumber);
 
 }

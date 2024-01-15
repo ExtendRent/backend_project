@@ -15,9 +15,7 @@ public interface ColorService {
 
     List<ColorDTO> getAll() throws Exception;
 
-    List<ColorDTO> getAllByIsDeletedFalse();
-
-    List<ColorDTO> getAllByIsDeletedTrue();
+    List<ColorDTO> getAllByDeletedState(boolean isDeleted);
 
     void delete(int id, boolean hardDelete);
 

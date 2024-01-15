@@ -1,4 +1,4 @@
-package source_files.services.entityServices.abstracts;
+package source_files.services.entityServices.abstracts.userAbstract;
 
 import source_files.data.models.userEntities.CustomerEntity;
 
@@ -17,9 +17,10 @@ public interface CustomerEntityService {
 
     CustomerEntity getByPhoneNumber(String phoneNumber);
 
-    List<CustomerEntity> getAllByIsDeletedFalse();
+    CustomerEntity getByEmailAddress(String emailAddress);
 
-    List<CustomerEntity> getAllByIsDeletedTrue();
+    List<CustomerEntity> getAllByDeletedState(boolean isDeleted);
+
 
     void delete(CustomerEntity customerEntity);
 

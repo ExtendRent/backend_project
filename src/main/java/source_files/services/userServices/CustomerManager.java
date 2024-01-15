@@ -10,7 +10,7 @@ import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.data.types.UserType;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRules;
-import source_files.services.entityServices.abstracts.CustomerEntityService;
+import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
 import source_files.services.userServices.abstracts.CustomerService;
 
 import java.util.List;
@@ -61,6 +61,12 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
+    public CustomerDTO getByEmailAddress(String emailAddress) {
+        return this.modelMapperService.forResponse()
+                .map(customerEntityService.getByEmailAddress(emailAddress), CustomerDTO.class);
+    }
+
+    @Override
     public List<CustomerDTO> getAll() {
         return customerBusinessRules.checkDataList(customerEntityService.getAll())
                 .stream().map(customer -> modelMapperService.forResponse()
@@ -68,16 +74,12 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> getAllByIsDeletedFalse() {
-        return customerBusinessRules.checkDataList(this.customerEntityService.getAllByIsDeletedFalse())
-                .stream().map(customerEntity -> modelMapperService.forResponse().map(customerEntity, CustomerDTO.class)).toList();
+    public List<CustomerDTO> getAllByDeletedState(boolean isDeleted) {
+        return customerBusinessRules.checkDataList(customerEntityService.getAllByDeletedState(isDeleted))
+                .stream().map(customerEntity -> modelMapperService.forResponse()
+                        .map(customerEntity, CustomerDTO.class)).toList();
     }
 
-    @Override
-    public List<CustomerDTO> getAllByIsDeletedTrue() {
-        return customerBusinessRules.checkDataList(this.customerEntityService.getAllByIsDeletedTrue())
-                .stream().map(customerEntity -> modelMapperService.forResponse().map(customerEntity, CustomerDTO.class)).toList();
-    }
 
     @Override
     public void delete(int id, boolean hardDelete) {

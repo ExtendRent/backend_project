@@ -20,9 +20,9 @@ public interface AdminService {
 
     AdminDTO getByPhoneNumber(String phoneNumber);
 
-    List<AdminDTO> getAllByIsDeletedFalse();
+    AdminDTO getByEmailAddress(String emailAddress);
 
-    List<AdminDTO> getAllByIsDeletedTrue();
+    List<AdminDTO> getAllByDeletedState(boolean isDeleted);
 
     void delete(int id, boolean hardDelete);
 

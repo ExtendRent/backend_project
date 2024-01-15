@@ -44,13 +44,9 @@ public class PaymentypeEntityManager implements PaymentTypeEntityService {
     }
 
     @Override
-    public List<PaymentTypeEntity> getAllByIsDeletedFalse() {
-        return this.paymentTypeEntityRepository.findAllByIsDeletedFalse();
-
+    public List<PaymentTypeEntity> getAllByDeletedState(boolean isDeleted) {
+        return this.paymentTypeEntityRepository.findAllByIsDeleted(isDeleted);
     }
 
-    @Override
-    public List<PaymentTypeEntity> getAllByIsDeletedTrue() {
-        return this.paymentTypeEntityRepository.findAllByIsDeletedTrue();
-    }
+
 }

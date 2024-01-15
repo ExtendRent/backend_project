@@ -5,4 +5,5 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Imag
 
 public interface ImageRepository extends JpaRepository<ImagesEntity, Integer> {
 
+
 }

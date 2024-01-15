@@ -1,4 +1,4 @@
-package source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts;
+package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
 
@@ -16,9 +16,7 @@ public interface BrandEntityService {
 
     List<BrandEntity> getAll();
 
-    List<BrandEntity> getAllByIsDeletedFalse();
-
-    List<BrandEntity> getAllByIsDeletedTrue();
+    List<BrandEntity> getAllByDeletedState(boolean isDeleted);
 
     void delete(BrandEntity brandEntity);
 

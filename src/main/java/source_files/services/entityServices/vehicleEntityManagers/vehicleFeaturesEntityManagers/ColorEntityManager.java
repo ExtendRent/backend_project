@@ -1,11 +1,11 @@
-package source_files.services.entityServices.vehicleFeaturesEntityManagers;
+package source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.ColorRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
 
 import java.util.List;
 
@@ -45,12 +45,7 @@ public class ColorEntityManager implements ColorEntityService {
     }
 
     @Override
-    public List<ColorEntity> getAllByIsDeletedFalse() {
-        return this.colorRepository.findAllByIsDeletedFalse();
-    }
-
-    @Override
-    public List<ColorEntity> getAllByIsDeletedTrue() {
-        return this.colorRepository.findAllByIsDeletedTrue();
+    public List<ColorEntity> getAllByDeletedState(boolean isDeleted) {
+        return colorRepository.findAllByIsDeleted(isDeleted);
     }
 }

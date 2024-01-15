@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface PaymentTypeEntityRepository extends JpaRepository<PaymentTypeEntity, Integer> {
 
-    List<PaymentTypeEntity> findAllByIsDeletedFalse();
+    List<PaymentTypeEntity> findAllByIsDeleted(boolean isDeleted);
 
-    List<PaymentTypeEntity> findAllByIsDeletedTrue();
 
 }

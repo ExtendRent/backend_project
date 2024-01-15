@@ -9,7 +9,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorR
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.types.ItemType;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBusinessRules;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
 import java.util.List;
@@ -60,15 +60,10 @@ public class ColorManager implements ColorService {
     }
 
     @Override
-    public List<ColorDTO> getAllByIsDeletedFalse() {
-        return colorBusinessRules.checkDataList(colorEntityService.getAllByIsDeletedFalse())
-                .stream().map(colorEntity -> modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
-    }
+    public List<ColorDTO> getAllByDeletedState(boolean isDeleted) {
 
-    @Override
-    public List<ColorDTO> getAllByIsDeletedTrue() {
-        return colorBusinessRules.checkDataList(colorEntityService.getAllByIsDeletedTrue())
-                .stream().map(colorEntity -> modelMapperService.forResponse().map(colorEntity, ColorDTO.class)).toList();
+        return colorBusinessRules.checkDataList(colorEntityService.getAllByDeletedState(isDeleted)).stream().map(
+                color -> modelMapperService.forResponse().map(color, ColorDTO.class)).toList();
     }
 
     @Override

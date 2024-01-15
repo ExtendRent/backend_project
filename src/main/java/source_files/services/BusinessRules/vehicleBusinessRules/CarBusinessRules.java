@@ -8,10 +8,10 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.BrandEntityService;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.CarModelEntityService;
-import source_files.services.entityServices.abstracts.vehicleFeaturesAbstracts.ColorEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarModelEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
 
 import java.util.List;
 
