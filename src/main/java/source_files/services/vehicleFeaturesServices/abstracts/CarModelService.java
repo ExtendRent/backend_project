@@ -22,8 +22,6 @@ public interface CarModelService {
 
     void delete(int id, boolean hardDelete);
 
-    void hardDelete(int id);
-
     void softDelete(int id);
 
     //--------------------GETBYID METHODS-----------------------------------------------------------------

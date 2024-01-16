@@ -53,6 +53,15 @@ public class CustomExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(NotSuitableException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public TResponse<?> handleAlreadyExistsException(NotSuitableException e) {
+        return TResponse.tResponseBuilder()
+                .message(e.getNotSuitableExceptionType().getMessage())
+                .response(new ErrorResponse(e.getNotSuitableExceptionType(), Collections.singletonList(e.getDetail())))
+                .build();
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

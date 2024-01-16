@@ -6,21 +6,24 @@ import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetails
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentDetailsRequest;
-import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.exception.NotSuitableException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityManager;
 import source_files.services.paperWorkServices.abstracts.DiscountCodeService;
-import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
+import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotSuitableExceptionType.DRIVING_LICENSE_TYPE_NOT_SUITABLE;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @AllArgsConstructor
@@ -28,14 +31,11 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 public class RentalBusinessRules implements BaseBusinessRulesService {
 
     private final RentalEntityManager rentalEntityManager;
-    private final CustomerRepository customerRepository;
 
     private final DiscountCodeService discountCodeService;
     private final CarService carService;
 
-    private final PaymentTypeService paymentTypeService;
-    private PaymentBusinessRules paymentBusinessRules;
-
+    private final CustomerService customerService;
 
     //--------------------- AUTO FIX METHODS ---------------------
     public AddRentalRequest fixAddRentalRequest(AddRentalRequest addRentalRequest) {
@@ -43,7 +43,6 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         if (this.checkDiscountCodeIsNull(addRentalRequest.getDiscountCode())) {
             addRentalRequest.setDiscountCode(this.fixName(addRentalRequest.getDiscountCode()));
         }
-        addRentalRequest.setDiscountCode(this.fixName(addRentalRequest.getDiscountCode()));
         return addRentalRequest;
     }
 
@@ -53,14 +52,16 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     }
 
     //---------------AUTO CHECKING METHODS--------------------------------
+
+    public ShowRentalRequest checkShowRentalRequest(ShowRentalRequest showRentalRequest) {
+        this.checkDrivingLicenseType(showRentalRequest);
+        this.carExists(showRentalRequest.getCarEntityId());
+        this.checkDiscountCode(showRentalRequest.getDiscountCode());
+        return showRentalRequest;
+    }
+
     public AddRentalRequest checkAddRentalRequest(AddRentalRequest addRentalRequest) {
-
-        this.checkEndDate(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
-        this.carExists(addRentalRequest.getCarEntityId());
         this.userExists(addRentalRequest.getCustomerEntityId());
-        this.checkTotalRentalDays(addRentalRequest.getStartDate(), addRentalRequest.getEndDate());
-        this.checkDiscountCode(addRentalRequest.getDiscountCode());
-
         return addRentalRequest;
     }
 
@@ -91,6 +92,15 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         return updatePaymentDetailsRequest;
     }
 
+    public void checkDrivingLicenseType(ShowRentalRequest showRentalRequest) {
+
+        if (!new HashSet<>(this.carService.getById(showRentalRequest.getCarEntityId()).getExpectedDrivingLicenseTypes()).
+                containsAll(this.customerService.getById(showRentalRequest.getCustomerEntityId()).getDrivingLicenseTypes())) {
+            throw new NotSuitableException(DRIVING_LICENSE_TYPE_NOT_SUITABLE, "Ehliyet tipi uygun değil");
+        }
+
+    }
+
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
@@ -105,28 +115,12 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     }
 
 
-    private void checkEndDate(LocalDate startDate, LocalDate endDate) {
-
-        if (endDate.isBefore(startDate) && endDate.isEqual(startDate)) {
-            throw new ValidationException(
-                    VALIDATION_EXCEPTION, "Başlangıç tarihi ile biriş tarihi arasında en az bir gün olmalıdır.");
-        }
-    }
-
     private void carExists(int carId) {
         this.carService.getById(carId);
     }
 
     private void userExists(int customerId) {
-        this.customerRepository.findById(customerId)
-                .orElseThrow(() -> new IllegalStateException("Bu kullanıcı sistemde bulunamadı"));
-    }
-
-    private void checkTotalRentalDays(LocalDate startDate, LocalDate endDate) {
-
-        if (this.calculateTotalRentalDays(startDate, endDate) > 25) {
-            throw new ValidationException(VALIDATION_EXCEPTION, "Kiralama tarihi maksimum 25 gün olabilir. Lütfen tarih aralığınızı buna göre düzenleyiniz.");
-        }
+        this.customerService.getById(customerId);
     }
 
     public void checkDiscountCode(String discountCode) {
@@ -179,26 +173,25 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         return rentalEntity.getPaymentDetailsEntity().getAmount(); //zamanında getirirse
     }
 
-    public double calculateAmount(AddRentalRequest addRentalRequest) {
-        PaymentDetailsEntity paymentDetailsEntity = new PaymentDetailsEntity();
+    public double calculateAmount(ShowRentalRequest showRentalRequest) {
 
         // Discount kodu boşsa, indirim yapılmasına gerek yok
-        if (this.checkDiscountCodeIsNull(addRentalRequest.getDiscountCode())) {
+        if (this.checkDiscountCodeIsNull(showRentalRequest.getDiscountCode())) {
 
             return this.calculateTotalPriceWithDiscount(
                     this.calculateTotalBasePrice(
-                            this.calculateTotalRentalDays(addRentalRequest.getStartDate(), addRentalRequest.getEndDate())
-                            , this.carService.getById(addRentalRequest.getCarEntityId()).getRentalPrice()
+                            this.calculateTotalRentalDays(showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
+                            , this.carService.getById(showRentalRequest.getCarEntityId()).getRentalPrice()
                     )
                     , this.discountCodeService.getByDiscountCode(
-                            addRentalRequest.getDiscountCode()).getDiscountPercentage()
+                            showRentalRequest.getDiscountCode()).getDiscountPercentage()
             );
         } else {
             // Discount kodu yoksa, direkt kira ücretini kullan
 
             return this.calculateTotalBasePrice(
-                    this.calculateTotalRentalDays(addRentalRequest.getStartDate(), addRentalRequest.getEndDate())
-                    , this.carService.getById(addRentalRequest.getCarEntityId()).getRentalPrice()
+                    this.calculateTotalRentalDays(showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
+                    , this.carService.getById(showRentalRequest.getCarEntityId()).getRentalPrice()
             );
         }
     }

@@ -8,6 +8,7 @@ import lombok.Setter;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.DrivingLicenseType;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -48,4 +49,6 @@ public class UpdateCarRequest implements BaseRequest {
     @Min(1)
     @Max(15)
     private int luggage;
+    private boolean isAvailable = true;
+    private LocalDate availabilityDate = null;
 }

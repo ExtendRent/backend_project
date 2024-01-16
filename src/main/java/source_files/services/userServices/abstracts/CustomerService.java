@@ -25,8 +25,6 @@ public interface CustomerService {
 
     void delete(int id, boolean hardDelete);
 
-    void hardDelete(int id);
-
     void softDelete(int id);
 
 

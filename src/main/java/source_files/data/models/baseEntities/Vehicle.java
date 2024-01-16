@@ -10,6 +10,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Colo
 import source_files.data.types.DrivingLicenseType;
 import source_files.data.types.VehicleType;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -42,6 +43,9 @@ public class Vehicle extends BaseEntity {
 
     @Column(name = "is_available")
     private Boolean isAvailable = true;
+
+    @Column()
+    private LocalDate availabilityDate;
 
     @Column(name = "expected_driving_license_types")
     private List<DrivingLicenseType> expectedDrivingLicenseTypes; //-> kullanıcıdan beklenen ehliyet sınıfları.

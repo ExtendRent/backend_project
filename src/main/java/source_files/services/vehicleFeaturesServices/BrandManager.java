@@ -71,15 +71,10 @@ public class BrandManager implements BrandService {
     public void delete(int id, boolean hardDelete) {
 
         if (hardDelete) {
-            this.hardDelete(id);
+            this.brandEntityService.delete(this.brandEntityService.getById(id));
         } else {
             this.softDelete(id);
         }
-    }
-
-    @Override
-    public void hardDelete(int id) {
-        this.brandEntityService.delete(this.brandEntityService.getById(id));
     }
 
     @Override

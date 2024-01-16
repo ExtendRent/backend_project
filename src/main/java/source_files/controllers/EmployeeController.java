@@ -2,6 +2,7 @@ package source_files.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.userDTOs.EmployeeDTO;
@@ -18,44 +19,41 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @PostMapping("/add/employee")
-    public ResponseEntity<TResponse<?>> addEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.employeeService.add(addEmployeeRequest))
-                .message("Çalışan eklendi.")
-                .build()
-        );
+    @PostMapping
+    public ResponseEntity<HttpStatus> addEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
+        this.employeeService.add(addEmployeeRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update/employee")
-    public ResponseEntity<TResponse<?>> updateEmployee(@RequestBody @Valid UpdateEmployeeRequest updateEmployeeRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @PutMapping
+    public ResponseEntity<TResponse<EmployeeDTO>> updateEmployee(@RequestBody @Valid UpdateEmployeeRequest updateEmployeeRequest) {
+        return ResponseEntity.ok(TResponse.<EmployeeDTO>tResponseBuilder()
                 .response(this.employeeService.update(updateEmployeeRequest))
                 .message("Çalışan güncellendi.")
                 .build()
         );
     }
 
-    @GetMapping("/getAll")
-    public ResponseEntity<TResponse<?>> getAll() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @GetMapping("/")
+    public ResponseEntity<TResponse<List<EmployeeDTO>>> getAll() {
+        return ResponseEntity.ok(TResponse.<List<EmployeeDTO>>tResponseBuilder()
                 .response(this.employeeService.getAll())
                 .message("Çalışan listesi getirildi.")
                 .build()
         );
     }
 
-    @GetMapping("/getById")
-    public ResponseEntity<TResponse<?>> getById(@RequestParam int id) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @GetMapping("{id}")
+    public ResponseEntity<TResponse<EmployeeDTO>> getById(@PathVariable int id) {
+        return ResponseEntity.ok(TResponse.<EmployeeDTO>tResponseBuilder()
                 .response(this.employeeService.getById(id))
                 .message("Çalışan getirildi.")
                 .build()
         );
     }
 
-    @GetMapping("/getPhoneNumber")
-    public ResponseEntity<TResponse<?>> getByPhoneNumber(@RequestParam String phoneNumber) {
+    @GetMapping("{phoneNumber}")
+    public ResponseEntity<TResponse<?>> getByPhoneNumber(@PathVariable String phoneNumber) {
         return ResponseEntity.ok(TResponse.tResponseBuilder()
                 .response(this.employeeService.getByPhoneNumber(phoneNumber))
                 .message("Telefon Numarasına Göre Getirildi")
@@ -63,11 +61,12 @@ public class EmployeeController {
         );
     }
 
-    @GetMapping("/getAllBySalaryBetween")
-    public ResponseEntity<TResponse<?>> getAllBySalaryBetween(@RequestParam Double salary1, Double salary2) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.employeeService.findAllBySalaryBetween(salary1, salary2))
-                .message(salary1 + "TL ve " + salary2 + "TL Arasındaki Aylık Ücrete Göre Getirildi.")
+    @GetMapping(params = {"startSalary", "endSalary"})
+    public ResponseEntity<TResponse<List<EmployeeDTO>>> getAllBySalaryBetween(
+            @RequestParam(name = "startSalary") Double startSalary, @RequestParam(name = "endSalary") Double endSalary) {
+        return ResponseEntity.ok(TResponse.<List<EmployeeDTO>>tResponseBuilder()
+                .response(this.employeeService.findAllBySalaryBetween(startSalary, endSalary))
+                .message(startSalary + "TL ve " + endSalary + "TL Arasındaki Aylık Ücrete Göre Getirildi.")
                 .build()
         );
     }
@@ -82,14 +81,12 @@ public class EmployeeController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
+    @DeleteMapping(params = {"id", "isHardDelete"})
+    public ResponseEntity<HttpStatus> delete(
+            @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.employeeService.delete(id, isHardDelete);
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .message("Çalışan silindi.")
-                .build()
-        );
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -12,6 +12,7 @@ import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,7 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<CarDTO> getAll() throws Exception {
+    public List<CarDTO> getAll() {
         //bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
         return businessRules.checkDataList(carEntityService.getAll())
                 .stream()
@@ -103,8 +104,24 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<CarDTO> getAllByYearBetween(int year1, int year2) {
-        return this.businessRules.checkDataList(this.carEntityService.getAllByYearBetween(year1, year2))
+    public List<CarDTO> getAllByYearBetween(int startYear, int endYear) {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByYearBetween(startYear, endYear))
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByRentalPriceBetween(double startPrice, double endPrice) {
+        return this.businessRules.checkDataList(this.carEntityService.getAllByRentalPriceBetween(startPrice, endPrice))
+                .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
+
+    @Override
+    public List<CarDTO> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate) {
+        LocalDate effectiveStartDate = startDate != null ? startDate : LocalDate.now();
+        LocalDate effectiveEndDate = endDate != null ? endDate : effectiveStartDate.plusDays(25);
+        this.businessRules.checkDates(effectiveStartDate, effectiveEndDate);
+
+        return this.businessRules.checkDataList(this.carEntityService.getAllByAvailabilityBetween(startDate, endDate))
                 .stream().map(carEntity -> modelMapperService.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
@@ -112,16 +129,10 @@ public class CarManager implements CarService {
     public void delete(int id, boolean hardDelete) {
 
         if (hardDelete) {
-            this.hardDelete(id);
+            this.carEntityService.delete(this.carEntityService.getById(id));
         } else {
             this.softDelete(id);
         }
-    }
-
-
-    @Override
-    public void hardDelete(int id) {
-        this.carEntityService.delete(this.carEntityService.getById(id));
     }
 
     @Override

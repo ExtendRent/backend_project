@@ -3,6 +3,7 @@ package source_files.services.entityServices.paperWorkEntityManagers;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
+import source_files.data.types.PaymentType;
 import source_files.dataAccess.paperWorkRepositories.PaymentTypeEntityRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
@@ -36,6 +37,11 @@ public class PaymentypeEntityManager implements PaymentTypeEntityService {
     public PaymentTypeEntity getById(int id) {
         return this.paymentTypeEntityRepository.findById(id).orElseThrow(() ->
                 new DataNotFoundException(PAYMENT_TYPE_NOT_FOUND, "Payment type bulunamadı."));
+    }
+
+    @Override
+    public PaymentTypeEntity getByPaymentType(PaymentType paymentType) {
+        return this.paymentTypeEntityRepository.findByPaymentType(paymentType);
     }
 
     @Override

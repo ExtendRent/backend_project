@@ -87,15 +87,10 @@ public class AdminManager implements AdminService {
     public void delete(int id, boolean hardDelete) {
 
         if (hardDelete) {
-            this.hardDelete(id);
+            this.adminEntityService.delete(adminEntityService.getById(id));
         } else {
             this.softDelete(id);
         }
-    }
-
-    @Override
-    public void hardDelete(int id) {
-        this.adminEntityService.delete(adminEntityService.getById(id));
     }
 
     @Override

@@ -38,8 +38,13 @@ public class PaymentTypeManager implements PaymentTypeService {
     }
 
     @Override
-    public void delete(int id) {
-        this.paymentTypeEntityService.delete(this.paymentTypeEntityService.getById(id));
+    public void delete(int id, boolean hardDelete) {
+        if (hardDelete) {
+            this.paymentTypeEntityService.delete(this.paymentTypeEntityService.getById(id));
+        } else {
+            this.softDelete(id);
+        }
+
     }
 
     @Override

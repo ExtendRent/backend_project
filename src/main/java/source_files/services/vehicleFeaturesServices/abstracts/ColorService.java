@@ -19,8 +19,6 @@ public interface ColorService {
 
     void delete(int id, boolean hardDelete);
 
-    void hardDelete(int id);
-
     void softDelete(int id);
 
 }

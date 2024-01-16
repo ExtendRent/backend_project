@@ -36,6 +36,7 @@ public class CarEntity extends Vehicle {
             , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private ImagesEntity imagesEntity;
 
+
     //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş
 
     public CarDTO convertToDTO() {

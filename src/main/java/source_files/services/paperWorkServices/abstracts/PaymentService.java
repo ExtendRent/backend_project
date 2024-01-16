@@ -1,11 +1,10 @@
 package source_files.services.paperWorkServices.abstracts;
 
-import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
+import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
 
 public interface PaymentService {
 
-    boolean payWithCreditCard(double amount,
-                              CreditCardInformation creditCardInformation);
+    AddRentalRequest payWithCreditCard(AddRentalRequest addRentalRequest);
 
 
 }

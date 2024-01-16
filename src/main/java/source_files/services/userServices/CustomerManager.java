@@ -84,15 +84,10 @@ public class CustomerManager implements CustomerService {
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            this.hardDelete(id);
+            this.customerEntityService.delete(customerEntityService.getById(id));
         } else {
             this.softDelete(id);
         }
-    }
-
-    @Override
-    public void hardDelete(int id) {
-        this.customerEntityService.delete(customerEntityService.getById(id));
     }
 
     @Override

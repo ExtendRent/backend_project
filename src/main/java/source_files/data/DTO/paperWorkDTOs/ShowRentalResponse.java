@@ -17,5 +17,6 @@ public class ShowRentalResponse {
     LocalDate startDate;
     LocalDate endDate;
 
+    String discountCode;
     double amount;
 }

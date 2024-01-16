@@ -83,15 +83,10 @@ public class EmployeeManager implements EmployeeService {
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            this.hardDelete(id);
+            this.employeeEntityService.delete(employeeEntityService.getById(id));
         } else {
             this.softDelete(id);
         }
-    }
-
-    @Override
-    public void hardDelete(int id) {
-        this.employeeEntityService.delete(employeeEntityService.getById(id));
     }
 
     @Override

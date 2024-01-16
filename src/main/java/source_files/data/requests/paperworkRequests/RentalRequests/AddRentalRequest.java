@@ -3,11 +3,14 @@ package source_files.data.requests.paperworkRequests.RentalRequests;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
+import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.requests.BaseRequest;
 
 import java.time.LocalDate;
@@ -31,8 +34,15 @@ public class AddRentalRequest implements BaseRequest {
     @NotNull(message = "EndDate cannot be null")
     @FutureOrPresent(message = "EndDate must be a future or present date")
     private LocalDate endDate;
-
+    @NotNull
+    @NotBlank
+    private Integer paymentTypeId;
+    @Nullable
+    private CreditCardInformation creditCardInformation;
+    @Nullable
+    private Double amount;
     @Nullable
     private String discountCode;
-
+    @Nullable
+    private PaymentDetailsDTO paymentDetailsDTO;
 }

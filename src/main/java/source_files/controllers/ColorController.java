@@ -2,6 +2,7 @@ package source_files.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.ColorDTO;
@@ -19,36 +20,33 @@ public class ColorController {
     private ColorService colorService;
 
 
-    @PostMapping("/add/color")
-    public ResponseEntity<TResponse<?>> addColor(@RequestBody @Valid AddColorRequest addColorRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .response(this.colorService.add(addColorRequest))
-                .message("Renk eklendi")
-                .build()
-        );
+    @PostMapping
+    public ResponseEntity<TResponse<HttpStatus>> addColor(@RequestBody @Valid AddColorRequest addColorRequest) {
+        this.colorService.add(addColorRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update/color")
-    public ResponseEntity<TResponse<?>> updateColor(@RequestBody @Valid UpdateColorRequest updateColorRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @PutMapping
+    public ResponseEntity<TResponse<ColorDTO>> updateColor(@RequestBody @Valid UpdateColorRequest updateColorRequest) {
+        return ResponseEntity.ok(TResponse.<ColorDTO>tResponseBuilder()
                 .response(this.colorService.update(updateColorRequest))
                 .message("Renk güncellendi")
                 .build()
         );
     }
 
-    @GetMapping("getById/{id}")
-    public ResponseEntity<TResponse<?>> getById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @GetMapping("{id}")
+    public ResponseEntity<TResponse<ColorDTO>> getById(@PathVariable int id) {
+        return ResponseEntity.ok(TResponse.<ColorDTO>tResponseBuilder()
                 .response(this.colorService.getById(id))
                 .message(id + " id' li renk görüntülendi")
                 .build()
         );
     }
 
-    @GetMapping("getAll")
-    public ResponseEntity<TResponse<?>> getAll() throws Exception {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @GetMapping("/")
+    public ResponseEntity<TResponse<List<ColorDTO>>> getAll() throws Exception {
+        return ResponseEntity.ok(TResponse.<List<ColorDTO>>tResponseBuilder()
                 .response(this.colorService.getAll())
                 .message("Renk Listesi döndü.")
                 .build()
@@ -60,19 +58,17 @@ public class ColorController {
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
         return ResponseEntity.ok(TResponse.<List<ColorDTO>>tResponseBuilder()
                 .response(this.colorService.getAllByDeletedState(isDeleted))
-                .message("Silinmeyen Araba Listesi döndü.")
+                .message("Silinene göre renk Listesi döndü.")
                 .build()
         );
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
+    @DeleteMapping(params = {"id", "isHardDelete"})
+    public ResponseEntity<HttpStatus> delete(
+            @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.colorService.delete(id, isHardDelete);
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .message("Renk silindi.")
-                .build()
-        );
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

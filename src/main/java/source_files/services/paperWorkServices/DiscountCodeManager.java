@@ -47,8 +47,12 @@ public class DiscountCodeManager implements DiscountCodeService {
     }
 
     @Override
-    public void delete(int id, boolean harDelete) {
-        this.discountCodeEntityService.delete(this.discountCodeEntityService.getById(id));
+    public void delete(int id, boolean hardDelete) {
+        if (hardDelete) {
+            this.discountCodeEntityService.delete(this.discountCodeEntityService.getById(id));
+        } else {
+            this.softDelete(id);
+        }
     }
 
     @Override

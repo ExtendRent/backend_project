@@ -81,15 +81,10 @@ public class CarModelManager implements CarModelService {
     public void delete(int id, boolean hardDelete) {
 
         if (hardDelete) {
-            this.hardDelete(id);
+            this.carModelEntityService.delete(this.carModelEntityService.getById(id));
         } else {
             this.softDelete(id);
         }
-    }
-
-    @Override
-    public void hardDelete(int id) {
-        this.carModelEntityService.delete(this.carModelEntityService.getById(id));
     }
 
     @Override

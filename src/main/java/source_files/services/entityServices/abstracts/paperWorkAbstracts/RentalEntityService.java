@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RentalEntityService {
 
-    RentalEntity add(RentalEntity rentalEntity);
+    void add(RentalEntity rentalEntity);
 
     RentalEntity update(RentalEntity rentalEntity);
 

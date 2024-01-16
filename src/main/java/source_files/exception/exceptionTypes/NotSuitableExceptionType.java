@@ -5,13 +5,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PaymentExceptionType {
+public enum NotSuitableExceptionType {
 
-
-    PAYMENT_REJECTED(4000, "Payment Rejected From Your Bank !"),
-    CREDIT_CARD_INFORMATION_NOT_VERIFIED(4001, "Your Credit Card Informations Not Verified !");
+    DRIVING_LICENSE_TYPE_NOT_SUITABLE(5000, "Driving License Type Not Suitable !");
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;
-
 }

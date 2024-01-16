@@ -8,6 +8,6 @@ import source_files.data.types.PaymentType;
 @Setter
 public class PaymentTypeDTO {
     int id;
-    String paymentTypeEntityName;
-    PaymentType paymentTypeEntityPaymentType;
+    String name;
+    PaymentType paymentType;
 }

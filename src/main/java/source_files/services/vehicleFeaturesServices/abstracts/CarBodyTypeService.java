@@ -19,7 +19,5 @@ public interface CarBodyTypeService {
 
     List<CarBodyTypeDTO> getAllByDeletedState(boolean isDeleted);
 
-    void hardDelete(int id);
-
     void softDelete(int id);
 }

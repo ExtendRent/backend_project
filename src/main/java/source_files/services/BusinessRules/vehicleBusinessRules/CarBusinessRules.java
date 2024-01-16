@@ -7,16 +7,20 @@ import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
+import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.LICENSE_PLATE_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @AllArgsConstructor
 @Service
@@ -62,6 +66,11 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return updateCarRequest;
     }
 
+    public void checkDates(LocalDate startDate, LocalDate endDate) {
+        this.checkEndDate(startDate, endDate);
+        this.checkTotalRentalDays(startDate, endDate);
+    }
+
     //----------------------------METHODS--------------------------------
     @Override
     public List<?> checkDataList(List<?> list) {
@@ -86,6 +95,21 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     private void checkLicensePlateAndIdNot(String licensePlate, int id) {
         if (this.carRepository.existsByLicensePlateAndIdNot(licensePlate, id)) {
             throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
+        }
+    }
+
+    private void checkEndDate(LocalDate startDate, LocalDate endDate) {
+
+        if (endDate.isBefore(startDate) && endDate.isEqual(startDate)) {
+            throw new ValidationException(
+                    VALIDATION_EXCEPTION, "Başlangıç tarihi ile biriş tarihi arasında en az bir gün olmalıdır.");
+        }
+    }
+
+    private void checkTotalRentalDays(LocalDate startDate, LocalDate endDate) {
+
+        if ((int) ChronoUnit.DAYS.between(startDate, endDate) > 25) {
+            throw new ValidationException(VALIDATION_EXCEPTION, "Kiralama tarihi maksimum 25 gün olabilir. Lütfen tarih aralığınızı buna göre düzenleyiniz.");
         }
     }
 

@@ -3,17 +3,17 @@ package source_files.services.paperWorkServices;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
-import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
-import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
-import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
+import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountCodeEntityService;
+import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 import source_files.services.systemServices.SysPaymentDetailsService;
@@ -33,35 +33,35 @@ public class RentalManager implements RentalService {
     private final CarService carService;
     private final SysPaymentDetailsService sysPaymentDetailsService;
     private final CustomerService customerService;
+
+    PaymentTypeEntityService paymentTypeEntityService;
+    DiscountCodeEntityService discountCodeEntityService;
     private RentalBusinessRules rentalBusinessRules;
 
     @Override
-    public ShowRentalResponse showRentalDetails(AddRentalRequest addRentalRequest) {
+    public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
 
-        return this.convertToShowRentalResponse(addRentalRequest);
+        return this.convertToShowRentalResponse(showRentalRequest);
     }
 
     @Override
-    public RentalDTO add(AddRentalRequest addRentalRequest, PaymentDetailsDTO paymentDetailsDTO) {
+    public void add(AddRentalRequest addRentalRequest) {
         // indirim işlemleri sonucu totalPrice hesaplama
 
         RentalEntity rentalEntity = modelMapperService.forRequest()
                 .map(rentalBusinessRules.checkAddRentalRequest(
-                        rentalBusinessRules.fixAddRentalRequest(addRentalRequest)), RentalEntity.class);
+                                rentalBusinessRules.fixAddRentalRequest(addRentalRequest))
+                        , source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity.class);
 
-        PaymentDetailsEntity paymentDetailsEntity = new PaymentDetailsEntity(
-
-                paymentDetailsDTO.getAmount()
-                , new PaymentTypeEntity(
-                paymentDetailsDTO.getPaymentTypeDTO().getPaymentTypeEntityName()
-                , paymentDetailsDTO.getPaymentTypeDTO().getPaymentTypeEntityPaymentType())
+        rentalEntity.setPaymentDetailsEntity(
+                this.sysPaymentDetailsService.getById(addRentalRequest.getPaymentDetailsDTO().getId())
         );
-
-        rentalEntity.setPaymentDetailsEntity(paymentDetailsEntity);
+        rentalEntity.setDiscountCodeEntity(this.discountCodeEntityService
+                .getByDiscountCode(addRentalRequest.getDiscountCode())
+        );
         rentalEntity.setStartKilometer(carService.getById(addRentalRequest.getCarEntityId()).getKilometer());
         rentalEntity.setItemType(RENTAL);
-
-        return this.modelMapperService.forResponse().map(rentalEntityService.add(rentalEntity), RentalDTO.class);
+        rentalEntityService.add(rentalEntity);
     }
 
     @Override
@@ -90,13 +90,19 @@ public class RentalManager implements RentalService {
     }
 
     @Override
-    public void delete(int id) {
-        this.rentalEntityService.delete(this.rentalEntityService.getById(id));
+    public void delete(int id, boolean hardDelete) {
+        if (hardDelete) {
+            this.rentalEntityService.delete(this.rentalEntityService.getById(id));
+        } else {
+            this.softDelete(id);
+        }
     }
 
     @Override
     public void softDelete(int id) {
-
+        RentalEntity rentalEntity = this.rentalEntityService.getById(id);
+        rentalEntity.setIsDeleted(true);
+        rentalEntityService.update(rentalEntity);
     }
 
     @Override
@@ -113,18 +119,15 @@ public class RentalManager implements RentalService {
     }
 
 
-    public ShowRentalResponse convertToShowRentalResponse(AddRentalRequest addRentalRequest) {
+    public ShowRentalResponse convertToShowRentalResponse(ShowRentalRequest showRentalRequest) {
 
         ShowRentalResponse showRentalResponse = this.modelMapperService.forResponse()
-                .map(this.rentalBusinessRules.checkAddRentalRequest(
-                                this.rentalBusinessRules.fixAddRentalRequest(addRentalRequest)
-                        ), ShowRentalResponse.class
-                );//endDate ve startDate almak için mapledik.
+                .map(this.rentalBusinessRules.checkShowRentalRequest(showRentalRequest), ShowRentalResponse.class
+                );
 
-        showRentalResponse.setCarDTO(carService.getById(addRentalRequest.getCarEntityId()));
-        showRentalResponse.setCustomerDTO(customerService.getById(addRentalRequest.getCustomerEntityId()));
-        showRentalResponse.setAmount(this.rentalBusinessRules.calculateAmount(addRentalRequest));
-
+        showRentalResponse.setCarDTO(carService.getById(showRentalRequest.getCarEntityId()));
+        showRentalResponse.setCustomerDTO(customerService.getById(showRentalRequest.getCustomerEntityId()));
+        showRentalResponse.setAmount(this.rentalBusinessRules.calculateAmount(showRentalRequest));
         return showRentalResponse;
     }
 }

@@ -7,6 +7,7 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_DATA_NOT_FOUND;
@@ -52,6 +53,16 @@ public class CarEntityManager implements CarEntityService {
     @Override
     public List<CarEntity> getAllByColorId(int id) {
         return this.carRepository.findAllByColorEntity_Id(id);
+    }
+
+    @Override
+    public List<CarEntity> getAllByRentalPriceBetween(double startPrice, double endPrice) {
+        return this.carRepository.findAllByRentalPriceBetween(startPrice, endPrice);
+    }
+
+    @Override
+    public List<CarEntity> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate) {
+        return this.carRepository.findAllByAvailabilityDateBetween(startDate, endDate);
     }
 
     @Override

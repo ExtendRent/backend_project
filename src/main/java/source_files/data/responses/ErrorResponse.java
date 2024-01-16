@@ -3,10 +3,7 @@ package source_files.data.responses;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.exception.exceptionTypes.AlreadyExistsExceptionType;
-import source_files.exception.exceptionTypes.NotFoundExceptionType;
-import source_files.exception.exceptionTypes.PaymentExceptionType;
-import source_files.exception.exceptionTypes.ValidationExceptionType;
+import source_files.exception.exceptionTypes.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,6 +36,11 @@ public class ErrorResponse {
 
     public ErrorResponse(PaymentExceptionType paymentExceptionType, List<String> details) {
         this.errorCode = paymentExceptionType.getErrorCode();
+        this.details = details;
+    }
+
+    public ErrorResponse(NotSuitableExceptionType notSuitableExceptionType, List<String> details) {
+        this.errorCode = notSuitableExceptionType.getErrorCode();
         this.details = details;
     }
 

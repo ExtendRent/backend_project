@@ -12,6 +12,7 @@ import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -47,7 +48,7 @@ public class CarController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAll() throws Exception {
+    public ResponseEntity<TResponse<List<CarDTO>>> getAll() {
         return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAll())
                 .message("Araba Listesi döndü.")
@@ -55,6 +56,30 @@ public class CarController {
         );
     }
 
+    @GetMapping("{startDate},{endDate}")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailabilityBetween(
+            @RequestParam(name = "startDate", required = false) LocalDate startDate
+            , @RequestParam(name = "endDate", required = false) LocalDate endDate) {
+
+
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByAvailabilityBetween(startDate, endDate))
+                .message("Araba Listesi döndü.")
+                .build()
+        );
+    }
+
+    @GetMapping("{startPrice},{endPrice}")
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailabilityBetween(
+            @RequestParam(name = "startPrice", required = false) double startPrice
+            , @RequestParam(name = "endDate", required = false) double endPrice) {
+
+        return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
+                .response(this.carService.getAllByRentalPriceBetween(startPrice, endPrice))
+                .message("Araba Listesi döndü.")
+                .build()
+        );
+    }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<CarDTO>>> getAllByDeletedState(
@@ -95,12 +120,12 @@ public class CarController {
         );
     }
 
-    @GetMapping(params = {"startDate", "endDate"})
+    @GetMapping(params = {"startYear", "endYear"})
     public ResponseEntity<TResponse<List<CarDTO>>> getAllByYearBetween(
-            @RequestParam(name = "startDate", required = false) int startDate, @RequestParam(value = "endDate") int endDate) {
+            @RequestParam(name = "startYear", required = false) int startYear, @RequestParam(value = "endYear") int endYear) {
 
         return ResponseEntity.ok(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByYearBetween(startDate, endDate))
+                .response(this.carService.getAllByYearBetween(startYear, endYear))
                 .message("Araba Listesi döndü.")
                 .build()
         );

@@ -2,6 +2,7 @@ package source_files.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,27 +22,43 @@ public class DiscountCodeController {
 
     private DiscountCodeService discountCodeService;
 
-    @PostMapping("/add")
-    public ResponseEntity<TResponse<DiscountCodeDTO>> addDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) {
-        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
-                .response(this.discountCodeService.add(addDiscountCodeRequest))
-                .message("Ödeme tipi ekleme işlemi başarılı")
-                .build()
-        );
+    @PostMapping
+    public ResponseEntity<HttpStatus> addDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) {
+        this.discountCodeService.add(addDiscountCodeRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<TResponse<?>> updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @PutMapping
+    public ResponseEntity<TResponse<DiscountCodeDTO>> updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) {
+        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
                 .response(this.discountCodeService.update(updateDiscountCodeRequest))
                 .message("Ödeme tipi güncelleme işlemi başarılı")
                 .build()
         );
     }
 
-    @GetMapping("/getAll")
-    public ResponseEntity<TResponse<?>> getAllDiscountCodes() {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+    @GetMapping("{id}")
+    public ResponseEntity<TResponse<DiscountCodeDTO>> getDiscountCodeById(@PathVariable int id) {
+        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
+                .response(this.discountCodeService.getById(id))
+                .message("Kiralama kayıtları görüntülendi")
+                .build()
+        );
+    }
+
+    @GetMapping("{discountCode}")
+    public ResponseEntity<TResponse<DiscountCodeDTO>> getDiscountCodeByDiscountCodeStr(@PathVariable String discountCode) {
+        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
+                .response(this.discountCodeService.getByDiscountCode(discountCode))
+                .message("Kiralama kayıtları görüntülendi")
+                .build()
+        );
+    }
+
+
+    @GetMapping("/")
+    public ResponseEntity<TResponse<List<DiscountCodeDTO>>> getAllDiscountCodes() {
+        return ResponseEntity.ok(TResponse.<List<DiscountCodeDTO>>tResponseBuilder()
                 .response(this.discountCodeService.getAll())
                 .message("Kiralama kayıtları görüntülendi")
                 .build()
@@ -58,14 +75,12 @@ public class DiscountCodeController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<TResponse<?>> delete(@PathVariable int id, boolean isHardDelete) {
+    @DeleteMapping(params = {"id", "isHardDelete"})
+    public ResponseEntity<HttpStatus> delete(
+            @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.discountCodeService.delete(id, isHardDelete);
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
-                .message("Müşteri silindi.")
-                .build()
-        );
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

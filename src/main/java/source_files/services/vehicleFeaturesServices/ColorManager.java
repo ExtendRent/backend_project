@@ -69,15 +69,10 @@ public class ColorManager implements ColorService {
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            this.hardDelete(id);
+            this.colorEntityService.delete(this.colorEntityService.getById(id));
         } else {
             this.softDelete(id);
         }
-    }
-
-    @Override
-    public void hardDelete(int id) {
-        this.colorEntityService.delete(this.colorEntityService.getById(id));
     }
 
     @Override

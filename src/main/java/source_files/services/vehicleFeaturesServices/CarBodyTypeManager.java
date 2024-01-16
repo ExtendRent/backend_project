@@ -56,7 +56,7 @@ public class CarBodyTypeManager implements CarBodyTypeService {
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete)
-            this.hardDelete(id);
+            this.carBodyTypeEntityService.delete(this.carBodyTypeEntityService.getById(id));
         else
             this.softDelete(id);
     }
@@ -68,10 +68,6 @@ public class CarBodyTypeManager implements CarBodyTypeService {
                         .map(carBodyType, CarBodyTypeDTO.class)).collect(Collectors.toList());
     }
 
-    @Override
-    public void hardDelete(int id) {
-        this.carBodyTypeEntityService.delete(this.carBodyTypeEntityService.getById(id));
-    }
 
     @Override
     public void softDelete(int id) {

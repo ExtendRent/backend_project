@@ -1,20 +1,19 @@
 package source_files.services.paperWorkServices.abstracts;
 
-import org.apache.coyote.BadRequestException;
-import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
 import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 
 import java.util.List;
 
 public interface RentalService {
 
-    ShowRentalResponse showRentalDetails(AddRentalRequest addRentalRequest);
+    ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest);
 
-    RentalDTO add(AddRentalRequest addRentalRequest, PaymentDetailsDTO paymentDetailsDTO) throws BadRequestException;
+    void add(AddRentalRequest addRentalRequest);
 
     RentalDTO returnCar(ReturnRentalRequest returnRentalRequest);
 
@@ -22,7 +21,7 @@ public interface RentalService {
 
     RentalDTO getById(int id);
 
-    void delete(int id);
+    void delete(int id, boolean isHardDelete);
 
     void softDelete(int id);
 

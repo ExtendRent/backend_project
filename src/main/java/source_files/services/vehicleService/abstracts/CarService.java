@@ -4,6 +4,7 @@ import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CarService {
@@ -14,7 +15,7 @@ public interface CarService {
 
     CarDTO update(UpdateCarRequest updateCarRequest);
 
-    List<CarDTO> getAll() throws Exception;
+    List<CarDTO> getAll();
 
     List<CarDTO> getAllByDeletedState(boolean isDeleted);
 
@@ -26,11 +27,13 @@ public interface CarService {
 
     List<CarDTO> getAllByBrandId(int id);
 
-    List<CarDTO> getAllByYearBetween(int year1, int year2);
+    List<CarDTO> getAllByYearBetween(int startYear, int endYear);
+
+    List<CarDTO> getAllByRentalPriceBetween(double startPrice, double endPrice);
+
+    List<CarDTO> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate);
 
     void delete(int id, boolean hardDelete);
-
-    void hardDelete(int id);
 
     void softDelete(int id);
 
