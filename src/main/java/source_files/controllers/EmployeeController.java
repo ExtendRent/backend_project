@@ -14,7 +14,7 @@ import source_files.services.userServices.abstracts.EmployeeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/employee")
+@RequestMapping("api/v1/employee")
 @AllArgsConstructor
 public class EmployeeController {
     private final EmployeeService employeeService;

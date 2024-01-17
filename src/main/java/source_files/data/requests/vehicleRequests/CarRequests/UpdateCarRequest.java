@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.DrivingLicenseType;
+import source_files.data.types.itemTypes.DrivingLicenseType;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,6 +43,10 @@ public class UpdateCarRequest implements BaseRequest {
     @NotNull
     @NotEmpty
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
+    @NotNull
+    String shiftType;
+    @NotNull
+    String fuelType;
     @Min(1)
     @Max(15)
     private int seat;

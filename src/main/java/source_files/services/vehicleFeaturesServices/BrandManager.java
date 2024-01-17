@@ -14,7 +14,7 @@ import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.types.ItemType.BRAND;
+import static source_files.data.types.itemTypes.ItemType.BRAND;
 
 @Service
 @AllArgsConstructor

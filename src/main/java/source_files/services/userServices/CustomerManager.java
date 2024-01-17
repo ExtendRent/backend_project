@@ -7,7 +7,7 @@ import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
-import source_files.data.types.UserType;
+import source_files.data.types.userTypes.UserType;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRules;
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;

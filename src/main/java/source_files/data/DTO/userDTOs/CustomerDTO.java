@@ -1,7 +1,7 @@
 package source_files.data.DTO.userDTOs;
 
 import lombok.*;
-import source_files.data.types.DrivingLicenseType;
+import source_files.data.types.itemTypes.DrivingLicenseType;
 
 import java.util.List;
 

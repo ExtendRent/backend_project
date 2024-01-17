@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.UserEntity;
-import source_files.data.types.EmployeeType;
+import source_files.data.types.userTypes.EmployeeType;
 
 @Getter
 @Setter

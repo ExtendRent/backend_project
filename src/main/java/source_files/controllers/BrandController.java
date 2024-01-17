@@ -15,7 +15,7 @@ import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/brand")
+@RequestMapping("api/v1/brand")
 @AllArgsConstructor
 @Validated
 public class BrandController {

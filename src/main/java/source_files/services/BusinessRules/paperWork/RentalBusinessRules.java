@@ -54,7 +54,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     //---------------AUTO CHECKING METHODS--------------------------------
 
     public ShowRentalRequest checkShowRentalRequest(ShowRentalRequest showRentalRequest) {
-        this.checkDrivingLicenseType(showRentalRequest);
+        this.checkDrivingLicenseType(showRentalRequest.getCarEntityId(), showRentalRequest.getCustomerEntityId());
         this.carExists(showRentalRequest.getCarEntityId());
         this.checkDiscountCode(showRentalRequest.getDiscountCode());
         return showRentalRequest;
@@ -92,13 +92,13 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         return updatePaymentDetailsRequest;
     }
 
-    public void checkDrivingLicenseType(ShowRentalRequest showRentalRequest) {
-
-        if (!new HashSet<>(this.carService.getById(showRentalRequest.getCarEntityId()).getExpectedDrivingLicenseTypes()).
-                containsAll(this.customerService.getById(showRentalRequest.getCustomerEntityId()).getDrivingLicenseTypes())) {
+    public void checkDrivingLicenseType(int carId, Integer customerId) {
+        //Giriş yapmadan araç listeleyebilmek için customerId null verilebilmelidir.
+        //CustomerId verilmiş ise ve beklenen ehliyet tipine uyuyorsa:
+        if (customerId != null && !new HashSet<>(this.carService.getById(carId).getExpectedDrivingLicenseTypes()).
+                containsAll(this.customerService.getById(customerId).getDrivingLicenseTypes())) {
             throw new NotSuitableException(DRIVING_LICENSE_TYPE_NOT_SUITABLE, "Ehliyet tipi uygun değil");
         }
-
     }
 
     @Override

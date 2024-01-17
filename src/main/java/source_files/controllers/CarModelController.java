@@ -13,7 +13,7 @@ import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/carModel")
+@RequestMapping("api/v1/carModel")
 @AllArgsConstructor
 public class CarModelController {
 

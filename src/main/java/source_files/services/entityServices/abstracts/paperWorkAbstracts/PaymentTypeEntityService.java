@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.paperWorkAbstracts;
 
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
-import source_files.data.types.PaymentType;
+import source_files.data.types.itemTypes.PaymentType;
 
 import java.util.List;
 

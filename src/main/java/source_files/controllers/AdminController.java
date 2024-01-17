@@ -14,7 +14,7 @@ import source_files.services.userServices.abstracts.AdminService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/admin")
+@RequestMapping("api/v1/admin")
 @AllArgsConstructor
 public class AdminController {
     private final AdminService adminService;

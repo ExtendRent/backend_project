@@ -15,7 +15,7 @@ import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.types.ItemType.CAR_MODEL;
+import static source_files.data.types.itemTypes.ItemType.CAR_MODEL;
 
 @Service
 @AllArgsConstructor

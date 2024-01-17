@@ -1,4 +1,6 @@
-package source_files.data.types;
+package source_files.data.types.userTypes;
+
+import source_files.data.types.BaseType;
 
 public enum EmployeeType implements BaseType {
 

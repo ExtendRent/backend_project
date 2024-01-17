@@ -14,7 +14,7 @@ import source_files.services.userServices.abstracts.AdminService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.types.UserType.ADMIN;
+import static source_files.data.types.userTypes.UserType.ADMIN;
 
 @Service
 @AllArgsConstructor

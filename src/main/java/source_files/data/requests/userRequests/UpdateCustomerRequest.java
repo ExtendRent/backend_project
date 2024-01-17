@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.DrivingLicenseType;
+import source_files.data.types.itemTypes.DrivingLicenseType;
 
 import java.util.List;
 

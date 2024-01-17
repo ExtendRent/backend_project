@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.Item;
-import source_files.data.types.PaymentType;
+import source_files.data.types.itemTypes.PaymentType;
 
 @Getter
 @Setter

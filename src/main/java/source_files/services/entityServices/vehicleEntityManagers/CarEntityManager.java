@@ -7,6 +7,7 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class CarEntityManager implements CarEntityService {
 
     @Override
     public CarEntity update(CarEntity carEntity) {
-        //CarEntity uptatedCar = carRepository.findById(id).orElseThrow();
         return this.carRepository.save(carEntity);
     }
 
@@ -78,6 +78,26 @@ public class CarEntityManager implements CarEntityService {
     @Override
     public List<CarEntity> getAllByBrandId(int brandId) {
         return this.carRepository.findAllByCarModelEntity_BrandEntity_Id(brandId);
+    }
+
+    public List<CarEntity> getAllFiltered(
+            Date startDate, Date endDate,
+            Integer startPrice, Integer endPrice,
+            Boolean isDeleted, Boolean isAvailable,
+            Integer colorId,String fuelType, String shiftType,
+            Integer seat, Integer luggage, Integer modelId,
+            Integer startYear, Integer endYear, Integer brandId) {
+
+        List<CarEntity> filteredCars = carRepository.findAllFiltered(
+                startDate, endDate,
+                startPrice, endPrice,
+                isDeleted, isAvailable,
+                colorId,fuelType,
+                shiftType,seat,luggage,
+                modelId, startYear,
+                endYear, brandId);
+
+        return filteredCars;
     }
 
     @Override

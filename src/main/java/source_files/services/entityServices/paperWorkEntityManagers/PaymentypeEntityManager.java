@@ -3,7 +3,7 @@ package source_files.services.entityServices.paperWorkEntityManagers;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
-import source_files.data.types.PaymentType;
+import source_files.data.types.itemTypes.PaymentType;
 import source_files.dataAccess.paperWorkRepositories.PaymentTypeEntityRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;

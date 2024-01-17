@@ -14,7 +14,7 @@ import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/color")
+@RequestMapping("api/v1/color")
 @AllArgsConstructor
 public class ColorController {
     private ColorService colorService;

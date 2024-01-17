@@ -2,6 +2,7 @@ package source_files.services.entityServices.abstracts.vehicleAbstracts;
 
 import source_files.data.models.vehicleEntities.CarEntity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,6 +31,14 @@ public interface CarEntityService {
     List<CarEntity> getAllByYearBetween(int year1, int year2);
 
     List<CarEntity> getAllByBrandId(int id);
+
+    public List<CarEntity> getAllFiltered(
+            Date startDate, Date endDate,
+            Integer startPrice, Integer endPrice,
+            Boolean isDeleted, Boolean isAvailable,
+            Integer colorId, String fuelType, String shiftType,
+            Integer seat, Integer luggage, Integer modelId,
+            Integer startYear, Integer endYear, Integer brandId);
 
     void delete(CarEntity carEntity);
 }

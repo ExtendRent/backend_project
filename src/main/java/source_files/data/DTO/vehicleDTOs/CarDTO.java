@@ -1,7 +1,9 @@
 package source_files.data.DTO.vehicleDTOs;
 
 import lombok.*;
-import source_files.data.types.DrivingLicenseType;
+import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.FuelType;
+import source_files.data.types.itemTypes.ShiftType;
 
 import java.util.List;
 
@@ -13,11 +15,14 @@ import java.util.List;
 public class CarDTO {
 
     int id;
+    Boolean isLicenseTypeSuitable = true;
     String carModelEntityBrandEntityName;
     String carModelEntityName;
     String colorEntityName;
     int year;
     String carBodyTypeEntityName;
+    String fuelType;
+    String shiftType;
     int seat;
     int luggage;
     String details;
@@ -26,5 +31,4 @@ public class CarDTO {
     int kilometer;
     List<String> imagesEntityImagePaths;
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
-
 }

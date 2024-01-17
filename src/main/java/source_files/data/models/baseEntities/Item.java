@@ -1,14 +1,11 @@
 package source_files.data.models.baseEntities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.types.ItemType;
+import source_files.data.types.itemTypes.ItemType;
 
 @Getter
 @Setter
@@ -19,5 +16,6 @@ import source_files.data.types.ItemType;
 public class Item extends BaseEntity {
 
     @Column(name = "item_type")
+    @Enumerated(EnumType.STRING)
     private ItemType itemType;
 }

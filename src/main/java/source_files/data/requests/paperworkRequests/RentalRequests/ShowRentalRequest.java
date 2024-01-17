@@ -19,8 +19,9 @@ public class ShowRentalRequest {
 
     @Nullable
     String discountCode;
+    @Nullable
     @Min(value = 1, message = "CustomerId must be greater than 0")
-    private int customerEntityId;
+    private Integer customerEntityId;
     @Min(value = 1, message = "CarId must be greater than 0")
     private int carEntityId;
     @NotNull(message = "StartDate cannot be null")

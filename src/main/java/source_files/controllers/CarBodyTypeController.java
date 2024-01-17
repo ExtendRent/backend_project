@@ -14,7 +14,7 @@ import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeServic
 import java.util.List;
 
 @RestController
-@RequestMapping("api/carBodyType")
+@RequestMapping("api/v1/carBodyType")
 @AllArgsConstructor
 public class CarBodyTypeController {
 

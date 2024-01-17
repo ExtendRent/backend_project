@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.types.CustomerType;
-import source_files.data.types.DrivingLicenseType;
+import source_files.data.types.userTypes.CustomerType;
+import source_files.data.types.itemTypes.DrivingLicenseType;
 
 import java.util.List;
 

@@ -22,7 +22,7 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.List;
 
-import static source_files.data.types.ItemType.RENTAL;
+import static source_files.data.types.itemTypes.ItemType.RENTAL;
 
 @Service
 @AllArgsConstructor

@@ -2,7 +2,7 @@ package source_files.data.DTO.paperWorkDTOs;
 
 import lombok.Getter;
 import lombok.Setter;
-import source_files.data.types.PaymentType;
+import source_files.data.types.itemTypes.PaymentType;
 
 @Getter
 @Setter

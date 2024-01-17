@@ -7,8 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
-import source_files.data.types.DrivingLicenseType;
-import source_files.data.types.VehicleType;
+import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.FuelType;
+import source_files.data.types.itemTypes.ShiftType;
+import source_files.data.types.itemTypes.VehicleType;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -38,18 +40,27 @@ public class Vehicle extends BaseEntity {
     @Column(name = "luggage")
     private int luggage;
 
+    @Column(name = "fuel_type")
+    @Enumerated(EnumType.STRING)
+    private FuelType fuelType;
+
+    @Column(name = "shift_type")
+    @Enumerated(EnumType.STRING)
+    private ShiftType shiftType;
+
     @Column(name = "rental_price")
     private double rentalPrice;
 
     @Column(name = "is_available")
     private Boolean isAvailable = true;
 
-    @Column()
+    @Column(name = "availability_date")
     private LocalDate availabilityDate;
 
     @Column(name = "expected_driving_license_types")
     private List<DrivingLicenseType> expectedDrivingLicenseTypes; //-> kullanıcıdan beklenen ehliyet sınıfları.
 
     @Column(name = "vehicle_type")
+    @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 }

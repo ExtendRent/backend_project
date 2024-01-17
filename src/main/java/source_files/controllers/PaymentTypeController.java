@@ -15,7 +15,7 @@ import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/paymentType")
+@RequestMapping("api/v1/paymentType")
 @AllArgsConstructor
 @Validated
 public class PaymentTypeController {
