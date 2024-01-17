@@ -32,7 +32,7 @@ public interface CarEntityService {
 
     List<CarEntity> getAllByBrandId(int id);
 
-    public List<CarEntity> getAllFiltered(
+    List<CarEntity> getAllFiltered(
             Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
             Boolean isDeleted, Boolean isAvailable,

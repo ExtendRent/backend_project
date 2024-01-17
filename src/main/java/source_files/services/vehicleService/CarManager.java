@@ -159,7 +159,7 @@ public class CarManager implements CarService {
                                        LocalDate startDate, LocalDate endDate,
                                        Integer startPrice, Integer endPrice,
                                        Boolean isDeleted, Boolean isAvailable,
-                                       Integer colorId,String fuelType, String shiftType,
+                                       Integer colorId, String fuelType, String shiftType,
                                        Integer seat, Integer luggage, Integer modelId,
                                        Integer startYear, Integer endYear, Integer brandId) {
 
@@ -170,8 +170,8 @@ public class CarManager implements CarService {
                 startDateSql, endDateSql,
                 startPrice, endPrice,
                 isDeleted, isAvailable,
-                colorId,fuelType,
-                shiftType,seat,luggage,
+                colorId, fuelType,
+                shiftType, seat, luggage,
                 modelId, startYear,
                 endYear, brandId);
 

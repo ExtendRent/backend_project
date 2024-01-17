@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.types.UserType;
+import source_files.data.types.userTypes.UserType;
 
 
 @Getter

@@ -84,20 +84,18 @@ public class CarEntityManager implements CarEntityService {
             Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
             Boolean isDeleted, Boolean isAvailable,
-            Integer colorId,String fuelType, String shiftType,
+            Integer colorId, String fuelType, String shiftType,
             Integer seat, Integer luggage, Integer modelId,
             Integer startYear, Integer endYear, Integer brandId) {
 
-        List<CarEntity> filteredCars = carRepository.findAllFiltered(
+        return carRepository.findAllFiltered(
                 startDate, endDate,
                 startPrice, endPrice,
                 isDeleted, isAvailable,
-                colorId,fuelType,
-                shiftType,seat,luggage,
+                colorId, fuelType,
+                shiftType, seat, luggage,
                 modelId, startYear,
                 endYear, brandId);
-
-        return filteredCars;
     }
 
     @Override

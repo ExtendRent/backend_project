@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import static source_files.data.types.userTypes.UserType.ADMIN;
 
+
 @Service
 @AllArgsConstructor
 public class AdminManager implements AdminService {

@@ -1,7 +1,6 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +26,7 @@ public class BaseEntity {
     private Boolean isDeleted = false;
 
 
-    @Column(name = "last_modified", nullable = true)
+    @Column(name = "last_modified")
     private LocalDate lastModified;
 
     @Column(name = "created_date")
