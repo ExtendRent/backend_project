@@ -3,6 +3,7 @@ package source_files.core.configurations;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import source_files.core.filters.JwtAuthFilter;
+import source_files.data.types.userTypes.UserRole;
 import source_files.services.userServices.abstracts.UserService;
 
 @Configuration
@@ -34,17 +36,17 @@ public class SecurityConfiguration {
 //            .requestMatchers(HttpMethod.POST, "/api/v1/carModels/**").hasAnyAuthority(UserRole.ADMIN.toString())
 //            .requestMatchers(HttpMethod.POST, "/api/v1/discountCodes/**").hasAnyAuthority(UserRole.ADMIN.toString())
 
-    //    .requestMatchers("/api/v1/users/**").permitAll()
+//  .authorizeHttpRequests((req) -> req
+//            .requestMatchers("/api/v1/users/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/api/v1/brands/").hasAnyAuthority(UserRole.ADMIN.toString())
 //            .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").permitAll()
+//                        .anyRequest().authenticated()
+//                )
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((req) -> req
 
-                        .anyRequest().authenticated()
-                )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
