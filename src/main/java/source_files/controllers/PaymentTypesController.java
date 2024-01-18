@@ -18,7 +18,8 @@ import java.util.List;
 @RequestMapping("api/v1/paymentTypes")
 @AllArgsConstructor
 @Validated
-public class PaymentTypeController {
+@CrossOrigin
+public class PaymentTypesController {
     private PaymentTypeService paymentTypeService;
 
     @PostMapping

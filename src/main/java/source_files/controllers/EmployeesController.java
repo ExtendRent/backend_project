@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.userDTOs.EmployeeDTO;
 import source_files.data.requests.userRequests.AddEmployeeRequest;
@@ -16,7 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/employees")
 @AllArgsConstructor
-public class EmployeeController {
+@Validated
+@CrossOrigin
+public class EmployeesController {
     private final EmployeeService employeeService;
 
     @PostMapping

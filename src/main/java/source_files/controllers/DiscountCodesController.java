@@ -18,7 +18,8 @@ import java.util.List;
 @RequestMapping("api/v1/discountCodes")
 @AllArgsConstructor
 @Validated
-public class DiscountCodeController {
+@CrossOrigin
+public class DiscountCodesController {
 
     private DiscountCodeService discountCodeService;
 

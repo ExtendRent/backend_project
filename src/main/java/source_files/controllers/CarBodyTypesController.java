@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.CarBodyTypeDTO;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
@@ -16,7 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/carBodyTypes")
 @AllArgsConstructor
-public class CarBodyTypeController {
+@Validated
+@CrossOrigin
+public class CarBodyTypesController {
 
     private final CarBodyTypeService carBodyTypeService;
 

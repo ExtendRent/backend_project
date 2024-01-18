@@ -18,7 +18,8 @@ import java.util.List;
 @RequestMapping("api/v1/brands")
 @AllArgsConstructor
 @Validated
-public class BrandController {
+@CrossOrigin
+public class BrandsController {
 
     private final BrandService brandService;
 

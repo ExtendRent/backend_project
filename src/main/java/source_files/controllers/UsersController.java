@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import source_files.core.services.JwtService;
 import source_files.data.requests.auth.LoginRequest;
 import source_files.data.requests.userRequests.AddCustomerRequest;
@@ -19,6 +17,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/v1/users")
 @AllArgsConstructor
+@Validated
+@CrossOrigin
 public class UsersController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;

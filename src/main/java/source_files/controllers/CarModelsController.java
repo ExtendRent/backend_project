@@ -3,6 +3,7 @@ package source_files.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
@@ -15,7 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/carModels")
 @AllArgsConstructor
-public class CarModelController {
+@Validated
+@CrossOrigin
+public class CarModelsController {
 
     private CarModelService carModelService;
 

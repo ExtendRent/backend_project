@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.requests.userRequests.AddCustomerRequest;
@@ -16,7 +17,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/customers")
 @AllArgsConstructor
-public class CustomerController {
+@Validated
+@CrossOrigin
+public class CustomersController {
     private final CustomerService customerService;
 
     @PostMapping
