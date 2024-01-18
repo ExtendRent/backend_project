@@ -9,7 +9,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
-
 //todo: baseentity abstract olacak
 //todo: bir logo ekleyebilriz img eklersek manager da yapacağız
 //todo: base entity de construction gerek yok

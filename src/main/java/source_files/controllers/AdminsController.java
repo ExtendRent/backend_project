@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.requests.userRequests.AddAdminRequest;
@@ -14,9 +15,11 @@ import source_files.services.userServices.abstracts.AdminService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/admin")
+@RequestMapping("api/v1/admins")
 @AllArgsConstructor
-public class AdminController {
+@Validated
+@CrossOrigin
+public class AdminsController {
     private final AdminService adminService;
 
 

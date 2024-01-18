@@ -19,7 +19,8 @@ import java.util.List;
 @RequestMapping("api/v1/cars")
 @AllArgsConstructor
 @Validated
-public class CarController {
+@CrossOrigin
+public class CarsController {
 
     private final CarService carService;
 

@@ -15,10 +15,11 @@ import source_files.services.paperWorkServices.abstracts.DiscountCodeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/discountCode")
+@RequestMapping("api/v1/discountCodes")
 @AllArgsConstructor
 @Validated
-public class DiscountCodeController {
+@CrossOrigin
+public class DiscountCodesController {
 
     private DiscountCodeService discountCodeService;
 

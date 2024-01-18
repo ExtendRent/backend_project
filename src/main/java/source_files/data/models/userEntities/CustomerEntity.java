@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+//@SuperBuilder
 @Table(name = "customers")
 //todo: Hoca UserEntityyi extends etmedi onun yerine baseEntity extend etti yönetimesi zor dedi User diye bir alan açtı User user ?
 //todo : CorporateCustomer diye bir class dha tanımlandı bizde gerek var mı ?

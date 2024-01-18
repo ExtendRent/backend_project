@@ -15,10 +15,11 @@ import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/paymentType")
+@RequestMapping("api/v1/paymentTypes")
 @AllArgsConstructor
 @Validated
-public class PaymentTypeController {
+@CrossOrigin
+public class PaymentTypesController {
     private PaymentTypeService paymentTypeService;
 
     @PostMapping
