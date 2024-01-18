@@ -2,8 +2,6 @@ package source_files.data.DTO.vehicleDTOs;
 
 import lombok.*;
 import source_files.data.types.itemTypes.DrivingLicenseType;
-import source_files.data.types.itemTypes.FuelType;
-import source_files.data.types.itemTypes.ShiftType;
 
 import java.util.List;
 

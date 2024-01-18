@@ -7,7 +7,6 @@ import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
-import source_files.data.types.userTypes.UserType;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRules;
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
@@ -32,7 +31,6 @@ public class CustomerManager implements CustomerService {
                         customerBusinessRules.fixAddCustomerRequest(addCustomerRequest)), CustomerEntity.class
                 );
 
-        customerEntity.setUserType(UserType.CUSTOMER);
 
         return this.modelMapperService.forResponse().map(this.customerEntityService.add(customerEntity), CustomerDTO.class);
     }
@@ -44,7 +42,6 @@ public class CustomerManager implements CustomerService {
                         customerBusinessRules.fixUpdateCustomerRequest(updateCustomerRequest)), CustomerEntity.class
                 );
 
-        customerEntity.setUserType(UserType.CUSTOMER);
 
         return this.modelMapperService.forResponse().map(this.customerEntityService.add(customerEntity), CustomerDTO.class);
     }

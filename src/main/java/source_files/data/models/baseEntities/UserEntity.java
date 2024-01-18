@@ -1,10 +1,13 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import source_files.data.types.userTypes.UserType;
+import source_files.data.types.userTypes.UserRole;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,13 +39,9 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "user_type")
-    private UserType userType;
-
     @Column(name = "roles")
     @Enumerated(EnumType.STRING)
-    private List<UserType> authorities;
+    private List<UserRole> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

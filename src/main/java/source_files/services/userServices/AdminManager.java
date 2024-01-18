@@ -14,8 +14,6 @@ import source_files.services.userServices.abstracts.AdminService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.types.userTypes.UserType.ADMIN;
-
 @Service
 @AllArgsConstructor
 public class AdminManager implements AdminService {
@@ -30,7 +28,7 @@ public class AdminManager implements AdminService {
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkAddAdminRequest
                         (adminBusinessRules.fixAddAdminRequest(addAdminRequest)), AdminEntity.class);
-        adminEntity.setUserType(ADMIN);
+
         return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
     }
 
@@ -39,7 +37,7 @@ public class AdminManager implements AdminService {
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkUpdateAdminRequest
                         (adminBusinessRules.fixUpdateAdminRequest(updateAdminRequest)), AdminEntity.class);
-        adminEntity.setUserType(ADMIN);
+
         return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
     }
 

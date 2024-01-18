@@ -15,7 +15,7 @@ import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/brand")
+@RequestMapping("api/v1/brands")
 @AllArgsConstructor
 @Validated
 public class BrandController {
@@ -46,7 +46,7 @@ public class BrandController {
         );
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/")
     public ResponseEntity<TResponse<List<BrandDTO>>> getAll() {
         return ResponseEntity.ok(TResponse.<List<BrandDTO>>tResponseBuilder()
                 .response(this.brandService.getAll())
@@ -55,8 +55,8 @@ public class BrandController {
         );
     }
 
-    @GetMapping("/getByBrandName")
-    public ResponseEntity<TResponse<BrandDTO>> getByBrandName(@RequestParam String brandName) {
+    @GetMapping("{brandName}")
+    public ResponseEntity<TResponse<BrandDTO>> getByBrandName(@PathVariable String brandName) {
         return ResponseEntity.ok(TResponse.<BrandDTO>tResponseBuilder()
                 .response(this.brandService.getByName(brandName))
                 .message("Marka görüntülendi")

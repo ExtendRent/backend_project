@@ -14,7 +14,7 @@ import source_files.services.userServices.abstracts.CustomerService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/customer")
+@RequestMapping("api/v1/customers")
 @AllArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;

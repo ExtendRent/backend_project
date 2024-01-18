@@ -1,9 +1,9 @@
 package source_files.data.types.userTypes;
 
 import org.springframework.security.core.GrantedAuthority;
-import source_files.data.types.BaseType;
 
-public enum UserType implements BaseType, GrantedAuthority {
+
+public enum UserRole implements GrantedAuthority {
     ADMIN, EMPLOYEE, CUSTOMER;
 
     @Override

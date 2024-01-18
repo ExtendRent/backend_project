@@ -20,7 +20,7 @@ import source_files.services.paperWorkServices.abstracts.RentalService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/rental")
+@RequestMapping("api/v1/rentals")
 @AllArgsConstructor
 @Validated
 public class RentalController {

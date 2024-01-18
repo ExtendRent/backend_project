@@ -7,7 +7,6 @@ import source_files.data.DTO.userDTOs.EmployeeDTO;
 import source_files.data.models.userEntities.EmployeeEntity;
 import source_files.data.requests.userRequests.AddEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
-import source_files.data.types.userTypes.UserType;
 import source_files.services.BusinessRules.userBusinessRuless.EmployeeBusinessRules;
 import source_files.services.entityServices.abstracts.userAbstract.EmployeeEntityService;
 import source_files.services.userServices.abstracts.EmployeeService;
@@ -29,7 +28,6 @@ public class EmployeeManager implements EmployeeService {
         EmployeeEntity employeeEntity = modelMapperService.forRequest()
                 .map(employeeBusinessRules.checkAddEmployeeRequest
                         (employeeBusinessRules.fixAddEmployeeRequest(addEmployeeRequest)), EmployeeEntity.class);
-        employeeEntity.setUserType(UserType.EMPLOYEE);
         return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity), EmployeeDTO.class);
     }
 
@@ -38,7 +36,6 @@ public class EmployeeManager implements EmployeeService {
         EmployeeEntity employeeEntity = modelMapperService.forRequest()
                 .map(employeeBusinessRules.checkUpdateEmployeeRequest
                         (employeeBusinessRules.fixUpdateEmployeeRequest(updateEmployeeRequest)), EmployeeEntity.class);
-        employeeEntity.setUserType(UserType.EMPLOYEE);
         return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity), EmployeeDTO.class);
     }
 
