@@ -1,6 +1,7 @@
 package source_files.services.userServices;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.CustomerDTO;
@@ -12,8 +13,11 @@ import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRu
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
 import source_files.services.userServices.abstracts.CustomerService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static source_files.data.types.userTypes.UserRole.CUSTOMER;
 
 @Service
 @AllArgsConstructor
@@ -24,13 +28,17 @@ public class CustomerManager implements CustomerService {
     private final CustomerBusinessRules customerBusinessRules;
     private final CustomerEntityService customerEntityService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public CustomerDTO add(AddCustomerRequest addCustomerRequest) {
+        addCustomerRequest.setPassword(passwordEncoder.encode(addCustomerRequest.getPassword()));
+
         CustomerEntity customerEntity = modelMapperService.forRequest()
                 .map(customerBusinessRules.checkAddCustomerRequest(
                         customerBusinessRules.fixAddCustomerRequest(addCustomerRequest)), CustomerEntity.class
                 );
-
+        customerEntity.setAuthorities(Collections.singletonList(CUSTOMER));
 
         return this.modelMapperService.forResponse().map(this.customerEntityService.add(customerEntity), CustomerDTO.class);
     }
