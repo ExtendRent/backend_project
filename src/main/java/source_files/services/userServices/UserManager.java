@@ -20,7 +20,6 @@ public class UserManager implements UserService {
 
     @Override
     public void register(AddCustomerRequest addCustomerRequest) {
-        addCustomerRequest.setPassword(passwordEncoder.encode(addCustomerRequest.getPassword()));
         this.customerService.add(addCustomerRequest);
     }
 
