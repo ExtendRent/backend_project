@@ -15,7 +15,6 @@ import source_files.services.userServices.abstracts.UserService;
 @AllArgsConstructor
 public class UserManager implements UserService {
     private final CustomerService customerService;
-    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
     @Override
