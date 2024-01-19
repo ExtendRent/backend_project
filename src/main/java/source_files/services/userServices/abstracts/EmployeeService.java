@@ -17,7 +17,7 @@ public interface EmployeeService {
 
     List<EmployeeDTO> getAll();
 
-    List<EmployeeDTO> findAllBySalaryBetween(double salary1, double salary2);
+    List<EmployeeDTO> getAllBySalaryBetween(double salary1, double salary2);
 
     List<EmployeeDTO> getAllByDeletedState(boolean isDeleted);
 

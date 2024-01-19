@@ -3,9 +3,8 @@ package source_files.services.userServices;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.auth.LoginRequest;
+import source_files.data.requests.auth.SignInRequest;
 import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.dataAccess.userRepositories.UserRepository;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -23,7 +22,7 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public void login(LoginRequest request) {
+    public void login(SignInRequest request) {
 
     }
 

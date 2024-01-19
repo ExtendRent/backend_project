@@ -52,7 +52,7 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDTO> findAllBySalaryBetween(double salary1, double salary2) {
+    public List<EmployeeDTO> getAllBySalaryBetween(double salary1, double salary2) {
         return this.employeeBusinessRules.checkDataList(this.employeeEntityService.getAllBySalaryBetween(salary1, salary2))
                 .stream().map(employeeEntity -> modelMapperService.forResponse().map(employeeEntity, EmployeeDTO.class)).toList();
     }

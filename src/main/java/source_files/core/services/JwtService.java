@@ -8,9 +8,11 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import source_files.data.models.baseEntities.UserEntity;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -21,14 +23,26 @@ public class JwtService {
     @Value("${application.security.jwt.expiration}")
     private long expiration;
 
-    public String generateToken(String username, Map<String, Object> claims) {
+    public String generateToken(UserEntity user) {
+        Map<String, Object> customClaims = new HashMap<>(Map.of(
+                "id", user.getId(),
+                "emailAddress", user.getEmailAddress(),
+                "firstname", user.getName(),
+                "lastname", user.getSurname(),
+                "phoneNumber", user.getPhoneNumber(),
+                "roles", user.getAuthorities()
+        ));
+        return generateToken(customClaims, user);
+    }
+
+    public String generateToken(Map<String, Object> customClaims, UserDetails userDetails) {
         return Jwts
                 .builder()
-                .setClaims(claims)
-                .setSubject(username)
+                .setClaims(customClaims)
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSigninKey(), SignatureAlgorithm.HS256)
+                .signWith(this.getSigninKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -62,4 +76,5 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
 }

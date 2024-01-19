@@ -19,6 +19,6 @@ public class CustomerDTO {
     String name;
     String surname;
     String emailAddress;
-    List<UserRole> userRoles;
+    List<UserRole> authorities;
 }
 

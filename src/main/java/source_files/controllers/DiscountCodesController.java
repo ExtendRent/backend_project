@@ -30,12 +30,14 @@ public class DiscountCodesController {
     }
 
     @PutMapping
-    public ResponseEntity<TResponse<DiscountCodeDTO>> updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) {
-        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
-                .response(this.discountCodeService.update(updateDiscountCodeRequest))
-                .message("Ödeme tipi güncelleme işlemi başarılı")
-                .build()
-        );
+    public ResponseEntity<TResponse<DiscountCodeDTO>>
+    updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) {
+        return ResponseEntity.ok
+                (TResponse.<DiscountCodeDTO>tResponseBuilder()
+                        .response(this.discountCodeService.update(updateDiscountCodeRequest))
+                        .message("Ödeme tipi güncelleme işlemi başarılı")
+                        .build()
+                );
     }
 
     @GetMapping("{id}")

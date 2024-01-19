@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.UserEntity;
-import source_files.data.types.userTypes.EmployeeType;
 
 @Getter
 @Setter
@@ -19,10 +18,7 @@ import source_files.data.types.userTypes.EmployeeType;
 @Table(name = "employees")
 public class EmployeeEntity extends UserEntity {
 
-
     @Column(name = "salary")
     private double salary;
 
-    @Column(name = "employee_type")
-    private EmployeeType employeeType;
 }

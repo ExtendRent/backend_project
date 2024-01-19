@@ -22,9 +22,16 @@ import source_files.services.userServices.abstracts.UserService;
 @AllArgsConstructor
 public class SecurityConfiguration {
 
+    private static final String[] WHITE_LIST_URLS = {
+            "/swagger-ui/**",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/api/auth/**",
+            "/api/users/login"
+    };
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
 
     //    .requestMatchers("/api/v1/users/**").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/api/v1/brands/**").hasAnyAuthority(UserRole.ADMIN.toString())
@@ -36,37 +43,30 @@ public class SecurityConfiguration {
 //            .requestMatchers(HttpMethod.POST, "/api/v1/carModels/**").hasAnyAuthority(UserRole.ADMIN.toString())
 //            .requestMatchers(HttpMethod.POST, "/api/v1/discountCodes/**").hasAnyAuthority(UserRole.ADMIN.toString())
 
-//  .authorizeHttpRequests((req) -> req
+    //  .authorizeHttpRequests((req) -> req
 //            .requestMatchers("/api/v1/users/**").permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/api/v1/brands/").hasAnyAuthority(UserRole.ADMIN.toString())
 //            .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").permitAll()
 //                        .anyRequest().authenticated()
 //                )
+    private final UserService userService;
 
-    private static final String[] WHITE_LIST_URLS = {
-            "/swagger-ui/**",
-            "/v2/api-docs",
-            "/v3/api-docs",
-            "/v3/api-docs/**",
-            "/api/auth/**",
-            "/api/users/login"
-    };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((req) -> req
                         .requestMatchers(WHITE_LIST_URLS).permitAll()
-                        .requestMatchers(HttpMethod.POST,"/api/v1/users/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/brands/**").permitAll()
-                        .requestMatchers( "/api/v1/colors/**").hasAnyAuthority(UserRole.CUSTOMER.name())
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
+                        .requestMatchers("/api/v1/brands/**").hasAnyAuthority(UserRole.ADMIN.name())
+                        .requestMatchers("/api/v1/colors/**").hasAnyAuthority(UserRole.CUSTOMER.name())
                         .requestMatchers(HttpMethod.POST, "/api/v1/carBodyTypes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/employees/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/paymentTypes/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/admins/**").permitAll()
+                        .requestMatchers("/api/v1/admins/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/carModels/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/discountCodes/**").permitAll()
-                        .requestMatchers( "/api/v1/customers/**").permitAll()
+                        .requestMatchers("/api/v1/customers/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/customers/**").permitAll()
                         .anyRequest().authenticated()
                 )

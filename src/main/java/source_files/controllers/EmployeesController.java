@@ -68,7 +68,7 @@ public class EmployeesController {
     public ResponseEntity<TResponse<List<EmployeeDTO>>> getAllBySalaryBetween(
             @RequestParam(name = "startSalary") Double startSalary, @RequestParam(name = "endSalary") Double endSalary) {
         return ResponseEntity.ok(TResponse.<List<EmployeeDTO>>tResponseBuilder()
-                .response(this.employeeService.findAllBySalaryBetween(startSalary, endSalary))
+                .response(this.employeeService.getAllBySalaryBetween(startSalary, endSalary))
                 .message(startSalary + "TL ve " + endSalary + "TL Arasındaki Aylık Ücrete Göre Getirildi.")
                 .build()
         );

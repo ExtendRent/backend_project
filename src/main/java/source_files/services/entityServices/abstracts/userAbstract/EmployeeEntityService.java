@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface EmployeeEntityService {
 
-    EmployeeEntity add(EmployeeEntity employeeEntity);
+    EmployeeEntity add(EmployeeEntity userEntity);
 
-    EmployeeEntity update(EmployeeEntity employeeEntity);
+    EmployeeEntity update(EmployeeEntity userEntity);
 
     EmployeeEntity getById(int id);
 
@@ -23,7 +23,7 @@ public interface EmployeeEntityService {
 
     List<EmployeeEntity> getAllByDeletedState(boolean isDeleted);
 
-    void delete(EmployeeEntity employeeEntity);
+    void delete(EmployeeEntity userEntity);
 
 
 }

@@ -18,7 +18,6 @@ import source_files.data.models.baseEntities.UserEntity;
 @Table(name = "admins")
 public class AdminEntity extends UserEntity {
 
-
     @Column(name = "salary")
     private double salary;
 

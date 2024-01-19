@@ -1,6 +1,7 @@
 package source_files.services.userServices;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.AdminDTO;
@@ -11,8 +12,11 @@ import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules
 import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
 import source_files.services.userServices.abstracts.AdminService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static source_files.data.types.userTypes.UserRole.ADMIN;
 
 @Service
 @AllArgsConstructor
@@ -21,14 +25,15 @@ public class AdminManager implements AdminService {
     private final AdminEntityService adminEntityService;
     private final ModelMapperService modelMapperService;
     private final AdminBusinessRules adminBusinessRules;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public AdminDTO add(AddAdminRequest addAdminRequest) {
+        addAdminRequest.setPassword(passwordEncoder.encode(addAdminRequest.getPassword()));
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkAddAdminRequest
                         (adminBusinessRules.fixAddAdminRequest(addAdminRequest)), AdminEntity.class);
-
+        adminEntity.setAuthorities(Collections.singletonList(ADMIN));
         return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
     }
 

@@ -1,5 +1,5 @@
 package source_files.data.types.userTypes;
 
-public enum UserType{
+public enum UserType {
     ADMIN, EMPLOYEE, CUSTOMER
 }

@@ -32,14 +32,14 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public CustomerDTO add(AddCustomerRequest addCustomerRequest) {
-        addCustomerRequest.setPassword(passwordEncoder.encode(addCustomerRequest.getPassword()));
+
 
         CustomerEntity customerEntity = modelMapperService.forRequest()
                 .map(customerBusinessRules.checkAddCustomerRequest(
                         customerBusinessRules.fixAddCustomerRequest(addCustomerRequest)), CustomerEntity.class
                 );
+        addCustomerRequest.setPassword(passwordEncoder.encode(addCustomerRequest.getPassword()));
         customerEntity.setAuthorities(Collections.singletonList(CUSTOMER));
-
         return this.modelMapperService.forResponse().map(this.customerEntityService.add(customerEntity), CustomerDTO.class);
     }
 

@@ -50,7 +50,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.name + " " + this.surname;
+        return this.emailAddress;
     }
 
     @Override
