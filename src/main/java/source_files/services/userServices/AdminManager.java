@@ -28,11 +28,11 @@ public class AdminManager implements AdminService {
 
     @Override
     public AdminDTO add(AddAdminRequest addAdminRequest) {
-
+        addAdminRequest.setPassword(passwordEncoder.encode(addAdminRequest.getPassword()));
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkAddAdminRequest
                         (adminBusinessRules.fixAddAdminRequest(addAdminRequest)), AdminEntity.class);
-        addAdminRequest.setPassword(passwordEncoder.encode(addAdminRequest.getPassword()));
+
         adminEntity.setAuthority(ADMIN);
         return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
     }

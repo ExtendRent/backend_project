@@ -24,7 +24,7 @@ public class SignUpReqeust {
     String surname;
 
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.
-    @NotBlank(message = "Admin mail adresi boş geçilemez")
+    @NotBlank(message = "Mail adresi boş geçilemez")
     String emailAddress;
 
     @Size(min = 8, max = 30)

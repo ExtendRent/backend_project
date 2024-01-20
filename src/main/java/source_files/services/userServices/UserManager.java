@@ -4,27 +4,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.auth.SignInRequest;
-import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.dataAccess.userRepositories.UserRepository;
-import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.userServices.abstracts.UserService;
 
 @Service
 @AllArgsConstructor
 public class UserManager implements UserService {
-    private final CustomerService customerService;
+
     private final UserRepository userRepository;
-
-    @Override
-    public void register(AddCustomerRequest addCustomerRequest) {
-        this.customerService.add(addCustomerRequest);
-    }
-
-    @Override
-    public void login(SignInRequest request) {
-
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
