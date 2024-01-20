@@ -1,4 +1,4 @@
-package source_files.core.configurations;
+package source_files.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
