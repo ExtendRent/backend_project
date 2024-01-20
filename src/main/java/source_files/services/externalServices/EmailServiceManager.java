@@ -31,8 +31,8 @@ public class EmailServiceManager implements EmailService {
 
     private final UserEntityService userEntityService;
 
-    @Value("${email.service.url}")
-    private final String emailServiceUrl;
+    //@Value("${email.service.url}")
+    //private final String emailServiceUrl;
 
     private static String formatUserName(UserEntity userEntity) {
 
@@ -50,7 +50,7 @@ public class EmailServiceManager implements EmailService {
 
         String registerConfirmUrl = String.format(
                 "%s%s%s",
-                emailServiceUrl,
+                "asd",
                 "/api/v1/register/confirm",
                 otpEntity.getVerificationToken());
 
