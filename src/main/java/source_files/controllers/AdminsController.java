@@ -22,55 +22,48 @@ import java.util.List;
 public class AdminsController {
     private final AdminService adminService;
 
-
     @PostMapping
-    public ResponseEntity<HttpStatus> addAdmin(@Valid @RequestBody AddAdminRequest addAdminRequest) {
-        this.adminService.add(addAdminRequest);
+    public ResponseEntity<Void> addAdmin(@Valid @RequestBody AddAdminRequest addAdminRequest) {
+        adminService.add(addAdminRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<AdminDTO>> updateAdmin(@RequestBody @Valid UpdateAdminRequest updateAdminRequest) {
-        return ResponseEntity.ok(TResponse.<AdminDTO>tResponseBuilder()
-                .response(this.adminService.update(updateAdminRequest))
-                .message("Admin güncellendi.")
-                .build()
+        return new ResponseEntity<>(TResponse.<AdminDTO>tResponseBuilder()
+                .response(adminService.update(updateAdminRequest)).build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<AdminDTO>>> getAll() {
-        return ResponseEntity.ok(TResponse.<List<AdminDTO>>tResponseBuilder()
-                .response(this.adminService.getAll())
-                .message("Admin listesi getirildi.")
-                .build()
+        return new ResponseEntity<>(
+                TResponse.<List<AdminDTO>>tResponseBuilder().response(adminService.getAll()).build()
+                , HttpStatus.OK
         );
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<AdminDTO>> getById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.<AdminDTO>tResponseBuilder()
-                .response(this.adminService.getById(id))
-                .message("Admin getirildi.")
-                .build()
+        return new ResponseEntity<>(TResponse.<AdminDTO>tResponseBuilder()
+                .response(adminService.getById(id)).build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{phoneNumber}")
+    @GetMapping("/{phoneNumber}")
     public ResponseEntity<TResponse<AdminDTO>> getByPhoneNumber(@PathVariable String phoneNumber) {
         return ResponseEntity.ok(TResponse.<AdminDTO>tResponseBuilder()
-                .response(this.adminService.getByPhoneNumber(phoneNumber))
-                .message("Telefon Numarasına Göre Getirildi")
+                .response(adminService.getByPhoneNumber(phoneNumber))
                 .build()
         );
     }
 
-    @GetMapping("{salary}")
+    @GetMapping("/{salary}")
     public ResponseEntity<TResponse<List<AdminDTO>>> getAllBySalaryGreaterThanEqual(@PathVariable Double salary) {
-        return ResponseEntity.ok(TResponse.<List<AdminDTO>>tResponseBuilder()
-                .response(this.adminService.getAllBySalaryGreaterThanEqual(salary))
-                .message("Minimum " + salary + "TL Aylık Ücrete Göre Getirildi.")
-                .build()
+        return new ResponseEntity<>(
+                TResponse.<List<AdminDTO>>tResponseBuilder().response(
+                        adminService.getAllBySalaryGreaterThanEqual(salary)
+                ).build(), HttpStatus.OK
         );
     }
 
@@ -78,15 +71,15 @@ public class AdminsController {
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<AdminDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<AdminDTO>>tResponseBuilder()
-                .response(this.adminService.getAllByDeletedState(isDeleted))
-                .message("Admin listesi döndü.")
-                .build()
+        return new ResponseEntity<>(
+                TResponse.<List<AdminDTO>>tResponseBuilder().response(
+                        adminService.getAllByDeletedState(isDeleted)
+                ).build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
         this.adminService.delete(id, isHardDelete);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
