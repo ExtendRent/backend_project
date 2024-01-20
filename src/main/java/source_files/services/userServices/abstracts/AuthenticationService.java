@@ -5,7 +5,7 @@ import source_files.data.requests.auth.SignUpReqeust;
 import source_files.data.responses.JwtToken;
 
 public interface AuthenticationService {
-    JwtToken signUp(SignUpReqeust request);
+    void signUp(SignUpReqeust request);
 
     JwtToken signIn(SignInRequest request);
 }

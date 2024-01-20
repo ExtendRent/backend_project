@@ -7,6 +7,7 @@ import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 import source_files.dataAccess.userRepositories.EmployeeRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
+import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
 import source_files.services.entityServices.userEntityManagers.EmployeeEntityManager;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.EMAIL_ADDRESS_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.PHONE_NUMBER_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.EMPLOYEE_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @AllArgsConstructor
 @Service
@@ -49,6 +51,7 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     }
 
     public AddEmployeeRequest checkAddEmployeeRequest(AddEmployeeRequest addEmployeeRequest) {
+        this.checkSalary(addEmployeeRequest.getSalary());
         this.existsByEmailAddress(addEmployeeRequest.getEmailAddress());
         this.existsByPhoneNumber(addEmployeeRequest.getPhoneNumber());
         return addEmployeeRequest;
@@ -63,6 +66,12 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
             throw new DataNotFoundException(EMPLOYEE_LIST_NOT_FOUND, "Aradığınız kriterlere uygun çalışan bulunamadı");
         }
         return list;
+    }
+
+    public void checkSalary(double salary) {
+        if (salary <= 0) {
+            throw new ValidationException(VALIDATION_EXCEPTION, "Salary must be greater than zero");
+        }
     }
 
     @Override

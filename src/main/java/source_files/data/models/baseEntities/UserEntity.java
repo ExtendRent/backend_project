@@ -41,11 +41,10 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private String password;
     @Column(name = "roles")
     @Enumerated(EnumType.STRING)
-    private List<UserRole> authorities;
+    private UserRole authority;
 
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return List.of(authority);
     }
 
     @Override

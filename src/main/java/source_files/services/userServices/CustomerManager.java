@@ -13,7 +13,6 @@ import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRu
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
 import source_files.services.userServices.abstracts.CustomerService;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +38,7 @@ public class CustomerManager implements CustomerService {
                         customerBusinessRules.fixAddCustomerRequest(addCustomerRequest)), CustomerEntity.class
                 );
         addCustomerRequest.setPassword(passwordEncoder.encode(addCustomerRequest.getPassword()));
-        customerEntity.setAuthorities(Collections.singletonList(CUSTOMER));
+        customerEntity.setAuthority(CUSTOMER);
         return this.modelMapperService.forResponse().map(this.customerEntityService.add(customerEntity), CustomerDTO.class);
     }
 

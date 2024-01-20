@@ -30,7 +30,7 @@ public class JwtService {
                 "firstname", user.getName(),
                 "lastname", user.getSurname(),
                 "phoneNumber", user.getPhoneNumber(),
-                "roles", user.getAuthorities()
+                "role", user.getAuthorities()
         ));
         return generateToken(customClaims, user);
     }

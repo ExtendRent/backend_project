@@ -8,6 +8,7 @@ import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.dataAccess.userRepositories.AdminRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
+import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.EMAIL_ADDRESS_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.PHONE_NUMBER_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @AllArgsConstructor
 @Service
@@ -49,6 +51,7 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
 
     //--------------------- AUTO CHECK METHODS ---------------------
     public AddAdminRequest checkAddAdminRequest(AddAdminRequest addAdminRequest) {
+        this.checkSalary(addAdminRequest.getSalary());
         this.existsByEmailAddress(addAdminRequest.getEmailAddress());
         this.existsByPhoneNumber(addAdminRequest.getPhoneNumber());
         return addAdminRequest;
@@ -64,6 +67,12 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
 
 
     //----------------------------METHODS--------------------------------
+
+    public void checkSalary(double salary) {
+        if (salary <= 0) {
+            throw new ValidationException(VALIDATION_EXCEPTION, "Salary must be greater than zero");
+        }
+    }
 
     @Override
     public String fixName(String name) {

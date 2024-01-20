@@ -1,4 +1,4 @@
-package source_files.core.configurations;
+package source_files.core.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,9 +18,11 @@ import source_files.core.filters.JwtAuthFilter;
 import source_files.data.types.userTypes.UserRole;
 import source_files.services.userServices.abstracts.UserService;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @AllArgsConstructor
-public class SecurityConfiguration {
+public class SecurityConfig {
 
     private static final String[] WHITE_LIST_URLS = {
             "/swagger-ui/**",
@@ -28,7 +30,8 @@ public class SecurityConfiguration {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/api/auth/**",
-            "/api/users/login"
+            "/api/users/login",
+            "/swagger-ui.html"
     };
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;
@@ -54,20 +57,24 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((req) -> req
                         .requestMatchers(WHITE_LIST_URLS).permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
                         .requestMatchers("/api/v1/brands/**").hasAnyAuthority(UserRole.ADMIN.name())
                         .requestMatchers("/api/v1/colors/**").hasAnyAuthority(UserRole.CUSTOMER.name())
-                        .requestMatchers(HttpMethod.POST, "/api/v1/carBodyTypes/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/employees/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/paymentTypes/**").permitAll()
+                        .requestMatchers("/api/v1/carBodyTypes/**").permitAll()
+                        .requestMatchers("/api/v1/employees/**").permitAll()
+                        .requestMatchers("/api/v1/paymentTypes/**").permitAll()
                         .requestMatchers("/api/v1/admins/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/carModels/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/discountCodes/**").permitAll()
+                        .requestMatchers("/api/v1/carModels/**").permitAll()
+                        .requestMatchers("/api/v1/discountCodes/**").permitAll()
                         .requestMatchers("/api/v1/customers/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/customers/**").permitAll()
+                        .requestMatchers("/api/v1/customers/**").permitAll()
                         .anyRequest().authenticated()
                 )
 

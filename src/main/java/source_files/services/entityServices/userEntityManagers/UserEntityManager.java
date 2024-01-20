@@ -1,6 +1,6 @@
 package source_files.services.entityServices.userEntityManagers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.dataAccess.userRepositories.UserRepository;
@@ -13,7 +13,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.EMPLOY
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_DATA_NOT_FOUND;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserEntityManager implements UserEntityService {
     private final UserRepository userRepository;
 

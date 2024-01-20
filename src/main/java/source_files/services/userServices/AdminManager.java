@@ -12,7 +12,6 @@ import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules
 import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
 import source_files.services.userServices.abstracts.AdminService;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,11 +28,12 @@ public class AdminManager implements AdminService {
 
     @Override
     public AdminDTO add(AddAdminRequest addAdminRequest) {
-        addAdminRequest.setPassword(passwordEncoder.encode(addAdminRequest.getPassword()));
+
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkAddAdminRequest
                         (adminBusinessRules.fixAddAdminRequest(addAdminRequest)), AdminEntity.class);
-        adminEntity.setAuthorities(Collections.singletonList(ADMIN));
+        addAdminRequest.setPassword(passwordEncoder.encode(addAdminRequest.getPassword()));
+        adminEntity.setAuthority(ADMIN);
         return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
     }
 

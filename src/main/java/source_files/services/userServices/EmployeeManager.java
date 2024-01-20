@@ -1,6 +1,7 @@
 package source_files.services.userServices;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.EmployeeDTO;
@@ -14,6 +15,8 @@ import source_files.services.userServices.abstracts.EmployeeService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.data.types.userTypes.UserRole.EMPLOYEE;
+
 @Service
 @AllArgsConstructor
 public class EmployeeManager implements EmployeeService {
@@ -21,13 +24,15 @@ public class EmployeeManager implements EmployeeService {
     private final EmployeeEntityService employeeEntityService;
     private final ModelMapperService modelMapperService;
     private final EmployeeBusinessRules employeeBusinessRules;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public EmployeeDTO add(AddEmployeeRequest addEmployeeRequest) {
         EmployeeEntity employeeEntity = modelMapperService.forRequest()
                 .map(employeeBusinessRules.checkAddEmployeeRequest
                         (employeeBusinessRules.fixAddEmployeeRequest(addEmployeeRequest)), EmployeeEntity.class);
+        employeeEntity.setPassword(passwordEncoder.encode(addEmployeeRequest.getPassword()));
+        employeeEntity.setAuthority(EMPLOYEE);
         return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity), EmployeeDTO.class);
     }
 

@@ -6,12 +6,20 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import source_files.core.services.JwtService;
+import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.requests.auth.SignInRequest;
 import source_files.data.requests.auth.SignUpReqeust;
+import source_files.data.requests.userRequests.AddAdminRequest;
+import source_files.data.requests.userRequests.AddCustomerRequest;
+import source_files.data.requests.userRequests.AddEmployeeRequest;
 import source_files.data.responses.JwtToken;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
+import source_files.services.externalServices.EmailServiceManager;
+import source_files.services.userServices.abstracts.AdminService;
 import source_files.services.userServices.abstracts.AuthenticationService;
+import source_files.services.userServices.abstracts.CustomerService;
+import source_files.services.userServices.abstracts.EmployeeService;
 
 @Service
 @RequiredArgsConstructor
@@ -22,10 +30,28 @@ public class CustomAuthenticationManager implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserEntityService userEntityService;
 
+    private final ModelMapperService modelMapperService;
+
+    private final AdminService adminService;
+
+    private final EmployeeService employeeService;
+
+    private final CustomerService customerService;
+
+    private EmailServiceManager emailService;
 
     @Override
-    public JwtToken signUp(SignUpReqeust request) {
-        return null;
+    public void signUp(SignUpReqeust request) {
+        switch (request.getAuthority()) {
+            case ADMIN:
+                this.adminService.add(this.modelMapperService.forRequest().map(request, AddAdminRequest.class));
+            case EMPLOYEE:
+                this.employeeService.add(this.modelMapperService.forRequest().map(request, AddEmployeeRequest.class));
+            case CUSTOMER:
+                this.customerService.add(this.modelMapperService.forRequest().map(request, AddCustomerRequest.class));
+                this.emailService.sendOtp(request.getEmailAddress());
+        }
+
     }
 
     public JwtToken signIn(SignInRequest request) {
