@@ -24,7 +24,7 @@ public class DiscountCodesController {
     private DiscountCodeService discountCodeService;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) {
+    public ResponseEntity<Void> createDiscountCode(@Valid @RequestBody AddDiscountCodeRequest addDiscountCodeRequest) {
         this.discountCodeService.add(addDiscountCodeRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -32,54 +32,49 @@ public class DiscountCodesController {
     @PutMapping
     public ResponseEntity<TResponse<DiscountCodeDTO>>
     updateDiscountCode(@Valid @RequestBody UpdateDiscountCodeRequest updateDiscountCodeRequest) {
-        return ResponseEntity.ok
+        return new ResponseEntity<>
                 (TResponse.<DiscountCodeDTO>tResponseBuilder()
                         .response(this.discountCodeService.update(updateDiscountCodeRequest))
-                        .message("Ödeme tipi güncelleme işlemi başarılı")
-                        .build()
+                        .build(), HttpStatus.OK
                 );
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TResponse<DiscountCodeDTO>> getDiscountCodeById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<DiscountCodeDTO>tResponseBuilder()
                 .response(this.discountCodeService.getById(id))
-                .message("Kiralama kayıtları görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{discountCode}")
+    @GetMapping("/{discountCode}")
     public ResponseEntity<TResponse<DiscountCodeDTO>> getDiscountCodeByDiscountCodeStr(@PathVariable String discountCode) {
-        return ResponseEntity.ok(TResponse.<DiscountCodeDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<DiscountCodeDTO>tResponseBuilder()
                 .response(this.discountCodeService.getByDiscountCode(discountCode))
-                .message("Kiralama kayıtları görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<DiscountCodeDTO>>> getAllDiscountCodes() {
-        return ResponseEntity.ok(TResponse.<List<DiscountCodeDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<DiscountCodeDTO>>tResponseBuilder()
                 .response(this.discountCodeService.getAll())
-                .message("Kiralama kayıtları görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<DiscountCodeDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<DiscountCodeDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<DiscountCodeDTO>>tResponseBuilder()
                 .response(this.discountCodeService.getAllByDeletedState(isDeleted))
-                .message("Silinmeyen Araba Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.discountCodeService.delete(id, isHardDelete);

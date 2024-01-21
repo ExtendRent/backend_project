@@ -9,15 +9,16 @@ import source_files.data.requests.auth.SignInRequest;
 import source_files.data.requests.auth.SignUpReqeust;
 import source_files.data.responses.JwtToken;
 import source_files.data.responses.TResponse;
+import source_files.services.externalServices.EmailService;
 import source_files.services.userServices.abstracts.AuthenticationService;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 @CrossOrigin
 @RequiredArgsConstructor
 public class AuthenticationController {
-
+    private final EmailService emailService;
     private final AuthenticationService authenticationService;
 
     @PostMapping("/signup")
@@ -33,4 +34,10 @@ public class AuthenticationController {
         );
     }
 
+    //TODO buraya bakılacak.
+    @GetMapping("/verifyEmail")
+    ResponseEntity<TResponse<JwtToken>> verifyEmailAddress(@RequestParam("token") String token) {
+
+        return null;
+    }
 }

@@ -23,68 +23,62 @@ public class CarModelsController {
     private CarModelService carModelService;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addCarModel(@RequestBody AddCarModelRequest addCarModelRequest) {
+    public ResponseEntity<Void> createCarModel(@RequestBody AddCarModelRequest addCarModelRequest) {
         this.carModelService.add(addCarModelRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<CarModelDTO>> updateCarModel(@RequestBody UpdateCarModelRequest updateCarModelRequest) {
-        return ResponseEntity.ok(TResponse.<CarModelDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<CarModelDTO>tResponseBuilder()
                 .response(this.carModelService.update(updateCarModelRequest))
-                .message("Araba modeli güncellendi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TResponse<CarModelDTO>> getByCarModelId(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.<CarModelDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<CarModelDTO>tResponseBuilder()
                 .response(this.carModelService.getById(id))
-                .message(id + " id'li araba modeli getirildi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<CarModelDTO>>> getAll() {
-        return ResponseEntity.ok(TResponse.<List<CarModelDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<CarModelDTO>>tResponseBuilder()
                 .response(this.carModelService.getAll())
-                .message("Araba modeli listesi getirildi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/models/{modelName}")
     public ResponseEntity<TResponse<?>> getByModelName(@PathVariable String modelName) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+        return new ResponseEntity<>(TResponse.tResponseBuilder()
                 .response(this.carModelService.getByModelName(modelName))
-                .message("Model görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/brands/{brandId}")
     public ResponseEntity<TResponse<?>> getByBrandId(@PathVariable int brandId) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+        return new ResponseEntity<>(TResponse.tResponseBuilder()
                 .response(this.carModelService.getAllByBrandId(brandId))
-                .message("Model görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<CarModelDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<CarModelDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<CarModelDTO>>tResponseBuilder()
                 .response(this.carModelService.getAllByDeletedState(isDeleted))
-                .message("Silinene göre model Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
         this.carModelService.delete(id, isHardDelete);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

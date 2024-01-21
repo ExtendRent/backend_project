@@ -24,50 +24,46 @@ public class ColorsController {
 
 
     @PostMapping
-    public ResponseEntity<TResponse<HttpStatus>> addColor(@RequestBody @Valid AddColorRequest addColorRequest) {
+    public ResponseEntity<Void> createColor(@RequestBody @Valid AddColorRequest addColorRequest) {
         this.colorService.add(addColorRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<ColorDTO>> updateColor(@RequestBody @Valid UpdateColorRequest updateColorRequest) {
-        return ResponseEntity.ok(TResponse.<ColorDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<ColorDTO>tResponseBuilder()
                 .response(this.colorService.update(updateColorRequest))
-                .message("Renk güncellendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TResponse<ColorDTO>> getById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.<ColorDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<ColorDTO>tResponseBuilder()
                 .response(this.colorService.getById(id))
-                .message(id + " id' li renk görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<ColorDTO>>> getAll() throws Exception {
-        return ResponseEntity.ok(TResponse.<List<ColorDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<ColorDTO>>tResponseBuilder()
                 .response(this.colorService.getAll())
-                .message("Renk Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<ColorDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<ColorDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<ColorDTO>>tResponseBuilder()
                 .response(this.colorService.getAllByDeletedState(isDeleted))
-                .message("Silinene göre renk Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.colorService.delete(id, isHardDelete);

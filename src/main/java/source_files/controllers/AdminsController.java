@@ -23,7 +23,7 @@ public class AdminsController {
     private final AdminService adminService;
 
     @PostMapping
-    public ResponseEntity<Void> addAdmin(@Valid @RequestBody AddAdminRequest addAdminRequest) {
+    public ResponseEntity<Void> createAdmin(@Valid @RequestBody AddAdminRequest addAdminRequest) {
         adminService.add(addAdminRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

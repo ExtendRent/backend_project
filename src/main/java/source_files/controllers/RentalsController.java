@@ -30,7 +30,7 @@ public class RentalsController {
     private PaymentService paymentService;
 
     @PostMapping
-    public ResponseEntity<TResponse<HttpStatus>> addRental(
+    public ResponseEntity<Void> createRental(
             @Valid @RequestBody AddRentalRequest addRentalRequest) {
 
         switch (this.paymentTypeService.getById(addRentalRequest.getPaymentTypeId()).getPaymentType()) {
@@ -47,52 +47,47 @@ public class RentalsController {
 
     @PostMapping("/showRental")
     public ResponseEntity<TResponse<ShowRentalResponse>> showRental(@Valid @RequestBody ShowRentalRequest showRentalRequest) {
-        return ResponseEntity.ok(TResponse.<ShowRentalResponse>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<ShowRentalResponse>tResponseBuilder()
                 .response(this.rentalService.showRentalDetails(showRentalRequest))
-                .message("Kiralama önizlemesi gösterildi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @PutMapping
     public ResponseEntity<TResponse<RentalDTO>> updateRental(@RequestBody UpdateRentalRequest updateRentalRequest) {
-        return ResponseEntity.ok(TResponse.<RentalDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<RentalDTO>tResponseBuilder()
                 .response(this.rentalService.update(updateRentalRequest))
-                .message("Güncelleme işlemi başarılı")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<RentalDTO>>> getAllRentals() {
-        return ResponseEntity.ok(TResponse.<List<RentalDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
                 .response(this.rentalService.getAll())
-                .message("Kiralama kayıtları görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @PutMapping("/returnRental")
     public ResponseEntity<TResponse<?>> returnRental(@RequestBody ReturnRentalRequest returnRentalRequest) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+        return new ResponseEntity<>(TResponse.tResponseBuilder()
                 .response(this.rentalService.returnCar(returnRentalRequest))
-                .message("Kiralama işlemi başarılı")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<RentalDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<RentalDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
                 .response(this.rentalService.getAllByDeletedState(isDeleted))
-                .message("Araba Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.rentalService.delete(id, isHardDelete);

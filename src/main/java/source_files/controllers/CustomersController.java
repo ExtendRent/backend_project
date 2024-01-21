@@ -23,59 +23,54 @@ public class CustomersController {
     private final CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addCustomer(@RequestBody @Valid AddCustomerRequest addCustomerRequest) {
+    public ResponseEntity<Void> createCustomer(@RequestBody @Valid AddCustomerRequest addCustomerRequest) {
         this.customerService.add(addCustomerRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<CustomerDTO>> updateCustomer(@RequestBody @Valid UpdateCustomerRequest updateCustomerRequest) {
-        return ResponseEntity.ok(TResponse.<CustomerDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<CustomerDTO>tResponseBuilder()
                 .response(this.customerService.update(updateCustomerRequest))
-                .message("Müşteri güncellendi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<CustomerDTO>>> getAll() {
-        return ResponseEntity.ok(TResponse.<List<CustomerDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<CustomerDTO>>tResponseBuilder()
                 .response(this.customerService.getAll())
-                .message("Müşteri listesi getirildi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TResponse<CustomerDTO>> getById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.<CustomerDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<CustomerDTO>tResponseBuilder()
                 .response(this.customerService.getById(id))
-                .message("Müşteri getirildi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{phoneNumber}")
+    @GetMapping("/{phoneNumber}")
     public ResponseEntity<TResponse<CustomerDTO>> getByPhoneNumber(@PathVariable String phoneNumber) {
-        return ResponseEntity.ok(TResponse.<CustomerDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<CustomerDTO>tResponseBuilder()
                 .response(this.customerService.getByPhoneNumber(phoneNumber))
-                .message("Telefon Numarasına Göre Getirildi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<CustomerDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<CustomerDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<CustomerDTO>>tResponseBuilder()
                 .response(this.customerService.getAllByDeletedState(isDeleted))
-                .message("silinene göre müşteri Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.customerService.delete(id, isHardDelete);

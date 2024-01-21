@@ -23,69 +23,63 @@ public class EmployeesController {
     private final EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
+    public ResponseEntity<Void> createEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
         this.employeeService.add(addEmployeeRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<EmployeeDTO>> updateEmployee(@RequestBody @Valid UpdateEmployeeRequest updateEmployeeRequest) {
-        return ResponseEntity.ok(TResponse.<EmployeeDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<EmployeeDTO>tResponseBuilder()
                 .response(this.employeeService.update(updateEmployeeRequest))
-                .message("Çalışan güncellendi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<EmployeeDTO>>> getAll() {
-        return ResponseEntity.ok(TResponse.<List<EmployeeDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<EmployeeDTO>>tResponseBuilder()
                 .response(this.employeeService.getAll())
-                .message("Çalışan listesi getirildi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TResponse<EmployeeDTO>> getById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.<EmployeeDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<EmployeeDTO>tResponseBuilder()
                 .response(this.employeeService.getById(id))
-                .message("Çalışan getirildi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{phoneNumber}")
+    @GetMapping("/{phoneNumber}")
     public ResponseEntity<TResponse<?>> getByPhoneNumber(@PathVariable String phoneNumber) {
-        return ResponseEntity.ok(TResponse.tResponseBuilder()
+        return new ResponseEntity<>(TResponse.tResponseBuilder()
                 .response(this.employeeService.getByPhoneNumber(phoneNumber))
-                .message("Telefon Numarasına Göre Getirildi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = {"startSalary", "endSalary"})
     public ResponseEntity<TResponse<List<EmployeeDTO>>> getAllBySalaryBetween(
             @RequestParam(name = "startSalary") Double startSalary, @RequestParam(name = "endSalary") Double endSalary) {
-        return ResponseEntity.ok(TResponse.<List<EmployeeDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<EmployeeDTO>>tResponseBuilder()
                 .response(this.employeeService.getAllBySalaryBetween(startSalary, endSalary))
-                .message(startSalary + "TL ve " + endSalary + "TL Arasındaki Aylık Ücrete Göre Getirildi.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<EmployeeDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<EmployeeDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<EmployeeDTO>>tResponseBuilder()
                 .response(this.employeeService.getAllByDeletedState(isDeleted))
-                .message("Silinmeyen Araba Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.employeeService.delete(id, isHardDelete);

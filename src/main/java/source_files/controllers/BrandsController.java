@@ -24,58 +24,52 @@ public class BrandsController {
     private final BrandService brandService;
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addBrand(@Valid @RequestBody AddBrandRequest addBrandRequest) {
+    public ResponseEntity<Void> createBrand(@Valid @RequestBody AddBrandRequest addBrandRequest) {
         this.brandService.add(addBrandRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<BrandDTO>> updateBrand(@RequestBody UpdateBrandRequest updateBrandRequest) {
-        return ResponseEntity.ok(TResponse.<BrandDTO>tResponseBuilder()
-                .response(this.brandService.update(updateBrandRequest))
-                .message("Marka güncellendi")
-                .build()
+        return new ResponseEntity<>(TResponse.<BrandDTO>tResponseBuilder()
+                .response(this.brandService.update(updateBrandRequest)).build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TResponse<BrandDTO>> getById(@PathVariable int id) {
-        return ResponseEntity.ok(TResponse.<BrandDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<BrandDTO>tResponseBuilder()
                 .response(this.brandService.getById(id))
-                .message(id + " li marka görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/")
     public ResponseEntity<TResponse<List<BrandDTO>>> getAll() {
-        return ResponseEntity.ok(TResponse.<List<BrandDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<BrandDTO>>tResponseBuilder()
                 .response(this.brandService.getAll())
-                .message("Marka Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @GetMapping("{brandName}")
+    @GetMapping("/{brandName}")
     public ResponseEntity<TResponse<BrandDTO>> getByBrandName(@PathVariable String brandName) {
-        return ResponseEntity.ok(TResponse.<BrandDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<BrandDTO>tResponseBuilder()
                 .response(this.brandService.getByName(brandName))
-                .message("Marka görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<BrandDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        return ResponseEntity.ok(TResponse.<List<BrandDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<BrandDTO>>tResponseBuilder()
                 .response(this.brandService.getAllByDeletedState(isDeleted))
-                .message("Silinme durumuna göre araba listesi döndü")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
         this.brandService.delete(id, isHardDelete);

@@ -23,25 +23,23 @@ public class PaymentTypesController {
     private PaymentTypeService paymentTypeService;
 
     @PostMapping
-    public ResponseEntity<TResponse<HttpStatus>> addPaymentType(@Valid @RequestBody AddPaymentTypeRequest addPaymentTypeRequest) {
+    public ResponseEntity<Void> createPaymentType(@Valid @RequestBody AddPaymentTypeRequest addPaymentTypeRequest) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<PaymentTypeDTO>> updatePaymentType(@Valid @RequestBody UpdatePaymentTypeRequest updatePaymentTypeRequest) {
-        return ResponseEntity.ok(TResponse.<PaymentTypeDTO>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<PaymentTypeDTO>tResponseBuilder()
                 .response(this.paymentTypeService.update(updatePaymentTypeRequest))
-                .message("Ödeme tipi güncelleme işlemi başarılı")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @GetMapping
     public ResponseEntity<TResponse<List<PaymentTypeDTO>>> GetAllPaymentTypes() {
-        return ResponseEntity.ok(TResponse.<List<PaymentTypeDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<PaymentTypeDTO>>tResponseBuilder()
                 .response(this.paymentTypeService.getAll())
-                .message("Ödeme tipleri görüntülendi")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
@@ -49,15 +47,14 @@ public class PaymentTypesController {
     public ResponseEntity<TResponse<List<PaymentTypeDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
 
-        return ResponseEntity.ok(TResponse.<List<PaymentTypeDTO>>tResponseBuilder()
+        return new ResponseEntity<>(TResponse.<List<PaymentTypeDTO>>tResponseBuilder()
                 .response(this.paymentTypeService.getAllByDeletedState(isDeleted))
-                .message("Araba Listesi döndü.")
-                .build()
+                .build(), HttpStatus.OK
         );
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<HttpStatus> delete(
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
 
         this.paymentTypeService.delete(id, isHardDelete);
