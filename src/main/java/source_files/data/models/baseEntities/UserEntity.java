@@ -46,7 +46,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Column(name = "status")
     private UserStatus status;
-    
+
     @Column(name = "image_path")
     private String imagePath;
 

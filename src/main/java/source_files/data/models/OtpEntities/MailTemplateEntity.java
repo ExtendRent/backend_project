@@ -20,7 +20,7 @@ public class MailTemplateEntity extends BaseEntity {
     private String templateName;
 
     @Lob
-    @Column(nullable = false, length = Integer.MAX_VALUE )
+    @Column(nullable = false, length = Integer.MAX_VALUE)
     private String content;
 
     @Column(name = "mail_subject")
