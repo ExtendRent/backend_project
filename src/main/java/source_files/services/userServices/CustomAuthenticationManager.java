@@ -15,7 +15,7 @@ import source_files.data.requests.userRequests.AddCustomerRequest;
 import source_files.data.requests.userRequests.AddEmployeeRequest;
 import source_files.data.responses.JwtToken;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
-import source_files.services.externalServices.EmailServiceManager;
+import source_files.services.externalServices.EmailService;
 import source_files.services.userServices.abstracts.AdminService;
 import source_files.services.userServices.abstracts.AuthenticationService;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -38,7 +38,7 @@ public class CustomAuthenticationManager implements AuthenticationService {
 
     private final CustomerService customerService;
 
-    private EmailServiceManager emailService;
+    private final EmailService emailService;
 
     @Override
     public void signUp(SignUpReqeust request) {
@@ -49,7 +49,7 @@ public class CustomAuthenticationManager implements AuthenticationService {
                 this.employeeService.add(this.modelMapperService.forRequest().map(request, AddEmployeeRequest.class));
             case CUSTOMER:
                 this.customerService.add(this.modelMapperService.forRequest().map(request, AddCustomerRequest.class));
-                this.emailService.sendOtp(request.getEmailAddress());
+                emailService.sendOtp(request.getEmailAddress());
         }
 
     }
