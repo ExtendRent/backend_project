@@ -24,11 +24,12 @@ public class BaseEntity {
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
 
-
+    @Column(name = "deleted_at")
+    private LocalDate deletedAt;
     @Column(name = "last_modified")
     private LocalDate lastModified;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date",updatable = false)
     private LocalDate createdDate;
 
     @PrePersist //classlar oluşmadan çalısır
