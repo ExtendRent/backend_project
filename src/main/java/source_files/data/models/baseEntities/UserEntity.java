@@ -1,10 +1,7 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import source_files.data.Status.UserStatus;
@@ -19,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 //@SuperBuilder
+@Builder
 //@MappedSuperclass//->Bu sınıf entity olduğu için bu anotasyonu KULLANAMAYIZ(artık bir üst sınıftaki kolonlar da bu sınıfa gelecek). !!!
 @Inheritance(strategy = InheritanceType.JOINED)
 //-> kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
@@ -40,7 +38,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Column(name = "password")
     private String password;
-    @Column(name = "roles")
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRole authority;
 
