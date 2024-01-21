@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,5 +17,4 @@ public class SignInRequest {
     private String email;
     @NotNull
     private String password;
-    private List<String> roles;
 }

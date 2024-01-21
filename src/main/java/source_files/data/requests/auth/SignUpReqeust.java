@@ -1,9 +1,6 @@
 package source_files.data.requests.auth;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import source_files.data.types.itemTypes.DrivingLicenseType;
@@ -42,5 +39,7 @@ public class SignUpReqeust {
 
     List<DrivingLicenseType> drivingLicenseTypes;
 
+    @NotBlank
+    @NotNull
     UserRole authority;
 }
