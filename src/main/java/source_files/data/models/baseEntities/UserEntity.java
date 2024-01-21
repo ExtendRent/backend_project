@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import source_files.data.Status.UserStatus;
 import source_files.data.types.userTypes.UserRole;
 
 import java.util.Collection;
@@ -42,6 +43,12 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Column(name = "roles")
     @Enumerated(EnumType.STRING)
     private UserRole authority;
+
+    @Column(name = "status")
+    private UserStatus status;
+    
+    @Column(name = "image_path")
+    private String imagePath;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(authority);
