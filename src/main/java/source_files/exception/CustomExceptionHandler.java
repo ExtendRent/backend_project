@@ -21,7 +21,6 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public TResponse<?> handleException(Exception e) {
         return TResponse.tResponseBuilder()
-                .message("Unknown error!")
                 .response(new ErrorResponse(NotFoundExceptionType.GENERIC_EXCEPTION, Collections.singletonList(e.getMessage())))
                 .build();
     }
@@ -30,7 +29,6 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public TResponse<?> handleDataNotFoundException(DataNotFoundException e) {
         return TResponse.tResponseBuilder()
-                .message(e.getNotFoundExceptionType().getMessage())
                 .response(new ErrorResponse(e.getNotFoundExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
@@ -39,7 +37,6 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TResponse<?> handleAlreadyExistsException(AlreadyExistsException e) {
         return TResponse.tResponseBuilder()
-                .message(e.getAlreadyExistsExceptionType().getMessage())
                 .response(new ErrorResponse(e.getAlreadyExistsExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
@@ -48,7 +45,6 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TResponse<?> handleAlreadyExistsException(PaymentException e) {
         return TResponse.tResponseBuilder()
-                .message(e.getPaymentExceptionType().getMessage())
                 .response(new ErrorResponse(e.getPaymentExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
@@ -57,7 +53,6 @@ public class CustomExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public TResponse<?> handleAlreadyExistsException(NotSuitableException e) {
         return TResponse.tResponseBuilder()
-                .message(e.getNotSuitableExceptionType().getMessage())
                 .response(new ErrorResponse(e.getNotSuitableExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
     }
@@ -82,7 +77,6 @@ public class CustomExceptionHandler {
         errorResponse.setDetails(validationErrors);
 
         return TResponse.tResponseBuilder()
-                .message("Validation error")
                 .response(errorResponse)
                 .build();
     }
