@@ -8,13 +8,13 @@ import source_files.core.config.SeedDataConfig;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
+    @Autowired
+    private SeedDataConfig seedDataConfig;
+
     public static void main(String[] args) {
 
         SpringApplication.run(Application.class, args);
     }
-
-    @Autowired
-    private SeedDataConfig seedDataConfig;
 
     @Override
     public void run(String... args) {

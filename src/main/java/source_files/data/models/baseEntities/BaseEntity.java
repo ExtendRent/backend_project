@@ -29,7 +29,7 @@ public class BaseEntity {
     @Column(name = "last_modified")
     private LocalDate lastModified;
 
-    @Column(name = "created_date",updatable = false)
+    @Column(name = "created_date", updatable = false)
     private LocalDate createdDate;
 
     @PrePersist //classlar oluşmadan çalısır
