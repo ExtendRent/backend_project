@@ -1,6 +1,6 @@
 package source_files.services.paperWorkServices;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
@@ -25,7 +25,7 @@ import java.util.List;
 import static source_files.data.types.itemTypes.ItemType.RENTAL;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RentalManager implements RentalService {
 
     private final RentalEntityService rentalEntityService;
@@ -65,6 +65,7 @@ public class RentalManager implements RentalService {
         UpdateCarRequest updateCarRequest = this.modelMapperService.forResponse().map(
                 this.carService.getById(createRentalRequest.getCarEntityId()), UpdateCarRequest.class
         );
+
         updateCarRequest.setAvailable(false);
         updateCarRequest.setAvailabilityDate(rentalEntity.getEndDate());
         rentalEntityService.create(rentalEntity);

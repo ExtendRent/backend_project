@@ -1,6 +1,6 @@
 package source_files.services.paperWorkServices;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.DiscountDTO;
@@ -14,7 +14,7 @@ import source_files.services.paperWorkServices.abstracts.DiscountService;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DiscountManager implements DiscountService {
     private final DiscountEntityService discountEntityService;
     private final ModelMapperService modelMapperService;

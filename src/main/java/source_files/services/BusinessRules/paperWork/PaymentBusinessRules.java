@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.paperWork;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
@@ -13,7 +13,7 @@ import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_LIST_NOT_FOUND;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class PaymentBusinessRules implements BaseBusinessRulesService {
 

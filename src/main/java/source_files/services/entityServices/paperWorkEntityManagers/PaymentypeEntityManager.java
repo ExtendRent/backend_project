@@ -1,6 +1,6 @@
 package source_files.services.entityServices.paperWorkEntityManagers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.types.itemTypes.PaymentType;
@@ -13,7 +13,7 @@ import java.util.List;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_TYPE_NOT_FOUND;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PaymentypeEntityManager implements PaymentTypeEntityService {
 
     private final PaymentTypeEntityRepository paymentTypeEntityRepository;

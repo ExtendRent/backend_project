@@ -1,6 +1,6 @@
 package source_files.services.userServices;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import static source_files.data.types.userTypes.UserRole.CUSTOMER;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CustomerManager implements CustomerService {
 
     private final ModelMapperService modelMapperService;

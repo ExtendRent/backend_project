@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.userBusinessRuless;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
@@ -15,7 +15,7 @@ import java.util.List;
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.*;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_LIST_NOT_FOUND;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     private final CustomerRepository customerRepository;

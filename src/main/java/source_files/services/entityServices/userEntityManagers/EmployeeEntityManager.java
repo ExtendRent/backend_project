@@ -1,6 +1,6 @@
 package source_files.services.entityServices.userEntityManagers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.userEntities.EmployeeEntity;
 import source_files.dataAccess.userRepositories.EmployeeRepository;
@@ -12,7 +12,7 @@ import java.util.List;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.EMPLOYEE_DATA_NOT_FOUND;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EmployeeEntityManager implements EmployeeEntityService {
     private final EmployeeRepository employeeRepository;
 

@@ -1,7 +1,7 @@
 package source_files.services.externalServices;
 
 import jakarta.mail.internet.MimeMessage;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringSubstitutor;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class EmailServiceManager implements EmailService {
     public static final String EMAIL_CONFIRMATION = "EMAIL_CONFIRMATION";

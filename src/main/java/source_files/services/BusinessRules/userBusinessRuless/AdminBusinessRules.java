@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.userBusinessRuless;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -18,7 +18,7 @@ import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.P
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_LIST_NOT_FOUND;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class AdminBusinessRules implements BaseUserBusinessRulesService {
     private final AdminRepository adminRepository;

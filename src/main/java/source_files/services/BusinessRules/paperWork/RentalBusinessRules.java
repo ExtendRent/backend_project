@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.paperWork;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
@@ -26,7 +26,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL
 import static source_files.exception.exceptionTypes.NotSuitableExceptionType.DRIVING_LICENSE_TYPE_NOT_SUITABLE;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class RentalBusinessRules implements BaseBusinessRulesService {
 

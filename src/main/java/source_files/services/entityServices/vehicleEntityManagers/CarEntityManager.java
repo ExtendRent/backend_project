@@ -1,6 +1,6 @@
 package source_files.services.entityServices.vehicleEntityManagers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
@@ -13,7 +13,7 @@ import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_DATA_NOT_FOUND;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class CarEntityManager implements CarEntityService {
 

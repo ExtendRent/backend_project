@@ -1,6 +1,6 @@
 package source_files.services.systemServices;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
@@ -14,7 +14,7 @@ import static source_files.data.types.itemTypes.ItemType.PAYMENT_DETAILS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_DATA_NOT_FOUND;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SysPaymentDetailsManager implements SysPaymentDetailsService {
     private final PaymentDetailsRepository paymentDetailsRepository;
 

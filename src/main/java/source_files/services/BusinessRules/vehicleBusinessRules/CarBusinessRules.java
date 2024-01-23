@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.vehicleBusinessRules;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.vehicleEntities.CarEntity;
@@ -26,7 +26,7 @@ import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.L
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class CarBusinessRules implements BaseBusinessRulesService {
     private final CarRepository carRepository;

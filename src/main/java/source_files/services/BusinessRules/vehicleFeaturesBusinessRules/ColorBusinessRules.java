@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
@@ -15,7 +15,7 @@ import java.util.List;
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.COLOR_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.COLOR_LIST_NOT_FOUND;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class ColorBusinessRules implements BaseItemBusinessRulesService {
     private final ColorRepository colorRepository;

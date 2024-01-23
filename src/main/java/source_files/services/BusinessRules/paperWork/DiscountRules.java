@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.paperWork;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.exception.DataNotFoundException;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.DISCOUNT_CODE_LIST_NOT_FOUND;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class DiscountRules implements BaseBusinessRulesService {
 

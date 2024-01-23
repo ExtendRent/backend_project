@@ -1,6 +1,6 @@
 package source_files.services.vehicleFeaturesServices;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static source_files.data.types.itemTypes.ItemType.BRAND;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BrandManager implements BrandService {
 
     private final BrandEntityService brandEntityService;

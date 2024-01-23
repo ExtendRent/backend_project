@@ -1,6 +1,6 @@
 package source_files.services.paperWorkServices.payment;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
@@ -15,7 +15,7 @@ import source_files.services.systemServices.SysPaymentDetailsService;
 import static source_files.exception.exceptionTypes.PaymentExceptionType.PAYMENT_REJECTED;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PaymentManager implements PaymentService {
 
     private final PayWithCreditCard payWithCreditCard;

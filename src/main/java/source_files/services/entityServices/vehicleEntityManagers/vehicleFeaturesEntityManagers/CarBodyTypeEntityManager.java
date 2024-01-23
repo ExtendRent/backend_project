@@ -1,6 +1,6 @@
 package source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
@@ -12,7 +12,7 @@ import java.util.List;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.BODY_TYPE_DATA_NOT_FOUND;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CarBodyTypeEntityManager implements CarBodyTypeEntityService {
 
     private final CarBodyTypeRepository carBodyTypeRepository;

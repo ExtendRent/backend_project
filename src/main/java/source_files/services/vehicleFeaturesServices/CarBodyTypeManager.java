@@ -1,6 +1,6 @@
 package source_files.services.vehicleFeaturesServices;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.CarBodyTypeDTO;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CarBodyTypeManager implements CarBodyTypeService {
 
     private final CarBodyTypeEntityService carBodyTypeEntityService;

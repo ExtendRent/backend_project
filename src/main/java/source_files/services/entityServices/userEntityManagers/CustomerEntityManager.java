@@ -1,6 +1,6 @@
 package source_files.services.entityServices.userEntityManagers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.dataAccess.userRepositories.CustomerRepository;
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_DATA_NOT_FOUND;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class CustomerEntityManager implements CustomerEntityService {
 
