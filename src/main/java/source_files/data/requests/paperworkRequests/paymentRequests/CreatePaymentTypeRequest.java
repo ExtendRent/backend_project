@@ -19,7 +19,9 @@ public class CreatePaymentTypeRequest {
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Ödeme tipi sadece harflerden oluşmalıdır.")
     private String paymentTypeEntityName;
+
     @NotNull
     @NotBlank
     private PaymentType PaymentTypeEntityPaymentType;
+
 }

@@ -61,7 +61,14 @@ public class RentalManager implements RentalService {
         );
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
         rentalEntity.setItemType(RENTAL);
+
+        UpdateCarRequest updateCarRequest = this.modelMapperService.forResponse().map(
+                this.carService.getById(createRentalRequest.getCarEntityId()), UpdateCarRequest.class
+        );
+        updateCarRequest.setAvailable(false);
+        updateCarRequest.setAvailabilityDate(rentalEntity.getEndDate());
         rentalEntityService.create(rentalEntity);
+        carService.update(updateCarRequest);
     }
 
     @Override

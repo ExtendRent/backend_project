@@ -1,16 +1,16 @@
 package source_files.data.requests.userRequests;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import source_files.data.Status.UserStatus;
 import source_files.data.requests.BaseRequest;
+import source_files.data.types.userTypes.UserRole;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class CreateAdminRequest implements BaseRequest {
     @NotNull(message = "isim null olamaz")
     @NotBlank(message = "isim boş geçilemez")
@@ -44,4 +44,8 @@ public class CreateAdminRequest implements BaseRequest {
     @NotBlank(message = "maaş boş geçilemez")
     @Min(0)
     Double salary;
+
+    String imagePath;
+    UserStatus status = UserStatus.VERIFIED;
+    private UserRole authority = UserRole.ADMIN;
 }

@@ -1,12 +1,11 @@
 package source_files.data.requests.userRequests;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import source_files.data.Status.UserStatus;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.userTypes.UserRole;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 //@Builder
 public class CreateCustomerRequest implements BaseRequest {
 
@@ -53,4 +53,8 @@ public class CreateCustomerRequest implements BaseRequest {
 
     @Size(min = 1, max = 16, message = "Sürücü belgesi türü listesi 1 ile 16 arasında olmalıdır.")
     List<DrivingLicenseType> drivingLicenseTypes;
+
+    String imagePath;
+    UserStatus status = UserStatus.PENDING_VERIFYING;
+    private UserRole authority = UserRole.CUSTOMER;
 }

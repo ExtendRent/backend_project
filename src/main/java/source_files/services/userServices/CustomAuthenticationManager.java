@@ -24,19 +24,15 @@ import source_files.services.userServices.abstracts.EmployeeService;
 @Service
 @RequiredArgsConstructor
 public class CustomAuthenticationManager implements AuthenticationService {
-
-    private final JwtService jwtService;
-
-    private final AuthenticationManager authenticationManager;
-    private final UserEntityService userEntityService;
-
-    private final ModelMapperService modelMapperService;
-
     private final AdminService adminService;
 
     private final EmployeeService employeeService;
 
     private final CustomerService customerService;
+    private final ModelMapperService modelMapperService;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final UserEntityService userEntityService;
 
     private final EmailService emailService;
 

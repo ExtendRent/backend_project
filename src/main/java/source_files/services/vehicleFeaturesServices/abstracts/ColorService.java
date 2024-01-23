@@ -13,7 +13,7 @@ public interface ColorService {
 
     ColorDTO getById(int id);
 
-    List<ColorDTO> getAll() throws Exception;
+    List<ColorDTO> getAll();
 
     List<ColorDTO> getAllByDeletedState(boolean isDeleted);
 

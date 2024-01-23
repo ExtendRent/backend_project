@@ -51,7 +51,7 @@ public class ColorManager implements ColorService {
     }
 
     @Override
-    public List<ColorDTO> getAll() throws Exception {
+    public List<ColorDTO> getAll() {
 
         //bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
         return colorBusinessRules.checkDataList(colorEntityService.getAll())

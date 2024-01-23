@@ -10,6 +10,7 @@ import source_files.exception.DataNotFoundException;
 
 import java.util.List;
 
+import static source_files.data.types.itemTypes.ItemType.PAYMENT_DETAILS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_DATA_NOT_FOUND;
 
 @Service
@@ -21,6 +22,7 @@ public class SysPaymentDetailsManager implements SysPaymentDetailsService {
 
     @Override
     public PaymentDetailsEntity create(PaymentDetailsEntity paymentDetailsEntity) {
+        paymentDetailsEntity.setItemType(PAYMENT_DETAILS);
         return this.paymentDetailsRepository.save(paymentDetailsEntity);
     }
 

@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.Status.UserStatus;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.userTypes.UserRole;
 
 import java.util.List;
 
@@ -56,4 +58,8 @@ public class UpdateCustomerRequest implements BaseRequest {
     @NotBlank(message = "Ehliyet tipi boş geçilemez.")
     @Size(min = 1, max = 16, message = "Sürücü belgesi türü listesi 1 ile 16 arasında olmalıdır.")
     List<DrivingLicenseType> drivingLicenseTypes;
+
+    String imagePath;
+    UserStatus status = UserStatus.PENDING_VERIFYING;
+    private UserRole authority = UserRole.CUSTOMER;
 }

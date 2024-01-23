@@ -7,10 +7,13 @@ import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
+import source_files.services.BusinessRules.paperWork.PaymentBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 
 import java.util.List;
+
+import static source_files.data.types.itemTypes.ItemType.PAYMENT_TYPE;
 
 @Service
 @AllArgsConstructor
@@ -18,11 +21,14 @@ public class PaymentTypeManager implements PaymentTypeService {
     private final PaymentTypeEntityService paymentTypeEntityService;
     private final ModelMapperService modelMapperService;
 
+    private final PaymentBusinessRules paymentBusinessRules;
+
     @Override
     public void create(CreatePaymentTypeRequest createPaymentTypeRequest) {
-        this.paymentTypeEntityService.create(
-                this.modelMapperService.forRequest()
-                        .map(createPaymentTypeRequest, PaymentTypeEntity.class));
+        PaymentTypeEntity paymentTypeEntity = this.modelMapperService.forRequest()
+                .map(createPaymentTypeRequest, PaymentTypeEntity.class);
+        paymentTypeEntity.setItemType(PAYMENT_TYPE);
+        this.paymentTypeEntityService.create(paymentTypeEntity);
     }
 
     @Override
@@ -56,10 +62,11 @@ public class PaymentTypeManager implements PaymentTypeService {
 
     @Override
     public List<PaymentTypeDTO> getAll() {
-        return this.paymentTypeEntityService.getAll().stream()
+        return this.paymentBusinessRules.checkDataList(this.paymentTypeEntityService.getAll()).stream()
                 .map(paymentTypeEntity -> this.modelMapperService.forResponse()
                         .map(paymentTypeEntity, PaymentTypeDTO.class)
                 ).toList();
+
     }
 
     @Override

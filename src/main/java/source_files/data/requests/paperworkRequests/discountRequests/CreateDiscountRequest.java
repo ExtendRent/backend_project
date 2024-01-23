@@ -1,16 +1,14 @@
 package source_files.data.requests.paperworkRequests.discountRequests;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateDiscount {
+@Builder
+public class CreateDiscountRequest {
     @NotBlank(message = "Discount code cannot be blank")
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Discount code must consist of letters and numbers only")

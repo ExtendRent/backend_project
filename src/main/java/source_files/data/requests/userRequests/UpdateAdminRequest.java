@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.Status.UserStatus;
 import source_files.data.requests.BaseRequest;
+import source_files.data.types.userTypes.UserRole;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,4 +56,8 @@ public class UpdateAdminRequest implements BaseRequest {
     @NotBlank(message = "maaş boş geçilemez")
     @Min(0)
     Double salary;
+
+    String imagePath;
+    UserStatus status = UserStatus.VERIFIED;
+    private UserRole authority = UserRole.ADMIN;
 }

@@ -55,7 +55,7 @@ public class Vehicle extends BaseEntity {
     private Boolean isAvailable = true;
 
     @Column(name = "availability_date")
-    private LocalDate availabilityDate;
+    private LocalDate availabilityDate = null;
 
     @Column(name = "expected_driving_license_types")
     private List<DrivingLicenseType> expectedDrivingLicenseTypes; //-> kullanıcıdan beklenen ehliyet sınıfları.

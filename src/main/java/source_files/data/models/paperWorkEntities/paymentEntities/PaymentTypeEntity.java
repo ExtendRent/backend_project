@@ -1,8 +1,6 @@
 package source_files.data.models.paperWorkEntities.paymentEntities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +19,6 @@ public class PaymentTypeEntity extends Item {
     @Column(name = "name")
     private String name;
     @Column(name = "paymentType")
+    @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 }

@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.DiscountDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
-import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscount;
+import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountRequest;
+import source_files.services.BusinessRules.paperWork.DiscountRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 
@@ -18,11 +19,13 @@ public class DiscountManager implements DiscountService {
     private final DiscountEntityService discountEntityService;
     private final ModelMapperService modelMapperService;
 
+    private final DiscountRules discountRules;
+
     @Override
-    public void create(CreateDiscount createDiscount) {
+    public void create(CreateDiscountRequest createDiscountRequest) {
         this.discountEntityService.create(
                 this.modelMapperService.forRequest()
-                        .map(createDiscount, DiscountEntity.class));
+                        .map(discountRules.fixDiscountRequest(createDiscountRequest), DiscountEntity.class));
     }
 
     @Override
@@ -63,7 +66,7 @@ public class DiscountManager implements DiscountService {
 
     @Override
     public List<DiscountDTO> getAll() {
-        return this.discountEntityService.getAll().stream()
+        return discountRules.checkDataList(this.discountEntityService.getAll()).stream()
                 .map(discountCode -> this.modelMapperService.forResponse()
                         .map(discountCode, DiscountDTO.class)).toList();
     }

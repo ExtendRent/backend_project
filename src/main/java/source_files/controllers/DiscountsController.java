@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.paperWorkDTOs.DiscountDTO;
-import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscount;
+import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
@@ -24,8 +24,8 @@ public class DiscountsController {
     private DiscountService discountService;
 
     @PostMapping
-    public ResponseEntity<Void> createDiscountCode(@Valid @RequestBody CreateDiscount createDiscount) {
-        this.discountService.create(createDiscount);
+    public ResponseEntity<Void> createDiscountCode(@Valid @RequestBody CreateDiscountRequest createDiscountRequest) {
+        this.discountService.create(createDiscountRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

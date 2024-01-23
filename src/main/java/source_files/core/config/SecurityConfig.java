@@ -3,7 +3,6 @@ package source_files.core.config;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import source_files.core.filters.JwtAuthFilter;
-import source_files.data.types.userTypes.UserRole;
 import source_files.services.userServices.abstracts.UserService;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -30,7 +28,7 @@ public class SecurityConfig {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/api/auth/**",
-            "/api/users/login",
+            "/api/v1/auth/**",
             "/swagger-ui.html"
     };
     private final JwtAuthFilter jwtAuthFilter;
@@ -64,9 +62,8 @@ public class SecurityConfig {
                 .logout(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((req) -> req
                         .requestMatchers(WHITE_LIST_URLS).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
-                        .requestMatchers("/api/v1/brands/**").hasAnyAuthority(UserRole.ADMIN.name())
-                        .requestMatchers("/api/v1/colors/**").hasAnyAuthority(UserRole.CUSTOMER.name())
+                        .requestMatchers("/api/v1/brands/**").permitAll()
+                        .requestMatchers("/api/v1/colors/**").permitAll()
                         .requestMatchers("/api/v1/carBodyTypes/**").permitAll()
                         .requestMatchers("/api/v1/employees/**").permitAll()
                         .requestMatchers("/api/v1/paymentTypes/**").permitAll()
@@ -74,8 +71,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/carModels/**").permitAll()
                         .requestMatchers("/api/v1/discountCodes/**").permitAll()
                         .requestMatchers("/api/v1/customers/**").permitAll()
-                        .requestMatchers("/api/v1/customers/**").permitAll()
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/cars/**").permitAll()
                         .anyRequest().authenticated()
                 )
 

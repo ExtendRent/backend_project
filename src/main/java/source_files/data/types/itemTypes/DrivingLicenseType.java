@@ -2,12 +2,6 @@ package source_files.data.types.itemTypes;
 
 public enum DrivingLicenseType {
 
-    //-----------Motorcycles----------
-    M,   //Motorlu Bisiklet
-    A1,  //125 cc'ye kadar Motosiklet
-    A2,  //35 kw yi geçmeyen Motosiklet
-    A,   //35 kw yi geçen Motosiklet
-    B1,  //4 tekerli Motosiklet
     //-----------Cars----------
     B,   //Otomobil ve Kamyonet
     BE,  //Röomorklu Otomobil ve Kamyonet
@@ -20,5 +14,12 @@ public enum DrivingLicenseType {
     D,   //Minibüs ve Otobüs
     E,   //Römorklu Minibüs ve Otobüs
     F,   //Lastik Tekerlekli Traktör
-    G    //İş Makinası
+    G,    //İş Makinası
+    //-----------Motorcycles----------
+    M,   //Motorlu Bisiklet
+    A1,  //125 cc'ye kadar Motosiklet
+    A2,  //35 kw yi geçmeyen Motosiklet
+    A,   //35 kw yi geçen Motosiklet
+    B1  //4 tekerli Motosiklet
+
 }

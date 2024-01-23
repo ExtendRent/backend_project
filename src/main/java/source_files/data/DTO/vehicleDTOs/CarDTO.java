@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 
+import java.time.LocalDate;
 import java.util.List;
 
 //@Builder
@@ -31,5 +32,7 @@ public class CarDTO {
     String licensePlate;
     int kilometer;
     List<String> imagesEntityImagePaths;
+    boolean isAvailable;
+    LocalDate availabilityDate;
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }

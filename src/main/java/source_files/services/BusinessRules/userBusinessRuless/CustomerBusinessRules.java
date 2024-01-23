@@ -38,7 +38,6 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
         updateCustomerRequest.setName(this.fixName(updateCustomerRequest.getName()));
         updateCustomerRequest.setSurname(this.fixName(updateCustomerRequest.getSurname()));
         updateCustomerRequest.setEmailAddress(this.fixName(updateCustomerRequest.getEmailAddress()));
-        updateCustomerRequest.setDrivingLicenseNumber(this.fixName(updateCustomerRequest.getDrivingLicenseNumber()));
         return updateCustomerRequest;
     }
 
