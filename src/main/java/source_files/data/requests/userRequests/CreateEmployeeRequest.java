@@ -1,50 +1,48 @@
 package source_files.data.requests.userRequests;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.itemTypes.DrivingLicenseType;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-//@Builder
-public class AddCustomerRequest implements BaseRequest {
-    @NotBlank(message = "Müşteri adı boş geçilemez")
+public class CreateEmployeeRequest implements BaseRequest {
+
+    @NotNull(message = "isim null olamaz")
+    @NotBlank(message = "Çalışan adı boş geçilemez")
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String name;
 
-    @NotBlank(message = "Müşteri soyadı boş geçilemez")
+    @NotNull(message = "soyisim null olamaz")
+    @NotBlank(message = "Çalışan soyadı boş geçilemez")
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
+    @NotNull(message = "Çalışan mail adresi null olamaz")
+    @NotBlank(message = "Çalışan mail adresi boş geçilemez")
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.
-    @NotBlank(message = "Müşteri mail adresi boş geçilemez")
     String emailAddress;
 
+    @NotNull(message = "Şifre null olamaz")
+    @NotBlank(message = "Çalışan şifresi boş geçilemez")
     @Size(min = 8, max = 30)
-    @NotBlank(message = "Müşteri şifresi boş geçilemez")
     String password;
 
-    @NotBlank(message = "Müşteri telefon numarası boş geçilemez")
+    @NotNull(message = "Çalışan telefon numarası null olamaz")
+    @NotBlank(message = "Çalışan telefon numarası boş geçilemez")
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")
     String phoneNumber;
 
-    @Size(max = 6, message = "Ehliyet seri numarası 6 haneli olmalıdır.")
-    String drivingLicenseNumber;
-
-    @Size(min = 1, max = 16, message = "Sürücü belgesi türü listesi 1 ile 16 arasında olmalıdır.")
-    List<DrivingLicenseType> drivingLicenseTypes;
+    @NotNull(message = "Maaş null olamaz")
+    @NotBlank(message = "Maas boş geçilemez")
+    @Min(0)
+    Double salary;
 }

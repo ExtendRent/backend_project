@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentDetailsRequest;
@@ -13,7 +13,7 @@ import source_files.exception.NotSuitableException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityManager;
-import source_files.services.paperWorkServices.abstracts.DiscountCodeService;
+import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
 
@@ -32,18 +32,18 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
     private final RentalEntityManager rentalEntityManager;
 
-    private final DiscountCodeService discountCodeService;
+    private final DiscountService discountService;
     private final CarService carService;
 
     private final CustomerService customerService;
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public AddRentalRequest fixAddRentalRequest(AddRentalRequest addRentalRequest) {
+    public CreateRentalRequest fixCreateRentalRequest(CreateRentalRequest createRentalRequest) {
 
-        if (this.checkDiscountCodeIsNull(addRentalRequest.getDiscountCode())) {
-            addRentalRequest.setDiscountCode(this.fixName(addRentalRequest.getDiscountCode()));
+        if (this.checkDiscountCodeIsNull(createRentalRequest.getDiscountCode())) {
+            createRentalRequest.setDiscountCode(this.fixName(createRentalRequest.getDiscountCode()));
         }
-        return addRentalRequest;
+        return createRentalRequest;
     }
 
     public ReturnRentalRequest fixReturnRentalRequest(ReturnRentalRequest returnRentalRequest) {
@@ -60,9 +60,9 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         return showRentalRequest;
     }
 
-    public AddRentalRequest checkAddRentalRequest(AddRentalRequest addRentalRequest) {
-        this.userExists(addRentalRequest.getCustomerEntityId());
-        return addRentalRequest;
+    public CreateRentalRequest checkCreateRentalRequest(CreateRentalRequest createRentalRequest) {
+        this.userExists(createRentalRequest.getCustomerEntityId());
+        return createRentalRequest;
     }
 
     public ReturnRentalRequest checkReturnRentalRequest(ReturnRentalRequest returnRentalRequest) {
@@ -125,7 +125,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
     public void checkDiscountCode(String discountCode) {
         if (this.checkDiscountCodeIsNull(discountCode)) { //discountCode girilmiş mi
-            if (!this.discountCodeService.getByDiscountCode(discountCode).isActive()) // varsa aktifmi değilmi diye bakıyor.
+            if (!this.discountService.getByDiscountCode(discountCode).isActive()) // varsa aktifmi değilmi diye bakıyor.
             {
                 throw new ValidationException(VALIDATION_EXCEPTION, "Bu indirim kodu artık geçersizdir.");
             }
@@ -183,7 +183,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
                             this.calculateTotalRentalDays(showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
                             , this.carService.getById(showRentalRequest.getCarEntityId()).getRentalPrice()
                     )
-                    , this.discountCodeService.getByDiscountCode(
+                    , this.discountService.getByDiscountCode(
                             showRentalRequest.getDiscountCode()).getDiscountPercentage()
             );
         } else {

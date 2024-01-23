@@ -2,7 +2,7 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.userRequests.AddCustomerRequest;
+import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.AlreadyExistsException;
@@ -24,13 +24,13 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public AddCustomerRequest fixAddCustomerRequest(AddCustomerRequest addCustomerRequest) {
-        addCustomerRequest.setPhoneNumber(this.fixName(addCustomerRequest.getPhoneNumber()));
-        addCustomerRequest.setName(this.fixName(addCustomerRequest.getName()));
-        addCustomerRequest.setSurname(this.fixName(addCustomerRequest.getSurname()));
-        addCustomerRequest.setEmailAddress(this.fixName(addCustomerRequest.getEmailAddress()));
-        addCustomerRequest.setDrivingLicenseNumber(this.fixName(addCustomerRequest.getDrivingLicenseNumber()));
-        return addCustomerRequest;
+    public CreateCustomerRequest fixCreateCustomerRequest(CreateCustomerRequest createCustomerRequest) {
+        createCustomerRequest.setPhoneNumber(this.fixName(createCustomerRequest.getPhoneNumber()));
+        createCustomerRequest.setName(this.fixName(createCustomerRequest.getName()));
+        createCustomerRequest.setSurname(this.fixName(createCustomerRequest.getSurname()));
+        createCustomerRequest.setEmailAddress(this.fixName(createCustomerRequest.getEmailAddress()));
+        createCustomerRequest.setDrivingLicenseNumber(this.fixName(createCustomerRequest.getDrivingLicenseNumber()));
+        return createCustomerRequest;
     }
 
     public UpdateCustomerRequest fixUpdateCustomerRequest(UpdateCustomerRequest updateCustomerRequest) {
@@ -44,11 +44,11 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
 
     //--------------------- AUTO CHECK METHODS ---------------------
 
-    public AddCustomerRequest checkAddCustomerRequest(AddCustomerRequest addCustomerRequest) {
-        this.existsByPhoneNumber(addCustomerRequest.getPhoneNumber());
-        this.existsByDrivingLicenseNumber(addCustomerRequest.getDrivingLicenseNumber());
-        this.existsByEmailAddress(addCustomerRequest.getEmailAddress());
-        return addCustomerRequest;
+    public CreateCustomerRequest checkCreateCustomerRequest(CreateCustomerRequest createCustomerRequest) {
+        this.existsByPhoneNumber(createCustomerRequest.getPhoneNumber());
+        this.existsByDrivingLicenseNumber(createCustomerRequest.getDrivingLicenseNumber());
+        this.existsByEmailAddress(createCustomerRequest.getEmailAddress());
+        return createCustomerRequest;
     }
 
     public UpdateCustomerRequest checkUpdateCustomerRequest(UpdateCustomerRequest updateCustomerRequest) {

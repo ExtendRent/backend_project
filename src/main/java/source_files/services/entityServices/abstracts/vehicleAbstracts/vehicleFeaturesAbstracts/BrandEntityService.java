@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BrandEntityService {
 
-    BrandEntity add(BrandEntity brandEntity);
+    BrandEntity create(BrandEntity brandEntity);
 
     BrandEntity update(BrandEntity brandEntity);
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.Item;
-import source_files.data.models.paperWorkEntities.paymentEntities.DiscountCodeEntity;
+import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
@@ -46,7 +46,7 @@ public class RentalEntity extends Item {
 
     @ManyToOne
     @JoinColumn(name = "discount_id")
-    private DiscountCodeEntity discountCodeEntity;
+    private DiscountEntity discountEntity;
 
     @OneToOne(mappedBy = "rentalEntity"
             , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)

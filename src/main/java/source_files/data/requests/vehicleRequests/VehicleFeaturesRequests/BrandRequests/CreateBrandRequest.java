@@ -1,6 +1,7 @@
 package source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,8 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddBrandRequest implements BaseRequest {
+public class CreateBrandRequest implements BaseRequest {
+    @NotNull(message = "Marka null olamaz")
     @NotBlank(message = "Marka adı boş geçilemez")
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Marka sadece harflerden oluşmalıdır.")

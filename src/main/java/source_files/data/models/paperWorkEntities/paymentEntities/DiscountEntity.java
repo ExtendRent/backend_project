@@ -15,7 +15,7 @@ import source_files.data.models.baseEntities.Item;
 @NoArgsConstructor
 @Entity
 @Table(name = "discount_codes")
-public class DiscountCodeEntity extends Item {
+public class DiscountEntity extends Item {
     @Column(name = "discount_code")
     private String discountCode;
 

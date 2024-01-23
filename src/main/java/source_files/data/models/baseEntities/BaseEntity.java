@@ -33,7 +33,7 @@ public class BaseEntity {
     private LocalDate createdDate;
 
     @PrePersist //classlar oluşmadan çalısır
-    private void beforeAdd() {
+    private void beforeCreate() {
         createdDate = LocalDate.now();
     }
 

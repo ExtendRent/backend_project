@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.userEntities.CustomerEntity;
-import source_files.data.requests.userRequests.AddCustomerRequest;
+import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRules;
@@ -30,16 +30,15 @@ public class CustomerManager implements CustomerService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public CustomerDTO add(AddCustomerRequest addCustomerRequest) {
-
+    public void create(CreateCustomerRequest createCustomerRequest) {
 
         CustomerEntity customerEntity = modelMapperService.forRequest()
-                .map(customerBusinessRules.checkAddCustomerRequest(
-                        customerBusinessRules.fixAddCustomerRequest(addCustomerRequest)), CustomerEntity.class
+                .map(customerBusinessRules.checkCreateCustomerRequest(
+                        customerBusinessRules.fixCreateCustomerRequest(createCustomerRequest)), CustomerEntity.class
                 );
-        addCustomerRequest.setPassword(passwordEncoder.encode(addCustomerRequest.getPassword()));
+        createCustomerRequest.setPassword(passwordEncoder.encode(createCustomerRequest.getPassword()));
         customerEntity.setAuthority(CUSTOMER);
-        return this.modelMapperService.forResponse().map(this.customerEntityService.add(customerEntity), CustomerDTO.class);
+        this.customerEntityService.create(customerEntity);
     }
 
     @Override
@@ -50,7 +49,7 @@ public class CustomerManager implements CustomerService {
                 );
 
 
-        return this.modelMapperService.forResponse().map(this.customerEntityService.add(customerEntity), CustomerDTO.class);
+        return this.modelMapperService.forResponse().map(this.customerEntityService.create(customerEntity), CustomerDTO.class);
     }
 
     @Override

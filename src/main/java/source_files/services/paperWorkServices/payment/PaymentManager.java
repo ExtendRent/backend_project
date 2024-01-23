@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
-import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.exception.PaymentException;
 import source_files.services.BusinessRules.paperWork.PaymentBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
@@ -29,19 +29,19 @@ public class PaymentManager implements PaymentService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public AddRentalRequest payWithCreditCard(AddRentalRequest addRentalRequest) {
+    public CreateRentalRequest payWithCreditCard(CreateRentalRequest createRentalRequest) {
 
         if (this.payWithCreditCard.pay(
-                addRentalRequest.getAmount()
+                createRentalRequest.getAmount()
                 , this.paymentBusinessRules
                         .checkCreditCard(
-                                this.paymentBusinessRules.fixCreditCardInformation(addRentalRequest.getCreditCardInformation())
+                                this.paymentBusinessRules.fixCreditCardInformation(createRentalRequest.getCreditCardInformation())
                         )
         )) {
-            addRentalRequest.setPaymentDetailsDTO(
+            createRentalRequest.setPaymentDetailsDTO(
                     this.modelMapperService.forResponse().map(
-                            this.sysPaymentDetailsService.add(new PaymentDetailsEntity(addRentalRequest.getAmount()
-                                    , this.paymentTypeEntityService.getById(addRentalRequest.getPaymentTypeId()))
+                            this.sysPaymentDetailsService.create(new PaymentDetailsEntity(createRentalRequest.getAmount()
+                                    , this.paymentTypeEntityService.getById(createRentalRequest.getPaymentTypeId()))
                             ), PaymentDetailsDTO.class));
         }
 

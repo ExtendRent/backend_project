@@ -3,7 +3,7 @@ package source_files.services.BusinessRules.userBusinessRuless;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.userEntities.AdminEntity;
-import source_files.data.requests.userRequests.AddAdminRequest;
+import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.dataAccess.userRepositories.AdminRepository;
 import source_files.exception.AlreadyExistsException;
@@ -33,12 +33,12 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     }
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public AddAdminRequest fixAddAdminRequest(AddAdminRequest addAdminRequest) {
-        addAdminRequest.setPhoneNumber(this.fixName(addAdminRequest.getPhoneNumber()));
-        addAdminRequest.setName(this.fixName(addAdminRequest.getName()));
-        addAdminRequest.setSurname(this.fixName(addAdminRequest.getSurname()));
-        addAdminRequest.setEmailAddress(this.fixName(addAdminRequest.getEmailAddress()));
-        return addAdminRequest;
+    public CreateAdminRequest fixCreateAdminRequest(CreateAdminRequest createAdminRequest) {
+        createAdminRequest.setPhoneNumber(this.fixName(createAdminRequest.getPhoneNumber()));
+        createAdminRequest.setName(this.fixName(createAdminRequest.getName()));
+        createAdminRequest.setSurname(this.fixName(createAdminRequest.getSurname()));
+        createAdminRequest.setEmailAddress(this.fixName(createAdminRequest.getEmailAddress()));
+        return createAdminRequest;
     }
 
     public UpdateAdminRequest fixUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
@@ -50,11 +50,11 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public AddAdminRequest checkAddAdminRequest(AddAdminRequest addAdminRequest) {
-        this.checkSalary(addAdminRequest.getSalary());
-        this.existsByEmailAddress(addAdminRequest.getEmailAddress());
-        this.existsByPhoneNumber(addAdminRequest.getPhoneNumber());
-        return addAdminRequest;
+    public CreateAdminRequest checkCreateAdminRequest(CreateAdminRequest createAdminRequest) {
+        this.checkSalary(createAdminRequest.getSalary());
+        this.existsByEmailAddress(createAdminRequest.getEmailAddress());
+        this.existsByPhoneNumber(createAdminRequest.getPhoneNumber());
+        return createAdminRequest;
     }
 
     public UpdateAdminRequest checkUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {

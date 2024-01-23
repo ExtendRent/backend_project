@@ -10,9 +10,9 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.requests.auth.SignInRequest;
 import source_files.data.requests.auth.SignUpReqeust;
-import source_files.data.requests.userRequests.AddAdminRequest;
-import source_files.data.requests.userRequests.AddCustomerRequest;
-import source_files.data.requests.userRequests.AddEmployeeRequest;
+import source_files.data.requests.userRequests.CreateAdminRequest;
+import source_files.data.requests.userRequests.CreateCustomerRequest;
+import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.responses.JwtToken;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.externalServices.EmailService;
@@ -44,11 +44,11 @@ public class CustomAuthenticationManager implements AuthenticationService {
     public void signUp(SignUpReqeust request) {
         switch (request.getAuthority()) {
             case ADMIN:
-                this.adminService.add(this.modelMapperService.forRequest().map(request, AddAdminRequest.class));
+                this.adminService.create(this.modelMapperService.forRequest().map(request, CreateAdminRequest.class));
             case EMPLOYEE:
-                this.employeeService.add(this.modelMapperService.forRequest().map(request, AddEmployeeRequest.class));
+                this.employeeService.create(this.modelMapperService.forRequest().map(request, CreateEmployeeRequest.class));
             case CUSTOMER:
-                this.customerService.add(this.modelMapperService.forRequest().map(request, AddCustomerRequest.class));
+                this.customerService.create(this.modelMapperService.forRequest().map(request, CreateCustomerRequest.class));
                 emailService.sendOtp(request.getEmailAddress());
         }
 

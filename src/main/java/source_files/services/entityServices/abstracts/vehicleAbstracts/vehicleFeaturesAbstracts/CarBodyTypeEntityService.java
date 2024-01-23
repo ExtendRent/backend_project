@@ -5,7 +5,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarB
 import java.util.List;
 
 public interface CarBodyTypeEntityService {
-    CarBodyTypeEntity add(CarBodyTypeEntity carBodyTypeEntity);
+    CarBodyTypeEntity create(CarBodyTypeEntity carBodyTypeEntity);
 
     CarBodyTypeEntity update(CarBodyTypeEntity carBodyTypeEntity);
 

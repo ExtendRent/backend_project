@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.ColorDTO;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
@@ -22,10 +22,9 @@ import java.util.List;
 public class ColorsController {
     private ColorService colorService;
 
-
     @PostMapping
-    public ResponseEntity<Void> createColor(@RequestBody @Valid AddColorRequest addColorRequest) {
-        this.colorService.add(addColorRequest);
+    public ResponseEntity<Void> createColor(@RequestBody @Valid CreateColorRequest createColorRequest) {
+        this.colorService.create(createColorRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -45,7 +44,7 @@ public class ColorsController {
         );
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<TResponse<List<ColorDTO>>> getAll() throws Exception {
         return new ResponseEntity<>(TResponse.<List<ColorDTO>>tResponseBuilder()
                 .response(this.colorService.getAll())

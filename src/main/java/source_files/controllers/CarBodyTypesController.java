@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.CarBodyTypeDTO;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
@@ -24,8 +24,8 @@ public class CarBodyTypesController {
     private final CarBodyTypeService carBodyTypeService;
 
     @PostMapping
-    public ResponseEntity<Void> createCarBodyType(@RequestBody @Valid AddCarBodyTypeRequest addCarBodyTypeRequest) {
-        this.carBodyTypeService.add(addCarBodyTypeRequest);
+    public ResponseEntity<Void> createCarBodyType(@RequestBody @Valid CreateCarBodyTypeRequest createCarBodyTypeRequest) {
+        this.carBodyTypeService.create(createCarBodyTypeRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

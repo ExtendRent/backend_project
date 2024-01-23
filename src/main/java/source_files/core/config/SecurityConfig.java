@@ -36,7 +36,7 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;
 
-    //    .requestMatchers("/api/v1/users/**").permitAll()
+    //    .requestMatchers("/api/v1/users/**").hasAnyAuthority(
 //                        .requestMatchers(HttpMethod.POST, "/api/v1/brands/**").hasAnyAuthority(UserRole.ADMIN.toString())
 //            .requestMatchers(HttpMethod.POST, "/api/v1/colors/**").hasAnyAuthority(UserRole.ADMIN.toString())
 //            .requestMatchers(HttpMethod.POST, "/api/v1/carBodyTypes/**").hasAnyAuthority(UserRole.ADMIN.toString())
@@ -47,9 +47,9 @@ public class SecurityConfig {
 //            .requestMatchers(HttpMethod.POST, "/api/v1/discountCodes/**").hasAnyAuthority(UserRole.ADMIN.toString())
 
     //  .authorizeHttpRequests((req) -> req
-//            .requestMatchers("/api/v1/users/**").permitAll()
+//            .requestMatchers("/api/v1/users/**").hasAnyAuthority(
 //                        .requestMatchers(HttpMethod.GET, "/api/v1/brands/").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").permitAll()
+//            .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").hasAnyAuthority(
 //                        .anyRequest().authenticated()
 //                )
     private final UserService userService;

@@ -1,13 +1,13 @@
 package source_files.services.paperWorkServices.abstracts;
 
 import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
-import source_files.data.requests.paperworkRequests.paymentRequests.AddPaymentTypeRequest;
+import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
 
 import java.util.List;
 
 public interface PaymentTypeService {
-    PaymentTypeDTO add(AddPaymentTypeRequest addPaymentTypeRequest);
+    void create(CreatePaymentTypeRequest createPaymentTypeRequest);
 
     PaymentTypeDTO update(UpdatePaymentTypeRequest updatePaymentTypeRequest);
 

@@ -2,7 +2,7 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.ColorRepository;
 import source_files.exception.AlreadyExistsException;
@@ -22,9 +22,9 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     private final ColorEntityManager colorEntityManager;
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public AddColorRequest fixAddColorRequest(AddColorRequest addColorRequest) {
-        addColorRequest.setColorEntityName(this.fixName(addColorRequest.getColorEntityName()));
-        return addColorRequest;
+    public CreateColorRequest fixCreateColorRequest(CreateColorRequest createColorRequest) {
+        createColorRequest.setColorEntityName(this.fixName(createColorRequest.getColorEntityName()));
+        return createColorRequest;
     }
 
     public UpdateColorRequest fixUpdateColorRequest(UpdateColorRequest updateColorRequest) {
@@ -33,9 +33,9 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public AddColorRequest checkAddColorRequest(AddColorRequest addColorRequest) {
-        this.existsByName(addColorRequest.getColorEntityName());
-        return addColorRequest;
+    public CreateColorRequest checkCreateColorRequest(CreateColorRequest createColorRequest) {
+        this.existsByName(createColorRequest.getColorEntityName());
+        return createColorRequest;
     }
 
     public UpdateColorRequest checkUpdateColorRequest(UpdateColorRequest updateColorRequest) {

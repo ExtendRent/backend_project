@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.BrandBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
@@ -25,12 +25,12 @@ public class BrandManager implements BrandService {
     private final BrandBusinessRules brandBusinessRules;
 
     @Override
-    public BrandDTO add(AddBrandRequest addBrandRequest) {
+    public void create(CreateBrandRequest createBrandRequest) {
         BrandEntity brandEntity = modelMapperService.forRequest()
-                .map(brandBusinessRules.checkAddBrandRequest(
-                        brandBusinessRules.fixAddBrandRequest(addBrandRequest)), BrandEntity.class);
+                .map(brandBusinessRules.checkCreateBrandRequest(
+                        brandBusinessRules.fixCreateBrandRequest(createBrandRequest)), BrandEntity.class);
         brandEntity.setItemType(BRAND);
-        return modelMapperService.forResponse().map(brandEntityService.add(brandEntity), BrandDTO.class);
+        brandEntityService.create(brandEntity);
     }
 
     @Override

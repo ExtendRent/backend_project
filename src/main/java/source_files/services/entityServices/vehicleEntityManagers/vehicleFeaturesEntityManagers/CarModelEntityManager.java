@@ -19,7 +19,7 @@ public class CarModelEntityManager implements CarModelEntityService {
     private final CarModelRepository carModelRepository;
 
     @Override
-    public CarModelEntity add(CarModelEntity carModelEntity) {
+    public CarModelEntity create(CarModelEntity carModelEntity) {
         carModelEntity.setId(0);
         BrandEntity brandEntity = new BrandEntity();
         brandEntity.setId(carModelEntity.getBrandEntity().getId());

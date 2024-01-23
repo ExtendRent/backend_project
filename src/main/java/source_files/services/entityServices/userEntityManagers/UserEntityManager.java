@@ -18,7 +18,7 @@ public class UserEntityManager implements UserEntityService {
     private final UserRepository userRepository;
 
     @Override
-    public UserEntity add(UserEntity userEntity) {
+    public UserEntity create(UserEntity userEntity) {
 
         return this.userRepository.save(userEntity);
     }
@@ -26,7 +26,7 @@ public class UserEntityManager implements UserEntityService {
     @Override
     public UserEntity update(UserEntity userEntity) {
 
-        return this.add(userEntity);
+        return this.create(userEntity);
     }
 
     @Override

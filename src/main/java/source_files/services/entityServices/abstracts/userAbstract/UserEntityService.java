@@ -6,7 +6,7 @@ import source_files.data.models.baseEntities.UserEntity;
 import java.util.List;
 
 public interface UserEntityService {
-    UserEntity add(UserEntity userEntity);
+    UserEntity create(UserEntity userEntity);
 
     UserEntity update(UserEntity userEntity);
 

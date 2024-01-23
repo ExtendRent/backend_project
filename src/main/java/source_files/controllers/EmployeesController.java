@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.userDTOs.EmployeeDTO;
-import source_files.data.requests.userRequests.AddEmployeeRequest;
+import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.userServices.abstracts.EmployeeService;
@@ -23,8 +23,8 @@ public class EmployeesController {
     private final EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<Void> createEmployee(@RequestBody @Valid AddEmployeeRequest addEmployeeRequest) {
-        this.employeeService.add(addEmployeeRequest);
+    public ResponseEntity<Void> createEmployee(@RequestBody @Valid CreateEmployeeRequest createEmployeeRequest) {
+        this.employeeService.create(createEmployeeRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

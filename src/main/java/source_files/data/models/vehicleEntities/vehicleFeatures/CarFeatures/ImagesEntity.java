@@ -23,5 +23,4 @@ public class ImagesEntity extends Item {
 
     @Column(name = "image_paths", length = 1024)
     private List<String> imagePaths;
-
 }

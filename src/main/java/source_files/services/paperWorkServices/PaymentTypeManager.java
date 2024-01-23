@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
-import source_files.data.requests.paperworkRequests.paymentRequests.AddPaymentTypeRequest;
+import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
@@ -19,10 +19,10 @@ public class PaymentTypeManager implements PaymentTypeService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public PaymentTypeDTO add(AddPaymentTypeRequest addPaymentTypeRequest) {
-        return this.modelMapperService.forResponse().map(this.paymentTypeEntityService.add(
+    public void create(CreatePaymentTypeRequest createPaymentTypeRequest) {
+        this.paymentTypeEntityService.create(
                 this.modelMapperService.forRequest()
-                        .map(addPaymentTypeRequest, PaymentTypeEntity.class)), PaymentTypeDTO.class);
+                        .map(createPaymentTypeRequest, PaymentTypeEntity.class));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class PaymentTypeManager implements PaymentTypeService {
     public void softDelete(int id) {
         PaymentTypeEntity paymentTypeEntity = this.paymentTypeEntityService.getById(id);
         paymentTypeEntity.setIsDeleted(true);
-        this.paymentTypeEntityService.add(paymentTypeEntity);
+        this.paymentTypeEntityService.create(paymentTypeEntity);
     }
 
     @Override

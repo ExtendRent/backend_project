@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
-import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
@@ -31,11 +31,11 @@ public class RentalsController {
 
     @PostMapping
     public ResponseEntity<Void> createRental(
-            @Valid @RequestBody AddRentalRequest addRentalRequest) {
+            @Valid @RequestBody CreateRentalRequest createRentalRequest) {
 
-        switch (this.paymentTypeService.getById(addRentalRequest.getPaymentTypeId()).getPaymentType()) {
+        switch (this.paymentTypeService.getById(createRentalRequest.getPaymentTypeId()).getPaymentType()) {
             case CREDIT_CARD:
-                this.rentalService.add(this.paymentService.payWithCreditCard(addRentalRequest));
+                this.rentalService.create(this.paymentService.payWithCreditCard(createRentalRequest));
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             case CASH:
                 break;

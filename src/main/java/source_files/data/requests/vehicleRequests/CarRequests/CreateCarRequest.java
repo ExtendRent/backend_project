@@ -1,25 +1,17 @@
 package source_files.data.requests.vehicleRequests.CarRequests;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 
-import java.time.LocalDate;
 import java.util.List;
 
+//@Builder
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class UpdateCarRequest implements BaseRequest {
-    @NotNull(message = "id null olamaz")
-    @NotBlank(message = "id boş geçilemez")
-    int id;
-
+public class CreateCarRequest implements BaseRequest {
     @NotNull(message = "brandId null olamaz")
     @NotBlank(message = "brandId boş geçilemez")
     @Min(1)
@@ -89,7 +81,4 @@ public class UpdateCarRequest implements BaseRequest {
     @Min(1)
     @Max(15)
     int luggage;
-
-    private boolean isAvailable = true;
-    private LocalDate availabilityDate = null;
 }

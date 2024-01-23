@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EmployeeEntityService {
 
-    EmployeeEntity add(EmployeeEntity userEntity);
+    EmployeeEntity create(EmployeeEntity userEntity);
 
     EmployeeEntity update(EmployeeEntity userEntity);
 

@@ -1,14 +1,14 @@
 package source_files.services.vehicleFeaturesServices.abstracts;
 
 import source_files.data.DTO.itemDTOs.BrandDTO;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 
 import java.util.List;
 
 public interface BrandService {
 
-    BrandDTO add(AddBrandRequest addBrandRequest);
+    void create(CreateBrandRequest createBrandRequest);
 
     BrandDTO update(UpdateBrandRequest updateBrandRequest);
 

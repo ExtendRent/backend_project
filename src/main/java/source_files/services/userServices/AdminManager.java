@@ -1,12 +1,12 @@
 package source_files.services.userServices;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.models.userEntities.AdminEntity;
-import source_files.data.requests.userRequests.AddAdminRequest;
+import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules;
 import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import static source_files.data.types.userTypes.UserRole.ADMIN;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdminManager implements AdminService {
 
     private final AdminEntityService adminEntityService;
@@ -27,14 +27,14 @@ public class AdminManager implements AdminService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public AdminDTO add(AddAdminRequest addAdminRequest) {
-        addAdminRequest.setPassword(passwordEncoder.encode(addAdminRequest.getPassword()));
+    public void create(CreateAdminRequest createAdminRequest) {
+        createAdminRequest.setPassword(passwordEncoder.encode(createAdminRequest.getPassword()));
         AdminEntity adminEntity = modelMapperService.forRequest()
-                .map(adminBusinessRules.checkAddAdminRequest
-                        (adminBusinessRules.fixAddAdminRequest(addAdminRequest)), AdminEntity.class);
+                .map(adminBusinessRules.checkCreateAdminRequest
+                        (adminBusinessRules.fixCreateAdminRequest(createAdminRequest)), AdminEntity.class);
 
         adminEntity.setAuthority(ADMIN);
-        return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
+        this.adminEntityService.create(adminEntity);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class AdminManager implements AdminService {
                 .map(adminBusinessRules.checkUpdateAdminRequest
                         (adminBusinessRules.fixUpdateAdminRequest(updateAdminRequest)), AdminEntity.class);
 
-        return modelMapperService.forResponse().map(this.adminEntityService.add(adminEntity), AdminDTO.class);
+        return modelMapperService.forResponse().map(this.adminEntityService.create(adminEntity), AdminDTO.class);
     }
 
     @Override

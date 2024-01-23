@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.CarBodyTypeDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
 import source_files.data.types.itemTypes.ItemType;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarBodyTypeBusinessRules;
@@ -24,12 +24,12 @@ public class CarBodyTypeManager implements CarBodyTypeService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public CarBodyTypeDTO add(AddCarBodyTypeRequest addCarBodyTypeRequest) {
+    public void create(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
         CarBodyTypeEntity carBodyTypeEntity = modelMapperService.forRequest().
-                map(carBodyTypeBusinessRules.checkAddCarBodyTypeRequest
-                        (carBodyTypeBusinessRules.fixAddCarBodyTypeRequest(addCarBodyTypeRequest)), CarBodyTypeEntity.class);
+                map(carBodyTypeBusinessRules.checkCreateCarBodyTypeRequest
+                        (carBodyTypeBusinessRules.fixCreateCarBodyTypeRequest(createCarBodyTypeRequest)), CarBodyTypeEntity.class);
         carBodyTypeEntity.setItemType(ItemType.CAR_BODY_TYPE);
-        return this.modelMapperService.forResponse().map(this.carBodyTypeEntityService.add(carBodyTypeEntity), CarBodyTypeDTO.class);
+        this.carBodyTypeEntityService.create(carBodyTypeEntity);
     }
 
     @Override

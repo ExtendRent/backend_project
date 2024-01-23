@@ -7,7 +7,7 @@
 //import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 //import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
 //import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
-//import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+//import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 //import source_files.data.responses.TResponse;
 //import source_files.services.paperWorkServices.abstracts.PaymentService;
 //import source_files.services.paperWorkServices.abstracts.RentalService;
@@ -23,10 +23,10 @@
 //    //@PutMapping(params = {"amount", "paymentTypeId"})
 //    @RequestMapping(method = RequestMethod.POST)
 //    public ResponseEntity<TResponse<PaymentDetailsDTO>> payWithCreditCard(
-//            @Valid @RequestBody AddRentalRequest addRentalRequest) {
+//            @Valid @RequestBody CreateRentalRequest createRentalRequest) {
 //
 //        return ResponseEntity.ok(TResponse.<PaymentDetailsDTO>tResponseBuilder()
-//                .response(this.paymentService.payWithCreditCard(addRentalRequest))
+//                .response(this.paymentService.payWithCreditCard(createRentalRequest))
 //                .message("Ödeme işlemi başarılı")
 //                .build()
 //        );

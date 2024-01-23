@@ -2,13 +2,13 @@ package source_files.services.vehicleFeaturesServices.abstracts;
 
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
 
 import java.util.List;
 
 public interface CarModelService {
-    CarModelDTO add(AddCarModelRequest addCarModelRequest);
+    void create(CreateCarModelRequest createCarModelRequest);
 
     CarModelDTO update(UpdateCarModelRequest updateCarModelRequest);
 

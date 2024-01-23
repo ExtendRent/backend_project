@@ -1,7 +1,7 @@
 package source_files.services.vehicleService.abstracts;
 
 import source_files.data.DTO.vehicleDTOs.CarDTO;
-import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 
 import java.time.LocalDate;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CarService {
 
-    void add(AddCarRequest addCarRequest);
+    void create(CreateCarRequest createCarRequest);
 
     CarDTO getById(int id);
 

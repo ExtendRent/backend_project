@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.EmployeeDTO;
 import source_files.data.models.userEntities.EmployeeEntity;
-import source_files.data.requests.userRequests.AddEmployeeRequest;
+import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 import source_files.services.BusinessRules.userBusinessRuless.EmployeeBusinessRules;
 import source_files.services.entityServices.abstracts.userAbstract.EmployeeEntityService;
@@ -27,13 +27,13 @@ public class EmployeeManager implements EmployeeService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public EmployeeDTO add(AddEmployeeRequest addEmployeeRequest) {
+    public void create(CreateEmployeeRequest createEmployeeRequest) {
         EmployeeEntity employeeEntity = modelMapperService.forRequest()
-                .map(employeeBusinessRules.checkAddEmployeeRequest
-                        (employeeBusinessRules.fixAddEmployeeRequest(addEmployeeRequest)), EmployeeEntity.class);
-        employeeEntity.setPassword(passwordEncoder.encode(addEmployeeRequest.getPassword()));
+                .map(employeeBusinessRules.checkCreateEmployeeRequest
+                        (employeeBusinessRules.fixCreateEmployeeRequest(createEmployeeRequest)), EmployeeEntity.class);
+        employeeEntity.setPassword(passwordEncoder.encode(createEmployeeRequest.getPassword()));
         employeeEntity.setAuthority(EMPLOYEE);
-        return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity), EmployeeDTO.class);
+        this.employeeEntityService.create(employeeEntity);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class EmployeeManager implements EmployeeService {
         EmployeeEntity employeeEntity = modelMapperService.forRequest()
                 .map(employeeBusinessRules.checkUpdateEmployeeRequest
                         (employeeBusinessRules.fixUpdateEmployeeRequest(updateEmployeeRequest)), EmployeeEntity.class);
-        return modelMapperService.forResponse().map(this.employeeEntityService.add(employeeEntity), EmployeeDTO.class);
+        return modelMapperService.forResponse().map(this.employeeEntityService.create(employeeEntity), EmployeeDTO.class);
     }
 
     @Override

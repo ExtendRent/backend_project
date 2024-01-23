@@ -1,6 +1,7 @@
 package source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,12 +13,16 @@ import source_files.data.requests.BaseRequest;
 @Builder
 public class UpdateCarModelRequest implements BaseRequest {
 
+    @NotNull(message = "id null olamaz")
+    @NotBlank(message = "id boş olamaz")
     int carModelEntityId;
 
+    @NotNull(message = "Model null olamaz")
     @NotBlank(message = "Model adı boş geçilemez")
     @Size(min = 2, message = "Model en az 2 karakter olmalıdır.")
     String carModelEntityName;
 
+    @NotNull(message = "Marka null olamaz")
     @NotBlank(message = "Marka boş geçilemez")
     int brandEntityId;
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AdminEntityService {
 
-    AdminEntity add(AdminEntity adminEntity);
+    AdminEntity create(AdminEntity adminEntity);
 
     AdminEntity update(AdminEntity adminEntity);
 

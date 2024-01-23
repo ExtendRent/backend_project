@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CustomerEntityService {
 
-    CustomerEntity add(CustomerEntity customerEntity);
+    CustomerEntity create(CustomerEntity customerEntity);
 
     CustomerEntity update(CustomerEntity customerEntity);
 

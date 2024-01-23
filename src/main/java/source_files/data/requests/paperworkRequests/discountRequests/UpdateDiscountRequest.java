@@ -12,12 +12,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddDiscountCodeRequest {
+public class UpdateDiscountRequest {
 
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Discount code must consist of letters and numbers only")
     String discountCode;
 
-    @Min(value = 0, message = "Discount percentage must be greater than or equal to 0")
-    @Max(value = 100, message = "Discount percentage must be less than or equal to 100")
+    @Min(value = 5, message = "Discount percentage must be greater than or equal to 5")
+    @Max(value = 90, message = "Discount percentage must be less than or equal to 90")
+    @Pattern(regexp = "^[0-9]+$", message = "Discount percentage must consist of numbers only")
     int discountPercentage;
+
+    boolean isActive;
 }

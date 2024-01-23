@@ -2,7 +2,7 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.AddCarModelRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 import source_files.exception.AlreadyExistsException;
@@ -23,9 +23,9 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
 
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public AddCarModelRequest fixAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
-        addCarModelRequest.setCarModelEntityName(this.fixName(addCarModelRequest.getCarModelEntityName()));
-        return addCarModelRequest;
+    public CreateCarModelRequest fixCreateCarModelRequest(CreateCarModelRequest createCarModelRequest) {
+        createCarModelRequest.setCarModelEntityName(this.fixName(createCarModelRequest.getCarModelEntityName()));
+        return createCarModelRequest;
     }
 
     public UpdateCarModelRequest fixUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
@@ -34,10 +34,10 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public AddCarModelRequest checkAddCarModelRequest(AddCarModelRequest addCarModelRequest) {
-        this.existsByName(addCarModelRequest.getCarModelEntityName());
-        this.checkBrand(addCarModelRequest.getBrandEntityId());
-        return addCarModelRequest;
+    public CreateCarModelRequest checkCreateCarModelRequest(CreateCarModelRequest createCarModelRequest) {
+        this.existsByName(createCarModelRequest.getCarModelEntityName());
+        this.checkBrand(createCarModelRequest.getBrandEntityId());
+        return createCarModelRequest;
     }
 
 

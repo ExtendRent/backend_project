@@ -20,7 +20,7 @@ public class SysPaymentDetailsManager implements SysPaymentDetailsService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public PaymentDetailsEntity add(PaymentDetailsEntity paymentDetailsEntity) {
+    public PaymentDetailsEntity create(PaymentDetailsEntity paymentDetailsEntity) {
         return this.paymentDetailsRepository.save(paymentDetailsEntity);
     }
 

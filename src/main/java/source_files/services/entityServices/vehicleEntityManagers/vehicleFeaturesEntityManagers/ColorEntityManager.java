@@ -18,13 +18,13 @@ public class ColorEntityManager implements ColorEntityService {
     private final ColorRepository colorRepository;
 
     @Override
-    public ColorEntity add(ColorEntity colorEntity) {
+    public ColorEntity create(ColorEntity colorEntity) {
         return colorRepository.save(colorEntity);
     }
 
     @Override
     public ColorEntity update(ColorEntity colorEntity) {
-        return this.add(colorEntity);
+        return this.create(colorEntity);
     }
 
     @Override

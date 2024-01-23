@@ -19,13 +19,13 @@ public class CarBodyTypeEntityManager implements CarBodyTypeEntityService {
 
 
     @Override
-    public CarBodyTypeEntity add(CarBodyTypeEntity carBodyTypeEntity) {
+    public CarBodyTypeEntity create(CarBodyTypeEntity carBodyTypeEntity) {
         return this.carBodyTypeRepository.save(carBodyTypeEntity);
     }
 
     @Override
     public CarBodyTypeEntity update(CarBodyTypeEntity carBodyTypeEntity) {
-        return this.add(carBodyTypeEntity);
+        return this.create(carBodyTypeEntity);
     }
 
     @Override

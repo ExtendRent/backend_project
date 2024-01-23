@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SysPaymentDetailsService {
 
-    PaymentDetailsEntity add(PaymentDetailsEntity paymentDetailsEntity);
+    PaymentDetailsEntity create(PaymentDetailsEntity paymentDetailsEntity);
 
     PaymentDetailsEntity update(UpdatePaymentDetailsRequest updatePaymentDetailsRequest);
 

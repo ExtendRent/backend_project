@@ -2,7 +2,7 @@ package source_files.services.paperWorkServices.abstracts;
 
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
-import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
@@ -13,7 +13,7 @@ public interface RentalService {
 
     ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest);
 
-    void add(AddRentalRequest addRentalRequest);
+    void create(CreateRentalRequest createRentalRequest);
 
     RentalDTO returnCar(ReturnRentalRequest returnRentalRequest);
 

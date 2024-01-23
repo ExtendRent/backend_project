@@ -19,7 +19,7 @@ public class CustomerEntityManager implements CustomerEntityService {
 
 
     @Override
-    public CustomerEntity add(CustomerEntity customerEntity) {
+    public CustomerEntity create(CustomerEntity customerEntity) {
 
         return this.customerRepository.save(customerEntity);
     }
@@ -27,7 +27,7 @@ public class CustomerEntityManager implements CustomerEntityService {
     @Override
     public CustomerEntity update(CustomerEntity customerEntity) {
 
-        return this.add(customerEntity);
+        return this.create(customerEntity);
     }
 
     @Override

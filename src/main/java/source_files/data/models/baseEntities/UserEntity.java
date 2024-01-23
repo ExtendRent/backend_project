@@ -29,7 +29,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Column(name = "surname")
     private String surname;
-
     @Column(name = "email_address", unique = true)
     private String emailAddress;
 
@@ -43,6 +42,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private UserRole authority;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private UserStatus status;
 
     @Column(name = "image_path")

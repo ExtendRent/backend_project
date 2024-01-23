@@ -2,7 +2,7 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.AddCarBodyTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
 import source_files.exception.AlreadyExistsException;
@@ -23,9 +23,9 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     private final CarBodyTypeRepository carBodyTypeRepository;
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public AddCarBodyTypeRequest fixAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest) {
-        addCarBodyTypeRequest.setCarBodyTypeEntityName(this.fixName(addCarBodyTypeRequest.getCarBodyTypeEntityName()));
-        return addCarBodyTypeRequest;
+    public CreateCarBodyTypeRequest fixCreateCarBodyTypeRequest(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
+        createCarBodyTypeRequest.setCarBodyTypeEntityName(this.fixName(createCarBodyTypeRequest.getCarBodyTypeEntityName()));
+        return createCarBodyTypeRequest;
     }
 
     public UpdateCarBodyTypeRequest fixUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
@@ -34,9 +34,9 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public AddCarBodyTypeRequest checkAddCarBodyTypeRequest(AddCarBodyTypeRequest addCarBodyTypeRequest) {
-        this.existsByName(addCarBodyTypeRequest.getCarBodyTypeEntityName());
-        return addCarBodyTypeRequest;
+    public CreateCarBodyTypeRequest checkCreateCarBodyTypeRequest(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
+        this.existsByName(createCarBodyTypeRequest.getCarBodyTypeEntityName());
+        return createCarBodyTypeRequest;
     }
 
     public UpdateCarBodyTypeRequest checkUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {

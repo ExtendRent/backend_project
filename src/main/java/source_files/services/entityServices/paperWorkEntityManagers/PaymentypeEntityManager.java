@@ -19,13 +19,13 @@ public class PaymentypeEntityManager implements PaymentTypeEntityService {
     private final PaymentTypeEntityRepository paymentTypeEntityRepository;
 
     @Override
-    public PaymentTypeEntity add(PaymentTypeEntity paymentTypeEntity) {
+    public PaymentTypeEntity create(PaymentTypeEntity paymentTypeEntity) {
         return this.paymentTypeEntityRepository.save(paymentTypeEntity);
     }
 
     @Override
     public PaymentTypeEntity update(PaymentTypeEntity paymentTypeEntity) {
-        return this.add(paymentTypeEntity);
+        return this.create(paymentTypeEntity);
     }
 
     @Override

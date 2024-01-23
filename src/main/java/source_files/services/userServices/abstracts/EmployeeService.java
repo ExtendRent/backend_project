@@ -2,14 +2,14 @@ package source_files.services.userServices.abstracts;
 
 
 import source_files.data.DTO.userDTOs.EmployeeDTO;
-import source_files.data.requests.userRequests.AddEmployeeRequest;
+import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    EmployeeDTO add(AddEmployeeRequest addEmployeeRequest);
+    void create(CreateEmployeeRequest createEmployeeRequest);
 
     EmployeeDTO update(UpdateEmployeeRequest updateEmployeeRequest);
 

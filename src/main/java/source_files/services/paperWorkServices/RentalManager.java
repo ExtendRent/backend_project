@@ -6,13 +6,13 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
-import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountCodeEntityService;
+import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
@@ -35,7 +35,7 @@ public class RentalManager implements RentalService {
     private final CustomerService customerService;
 
     PaymentTypeEntityService paymentTypeEntityService;
-    DiscountCodeEntityService discountCodeEntityService;
+    DiscountEntityService discountEntityService;
     private RentalBusinessRules rentalBusinessRules;
 
     @Override
@@ -45,23 +45,23 @@ public class RentalManager implements RentalService {
     }
 
     @Override
-    public void add(AddRentalRequest addRentalRequest) {
+    public void create(CreateRentalRequest createRentalRequest) {
         // indirim işlemleri sonucu totalPrice hesaplama
 
         RentalEntity rentalEntity = modelMapperService.forRequest()
-                .map(rentalBusinessRules.checkAddRentalRequest(
-                                rentalBusinessRules.fixAddRentalRequest(addRentalRequest))
-                        , source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity.class);
+                .map(rentalBusinessRules.checkCreateRentalRequest(
+                                rentalBusinessRules.checkCreateRentalRequest(createRentalRequest))
+                        , RentalEntity.class);
 
         rentalEntity.setPaymentDetailsEntity(
-                this.sysPaymentDetailsService.getById(addRentalRequest.getPaymentDetailsDTO().getId())
+                this.sysPaymentDetailsService.getById(createRentalRequest.getPaymentDetailsDTO().getId())
         );
-        rentalEntity.setDiscountCodeEntity(this.discountCodeEntityService
-                .getByDiscountCode(addRentalRequest.getDiscountCode())
+        rentalEntity.setDiscountEntity(this.discountEntityService
+                .getByDiscountCode(createRentalRequest.getDiscountCode())
         );
-        rentalEntity.setStartKilometer(carService.getById(addRentalRequest.getCarEntityId()).getKilometer());
+        rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
         rentalEntity.setItemType(RENTAL);
-        rentalEntityService.add(rentalEntity);
+        rentalEntityService.create(rentalEntity);
     }
 
     @Override

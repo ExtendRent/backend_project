@@ -20,7 +20,7 @@ public class AdminEntityManager implements AdminEntityService {
     AdminBusinessRules adminBusinessRules;
 
     @Override
-    public AdminEntity add(AdminEntity adminEntity) {
+    public AdminEntity create(AdminEntity adminEntity) {
 
         return this.adminRepository.save(adminEntity);
     }
@@ -28,7 +28,7 @@ public class AdminEntityManager implements AdminEntityService {
     @Override
     public AdminEntity update(AdminEntity adminEntity) {
 
-        return this.add(adminEntity);
+        return this.create(adminEntity);
     }
 
     @Override

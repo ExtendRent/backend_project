@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.userDTOs.CustomerDTO;
-import source_files.data.requests.userRequests.AddCustomerRequest;
+import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -23,8 +23,8 @@ public class CustomersController {
     private final CustomerService customerService;
 
     @PostMapping
-    public ResponseEntity<Void> createCustomer(@RequestBody @Valid AddCustomerRequest addCustomerRequest) {
-        this.customerService.add(addCustomerRequest);
+    public ResponseEntity<Void> createCustomer(@RequestBody @Valid CreateCustomerRequest createCustomerRequest) {
+        this.customerService.create(createCustomerRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

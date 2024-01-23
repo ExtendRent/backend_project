@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
@@ -41,9 +41,9 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public AddCarRequest fixAddCarRequest(AddCarRequest addCarRequest) {
-        addCarRequest.setLicensePlate(this.fixName(addCarRequest.getLicensePlate()));
-        return addCarRequest;
+    public CreateCarRequest fixCreateCarRequest(CreateCarRequest createCarRequest) {
+        createCarRequest.setLicensePlate(this.fixName(createCarRequest.getLicensePlate()));
+        return createCarRequest;
     }
 
     public UpdateCarRequest fixUpdateCarRequest(UpdateCarRequest updateCarRequest) {
@@ -53,13 +53,13 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public AddCarRequest checkAddCarRequest(AddCarRequest addCarRequest) {
-        this.checkLicensePlate(addCarRequest.getLicensePlate());
-        this.checkModel(addCarRequest.getCarModelEntityId());
-        this.checkColor(addCarRequest.getColorEntityId());
-        this.checkBodyType(addCarRequest.getCarBodyTypeEntityId());
-        this.checkBrand(addCarRequest.getBrandEntityId());
-        return addCarRequest;
+    public CreateCarRequest checkCreateCarRequest(CreateCarRequest createCarRequest) {
+        this.checkLicensePlate(createCarRequest.getLicensePlate());
+        this.checkModel(createCarRequest.getCarModelEntityId());
+        this.checkColor(createCarRequest.getColorEntityId());
+        this.checkBodyType(createCarRequest.getCarBodyTypeEntityId());
+        this.checkBrand(createCarRequest.getBrandEntityId());
+        return createCarRequest;
     }
 
     public UpdateCarRequest checkUpdateCarRequest(UpdateCarRequest updateCarRequest) {

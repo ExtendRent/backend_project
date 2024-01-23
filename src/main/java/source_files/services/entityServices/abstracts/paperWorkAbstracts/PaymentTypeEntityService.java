@@ -6,7 +6,7 @@ import source_files.data.types.itemTypes.PaymentType;
 import java.util.List;
 
 public interface PaymentTypeEntityService {
-    PaymentTypeEntity add(PaymentTypeEntity paymentTypeEntity);
+    PaymentTypeEntity create(PaymentTypeEntity paymentTypeEntity);
 
     PaymentTypeEntity update(PaymentTypeEntity paymentTypeEntity);
 

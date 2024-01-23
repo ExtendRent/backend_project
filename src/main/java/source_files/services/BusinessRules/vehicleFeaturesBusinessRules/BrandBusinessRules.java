@@ -2,7 +2,7 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.BrandRespository;
 import source_files.exception.AlreadyExistsException;
@@ -29,9 +29,9 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public AddBrandRequest fixAddBrandRequest(AddBrandRequest addBrandRequest) {
-        addBrandRequest.setName(this.fixName(addBrandRequest.getName()));
-        return addBrandRequest;
+    public CreateBrandRequest fixCreateBrandRequest(CreateBrandRequest createBrandRequest) {
+        createBrandRequest.setName(this.fixName(createBrandRequest.getName()));
+        return createBrandRequest;
     }
 
     public UpdateBrandRequest fixUpdateBrandRequest(UpdateBrandRequest updateBrandRequest) {
@@ -40,9 +40,9 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public AddBrandRequest checkAddBrandRequest(AddBrandRequest addBrandRequest) {
-        this.existsByName(addBrandRequest.getName());
-        return addBrandRequest;
+    public CreateBrandRequest checkCreateBrandRequest(CreateBrandRequest createBrandRequest) {
+        this.existsByName(createBrandRequest.getName());
+        return createBrandRequest;
     }
 
     public UpdateBrandRequest checkUpdateBrandRequest(UpdateBrandRequest updateBrandRequest) {

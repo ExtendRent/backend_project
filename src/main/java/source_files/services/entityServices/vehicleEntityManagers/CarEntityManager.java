@@ -20,7 +20,7 @@ public class CarEntityManager implements CarEntityService {
     private final CarRepository carRepository;
 
     @Override
-    public void add(CarEntity carEntity) {
+    public void create(CarEntity carEntity) {
         this.carRepository.save(carEntity);
     }
 

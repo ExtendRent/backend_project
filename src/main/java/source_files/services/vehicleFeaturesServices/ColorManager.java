@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.ColorDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.AddColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.types.itemTypes.ItemType;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBusinessRules;
@@ -24,16 +24,16 @@ public class ColorManager implements ColorService {
     private final ColorBusinessRules colorBusinessRules;
 
     @Override
-    public ColorDTO add(AddColorRequest addColorRequest) {
+    public void create(CreateColorRequest createColorRequest) {
 
         ColorEntity colorEntity = modelMapperService.forRequest()
-                .map(colorBusinessRules.checkAddColorRequest(
-                        colorBusinessRules.fixAddColorRequest(addColorRequest)), ColorEntity.class
+                .map(colorBusinessRules.checkCreateColorRequest(
+                        colorBusinessRules.fixCreateColorRequest(createColorRequest)), ColorEntity.class
                 );
 
         colorEntity.setItemType(ItemType.COLOR);
 
-        return this.modelMapperService.forResponse().map(this.colorEntityService.add(colorEntity), ColorDTO.class);
+        this.colorEntityService.create(colorEntity);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ColorManager implements ColorService {
         ColorEntity color = modelMapperService.forRequest().map(colorBusinessRules.checkUpdateColorRequest(
                 colorBusinessRules.fixUpdateColorRequest(updateColorRequest)), ColorEntity.class);
         color.setItemType(ItemType.COLOR);
-        return modelMapperService.forResponse().map(colorEntityService.add(color), ColorDTO.class);
+        return modelMapperService.forResponse().map(colorEntityService.create(color), ColorDTO.class);
     }
 
     @Override

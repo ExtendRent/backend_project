@@ -1,10 +1,10 @@
 package source_files.services.paperWorkServices.abstracts;
 
-import source_files.data.requests.paperworkRequests.RentalRequests.AddRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 
 public interface PaymentService {
 
-    AddRentalRequest payWithCreditCard(AddRentalRequest addRentalRequest);
+    CreateRentalRequest payWithCreditCard(CreateRentalRequest createRentalRequest);
 
 
 }

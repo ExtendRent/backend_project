@@ -2,7 +2,7 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.userRequests.AddEmployeeRequest;
+import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 import source_files.dataAccess.userRepositories.EmployeeRepository;
 import source_files.exception.AlreadyExistsException;
@@ -27,12 +27,12 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public AddEmployeeRequest fixAddEmployeeRequest(AddEmployeeRequest addEmployeeRequest) {
-        addEmployeeRequest.setPhoneNumber(this.fixName(addEmployeeRequest.getPhoneNumber()));
-        addEmployeeRequest.setName(this.fixName(addEmployeeRequest.getName()));
-        addEmployeeRequest.setSurname(this.fixName(addEmployeeRequest.getSurname()));
-        addEmployeeRequest.setEmailAddress(this.fixName(addEmployeeRequest.getEmailAddress()));
-        return addEmployeeRequest;
+    public CreateEmployeeRequest fixCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest) {
+        createEmployeeRequest.setPhoneNumber(this.fixName(createEmployeeRequest.getPhoneNumber()));
+        createEmployeeRequest.setName(this.fixName(createEmployeeRequest.getName()));
+        createEmployeeRequest.setSurname(this.fixName(createEmployeeRequest.getSurname()));
+        createEmployeeRequest.setEmailAddress(this.fixName(createEmployeeRequest.getEmailAddress()));
+        return createEmployeeRequest;
     }
 
     public UpdateEmployeeRequest fixUpdateEmployeeRequest(UpdateEmployeeRequest updateEmployeeRequest) {
@@ -50,11 +50,11 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
         return updateEmployeeRequest;
     }
 
-    public AddEmployeeRequest checkAddEmployeeRequest(AddEmployeeRequest addEmployeeRequest) {
-        this.checkSalary(addEmployeeRequest.getSalary());
-        this.existsByEmailAddress(addEmployeeRequest.getEmailAddress());
-        this.existsByPhoneNumber(addEmployeeRequest.getPhoneNumber());
-        return addEmployeeRequest;
+    public CreateEmployeeRequest checkCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest) {
+        this.checkSalary(createEmployeeRequest.getSalary());
+        this.existsByEmailAddress(createEmployeeRequest.getEmailAddress());
+        this.existsByPhoneNumber(createEmployeeRequest.getPhoneNumber());
+        return createEmployeeRequest;
     }
 
 

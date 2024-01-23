@@ -1,6 +1,5 @@
 package source_files.data.requests.paperworkRequests.RentalRequests;
 
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -19,30 +18,39 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AddRentalRequest implements BaseRequest {
+public class CreateRentalRequest implements BaseRequest {
 
     @Min(value = 1, message = "CustomerId must be greater than 0")
+    @NotBlank(message = "CustomerId cannot be blank")
+    @NotNull(message = "CustomerId cannot be null")
     private int customerEntityId;
 
+    @NotBlank(message = "CarId cannot be blank")
+    @NotNull(message = "CarId cannot be null")
     @Min(value = 1, message = "CarId must be greater than 0")
     private int carEntityId;
 
+    @NotBlank(message = "StartDate cannot be blank")
     @NotNull(message = "StartDate cannot be null")
     @FutureOrPresent(message = "StartDate must be a future or present date")
     private LocalDate startDate;
 
+    @NotBlank(message = "EndDate cannot be blank")
     @NotNull(message = "EndDate cannot be null")
     @FutureOrPresent(message = "EndDate must be a future or present date")
     private LocalDate endDate;
-    @NotNull
-    @NotBlank
+
+    @NotBlank(message = "PaymentTypeId cannot be blank")
+    @NotNull(message = "PaymentTypeId cannot be null")
     private Integer paymentTypeId;
-    @Nullable
-    private CreditCardInformation creditCardInformation;
-    @Nullable
+
+    @NotBlank(message = "DiscountCode cannot be blank")
+    @NotNull(message = "DiscountCode cannot be null")
     private Double amount;
-    @Nullable
+
     private String discountCode;
-    @Nullable
+
     private PaymentDetailsDTO paymentDetailsDTO;
+
+    private CreditCardInformation creditCardInformation;
 }

@@ -6,7 +6,7 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
-import source_files.data.requests.vehicleRequests.CarRequests.AddCarRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
@@ -28,22 +28,22 @@ public class CarManager implements CarService {
     private CarBusinessRules businessRules;
 
     @Override
-    public void add(AddCarRequest addCarRequest) {
+    public void create(CreateCarRequest createCarRequest) {
         //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
 
-        //CarEntity carEntity = modelMapperService.forRequest().map(addCarRequest, CarEntity.class); //ESKİ KOD !
+        //CarEntity carEntity = modelMapperService.forRequest().map(createCarRequest, CarEntity.class); //ESKİ KOD !
 
         CarEntity carEntity = modelMapperService.forRequest().map(this.businessRules                 //YENİ KOD
-                .checkAddCarRequest(businessRules.fixAddCarRequest(addCarRequest)), CarEntity.class);
+                .checkCreateCarRequest(businessRules.fixCreateCarRequest(createCarRequest)), CarEntity.class);
 
         carEntity.setVehicleType(CAR);
 
         //ImagesEntity içerisinde kullandığımız oneToOne bağlantısındaki cascade sayesinde, CarEntity üzerinden
         //yapılan ImagesEntity değişiklikleri ana klastaki(ImagesEntity) de de değişecek.
         //Yani carEntity ye ImagesEntity set ettiğimizde, database e de eklenecek ve içindeki CarEntity otomatik oluşacak.
-        carEntity.setImagesEntity(new ImagesEntity(carEntity, addCarRequest.getImagePaths()));
+        carEntity.setImagesEntity(new ImagesEntity(carEntity, createCarRequest.getImagePaths()));
 
-        this.carEntityService.add(carEntity);
+        this.carEntityService.create(carEntity);
     }
 
     @Override

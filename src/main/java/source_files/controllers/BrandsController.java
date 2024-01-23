@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.BrandDTO;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.AddBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
@@ -24,8 +24,8 @@ public class BrandsController {
     private final BrandService brandService;
 
     @PostMapping
-    public ResponseEntity<Void> createBrand(@Valid @RequestBody AddBrandRequest addBrandRequest) {
-        this.brandService.add(addBrandRequest);
+    public ResponseEntity<Void> createBrand(@Valid @RequestBody CreateBrandRequest createBrandRequest) {
+        this.brandService.create(createBrandRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

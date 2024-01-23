@@ -19,7 +19,7 @@ public class RentalEntityManager implements RentalEntityService {
 
 
     @Override
-    public void add(RentalEntity rentalEntity) {
+    public void create(RentalEntity rentalEntity) {
         this.rentalRepository.save(rentalEntity);
     }
 

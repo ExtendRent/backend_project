@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.userDTOs.AdminDTO;
-import source_files.data.requests.userRequests.AddAdminRequest;
+import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.userServices.abstracts.AdminService;
@@ -23,8 +23,8 @@ public class AdminsController {
     private final AdminService adminService;
 
     @PostMapping
-    public ResponseEntity<Void> createAdmin(@Valid @RequestBody AddAdminRequest addAdminRequest) {
-        adminService.add(addAdminRequest);
+    public ResponseEntity<Void> createAdmin(@Valid @RequestBody CreateAdminRequest createAdminRequest) {
+        adminService.create(createAdminRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

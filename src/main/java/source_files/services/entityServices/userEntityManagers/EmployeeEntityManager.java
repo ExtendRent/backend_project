@@ -17,7 +17,7 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     private final EmployeeRepository employeeRepository;
 
     @Override
-    public EmployeeEntity add(EmployeeEntity employeeEntity) {
+    public EmployeeEntity create(EmployeeEntity employeeEntity) {
 
         return this.employeeRepository.save(employeeEntity);
     }
@@ -25,7 +25,7 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     @Override
     public EmployeeEntity update(EmployeeEntity employeeEntity) {
 
-        return this.add(employeeEntity);
+        return this.create(employeeEntity);
     }
 
     @Override

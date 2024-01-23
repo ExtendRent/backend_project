@@ -5,7 +5,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Colo
 import java.util.List;
 
 public interface ColorEntityService {
-    ColorEntity add(ColorEntity colorEntity);
+    ColorEntity create(ColorEntity colorEntity);
 
     ColorEntity update(ColorEntity colorEntity);
 

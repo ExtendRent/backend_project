@@ -19,7 +19,7 @@ public class BrandEntityManager implements BrandEntityService {
 
 
     @Override
-    public BrandEntity add(BrandEntity brandEntity) {
+    public BrandEntity create(BrandEntity brandEntity) {
         return brandRespository.save(brandEntity);
     }
 
