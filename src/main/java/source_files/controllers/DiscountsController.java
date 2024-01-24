@@ -15,7 +15,7 @@ import source_files.services.paperWorkServices.abstracts.DiscountService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/discountCodes")
+@RequestMapping("api/v1/discounts")
 @AllArgsConstructor
 @Validated
 @CrossOrigin
