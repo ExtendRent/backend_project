@@ -9,9 +9,7 @@ import source_files.services.entityServices.abstracts.otpAbstracts.OtpEntityServ
 @Service
 @RequiredArgsConstructor
 public class OtpEntityManager implements OtpEntityService {
-
     private final OtpRepository otpRepository;
-
     @Override
     public void createOtp(OtpEntity otpEntity) {
         otpRepository.save(otpEntity);
