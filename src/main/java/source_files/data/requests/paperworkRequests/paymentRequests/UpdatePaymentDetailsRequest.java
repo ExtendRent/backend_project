@@ -7,18 +7,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.itemTypes.PaymentType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdatePaymentDetailsRequest implements BaseRequest {
+
     @NotBlank(message = "id boş geçilemez")
     @NotNull
-    private int paymentDetailsId;
+    private int id;
+
     @NotBlank(message = "tutar boş geçilemez")
     @NotNull
     private double amount;
-    private PaymentType paymentType;
+
+    @NotNull(message = "Ödeme tipi null geçilemez")
+    @NotBlank(message = "Ödeme tipi boş geçilemez")
+    private int paymentTypeEntityId;
+
+    @NotNull(message = "aktiflik null geçilemez")
+    @NotBlank(message = "aktiflik boş geçilemez")
+    private boolean isActive;
 }

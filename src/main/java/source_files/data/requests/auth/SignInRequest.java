@@ -16,5 +16,6 @@ public class SignInRequest {
     @NotNull
     private String email;
     @NotNull
+    @NotBlank(message = "Şifre boş geçilemez")
     private String password;
 }

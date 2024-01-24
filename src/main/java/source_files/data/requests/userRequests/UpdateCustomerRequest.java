@@ -25,13 +25,13 @@ public class UpdateCustomerRequest implements BaseRequest {
     @NotNull(message = "Müşteri adı null olamaz")
     @NotBlank(message = "Müşteri adı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String name;
 
     @NotNull(message = "Müşteri soyadı null olamaz")
     @NotBlank(message = "Müşteri soyadı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
     @NotNull(message = "Müşteri mail adresi null olamaz")

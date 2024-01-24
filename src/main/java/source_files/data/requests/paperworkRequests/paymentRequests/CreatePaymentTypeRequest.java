@@ -1,5 +1,7 @@
 package source_files.data.requests.paperworkRequests.paymentRequests;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -17,11 +19,12 @@ import source_files.data.types.itemTypes.PaymentType;
 public class CreatePaymentTypeRequest {
     @NotBlank(message = "Ödeme tipi boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Ödeme tipi sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "Ödeme tipi sadece harflerden oluşmalıdır.")
     private String paymentTypeEntityName;
 
     @NotNull
-    @NotBlank
-    private PaymentType PaymentTypeEntityPaymentType;
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
 
+    private boolean isActive;
 }

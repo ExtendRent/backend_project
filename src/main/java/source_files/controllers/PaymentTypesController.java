@@ -24,6 +24,7 @@ public class PaymentTypesController {
 
     @PostMapping
     public ResponseEntity<Void> createPaymentType(@Valid @RequestBody CreatePaymentTypeRequest createPaymentTypeRequest) {
+        this.paymentTypeService.create(createPaymentTypeRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

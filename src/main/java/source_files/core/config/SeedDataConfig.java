@@ -29,9 +29,11 @@ import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static source_files.data.types.itemTypes.DrivingLicenseType.*;
+import static source_files.data.types.itemTypes.PaymentType.*;
 
 @Component
 @RequiredArgsConstructor
@@ -60,8 +62,14 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             paymentTypeService.getAll();
         } catch (DataNotFoundException e) {
-            paymentTypeService.create(new CreatePaymentTypeRequest("Credit Card"
-                    , PaymentType.CREDIT_CARD));
+            HashMap<PaymentType, String> paymentTypes = new HashMap<>();
+            paymentTypes.put(CREDIT_CARD, "Kredi Kartı");
+            paymentTypes.put(CASH, "Ofiste Ödeme");
+            paymentTypes.put(BANK_MONEY_TRANSFER, "Havale");
+
+            for (PaymentType paymentType : paymentTypes.keySet()) {
+                paymentTypeService.create(new CreatePaymentTypeRequest(paymentTypes.get(paymentType), paymentType, true));
+            }
         }
 
         try {
@@ -140,6 +148,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .password(passwordEncoder.encode("pass"))
                     .imagePath("https://avatars.githubusercontent.com/u/92371744?v=4")
                     .salary(10000.00)
+                    .status(UserStatus.VERIFIED)
                     .build());
         }
     }

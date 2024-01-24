@@ -14,14 +14,14 @@ import source_files.data.types.userTypes.UserRole;
 public class CreateAdminRequest implements BaseRequest {
     @NotNull(message = "isim null olamaz")
     @NotBlank(message = "isim boş geçilemez")
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     @Size(min = 2, max = 20)
     String name;
 
     @NotNull(message = "soyisim null olamaz")
     @NotBlank(message = "Soyisim boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.

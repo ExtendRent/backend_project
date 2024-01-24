@@ -20,13 +20,13 @@ public class UpdateEmployeeRequest implements BaseRequest {
     @NotNull(message = "id cannot be null")
     @NotBlank(message = "Çalışan adı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String name;
 
     @NotNull(message = "soyisim null olamaz")
     @NotBlank(message = "Çalışan soyadı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.

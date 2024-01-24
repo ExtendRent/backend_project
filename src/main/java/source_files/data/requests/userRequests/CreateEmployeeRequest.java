@@ -16,13 +16,13 @@ public class CreateEmployeeRequest implements BaseRequest {
     @NotNull(message = "isim null olamaz")
     @NotBlank(message = "Çalışan adı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String name;
 
     @NotNull(message = "soyisim null olamaz")
     @NotBlank(message = "Çalışan soyadı boş geçilemez")
     @Size(min = 2, max = 20)
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")
     String surname;
 
     @NotNull(message = "Çalışan mail adresi null olamaz")
