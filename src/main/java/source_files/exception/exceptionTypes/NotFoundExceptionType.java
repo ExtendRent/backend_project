@@ -30,7 +30,6 @@ public enum NotFoundExceptionType {
 
     COLOR_DATA_NOT_FOUND(1011, "Color Not Found!"),
     COLOR_LIST_NOT_FOUND(1012, "Color List is Empty!"),
-
     BODY_TYPE_DATA_NOT_FOUND(1013, "Body Type Not Found!"),
     BODY_TYPE_LIST_NOT_FOUND(1014, "Body Type List is Empty!"),
 
@@ -49,7 +48,12 @@ public enum NotFoundExceptionType {
     PAYMENT_TYPE_NOT_FOUND(1023, "Payment Type Not Found"),
     PAYMENT_TYPE_LIST_NOT_FOUND(1024, "Payment Type List is EMpty"),
     DISCOUNT_CODE_NOT_FOUND(1025, "Discount Code Not Found!"),
-    DISCOUNT_CODE_LIST_NOT_FOUND(1026, "Discount Code List is Empty!");
+    DISCOUNT_CODE_LIST_NOT_FOUND(1026, "Discount Code List is Empty!"),
+
+    FUEL_TYPE_NOT_FOUND(1027, "Fuel Type Not Found"),
+    FUEL_TYPE_LIST_NOT_FOUND(1028, "Fuel Type List is Empty"),
+    SHIFT_TYPE_NOT_FOUND(1029, "Shift Type Not Found"),
+    SHIFT_TYPE_LIST_NOT_FOUND(1030, "Shift Type List is Empty");
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;

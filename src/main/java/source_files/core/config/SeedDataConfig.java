@@ -7,18 +7,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.Status.UserStatus;
+import source_files.data.models.vehicleEntities.vehicleFeatures.FuelTypeEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.ShiftTypeEntity;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.CreateCustomerRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
-import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.FuelType;
 import source_files.data.types.itemTypes.PaymentType;
+import source_files.data.types.itemTypes.ShiftType;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.FuelTypeEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ShiftTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import source_files.services.userServices.abstracts.AdminService;
@@ -27,13 +33,17 @@ import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
+import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import static source_files.data.types.itemTypes.DrivingLicenseType.*;
+import static source_files.data.types.itemTypes.FuelType.*;
 import static source_files.data.types.itemTypes.PaymentType.*;
+import static source_files.data.types.itemTypes.ShiftType.*;
 
 @Component
 @RequiredArgsConstructor
@@ -41,7 +51,7 @@ import static source_files.data.types.itemTypes.PaymentType.*;
 public class SeedDataConfig implements CommandLineRunner {
 
     private final UserEntityService userEntityService;
-    private final AdminService adminServices;
+    private final AdminService adminService;
 
     private final CustomerService customerService;
 
@@ -56,6 +66,12 @@ public class SeedDataConfig implements CommandLineRunner {
     private final CarBodyTypeService carBodyTypeService;
 
     private final PaymentTypeService paymentTypeService;
+
+    private final CarService carService;
+
+    private final ShiftTypeEntityService shiftTypeEntityService;
+
+    private final FuelTypeEntityService fuelTypeEntityService;
 
     @Override
     public void run(String... args) {
@@ -84,7 +100,7 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             brandService.getAll();
         } catch (DataNotFoundException e) {
-            String[] brands = {"Audi", "BMW", "Mercedes", "Honda", "Toyota"};
+            String[] brands = {"Audi", "BMW", "Tesla", "Honda", "Toyota"};
             for (String brand : brands) {
                 brandService.create(new CreateBrandRequest(brand));
             }
@@ -94,7 +110,7 @@ public class SeedDataConfig implements CommandLineRunner {
             carModelService.getAll();
         } catch (DataNotFoundException e) {
             List<BrandDTO> brands = this.brandService.getAll();
-            String[] carModels = {"A4", "M3", "c180", "Civic", "Corolla"};
+            String[] carModels = {"A4", "M3", "ModelY", "Civic", "Corolla"};
             for (BrandDTO brand : brands) {
                 carModelService.create(new CreateCarModelRequest(brand.getId(), carModels[brands.indexOf(brand)]));
             }
@@ -117,6 +133,56 @@ public class SeedDataConfig implements CommandLineRunner {
             discountService.create(new CreateDiscountRequest("HOSGELDIN", 10));
         }
 
+        if (shiftTypeEntityService.getAll().size() == 0) {
+            HashMap<ShiftType, String> shiftTypes = new HashMap<>();
+            shiftTypes.put(SEMI_AUTOMATIC, "Yarı Otomatik");
+            shiftTypes.put(MANUAL, "Manuel");
+            shiftTypes.put(AUTOMATIC, "Otomatik");
+            shiftTypes.put(TIPTRONIC, "Triptonik");
+            shiftTypes.put(NO_GEARSHIFT, "Vites Yok");
+            for (ShiftType shiftType : shiftTypes.keySet()) {
+                shiftTypeEntityService.create(new ShiftTypeEntity(shiftTypes.get(shiftType), shiftType));
+            }
+        }
+
+        if (fuelTypeEntityService.getAll().size() == 0) {
+            HashMap<FuelType, String> fuelTypes = new HashMap<>();
+            fuelTypes.put(PETROL, "Benzin");
+            fuelTypes.put(DIESEL, "Dizel");
+            fuelTypes.put(ELECTRIC, "Elektrik");
+            fuelTypes.put(HYBRID, "Hybrid");
+            fuelTypes.put(GAS, "Lpg");
+            fuelTypes.put(PETROL_GAS, "Benzin Lpg");
+            fuelTypes.put(NO_FUEL, "Yakıt Yok");
+            for (FuelType fuelType : fuelTypes.keySet()) {
+                fuelTypeEntityService.create(new FuelTypeEntity(fuelTypes.get(fuelType), fuelType));
+            }
+        }
+
+        try {
+            carService.getAll();
+        } catch (DataNotFoundException e) {
+
+            for (int i = 1; i <= 3; i++) {
+                carService.create(CreateCarRequest.builder()
+                        .carModelEntityId(i).brandEntityId(i)
+                        .colorEntityId(i).carBodyTypeEntityId(i)
+                        .kilometer(10000).details("lorem ipsum")
+                        .seat(i + 3).year(2020 + i)
+                        .luggage(2).imagePaths(Collections.singletonList("https://mediaservice.audi.com/media/live/50900/fly1400x601n1/8yabdc/2023.png?wid=850"))
+                        .fuelTypeEntityId(i).licensePlate("46kk35" + i)
+                        .rentalPrice(100).shiftTypeEntityId(i)
+                        .expectedDrivingLicenseTypes(new ArrayList<>() {{
+                            add(A);
+                            add(B);
+                            add(BE);
+                            add(C1);
+                            add(E);
+                        }}).build());
+            }
+
+        }
+
         //--------------------SEED USERS--------------------
 
         if (userEntityService.getAll().toArray().length == 0) {
@@ -128,7 +194,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .emailAddress("customer@gmail.com")
                     .password(passwordEncoder.encode("pass"))
                     .drivingLicenseNumber("123456")
-                    .drivingLicenseTypes(new ArrayList<DrivingLicenseType>() {{
+                    .drivingLicenseTypes(new ArrayList<>() {{
                         add(A);
                         add(B);
                         add(BE);
@@ -140,7 +206,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .build());
 
 
-            adminServices.create(CreateAdminRequest.builder()
+            adminService.create(CreateAdminRequest.builder()
                     .name("admin")
                     .surname("admin")
                     .phoneNumber("22222222222")
