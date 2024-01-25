@@ -34,10 +34,5 @@ public class AuthenticationController {
         );
     }
 
-    //TODO verify email endpointi.
-    @GetMapping("/verifyEmail")
-    ResponseEntity<TResponse<JwtToken>> verifyEmailAddress(@RequestParam("token") String token) {
 
-        return null;
-    }
 }

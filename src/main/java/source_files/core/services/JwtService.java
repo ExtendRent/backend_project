@@ -46,6 +46,17 @@ public class JwtService {
                 .compact();
     }
 
+    public String generateRefreshToken(UserEntity user) {
+        Map<String, Object> refreshTokenClaims = new HashMap<>();
+        refreshTokenClaims.put("userId", user.getId());
+
+        return Jwts.builder()
+                .setClaims(refreshTokenClaims)
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getSigninKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

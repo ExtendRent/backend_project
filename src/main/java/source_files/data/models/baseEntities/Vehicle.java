@@ -6,10 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.FuelTypeEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.ShiftTypeEntity;
 import source_files.data.types.itemTypes.DrivingLicenseType;
-import source_files.data.types.itemTypes.FuelType;
-import source_files.data.types.itemTypes.ShiftType;
 import source_files.data.types.itemTypes.VehicleType;
 
 import java.time.LocalDate;
@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 //@SuperBuilder
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
-@Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
+//@Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class Vehicle extends BaseEntity {
 
     @ManyToOne
@@ -40,13 +40,13 @@ public class Vehicle extends BaseEntity {
     @Column(name = "luggage")
     private int luggage;
 
-    @Column(name = "fuel_type")
-    @Enumerated(EnumType.STRING)
-    private FuelType fuelType;
+    @ManyToOne
+    @JoinColumn(name = "fuel_type_id")
+    private FuelTypeEntity fuelTypeEntity;
 
-    @Column(name = "shift_type")
-    @Enumerated(EnumType.STRING)
-    private ShiftType shiftType;
+    @ManyToOne
+    @JoinColumn(name = "shift_type_id")
+    private ShiftTypeEntity shiftTypeEntity;
 
     @Column(name = "rental_price")
     private double rentalPrice;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import source_files.core.services.JwtService;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.baseEntities.UserEntity;
+import source_files.data.requests.auth.RefreshTokenRequest;
 import source_files.data.requests.auth.SignInRequest;
 import source_files.data.requests.auth.SignUpReqeust;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -16,14 +17,11 @@ import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.responses.JwtToken;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.externalServices.EmailService;
-import source_files.services.userServices.abstracts.AdminService;
-import source_files.services.userServices.abstracts.AuthenticationService;
-import source_files.services.userServices.abstracts.CustomerService;
-import source_files.services.userServices.abstracts.EmployeeService;
+import source_files.services.userServices.abstracts.*;
 
 @Service
 @RequiredArgsConstructor
-public class CustomAuthenticationManager implements AuthenticationService {
+public class CustomAuthenticationManager implements AuthenticationService, AccessTokenService {
     private final AdminService adminService;
 
     private final EmployeeService employeeService;
@@ -63,5 +61,15 @@ public class CustomAuthenticationManager implements AuthenticationService {
         }
         throw new RuntimeException("Bilgiler hatalı");
 
+    }
+
+    @Override
+    public JwtToken refreshToken(RefreshTokenRequest refreshTokenRequest) {
+        UserEntity userEntity = userEntityService.getByEmailAddress(refreshTokenRequest.getEmail());
+        if (jwtService.isTokenValid(refreshTokenRequest.getToken(), userEntity)) {
+            String newAccessToken = jwtService.generateToken(userEntity);
+            return JwtToken.builder().token(newAccessToken).build();
+        }
+        throw new RuntimeException("Bilgiler hatalı");
     }
 }
