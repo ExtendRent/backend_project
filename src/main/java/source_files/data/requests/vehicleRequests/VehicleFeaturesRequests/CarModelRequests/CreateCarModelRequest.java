@@ -15,7 +15,6 @@ import source_files.data.requests.BaseRequest;
 @NoArgsConstructor
 public class CreateCarModelRequest implements BaseRequest {
     @NotNull(message = "Marka null olamaz")
-    @NotBlank(message = "Marka boş geçilemez")
     int brandEntityId;
 
     @NotNull(message = "Model null olamaz")

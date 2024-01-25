@@ -14,7 +14,6 @@ import source_files.data.requests.BaseRequest;
 public class UpdateEmployeeRequest implements BaseRequest {
 
     @NotNull(message = "id cannot be null")
-    @NotBlank(message = "id cannot be blank")
     int id;
 
     @NotNull(message = "id cannot be null")

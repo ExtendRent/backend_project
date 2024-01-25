@@ -19,7 +19,6 @@ import java.util.List;
 public class UpdateCustomerRequest implements BaseRequest {
 
     @NotNull(message = "Müşteri id null olamaz")
-    @NotBlank(message = "Müşteri id boş.QRect.")
     int id;
 
     @NotNull(message = "Müşteri adı null olamaz")

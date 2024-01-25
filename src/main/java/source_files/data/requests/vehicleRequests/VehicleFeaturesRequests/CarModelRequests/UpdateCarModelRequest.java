@@ -14,7 +14,6 @@ import source_files.data.requests.BaseRequest;
 public class UpdateCarModelRequest implements BaseRequest {
 
     @NotNull(message = "id null olamaz")
-    @NotBlank(message = "id boş olamaz")
     int carModelEntityId;
 
     @NotNull(message = "Model null olamaz")
@@ -23,6 +22,5 @@ public class UpdateCarModelRequest implements BaseRequest {
     String carModelEntityName;
 
     @NotNull(message = "Marka null olamaz")
-    @NotBlank(message = "Marka boş geçilemez")
     int brandEntityId;
 }

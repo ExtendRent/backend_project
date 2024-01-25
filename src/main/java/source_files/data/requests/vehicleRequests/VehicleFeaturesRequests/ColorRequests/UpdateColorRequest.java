@@ -15,9 +15,10 @@ import source_files.data.requests.BaseRequest;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateColorRequest implements BaseRequest {
-    @NotBlank(message = "id boş olamaz")
+
     @NotNull(message = "id null olamaz")
     int id;
+
     @NotBlank(message = "Renk adı boş geçilemez")
     @NotNull(message = "Renk null olamaz")
     @Size(min = 2, message = "Renk en az 2 karakter olmalıdır.")

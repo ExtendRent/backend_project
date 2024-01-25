@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import source_files.data.DTO.Mappers.ModelMapperManager;
 import source_files.data.DTO.itemDTOs.ColorDTO;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBusinessRules;

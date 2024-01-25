@@ -21,11 +21,9 @@ import java.time.LocalDate;
 public class CreateRentalRequest implements BaseRequest {
 
     @Min(value = 1, message = "CustomerId must be greater than 0")
-    @NotBlank(message = "CustomerId cannot be blank")
     @NotNull(message = "CustomerId cannot be null")
     private int customerEntityId;
 
-    @NotBlank(message = "CarId cannot be blank")
     @NotNull(message = "CarId cannot be null")
     @Min(value = 1, message = "CarId must be greater than 0")
     private int carEntityId;
@@ -40,7 +38,6 @@ public class CreateRentalRequest implements BaseRequest {
     @FutureOrPresent(message = "EndDate must be a future or present date")
     private LocalDate endDate;
 
-    @NotBlank(message = "PaymentTypeId cannot be blank")
     @NotNull(message = "PaymentTypeId cannot be null")
     private Integer paymentTypeId;
 

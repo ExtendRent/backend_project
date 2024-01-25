@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-//@Builder
 public class CreateCustomerRequest implements BaseRequest {
 
     @NotNull(message = "Müşteri adı null olamaz")

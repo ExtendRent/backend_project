@@ -15,7 +15,7 @@ import source_files.data.requests.BaseRequest;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateCarBodyTypeRequest implements BaseRequest {
-    @NotBlank(message = "id boş olamaz")
+
     @NotNull(message = "id null olamaz")
     int id;
 

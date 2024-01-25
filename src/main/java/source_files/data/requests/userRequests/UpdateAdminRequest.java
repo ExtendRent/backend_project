@@ -17,7 +17,6 @@ public class UpdateAdminRequest implements BaseRequest {
 
 
     @NotNull(message = "id null olamaz")
-    @NotBlank(message = "id boş geçilemez")
     int id;
 
     @NotNull(message = "isim null olamaz")
