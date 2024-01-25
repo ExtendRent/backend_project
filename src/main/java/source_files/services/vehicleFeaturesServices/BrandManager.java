@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.BrandEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.BrandBusinessRules;

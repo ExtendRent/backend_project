@@ -13,7 +13,6 @@ import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalR
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
-import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 import source_files.services.systemServices.SysPaymentDetailsService;
@@ -33,10 +32,8 @@ public class RentalManager implements RentalService {
     private final CarService carService;
     private final SysPaymentDetailsService sysPaymentDetailsService;
     private final CustomerService customerService;
-
-    PaymentTypeEntityService paymentTypeEntityService;
-    DiscountEntityService discountEntityService;
-    private RentalBusinessRules rentalBusinessRules;
+    private final DiscountEntityService discountEntityService;
+    private final RentalBusinessRules rentalBusinessRules;
 
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {

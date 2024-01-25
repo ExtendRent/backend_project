@@ -13,7 +13,7 @@ import java.time.LocalDate;
 //todo: bir logo ekleyebilriz img eklersek manager da yapacağız
 //todo: base entity de construction gerek yok
 //todo: logopath eklenebilir
-@Inheritance(strategy = InheritanceType.JOINED)
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures;
+package source_files.data.models.vehicleEntities.vehicleFeatures;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

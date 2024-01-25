@@ -1,6 +1,6 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
 
 import java.util.List;
 

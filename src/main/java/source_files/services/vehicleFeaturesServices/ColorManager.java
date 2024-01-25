@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.ColorDTO;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ColorEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.data.types.itemTypes.ItemType;
@@ -12,6 +12,7 @@ import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBus
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,6 +80,7 @@ public class ColorManager implements ColorService {
     public void softDelete(int id) {
         ColorEntity colorEntity = this.colorEntityService.getById(id);
         colorEntity.setIsDeleted(true);
+        colorEntity.setDeletedAt(LocalDate.now());
         this.colorEntityService.update(colorEntity);
     }
 

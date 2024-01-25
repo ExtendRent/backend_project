@@ -10,11 +10,11 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import source_files.core.filters.JwtAuthFilter;
-import source_files.services.userServices.abstracts.UserService;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -50,7 +50,7 @@ public class SecurityConfig {
 //            .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").hasAnyAuthority(
 //                        .anyRequest().authenticated()
 //                )
-    private final UserService userService;
+    private final UserDetailsService userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

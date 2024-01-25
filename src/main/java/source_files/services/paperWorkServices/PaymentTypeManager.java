@@ -27,6 +27,7 @@ public class PaymentTypeManager implements PaymentTypeService {
     public void create(CreatePaymentTypeRequest createPaymentTypeRequest) {
         PaymentTypeEntity paymentTypeEntity = this.modelMapperService.forRequest()
                 .map(createPaymentTypeRequest, PaymentTypeEntity.class);
+
         paymentTypeEntity.setItemType(PAYMENT_TYPE);
         this.paymentTypeEntityService.create(paymentTypeEntity);
     }

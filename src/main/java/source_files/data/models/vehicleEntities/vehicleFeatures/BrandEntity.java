@@ -1,4 +1,4 @@
-package source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures;
+package source_files.data.models.vehicleEntities.vehicleFeatures;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.Item;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 
 import java.util.List;
 

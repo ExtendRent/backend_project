@@ -18,9 +18,11 @@ public class PaymentTypeEntity extends Item {
 
     @Column(name = "name")
     private String name;
+
     @Column(name = "paymentType")
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
+
     @Column(name = "is_active")
     private boolean isActive = true;
 }
