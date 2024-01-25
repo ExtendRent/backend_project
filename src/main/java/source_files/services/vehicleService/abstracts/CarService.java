@@ -22,9 +22,9 @@ public interface CarService {
     List<CarDTO> getAllFiltered(Integer customerID, LocalDate startDate, LocalDate endDate,
                                 Integer startPrice, Integer endPrice,
                                 Boolean isDeleted, Boolean isAvailable,
-                                Integer colorId, String fuelType, String shiftType,
-                                Integer seat, Integer luggage, Integer modelId,
-                                Integer startYear, Integer endYear, Integer brandId);
+                                Integer colorId, Integer seat, Integer luggage, Integer modelId,
+                                Integer startYear, Integer endYear, Integer brandId,
+                                Integer fuelTypeID, Integer shiftTypeID);
 
     List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId);
 

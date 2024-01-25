@@ -17,30 +17,24 @@ import java.util.List;
 @NoArgsConstructor
 public class UpdateCarRequest implements BaseRequest {
     @NotNull(message = "id null olamaz")
-    @NotBlank(message = "id boş geçilemez")
     int id;
 
     @NotNull(message = "brandId null olamaz")
-    @NotBlank(message = "brandId boş geçilemez")
     @Min(1)
     int brandEntityId;
 
     @NotNull(message = "id null olamaz")
-    @NotBlank(message = "id boş geçilemez")
     @Min(1)
     int carModelEntityId;
 
     @NotNull(message = "carBodyTypeId null olamaz")
-    @NotBlank(message = "carBodyTypeId boş geçilemez")
     @Min(1)
     int carBodyTypeEntityId;
     @NotNull(message = "colorId null olamaz")
-    @NotBlank(message = "colorId boş geçilemez")
     @Min(1)
     int colorEntityId;
 
     @NotNull(message = "yıl null olamaz.")
-    @NotBlank(message = "yıl boş olamaz.")
     @Min(value = 2005, message = "Yıl en küçük 2005 olmalıdır.")
     @Max(value = 2024, message = "Yıl en yüksek 2024 olmalıdır.")
     int year;
@@ -49,7 +43,6 @@ public class UpdateCarRequest implements BaseRequest {
     String details;
 
     @DecimalMin(value = "0.0", message = "Kiralama ücreti 0 dan küçük olamaz.")
-    @NotBlank(message = "rentalPrice can not be blank")
     @NotNull(message = "rentalPrice can not be null")
     double rentalPrice;
 
@@ -59,7 +52,6 @@ public class UpdateCarRequest implements BaseRequest {
     String licensePlate;
 
     @NotNull(message = "kilometer null olamaz")
-    @NotBlank(message = "kilometer boş olamaz")
     @Min(value = 0, message = "Kilometre 0 dan küçük olamaz.")
     int kilometer;
 
@@ -71,21 +63,17 @@ public class UpdateCarRequest implements BaseRequest {
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
 
     @NotNull
-    @NotBlank(message = "shiftType boş olamaz")
-    String shiftType;
+    int shiftTypeEntityId;
 
-    @NotBlank(message = "fuelType boş olamaz")
     @NotNull
-    String fuelType;
+    int fuelTypeEntityId;
 
     @NotNull(message = "seat null olamaz")
-    @NotBlank(message = "seat boş olamaz")
     @Min(1)
     @Max(15)
     int seat;
 
     @NotNull(message = "luggage null olamaz")
-    @NotBlank(message = "luggage boş olamaz")
     @Min(1)
     @Max(15)
     int luggage;

@@ -62,25 +62,26 @@ public class CarsController {
             @RequestParam(name = "brandId", required = false) Integer brandId,
             @RequestParam(name = "modelId", required = false) Integer modelId,
             @RequestParam(name = "colorId", required = false) Integer colorId,
-            @RequestParam(name = "colorId", required = false) String fuelType,
-            @RequestParam(name = "colorId", required = false) String shiftType,
-            @RequestParam(name = "colorId", required = false) Integer seat,
-            @RequestParam(name = "colorId", required = false) Integer luggage,
+            @RequestParam(name = "fuelTypeId", required = false) Integer fuelTypeId,
+            @RequestParam(name = "shiftTypeId", required = false) Integer shiftTypeId,
+            @RequestParam(name = "seat", required = false) Integer seat,
+            @RequestParam(name = "luggage", required = false) Integer luggage,
             @RequestParam(name = "startPrice", required = false) Integer startPrice,
             @RequestParam(name = "endPrice", required = false) Integer endPrice,
             @RequestParam(name = "startYear", required = false) Integer startYear,
             @RequestParam(name = "endYear", required = false) Integer endYear,
             @RequestParam(name = "isDeleted", required = false) Boolean isDeleted,
             @RequestParam(name = "isAvailable", required = false) Boolean isAvailable
+
     ) {
         List<CarDTO> filteredCars = carService.getAllFiltered(
                 customerId, startDate, endDate,
                 startPrice, endPrice,
                 isDeleted, isAvailable,
-                colorId, fuelType,
-                shiftType, seat, luggage,
-                modelId, startYear,
-                endYear, brandId);
+                colorId, seat, luggage, modelId,
+                startYear, endYear, brandId,
+                fuelTypeId, shiftTypeId
+        );
         return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(filteredCars)
                 .build(), HttpStatus.OK

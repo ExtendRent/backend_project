@@ -25,7 +25,7 @@ public class CarManager implements CarService {
 
     private final ModelMapperService modelMapperService;
     private final CarEntityService carEntityService;
-    private CarBusinessRules businessRules;
+    private final CarBusinessRules businessRules;
 
     @Override
     public void create(CreateCarRequest createCarRequest) {
@@ -155,13 +155,15 @@ public class CarManager implements CarService {
     }
 
 
+    @Override
     public List<CarDTO> getAllFiltered(Integer customerId,
                                        LocalDate startDate, LocalDate endDate,
                                        Integer startPrice, Integer endPrice,
                                        Boolean isDeleted, Boolean isAvailable,
-                                       Integer colorId, String fuelType, String shiftType,
+                                       Integer colorId,
                                        Integer seat, Integer luggage, Integer modelId,
-                                       Integer startYear, Integer endYear, Integer brandId) {
+                                       Integer startYear, Integer endYear, Integer brandId,
+                                       Integer fuelTypeId, Integer shiftTypeId) {
 
         Date startDateSql = startDate != null ? Date.valueOf(startDate) : null;
         Date endDateSql = endDate != null ? Date.valueOf(endDate) : null;
@@ -170,10 +172,10 @@ public class CarManager implements CarService {
                 startDateSql, endDateSql,
                 startPrice, endPrice,
                 isDeleted, isAvailable,
-                colorId, fuelType,
-                shiftType, seat, luggage,
+                colorId, seat, luggage,
                 modelId, startYear,
-                endYear, brandId);
+                endYear, brandId,
+                fuelTypeId, shiftTypeId);
 
 
         return this.businessRules.checkDataList(filteredCars).stream()

@@ -38,20 +38,5 @@ public class CarEntity extends Vehicle {
 
     //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş
 
-//    public CarDTO convertToDTO() {
-//        return CarDTO.builder()
-//                .id(getId())
-//                .carModelEntityBrandEntityName(this.carModelEntity.getBrandEntity().getName())
-//                .carBodyTypeEntityName(this.carBodyTypeEntity.getName())
-//                .kilometer(this.kilometer)
-//                .seat(this.getSeat())
-//                .luggage(this.getLuggage())
-//                .year(this.getYear())
-//                .details(this.getDetails())
-//                .rentalPrice(this.getRentalPrice())
-//                .imagesEntityImagePaths(this.imagesEntity.getImagePaths())
-//                .expectedDrivingLicenseTypes(this.getExpectedDrivingLicenseTypes())
-//                .build();
-//    }
 
 }

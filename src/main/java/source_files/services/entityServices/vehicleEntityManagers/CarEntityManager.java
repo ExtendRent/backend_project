@@ -80,22 +80,23 @@ public class CarEntityManager implements CarEntityService {
         return this.carRepository.findAllByCarModelEntity_BrandEntity_Id(brandId);
     }
 
+    @Override
     public List<CarEntity> getAllFiltered(
             Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
             Boolean isDeleted, Boolean isAvailable,
-            Integer colorId, String fuelType, String shiftType,
-            Integer seat, Integer luggage, Integer modelId,
-            Integer startYear, Integer endYear, Integer brandId) {
+            Integer colorId, Integer seat,
+            Integer luggage, Integer modelId,
+            Integer startYear, Integer endYear, Integer brandId,
+            Integer fuelTypeId, Integer shiftTypeId) {
 
         return carRepository.findAllFiltered(
                 startDate, endDate,
                 startPrice, endPrice,
                 isDeleted, isAvailable,
-                colorId, fuelType,
-                shiftType, seat, luggage,
+                colorId, seat, luggage,
                 modelId, startYear,
-                endYear, brandId);
+                endYear, brandId, fuelTypeId, shiftTypeId);
     }
 
     @Override

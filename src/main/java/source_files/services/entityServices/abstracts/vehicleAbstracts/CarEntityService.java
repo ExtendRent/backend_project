@@ -36,9 +36,9 @@ public interface CarEntityService {
             Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
             Boolean isDeleted, Boolean isAvailable,
-            Integer colorId, String fuelType, String shiftType,
-            Integer seat, Integer luggage, Integer modelId,
-            Integer startYear, Integer endYear, Integer brandId);
+            Integer colorId, Integer seat, Integer luggage, Integer modelId,
+            Integer startYear, Integer endYear, Integer brandId,
+            Integer fuelTypeId, Integer shiftTypeId);
 
     void delete(CarEntity carEntity);
 }
