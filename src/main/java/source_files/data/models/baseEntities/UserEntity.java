@@ -64,7 +64,10 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return switch (this.status) {
+            case BLOCKED, TIME_BLOCKED -> false;
+            default -> true;
+        };
     }
 
     @Override

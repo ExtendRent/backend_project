@@ -23,8 +23,8 @@ public class CarDTO {
     String colorEntityName;
     int year;
     String carBodyTypeEntityName;
-    String fuelType;
-    String shiftType;
+    String fuelTypeEntityName;
+    String shiftTypeEntityName;
     int seat;
     int luggage;
     String details;

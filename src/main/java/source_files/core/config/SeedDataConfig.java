@@ -18,9 +18,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandR
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
-import source_files.data.types.itemTypes.FuelType;
 import source_files.data.types.itemTypes.PaymentType;
-import source_files.data.types.itemTypes.ShiftType;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.FuelTypeEntityService;
@@ -35,15 +33,12 @@ import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 import source_files.services.vehicleService.abstracts.CarService;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+import static source_files.data.types.itemTypes.DefaultFuelType.*;
+import static source_files.data.types.itemTypes.DefaultShiftType.*;
 import static source_files.data.types.itemTypes.DrivingLicenseType.*;
-import static source_files.data.types.itemTypes.FuelType.*;
 import static source_files.data.types.itemTypes.PaymentType.*;
-import static source_files.data.types.itemTypes.ShiftType.*;
 
 @Component
 @RequiredArgsConstructor
@@ -78,7 +73,7 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             paymentTypeService.getAll();
         } catch (DataNotFoundException e) {
-            HashMap<PaymentType, String> paymentTypes = new HashMap<>();
+            HashMap<PaymentType, String> paymentTypes = new LinkedHashMap<>();
             paymentTypes.put(CREDIT_CARD, "Kredi Kartı");
             paymentTypes.put(CASH, "Ofiste Ödeme");
             paymentTypes.put(BANK_MONEY_TRANSFER, "Havale");
@@ -134,28 +129,28 @@ public class SeedDataConfig implements CommandLineRunner {
         }
 
         if (shiftTypeEntityService.getAll().size() == 0) {
-            HashMap<ShiftType, String> shiftTypes = new HashMap<>();
-            shiftTypes.put(SEMI_AUTOMATIC, "Yarı Otomatik");
-            shiftTypes.put(MANUAL, "Manuel");
-            shiftTypes.put(AUTOMATIC, "Otomatik");
-            shiftTypes.put(TIPTRONIC, "Triptonik");
-            shiftTypes.put(NO_GEARSHIFT, "Vites Yok");
-            for (ShiftType shiftType : shiftTypes.keySet()) {
-                shiftTypeEntityService.create(new ShiftTypeEntity(shiftTypes.get(shiftType), shiftType));
+            HashMap<String, String> shiftTypes = new LinkedHashMap<>();
+            shiftTypes.put(SEMI_AUTOMATIC.name(), "Yarı Otomatik");
+            shiftTypes.put(MANUAL.name(), "Manuel");
+            shiftTypes.put(AUTOMATIC.name(), "Otomatik");
+            shiftTypes.put(TIPTRONIC.name(), "Triptonik");
+            shiftTypes.put(NO_GEARSHIFT.name(), "Vites Yok");
+            for (String defaultShiftType : shiftTypes.keySet()) {
+                shiftTypeEntityService.create(new ShiftTypeEntity(defaultShiftType, shiftTypes.get(defaultShiftType)));
             }
         }
 
         if (fuelTypeEntityService.getAll().size() == 0) {
-            HashMap<FuelType, String> fuelTypes = new HashMap<>();
-            fuelTypes.put(PETROL, "Benzin");
-            fuelTypes.put(DIESEL, "Dizel");
-            fuelTypes.put(ELECTRIC, "Elektrik");
-            fuelTypes.put(HYBRID, "Hybrid");
-            fuelTypes.put(GAS, "Lpg");
-            fuelTypes.put(PETROL_GAS, "Benzin Lpg");
-            fuelTypes.put(NO_FUEL, "Yakıt Yok");
-            for (FuelType fuelType : fuelTypes.keySet()) {
-                fuelTypeEntityService.create(new FuelTypeEntity(fuelTypes.get(fuelType), fuelType));
+            HashMap<String, String> fuelTypes = new LinkedHashMap<>();
+            fuelTypes.put(PETROL.name(), "Benzin");
+            fuelTypes.put(DIESEL.name(), "Dizel");
+            fuelTypes.put(ELECTRIC.name(), "Elektrik");
+            fuelTypes.put(HYBRID.name(), "Hybrid");
+            fuelTypes.put(GAS.name(), "Lpg");
+            fuelTypes.put(PETROL_GAS.name(), "Benzin Lpg");
+            fuelTypes.put(NO_FUEL.name(), "Yakıt Yok");
+            for (String defaultFuelType : fuelTypes.keySet()) {
+                fuelTypeEntityService.create(new FuelTypeEntity(defaultFuelType, fuelTypes.get(defaultFuelType)));
             }
         }
 

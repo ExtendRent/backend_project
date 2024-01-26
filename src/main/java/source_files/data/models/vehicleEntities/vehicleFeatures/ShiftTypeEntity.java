@@ -1,12 +1,13 @@
 package source_files.data.models.vehicleEntities.vehicleFeatures;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.Item;
-import source_files.data.types.itemTypes.ShiftType;
 
 @Getter
 @Setter
@@ -16,10 +17,10 @@ import source_files.data.types.itemTypes.ShiftType;
 @Table(name = "shift_types")
 public class ShiftTypeEntity extends Item {
 
-    @Column(name = "name", unique = true)
-    private String name;
 
     @Column(name = "shift_type")
-    @Enumerated(EnumType.STRING)
-    private ShiftType shiftType;
+    private String shiftType;
+
+    @Column(name = "name", unique = true)
+    private String name;
 }
