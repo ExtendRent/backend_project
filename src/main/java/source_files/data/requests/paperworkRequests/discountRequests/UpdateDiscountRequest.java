@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateDiscountRequest {
+    @NotNull(message = "id null olamaz")
+    int id;
 
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Discount code must consist of letters and numbers only")
     String discountCode;
@@ -23,6 +25,6 @@ public class UpdateDiscountRequest {
     @Pattern(regexp = "^[0-9]+$", message = "Discount percentage must consist of numbers only")
     @NotNull(message = "Discount percentage cannot be blank")
     int discountPercentage;
-
+    @NotNull
     boolean isActive;
 }
