@@ -7,8 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.Status.UserStatus;
-import source_files.data.models.vehicleEntities.vehicleFeatures.FuelTypeEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.ShiftTypeEntity;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -18,19 +16,16 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandR
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
 import source_files.data.types.itemTypes.PaymentType;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
-import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.FuelTypeEntityService;
-import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ShiftTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import source_files.services.userServices.abstracts.AdminService;
 import source_files.services.userServices.abstracts.CustomerService;
-import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
-import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
-import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
-import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
+import source_files.services.vehicleFeaturesServices.abstracts.*;
 import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.*;
@@ -62,9 +57,9 @@ public class SeedDataConfig implements CommandLineRunner {
 
     private final CarService carService;
 
-    private final ShiftTypeEntityService shiftTypeEntityService;
+    private final ShiftTypeService shiftTypeService;
 
-    private final FuelTypeEntityService fuelTypeEntityService;
+    private final FuelTypeService fuelTypeService;
 
     @Override
     public void run(String... args) {
@@ -126,17 +121,21 @@ public class SeedDataConfig implements CommandLineRunner {
             discountService.create(new CreateDiscountRequest("HOSGELDIN", 10));
         }
 
-        if (shiftTypeEntityService.getAll().size() == 0) {
+        try {
+            shiftTypeService.getAll();
+        } catch (DataNotFoundException e) {
             String[] defaultShiftTypes = {"Yarı Otomatik", "Manuel", "Otomatik", "Triptonik", "Vites Yok"};
             for (String defaultShiftType : defaultShiftTypes) {
-                shiftTypeEntityService.create(new ShiftTypeEntity(defaultShiftType));
+                shiftTypeService.create(new CreateShiftTypeRequest(defaultShiftType));
             }
         }
 
-        if (fuelTypeEntityService.getAll().size() == 0) {
+        try {
+            fuelTypeService.getAll();
+        } catch (DataNotFoundException e) {
             String[] defaultFuelTypes = {"Benzin", "Dizel", "Elektrik", "Hybrid", "Lpg", "Benzin Lpg", "Yakıt Yok"};
             for (String defaultFuelType : defaultFuelTypes) {
-                fuelTypeEntityService.create(new FuelTypeEntity(defaultFuelType));
+                fuelTypeService.create(new CreateFuelTypeRequest(defaultFuelType));
             }
         }
 
