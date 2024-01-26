@@ -21,10 +21,4 @@ public class UpdateFuelTypeRequest {
     @Size(min = 2, message = "Yakıt ismi en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-Z ]+$", message = "yakıt ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
-
-    @NotNull(message = "Yakıt tipi null olamaz")
-    @NotBlank(message = "Yakıt tipi adı boş geçilemez")
-    @Size(min = 2, message = "Yakıt tipi en az 2 karakter olmalıdır.")
-    @Pattern(regexp = "^[A-Z]+$", message = "yakıt tipi sadece BÜYÜK harflerden oluşmalıdır.")
-    String fuelType;
 }

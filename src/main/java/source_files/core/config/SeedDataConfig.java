@@ -35,8 +35,6 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.*;
 
-import static source_files.data.types.itemTypes.DefaultFuelType.*;
-import static source_files.data.types.itemTypes.DefaultShiftType.*;
 import static source_files.data.types.itemTypes.DrivingLicenseType.*;
 import static source_files.data.types.itemTypes.PaymentType.*;
 
@@ -129,28 +127,16 @@ public class SeedDataConfig implements CommandLineRunner {
         }
 
         if (shiftTypeEntityService.getAll().size() == 0) {
-            HashMap<String, String> shiftTypes = new LinkedHashMap<>();
-            shiftTypes.put(SEMI_AUTOMATIC.name(), "Yarı Otomatik");
-            shiftTypes.put(MANUAL.name(), "Manuel");
-            shiftTypes.put(AUTOMATIC.name(), "Otomatik");
-            shiftTypes.put(TIPTRONIC.name(), "Triptonik");
-            shiftTypes.put(NO_GEARSHIFT.name(), "Vites Yok");
-            for (String defaultShiftType : shiftTypes.keySet()) {
-                shiftTypeEntityService.create(new ShiftTypeEntity(defaultShiftType, shiftTypes.get(defaultShiftType)));
+            String[] defaultShiftTypes = {"Yarı Otomatik", "Manuel", "Otomatik", "Triptonik", "Vites Yok"};
+            for (String defaultShiftType : defaultShiftTypes) {
+                shiftTypeEntityService.create(new ShiftTypeEntity(defaultShiftType));
             }
         }
 
         if (fuelTypeEntityService.getAll().size() == 0) {
-            HashMap<String, String> fuelTypes = new LinkedHashMap<>();
-            fuelTypes.put(PETROL.name(), "Benzin");
-            fuelTypes.put(DIESEL.name(), "Dizel");
-            fuelTypes.put(ELECTRIC.name(), "Elektrik");
-            fuelTypes.put(HYBRID.name(), "Hybrid");
-            fuelTypes.put(GAS.name(), "Lpg");
-            fuelTypes.put(PETROL_GAS.name(), "Benzin Lpg");
-            fuelTypes.put(NO_FUEL.name(), "Yakıt Yok");
-            for (String defaultFuelType : fuelTypes.keySet()) {
-                fuelTypeEntityService.create(new FuelTypeEntity(defaultFuelType, fuelTypes.get(defaultFuelType)));
+            String[] defaultFuelTypes = {"Benzin", "Dizel", "Elektrik", "Hybrid", "Lpg", "Benzin Lpg", "Yakıt Yok"};
+            for (String defaultFuelType : defaultFuelTypes) {
+                fuelTypeEntityService.create(new FuelTypeEntity(defaultFuelType));
             }
         }
 

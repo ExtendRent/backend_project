@@ -16,11 +16,7 @@ import source_files.data.models.baseEntities.Item;
 @NoArgsConstructor
 @Table(name = "shift_types")
 public class ShiftTypeEntity extends Item {
-
-
-    @Column(name = "shift_type")
-    private String shiftType;
-
+    
     @Column(name = "name", unique = true)
     private String name;
 }

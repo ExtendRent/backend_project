@@ -17,10 +17,6 @@ import source_files.data.models.baseEntities.Item;
 @Table(name = "fuel_types")
 public class FuelTypeEntity extends Item {
 
-
-    @Column(name = "fuel_type")
-    private String fuelType;
-
     @Column(name = "name", unique = true)
     private String name;
 
