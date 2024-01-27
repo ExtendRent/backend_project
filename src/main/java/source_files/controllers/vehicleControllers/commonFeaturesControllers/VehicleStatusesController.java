@@ -39,7 +39,7 @@ public class VehicleStatusesController {
         );
     }
 
-    @GetMapping("/{status}")
+    @GetMapping("/byStatus/{status}")
     public ResponseEntity<TResponse<VehicleStatusDTO>> getByStatus(
             @RequestParam(name = "status", required = false) String status) {
         return new ResponseEntity<>(TResponse.<VehicleStatusDTO>tResponseBuilder()

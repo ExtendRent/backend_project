@@ -147,8 +147,8 @@ public class CarsController {
     }
 
     @GetMapping(params = "statusId")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailableState(
-            @RequestParam(value = "isAvailable", required = false) Integer statusId) {
+    public ResponseEntity<TResponse<List<CarDTO>>> getAllByStatus(
+            @RequestParam(value = "statusId", required = false) Integer statusId) {
         return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(this.carService.getAllByStatus(statusId))
                 .build(), HttpStatus.OK
