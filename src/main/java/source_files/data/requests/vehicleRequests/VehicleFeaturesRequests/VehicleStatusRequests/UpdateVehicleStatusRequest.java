@@ -1,9 +1,6 @@
 package source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateVehicleStatusRequest {
     @NotNull
+    @Min(1)
     int id;
     @NotNull(message = "Araç durumu ismi null olamaz")
     @NotBlank(message = "Araç durumu ismi boş geçilemez")
