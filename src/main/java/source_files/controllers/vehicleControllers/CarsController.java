@@ -1,4 +1,4 @@
-package source_files.controllers;
+package source_files.controllers.vehicleControllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -71,13 +71,13 @@ public class CarsController {
             @RequestParam(name = "startYear", required = false) Integer startYear,
             @RequestParam(name = "endYear", required = false) Integer endYear,
             @RequestParam(name = "isDeleted", required = false) Boolean isDeleted,
-            @RequestParam(name = "isAvailable", required = false) Boolean isAvailable
+            @RequestParam(name = "statusId", required = false) Integer statusId
 
     ) {
         List<CarDTO> filteredCars = carService.getAllFiltered(
                 customerId, startDate, endDate,
                 startPrice, endPrice,
-                isDeleted, isAvailable,
+                isDeleted, statusId,
                 colorId, seat, luggage, modelId,
                 startYear, endYear, brandId,
                 fuelTypeId, shiftTypeId
@@ -146,11 +146,11 @@ public class CarsController {
         );
     }
 
-    @GetMapping(params = "isAvailable")
+    @GetMapping(params = "statusId")
     public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailableState(
-            @RequestParam(value = "isAvailable", required = false) boolean isAvailable) {
+            @RequestParam(value = "isAvailable", required = false) Integer statusId) {
         return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByAvailableState(isAvailable))
+                .response(this.carService.getAllByStatus(statusId))
                 .build(), HttpStatus.OK
         );
     }

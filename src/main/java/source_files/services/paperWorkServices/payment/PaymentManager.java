@@ -43,9 +43,11 @@ public class PaymentManager implements PaymentService {
                             this.sysPaymentDetailsService.create(new PaymentDetailsEntity(createRentalRequest.getAmount()
                                     , this.paymentTypeEntityService.getById(createRentalRequest.getPaymentTypeId()))
                             ), PaymentDetailsDTO.class));
+            return createRentalRequest;
+        } else {
+            throw new PaymentException(PAYMENT_REJECTED, "Ödeme Banka Tarafından Reddedildi.");
         }
 
-        throw new PaymentException(PAYMENT_REJECTED, "Ödeme Banka Tarafından Reddedildi.");
     }
 
 

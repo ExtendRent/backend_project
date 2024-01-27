@@ -10,6 +10,7 @@ import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
+import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.VehicleStatusEntityManager;
 import source_files.services.vehicleService.abstracts.CarService;
 
 import java.sql.Date;
@@ -26,6 +27,8 @@ public class CarManager implements CarService {
     private final ModelMapperService modelMapperService;
     private final CarEntityService carEntityService;
     private final CarBusinessRules businessRules;
+
+    VehicleStatusEntityManager vehicleStatusManager;
 
     @Override
     public void create(CreateCarRequest createCarRequest) {
@@ -107,10 +110,10 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<CarDTO> getAllByAvailableState(boolean isAvailable) {
+    public List<CarDTO> getAllByStatus(Integer statusId) {
         return this.businessRules.checkDataList(
-                        this.carEntityService.getAllByAvailability(isAvailable)).stream()
-                .map(o -> modelMapperService.forResponse().map(o, CarDTO.class)).toList();
+                        this.carEntityService.getAllByStatus(statusId)).stream()
+                .map(car -> modelMapperService.forResponse().map(car, CarDTO.class)).toList();
     }
 
     @Override
@@ -159,7 +162,7 @@ public class CarManager implements CarService {
     public List<CarDTO> getAllFiltered(Integer customerId,
                                        LocalDate startDate, LocalDate endDate,
                                        Integer startPrice, Integer endPrice,
-                                       Boolean isDeleted, Boolean isAvailable,
+                                       Boolean isDeleted, Integer statusId,
                                        Integer colorId,
                                        Integer seat, Integer luggage, Integer modelId,
                                        Integer startYear, Integer endYear, Integer brandId,
@@ -171,7 +174,7 @@ public class CarManager implements CarService {
         List<CarEntity> filteredCars = carEntityService.getAllFiltered(
                 startDateSql, endDateSql,
                 startPrice, endPrice,
-                isDeleted, isAvailable,
+                isDeleted, statusId,
                 colorId, seat, luggage,
                 modelId, startYear,
                 endYear, brandId,
@@ -197,9 +200,32 @@ public class CarManager implements CarService {
     public void softDelete(int id) {
         CarEntity carEntity = this.carEntityService.getById(id);
         carEntity.setIsDeleted(true);
-        carEntity.setIsAvailable(false);
+        carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus("DELETED"));
         this.carEntityService.update(carEntity);
     }
 
+    public UpdateCarRequest convertToUpdateRequest(int id) {
+        CarEntity carEntity = this.carEntityService.getById(id);
+        return UpdateCarRequest.builder()
+                .id(carEntity.getId())
+                .brandEntityId(carEntity.getCarModelEntity().getBrandEntity().getId())
+                .carModelEntityId(carEntity.getCarModelEntity().getId())
+                .carBodyTypeEntityId(carEntity.getCarBodyTypeEntity().getId())
+                .licensePlate(carEntity.getLicensePlate())
+                .kilometer(carEntity.getKilometer())
+                .imagePaths(carEntity.getImagesEntity().getImagePaths())
+                .year(carEntity.getYear())
+                .seat(carEntity.getSeat())
+                .rentalPrice(carEntity.getRentalPrice())
+                .details(carEntity.getDetails())
+                .luggage(carEntity.getLuggage())
+                .expectedDrivingLicenseTypes(carEntity.getExpectedDrivingLicenseTypes())
+                .colorEntityId(carEntity.getColorEntity().getId())
+                .fuelTypeEntityId(carEntity.getFuelTypeEntity().getId())
+                .shiftTypeEntityId(carEntity.getShiftTypeEntity().getId())
+                .vehicleStatusEntityId(carEntity.getVehicleStatusEntity().getId())
+                .availabilityDate(carEntity.getAvailabilityDate())
+                .build();
+    }
 
 }

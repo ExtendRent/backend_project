@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.Status.UserStatus;
+import source_files.data.Status.DefaultUserStatus;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 import source_files.data.types.userTypes.UserRole;
@@ -59,6 +59,6 @@ public class UpdateCustomerRequest implements BaseRequest {
     List<DrivingLicenseType> drivingLicenseTypes;
 
     String imagePath;
-    UserStatus status = UserStatus.PENDING_VERIFYING;
+    DefaultUserStatus status = DefaultUserStatus.PENDING_VERIFYING;
     private UserRole authority = UserRole.CUSTOMER;
 }

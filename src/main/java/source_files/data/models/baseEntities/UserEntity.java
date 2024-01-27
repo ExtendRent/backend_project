@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import source_files.data.Status.UserStatus;
+import source_files.data.Status.DefaultUserStatus;
 import source_files.data.types.userTypes.UserRole;
 
 import java.util.Collection;
@@ -43,7 +43,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    private DefaultUserStatus status;
 
     @Column(name = "image_path")
     private String imagePath;

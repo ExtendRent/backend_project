@@ -1,4 +1,4 @@
-package source_files.controllers;
+package source_files.controllers.securityControllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

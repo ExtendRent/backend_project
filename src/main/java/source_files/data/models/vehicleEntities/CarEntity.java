@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.baseEntities.Vehicle;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
+import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 
 @Getter
 @Setter
@@ -17,6 +19,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.Imag
 @NoArgsConstructor
 @Table(name = "cars")
 public class CarEntity extends Vehicle {
+
     @ManyToOne
     @JoinColumn(name = "model_id")
     private CarModelEntity carModelEntity;
@@ -38,5 +41,48 @@ public class CarEntity extends Vehicle {
 
     //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş
 
+    public CarDTO convertToDTO() {
+        return CarDTO.builder()
+                .id(this.getId())
+                .carModelEntityBrandEntityName(this.getCarModelEntity().getBrandEntity().getName())
+                .carModelEntityName(this.getCarModelEntity().getName())
+                .carBodyTypeEntityName(this.getCarBodyTypeEntity().getName())
+                .licensePlate(this.getLicensePlate())
+                .kilometer(this.getKilometer())
+                .imagesEntityImagePaths(this.getImagesEntity().getImagePaths())
+                .year(this.getYear())
+                .seat(this.getSeat())
+                .rentalPrice(this.getRentalPrice())
+                .details(this.getDetails())
+                .luggage(this.getLuggage())
+                .expectedDrivingLicenseTypes(this.getExpectedDrivingLicenseTypes())
+                .colorEntityName(this.getColorEntity().getName())
+                .fuelTypeEntityName(this.getFuelTypeEntity().getName())
+                .shiftTypeEntityName(this.getShiftTypeEntity().getName())
+                .availabilityDate(this.getAvailabilityDate())
+                .build();
+    }
+
+    public UpdateCarRequest convertToUpdateRequest() {
+        return UpdateCarRequest.builder()
+                .id(this.getId())
+                .brandEntityId(this.getCarModelEntity().getBrandEntity().getId())
+                .carModelEntityId(this.getCarModelEntity().getId())
+                .carBodyTypeEntityId(this.getCarBodyTypeEntity().getId())
+                .licensePlate(this.getLicensePlate())
+                .kilometer(this.getKilometer())
+                .imagePaths(this.getImagesEntity().getImagePaths())
+                .year(this.getYear())
+                .seat(this.getSeat())
+                .rentalPrice(this.getRentalPrice())
+                .details(this.getDetails())
+                .luggage(this.getLuggage())
+                .expectedDrivingLicenseTypes(this.getExpectedDrivingLicenseTypes())
+                .colorEntityId(this.getColorEntity().getId())
+                .fuelTypeEntityId(this.getFuelTypeEntity().getId())
+                .shiftTypeEntityId(this.getShiftTypeEntity().getId())
+                .availabilityDate(this.getAvailabilityDate())
+                .build();
+    }
 
 }

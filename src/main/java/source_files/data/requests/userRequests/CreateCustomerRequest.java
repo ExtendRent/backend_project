@@ -2,10 +2,8 @@ package source_files.data.requests.userRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.Status.UserStatus;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
-import source_files.data.types.userTypes.UserRole;
 
 import java.util.List;
 
@@ -54,6 +52,4 @@ public class CreateCustomerRequest implements BaseRequest {
     List<DrivingLicenseType> drivingLicenseTypes;
 
     String imagePath;
-    UserStatus status = UserStatus.PENDING_VERIFYING;
-    private UserRole authority = UserRole.CUSTOMER;
 }

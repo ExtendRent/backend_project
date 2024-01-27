@@ -19,7 +19,7 @@ public class UpdateShiftTypeRequest {
     @NotNull(message = "Vites ismi null olamaz")
     @NotBlank(message = "Vites ismi boş geçilemez")
     @Size(min = 2, message = "Vites ismi en az 2 karakter olmalıdır.")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "Vites ismi sadece harflerden ve boşluklardan oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "Vites ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
 
 }

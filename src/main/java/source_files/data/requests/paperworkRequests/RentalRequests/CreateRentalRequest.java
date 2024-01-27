@@ -2,7 +2,6 @@ package source_files.data.requests.paperworkRequests.RentalRequests;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,12 +27,10 @@ public class CreateRentalRequest implements BaseRequest {
     @Min(value = 1, message = "CarId must be greater than 0")
     private int carEntityId;
 
-    @NotBlank(message = "StartDate cannot be blank")
     @NotNull(message = "StartDate cannot be null")
     @FutureOrPresent(message = "StartDate must be a future or present date")
     private LocalDate startDate;
 
-    @NotBlank(message = "EndDate cannot be blank")
     @NotNull(message = "EndDate cannot be null")
     @FutureOrPresent(message = "EndDate must be a future or present date")
     private LocalDate endDate;
@@ -41,7 +38,6 @@ public class CreateRentalRequest implements BaseRequest {
     @NotNull(message = "PaymentTypeId cannot be null")
     private Integer paymentTypeId;
 
-    @NotBlank(message = "DiscountCode cannot be blank")
     @NotNull(message = "DiscountCode cannot be null")
     private Double amount;
 

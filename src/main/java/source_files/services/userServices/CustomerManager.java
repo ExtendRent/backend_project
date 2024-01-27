@@ -16,6 +16,7 @@ import source_files.services.userServices.abstracts.CustomerService;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.data.Status.DefaultUserStatus.PENDING_VERIFYING;
 import static source_files.data.types.userTypes.UserRole.CUSTOMER;
 
 @Service
@@ -38,6 +39,7 @@ public class CustomerManager implements CustomerService {
                 );
         createCustomerRequest.setPassword(passwordEncoder.encode(createCustomerRequest.getPassword()));
         customerEntity.setAuthority(CUSTOMER);
+        customerEntity.setStatus(PENDING_VERIFYING);
         this.customerEntityService.create(customerEntity);
     }
 

@@ -28,7 +28,6 @@ public class SecurityConfig {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/api/auth/**",
-            "/api/v1/auth/**",
             "/swagger-ui.html"
     };
     private final JwtAuthFilter jwtAuthFilter;
@@ -76,6 +75,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/discounts/**").permitAll()
                         .requestMatchers("/api/v1/fuels/**").permitAll()
                         .requestMatchers("/api/v1/gearshifts/**").permitAll()
+                        .requestMatchers("/api/v1/vehicle-statuses**").permitAll()
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
 

@@ -20,7 +20,6 @@ public class BaseEntity {
     @Column(name = "id")
     private int id;
 
-
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
 

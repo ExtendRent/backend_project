@@ -14,6 +14,7 @@ import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
+import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.VehicleStatusEntityManager;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -21,6 +22,7 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.List;
 
+import static source_files.data.Status.DefaultVehicleStatus.IN_USE;
 import static source_files.data.types.itemTypes.ItemType.RENTAL;
 
 @Service
@@ -34,6 +36,8 @@ public class RentalManager implements RentalService {
     private final CustomerService customerService;
     private final DiscountEntityService discountEntityService;
     private final RentalBusinessRules rentalBusinessRules;
+
+    private final VehicleStatusEntityManager vehicleStatusManager;
 
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
@@ -59,11 +63,10 @@ public class RentalManager implements RentalService {
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
         rentalEntity.setItemType(RENTAL);
 
-        UpdateCarRequest updateCarRequest = this.modelMapperService.forResponse().map(
-                this.carService.getById(createRentalRequest.getCarEntityId()), UpdateCarRequest.class
-        );
+        UpdateCarRequest updateCarRequest =
+                carService.convertToUpdateRequest(createRentalRequest.getCarEntityId());
 
-        updateCarRequest.setAvailable(false);
+        updateCarRequest.setVehicleStatusEntityId(vehicleStatusManager.getByStatus(IN_USE.name()).getId());
         updateCarRequest.setAvailabilityDate(rentalEntity.getEndDate());
         rentalEntityService.create(rentalEntity);
         carService.update(updateCarRequest);

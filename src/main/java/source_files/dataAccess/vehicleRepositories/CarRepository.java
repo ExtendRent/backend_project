@@ -18,10 +18,10 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
             "(:startPrice IS NULL OR :startPrice <= c.rentalPrice) AND " +
             "(:endPrice IS NULL OR :endPrice >= c.rentalPrice) AND " +
             "(:isDeleted IS NULL OR :isDeleted = c.isDeleted) AND " +
-            "(:isAvailable IS NULL OR :isAvailable = c.isAvailable) AND " +
+            "(:statusId IS NULL OR :statusId = c.vehicleStatusEntity.id) AND " +
             "(:colorId IS NULL OR :colorId = c.colorEntity.id) AND " +
-            "(:colorId IS NULL OR :seat = c.seat) AND " +
-            "(:colorId IS NULL OR :luggage = c.luggage) AND " +
+            "(:seat IS NULL OR :seat = c.seat) AND " +
+            "(:luggage IS NULL OR :luggage = c.luggage) AND " +
             "(:modelId IS NULL OR :modelId = c.carModelEntity.id) AND " +
             "(:startYear IS NULL OR :startYear <= c.year) AND " +
             "(:endYear IS NULL OR :endYear >= c.year) AND " +
@@ -36,7 +36,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
             @Param("endPrice") Integer endPrice,
 
             @Param("isDeleted") Boolean isDeleted,
-            @Param("isAvailable") Boolean isAvailable,
+            @Param("statusId") Integer statusId,
 
             @Param("colorId") Integer colorId,
             @Param("seat") Integer seat,
@@ -56,7 +56,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
     List<CarEntity> findAllByIsDeleted(boolean isDeleted);
 
-    List<CarEntity> findAllByIsAvailable(boolean isAvailable);
+    List<CarEntity> findAllByVehicleStatusEntityId(Integer vehicleStatusId);
 
     List<CarEntity> findAllByColorEntity_Id(int id);
 

@@ -14,9 +14,12 @@ import source_files.data.models.baseEntities.Item;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "shift_types")
-public class ShiftTypeEntity extends Item {
+@Table(name = "vehicle_statuses")
+public class VehicleStatusEntity extends Item {
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "vehicle_status")
+    private String vehicleStatus;
 }

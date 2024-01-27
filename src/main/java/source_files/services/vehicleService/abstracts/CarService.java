@@ -21,7 +21,7 @@ public interface CarService {
 
     List<CarDTO> getAllFiltered(Integer customerID, LocalDate startDate, LocalDate endDate,
                                 Integer startPrice, Integer endPrice,
-                                Boolean isDeleted, Boolean isAvailable,
+                                Boolean isDeleted, Integer statusId,
                                 Integer colorId, Integer seat, Integer luggage, Integer modelId,
                                 Integer startYear, Integer endYear, Integer brandId,
                                 Integer fuelTypeID, Integer shiftTypeID);
@@ -30,7 +30,7 @@ public interface CarService {
 
     List<CarDTO> getAllByDeletedState(boolean isDeleted);
 
-    List<CarDTO> getAllByAvailableState(boolean isAvailable);
+    List<CarDTO> getAllByStatus(Integer statusId);
 
     List<CarDTO> getAllByColorId(int id);
 
@@ -47,5 +47,7 @@ public interface CarService {
     void delete(int id, boolean hardDelete);
 
     void softDelete(int id);
+
+    UpdateCarRequest convertToUpdateRequest(int id);
 
 }

@@ -53,7 +53,12 @@ public enum NotFoundExceptionType {
     FUEL_TYPE_NOT_FOUND(1027, "Fuel Type Not Found"),
     FUEL_TYPE_LIST_NOT_FOUND(1028, "Fuel Type List is Empty"),
     SHIFT_TYPE_NOT_FOUND(1029, "Shift Type Not Found"),
-    SHIFT_TYPE_LIST_NOT_FOUND(1030, "Shift Type List is Empty");
+    SHIFT_TYPE_LIST_NOT_FOUND(1030, "Shift Type List is Empty"),
+
+    VEHICLE_STATUS_NOT_FOUND(1031, "Vehicle Type Not Found"),
+
+    VEHICLE_STATUS_LIST_NOT_FOUND(1032, "Vehicle Type List is Empty");
+
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;

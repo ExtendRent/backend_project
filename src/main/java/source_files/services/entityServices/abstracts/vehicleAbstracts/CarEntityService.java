@@ -18,7 +18,7 @@ public interface CarEntityService {
 
     List<CarEntity> getAllByDeletedState(boolean isDeleted);
 
-    List<CarEntity> getAllByAvailability(boolean isAvailable);
+    List<CarEntity> getAllByStatus(Integer statusId);
 
     List<CarEntity> getAllByColorId(int id);
 
@@ -35,7 +35,7 @@ public interface CarEntityService {
     List<CarEntity> getAllFiltered(
             Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
-            Boolean isDeleted, Boolean isAvailable,
+            Boolean isDeleted, Integer statusId,
             Integer colorId, Integer seat, Integer luggage, Integer modelId,
             Integer startYear, Integer endYear, Integer brandId,
             Integer fuelTypeId, Integer shiftTypeId);

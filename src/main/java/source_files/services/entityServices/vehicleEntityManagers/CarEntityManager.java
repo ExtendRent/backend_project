@@ -46,8 +46,8 @@ public class CarEntityManager implements CarEntityService {
     }
 
     @Override
-    public List<CarEntity> getAllByAvailability(boolean isAvailable) {
-        return this.carRepository.findAllByIsAvailable(isAvailable);
+    public List<CarEntity> getAllByStatus(Integer statusId) {
+        return this.carRepository.findAllByVehicleStatusEntityId(statusId);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CarEntityManager implements CarEntityService {
     public List<CarEntity> getAllFiltered(
             Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
-            Boolean isDeleted, Boolean isAvailable,
+            Boolean isDeleted, Integer statusId,
             Integer colorId, Integer seat,
             Integer luggage, Integer modelId,
             Integer startYear, Integer endYear, Integer brandId,
@@ -93,7 +93,7 @@ public class CarEntityManager implements CarEntityService {
         return carRepository.findAllFiltered(
                 startDate, endDate,
                 startPrice, endPrice,
-                isDeleted, isAvailable,
+                isDeleted, statusId,
                 colorId, seat, luggage,
                 modelId, startYear,
                 endYear, brandId, fuelTypeId, shiftTypeId);

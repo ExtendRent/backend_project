@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import source_files.data.DTO.itemDTOs.BrandDTO;
-import source_files.data.Status.UserStatus;
+import source_files.data.Status.DefaultUserStatus;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -18,6 +18,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarMod
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
 import source_files.data.types.itemTypes.PaymentType;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
@@ -30,6 +31,7 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.*;
 
+import static source_files.data.Status.DefaultVehicleStatus.*;
 import static source_files.data.types.itemTypes.DrivingLicenseType.*;
 import static source_files.data.types.itemTypes.PaymentType.*;
 
@@ -60,6 +62,8 @@ public class SeedDataConfig implements CommandLineRunner {
     private final ShiftTypeService shiftTypeService;
 
     private final FuelTypeService fuelTypeService;
+
+    private final VehicleStatusService vehicleStatusService;
 
     @Override
     public void run(String... args) {
@@ -99,9 +103,9 @@ public class SeedDataConfig implements CommandLineRunner {
         } catch (DataNotFoundException e) {
             List<BrandDTO> brands = this.brandService.getAll();
             String[] carModels = {"A4", "M3", "ModelY", "Civic", "Corolla"};
-            for (BrandDTO brand : brands) {
-                carModelService.create(new CreateCarModelRequest(brand.getId(), carModels[brands.indexOf(brand)]));
-            }
+            brands.forEach(brand -> carModelService.create(
+                    new CreateCarModelRequest(brand.getId(), carModels[brands.indexOf(brand)]))
+            );
         }
 
         try {
@@ -117,8 +121,11 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             discountService.getAll();
         } catch (DataNotFoundException e) {
-            discountService.create(new CreateDiscountRequest("PAIR5", 20));
-            discountService.create(new CreateDiscountRequest("HOSGELDIN", 10));
+            HashMap<String, Integer> discounts = new LinkedHashMap<>();
+            discounts.put("DEFAULT", 10);
+            discounts.put("PAIR5", 20);
+            discounts.put("HOSGELDIN", 10);
+            discounts.forEach((name, percentage) -> discountService.create(new CreateDiscountRequest(name, percentage)));
         }
 
         try {
@@ -140,6 +147,21 @@ public class SeedDataConfig implements CommandLineRunner {
         }
 
         try {
+            vehicleStatusService.getAll();
+        } catch (DataNotFoundException e) {
+            HashMap<String, String> defaultVehicleStatuses = new LinkedHashMap<>();
+            defaultVehicleStatuses.put(AVAILABLE.name(), "Kiralanabilir");
+            defaultVehicleStatuses.put(IN_USE.name(), "Kullanımda");
+            defaultVehicleStatuses.put(MAINTENANCE.name(), "Bakımda");
+            defaultVehicleStatuses.put(UNAVAILABLE.name(), "Kullanım Dışı");
+            defaultVehicleStatuses.put(BOOKED.name(), "Rezerve");
+            defaultVehicleStatuses.put(DELETED.name(), "Sistem Dışı");
+            defaultVehicleStatuses.forEach((status, name) ->
+                    vehicleStatusService.create(new CreateVehicleStatusRequest(name, status)));
+        }
+
+
+        try {
             carService.getAll();
         } catch (DataNotFoundException e) {
 
@@ -152,6 +174,7 @@ public class SeedDataConfig implements CommandLineRunner {
                         .luggage(2).imagePaths(Collections.singletonList("https://mediaservice.audi.com/media/live/50900/fly1400x601n1/8yabdc/2023.png?wid=850"))
                         .fuelTypeEntityId(i).licensePlate("46kk35" + i)
                         .rentalPrice(100).shiftTypeEntityId(i)
+                        .vehicleStatusEntityId(1)
                         .expectedDrivingLicenseTypes(new ArrayList<>() {{
                             add(A);
                             add(B);
@@ -182,7 +205,6 @@ public class SeedDataConfig implements CommandLineRunner {
                         add(E);
                     }})
                     .imagePath("https://img.memurlar.net/galeri/4599/2cc5bb86-a578-e311-a7bb-14feb5cc13c9.jpg?width=800")
-                    .status(UserStatus.VERIFIED)
                     .build());
 
 
@@ -194,7 +216,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .password(passwordEncoder.encode("pass"))
                     .imagePath("https://avatars.githubusercontent.com/u/92371744?v=4")
                     .salary(10000.00)
-                    .status(UserStatus.VERIFIED)
+                    .status(DefaultUserStatus.VERIFIED)
                     .build());
         }
     }

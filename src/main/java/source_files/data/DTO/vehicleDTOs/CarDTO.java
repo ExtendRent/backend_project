@@ -1,22 +1,20 @@
 package source_files.data.DTO.vehicleDTOs;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 
 import java.time.LocalDate;
 import java.util.List;
 
-//@Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class CarDTO {
 
     int id;
+    String VehicleStatusEntityName;
     Boolean isLicenseTypeSuitable = true;
     String carModelEntityBrandEntityName;
     String carModelEntityName;
@@ -32,7 +30,6 @@ public class CarDTO {
     String licensePlate;
     int kilometer;
     List<String> imagesEntityImagePaths;
-    boolean isAvailable;
     LocalDate availabilityDate;
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }
