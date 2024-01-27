@@ -169,11 +169,11 @@ public class SeedDataConfig implements CommandLineRunner {
                 carService.create(CreateCarRequest.builder()
                         .carModelEntityId(i).brandEntityId(i)
                         .colorEntityId(i).carBodyTypeEntityId(i)
-                        .kilometer(10000).details("lorem ipsum")
+                        .kilometer(10000 - i*1000).details("lorem ipsum")
                         .seat(i + 3).year(2020 + i)
                         .luggage(2).imagePaths(Collections.singletonList("https://mediaservice.audi.com/media/live/50900/fly1400x601n1/8yabdc/2023.png?wid=850"))
                         .fuelTypeEntityId(i).licensePlate("46kk35" + i)
-                        .rentalPrice(100).shiftTypeEntityId(i)
+                        .rentalPrice(100 + i*100).shiftTypeEntityId(i)
                         .vehicleStatusEntityId(1)
                         .expectedDrivingLicenseTypes(new ArrayList<>() {{
                             add(A);
