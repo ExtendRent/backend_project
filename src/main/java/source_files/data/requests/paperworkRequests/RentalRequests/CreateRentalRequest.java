@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
-import source_files.data.requests.BaseRequest;
 
 import java.time.LocalDate;
 
@@ -17,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateRentalRequest implements BaseRequest {
+public class CreateRentalRequest {
 
     @Min(value = 1, message = "CustomerId must be greater than 0")
     @NotNull(message = "CustomerId cannot be null")

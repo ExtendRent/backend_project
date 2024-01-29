@@ -2,7 +2,6 @@ package source_files.data.requests.vehicleRequests.CarRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.requests.BaseRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 
 import java.time.LocalDate;
@@ -13,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UpdateCarRequest implements BaseRequest {
+public class UpdateCarRequest {
     @NotNull(message = "id null olamaz")
     int id;
 

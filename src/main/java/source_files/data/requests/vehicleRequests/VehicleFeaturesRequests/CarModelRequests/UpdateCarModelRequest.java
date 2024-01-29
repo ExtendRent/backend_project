@@ -11,7 +11,7 @@ import source_files.data.requests.BaseRequest;
 @Getter
 @Setter
 @Builder
-public class UpdateCarModelRequest implements BaseRequest {
+public class UpdateCarModelRequest extends BaseRequest {
 
     @NotNull(message = "id null olamaz")
     int carModelEntityId;

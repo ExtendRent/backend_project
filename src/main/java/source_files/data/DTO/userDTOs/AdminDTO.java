@@ -13,6 +13,5 @@ public class AdminDTO {
     String surname;
     String email;
     String phoneNumber;
-    String password;
     double salary;
 }

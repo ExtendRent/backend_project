@@ -27,6 +27,7 @@ public class ColorEntityManager implements ColorEntityService {
         return this.create(colorEntity);
     }
 
+
     @Override
     public ColorEntity getById(int id) {
         return this.colorRepository.findById(id)

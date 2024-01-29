@@ -11,6 +11,7 @@ import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.VehicleS
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.VehicleStatusEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.VehicleStatusService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,12 +28,10 @@ public class VehicleStatusManager implements VehicleStatusService {
 
     @Override
     public VehicleStatusDTO update(UpdateVehicleStatusRequest updateVehicleStatusRequest) {
-        return mapper.forResponse().map(
-                vehicleStatusEntityService.update(
-                        mapper.forRequest().map(updateVehicleStatusRequest, VehicleStatusEntity.class)
-                )
-                , VehicleStatusDTO.class
-        );
+        VehicleStatusEntity vehicleStatusEntity = vehicleStatusEntityService.getById(updateVehicleStatusRequest.getId());
+        vehicleStatusEntity.setName(updateVehicleStatusRequest.getName());
+        return mapper.forResponse().map(vehicleStatusEntityService.update(vehicleStatusEntity), VehicleStatusDTO.class);
+
     }
 
     @Override
@@ -66,6 +65,7 @@ public class VehicleStatusManager implements VehicleStatusService {
     public void softDelete(int id) {
         VehicleStatusEntity vehicleStatusEntity = this.vehicleStatusEntityService.getById(id);
         vehicleStatusEntity.setIsDeleted(true);
+        vehicleStatusEntity.setDeletedAt(LocalDateTime.now());
         this.vehicleStatusEntityService.update(vehicleStatusEntity);
     }
 }

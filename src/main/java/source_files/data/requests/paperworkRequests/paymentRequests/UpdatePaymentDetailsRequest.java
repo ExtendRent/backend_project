@@ -11,7 +11,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdatePaymentDetailsRequest implements BaseRequest {
+public class UpdatePaymentDetailsRequest extends BaseRequest {
 
     @NotNull
     private int id;

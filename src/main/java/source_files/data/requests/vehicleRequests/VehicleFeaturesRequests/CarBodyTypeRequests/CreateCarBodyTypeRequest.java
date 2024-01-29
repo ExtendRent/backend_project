@@ -14,7 +14,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateCarBodyTypeRequest implements BaseRequest {
+public class CreateCarBodyTypeRequest extends BaseRequest {
     @NotNull(message = "Body Type null olamaz")
     @NotBlank(message = "Body Type adı boş geçilemez")
     @Size(min = 2, message = "Body Type en az 2 karakter olmalıdır.")

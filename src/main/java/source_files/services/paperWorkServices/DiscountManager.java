@@ -11,6 +11,7 @@ import source_files.services.BusinessRules.paperWork.DiscountRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -61,6 +62,7 @@ public class DiscountManager implements DiscountService {
     public void softDelete(int id) {
         DiscountEntity discountCode = this.discountEntityService.getById(id);
         discountCode.setIsDeleted(true);
+        discountCode.setDeletedAt(LocalDateTime.now());
         this.discountEntityService.update(discountCode);
     }
 

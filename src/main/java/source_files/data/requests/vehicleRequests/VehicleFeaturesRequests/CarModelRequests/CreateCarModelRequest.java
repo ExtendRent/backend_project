@@ -13,7 +13,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateCarModelRequest implements BaseRequest {
+public class CreateCarModelRequest extends BaseRequest {
     @NotNull(message = "Marka null olamaz")
     int brandEntityId;
 

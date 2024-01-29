@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class CreateCarRequest implements BaseRequest {
+public class CreateCarRequest extends BaseRequest {
     @NotNull(message = "brandId null olamaz")
     @Min(1)
     int brandEntityId;

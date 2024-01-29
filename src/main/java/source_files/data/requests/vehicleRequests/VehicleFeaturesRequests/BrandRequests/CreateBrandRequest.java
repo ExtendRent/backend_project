@@ -14,7 +14,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateBrandRequest implements BaseRequest {
+public class CreateBrandRequest extends BaseRequest {
     @NotNull(message = "Marka null olamaz")
     @NotBlank(message = "Marka adı boş geçilemez")
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")

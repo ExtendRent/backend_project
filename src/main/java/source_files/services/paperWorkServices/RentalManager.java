@@ -20,6 +20,7 @@ import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static source_files.data.Status.DefaultVehicleStatus.IN_USE;
@@ -110,6 +111,7 @@ public class RentalManager implements RentalService {
     public void softDelete(int id) {
         RentalEntity rentalEntity = this.rentalEntityService.getById(id);
         rentalEntity.setIsDeleted(true);
+        rentalEntity.setDeletedAt(LocalDateTime.now());
         rentalEntityService.update(rentalEntity);
     }
 

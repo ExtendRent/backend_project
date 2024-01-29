@@ -12,7 +12,7 @@ import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBus
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +35,7 @@ public class ColorManager implements ColorService {
         colorEntity.setItemType(ItemType.COLOR);
 
         this.colorEntityService.create(colorEntity);
+
     }
 
     @Override
@@ -80,7 +81,7 @@ public class ColorManager implements ColorService {
     public void softDelete(int id) {
         ColorEntity colorEntity = this.colorEntityService.getById(id);
         colorEntity.setIsDeleted(true);
-        colorEntity.setDeletedAt(LocalDate.now());
+        colorEntity.setDeletedAt(LocalDateTime.now());
         this.colorEntityService.update(colorEntity);
     }
 

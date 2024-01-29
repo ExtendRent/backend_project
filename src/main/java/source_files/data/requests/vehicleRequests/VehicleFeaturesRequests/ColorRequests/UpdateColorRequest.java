@@ -14,7 +14,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateColorRequest implements BaseRequest {
+public class UpdateColorRequest extends BaseRequest {
 
     @NotNull(message = "id null olamaz")
     int id;

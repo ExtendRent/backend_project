@@ -1,10 +1,13 @@
 package source_files.servicesTests;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import source_files.data.DTO.Mappers.ModelMapperManager;
@@ -14,6 +17,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorR
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBusinessRules;
 import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.ColorEntityManager;
+import source_files.services.vehicleFeaturesServices.BrandManager;
 import source_files.services.vehicleFeaturesServices.ColorManager;
 
 import java.util.Arrays;
@@ -28,7 +32,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ColorServiceTests {
 
-    @InjectMocks
+
+
+
     private ColorManager colorManager;
 
     @Mock
@@ -39,6 +45,17 @@ public class ColorServiceTests {
 
     @Mock
     private ColorBusinessRules colorBusinessRules;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        colorManager = new ColorManager(colorEntityManager, modelMapperManager, colorBusinessRules);
+    }
+
+    @AfterEach
+    void tearDown() {
+
+    }
 
     @Test
     public void testCreate() {

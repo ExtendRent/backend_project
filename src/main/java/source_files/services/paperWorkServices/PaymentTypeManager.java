@@ -11,6 +11,7 @@ import source_files.services.BusinessRules.paperWork.PaymentBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static source_files.data.types.itemTypes.ItemType.PAYMENT_TYPE;
@@ -58,6 +59,7 @@ public class PaymentTypeManager implements PaymentTypeService {
     public void softDelete(int id) {
         PaymentTypeEntity paymentTypeEntity = this.paymentTypeEntityService.getById(id);
         paymentTypeEntity.setIsDeleted(true);
+        paymentTypeEntity.setDeletedAt(LocalDateTime.now());
         this.paymentTypeEntityService.create(paymentTypeEntity);
     }
 

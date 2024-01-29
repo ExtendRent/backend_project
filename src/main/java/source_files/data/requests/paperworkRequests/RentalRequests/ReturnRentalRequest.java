@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.requests.BaseRequest;
 
 import java.time.LocalDate;
 
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ReturnRentalRequest implements BaseRequest {
+public class ReturnRentalRequest {
 
     @NotBlank
     @NotNull(message = "return date cannot be null")

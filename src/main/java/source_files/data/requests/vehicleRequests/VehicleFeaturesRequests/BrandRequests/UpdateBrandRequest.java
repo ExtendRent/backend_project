@@ -8,13 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.requests.BaseRequest;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateBrandRequest implements BaseRequest {
+public class UpdateBrandRequest {
 
     @NotNull(message = "id null olamaz")
     int id;

@@ -1,4 +1,10 @@
 package source_files.data.DTO;
 
-public interface BaseDTO {
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+
+public class BaseDTO {
 }

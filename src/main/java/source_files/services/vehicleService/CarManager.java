@@ -15,6 +15,7 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -201,6 +202,7 @@ public class CarManager implements CarService {
         CarEntity carEntity = this.carEntityService.getById(id);
         carEntity.setIsDeleted(true);
         carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus("DELETED"));
+        carEntity.setDeletedAt(LocalDateTime.now());
         this.carEntityService.update(carEntity);
     }
 

@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.userTypes.UserRole;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class CreateCustomerRequest implements BaseRequest {
+public class CreateCustomerRequest extends BaseRequest {
 
     @NotNull(message = "Müşteri adı null olamaz")
     @NotBlank(message = "Müşteri adı boş geçilemez")
@@ -38,7 +39,6 @@ public class CreateCustomerRequest implements BaseRequest {
     String password;
 
     @NotNull(message = "Müşteri telefon numarası null olamaz")
-    @NotBlank(message = "Müşteri telefon numarası boş geçilemez")
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")
     String phoneNumber;
@@ -52,4 +52,5 @@ public class CreateCustomerRequest implements BaseRequest {
     List<DrivingLicenseType> drivingLicenseTypes;
 
     String imagePath;
+    private UserRole authority = UserRole.CUSTOMER;
 }

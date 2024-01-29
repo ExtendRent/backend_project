@@ -11,6 +11,7 @@ import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.BrandBus
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,6 +82,7 @@ public class BrandManager implements BrandService {
     public void softDelete(int id) {
         BrandEntity brandEntity = this.brandEntityService.getById(id);
         brandEntity.setIsDeleted(true);
+        brandEntity.setDeletedAt(LocalDateTime.now());
         this.brandEntityService.update(brandEntity);
     }
 }

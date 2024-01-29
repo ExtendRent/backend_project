@@ -11,7 +11,7 @@ import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ShiftTyp
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ShiftTypeEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ShiftTypeService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -68,7 +68,7 @@ public class ShiftTypeManager implements ShiftTypeService {
     public void softDelete(int id) {
         ShiftTypeEntity shiftTypeEntity = this.shiftTypeEntityService.getById(id);
         shiftTypeEntity.setIsDeleted(true);
-        shiftTypeEntity.setDeletedAt(LocalDate.now());
+        shiftTypeEntity.setDeletedAt(LocalDateTime.now());
         this.shiftTypeEntityService.update(shiftTypeEntity);
     }
 }

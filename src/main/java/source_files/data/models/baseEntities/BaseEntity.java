@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -24,21 +24,21 @@ public class BaseEntity {
     private Boolean isDeleted = false;
 
     @Column(name = "deleted_at")
-    private LocalDate deletedAt;
+    private LocalDateTime deletedAt;
     @Column(name = "last_modified")
-    private LocalDate lastModified;
+    private LocalDateTime lastModified;
 
     @Column(name = "created_date", updatable = false)
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 
     @PrePersist //classlar oluşmadan çalısır
     private void beforeCreate() {
-        createdDate = LocalDate.now();
+        createdDate = LocalDateTime.now();
     }
 
     @PreUpdate //classlar oluşmadan çalısır
     private void beforeUpdate() {
-        lastModified = LocalDate.now();
+        lastModified = LocalDateTime.now();
     }
 
 

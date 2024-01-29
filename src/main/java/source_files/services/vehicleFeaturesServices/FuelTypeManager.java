@@ -11,7 +11,7 @@ import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.FuelType
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.FuelTypeEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.FuelTypeService;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,7 +68,7 @@ public class FuelTypeManager implements FuelTypeService {
     public void softDelete(int id) {
         FuelTypeEntity fuelTypeEntity = this.fuelTypeEntityService.getById(id);
         fuelTypeEntity.setIsDeleted(true);
-        fuelTypeEntity.setDeletedAt(LocalDate.now());
+        fuelTypeEntity.setDeletedAt(LocalDateTime.now());
         this.fuelTypeEntityService.update(fuelTypeEntity);
     }
 }

@@ -12,6 +12,7 @@ import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarBodyT
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarBodyTypeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,6 +74,7 @@ public class CarBodyTypeManager implements CarBodyTypeService {
     public void softDelete(int id) {
         CarBodyTypeEntity carBodyTypeEntity = this.carBodyTypeEntityService.getById(id);
         carBodyTypeEntity.setIsDeleted(true);
+        carBodyTypeEntity.setDeletedAt(LocalDateTime.now());
         this.carBodyTypeEntityService.update(carBodyTypeEntity);
     }
 }
