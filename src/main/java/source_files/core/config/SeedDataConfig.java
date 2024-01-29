@@ -219,10 +219,10 @@ public class SeedDataConfig implements CommandLineRunner {
                     .build());
 
             employeeService.create(CreateEmployeeRequest.builder()
-                    .name("admin")
-                    .surname("admin")
-                    .phoneNumber("22222222222")
-                    .emailAddress("admin@gmail.com")
+                    .name("employee")
+                    .surname("employee")
+                    .phoneNumber("33333333333")
+                    .emailAddress("employee@gmail.com")
                     .password("pass")
                     .imagePath("https://avatars.githubusercontent.com/u/92371744?v=4")
                     .salary(10000.00)
