@@ -13,6 +13,7 @@ import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRu
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
 import source_files.services.userServices.abstracts.CustomerService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class CustomerManager implements CustomerService {
                 .map(customerBusinessRules.checkCreateCustomerRequest(
                         customerBusinessRules.fixCreateCustomerRequest(createCustomerRequest)), CustomerEntity.class
                 );
-        createCustomerRequest.setPassword(passwordEncoder.encode(createCustomerRequest.getPassword()));
+        customerEntity.setPassword(passwordEncoder.encode(customerEntity.getPassword()));
         customerEntity.setAuthority(CUSTOMER);
         customerEntity.setStatus(PENDING_VERIFYING);
         this.customerEntityService.create(customerEntity);
@@ -99,6 +100,7 @@ public class CustomerManager implements CustomerService {
     public void softDelete(int id) {
         CustomerEntity customerEntity = this.customerEntityService.getById(id);
         customerEntity.setIsDeleted(true);
+        customerEntity.setDeletedAt(LocalDateTime.now());
         customerRepository.save(customerEntity);
     }
 

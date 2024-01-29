@@ -12,6 +12,7 @@ import source_files.services.BusinessRules.userBusinessRuless.EmployeeBusinessRu
 import source_files.services.entityServices.abstracts.userAbstract.EmployeeEntityService;
 import source_files.services.userServices.abstracts.EmployeeService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,6 +96,7 @@ public class EmployeeManager implements EmployeeService {
     public void softDelete(int id) {
         EmployeeEntity employeeEntity = employeeEntityService.getById(id);
         employeeEntity.setIsDeleted(true);
+        employeeEntity.setDeletedAt(LocalDateTime.now());
         this.employeeEntityService.update(employeeEntity);
     }
 }

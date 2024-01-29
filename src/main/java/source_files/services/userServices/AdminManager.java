@@ -12,6 +12,7 @@ import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules
 import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
 import source_files.services.userServices.abstracts.AdminService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +29,12 @@ public class AdminManager implements AdminService {
 
     @Override
     public void create(CreateAdminRequest createAdminRequest) {
-        createAdminRequest.setPassword(passwordEncoder.encode(createAdminRequest.getPassword()));
+
         AdminEntity adminEntity = modelMapperService.forRequest()
                 .map(adminBusinessRules.checkCreateAdminRequest
                         (adminBusinessRules.fixCreateAdminRequest(createAdminRequest)), AdminEntity.class);
 
+        adminEntity.setPassword(passwordEncoder.encode(createAdminRequest.getPassword()));
         adminEntity.setAuthority(ADMIN);
         this.adminEntityService.create(adminEntity);
     }
@@ -100,6 +102,7 @@ public class AdminManager implements AdminService {
     public void softDelete(int id) {
         AdminEntity adminEntity = adminEntityService.getById(id);
         adminEntity.setIsDeleted(true);
+        adminEntity.setDeletedAt(LocalDateTime.now());
         this.adminEntityService.update(adminEntity);
     }
 
