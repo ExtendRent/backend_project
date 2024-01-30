@@ -24,37 +24,35 @@ import java.time.LocalDate;
 public class RentalEntity extends Item {
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customerEntity;
-
     @ManyToOne
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "car_id", nullable = false)
     private CarEntity carEntity;
-
     @Column(name = "start_kilometer") //EndKilometer ve ReturnDate null bırakılmalıdır.
     private Integer startKilometer = null;
-
     @Column(name = "end_kilometer")
     private Integer endKilometer = null;
-
     @Column(name = "start_date")
-
     private LocalDate startDate;
-
     @Column(name = "end_date")
     private LocalDate endDate;
-
     @ManyToOne
     @JoinColumn(name = "discount_id")
     private DiscountEntity discountEntity;
-
     @OneToOne(mappedBy = "rentalEntity"
             , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private PaymentDetailsEntity paymentDetailsEntity;
-
     @Column(name = "return_date")
     private LocalDate returnDate = null;
-
     @Column(name = "is_active")
     private boolean isActive = true;
+
+    @PreRemove
+    private void preRemove() {
+        if (carEntity != null) {
+            carEntity.getRentalList().remove(this);
+        }
+    }
+
 }

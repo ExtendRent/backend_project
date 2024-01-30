@@ -39,6 +39,7 @@ public class CreateCustomerRequest extends BaseRequest {
     String password;
 
     @NotNull(message = "Müşteri telefon numarası null olamaz")
+    @NotBlank(message = "Çalışan telefon numarası boş geçilemez")
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")
     String phoneNumber;

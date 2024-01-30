@@ -2,8 +2,6 @@ package source_files.services.entityServices.abstracts.vehicleAbstracts;
 
 import source_files.data.models.vehicleEntities.CarEntity;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 public interface CarEntityService {
@@ -24,8 +22,6 @@ public interface CarEntityService {
 
     List<CarEntity> getAllByRentalPriceBetween(double startPrice, double endPrice);
 
-    List<CarEntity> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate);
-
     List<CarEntity> getAllByModelId(int id);
 
     List<CarEntity> getAllByYearBetween(int year1, int year2);
@@ -33,7 +29,6 @@ public interface CarEntityService {
     List<CarEntity> getAllByBrandId(int id);
 
     List<CarEntity> getAllFiltered(
-            Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
             Boolean isDeleted, Integer statusId,
             Integer colorId, Integer seat, Integer luggage, Integer modelId,

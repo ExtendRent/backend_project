@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.VehicleStatusDTO;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.VehicleStatusService;
@@ -41,7 +42,7 @@ public class VehicleStatusesController {
 
     @GetMapping("/byStatus/{status}")
     public ResponseEntity<TResponse<VehicleStatusDTO>> getByStatus(
-            @RequestParam(name = "status", required = false) String status) {
+            @RequestParam(name = "status", required = false) DefaultVehicleStatus status) {
         return new ResponseEntity<>(TResponse.<VehicleStatusDTO>tResponseBuilder()
                 .response(this.vehicleStatusService.getByStatus(status))
                 .build(), HttpStatus.OK

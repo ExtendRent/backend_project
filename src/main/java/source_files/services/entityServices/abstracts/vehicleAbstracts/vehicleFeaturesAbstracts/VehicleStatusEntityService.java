@@ -1,5 +1,6 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface VehicleStatusEntityService {
 
     List<VehicleStatusEntity> getAll();
 
-    VehicleStatusEntity getByStatus(String status);
+    VehicleStatusEntity getByStatus(DefaultVehicleStatus status);
 
     void delete(VehicleStatusEntity vehicleStatusEntity);
 }

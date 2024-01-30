@@ -7,6 +7,7 @@ import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalR
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RentalService {
@@ -28,4 +29,6 @@ public interface RentalService {
     List<RentalDTO> getAll();
 
     List<RentalDTO> getAllByDeletedState(boolean isDeleted);
+
+    List<RentalDTO> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate);
 }

@@ -5,16 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import source_files.data.models.vehicleEntities.CarEntity;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
 
     @Query("SELECT c FROM CarEntity c WHERE " +
-            "(:startDate IS NULL OR c.availabilityDate <= :startDate) AND " +
-            "(:endDate IS NULL OR c.availabilityDate < :endDate) AND " +
             "(:startPrice IS NULL OR :startPrice <= c.rentalPrice) AND " +
             "(:endPrice IS NULL OR :endPrice >= c.rentalPrice) AND " +
             "(:isDeleted IS NULL OR :isDeleted = c.isDeleted) AND " +
@@ -29,8 +25,6 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
             "(:fuelTypeId IS NULL OR :fuelTypeId = c.fuelTypeEntity.id) AND " +
             "(:shiftTypeId IS NULL OR :shiftTypeId = c.shiftTypeEntity.id)")
     List<CarEntity> findAllFiltered(
-            @Param("startDate") Date startDate,
-            @Param("endDate") Date endDate,
 
             @Param("startPrice") Integer startPrice,
             @Param("endPrice") Integer endPrice,
@@ -61,8 +55,6 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
     List<CarEntity> findAllByColorEntity_Id(int id);
 
     List<CarEntity> findAllByRentalPriceBetween(double startPrice, double endPrice);
-
-    List<CarEntity> findAllByAvailabilityDateBetween(LocalDate startDate, LocalDate endDate);
 
     List<CarEntity> findAllByCarModelEntity_Id(int id);
 

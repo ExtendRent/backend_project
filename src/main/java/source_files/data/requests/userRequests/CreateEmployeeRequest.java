@@ -2,7 +2,6 @@ package source_files.data.requests.userRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.Status.DefaultUserStatus;
 import source_files.data.requests.BaseRequest;
 import source_files.data.types.userTypes.UserRole;
 
@@ -36,12 +35,12 @@ public class CreateEmployeeRequest extends BaseRequest {
     private String password;
 
     @NotNull(message = "telefon numarası null olamaz")
+    @NotBlank(message = "Çalışan telefon numarası boş geçilemez")
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")
     private String phoneNumber;
 
     @NotNull(message = "maaş null olamaz")
-    @NotBlank(message = "maaş boş geçilemez")
     @Min(0)
     private Double salary;
 

@@ -10,4 +10,5 @@ public class PaymentTypeDTO {
     int id;
     String name;
     PaymentType paymentType;
+    boolean isActive;
 }

@@ -1,7 +1,5 @@
 package source_files.data.requests.paperworkRequests.paymentRequests;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -23,8 +21,8 @@ public class CreatePaymentTypeRequest {
     private String paymentTypeEntityName;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private PaymentType paymentType;
+    @Pattern(regexp = "^[A-Z-_]+$", message = "Ödeme tipi sadece büyük harflerden ve boşluksuz olmalıdır.")
+    private PaymentType paymentTypeEntityPaymentType;
 
     private boolean isActive;
 }

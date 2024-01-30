@@ -7,10 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.baseEntities.Vehicle;
+import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,6 +41,9 @@ public class CarEntity extends Vehicle {
             , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private ImagesEntity imagesEntity;
 
+    @Column(name = "rentals_id")
+    @OneToMany(mappedBy = "carEntity", cascade = CascadeType.PERSIST)
+    private List<RentalEntity> rentalList;
 
     //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş
 
@@ -59,7 +65,6 @@ public class CarEntity extends Vehicle {
                 .colorEntityName(this.getColorEntity().getName())
                 .fuelTypeEntityName(this.getFuelTypeEntity().getName())
                 .shiftTypeEntityName(this.getShiftTypeEntity().getName())
-                .availabilityDate(this.getAvailabilityDate())
                 .build();
     }
 
@@ -81,7 +86,6 @@ public class CarEntity extends Vehicle {
                 .colorEntityId(this.getColorEntity().getId())
                 .fuelTypeEntityId(this.getFuelTypeEntity().getId())
                 .shiftTypeEntityId(this.getShiftTypeEntity().getId())
-                .availabilityDate(this.getAvailabilityDate())
                 .build();
     }
 

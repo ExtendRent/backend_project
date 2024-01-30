@@ -3,7 +3,6 @@ package source_files.data.DTO.vehicleDTOs;
 import lombok.*;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -30,6 +29,5 @@ public class CarDTO {
     String licensePlate;
     int kilometer;
     List<String> imagesEntityImagePaths;
-    LocalDate availabilityDate;
     List<DrivingLicenseType> expectedDrivingLicenseTypes;
 }

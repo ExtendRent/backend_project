@@ -1,13 +1,11 @@
 package source_files.data.models.vehicleEntities.vehicleFeatures;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.models.baseEntities.Item;
 
 @Getter
@@ -22,5 +20,6 @@ public class VehicleStatusEntity extends Item {
     private String name;
 
     @Column(name = "vehicle_status")
-    private String vehicleStatus;
+    @Enumerated(EnumType.STRING)
+    private DefaultVehicleStatus vehicleStatus;
 }

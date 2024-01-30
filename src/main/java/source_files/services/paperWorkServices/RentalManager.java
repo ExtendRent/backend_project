@@ -6,6 +6,7 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
+import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
@@ -20,6 +21,7 @@ import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -36,14 +38,14 @@ public class RentalManager implements RentalService {
     private final SysPaymentDetailsService sysPaymentDetailsService;
     private final CustomerService customerService;
     private final DiscountEntityService discountEntityService;
-    private final RentalBusinessRules rentalBusinessRules;
-
+    private final RentalBusinessRules rules;
     private final VehicleStatusEntityManager vehicleStatusManager;
+
 
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
 
-        return this.convertToShowRentalResponse(showRentalRequest);
+        return convertToShowRentalResponse(showRentalRequest);
     }
 
     @Override
@@ -51,14 +53,14 @@ public class RentalManager implements RentalService {
         // indirim işlemleri sonucu totalPrice hesaplama
 
         RentalEntity rentalEntity = modelMapperService.forRequest()
-                .map(rentalBusinessRules.checkCreateRentalRequest(
-                                rentalBusinessRules.checkCreateRentalRequest(createRentalRequest))
+                .map(rules.checkCreateRentalRequest(
+                                rules.checkCreateRentalRequest(createRentalRequest))
                         , RentalEntity.class);
 
         rentalEntity.setPaymentDetailsEntity(
-                this.sysPaymentDetailsService.getById(createRentalRequest.getPaymentDetailsDTO().getId())
+                sysPaymentDetailsService.getById(createRentalRequest.getPaymentDetailsDTO().getId())
         );
-        rentalEntity.setDiscountEntity(this.discountEntityService
+        rentalEntity.setDiscountEntity(discountEntityService
                 .getByDiscountCode(createRentalRequest.getDiscountCode())
         );
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
@@ -67,8 +69,7 @@ public class RentalManager implements RentalService {
         UpdateCarRequest updateCarRequest =
                 carService.convertToUpdateRequest(createRentalRequest.getCarEntityId());
 
-        updateCarRequest.setVehicleStatusEntityId(vehicleStatusManager.getByStatus(IN_USE.name()).getId());
-        updateCarRequest.setAvailabilityDate(rentalEntity.getEndDate());
+        updateCarRequest.setVehicleStatusEntityId(vehicleStatusManager.getByStatus(IN_USE).getId());
         rentalEntityService.create(rentalEntity);
         carService.update(updateCarRequest);
     }
@@ -77,15 +78,21 @@ public class RentalManager implements RentalService {
     public RentalDTO returnCar(ReturnRentalRequest returnRentalRequest) {
         // ceza işlemleri , indirim işlemleri iptali kontrol edilecek sonuçta da totalPrice güncelleme
 
-        RentalEntity rentalEntity = this.rentalEntityService.getById(returnRentalRequest.getRentalEntityId());
+        RentalEntity rentalEntity = rentalEntityService.getById(returnRentalRequest.getRentalEntityId());
 
-        rentalEntity.setPaymentDetailsEntity(this.sysPaymentDetailsService.update(
-                this.rentalBusinessRules.createUpdatePaymentDetailsRequest(returnRentalRequest)));
+        rentalEntity.setPaymentDetailsEntity(sysPaymentDetailsService.update(
+                rules.createUpdatePaymentDetailsRequest(returnRentalRequest)));
 
         rentalEntity.setActive(false);
-        rentalEntity.getCarEntity().setKilometer(rentalEntity.getEndKilometer());
-        this.carService.update(this.modelMapperService.forResponse().map(rentalEntity.getCarEntity(), UpdateCarRequest.class));
-        return this.modelMapperService.forResponse().map(this.rentalEntityService.update(rentalEntity), RentalDTO.class);
+
+        if (rentalEntity.getCarEntity() != null) {
+            CarEntity carEntity = rentalEntity.getCarEntity();
+            carEntity.setKilometer(rentalEntity.getEndKilometer());
+            carEntity.getRentalList().remove(rentalEntity);
+            carService.update(carEntity.convertToUpdateRequest());
+        }
+
+        return modelMapperService.forResponse().map(rentalEntityService.update(rentalEntity), RentalDTO.class);
     }
 
     @Override
@@ -95,21 +102,21 @@ public class RentalManager implements RentalService {
 
     @Override
     public RentalDTO getById(int id) {
-        return this.modelMapperService.forResponse().map(rentalEntityService.getById(id), RentalDTO.class);
+        return modelMapperService.forResponse().map(rentalEntityService.getById(id), RentalDTO.class);
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            this.rentalEntityService.delete(this.rentalEntityService.getById(id));
+            rentalEntityService.delete(rentalEntityService.getById(id));
         } else {
-            this.softDelete(id);
+            softDelete(id);
         }
     }
 
     @Override
     public void softDelete(int id) {
-        RentalEntity rentalEntity = this.rentalEntityService.getById(id);
+        RentalEntity rentalEntity = rentalEntityService.getById(id);
         rentalEntity.setIsDeleted(true);
         rentalEntity.setDeletedAt(LocalDateTime.now());
         rentalEntityService.update(rentalEntity);
@@ -117,27 +124,33 @@ public class RentalManager implements RentalService {
 
     @Override
     public List<RentalDTO> getAll() {
-        return this.rentalEntityService.getAll().stream()
+        return rentalEntityService.getAll().stream()
                 .map(rentalEntity -> modelMapperService.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override
     public List<RentalDTO> getAllByDeletedState(boolean isDeleted) {
-        return this.rentalEntityService.getAllByDeletedState(isDeleted).stream()
+        return rentalEntityService.getAllByDeletedState(isDeleted).stream()
                 .map(rentalEntity -> modelMapperService.forResponse()
                         .map(rentalEntity, RentalDTO.class)).toList();
+    }
+
+    @Override //Tarihler arasında çakışan ve aktif olan rental kayıtları.
+    public List<RentalDTO> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
+        return rentalEntityService.getAllOverlappingRentals(startDate, endDate).stream().map(rentalEntity ->
+                modelMapperService.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
 
     public ShowRentalResponse convertToShowRentalResponse(ShowRentalRequest showRentalRequest) {
 
-        ShowRentalResponse showRentalResponse = this.modelMapperService.forResponse()
-                .map(this.rentalBusinessRules.checkShowRentalRequest(showRentalRequest), ShowRentalResponse.class
-                );
-
-        showRentalResponse.setCarDTO(carService.getById(showRentalRequest.getCarEntityId()));
-        showRentalResponse.setCustomerDTO(customerService.getById(showRentalRequest.getCustomerEntityId()));
-        showRentalResponse.setAmount(this.rentalBusinessRules.calculateAmount(showRentalRequest));
-        return showRentalResponse;
+        return ShowRentalResponse.builder()
+                .amount(rules.calculateAmount(showRentalRequest))
+                .customerDTO(customerService.getById(showRentalRequest.getCustomerEntityId()))
+                .carDTO(carService.getById(showRentalRequest.getCarEntityId()))
+                .discountCode(showRentalRequest.getDiscountCode())
+                .startDate(showRentalRequest.getStartDate())
+                .endDate(showRentalRequest.getEndDate())
+                .build();
     }
 }

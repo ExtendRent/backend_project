@@ -13,7 +13,6 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEnt
 import source_files.data.types.itemTypes.DrivingLicenseType;
 import source_files.data.types.itemTypes.VehicleType;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -56,8 +55,8 @@ public class Vehicle extends BaseEntity {
     @JoinColumn(name = "vehicle_status_id")
     private VehicleStatusEntity vehicleStatusEntity;
 
-    @Column(name = "availability_date")
-    private LocalDate availabilityDate = null;
+    @Column(name = "is_available")
+    private boolean isAvailable;
 
     @Column(name = "expected_driving_license_types")
     @Enumerated(EnumType.STRING)

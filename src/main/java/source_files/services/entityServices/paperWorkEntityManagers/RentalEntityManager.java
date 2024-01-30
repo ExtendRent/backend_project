@@ -7,6 +7,7 @@ import source_files.dataAccess.paperWorkRepositories.RentalRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
@@ -50,5 +51,8 @@ public class RentalEntityManager implements RentalEntityService {
         return this.rentalRepository.findAllByIsDeleted(isDeleted);
     }
 
+    public List<RentalEntity> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
+        return rentalRepository.findOverlappingRentals(startDate, endDate);
+    }
 
 }

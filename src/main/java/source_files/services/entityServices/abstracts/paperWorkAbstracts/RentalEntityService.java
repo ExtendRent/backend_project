@@ -2,6 +2,7 @@ package source_files.services.entityServices.abstracts.paperWorkAbstracts;
 
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RentalEntityService {
@@ -17,4 +18,6 @@ public interface RentalEntityService {
     List<RentalEntity> getAll();
 
     List<RentalEntity> getAllByDeletedState(boolean isDeleted);
+
+    List<RentalEntity> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate);
 }

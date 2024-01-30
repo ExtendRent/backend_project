@@ -4,7 +4,6 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import source_files.data.types.itemTypes.DrivingLicenseType;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -27,6 +26,7 @@ public class UpdateCarRequest {
     @NotNull(message = "carBodyTypeId null olamaz")
     @Min(1)
     int carBodyTypeEntityId;
+
     @NotNull(message = "colorId null olamaz")
     @Min(1)
     int colorEntityId;
@@ -80,5 +80,5 @@ public class UpdateCarRequest {
     @Min(1)
     int vehicleStatusEntityId;
 
-    LocalDate availabilityDate;
+    boolean isAvailable;
 }

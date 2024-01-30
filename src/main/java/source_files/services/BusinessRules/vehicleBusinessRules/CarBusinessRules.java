@@ -19,6 +19,7 @@ import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFe
 import source_files.services.userServices.abstracts.CustomerService;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -73,8 +74,11 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     }
 
     public void checkDates(LocalDate startDate, LocalDate endDate) {
-        this.checkEndDate(startDate, endDate);
         this.checkTotalRentalDays(startDate, endDate);
+    }
+
+    public LocalDate fixStartDate(LocalDate startDate) {
+        return this.setStartDate(startDate);
     }
 
     //----------------------------METHODS--------------------------------
@@ -120,18 +124,24 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         }
     }
 
-    private void checkEndDate(LocalDate startDate, LocalDate endDate) {
 
-        if (endDate.isBefore(startDate) && endDate.isEqual(startDate)) {
-            throw new ValidationException(
-                    VALIDATION_EXCEPTION, "Başlangıç tarihi ile biriş tarihi arasında en az bir gün olmalıdır.");
+    private LocalDate setStartDate(LocalDate startDate) {
+        if (startDate == null && (LocalTime.now().isAfter(LocalTime.of(17, 0)))) {
+            startDate = LocalDate.now().plusDays(1);
+        } else {
+            startDate = LocalDate.now();
         }
+        return startDate;
     }
 
     private void checkTotalRentalDays(LocalDate startDate, LocalDate endDate) {
-
-        if ((int) ChronoUnit.DAYS.between(startDate, endDate) > 25) {
-            throw new ValidationException(VALIDATION_EXCEPTION, "Kiralama tarihi maksimum 25 gün olabilir. Lütfen tarih aralığınızı buna göre düzenleyiniz.");
+        if (endDate != null) {
+            if (startDate.isAfter(endDate)) {
+                throw new ValidationException(VALIDATION_EXCEPTION, "Başlangıç tarihi teslim tarihinden sonra olamaz");
+            } else if ((int) ChronoUnit.DAYS.between(startDate, endDate) > 25) {
+                throw new ValidationException(VALIDATION_EXCEPTION,
+                        "Kiralama aralığı maksimum 25 gün olabilir. Lütfen tarih aralığınızı buna göre düzenleyiniz.");
+            }
         }
     }
 

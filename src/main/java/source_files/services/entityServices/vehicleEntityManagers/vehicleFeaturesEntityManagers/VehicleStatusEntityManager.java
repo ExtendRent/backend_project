@@ -2,6 +2,7 @@ package source_files.services.entityServices.vehicleEntityManagers.vehicleFeatur
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
 import source_files.dataAccess.vehicleFeaturesRespositories.VehicleStatusRepository;
 import source_files.exception.DataNotFoundException;
@@ -39,7 +40,7 @@ public class VehicleStatusEntityManager implements VehicleStatusEntityService {
     }
 
     @Override
-    public VehicleStatusEntity getByStatus(String status) {
+    public VehicleStatusEntity getByStatus(DefaultVehicleStatus status) {
         return vehicleStatusRepository.findByVehicleStatus(status)
                 .orElseThrow(() -> new DataNotFoundException(VEHICLE_STATUS_NOT_FOUND, "Araç durumu bulunamadı."));
     }

@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import source_files.data.DTO.itemDTOs.BrandDTO;
-import source_files.data.Status.DefaultUserStatus;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -72,9 +72,9 @@ public class SeedDataConfig implements CommandLineRunner {
             paymentTypeService.getAll();
         } catch (DataNotFoundException e) {
             HashMap<PaymentType, String> paymentTypes = new LinkedHashMap<>();
-            paymentTypes.put(CREDIT_CARD, "Kredi Kartı");
-            paymentTypes.put(CASH, "Ofiste Ödeme");
-            paymentTypes.put(BANK_MONEY_TRANSFER, "Havale");
+            paymentTypes.put(CREDIT_CARD, CREDIT_CARD.getLabel());
+            paymentTypes.put(CASH, CASH.getLabel());
+            paymentTypes.put(BANK_MONEY_TRANSFER, BANK_MONEY_TRANSFER.getLabel());
 
             for (PaymentType paymentType : paymentTypes.keySet()) {
                 paymentTypeService.create(new CreatePaymentTypeRequest(paymentTypes.get(paymentType), paymentType, true));
@@ -150,13 +150,13 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             vehicleStatusService.getAll();
         } catch (DataNotFoundException e) {
-            HashMap<String, String> defaultVehicleStatuses = new LinkedHashMap<>();
-            defaultVehicleStatuses.put(AVAILABLE.name(), "Kiralanabilir");
-            defaultVehicleStatuses.put(IN_USE.name(), "Kullanımda");
-            defaultVehicleStatuses.put(MAINTENANCE.name(), "Bakımda");
-            defaultVehicleStatuses.put(UNAVAILABLE.name(), "Kullanım Dışı");
-            defaultVehicleStatuses.put(BOOKED.name(), "Rezerve");
-            defaultVehicleStatuses.put(DELETED.name(), "Sistem Dışı");
+            HashMap<DefaultVehicleStatus, String> defaultVehicleStatuses = new LinkedHashMap<>();
+            defaultVehicleStatuses.put(AVAILABLE, AVAILABLE.getLabel());
+            defaultVehicleStatuses.put(IN_USE, IN_USE.getLabel());
+            defaultVehicleStatuses.put(MAINTENANCE, MAINTENANCE.getLabel());
+            defaultVehicleStatuses.put(UNAVAILABLE, UNAVAILABLE.getLabel());
+            defaultVehicleStatuses.put(BOOKED, BOOKED.getLabel());
+            defaultVehicleStatuses.put(DELETED, DELETED.getLabel());
             defaultVehicleStatuses.forEach((status, name) ->
                     vehicleStatusService.create(new CreateVehicleStatusRequest(name, status)));
         }
@@ -176,6 +176,7 @@ public class SeedDataConfig implements CommandLineRunner {
                         .fuelTypeEntityId(i).licensePlate("46kk35" + i)
                         .rentalPrice(100 + i * 100).shiftTypeEntityId(i)
                         .vehicleStatusEntityId(1)
+                        .isAvailable(true)
                         .expectedDrivingLicenseTypes(new ArrayList<>() {{
                             add(A);
                             add(B);

@@ -24,6 +24,7 @@ public class CreateCarRequest extends BaseRequest {
     @NotNull(message = "carBodyTypeId null olamaz")
     @Min(1)
     int carBodyTypeEntityId;
+
     @NotNull(message = "colorId null olamaz")
     @Min(1)
     int colorEntityId;
@@ -77,4 +78,7 @@ public class CreateCarRequest extends BaseRequest {
     @NotNull(message = "vehicleStatusId null olamaz")
     @Min(1)
     int vehicleStatusEntityId;
+
+    @NotNull
+    boolean isAvailable;
 }

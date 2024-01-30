@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.VehicleStatusDTO;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
@@ -48,7 +49,7 @@ public class VehicleStatusManager implements VehicleStatusService {
     }
 
     @Override
-    public VehicleStatusDTO getByStatus(String status) {
+    public VehicleStatusDTO getByStatus(DefaultVehicleStatus status) {
         return mapper.forResponse().map(vehicleStatusEntityService.getByStatus(status), VehicleStatusDTO.class);
     }
 

@@ -1,6 +1,7 @@
 package source_files.services.vehicleFeaturesServices.abstracts;
 
 import source_files.data.DTO.itemDTOs.VehicleStatusDTO;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
 
@@ -15,7 +16,7 @@ public interface VehicleStatusService {
 
     List<VehicleStatusDTO> getAll();
 
-    VehicleStatusDTO getByStatus(String status);
+    VehicleStatusDTO getByStatus(DefaultVehicleStatus status);
 
     void delete(int id, boolean hardDelete);
 

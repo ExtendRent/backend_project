@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.Status.DefaultVehicleStatus;
 
 @Getter
 @Setter
@@ -19,6 +20,7 @@ public class CreateVehicleStatusRequest {
     @Size(min = 2, message = "Araç durumu ismi en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "Araç durumu ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
+
     @Pattern(regexp = "^[A-Z-_]+$", message = "Araç durumu tipi sadece büyük harflerden ve boşluksuz olmalıdır.")
-    String vehicleStatus;
+    DefaultVehicleStatus vehicleStatus;
 }

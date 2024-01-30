@@ -7,8 +7,6 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_DATA_NOT_FOUND;
@@ -18,6 +16,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_DA
 public class CarEntityManager implements CarEntityService {
 
     private final CarRepository carRepository;
+
 
     @Override
     public void create(CarEntity carEntity) {
@@ -60,10 +59,6 @@ public class CarEntityManager implements CarEntityService {
         return this.carRepository.findAllByRentalPriceBetween(startPrice, endPrice);
     }
 
-    @Override
-    public List<CarEntity> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate) {
-        return this.carRepository.findAllByAvailabilityDateBetween(startDate, endDate);
-    }
 
     @Override
     public List<CarEntity> getAllByModelId(int id) {
@@ -82,7 +77,6 @@ public class CarEntityManager implements CarEntityService {
 
     @Override
     public List<CarEntity> getAllFiltered(
-            Date startDate, Date endDate,
             Integer startPrice, Integer endPrice,
             Boolean isDeleted, Integer statusId,
             Integer colorId, Integer seat,
@@ -91,7 +85,6 @@ public class CarEntityManager implements CarEntityService {
             Integer fuelTypeId, Integer shiftTypeId) {
 
         return carRepository.findAllFiltered(
-                startDate, endDate,
                 startPrice, endPrice,
                 isDeleted, statusId,
                 colorId, seat, luggage,
