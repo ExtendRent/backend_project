@@ -12,6 +12,7 @@ import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarModelEntityService;
@@ -31,6 +32,8 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 @Service
 public class CarBusinessRules implements BaseBusinessRulesService {
     private final CarRepository carRepository;
+
+    private final CarEntityService carEntityService;
     private final CarModelEntityService carModelEntityService;
     private final ColorEntityService colorEntityService;
 
@@ -64,12 +67,14 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     }
 
     public UpdateCarRequest checkUpdateCarRequest(UpdateCarRequest updateCarRequest) {
-        this.checkLicensePlateAndIdNot(updateCarRequest.getLicensePlate(), updateCarRequest.getId());
+        if (!updateCarRequest.getLicensePlate().equals(
+                carEntityService.getById(updateCarRequest.getId()).getLicensePlate())) {
+            this.checkLicensePlate(updateCarRequest.getLicensePlate());
+        }
         this.checkModel(updateCarRequest.getCarModelEntityId());
         this.checkColor(updateCarRequest.getColorEntityId());
         this.checkBodyType(updateCarRequest.getCarBodyTypeEntityId());
         this.checkBrand(updateCarRequest.getBrandEntityId());
-        this.checkLicensePlate(updateCarRequest.getLicensePlate());
         return updateCarRequest;
     }
 
@@ -113,9 +118,12 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
 
     private void checkLicensePlate(String licensePlate) {
+
         if (this.carRepository.existsByLicensePlate(licensePlate)) {
             throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
         }
+
+
     }
 
     private void checkLicensePlateAndIdNot(String licensePlate, int id) {

@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.types.itemTypes.PaymentType;
+import source_files.data.types.itemTypes.DefaultPaymentType;
 
 @Getter
 @Setter
@@ -22,7 +22,7 @@ public class CreatePaymentTypeRequest {
 
     @NotNull
     @Pattern(regexp = "^[A-Z-_]+$", message = "Ödeme tipi sadece büyük harflerden ve boşluksuz olmalıdır.")
-    private PaymentType paymentTypeEntityPaymentType;
+    private DefaultPaymentType paymentType;
 
     private boolean isActive;
 }

@@ -212,14 +212,14 @@ public class CarManager implements CarService {
 
     private List<CarEntity> filterAvailableCars(List<CarEntity> cars, LocalDate startDate, LocalDate endDate) {
         return cars.stream()
-                .filter(car -> isCarAvailableBetween(car, startDate, endDate))
+                .filter(car -> isCarAvailableBetween(car.getId(), startDate, endDate))
                 .collect(Collectors.toList());
     }
 
 
-    private boolean isCarAvailableBetween(CarEntity car, LocalDate startDate, LocalDate endDate) {
+    public boolean isCarAvailableBetween(int carId, LocalDate startDate, LocalDate endDate) {
+        CarEntity car = carEntityService.getById(carId);
         List<RentalEntity> rentalList = car.getRentalList();
-
         if (car.isAvailable()) {
             for (RentalEntity rental : rentalList) {
                 LocalDate rentalStartDate = rental.getStartDate();

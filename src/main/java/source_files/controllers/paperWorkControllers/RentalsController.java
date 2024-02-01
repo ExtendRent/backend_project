@@ -8,16 +8,21 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
+import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.data.responses.TResponse;
+import source_files.exception.PaymentException;
+import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentService;
-import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 
 import java.util.List;
+
+import static source_files.exception.exceptionTypes.PaymentExceptionType.NOT_SUPPORTED_PAYMENT_TYPE;
+import static source_files.exception.exceptionTypes.PaymentExceptionType.PAYMENT_TYPE_IS_NOT_ACTIVE;
 
 @RestController
 @RequestMapping("api/v1/rentals")
@@ -25,25 +30,31 @@ import java.util.List;
 @Validated
 @CrossOrigin
 public class RentalsController {
-    PaymentTypeService paymentTypeService;
+    PaymentTypeEntityService paymentTypeService;
     private RentalService rentalService;
     private PaymentService paymentService;
 
     @PostMapping
     public ResponseEntity<Void> createRental(
             @Valid @RequestBody CreateRentalRequest createRentalRequest) {
+        PaymentTypeEntity paymentTypeEntity = paymentTypeService.getById(createRentalRequest.getPaymentTypeId());
 
-        switch (this.paymentTypeService.getById(createRentalRequest.getPaymentTypeId()).getPaymentType()) {
-            case CREDIT_CARD:
-                this.rentalService.create(this.paymentService.payWithCreditCard(createRentalRequest));
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            case CASH:
-                break;
-            case BANK_MONEY_TRANSFER:
-                break;
+        if (paymentTypeEntity.isActive()) {
+            switch (paymentTypeEntity.getPaymentType()) {
+                case CREDIT_CARD:
+                    this.rentalService.create(this.paymentService.payWithCreditCard(createRentalRequest));
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                case CASH:
+                    break;
+                case BANK_MONEY_TRANSFER:
+                    break;
+            }
+            throw new PaymentException(NOT_SUPPORTED_PAYMENT_TYPE);
+        } else {
+            throw new PaymentException(PAYMENT_TYPE_IS_NOT_ACTIVE);
         }
-        throw new RuntimeException("Payment type not supported");
     }
+
 
     @PostMapping("/showRental")
     public ResponseEntity<TResponse<ShowRentalResponse>> showRental(@Valid @RequestBody ShowRentalRequest showRentalRequest) {

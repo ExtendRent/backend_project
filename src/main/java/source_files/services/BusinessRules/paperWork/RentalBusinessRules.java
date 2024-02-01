@@ -132,7 +132,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         }
     }
 
-    private boolean checkDiscountCodeIsNull(String discountCode) {
+    public boolean checkDiscountCodeIsNull(String discountCode) {
         return discountCode != null && !discountCode.equals("");
     }
 

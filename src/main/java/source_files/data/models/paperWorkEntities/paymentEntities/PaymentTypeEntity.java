@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.Item;
-import source_files.data.types.itemTypes.PaymentType;
+import source_files.data.types.itemTypes.DefaultPaymentType;
 
 @Getter
 @Setter
@@ -19,9 +19,9 @@ public class PaymentTypeEntity extends Item {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "paymentType")
+    @Column(name = "payment_type")
     @Enumerated(EnumType.STRING)
-    private PaymentType paymentType;
+    private DefaultPaymentType paymentType;
 
     @Column(name = "is_active")
     private boolean isActive = true;

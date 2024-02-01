@@ -19,7 +19,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorR
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
-import source_files.data.types.itemTypes.PaymentType;
+import source_files.data.types.itemTypes.DefaultPaymentType;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
@@ -34,7 +34,7 @@ import java.util.*;
 
 import static source_files.data.Status.DefaultVehicleStatus.*;
 import static source_files.data.types.itemTypes.DrivingLicenseType.*;
-import static source_files.data.types.itemTypes.PaymentType.*;
+import static source_files.data.types.itemTypes.DefaultPaymentType.*;
 
 @Component
 @RequiredArgsConstructor
@@ -71,13 +71,13 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             paymentTypeService.getAll();
         } catch (DataNotFoundException e) {
-            HashMap<PaymentType, String> paymentTypes = new LinkedHashMap<>();
+            HashMap<DefaultPaymentType, String> paymentTypes = new LinkedHashMap<>();
             paymentTypes.put(CREDIT_CARD, CREDIT_CARD.getLabel());
             paymentTypes.put(CASH, CASH.getLabel());
             paymentTypes.put(BANK_MONEY_TRANSFER, BANK_MONEY_TRANSFER.getLabel());
 
-            for (PaymentType paymentType : paymentTypes.keySet()) {
-                paymentTypeService.create(new CreatePaymentTypeRequest(paymentTypes.get(paymentType), paymentType, true));
+            for (DefaultPaymentType defaultPaymentType : paymentTypes.keySet()) {
+                paymentTypeService.create(new CreatePaymentTypeRequest(paymentTypes.get(defaultPaymentType), defaultPaymentType, true));
             }
         }
 

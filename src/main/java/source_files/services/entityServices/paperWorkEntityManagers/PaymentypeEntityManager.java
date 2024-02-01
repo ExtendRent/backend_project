@@ -3,7 +3,7 @@ package source_files.services.entityServices.paperWorkEntityManagers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
-import source_files.data.types.itemTypes.PaymentType;
+import source_files.data.types.itemTypes.DefaultPaymentType;
 import source_files.dataAccess.paperWorkRepositories.PaymentTypeEntityRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
@@ -40,8 +40,8 @@ public class PaymentypeEntityManager implements PaymentTypeEntityService {
     }
 
     @Override
-    public PaymentTypeEntity getByPaymentType(PaymentType paymentType) {
-        return this.paymentTypeEntityRepository.findByPaymentType(paymentType);
+    public PaymentTypeEntity getByPaymentType(DefaultPaymentType defaultPaymentType) {
+        return this.paymentTypeEntityRepository.findByPaymentType(defaultPaymentType);
     }
 
     @Override

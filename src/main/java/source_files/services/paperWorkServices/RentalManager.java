@@ -12,6 +12,7 @@ import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalR
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
+import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
@@ -27,13 +28,14 @@ import java.util.List;
 
 import static source_files.data.Status.DefaultVehicleStatus.IN_USE;
 import static source_files.data.types.itemTypes.ItemType.RENTAL;
+import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @Service
 @RequiredArgsConstructor
 public class RentalManager implements RentalService {
 
     private final RentalEntityService rentalEntityService;
-    private final ModelMapperService modelMapperService;
+    private final ModelMapperService mapper;
     private final CarService carService;
     private final SysPaymentDetailsService sysPaymentDetailsService;
     private final CustomerService customerService;
@@ -44,25 +46,33 @@ public class RentalManager implements RentalService {
 
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
-
-        return convertToShowRentalResponse(showRentalRequest);
+        if (carService.isCarAvailableBetween(showRentalRequest.getCarEntityId(),
+                showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
+        ) {
+            return convertToShowRentalResponse(rules.checkShowRentalRequest(showRentalRequest));
+        }
+        throw new ValidationException(VALIDATION_EXCEPTION, "Araç bu tarihler arasında kiralanamaz");
     }
 
     @Override
     public void create(CreateRentalRequest createRentalRequest) {
         // indirim işlemleri sonucu totalPrice hesaplama
 
-        RentalEntity rentalEntity = modelMapperService.forRequest()
+        RentalEntity rentalEntity = mapper.forRequest()
                 .map(rules.checkCreateRentalRequest(
-                                rules.checkCreateRentalRequest(createRentalRequest))
+                                rules.fixCreateRentalRequest(createRentalRequest))
                         , RentalEntity.class);
+        String discountCode = createRentalRequest.getDiscountCode();
+        if (rules.checkDiscountCodeIsNull(discountCode)) {
+            rentalEntity.setDiscountEntity(discountEntityService
+                    .getByDiscountCode(discountCode)
+            );
+        }
 
         rentalEntity.setPaymentDetailsEntity(
                 sysPaymentDetailsService.getById(createRentalRequest.getPaymentDetailsDTO().getId())
         );
-        rentalEntity.setDiscountEntity(discountEntityService
-                .getByDiscountCode(createRentalRequest.getDiscountCode())
-        );
+
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
         rentalEntity.setItemType(RENTAL);
 
@@ -70,8 +80,9 @@ public class RentalManager implements RentalService {
                 carService.convertToUpdateRequest(createRentalRequest.getCarEntityId());
 
         updateCarRequest.setVehicleStatusEntityId(vehicleStatusManager.getByStatus(IN_USE).getId());
-        rentalEntityService.create(rentalEntity);
         carService.update(updateCarRequest);
+        rentalEntityService.create(rentalEntity);
+
     }
 
     @Override
@@ -92,7 +103,7 @@ public class RentalManager implements RentalService {
             carService.update(carEntity.convertToUpdateRequest());
         }
 
-        return modelMapperService.forResponse().map(rentalEntityService.update(rentalEntity), RentalDTO.class);
+        return mapper.forResponse().map(rentalEntityService.update(rentalEntity), RentalDTO.class);
     }
 
     @Override
@@ -102,7 +113,7 @@ public class RentalManager implements RentalService {
 
     @Override
     public RentalDTO getById(int id) {
-        return modelMapperService.forResponse().map(rentalEntityService.getById(id), RentalDTO.class);
+        return mapper.forResponse().map(rentalEntityService.getById(id), RentalDTO.class);
     }
 
     @Override
@@ -125,20 +136,20 @@ public class RentalManager implements RentalService {
     @Override
     public List<RentalDTO> getAll() {
         return rentalEntityService.getAll().stream()
-                .map(rentalEntity -> modelMapperService.forResponse().map(rentalEntity, RentalDTO.class)).toList();
+                .map(rentalEntity -> mapper.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override
     public List<RentalDTO> getAllByDeletedState(boolean isDeleted) {
         return rentalEntityService.getAllByDeletedState(isDeleted).stream()
-                .map(rentalEntity -> modelMapperService.forResponse()
+                .map(rentalEntity -> mapper.forResponse()
                         .map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override //Tarihler arasında çakışan ve aktif olan rental kayıtları.
     public List<RentalDTO> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
         return rentalEntityService.getAllOverlappingRentals(startDate, endDate).stream().map(rentalEntity ->
-                modelMapperService.forResponse().map(rentalEntity, RentalDTO.class)).toList();
+                mapper.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
 
