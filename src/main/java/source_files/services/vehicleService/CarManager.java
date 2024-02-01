@@ -225,7 +225,8 @@ public class CarManager implements CarService {
                 LocalDate rentalStartDate = rental.getStartDate();
                 LocalDate rentalEndDate = rental.getEndDate();
                 //TODO küçük bir bug var
-                if (!(endDate.isAfter(rentalStartDate) || startDate.isBefore(rentalEndDate))) {
+                if (!(startDate.isAfter(rentalEndDate)
+                        || endDate.isBefore(rentalStartDate))) {
                     return false;
                 }
             }

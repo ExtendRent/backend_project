@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.data.Status.DefaultUserStatus.PENDING_VERIFYING;
 import static source_files.data.types.userTypes.UserRole.EMPLOYEE;
 
 @Service
@@ -34,6 +35,7 @@ public class EmployeeManager implements EmployeeService {
                         (employeeBusinessRules.fixCreateEmployeeRequest(createEmployeeRequest)), EmployeeEntity.class);
         employeeEntity.setPassword(passwordEncoder.encode(createEmployeeRequest.getPassword()));
         employeeEntity.setAuthority(EMPLOYEE);
+        employeeEntity.setStatus(PENDING_VERIFYING);
         this.employeeEntityService.create(employeeEntity);
     }
 

@@ -27,7 +27,7 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
     private final EmployeeService employeeService;
 
     private final CustomerService customerService;
-    private final ModelMapperService modelMapperService;
+    private final ModelMapperService mapper;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final UserEntityService userEntityService;
@@ -38,14 +38,13 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
     public void signUp(SignUpReqeust request) {
         switch (request.getAuthority()) {
             case ADMIN:
-                this.adminService.create(this.modelMapperService.forRequest().map(request, CreateAdminRequest.class));
+                this.adminService.create(this.mapper.forRequest().map(request, CreateAdminRequest.class));
             case EMPLOYEE:
-                this.employeeService.create(this.modelMapperService.forRequest().map(request, CreateEmployeeRequest.class));
+                this.employeeService.create(this.mapper.forRequest().map(request, CreateEmployeeRequest.class));
             case CUSTOMER:
-                this.customerService.create(this.modelMapperService.forRequest().map(request, CreateCustomerRequest.class));
+                this.customerService.create(this.mapper.forRequest().map(request, CreateCustomerRequest.class));
                 emailService.sendOtp(request.getEmailAddress());
         }
-
     }
 
     public JwtToken signIn(SignInRequest request) {

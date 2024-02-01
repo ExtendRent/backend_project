@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.data.Status.DefaultUserStatus.VERIFIED;
 import static source_files.data.types.userTypes.UserRole.ADMIN;
 
 @Service
@@ -36,6 +37,7 @@ public class AdminManager implements AdminService {
 
         adminEntity.setPassword(passwordEncoder.encode(createAdminRequest.getPassword()));
         adminEntity.setAuthority(ADMIN);
+        adminEntity.setStatus(VERIFIED);
         this.adminEntityService.create(adminEntity);
     }
 

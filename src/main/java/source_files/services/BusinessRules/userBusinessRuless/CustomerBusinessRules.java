@@ -77,7 +77,7 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByPhoneNumber(String phoneNumber) {
         if (customerRepository.existsByPhoneNumber(phoneNumber)) {
-            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number already exist");
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
         }
     }
 
