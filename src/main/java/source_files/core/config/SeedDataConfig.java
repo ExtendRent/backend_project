@@ -33,8 +33,8 @@ import source_files.services.vehicleService.abstracts.CarService;
 import java.util.*;
 
 import static source_files.data.Status.DefaultVehicleStatus.*;
-import static source_files.data.types.itemTypes.DrivingLicenseType.*;
 import static source_files.data.types.itemTypes.DefaultPaymentType.*;
+import static source_files.data.types.itemTypes.DrivingLicenseType.*;
 
 @Component
 @RequiredArgsConstructor

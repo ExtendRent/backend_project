@@ -17,6 +17,7 @@ import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.VehicleStatusEntityManager;
+import source_files.services.paperWorkServices.abstracts.PaymentService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -43,6 +44,8 @@ public class RentalManager implements RentalService {
     private final RentalBusinessRules rules;
     private final VehicleStatusEntityManager vehicleStatusManager;
 
+    private final PaymentService paymentService;
+
 
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
@@ -56,22 +59,20 @@ public class RentalManager implements RentalService {
 
     @Override
     public void create(CreateRentalRequest createRentalRequest) {
-        // indirim işlemleri sonucu totalPrice hesaplama
 
         RentalEntity rentalEntity = mapper.forRequest()
                 .map(rules.checkCreateRentalRequest(
                                 rules.fixCreateRentalRequest(createRentalRequest))
                         , RentalEntity.class);
+
+
         String discountCode = createRentalRequest.getDiscountCode();
+
         if (rules.checkDiscountCodeIsNull(discountCode)) {
             rentalEntity.setDiscountEntity(discountEntityService
                     .getByDiscountCode(discountCode)
             );
         }
-
-        rentalEntity.setPaymentDetailsEntity(
-                sysPaymentDetailsService.getById(createRentalRequest.getPaymentDetailsDTO().getId())
-        );
 
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
         rentalEntity.setItemType(RENTAL);
@@ -81,7 +82,14 @@ public class RentalManager implements RentalService {
 
         updateCarRequest.setVehicleStatusEntityId(vehicleStatusManager.getByStatus(IN_USE).getId());
         carService.update(updateCarRequest);
+
         rentalEntityService.create(rentalEntity);
+        try {
+            rentalEntity.setPaymentDetailsEntity(paymentService.pay(createRentalRequest, rentalEntity));
+            this.rentalEntityService.update(rentalEntity);
+        } catch (Exception e) {
+            this.softDelete(rentalEntity.getId());
+        }
 
     }
 
@@ -108,7 +116,10 @@ public class RentalManager implements RentalService {
 
     @Override
     public RentalDTO update(UpdateRentalRequest updateRentalRequest) {
-        return null;
+        return
+                mapper.forResponse().map(
+                        rentalEntityService.update(mapper.forRequest()
+                                .map(updateRentalRequest, RentalEntity.class)), RentalDTO.class);
     }
 
     @Override
@@ -153,8 +164,8 @@ public class RentalManager implements RentalService {
     }
 
 
-    public ShowRentalResponse convertToShowRentalResponse(ShowRentalRequest showRentalRequest) {
-
+    private ShowRentalResponse convertToShowRentalResponse(ShowRentalRequest showRentalRequest) {
+        // indirim işlemleri sonucu totalPrice hesaplama
         return ShowRentalResponse.builder()
                 .amount(rules.calculateAmount(showRentalRequest))
                 .customerDTO(customerService.getById(showRentalRequest.getCustomerEntityId()))
@@ -164,4 +175,16 @@ public class RentalManager implements RentalService {
                 .endDate(showRentalRequest.getEndDate())
                 .build();
     }
+
+    private UpdateRentalRequest convertToUpdateRequest(RentalEntity rentalEntity) {
+        return UpdateRentalRequest.builder()
+                .id(rentalEntity.getId())
+                .carEntityId(rentalEntity.getCarEntity().getId())
+                .customerEntityId(rentalEntity.getCustomerEntity().getId())
+                .startKilometer(rentalEntity.getStartKilometer())
+                .endDate(rentalEntity.getEndDate())
+                .startDate(rentalEntity.getStartDate())
+                .build();
+    }
+
 }

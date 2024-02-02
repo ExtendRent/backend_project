@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 public class RentalDTO {
     int id;
+    int customerEntityId;
     String customerEntityName;
     String customerEntitySurname;
 
@@ -26,5 +27,4 @@ public class RentalDTO {
 
     double paymentDetailsEntityAmount;
     String paymentDetailsEntityPaymentTypeEntityPaymentTypeName;
-    LocalDate createdDate;
 }

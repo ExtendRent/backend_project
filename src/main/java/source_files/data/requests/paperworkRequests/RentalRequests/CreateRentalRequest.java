@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 
 import java.time.LocalDate;
@@ -35,14 +34,12 @@ public class CreateRentalRequest {
     private LocalDate endDate;
 
     @NotNull(message = "PaymentTypeId cannot be null")
-    private Integer paymentTypeId;
+    private int paymentTypeId;
 
     @NotNull(message = "DiscountCode cannot be null")
     private Double amount;
 
     private String discountCode;
-
-    private PaymentDetailsDTO paymentDetailsDTO;
 
     private CreditCardInformation creditCardInformation;
 }
