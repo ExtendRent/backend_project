@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.Status.DefaultVehicleStatus.DELETED;
+import static source_files.data.Status.DefaultVehicleStatus.*;
 import static source_files.data.types.itemTypes.VehicleType.CAR;
 
 @Service
@@ -33,7 +33,6 @@ public class CarManager implements CarService {
 
     @Override
     public void create(CreateCarRequest createCarRequest) {
-        //TODO:DTO DAN ENTİTYLER NULL GELİYOR TEKRAR KONTROL ET
 
         //CarEntity carEntity = mapper.forRequest().map(createCarRequest, CarEntity.class); //ESKİ KOD !
 
@@ -57,14 +56,14 @@ public class CarManager implements CarService {
 
     @Override
     public CarDTO update(UpdateCarRequest updateCarRequest) {
-
-        return mapToDTO(
-                carEntityService.update(mapper.forRequest().map(
-                        rules.checkUpdateCarRequest(
-                                rules.fixUpdateCarRequest(updateCarRequest)
-                        ), CarEntity.class
-                ))
+        CarEntity carEntity = mapper.forRequest().map(
+                rules.checkUpdateCarRequest(
+                        rules.fixUpdateCarRequest(updateCarRequest)
+                ), CarEntity.class
         );
+        carEntity.setVehicleType(CAR);
+        return
+                this.mapToDTO(carEntityService.update(carEntity));
 
     }
 
@@ -149,8 +148,6 @@ public class CarManager implements CarService {
 
     @Override
     public List<CarDTO> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate) {
-        startDate = rules.fixStartDate(startDate);
-        rules.checkDates(startDate, endDate);
 
         List<CarEntity> allCars = carEntityService.getAll();
         List<CarEntity> availableCars = filterAvailableCars(allCars, startDate, endDate);
@@ -178,14 +175,14 @@ public class CarManager implements CarService {
                 endYear, brandId,
                 fuelTypeId, shiftTypeId);
 
-        //Burası null oluiştuğu için kriterlere uygun araç yok hatası !!!!!
-        List<CarDTO> availableCarsDTO = getAllByAvailabilityBetween(startDate, endDate);
-
         List<CarDTO> filteredCarsDTO = filteredCars.stream().map(this::mapToDTO).toList();
 
-        return rules.checkDataList(filteredCarsDTO.stream()
-                .filter(availableCarsDTO::contains).toList()
-        ).stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        List<CarDTO> result = filteredCarsDTO.stream()
+                .filter(carDTO -> isCarAvailableBetween(carDTO.getId(), endDate, startDate))
+                .toList();
+
+        return rules.checkDataList(result)
+                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
@@ -208,6 +205,24 @@ public class CarManager implements CarService {
         carEntityService.update(carEntity);
     }
 
+    @Override
+    public void addRental(int carId, RentalEntity rentalEntity) {
+        CarEntity carEntity = carEntityService.getById(carId);
+        carEntity.getRentalList().add(rentalEntity);
+        carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus(BOOKED));
+        carEntityService.update(carEntity);
+    }
+
+    @Override
+    public void removeRental(int carId, RentalEntity rentalEntity) {
+        CarEntity carEntity = carEntityService.getById(carId);
+        carEntity.getRentalList().remove(rentalEntity);
+        if (carEntity.getRentalList().isEmpty()) {
+            carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus(AVAILABLE));
+        }
+        carEntityService.update(carEntity);
+    }
+
     //---------------------------------Local Methods------------------------------------------------------
 
     private List<CarEntity> filterAvailableCars(List<CarEntity> cars, LocalDate startDate, LocalDate endDate) {
@@ -218,13 +233,15 @@ public class CarManager implements CarService {
 
 
     public boolean isCarAvailableBetween(int carId, LocalDate startDate, LocalDate endDate) {
+        startDate = rules.fixStartDate(startDate);
+        rules.checkDates(startDate, endDate);
+
         CarEntity car = carEntityService.getById(carId);
         List<RentalEntity> rentalList = car.getRentalList();
         if (car.isAvailable()) {
             for (RentalEntity rental : rentalList) {
                 LocalDate rentalStartDate = rental.getStartDate();
                 LocalDate rentalEndDate = rental.getEndDate();
-                //TODO küçük bir bug var
                 if (!(startDate.isAfter(rentalEndDate)
                         || endDate.isBefore(rentalStartDate))) {
                     return false;

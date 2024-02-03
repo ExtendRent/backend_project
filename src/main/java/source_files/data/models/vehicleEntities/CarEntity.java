@@ -41,8 +41,7 @@ public class CarEntity extends Vehicle {
             , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
     private ImagesEntity imagesEntity;
 
-    @Column(name = "rentals_id")
-    @OneToMany(mappedBy = "carEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "carEntity")
     private List<RentalEntity> rentalList;
 
     //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş

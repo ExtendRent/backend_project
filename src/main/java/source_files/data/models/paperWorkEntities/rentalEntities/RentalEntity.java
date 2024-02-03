@@ -29,14 +29,19 @@ public class RentalEntity extends Item {
     @ManyToOne
     @JoinColumn(name = "car_id", nullable = false)
     private CarEntity carEntity;
+
     @Column(name = "start_kilometer") //EndKilometer ve ReturnDate null bırakılmalıdır.
     private Integer startKilometer = null;
+
     @Column(name = "end_kilometer")
     private Integer endKilometer = null;
+
     @Column(name = "start_date")
     private LocalDate startDate;
+
     @Column(name = "end_date")
     private LocalDate endDate;
+
     @ManyToOne
     @JoinColumn(name = "discount_id")
     private DiscountEntity discountEntity;

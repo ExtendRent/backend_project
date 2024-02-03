@@ -21,6 +21,7 @@ public class ImagesEntity extends Item {
     @OneToOne
     private CarEntity carEntity;
 
-    @Column(name = "image_paths", length = 1024)
+    //TODO linkler sığmıyor.
+    @Column(name = "image_paths")
     private List<String> imagePaths;
 }

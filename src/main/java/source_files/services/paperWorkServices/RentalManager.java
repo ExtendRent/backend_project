@@ -6,17 +6,14 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
-import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
-import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.VehicleStatusEntityManager;
 import source_files.services.paperWorkServices.abstracts.PaymentService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 import source_files.services.systemServices.SysPaymentDetailsService;
@@ -27,7 +24,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static source_files.data.Status.DefaultVehicleStatus.IN_USE;
 import static source_files.data.types.itemTypes.ItemType.RENTAL;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
@@ -42,8 +38,6 @@ public class RentalManager implements RentalService {
     private final CustomerService customerService;
     private final DiscountEntityService discountEntityService;
     private final RentalBusinessRules rules;
-    private final VehicleStatusEntityManager vehicleStatusManager;
-
     private final PaymentService paymentService;
 
 
@@ -77,20 +71,15 @@ public class RentalManager implements RentalService {
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
         rentalEntity.setItemType(RENTAL);
 
-        UpdateCarRequest updateCarRequest =
-                carService.convertToUpdateRequest(createRentalRequest.getCarEntityId());
-
-        updateCarRequest.setVehicleStatusEntityId(vehicleStatusManager.getByStatus(IN_USE).getId());
-        carService.update(updateCarRequest);
 
         rentalEntityService.create(rentalEntity);
         try {
             rentalEntity.setPaymentDetailsEntity(paymentService.pay(createRentalRequest, rentalEntity));
             this.rentalEntityService.update(rentalEntity);
+            carService.addRental(createRentalRequest.getCarEntityId(), rentalEntity);
         } catch (Exception e) {
             this.softDelete(rentalEntity.getId());
         }
-
     }
 
     @Override
@@ -105,10 +94,7 @@ public class RentalManager implements RentalService {
         rentalEntity.setActive(false);
 
         if (rentalEntity.getCarEntity() != null) {
-            CarEntity carEntity = rentalEntity.getCarEntity();
-            carEntity.setKilometer(rentalEntity.getEndKilometer());
-            carEntity.getRentalList().remove(rentalEntity);
-            carService.update(carEntity.convertToUpdateRequest());
+            carService.removeRental(rentalEntity.getCarEntity().getId(), rentalEntity);
         }
 
         return mapper.forResponse().map(rentalEntityService.update(rentalEntity), RentalDTO.class);
