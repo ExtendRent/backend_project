@@ -134,10 +134,11 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
 
     private LocalDate setStartDate(LocalDate startDate) {
-        if (startDate == null && (LocalTime.now().isAfter(LocalTime.of(17, 0)))) {
+        if (startDate == null) {
             startDate = LocalDate.now().plusDays(1);
-        } else {
-            startDate = LocalDate.now();
+            if((LocalTime.now().isAfter(LocalTime.of(17, 0)))){
+                startDate = startDate.plusDays(1);
+            }
         }
         return startDate;
     }
