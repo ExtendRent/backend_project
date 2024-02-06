@@ -1,7 +1,7 @@
 package source_files.data.DTO.vehicleDTOs;
 
 import lombok.*;
-import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 
 import java.util.List;
 
@@ -29,5 +29,5 @@ public class CarDTO {
     String licensePlate;
     int kilometer;
     List<String> imagesEntityImagePaths;
-    List<DrivingLicenseType> expectedDrivingLicenseTypes;
+    List<DefaultDrivingLicenseType> expectedDefaultDrivingLicenseTypes;
 }

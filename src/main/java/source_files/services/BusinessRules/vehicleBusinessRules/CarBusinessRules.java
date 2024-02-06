@@ -6,7 +6,7 @@ import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
-import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
@@ -104,8 +104,8 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     private boolean isDrivingLicenseTypeSuitable(CarEntity car, Integer customerId) {
         if (customerId != null) {
             CustomerDTO customer = customerService.getById(customerId);
-            List<DrivingLicenseType> customerLicenseTypes = customer.getDrivingLicenseTypes();
-            List<DrivingLicenseType> expectedLicenseTypes = car.getExpectedDrivingLicenseTypes();
+            List<DefaultDrivingLicenseType> customerLicenseTypes = customer.getDefaultDrivingLicenseTypes();
+            List<DefaultDrivingLicenseType> expectedLicenseTypes = car.getExpectedDefaultDrivingLicenseTypes();
             return customerLicenseTypes.stream().anyMatch(expectedLicenseTypes::contains);
         }
         return true; // Giriş yapmadan araç listeleyebilmek için customerId null verilebilmelidir.
@@ -136,7 +136,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     private LocalDate setStartDate(LocalDate startDate) {
         if (startDate == null) {
             startDate = LocalDate.now().plusDays(1);
-            if((LocalTime.now().isAfter(LocalTime.of(17, 0)))){
+            if ((LocalTime.now().isAfter(LocalTime.of(17, 0)))) {
                 startDate = startDate.plusDays(1);
             }
         }

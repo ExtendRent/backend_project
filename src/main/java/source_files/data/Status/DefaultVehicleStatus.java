@@ -14,6 +14,10 @@ public enum DefaultVehicleStatus {
         this.label = label;
     }
 
+    public static DefaultVehicleStatus[] getAll() {
+        return values();
+    }
+
     public String getLabel() {
         return label;
     }

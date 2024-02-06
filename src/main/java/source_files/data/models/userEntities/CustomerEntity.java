@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 import source_files.data.types.userTypes.CustomerType;
 
 import java.util.List;
@@ -36,5 +36,5 @@ public class CustomerEntity extends UserEntity {
     private String drivingLicenseNumber;
 
     @Column(name = "driving_license_type")
-    private List<DrivingLicenseType> drivingLicenseTypes;
+    private List<DefaultDrivingLicenseType> defaultDrivingLicenseTypes;
 }

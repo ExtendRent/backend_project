@@ -278,7 +278,7 @@ public class CarManager implements CarService {
                 .rentalPrice(carEntity.getRentalPrice())
                 .details(carEntity.getDetails())
                 .luggage(carEntity.getLuggage())
-                .expectedDrivingLicenseTypes(carEntity.getExpectedDrivingLicenseTypes())
+                .expectedDefaultDrivingLicenseTypes(carEntity.getExpectedDefaultDrivingLicenseTypes())
                 .colorEntityId(carEntity.getColorEntity().getId())
                 .fuelTypeEntityId(carEntity.getFuelTypeEntity().getId())
                 .shiftTypeEntityId(carEntity.getShiftTypeEntity().getId())

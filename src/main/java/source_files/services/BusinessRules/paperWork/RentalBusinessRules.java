@@ -95,8 +95,8 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     public void checkDrivingLicenseType(int carId, Integer customerId) {
         //Giriş yapmadan araç listeleyebilmek için customerId null verilebilmelidir.
         //CustomerId verilmiş ise ve beklenen ehliyet tipine uyuyorsa:
-        if (customerId != null && !new HashSet<>(this.carService.getById(carId).getExpectedDrivingLicenseTypes()).
-                containsAll(this.customerService.getById(customerId).getDrivingLicenseTypes())) {
+        if (customerId != null && !new HashSet<>(this.carService.getById(carId).getExpectedDefaultDrivingLicenseTypes()).
+                containsAll(this.customerService.getById(customerId).getDefaultDrivingLicenseTypes())) {
             throw new NotSuitableException(DRIVING_LICENSE_TYPE_NOT_SUITABLE, "Ehliyet tipi uygun değil");
         }
     }

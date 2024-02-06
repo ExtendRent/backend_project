@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.types.itemTypes.DefaultPaymentType;
 
 @Getter
 @Setter
@@ -16,11 +15,13 @@ import source_files.data.types.itemTypes.DefaultPaymentType;
 public class UpdatePaymentTypeRequest {
 
     @NotNull
-    private int paymentTypeEntityId;
+    private int id;
 
     @NotNull
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Ödeme tipi sadece harflerden oluşmalıdır.")
-    private String paymentTypeEntityName;
-    private DefaultPaymentType paymentTypeEntityDefaultPaymentType;
+    private String name;
+
+    @NotNull
+    private boolean isActive;
 }

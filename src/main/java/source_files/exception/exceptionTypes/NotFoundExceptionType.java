@@ -57,7 +57,10 @@ public enum NotFoundExceptionType {
 
     VEHICLE_STATUS_NOT_FOUND(1031, "Vehicle Type Not Found"),
 
-    VEHICLE_STATUS_LIST_NOT_FOUND(1032, "Vehicle Type List is Empty");
+    VEHICLE_STATUS_LIST_NOT_FOUND(1032, "Vehicle Type List is Empty"),
+
+    DRIVING_LICENSE_TYPE_NOT_FOUND(1033, "Driving License Type Not Found"),
+    DRIVING_LICENSE_TYPE_LIST_NOT_FOUND(1034, "Driving License Type List is Empty");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

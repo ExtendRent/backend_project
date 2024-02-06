@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.Status.DefaultVehicleStatus;
+import source_files.data.requests.CreateDrivingLicenseTypeRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -19,8 +20,10 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorR
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
+import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 import source_files.data.types.itemTypes.DefaultPaymentType;
 import source_files.exception.DataNotFoundException;
+import source_files.services.DrivingLicenseTypeService;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
@@ -32,15 +35,15 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.util.*;
 
-import static source_files.data.Status.DefaultVehicleStatus.*;
+import static source_files.data.types.itemTypes.DefaultDrivingLicenseType.*;
 import static source_files.data.types.itemTypes.DefaultPaymentType.*;
-import static source_files.data.types.itemTypes.DrivingLicenseType.*;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class SeedDataConfig implements CommandLineRunner {
 
+    private final DrivingLicenseTypeService drivingLicenseTypeService;
     private final UserEntityService userEntityService;
     private final AdminService adminService;
 
@@ -150,17 +153,21 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             vehicleStatusService.getAll();
         } catch (DataNotFoundException e) {
-            HashMap<DefaultVehicleStatus, String> defaultVehicleStatuses = new LinkedHashMap<>();
-            defaultVehicleStatuses.put(AVAILABLE, AVAILABLE.getLabel());
-            defaultVehicleStatuses.put(IN_USE, IN_USE.getLabel());
-            defaultVehicleStatuses.put(MAINTENANCE, MAINTENANCE.getLabel());
-            defaultVehicleStatuses.put(UNAVAILABLE, UNAVAILABLE.getLabel());
-            defaultVehicleStatuses.put(BOOKED, BOOKED.getLabel());
-            defaultVehicleStatuses.put(DELETED, DELETED.getLabel());
-            defaultVehicleStatuses.forEach((status, name) ->
-                    vehicleStatusService.create(new CreateVehicleStatusRequest(name, status)));
+            DefaultVehicleStatus[] defaultVehicleStatuses = DefaultVehicleStatus.getAll();
+            for (DefaultVehicleStatus defaultVehicleStatus : defaultVehicleStatuses) {
+                vehicleStatusService.create(new CreateVehicleStatusRequest(defaultVehicleStatus.name(), defaultVehicleStatus));
+            }
         }
 
+        try {
+            drivingLicenseTypeService.getAll();
+        } catch (DataNotFoundException e) {
+            DefaultDrivingLicenseType[] allLicenseTypes = DefaultDrivingLicenseType.getAll();
+            for (DefaultDrivingLicenseType defaultDrivingLicenseType : allLicenseTypes) {
+                drivingLicenseTypeService.create(new CreateDrivingLicenseTypeRequest
+                        (defaultDrivingLicenseType.name(), defaultDrivingLicenseType.getLabel()));
+            }
+        }
 
         try {
             carService.getAll();
@@ -177,7 +184,7 @@ public class SeedDataConfig implements CommandLineRunner {
                         .rentalPrice(100 + i * 100).shiftTypeEntityId(i)
                         .vehicleStatusEntityId(1)
                         .isAvailable(true)
-                        .expectedDrivingLicenseTypes(new ArrayList<>() {{
+                        .expectedDefaultDrivingLicenseTypes(new ArrayList<>() {{
                             add(A);
                             add(B);
                             add(BE);
@@ -185,8 +192,8 @@ public class SeedDataConfig implements CommandLineRunner {
                             add(E);
                         }}).build());
             }
-
         }
+
 
         //--------------------SEED USERS--------------------
 
@@ -199,7 +206,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .emailAddress("customer@gmail.com")
                     .password("pass")
                     .drivingLicenseNumber("123456")
-                    .drivingLicenseTypes(new ArrayList<>() {{
+                    .defaultDrivingLicenseTypes(new ArrayList<>() {{
                         add(A);
                         add(B);
                         add(BE);
@@ -233,3 +240,4 @@ public class SeedDataConfig implements CommandLineRunner {
         }
     }
 }
+

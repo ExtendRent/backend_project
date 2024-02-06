@@ -24,5 +24,6 @@ public class CreatePaymentTypeRequest {
     @Pattern(regexp = "^[A-Z-_]+$", message = "Ödeme tipi sadece büyük harflerden ve boşluksuz olmalıdır.")
     private DefaultPaymentType paymentType;
 
+    @NotNull
     private boolean isActive;
 }

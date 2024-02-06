@@ -20,4 +20,6 @@ public interface PaymentTypeEntityService {
 
     List<PaymentTypeEntity> getAllByDeletedState(boolean isDeleted);
 
+    List<PaymentTypeEntity> getAllByActiveState(boolean isActive);
+
 }

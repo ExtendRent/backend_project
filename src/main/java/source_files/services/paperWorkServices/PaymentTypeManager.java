@@ -7,7 +7,7 @@ import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
-import source_files.services.BusinessRules.paperWork.PaymentBusinessRules;
+import source_files.services.BusinessRules.paperWork.PaymentTypeBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 
@@ -19,54 +19,56 @@ import static source_files.data.types.itemTypes.ItemType.PAYMENT_TYPE;
 @Service
 @RequiredArgsConstructor
 public class PaymentTypeManager implements PaymentTypeService {
-    private final PaymentTypeEntityService paymentTypeEntityService;
-    private final ModelMapperService modelMapperService;
+    private final PaymentTypeEntityService entityService;
+    private final ModelMapperService mapper;
 
-    private final PaymentBusinessRules paymentBusinessRules;
+    private final PaymentTypeBusinessRules rules;
 
     @Override
     public void create(CreatePaymentTypeRequest createPaymentTypeRequest) {
-        PaymentTypeEntity paymentTypeEntity = this.modelMapperService.forRequest()
+        PaymentTypeEntity paymentTypeEntity = mapper.forRequest()
                 .map(createPaymentTypeRequest, PaymentTypeEntity.class);
 
         paymentTypeEntity.setItemType(PAYMENT_TYPE);
-        this.paymentTypeEntityService.create(paymentTypeEntity);
+        entityService.create(paymentTypeEntity);
     }
+
 
     @Override
     public PaymentTypeDTO update(UpdatePaymentTypeRequest updatePaymentTypeRequest) {
-        return this.modelMapperService.forResponse().map(this.paymentTypeEntityService.update(
-                this.modelMapperService.forRequest()
-                        .map(updatePaymentTypeRequest, PaymentTypeEntity.class)), PaymentTypeDTO.class);
+        PaymentTypeEntity paymentType = entityService.getById(updatePaymentTypeRequest.getId());
+        paymentType.setActive(updatePaymentTypeRequest.isActive());
+        return mapper.forResponse().map(entityService.update(paymentType), PaymentTypeDTO.class);
     }
 
     @Override
     public PaymentTypeDTO getById(int id) {
-        return this.modelMapperService.forResponse().map(this.paymentTypeEntityService.getById(id), PaymentTypeDTO.class);
+        return mapper.forResponse().map(entityService.getById(id), PaymentTypeDTO.class);
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            this.paymentTypeEntityService.delete(this.paymentTypeEntityService.getById(id));
+            entityService.delete(entityService.getById(id));
         } else {
-            this.softDelete(id);
+            softDelete(id);
         }
 
     }
 
     @Override
     public void softDelete(int id) {
-        PaymentTypeEntity paymentTypeEntity = this.paymentTypeEntityService.getById(id);
+        PaymentTypeEntity paymentTypeEntity = entityService.getById(id);
         paymentTypeEntity.setIsDeleted(true);
+        paymentTypeEntity.setActive(false);
         paymentTypeEntity.setDeletedAt(LocalDateTime.now());
-        this.paymentTypeEntityService.create(paymentTypeEntity);
+        entityService.create(paymentTypeEntity);
     }
 
     @Override
     public List<PaymentTypeDTO> getAll() {
-        return this.paymentBusinessRules.checkDataList(this.paymentTypeEntityService.getAll()).stream()
-                .map(paymentTypeEntity -> this.modelMapperService.forResponse()
+        return rules.checkDataList(entityService.getAll()).stream()
+                .map(paymentTypeEntity -> mapper.forResponse()
                         .map(paymentTypeEntity, PaymentTypeDTO.class)
                 ).toList();
 
@@ -74,10 +76,17 @@ public class PaymentTypeManager implements PaymentTypeService {
 
     @Override
     public List<PaymentTypeDTO> getAllByDeletedState(boolean isDeleted) {
-        return this.paymentTypeEntityService.getAllByDeletedState(isDeleted).stream()
-                .map(paymentTypeEntity -> this.modelMapperService.forResponse()
-                        .map(paymentTypeEntity, PaymentTypeDTO.class)
-                ).toList();
+        return rules.checkDataList(entityService.getAllByDeletedState(isDeleted)).stream()
+                .map(discountCode -> mapper.forResponse()
+                        .map(discountCode, PaymentTypeDTO.class)).toList();
     }
+
+    @Override
+    public List<PaymentTypeDTO> getAllByActiveState(boolean isActive) {
+        return rules.checkDataList(entityService.getAllByActiveState(isActive)).stream()
+                .map(discountCode -> mapper.forResponse()
+                        .map(discountCode, PaymentTypeDTO.class)).toList();
+    }
+
 
 }

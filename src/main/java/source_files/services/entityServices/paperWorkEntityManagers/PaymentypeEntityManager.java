@@ -16,43 +16,47 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMEN
 @RequiredArgsConstructor
 public class PaymentypeEntityManager implements PaymentTypeEntityService {
 
-    private final PaymentTypeEntityRepository paymentTypeEntityRepository;
+    private final PaymentTypeEntityRepository repository;
 
     @Override
     public PaymentTypeEntity create(PaymentTypeEntity paymentTypeEntity) {
-        return this.paymentTypeEntityRepository.save(paymentTypeEntity);
+        return repository.save(paymentTypeEntity);
     }
 
     @Override
     public PaymentTypeEntity update(PaymentTypeEntity paymentTypeEntity) {
-        return this.create(paymentTypeEntity);
+        return create(paymentTypeEntity);
     }
 
     @Override
     public void delete(PaymentTypeEntity paymentTypeEntity) {
-        this.paymentTypeEntityRepository.delete(paymentTypeEntity);
+        repository.delete(paymentTypeEntity);
     }
 
     @Override
     public PaymentTypeEntity getById(int id) {
-        return this.paymentTypeEntityRepository.findById(id).orElseThrow(() ->
+        return repository.findById(id).orElseThrow(() ->
                 new DataNotFoundException(PAYMENT_TYPE_NOT_FOUND, "Payment type bulunamadı."));
     }
 
     @Override
     public PaymentTypeEntity getByPaymentType(DefaultPaymentType defaultPaymentType) {
-        return this.paymentTypeEntityRepository.findByPaymentType(defaultPaymentType);
+        return repository.findByPaymentType(defaultPaymentType);
     }
 
     @Override
     public List<PaymentTypeEntity> getAll() {
-        return this.paymentTypeEntityRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public List<PaymentTypeEntity> getAllByDeletedState(boolean isDeleted) {
-        return this.paymentTypeEntityRepository.findAllByIsDeleted(isDeleted);
+        return repository.findAllByIsDeleted(isDeleted);
     }
 
+    @Override
+    public List<PaymentTypeEntity> getAllByActiveState(boolean isActive) {
+        return repository.findAllByIsActive(isActive);
+    }
 
 }

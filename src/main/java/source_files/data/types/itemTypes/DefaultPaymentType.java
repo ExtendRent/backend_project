@@ -11,7 +11,13 @@ public enum DefaultPaymentType {
         this.label = label;
     }
 
+    // Yeni eklenen method
+    public static DefaultPaymentType[] getAll() {
+        return values();
+    }
+
     public String getLabel() {
         return label;
     }
+
 }

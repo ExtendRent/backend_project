@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
-import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
@@ -21,12 +20,6 @@ import java.util.List;
 @CrossOrigin
 public class PaymentTypesController {
     private PaymentTypeService paymentTypeService;
-
-    @PostMapping
-    public ResponseEntity<Void> createPaymentType(@Valid @RequestBody CreatePaymentTypeRequest createPaymentTypeRequest) {
-        this.paymentTypeService.create(createPaymentTypeRequest);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 
     @PutMapping
     public ResponseEntity<TResponse<PaymentTypeDTO>> updatePaymentType(@Valid @RequestBody UpdatePaymentTypeRequest updatePaymentTypeRequest) {
@@ -44,22 +37,14 @@ public class PaymentTypesController {
         );
     }
 
-    @GetMapping(params = "isDeleted")
-    public ResponseEntity<TResponse<List<PaymentTypeDTO>>> getAllByDeletedState(
-            @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
+    @GetMapping(params = "isActive")
+    public ResponseEntity<TResponse<List<PaymentTypeDTO>>> getAllByActiveState(
+            @RequestParam(value = "isActive", required = false) boolean isActive) {
 
         return new ResponseEntity<>(TResponse.<List<PaymentTypeDTO>>tResponseBuilder()
-                .response(this.paymentTypeService.getAllByDeletedState(isDeleted))
+                .response(this.paymentTypeService.getAllByActiveState(isActive))
                 .build(), HttpStatus.OK
         );
-    }
-
-    @DeleteMapping(params = {"id", "isHardDelete"})
-    public ResponseEntity<Void> delete(
-            @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
-
-        this.paymentTypeService.delete(id, isHardDelete);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

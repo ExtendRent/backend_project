@@ -32,23 +32,6 @@ public class SecurityConfig {
     };
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;
-
-    //    .requestMatchers("/api/v1/users/**").hasAnyAuthority(
-//                        .requestMatchers(HttpMethod.POST, "/api/v1/brands/**").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.POST, "/api/v1/colors/**").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.POST, "/api/v1/carBodyTypes/**").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.POST, "/api/v1/employees/**").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.POST, "/api/v1/paymentTypes/**").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.POST, "/api/v1/admins/**").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.POST, "/api/v1/carModels/**").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.POST, "/api/v1/discountCodes/**").hasAnyAuthority(UserRole.ADMIN.toString())
-
-    //  .authorizeHttpRequests((req) -> req
-//            .requestMatchers("/api/v1/users/**").hasAnyAuthority(
-//                        .requestMatchers(HttpMethod.GET, "/api/v1/brands/").hasAnyAuthority(UserRole.ADMIN.toString())
-//            .requestMatchers(HttpMethod.GET, "/api/v1/brands/**").hasAnyAuthority(
-//                        .anyRequest().authenticated()
-//                )
     private final UserDetailsService userService;
 
     @Bean
@@ -77,6 +60,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/gearshifts/**").permitAll()
                         .requestMatchers("/api/v1/vehicle-statuses/**").permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/drivingLicenseType/**").permitAll()
 
                         .anyRequest().authenticated()
                 )

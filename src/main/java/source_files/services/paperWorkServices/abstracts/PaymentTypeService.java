@@ -20,4 +20,6 @@ public interface PaymentTypeService {
     List<PaymentTypeDTO> getAll();
 
     List<PaymentTypeDTO> getAllByDeletedState(boolean isDeleted);
+
+    List<PaymentTypeDTO> getAllByActiveState(boolean isActive);
 }

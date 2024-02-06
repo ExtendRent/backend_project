@@ -3,7 +3,7 @@ package source_files.data.requests.userRequests;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 import source_files.data.types.userTypes.UserRole;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class CreateCustomerRequest extends BaseRequest {
 
 
     @Size(min = 1, max = 16, message = "Sürücü belgesi türü listesi 1 ile 16 arasında olmalıdır.")
-    List<DrivingLicenseType> drivingLicenseTypes;
+    List<DefaultDrivingLicenseType> defaultDrivingLicenseTypes;
 
     String imagePath;
     private UserRole authority = UserRole.CUSTOMER;

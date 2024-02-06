@@ -12,4 +12,6 @@ public interface PaymentTypeEntityRepository extends JpaRepository<PaymentTypeEn
 
     PaymentTypeEntity findByPaymentType(DefaultPaymentType defaultPaymentType);
 
+    List<PaymentTypeEntity> findAllByIsActive(boolean isActive);
+
 }

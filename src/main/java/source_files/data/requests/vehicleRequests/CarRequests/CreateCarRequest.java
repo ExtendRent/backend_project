@@ -3,7 +3,7 @@ package source_files.data.requests.vehicleRequests.CarRequests;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.itemTypes.DrivingLicenseType;
+import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 
 import java.util.List;
 
@@ -53,9 +53,9 @@ public class CreateCarRequest extends BaseRequest {
     @NotNull(message = "imagePaths null olamaz")
     List<String> imagePaths;
 
-    @NotNull(message = "expectedDrivingLicenseTypes null olamaz")
+    @NotNull(message = "expectedDefaultDrivingLicenseTypes null olamaz")
     @NotEmpty
-    List<DrivingLicenseType> expectedDrivingLicenseTypes;
+    List<DefaultDrivingLicenseType> expectedDefaultDrivingLicenseTypes;
 
     @NotNull
     @Min(1)
