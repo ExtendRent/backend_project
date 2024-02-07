@@ -69,7 +69,7 @@ public class SeedDataConfig implements CommandLineRunner {
             paymentTypeService.getAll();
         } catch (DataNotFoundException e) {
             for (DefaultPaymentType paymentType : DefaultPaymentType.getAll()) {
-                paymentTypeService.create(new CreatePaymentTypeRequest(paymentType.name(), paymentType, true));
+                paymentTypeService.create(new CreatePaymentTypeRequest(paymentType.getLabel(), paymentType, true));
             }
         }
 
@@ -241,6 +241,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .cardOwnerSurname("customer")
                     .cardNumber("1111111111111111")
                     .cvc("111")
+                    .expirationDate(LocalDate.parse("2024-04-25"))
                     .build();
             rentalService.create(CreateRentalRequest.builder()
                     .customerEntityId(1).carEntityId(1)

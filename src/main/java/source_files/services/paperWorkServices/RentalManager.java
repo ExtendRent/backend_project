@@ -132,23 +132,24 @@ public class RentalManager implements RentalService {
 
     @Override
     public List<RentalDTO> getAll() {
-        return rentalEntityService.getAll().stream()
+        return rules.checkDataList(rentalEntityService.getAll()).stream()
                 .map(rentalEntity -> mapper.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override
     public List<RentalDTO> getAllByDeletedState(boolean isDeleted) {
-        return rentalEntityService.getAllByDeletedState(isDeleted).stream()
+        return rules.checkDataList(rentalEntityService.getAllByDeletedState(isDeleted)).stream()
                 .map(rentalEntity -> mapper.forResponse()
                         .map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override //Tarihler arasında çakışan ve aktif olan rental kayıtları.
     public List<RentalDTO> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
-        return rentalEntityService.getAllOverlappingRentals(startDate, endDate).stream().map(rentalEntity ->
+        return rules.checkDataList(rentalEntityService.getAllOverlappingRentals(startDate, endDate)).stream().map(rentalEntity ->
                 mapper.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
+    //--------------------------------Local Methods--------------------------------
 
     private ShowRentalResponse convertToShowRentalResponse(ShowRentalRequest showRentalRequest) {
         // indirim işlemleri sonucu totalPrice hesaplama

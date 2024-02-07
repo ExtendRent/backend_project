@@ -15,7 +15,6 @@ import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 @Entity
 @Table(name = "payment_details")
 public class PaymentDetailsEntity extends Item {
-
     @OneToOne
     @JoinColumn(name = "rental_id", referencedColumnName = "id")
     private RentalEntity rentalEntity;

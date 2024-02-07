@@ -43,7 +43,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(PaymentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public TResponse<?> handleAlreadyExistsException(PaymentException e) {
+    public TResponse<?> handlePaymentException(PaymentException e) {
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getPaymentExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();

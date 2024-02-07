@@ -82,6 +82,8 @@ public class CarManager implements CarService {
         List<CarDTO> carDTOList = getAll();
         List<CarDTO> matchedCarDTOList = getAllByIsDrivingLicenseSuitable(customerId);
 
+
+
         carDTOList.forEach(carDTO -> {
             boolean isMatched = matchedCarDTOList.stream()
                     .anyMatch(matchedCar -> matchedCar.getId() == carDTO.getId());

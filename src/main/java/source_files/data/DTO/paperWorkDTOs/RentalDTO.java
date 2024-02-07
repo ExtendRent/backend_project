@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public class RentalDTO {
     int id;
     int customerEntityId;
+    int discountEntityId;
     String customerEntityName;
     String customerEntitySurname;
 
