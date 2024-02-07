@@ -20,4 +20,6 @@ public class CreateBrandRequest extends BaseRequest {
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Marka sadece harflerden oluşmalıdır.")
     String name;
+
+    String logoImagePath;
 }

@@ -44,7 +44,7 @@ public class BrandsController {
         );
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<TResponse<List<BrandDTO>>> getAll() {
         return new ResponseEntity<>(TResponse.<List<BrandDTO>>tResponseBuilder()
                 .response(this.brandService.getAll())

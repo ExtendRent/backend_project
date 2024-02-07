@@ -85,9 +85,14 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             brandService.getAll();
         } catch (DataNotFoundException e) {
-            String[] brands = {"Audi", "BMW", "Tesla", "Honda", "Toyota"};
-            for (String brand : brands) {
-                brandService.create(new CreateBrandRequest(brand));
+            HashMap<String, String> brands = new LinkedHashMap<>();
+            brands.put("Audi", "https://www.carlogos.org/car-logos/audi-logo-2016-640.png");
+            brands.put("BMW", "https://www.carlogos.org/car-logos/bmw-logo-2020-gray.png");
+            brands.put("Tesla", "https://www.carlogos.org/car-logos/tesla-logo-2007-full-download.png");
+            brands.put("Honda", "https://www.carlogos.org/car-logos/honda-logo-2000-full-640.png");
+            brands.put("Toyota", "https://www.carlogos.org/car-logos/toyota-logo-2020-europe-640.png");
+            for (String brand : brands.keySet()) {
+                brandService.create(new CreateBrandRequest(brand, brands.get(brand)));
             }
         }
 
