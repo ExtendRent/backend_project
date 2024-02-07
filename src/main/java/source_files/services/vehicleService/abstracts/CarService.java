@@ -18,7 +18,7 @@ public interface CarService {
 
     List<CarDTO> getAll();
 
-    List<CarDTO> getAllWithLogin(int customerId);
+    List<CarDTO> getAllWithLogin(Integer customerId);
 
     List<CarDTO> getAllFiltered(Integer customerID, LocalDate startDate, LocalDate endDate,
                                 Integer startPrice, Integer endPrice,
