@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.DISCOU
 
 @RequiredArgsConstructor
 @Service
-public class DiscountRules implements BaseBusinessRulesService {
+public class DiscountRules implements BaseItemBusinessRulesService {
 
     public CreateDiscountRequest fixDiscountRequest(CreateDiscountRequest createDiscountRequest) {
         createDiscountRequest.setDiscountCode(this.fixName(createDiscountRequest.getDiscountCode().toUpperCase()));
@@ -30,5 +30,15 @@ public class DiscountRules implements BaseBusinessRulesService {
     @Override
     public String fixName(String name) {
         return name.trim().toUpperCase();
+    }
+
+    @Override
+    public void existsByName(String name) {
+
+    }
+
+    @Override
+    public void existsByNameAndIdNot(String name, int id) {
+
     }
 }

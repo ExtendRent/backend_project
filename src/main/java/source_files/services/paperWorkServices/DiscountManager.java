@@ -18,66 +18,73 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DiscountManager implements DiscountService {
     private final DiscountEntityService discountEntityService;
-    private final ModelMapperService modelMapperService;
+    private final ModelMapperService mapper;
 
-    private final DiscountRules discountRules;
+    private final DiscountRules rules;
 
     @Override
     public void create(CreateDiscountRequest createDiscountRequest) {
-        this.discountEntityService.create(
-                this.modelMapperService.forRequest()
-                        .map(discountRules.fixDiscountRequest(createDiscountRequest), DiscountEntity.class));
+        discountEntityService.create(
+                mapper.forRequest()
+                        .map(rules.fixDiscountRequest(createDiscountRequest), DiscountEntity.class));
     }
 
     @Override
     public DiscountDTO update(UpdateDiscountRequest updateDiscountRequest) {
-        return this.modelMapperService.forResponse()
-                .map(this.discountEntityService.update(
-                        this.modelMapperService.forRequest()
+        return mapper.forResponse()
+                .map(discountEntityService.update(
+                        mapper.forRequest()
                                 .map(updateDiscountRequest, DiscountEntity.class)), DiscountDTO.class);
     }
 
     @Override
     public DiscountDTO getById(int id) {
-        return this.modelMapperService.forResponse()
-                .map(this.discountEntityService.getById(id), DiscountDTO.class);
+        return mapper.forResponse()
+                .map(discountEntityService.getById(id), DiscountDTO.class);
     }
 
     @Override
     public DiscountDTO getByDiscountCode(String discountCode) {
-        return this.modelMapperService.forResponse()
-                .map(this.discountEntityService.getByDiscountCode(discountCode), DiscountDTO.class);
+        return mapper.forResponse()
+                .map(discountEntityService.getByDiscountCode(discountCode), DiscountDTO.class);
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            this.discountEntityService.delete(this.discountEntityService.getById(id));
+            discountEntityService.delete(discountEntityService.getById(id));
         } else {
-            this.softDelete(id);
+            softDelete(id);
         }
     }
 
     @Override
     public void softDelete(int id) {
-        DiscountEntity discountCode = this.discountEntityService.getById(id);
+        DiscountEntity discountCode = discountEntityService.getById(id);
         discountCode.setIsDeleted(true);
         discountCode.setDeletedAt(LocalDateTime.now());
-        this.discountEntityService.update(discountCode);
+        discountEntityService.update(discountCode);
     }
 
     @Override
     public List<DiscountDTO> getAll() {
-        return discountRules.checkDataList(this.discountEntityService.getAll()).stream()
-                .map(discountCode -> this.modelMapperService.forResponse()
+        return rules.checkDataList(discountEntityService.getAll()).stream()
+                .map(discountCode -> mapper.forResponse()
                         .map(discountCode, DiscountDTO.class)).toList();
     }
 
     @Override
     public List<DiscountDTO> getAllByDeletedState(boolean isDeleted) {
-        return this.discountEntityService.getAllByDeletedState(isDeleted)
-                .stream().map(discountCode -> this.modelMapperService.forResponse()
+        return rules.checkDataList(discountEntityService.getAllByDeletedState(isDeleted))
+                .stream().map(discountCode -> mapper.forResponse()
                         .map(discountCode, DiscountDTO.class)).toList();
+    }
+
+    @Override
+    public List<DiscountDTO> getAllByActiveState(boolean isActive) {
+        return rules.checkDataList(discountEntityService.getAllByActiveState(isActive))
+                .stream().map(discountCode -> mapper.forResponse(
+                ).map(discountCode, DiscountDTO.class)).toList();
     }
 
 }

@@ -2,7 +2,6 @@ package source_files.data.requests.vehicleRequests.CarRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 
 import java.util.List;
 
@@ -54,9 +53,8 @@ public class UpdateCarRequest {
     @NotNull(message = "imagePaths null olamaz")
     List<String> imagePaths;
 
-    @NotNull(message = "expectedDefaultDrivingLicenseTypes null olamaz")
-    @NotEmpty
-    List<DefaultDrivingLicenseType> expectedDefaultDrivingLicenseTypes;
+    @NotNull(message = "beklenen ehliyet sınıfı null olamaz")
+    int expectedMinDrivingLicenseTypeId;
 
     @NotNull
     @Min(1)

@@ -12,6 +12,8 @@ import source_files.exception.DataNotFoundException;
 import source_files.exception.NotSuitableException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
+import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
+import source_files.services.DrivingLicenseTypeService;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityManager;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -19,7 +21,6 @@ import source_files.services.vehicleService.abstracts.CarService;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
@@ -36,6 +37,10 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     private final CarService carService;
 
     private final CustomerService customerService;
+
+    private final DrivingLicenseTypeService drivingLicenseTypeService;
+
+    private final CarBusinessRules carRules;
 
     //--------------------- AUTO FIX METHODS ---------------------
     public CreateRentalRequest fixCreateRentalRequest(CreateRentalRequest createRentalRequest) {
@@ -95,8 +100,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     public void checkDrivingLicenseType(int carId, Integer customerId) {
         //Giriş yapmadan araç listeleyebilmek için customerId null verilebilmelidir.
         //CustomerId verilmiş ise ve beklenen ehliyet tipine uyuyorsa:
-        if (customerId != null && !new HashSet<>(this.carService.getById(carId).getExpectedDefaultDrivingLicenseTypes()).
-                containsAll(this.customerService.getById(customerId).getDefaultDrivingLicenseTypes())) {
+        if (!carRules.isDrivingLicenseTypeSuitable(carId, customerId)) {
             throw new NotSuitableException(DRIVING_LICENSE_TYPE_NOT_SUITABLE, "Ehliyet tipi uygun değil");
         }
     }

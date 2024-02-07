@@ -10,4 +10,5 @@ import lombok.*;
 public class DrivingLicenseTypeDTO {
     int id;
     String name;
+    int licenseLevel;
 }

@@ -23,5 +23,6 @@ public interface DiscountService {
 
     List<DiscountDTO> getAllByDeletedState(boolean isDeleted);
 
+    List<DiscountDTO> getAllByActiveState(boolean isActive);
 
 }

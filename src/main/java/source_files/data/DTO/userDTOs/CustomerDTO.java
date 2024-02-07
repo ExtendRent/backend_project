@@ -1,7 +1,6 @@
 package source_files.data.DTO.userDTOs;
 
 import lombok.*;
-import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 import source_files.data.types.userTypes.UserRole;
 
 import java.util.List;
@@ -13,9 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerDTO {
     int id;
+    int drivingLicenseTypeId;
     String phoneNumber;
     String drivingLicenseNumber;
-    List<DefaultDrivingLicenseType> defaultDrivingLicenseTypes;
+    String drivingLicenseTypeEntityName;
     String name;
     String surname;
     String emailAddress;

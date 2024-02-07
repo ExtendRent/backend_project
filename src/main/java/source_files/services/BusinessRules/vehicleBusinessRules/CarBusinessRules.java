@@ -6,12 +6,12 @@ import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
-import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
+import source_files.services.DrivingLicenseTypeService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
@@ -42,6 +42,8 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     private final BrandEntityService brandEntityService;
 
     private final CustomerService customerService;
+
+    private final DrivingLicenseTypeService drivingLicenseTypeService;
 
     //--------------------- AUTO FIX METHODS ---------------------
 
@@ -96,17 +98,20 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
-    public List<CarEntity> getCarEntityListByMatchedDrivingLicense(List<CarEntity> carEntityList, Integer customerId) {
+    public List<CarEntity> getCarEntityListByDrivingLicenseSuitable(List<CarEntity> carEntityList, Integer customerId) {
         //Müşteri giriş yapmış ise müşterinin ehliyet tipi ile araçlar karşılaştırılıp filtreleniyor.
-        return carEntityList.stream().filter(car -> this.isDrivingLicenseTypeSuitable(car, customerId)).toList();
+        return carEntityList.stream().filter(car -> this.isDrivingLicenseTypeSuitable(car.getId(), customerId)).toList();
     }
 
-    private boolean isDrivingLicenseTypeSuitable(CarEntity car, Integer customerId) {
+    public boolean isDrivingLicenseTypeSuitable(int carId, Integer customerId) {
         if (customerId != null) {
-            CustomerDTO customer = customerService.getById(customerId);
-            List<DefaultDrivingLicenseType> customerLicenseTypes = customer.getDefaultDrivingLicenseTypes();
-            List<DefaultDrivingLicenseType> expectedLicenseTypes = car.getExpectedDefaultDrivingLicenseTypes();
-            return customerLicenseTypes.stream().anyMatch(expectedLicenseTypes::contains);
+            CarEntity car = carEntityService.getById(carId);
+            CustomerDTO customerDto = customerService.getById(customerId);
+            int customerLicenseLevel =
+                    drivingLicenseTypeService.getById(customerDto.getDrivingLicenseTypeId()).getLicenseLevel();
+            int expectedLicenseLevel = car.getExpectedMinDrivingLicenseType().getLicenseLevel();
+
+            return customerLicenseLevel >= expectedLicenseLevel;
         }
         return true; // Giriş yapmadan araç listeleyebilmek için customerId null verilebilmelidir.
     }

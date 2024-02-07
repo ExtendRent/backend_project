@@ -6,7 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.Status.DefaultVehicleStatus;
+import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.requests.CreateDrivingLicenseTypeRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -20,53 +22,45 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorR
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
-import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
+import source_files.data.types.itemTypes.DefaultCarDrivingLicenseType;
 import source_files.data.types.itemTypes.DefaultPaymentType;
 import source_files.exception.DataNotFoundException;
 import source_files.services.DrivingLicenseTypeService;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
+import source_files.services.paperWorkServices.abstracts.RentalService;
 import source_files.services.userServices.abstracts.AdminService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.userServices.abstracts.EmployeeService;
 import source_files.services.vehicleFeaturesServices.abstracts.*;
 import source_files.services.vehicleService.abstracts.CarService;
 
-import java.util.*;
-
-import static source_files.data.types.itemTypes.DefaultDrivingLicenseType.*;
-import static source_files.data.types.itemTypes.DefaultPaymentType.*;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class SeedDataConfig implements CommandLineRunner {
-
+    private final RentalService rentalService;
     private final DrivingLicenseTypeService drivingLicenseTypeService;
     private final UserEntityService userEntityService;
     private final AdminService adminService;
-
     private final CustomerService customerService;
-
     private final EmployeeService employeeService;
-
     private final DiscountService discountService;
     private final ColorService colorService;
-
     private final BrandService brandService;
     private final CarModelService carModelService;
-
     private final CarBodyTypeService carBodyTypeService;
-
     private final PaymentTypeService paymentTypeService;
-
     private final CarService carService;
-
     private final ShiftTypeService shiftTypeService;
-
     private final FuelTypeService fuelTypeService;
-
     private final VehicleStatusService vehicleStatusService;
 
     @Override
@@ -74,13 +68,8 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             paymentTypeService.getAll();
         } catch (DataNotFoundException e) {
-            HashMap<DefaultPaymentType, String> paymentTypes = new LinkedHashMap<>();
-            paymentTypes.put(CREDIT_CARD, CREDIT_CARD.getLabel());
-            paymentTypes.put(CASH, CASH.getLabel());
-            paymentTypes.put(BANK_MONEY_TRANSFER, BANK_MONEY_TRANSFER.getLabel());
-
-            for (DefaultPaymentType defaultPaymentType : paymentTypes.keySet()) {
-                paymentTypeService.create(new CreatePaymentTypeRequest(paymentTypes.get(defaultPaymentType), defaultPaymentType, true));
+            for (DefaultPaymentType paymentType : DefaultPaymentType.getAll()) {
+                paymentTypeService.create(new CreatePaymentTypeRequest(paymentType.name(), paymentType, true));
             }
         }
 
@@ -105,7 +94,7 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             carModelService.getAll();
         } catch (DataNotFoundException e) {
-            List<BrandDTO> brands = this.brandService.getAll();
+            List<BrandDTO> brands = brandService.getAll();
             String[] carModels = {"A4", "M3", "ModelY", "Civic", "Corolla"};
             brands.forEach(brand -> carModelService.create(
                     new CreateCarModelRequest(brand.getId(), carModels[brands.indexOf(brand)]))
@@ -115,7 +104,7 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             colorService.getAll();
         } catch (DataNotFoundException e) {
-            String[] colors = {"White", "Black", "Red", "Green", "Blue"};
+            String[] colors = {"Beyaz", "Siyah", "Kırmızı", "Yeşil", "Mavi"};
             for (String color : colors) {
                 colorService.create(new CreateColorRequest(color));
             }
@@ -153,8 +142,7 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             vehicleStatusService.getAll();
         } catch (DataNotFoundException e) {
-            DefaultVehicleStatus[] defaultVehicleStatuses = DefaultVehicleStatus.getAll();
-            for (DefaultVehicleStatus defaultVehicleStatus : defaultVehicleStatuses) {
+            for (DefaultVehicleStatus defaultVehicleStatus : DefaultVehicleStatus.getAll()) {
                 vehicleStatusService.create(new CreateVehicleStatusRequest(defaultVehicleStatus.name(), defaultVehicleStatus));
             }
         }
@@ -162,10 +150,11 @@ public class SeedDataConfig implements CommandLineRunner {
         try {
             drivingLicenseTypeService.getAll();
         } catch (DataNotFoundException e) {
-            DefaultDrivingLicenseType[] allLicenseTypes = DefaultDrivingLicenseType.getAll();
-            for (DefaultDrivingLicenseType defaultDrivingLicenseType : allLicenseTypes) {
-                drivingLicenseTypeService.create(new CreateDrivingLicenseTypeRequest
-                        (defaultDrivingLicenseType.name(), defaultDrivingLicenseType.getLabel()));
+            for (DefaultCarDrivingLicenseType defaultCarDrivingLicenseType : DefaultCarDrivingLicenseType.getAll()) {
+                drivingLicenseTypeService.create(new CreateDrivingLicenseTypeRequest(
+                        defaultCarDrivingLicenseType.name(),
+                        defaultCarDrivingLicenseType.getLabel(),
+                        defaultCarDrivingLicenseType.ordinal()));
             }
         }
 
@@ -174,6 +163,10 @@ public class SeedDataConfig implements CommandLineRunner {
         } catch (DataNotFoundException e) {
 
             for (int i = 1; i <= 3; i++) {
+                int x = 2;
+                if (i == 3) {
+                    x = 3;
+                }
                 carService.create(CreateCarRequest.builder()
                         .carModelEntityId(i).brandEntityId(i)
                         .colorEntityId(i).carBodyTypeEntityId(i)
@@ -184,21 +177,15 @@ public class SeedDataConfig implements CommandLineRunner {
                         .rentalPrice(100 + i * 100).shiftTypeEntityId(i)
                         .vehicleStatusEntityId(1)
                         .isAvailable(true)
-                        .expectedDefaultDrivingLicenseTypes(new ArrayList<>() {{
-                            add(A);
-                            add(B);
-                            add(BE);
-                            add(C1);
-                            add(E);
-                        }}).build());
+                        .expectedMinDrivingLicenseTypeId(x)
+                        .build());
             }
         }
 
 
-        //--------------------SEED USERS--------------------
+        //-------------------------------SEED USERS-----------------------------------------
 
         if (userEntityService.getAll().toArray().length == 0) {
-
             customerService.create(CreateCustomerRequest.builder()
                     .name("customer")
                     .surname("customer")
@@ -206,20 +193,25 @@ public class SeedDataConfig implements CommandLineRunner {
                     .emailAddress("customer@gmail.com")
                     .password("pass")
                     .drivingLicenseNumber("123456")
-                    .defaultDrivingLicenseTypes(new ArrayList<>() {{
-                        add(A);
-                        add(B);
-                        add(BE);
-                        add(C1);
-                        add(E);
-                    }})
+                    .drivingLicenseTypeEntityId(2)
+                    .imagePath("https://img.memurlar.net/galeri/4599/2cc5bb86-a578-e311-a7bb-14feb5cc13c9.jpg?width=800")
+                    .build());
+
+            customerService.create(CreateCustomerRequest.builder()
+                    .name("customer2")
+                    .surname("customer2")
+                    .phoneNumber("22222222222")
+                    .emailAddress("customer2@gmail.com")
+                    .password("pass")
+                    .drivingLicenseNumber("123457")
+                    .drivingLicenseTypeEntityId(3)
                     .imagePath("https://img.memurlar.net/galeri/4599/2cc5bb86-a578-e311-a7bb-14feb5cc13c9.jpg?width=800")
                     .build());
 
             adminService.create(CreateAdminRequest.builder()
                     .name("admin")
                     .surname("admin")
-                    .phoneNumber("22222222222")
+                    .phoneNumber("33333333333")
                     .emailAddress("admin@gmail.com")
                     .password("pass")
                     .imagePath("https://avatars.githubusercontent.com/u/92371744?v=4")
@@ -229,7 +221,7 @@ public class SeedDataConfig implements CommandLineRunner {
             employeeService.create(CreateEmployeeRequest.builder()
                     .name("employee")
                     .surname("employee")
-                    .phoneNumber("33333333333")
+                    .phoneNumber("44444444444")
                     .emailAddress("employee@gmail.com")
                     .password("pass")
                     .imagePath("https://avatars.githubusercontent.com/u/92371744?v=4")
@@ -237,6 +229,28 @@ public class SeedDataConfig implements CommandLineRunner {
                     .build()
             );
 
+        }
+
+        //-------------------------------SEED RENTALS-----------------------------------------
+
+        try {
+            rentalService.getAll();
+        } catch (DataNotFoundException e) {
+            CreditCardInformation creditCardInformation = CreditCardInformation.builder()
+                    .cardOwnerName("customer")
+                    .cardOwnerSurname("customer")
+                    .cardNumber("1111111111111111")
+                    .cvc("111")
+                    .build();
+            rentalService.create(CreateRentalRequest.builder()
+                    .customerEntityId(1).carEntityId(1)
+                    .amount(1800.00)
+                    .startDate(LocalDate.parse("2024-03-10"))
+                    .endDate(LocalDate.parse("2024-03-15"))
+                    .paymentTypeId(1)
+                    .discountCode("HOSGELDIN")
+                    .creditCardInformation(creditCardInformation)
+                    .build());
         }
     }
 }

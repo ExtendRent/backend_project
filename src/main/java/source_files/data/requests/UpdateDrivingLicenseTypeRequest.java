@@ -20,4 +20,8 @@ public class UpdateDrivingLicenseTypeRequest {
     @NotBlank(message = "Description can not be blank")
     @Size(max = 30)
     String description;
+
+    @NotNull(message = "License level can not be null")
+    @Min(0)
+    int licenseLevel;
 }

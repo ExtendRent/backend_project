@@ -99,7 +99,7 @@ public class CarManager implements CarService {
     @Override
     public List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId) {
         return rules.checkDataList(
-                rules.getCarEntityListByMatchedDrivingLicense(carEntityService.getAll(), customerId)).stream().map(
+                rules.getCarEntityListByDrivingLicenseSuitable(carEntityService.getAll(), customerId)).stream().map(
                 carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
@@ -278,7 +278,7 @@ public class CarManager implements CarService {
                 .rentalPrice(carEntity.getRentalPrice())
                 .details(carEntity.getDetails())
                 .luggage(carEntity.getLuggage())
-                .expectedDefaultDrivingLicenseTypes(carEntity.getExpectedDefaultDrivingLicenseTypes())
+                .expectedMinDrivingLicenseTypeId(carEntity.getExpectedMinDrivingLicenseType().getId())
                 .colorEntityId(carEntity.getColorEntity().getId())
                 .fuelTypeEntityId(carEntity.getFuelTypeEntity().getId())
                 .shiftTypeEntityId(carEntity.getShiftTypeEntity().getId())

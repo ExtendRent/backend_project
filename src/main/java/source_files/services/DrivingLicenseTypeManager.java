@@ -12,6 +12,8 @@ import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntitySe
 
 import java.util.List;
 
+import static source_files.data.types.itemTypes.ItemType.DRIVING_LICENSE_TYPE;
+
 @Service
 @RequiredArgsConstructor
 public class DrivingLicenseTypeManager implements DrivingLicenseTypeService {
@@ -22,7 +24,9 @@ public class DrivingLicenseTypeManager implements DrivingLicenseTypeService {
 
     @Override
     public void create(CreateDrivingLicenseTypeRequest createDrivingLicenseTypeRequest) {
-        entityService.create(mapper.forRequest().map(createDrivingLicenseTypeRequest, DrivingLicenseTypeEntity.class));
+        DrivingLicenseTypeEntity drivingLicenseTypeEntity = mapper.forRequest().map(createDrivingLicenseTypeRequest, DrivingLicenseTypeEntity.class);
+        drivingLicenseTypeEntity.setItemType(DRIVING_LICENSE_TYPE);
+        entityService.create(drivingLicenseTypeEntity);
     }
 
     @Override

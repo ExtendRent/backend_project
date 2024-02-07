@@ -56,7 +56,7 @@ public class DiscountsController {
     }
 
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<TResponse<List<DiscountDTO>>> getAllDiscountCodes() {
         return new ResponseEntity<>(TResponse.<List<DiscountDTO>>tResponseBuilder()
                 .response(this.discountService.getAll())
@@ -69,6 +69,15 @@ public class DiscountsController {
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
         return new ResponseEntity<>(TResponse.<List<DiscountDTO>>tResponseBuilder()
                 .response(this.discountService.getAllByDeletedState(isDeleted))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @GetMapping(params = "isActive")
+    public ResponseEntity<TResponse<List<DiscountDTO>>> getAllByActiveState(
+            @RequestParam(value = "isActive", required = false) boolean isActive) {
+        return new ResponseEntity<>(TResponse.<List<DiscountDTO>>tResponseBuilder()
+                .response(this.discountService.getAllByActiveState(isActive))
                 .build(), HttpStatus.OK
         );
     }

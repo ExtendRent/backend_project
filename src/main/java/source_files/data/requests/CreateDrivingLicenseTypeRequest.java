@@ -1,9 +1,6 @@
 package source_files.data.requests;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @AllArgsConstructor
@@ -21,4 +18,8 @@ public class CreateDrivingLicenseTypeRequest {
     @NotBlank(message = "Description can not be blank")
     @Size(max = 30)
     String description;
+
+    @NotNull(message = "License level can not be null")
+    @Min(0)
+    int licenseLevel;
 }

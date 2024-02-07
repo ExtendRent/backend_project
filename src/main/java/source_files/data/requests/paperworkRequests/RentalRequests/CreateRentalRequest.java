@@ -3,10 +3,7 @@ package source_files.data.requests.paperworkRequests.RentalRequests;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 
 import java.time.LocalDate;
@@ -15,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class CreateRentalRequest {
 
     @Min(value = 1, message = "CustomerId must be greater than 0")

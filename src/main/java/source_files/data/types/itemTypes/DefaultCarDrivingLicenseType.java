@@ -1,8 +1,10 @@
 package source_files.data.types.itemTypes;
 
-public enum DefaultDrivingLicenseType {
+public enum DefaultCarDrivingLicenseType {
+
 
     //-----------Cars----------
+    NONE("Yok"),   //Yok
     B("Otomobil ve Kamyonet"),   //Otomobil ve Kamyonet
     BE("Römorklu Otomobil ve Kamyonet"),  //Römorklu Otomobil ve Kamyonet
     C1("7500 kg'a kadar Kamyon ve Çekici"),  //7500 kg'a kadar Kamyon ve Çekici
@@ -14,21 +16,14 @@ public enum DefaultDrivingLicenseType {
     D("Minibüs ve Otobüs"),   //Minibüs ve Otobüs
     E("Römorklu Minibüs ve Otobüs"),   //Römorklu Minibüs ve Otobüs
     F("Lastik Tekerlekli Traktör"),   //Lastik Tekerlekli Traktör
-    G("İş Makinası"),    //İş Makinası
-    //-----------Motorcycles----------
-    M("Motorlu Bisiklet"),   //Motorlu Bisiklet
-    A1("125 cc'ye kadar Motosiklet"),  //125 cc'ye kadar Motosiklet
-    A2("35 kw yi geçmeyen Motosiklet"),  //35 kw yi geçmeyen Motosiklet
-    A("35 kw yi geçen Motosiklet"),   //35 kw yi geçen Motosiklet
-    B1("4 tekerli Motosiklet");  //4 tekerli Motosiklet
-
+    G("İş Makinası");    //İş Makinası
     private final String label;
 
-    DefaultDrivingLicenseType(String label) {
+    DefaultCarDrivingLicenseType(String label) {
         this.label = label;
     }
 
-    public static DefaultDrivingLicenseType[] getAll() {
+    public static DefaultCarDrivingLicenseType[] getAll() {
         return values();
     }
 

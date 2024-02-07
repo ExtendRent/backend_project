@@ -36,8 +36,7 @@ public class PaymentTypeManager implements PaymentTypeService {
 
     @Override
     public PaymentTypeDTO update(UpdatePaymentTypeRequest updatePaymentTypeRequest) {
-        PaymentTypeEntity paymentType = entityService.getById(updatePaymentTypeRequest.getId());
-        paymentType.setActive(updatePaymentTypeRequest.isActive());
+        PaymentTypeEntity paymentType = mapper.forRequest().map(updatePaymentTypeRequest, PaymentTypeEntity.class);
         return mapper.forResponse().map(entityService.update(paymentType), PaymentTypeDTO.class);
     }
 

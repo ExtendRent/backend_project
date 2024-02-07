@@ -3,7 +3,7 @@ package source_files.data.requests.auth;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
+import source_files.data.types.itemTypes.DefaultCarDrivingLicenseType;
 import source_files.data.types.userTypes.UserRole;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class SignUpReqeust {
 
     String drivingLicenseNumber;
 
-    List<DefaultDrivingLicenseType> defaultDrivingLicenseTypes;
+    List<DefaultCarDrivingLicenseType> defaultCarDrivingLicenseTypes;
 
     @NotBlank
     @NotNull

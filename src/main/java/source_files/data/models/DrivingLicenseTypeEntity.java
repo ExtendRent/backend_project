@@ -22,4 +22,7 @@ public class DrivingLicenseTypeEntity extends Item {
 
     @Column(name = "description")
     String description;
+
+    @Column(name = "license_level")
+    int licenseLevel;
 }

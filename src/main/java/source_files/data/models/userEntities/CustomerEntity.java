@@ -1,16 +1,13 @@
 package source_files.data.models.userEntities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.models.DrivingLicenseTypeEntity;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.types.itemTypes.DefaultDrivingLicenseType;
 import source_files.data.types.userTypes.CustomerType;
 
 import java.util.List;
@@ -35,6 +32,7 @@ public class CustomerEntity extends UserEntity {
     @Column(name = "driving_license_number", unique = true)
     private String drivingLicenseNumber;
 
-    @Column(name = "driving_license_type")
-    private List<DefaultDrivingLicenseType> defaultDrivingLicenseTypes;
+    @ManyToOne()
+    @JoinColumn(name = "driving_license_type")
+    private DrivingLicenseTypeEntity drivingLicenseTypeEntity;
 }
