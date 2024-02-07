@@ -88,7 +88,7 @@ public class CarsController {
         );
     }
 
-    @GetMapping(params = "/{customerId}")
+    @GetMapping(params = {"customerId"})
     public ResponseEntity<TResponse<List<CarDTO>>> getAllWithLogin(
             @RequestParam(name = "customerId", required = false) Integer customerId) {
         return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()

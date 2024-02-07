@@ -77,26 +77,17 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public List<CarDTO> getAllWithLogin(int customerId) {
-
+    public List<CarDTO> getAllWithLogin(Integer customerId) {
         List<CarDTO> carDTOList = getAll();
-        List<CarDTO> matchedCarDTOList = getAllByIsDrivingLicenseSuitable(customerId);
-
-
-
         carDTOList.forEach(carDTO -> {
-            boolean isMatched = matchedCarDTOList.stream()
-                    .anyMatch(matchedCar -> matchedCar.getId() == carDTO.getId());
-
-            // Eğer araç kullanıcının kullanabileceği araçlar listesinde değilse
+            boolean isMatched = rules.isDrivingLicenseTypeSuitable(carDTO.getId(), customerId);
+            // Eğer araç kullanıcının lisans tipine uygun değilse
             // isLicenseTypeSuitable'ı false yap
             // Buradaki amaç, bütün araçları getirmek fakat ehliyet uyuşmayan araçları işaretlemek.
             carDTO.setIsLicenseTypeSuitable(isMatched);
         });
-
         return carDTOList;
     }
-
 
     @Override
     public List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId) {
