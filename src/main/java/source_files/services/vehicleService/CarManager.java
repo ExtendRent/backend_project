@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
+import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.VehicleStatusEntityManager;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 
 import static source_files.data.Status.DefaultVehicleStatus.*;
 import static source_files.data.types.itemTypes.VehicleType.CAR;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICLE_STATUS_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -190,20 +193,15 @@ public class CarManager implements CarService {
 
     @Override
     public void softDelete(int id) {
-        CarEntity carEntity = carEntityService.getById(id);
-        carEntity.setIsDeleted(true);
-        carEntity.setAvailable(false);
-        carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus(DELETED));
-        carEntity.setDeletedAt(LocalDateTime.now());
-        carEntityService.update(carEntity);
+        this.changeStatus(carEntityService.getById(id), DELETED);
     }
 
     @Override
     public void addRental(int carId, RentalEntity rentalEntity) {
         CarEntity carEntity = carEntityService.getById(carId);
         carEntity.getRentalList().add(rentalEntity);
-        carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus(BOOKED));
         carEntityService.update(carEntity);
+        this.changeStatus(carEntity, BOOKED);
     }
 
     @Override
@@ -211,7 +209,7 @@ public class CarManager implements CarService {
         CarEntity carEntity = carEntityService.getById(carId);
         carEntity.getRentalList().remove(rentalEntity);
         if (carEntity.getRentalList().isEmpty()) {
-            carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus(AVAILABLE));
+            this.changeStatus(carEntity, AVAILABLE);
         }
         carEntityService.update(carEntity);
     }
@@ -245,6 +243,30 @@ public class CarManager implements CarService {
         return false;
     }
 
+    @Override
+    public void changeStatus(CarEntity carEntity, DefaultVehicleStatus status) {
+
+        boolean available;
+        switch (status) {
+            case AVAILABLE, BOOKED -> {
+                available = true;
+            }
+            case DELETED -> {
+                available = false;
+                carEntity.setIsDeleted(true);
+                carEntity.setDeletedAt(LocalDateTime.now());
+            }
+            case IN_USE, MAINTENANCE, UNAVAILABLE -> {
+                available = false;
+            }
+            default -> {
+                throw new DataNotFoundException(VEHICLE_STATUS_NOT_FOUND);
+            }
+        }
+        carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus(status));
+        carEntity.setAvailable(available);
+        carEntityService.update(carEntity);
+    }
 
     private List<CarDTO> mapToDTOList(List<CarEntity> cars) {
         return cars.stream()

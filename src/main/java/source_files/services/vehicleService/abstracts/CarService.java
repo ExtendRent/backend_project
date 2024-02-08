@@ -1,7 +1,9 @@
 package source_files.services.vehicleService.abstracts;
 
 import source_files.data.DTO.vehicleDTOs.CarDTO;
+import source_files.data.Status.DefaultVehicleStatus;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
+import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 
@@ -54,5 +56,7 @@ public interface CarService {
     void addRental(int carId, RentalEntity rentalEntity);
 
     void removeRental(int carId, RentalEntity rentalEntity);
+
+    void changeStatus(CarEntity carEntity, DefaultVehicleStatus status);
 
 }

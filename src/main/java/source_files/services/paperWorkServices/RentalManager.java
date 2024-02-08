@@ -79,6 +79,7 @@ public class RentalManager implements RentalService {
             carService.addRental(createRentalRequest.getCarEntityId(), rentalEntity);
         } catch (Exception e) {
             this.softDelete(rentalEntity.getId());
+            carService.removeRental(createRentalRequest.getCarEntityId(), rentalEntity);
         }
     }
 
