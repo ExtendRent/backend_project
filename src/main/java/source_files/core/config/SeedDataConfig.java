@@ -148,7 +148,7 @@ public class SeedDataConfig implements CommandLineRunner {
             vehicleStatusService.getAll();
         } catch (DataNotFoundException e) {
             for (DefaultVehicleStatus defaultVehicleStatus : DefaultVehicleStatus.getAll()) {
-                vehicleStatusService.create(new CreateVehicleStatusRequest(defaultVehicleStatus.name(), defaultVehicleStatus));
+                vehicleStatusService.create(new CreateVehicleStatusRequest(defaultVehicleStatus.getLabel(), defaultVehicleStatus));
             }
         }
 
