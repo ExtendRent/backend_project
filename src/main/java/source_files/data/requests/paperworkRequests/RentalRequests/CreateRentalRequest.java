@@ -34,7 +34,7 @@ public class CreateRentalRequest {
     @NotNull(message = "PaymentTypeId cannot be null")
     private int paymentTypeId;
 
-    @NotNull(message = "DiscountCode cannot be null")
+    @NotNull(message = "amount cannot be null")
     private Double amount;
 
     private String discountCode;
