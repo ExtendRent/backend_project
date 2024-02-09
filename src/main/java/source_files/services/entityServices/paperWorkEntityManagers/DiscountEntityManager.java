@@ -15,49 +15,49 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.DISCOU
 @RequiredArgsConstructor
 public class DiscountEntityManager implements DiscountEntityService {
 
-    private final DiscountRepository discountRepository;
+    private final DiscountRepository repository;
 
     @Override
     public DiscountEntity create(DiscountEntity discountEntity) {
-        return this.discountRepository.save(discountEntity);
+        return repository.save(discountEntity);
     }
 
     @Override
     public DiscountEntity update(DiscountEntity discountEntity) {
-        return this.create(discountEntity);
+        return create(discountEntity);
     }
 
     @Override
     public void delete(DiscountEntity discountEntity) {
-        this.discountRepository.delete(discountEntity);
+        repository.delete(discountEntity);
     }
 
     @Override
     public DiscountEntity getById(int id) {
-        return this.discountRepository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 () -> new DataNotFoundException(DISCOUNT_CODE_NOT_FOUND, "Indirim kodu bulunamadı"));
     }
 
     @Override
     public DiscountEntity getByDiscountCode(String discountCode) {
-        return this.discountRepository.findByDiscountCode(discountCode).orElseThrow(
+        return repository.findByDiscountCode(discountCode).orElseThrow(
                 () -> new DataNotFoundException(DISCOUNT_CODE_NOT_FOUND, "Indirim kodu bulunamadı")
         );
     }
 
     @Override
     public List<DiscountEntity> getAll() {
-        return this.discountRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public List<DiscountEntity> getAllByActiveState(boolean isActive) {
-        return this.discountRepository.findAllByIsActive(isActive);
+        return repository.findAllByIsActive(isActive);
     }
 
     @Override
     public List<DiscountEntity> getAllByDeletedState(boolean isDeleted) {
-        return this.discountRepository.findAllByIsDeleted(isDeleted);
+        return repository.findAllByIsDeleted(isDeleted);
     }
 
 
