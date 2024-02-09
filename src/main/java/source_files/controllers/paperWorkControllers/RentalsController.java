@@ -60,6 +60,22 @@ public class RentalsController {
         );
     }
 
+    @GetMapping("/customers/{customerId}")
+    public ResponseEntity<TResponse<List<RentalDTO>>> getAllByCustomerId(@PathVariable Integer customerId) {
+        return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
+                .response(this.rentalService.getAllByCustomerId(customerId))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/startRental/{rentalId}")
+    public ResponseEntity<TResponse<RentalDTO>> startRental(@PathVariable int rentalId) {
+        return new ResponseEntity<>(TResponse.<RentalDTO>tResponseBuilder()
+                .response(this.rentalService.startRental(rentalId))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @PutMapping("/returnRental")
     public ResponseEntity<TResponse<?>> returnRental(@RequestBody ReturnRentalRequest returnRentalRequest) {
         return new ResponseEntity<>(TResponse.tResponseBuilder()

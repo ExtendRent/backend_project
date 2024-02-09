@@ -18,6 +18,10 @@ public interface RentalService {
 
     RentalDTO returnCar(ReturnRentalRequest returnRentalRequest);
 
+    RentalDTO startRental(int rentalId);
+
+    List<RentalDTO> getAllByCustomerId(int customerId);
+
     RentalDTO update(UpdateRentalRequest updateRentalRequest);
 
     RentalDTO getById(int id);

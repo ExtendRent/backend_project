@@ -80,7 +80,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
 
     public UpdatePaymentDetailsRequest createUpdatePaymentDetailsRequest(ReturnRentalRequest returnRentalRequest) {
-        RentalEntity rentalEntity = this.rentalEntityManager.getById(returnRentalRequest.getRentalEntityId());
+        RentalEntity rentalEntity = this.rentalEntityManager.getById(returnRentalRequest.getId());
         UpdatePaymentDetailsRequest updatePaymentDetailsRequest = new UpdatePaymentDetailsRequest();
 
         PaymentDetailsEntity paymentDetailsEntity = rentalEntity.getPaymentDetailsEntity();
@@ -163,7 +163,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
     public double calculateReturnFinalAmount(ReturnRentalRequest returnRentalRequest, int totalRentalDays) {
         RentalEntity rentalEntity = this.rentalEntityManager
-                .getById(returnRentalRequest.getRentalEntityId());
+                .getById(returnRentalRequest.getId());
 
         double baseTotalPrice = calculateTotalBasePrice(totalRentalDays, rentalEntity.getCarEntity().getRentalPrice());
 

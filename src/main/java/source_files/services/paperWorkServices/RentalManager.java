@@ -6,6 +6,7 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
+import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static source_files.data.Status.DefaultVehicleStatus.IN_USE;
 import static source_files.data.types.itemTypes.ItemType.RENTAL;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
@@ -31,7 +33,7 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 @RequiredArgsConstructor
 public class RentalManager implements RentalService {
 
-    private final RentalEntityService rentalEntityService;
+    private final RentalEntityService entityService;
     private final ModelMapperService mapper;
     private final CarService carService;
     private final SysPaymentDetailsService sysPaymentDetailsService;
@@ -72,10 +74,10 @@ public class RentalManager implements RentalService {
         rentalEntity.setItemType(RENTAL);
 
 
-        rentalEntityService.create(rentalEntity);
+        entityService.create(rentalEntity);
         try {
             rentalEntity.setPaymentDetailsEntity(paymentService.pay(createRentalRequest, rentalEntity));
-            this.rentalEntityService.update(rentalEntity);
+            this.entityService.update(rentalEntity);
             carService.addRental(createRentalRequest.getCarEntityId(), rentalEntity);
         } catch (Exception e) {
             this.softDelete(rentalEntity.getId());
@@ -87,37 +89,55 @@ public class RentalManager implements RentalService {
     public RentalDTO returnCar(ReturnRentalRequest returnRentalRequest) {
         // ceza işlemleri , indirim işlemleri iptali kontrol edilecek sonuçta da totalPrice güncelleme
 
-        RentalEntity rentalEntity = rentalEntityService.getById(returnRentalRequest.getRentalEntityId());
+        RentalEntity rentalEntity = entityService.getById(returnRentalRequest.getId());
+        CarEntity carEntity = rentalEntity.getCarEntity();
 
         rentalEntity.setPaymentDetailsEntity(sysPaymentDetailsService.update(
                 rules.createUpdatePaymentDetailsRequest(returnRentalRequest)));
 
+        rentalEntity.setEndKilometer(returnRentalRequest.getEndKilometer());
         rentalEntity.setActive(false);
-
+        carEntity.setKilometer(rentalEntity.getEndKilometer());
         if (rentalEntity.getCarEntity() != null) {
-            carService.removeRental(rentalEntity.getCarEntity().getId(), rentalEntity);
+            carService.removeRental(carEntity.getId(), rentalEntity);
         }
 
-        return mapper.forResponse().map(rentalEntityService.update(rentalEntity), RentalDTO.class);
+        return mapper.forResponse().map(entityService.update(rentalEntity), RentalDTO.class);
+    }
+
+    @Override
+    public RentalDTO startRental(int rentalId) {
+        RentalEntity rentalEntity = entityService.getById(rentalId);
+        CarEntity carEntity = rentalEntity.getCarEntity();
+        rentalEntity.setStartKilometer(carEntity.getKilometer());
+        carService.changeStatus(carEntity, IN_USE);
+        return mapToDTO(entityService.update(rentalEntity));
+    }
+
+    @Override
+    public List<RentalDTO> getAllByCustomerId(int customerId) {
+        return rules.checkDataList(entityService.getAllByCustomerId(customerId)).stream().map(
+                rentalEntity -> mapper.forResponse().map(rentalEntity, RentalDTO.class)
+        ).toList();
     }
 
     @Override
     public RentalDTO update(UpdateRentalRequest updateRentalRequest) {
         return
                 mapper.forResponse().map(
-                        rentalEntityService.update(mapper.forRequest()
+                        entityService.update(mapper.forRequest()
                                 .map(updateRentalRequest, RentalEntity.class)), RentalDTO.class);
     }
 
     @Override
     public RentalDTO getById(int id) {
-        return mapper.forResponse().map(rentalEntityService.getById(id), RentalDTO.class);
+        return mapper.forResponse().map(entityService.getById(id), RentalDTO.class);
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            rentalEntityService.delete(rentalEntityService.getById(id));
+            entityService.delete(entityService.getById(id));
         } else {
             softDelete(id);
         }
@@ -125,32 +145,36 @@ public class RentalManager implements RentalService {
 
     @Override
     public void softDelete(int id) {
-        RentalEntity rentalEntity = rentalEntityService.getById(id);
+        RentalEntity rentalEntity = entityService.getById(id);
         rentalEntity.setIsDeleted(true);
         rentalEntity.setDeletedAt(LocalDateTime.now());
-        rentalEntityService.update(rentalEntity);
+        entityService.update(rentalEntity);
     }
 
     @Override
     public List<RentalDTO> getAll() {
-        return rules.checkDataList(rentalEntityService.getAll()).stream()
+        return rules.checkDataList(entityService.getAll()).stream()
                 .map(rentalEntity -> mapper.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override
     public List<RentalDTO> getAllByDeletedState(boolean isDeleted) {
-        return rules.checkDataList(rentalEntityService.getAllByDeletedState(isDeleted)).stream()
+        return rules.checkDataList(entityService.getAllByDeletedState(isDeleted)).stream()
                 .map(rentalEntity -> mapper.forResponse()
                         .map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override //Tarihler arasında çakışan ve aktif olan rental kayıtları.
     public List<RentalDTO> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
-        return rules.checkDataList(rentalEntityService.getAllOverlappingRentals(startDate, endDate)).stream().map(rentalEntity ->
+        return rules.checkDataList(entityService.getAllOverlappingRentals(startDate, endDate)).stream().map(rentalEntity ->
                 mapper.forResponse().map(rentalEntity, RentalDTO.class)).toList();
     }
 
     //--------------------------------Local Methods--------------------------------
+
+    private RentalDTO mapToDTO(RentalEntity rentalEntity) {
+        return mapper.forResponse().map(rentalEntity, RentalDTO.class);
+    }
 
     private ShowRentalResponse convertToShowRentalResponse(ShowRentalRequest showRentalRequest) {
         // indirim işlemleri sonucu totalPrice hesaplama

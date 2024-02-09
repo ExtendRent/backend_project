@@ -20,11 +20,9 @@ public class ReturnRentalRequest {
     @NotBlank
     @NotNull(message = "return date cannot be null")
     LocalDate returnDate;
-
     @Min(value = 1, message = "rental ID must be greater than 0")
     @NotNull(message = "rental ID cannot be null")
-    private int rentalEntityId;
-
+    private int id;
     @Min(value = 0, message = "End kilometer must be greater than or equal to 0")
     @Pattern(regexp = "^[0-9]+$", message = "Kilometre sadece sayılardan oluşmalıdır.")
     @NotNull(message = "End kilometer cannot be null")

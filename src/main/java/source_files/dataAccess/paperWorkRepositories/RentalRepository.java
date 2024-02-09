@@ -23,4 +23,6 @@ public interface RentalRepository extends JpaRepository<RentalEntity, Integer> {
             @Param("endDate") LocalDate endDate
     );
 
+    List<RentalEntity> findAllByCustomerEntity_Id(int customerId);
+
 }

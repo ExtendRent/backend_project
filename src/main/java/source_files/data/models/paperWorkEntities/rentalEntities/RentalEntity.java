@@ -51,6 +51,7 @@ public class RentalEntity extends Item {
 
     @Column(name = "return_date")
     private LocalDate returnDate = null;
+
     @Column(name = "is_active")
     private boolean isActive = true;
 
