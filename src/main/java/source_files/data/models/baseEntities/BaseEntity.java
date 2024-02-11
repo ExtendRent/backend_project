@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -31,15 +32,14 @@ public class BaseEntity {
     @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
 
-    @PrePersist //classlar oluşmadan çalısır
+    @PrePersist
     private void beforeCreate() {
-        createdDate = LocalDateTime.now();
+        createdDate = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
     }
 
-    @PreUpdate //classlar oluşmadan çalısır
+    @PreUpdate
     private void beforeUpdate() {
-        lastModified = LocalDateTime.now();
+        lastModified = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
     }
-
 
 }
