@@ -78,7 +78,7 @@ public class CarEntityManager implements CarEntityService {
     @Override
     public List<CarEntity> getAllFiltered(
             Integer startPrice, Integer endPrice,
-            Boolean isDeleted, Integer statusId,
+            Integer statusId,
             Integer colorId, Integer seat,
             Integer luggage, Integer modelId,
             Integer startYear, Integer endYear, Integer brandId,
@@ -86,8 +86,8 @@ public class CarEntityManager implements CarEntityService {
 
         return carRepository.findAllFiltered(
                 startPrice, endPrice,
-                isDeleted, statusId,
-                colorId, seat, luggage,
+                statusId, colorId,
+                seat, luggage,
                 modelId, startYear,
                 endYear, brandId, fuelTypeId, shiftTypeId);
     }

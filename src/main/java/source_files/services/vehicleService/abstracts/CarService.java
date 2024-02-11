@@ -20,14 +20,13 @@ public interface CarService {
 
     List<CarDTO> getAll();
 
-    List<CarDTO> getAllWithLogin(Integer customerId);
-
-    List<CarDTO> getAllFiltered(Integer customerID, LocalDate startDate, LocalDate endDate,
+    List<CarDTO> getAllFiltered(Integer customerID, Boolean licenseSuitable,
+                                LocalDate startDate, LocalDate endDate,
                                 Integer startPrice, Integer endPrice,
                                 Boolean isDeleted, Integer statusId,
                                 Integer colorId, Integer seat, Integer luggage, Integer modelId,
-                                Integer startYear, Integer endYear, Integer brandId,
-                                Integer fuelTypeID, Integer shiftTypeID);
+                                Integer startYear, Integer endYear,
+                                Integer brandId, Integer fuelTypeID, Integer shiftTypeID);
 
     List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId);
 

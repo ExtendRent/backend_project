@@ -79,25 +79,6 @@ public class CarManager implements CarService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<CarDTO> getAllWithLogin(Integer customerId) {
-        List<CarDTO> carDTOList = getAll();
-        carDTOList.forEach(carDTO -> {
-            boolean isMatched = rules.isDrivingLicenseTypeSuitable(carDTO.getId(), customerId);
-            // Eğer araç kullanıcının lisans tipine uygun değilse
-            // isLicenseTypeSuitable'ı false yap
-            // Buradaki amaç, bütün araçları getirmek fakat ehliyet uyuşmayan araçları işaretlemek.
-            carDTO.setIsLicenseTypeSuitable(isMatched);
-        });
-        return carDTOList;
-    }
-
-    @Override
-    public List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId) {
-        return rules.checkDataList(
-                rules.getCarEntityListByDrivingLicenseSuitable(carEntityService.getAll(), customerId)).stream().map(
-                carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
-    }
 
     @Override
     public List<CarDTO> getAllByDeletedState(boolean isDeleted) {
@@ -152,9 +133,15 @@ public class CarManager implements CarService {
         return mapToDTOList(availableCars);
     }
 
+    @Override
+    public List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId) {
+        return rules.checkDataList(
+                getCarEntityListByDrivingLicenseSuitable(carEntityService.getAll(), customerId)).stream().map(
+                carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+    }
 
     @Override
-    public List<CarDTO> getAllFiltered(Integer customerId,
+    public List<CarDTO> getAllFiltered(Integer customerId, Boolean licenseSuitable,
                                        LocalDate startDate, LocalDate endDate,
                                        Integer startPrice, Integer endPrice,
                                        Boolean isDeleted, Integer statusId,
@@ -165,19 +152,20 @@ public class CarManager implements CarService {
 
         List<CarEntity> filteredCars = carEntityService.getAllFiltered(
                 startPrice, endPrice,
-                isDeleted, statusId,
+                statusId,
                 colorId, seat, luggage,
                 modelId, startYear,
                 endYear, brandId,
                 fuelTypeId, shiftTypeId);
 
-        List<CarDTO> filteredCarsDTO = filteredCars.stream().map(this::mapToDTO).toList();
+        filteredCars = filterAvailableCars(filteredCars, startDate, endDate);
+        filteredCars = filterDeletedCars(filteredCars, isDeleted);
 
-        List<CarDTO> result = filteredCarsDTO.stream()
-                .filter(carDTO -> isCarAvailableBetween(carDTO.getId(), startDate, endDate))
-                .toList();
+        if (licenseSuitable != null && licenseSuitable) {
+            filteredCars = getCarEntityListByDrivingLicenseSuitable(filteredCars, customerId);
+        }
 
-        return rules.checkDataList(result)
+        return rules.checkDataList(markAllForDrivingLicenseSuitable(filteredCars, customerId))
                 .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
@@ -216,12 +204,35 @@ public class CarManager implements CarService {
 
     //---------------------------------Local Methods------------------------------------------------------
 
+    public List<CarDTO> markAllForDrivingLicenseSuitable(List<CarEntity> cars, Integer customerId) {
+        List<CarDTO> carDTOList = mapToDTOList(cars);
+        carDTOList.forEach(carDTO -> {
+            boolean isMatched = rules.isDrivingLicenseTypeSuitable(carDTO.getId(), customerId);
+            // Eğer araç kullanıcının lisans tipine uygun değilse
+            // isLicenseTypeSuitable'ı false yap
+            // Buradaki amaç, bütün araçları getirmek fakat ehliyet uyuşmayan araçları işaretlemek.
+            carDTO.setIsLicenseTypeSuitable(isMatched);
+        });
+        return carDTOList;
+    }
+
+    private List<CarEntity> filterDeletedCars(List<CarEntity> filteredCars, Boolean isDeleted) {
+        if (isDeleted == null) {
+            return filteredCars;
+        }
+        return filteredCars.stream().filter(car -> car.getIsDeleted() == isDeleted).toList();
+    }
+
+    public List<CarEntity> getCarEntityListByDrivingLicenseSuitable(List<CarEntity> carEntityList, Integer customerId) {
+        //Müşteri giriş yapmış ise ve sadece ehliyetinin yettiği araçları isterse müşterinin ehliyet tipi ile araçlar karşılaştırılıp filtreleniyor.
+        return carEntityList.stream().filter(car -> rules.isDrivingLicenseTypeSuitable(car.getId(), customerId)).toList();
+    }
+
     private List<CarEntity> filterAvailableCars(List<CarEntity> cars, LocalDate startDate, LocalDate endDate) {
         return cars.stream()
                 .filter(car -> isCarAvailableBetween(car.getId(), startDate, endDate))
                 .collect(Collectors.toList());
     }
-
 
     public boolean isCarAvailableBetween(int carId, LocalDate startDate, LocalDate endDate) {
         startDate = rules.fixStartDate(startDate);

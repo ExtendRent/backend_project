@@ -102,11 +102,6 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return list;
     }
 
-    public List<CarEntity> getCarEntityListByDrivingLicenseSuitable(List<CarEntity> carEntityList, Integer customerId) {
-        //Müşteri giriş yapmış ise müşterinin ehliyet tipi ile araçlar karşılaştırılıp filtreleniyor.
-        return carEntityList.stream().filter(car -> this.isDrivingLicenseTypeSuitable(car.getId(), customerId)).toList();
-    }
-
     public boolean isDrivingLicenseTypeSuitable(int carId, Integer customerId) {
         if (customerId != null) {
             CarEntity car = carEntityService.getById(carId);

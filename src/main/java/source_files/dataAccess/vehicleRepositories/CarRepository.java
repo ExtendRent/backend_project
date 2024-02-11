@@ -13,7 +13,6 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
     @Query("SELECT c FROM CarEntity c WHERE " +
             "(:startPrice IS NULL OR :startPrice <= c.rentalPrice) AND " +
             "(:endPrice IS NULL OR :endPrice >= c.rentalPrice) AND " +
-            "(:isDeleted IS NULL OR :isDeleted = c.isDeleted) AND " +
             "(:statusId IS NULL OR :statusId = c.vehicleStatusEntity.id) AND " +
             "(:colorId IS NULL OR :colorId = c.colorEntity.id) AND " +
             "(:seat IS NULL OR :seat = c.seat) AND " +
@@ -28,10 +27,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
             @Param("startPrice") Integer startPrice,
             @Param("endPrice") Integer endPrice,
-
-            @Param("isDeleted") Boolean isDeleted,
             @Param("statusId") Integer statusId,
-
             @Param("colorId") Integer colorId,
             @Param("seat") Integer seat,
             @Param("luggage") Integer luggage,
