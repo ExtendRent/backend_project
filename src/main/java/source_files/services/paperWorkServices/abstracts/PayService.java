@@ -1,4 +1,4 @@
-package source_files.services.paperWorkServices.payment;
+package source_files.services.paperWorkServices.abstracts;
 
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 

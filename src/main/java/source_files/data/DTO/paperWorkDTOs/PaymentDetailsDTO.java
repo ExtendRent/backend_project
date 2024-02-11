@@ -3,14 +3,16 @@ package source_files.data.DTO.paperWorkDTOs;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Getter
 @Setter
 public class PaymentDetailsDTO {
     int id;
+    int paymentTypeEntityId;
     double amount;
-    PaymentTypeDTO paymentTypeDTO;
-    LocalDate createdDate;
+    String PaymentTypeEntityName;
+    LocalDateTime createdDate;
+    boolean isDeleted;
 }

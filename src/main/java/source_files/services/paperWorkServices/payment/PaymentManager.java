@@ -12,6 +12,8 @@ import source_files.services.entityServices.abstracts.paperWorkAbstracts.Payment
 import source_files.services.paperWorkServices.abstracts.PaymentService;
 import source_files.services.systemServices.SysPaymentDetailsManager;
 
+import java.time.LocalDateTime;
+
 import static source_files.data.types.itemTypes.ItemType.PAYMENT_DETAILS;
 import static source_files.exception.exceptionTypes.PaymentExceptionType.*;
 
@@ -34,7 +36,6 @@ public class PaymentManager implements PaymentService {
                 case CREDIT_CARD:
                     return payWithCreditCard(createRentalRequest, rentalEntity);
                 case CASH:
-                    break;
                 case BANK_MONEY_TRANSFER:
                     break;
             }
@@ -54,19 +55,25 @@ public class PaymentManager implements PaymentService {
                                 paymentBusinessRules.fixCreditCardInformation(createRentalRequest.getCreditCardInformation())
                         ))
         ) {
-            return createPaymentDetailsEntity(createRentalRequest, rentalEntity);
+            return createPaymentDetailsEntity(createRentalRequest, rentalEntity, false);
         } else {
+            createPaymentDetailsEntity(createRentalRequest, rentalEntity, true);
             throw new PaymentException(PAYMENT_REJECTED, "Ödeme Banka Tarafından Reddedildi.");
         }
     }
 
-    private PaymentDetailsEntity createPaymentDetailsEntity(CreateRentalRequest createRentalRequest, RentalEntity rentalEntity) {
+    private PaymentDetailsEntity createPaymentDetailsEntity(CreateRentalRequest createRentalRequest,
+                                                            RentalEntity rentalEntity, boolean isRejected) {
         PaymentDetailsEntity paymentDetails = new PaymentDetailsEntity(
                 createRentalRequest.getAmount(),
                 paymentTypeService.getById(createRentalRequest.getPaymentTypeId())
         );
         paymentDetails.setItemType(PAYMENT_DETAILS);
         paymentDetails.setRentalEntity(rentalEntity);
+        if (isRejected) {
+            paymentDetails.setIsDeleted(true);
+            paymentDetails.setDeletedAt(LocalDateTime.now());
+        }
         return sysPaymentDetailsManager.create(paymentDetails);
     }
 

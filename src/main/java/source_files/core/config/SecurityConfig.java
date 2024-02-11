@@ -61,6 +61,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/vehicle-statuses/**").permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/drivingLicenseType/**").permitAll()
+                        .requestMatchers("/api/v1/paymentDetails/**").permitAll()
 
                         .anyRequest().authenticated()
                 )

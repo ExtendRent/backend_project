@@ -174,7 +174,7 @@ public class CarManager implements CarService {
         List<CarDTO> filteredCarsDTO = filteredCars.stream().map(this::mapToDTO).toList();
 
         List<CarDTO> result = filteredCarsDTO.stream()
-                .filter(carDTO -> isCarAvailableBetween(carDTO.getId(), endDate, startDate))
+                .filter(carDTO -> isCarAvailableBetween(carDTO.getId(), startDate, endDate))
                 .toList();
 
         return rules.checkDataList(result)
@@ -225,6 +225,7 @@ public class CarManager implements CarService {
 
     public boolean isCarAvailableBetween(int carId, LocalDate startDate, LocalDate endDate) {
         startDate = rules.fixStartDate(startDate);
+        endDate = rules.fixEndDate(startDate, endDate);
         rules.checkDates(startDate, endDate);
 
         CarEntity car = carEntityService.getById(carId);

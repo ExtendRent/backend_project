@@ -11,15 +11,12 @@ import source_files.data.requests.BaseRequest;
 @Builder
 public class UpdatePaymentDetailsRequest extends BaseRequest {
 
-    @NotNull
+    @NotNull(message = "Id null geçilemez")
     private int id;
 
-    @NotNull
+    @NotNull(message = "tutar null geçilemez")
     private double amount;
 
     @NotNull(message = "Ödeme tipi null geçilemez")
     private int paymentTypeEntityId;
-
-    @NotNull(message = "aktiflik null geçilemez")
-    private boolean isActive;
 }

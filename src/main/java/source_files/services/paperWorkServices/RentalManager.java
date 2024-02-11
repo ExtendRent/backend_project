@@ -93,7 +93,7 @@ public class RentalManager implements RentalService {
         CarEntity carEntity = rentalEntity.getCarEntity();
 
         rentalEntity.setPaymentDetailsEntity(sysPaymentDetailsService.update(
-                rules.createUpdatePaymentDetailsRequest(returnRentalRequest)));
+                rules.updatePaymentDetailsToFinal(returnRentalRequest)));
 
         rentalEntity.setEndKilometer(returnRentalRequest.getEndKilometer());
         rentalEntity.setActive(false);

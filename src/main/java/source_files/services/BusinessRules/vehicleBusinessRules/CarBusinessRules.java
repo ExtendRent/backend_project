@@ -88,6 +88,10 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return this.setStartDate(startDate);
     }
 
+    public LocalDate fixEndDate(LocalDate startDate, LocalDate endDate) {
+        return this.setEndDate(startDate,endDate);
+    }
+
     //----------------------------METHODS--------------------------------
 
     @Override
@@ -146,6 +150,13 @@ public class CarBusinessRules implements BaseBusinessRulesService {
             }
         }
         return startDate;
+    }
+
+    private LocalDate setEndDate(LocalDate startDate,LocalDate endDate) {
+        if (endDate == null) {
+            endDate = startDate.plusDays(1);
+        }
+        return endDate;
     }
 
     private void checkTotalRentalDays(LocalDate startDate, LocalDate endDate) {

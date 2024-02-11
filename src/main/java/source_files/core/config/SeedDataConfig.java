@@ -257,6 +257,16 @@ public class SeedDataConfig implements CommandLineRunner {
                     .discountCode("HOSGELDIN")
                     .creditCardInformation(creditCardInformation)
                     .build());
+
+            rentalService.create(CreateRentalRequest.builder()
+                    .customerEntityId(2).carEntityId(2)
+                    .amount(1200.00)
+                    .startDate(LocalDate.parse("2024-03-20"))
+                    .endDate(LocalDate.parse("2024-03-25"))
+                    .paymentTypeId(1)
+                    .discountCode("PAIR5")
+                    .creditCardInformation(creditCardInformation)
+                    .build());
         }
     }
 }

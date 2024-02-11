@@ -7,7 +7,6 @@ import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
-import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentDetailsRequest;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.NotSuitableException;
 import source_files.exception.ValidationException;
@@ -79,22 +78,19 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     //----------------------------METHODS--------------------------------
 
 
-    public UpdatePaymentDetailsRequest createUpdatePaymentDetailsRequest(ReturnRentalRequest returnRentalRequest) {
+    public PaymentDetailsEntity updatePaymentDetailsToFinal(ReturnRentalRequest returnRentalRequest) {
         RentalEntity rentalEntity = this.rentalEntityManager.getById(returnRentalRequest.getId());
-        UpdatePaymentDetailsRequest updatePaymentDetailsRequest = new UpdatePaymentDetailsRequest();
 
         PaymentDetailsEntity paymentDetailsEntity = rentalEntity.getPaymentDetailsEntity();
 
-        updatePaymentDetailsRequest.setId(paymentDetailsEntity.getId());
-
-        updatePaymentDetailsRequest.setPaymentTypeEntityId(paymentDetailsEntity.getPaymentTypeEntity().getId());
+        paymentDetailsEntity.setId(paymentDetailsEntity.getId());
         //TODO  calculate total final amount kısmında hata var. cezalı hesaplamayı yanlış yapıyor.
 
-        updatePaymentDetailsRequest.setAmount(
+        paymentDetailsEntity.setAmount(
                 this.calculateReturnFinalAmount(returnRentalRequest
                         , this.calculateTotalRentalDays(rentalEntity.getStartDate(), rentalEntity.getEndDate())));
 
-        return updatePaymentDetailsRequest;
+        return paymentDetailsEntity;
     }
 
     public void checkDrivingLicenseType(int carId, Integer customerId) {
