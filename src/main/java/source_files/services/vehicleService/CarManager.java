@@ -37,9 +37,7 @@ public class CarManager implements CarService {
     @Override
     public void create(CreateCarRequest createCarRequest) {
 
-        //CarEntity carEntity = mapper.forRequest().map(createCarRequest, CarEntity.class); //ESKİ KOD !
-
-        CarEntity carEntity = mapper.forRequest().map(rules                 //YENİ KOD
+        CarEntity carEntity = mapper.forRequest().map(rules
                 .checkCreateCarRequest(rules.fixCreateCarRequest(createCarRequest)), CarEntity.class);
 
         carEntity.setVehicleType(CAR);
