@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.Status.DefaultUserStatus.PENDING_VERIFYING;
-import static source_files.data.types.userTypes.UserRole.EMPLOYEE;
+import static source_files.data.enums.Status.DefaultUserStatus.PENDING_VERIFYING;
+import static source_files.data.enums.types.userTypes.UserRole.EMPLOYEE;
 
 @Service
 @RequiredArgsConstructor

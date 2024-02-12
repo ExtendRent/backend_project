@@ -1,4 +1,4 @@
-package source_files.data.Status;
+package source_files.data.enums.Status;
 
 public enum DefaultVehicleStatus {
     AVAILABLE("Kullanılabilir"),

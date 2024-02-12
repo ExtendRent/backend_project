@@ -8,7 +8,7 @@ import lombok.Setter;
 import source_files.data.models.DrivingLicenseTypeEntity;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.types.userTypes.CustomerType;
+import source_files.data.enums.types.userTypes.CustomerType;
 
 import java.util.List;
 

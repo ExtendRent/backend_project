@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
-import source_files.data.Status.DefaultVehicleStatus;
+import source_files.data.enums.Status.DefaultVehicleStatus;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
@@ -21,8 +21,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.Status.DefaultVehicleStatus.*;
-import static source_files.data.types.itemTypes.VehicleType.CAR;
+import static source_files.data.enums.Status.DefaultVehicleStatus.*;
+import static source_files.data.enums.types.itemTypes.VehicleType.CAR;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICLE_STATUS_NOT_FOUND;
 
 @Service

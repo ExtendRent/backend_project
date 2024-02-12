@@ -16,7 +16,4 @@ public class UpdatePaymentDetailsRequest extends BaseRequest {
 
     @NotNull(message = "tutar null geçilemez")
     private double amount;
-
-    @NotNull(message = "Ödeme tipi null geçilemez")
-    private int paymentTypeEntityId;
 }

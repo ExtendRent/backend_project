@@ -14,7 +14,7 @@ import source_files.services.systemServices.SysPaymentDetailsManager;
 
 import java.time.LocalDateTime;
 
-import static source_files.data.types.itemTypes.ItemType.PAYMENT_DETAILS;
+import static source_files.data.enums.types.itemTypes.ItemType.PAYMENT_DETAILS;
 import static source_files.exception.exceptionTypes.PaymentExceptionType.*;
 
 @Service

@@ -25,8 +25,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static source_files.data.Status.DefaultVehicleStatus.IN_USE;
-import static source_files.data.types.itemTypes.ItemType.RENTAL;
+import static source_files.data.enums.Status.DefaultVehicleStatus.IN_USE;
+import static source_files.data.enums.types.itemTypes.ItemType.RENTAL;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @Service

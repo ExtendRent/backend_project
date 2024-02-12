@@ -3,7 +3,7 @@ package source_files.data.requests.userRequests;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.userTypes.UserRole;
+import source_files.data.enums.types.userTypes.UserRole;
 
 @AllArgsConstructor
 @NoArgsConstructor

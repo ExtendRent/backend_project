@@ -12,7 +12,7 @@ import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntitySe
 
 import java.util.List;
 
-import static source_files.data.types.itemTypes.ItemType.DRIVING_LICENSE_TYPE;
+import static source_files.data.enums.types.itemTypes.ItemType.DRIVING_LICENSE_TYPE;
 
 @Service
 @RequiredArgsConstructor

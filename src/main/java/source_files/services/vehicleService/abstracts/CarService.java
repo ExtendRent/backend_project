@@ -1,7 +1,7 @@
 package source_files.services.vehicleService.abstracts;
 
 import source_files.data.DTO.vehicleDTOs.CarDTO;
-import source_files.data.Status.DefaultVehicleStatus;
+import source_files.data.enums.Status.DefaultVehicleStatus;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;

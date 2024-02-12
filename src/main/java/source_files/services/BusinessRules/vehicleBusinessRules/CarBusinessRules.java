@@ -89,7 +89,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     }
 
     public LocalDate fixEndDate(LocalDate startDate, LocalDate endDate) {
-        return this.setEndDate(startDate,endDate);
+        return this.setEndDate(startDate, endDate);
     }
 
     //----------------------------METHODS--------------------------------
@@ -147,7 +147,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         return startDate;
     }
 
-    private LocalDate setEndDate(LocalDate startDate,LocalDate endDate) {
+    private LocalDate setEndDate(LocalDate startDate, LocalDate endDate) {
         if (endDate == null) {
             endDate = startDate.plusDays(1);
         }

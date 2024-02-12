@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.types.itemTypes.ItemType.CAR_MODEL;
+import static source_files.data.enums.types.itemTypes.ItemType.CAR_MODEL;
 
 @Service
 @RequiredArgsConstructor

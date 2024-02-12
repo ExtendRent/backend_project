@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.Status.DefaultUserStatus;
+import source_files.data.enums.Status.DefaultUserStatus;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.userTypes.UserRole;
+import source_files.data.enums.types.userTypes.UserRole;
 
 @AllArgsConstructor
 @NoArgsConstructor

@@ -14,7 +14,7 @@ import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static source_files.data.types.itemTypes.ItemType.PAYMENT_TYPE;
+import static source_files.data.enums.types.itemTypes.ItemType.PAYMENT_TYPE;
 
 @Service
 @RequiredArgsConstructor

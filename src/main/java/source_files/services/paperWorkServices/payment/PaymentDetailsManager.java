@@ -17,7 +17,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static source_files.data.types.itemTypes.ItemType.PAYMENT_DETAILS;
+import static source_files.data.enums.types.itemTypes.ItemType.PAYMENT_DETAILS;
 
 @Service
 @RequiredArgsConstructor

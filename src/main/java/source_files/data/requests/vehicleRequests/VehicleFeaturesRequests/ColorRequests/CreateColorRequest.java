@@ -9,9 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.requests.BaseRequest;
-import source_files.data.types.itemTypes.ItemType;
+import source_files.data.enums.types.itemTypes.ItemType;
 
-import static source_files.data.types.itemTypes.ItemType.COLOR;
+import static source_files.data.enums.types.itemTypes.ItemType.COLOR;
 
 @Getter
 @Setter

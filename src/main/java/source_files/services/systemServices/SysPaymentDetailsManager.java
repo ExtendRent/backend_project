@@ -8,7 +8,7 @@ import source_files.exception.DataNotFoundException;
 
 import java.util.List;
 
-import static source_files.data.types.itemTypes.ItemType.PAYMENT_DETAILS;
+import static source_files.data.enums.types.itemTypes.ItemType.PAYMENT_DETAILS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_DATA_NOT_FOUND;
 
 @Service

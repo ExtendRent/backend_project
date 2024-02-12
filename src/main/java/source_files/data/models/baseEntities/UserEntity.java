@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import source_files.data.Status.DefaultUserStatus;
-import source_files.data.types.userTypes.UserRole;
+import source_files.data.enums.Status.DefaultUserStatus;
+import source_files.data.enums.types.userTypes.UserRole;
 
 import java.util.Collection;
 import java.util.List;

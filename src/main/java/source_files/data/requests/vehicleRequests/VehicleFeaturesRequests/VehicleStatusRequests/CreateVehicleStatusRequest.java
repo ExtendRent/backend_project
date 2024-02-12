@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.Status.DefaultVehicleStatus;
+import source_files.data.enums.Status.DefaultVehicleStatus;
 
 @Getter
 @Setter

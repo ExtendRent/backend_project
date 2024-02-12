@@ -3,8 +3,8 @@ package source_files.data.requests.auth;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import source_files.data.types.itemTypes.DefaultCarDrivingLicenseType;
-import source_files.data.types.userTypes.UserRole;
+import source_files.data.enums.types.itemTypes.DefaultCarDrivingLicenseType;
+import source_files.data.enums.types.userTypes.UserRole;
 
 import java.util.List;
 

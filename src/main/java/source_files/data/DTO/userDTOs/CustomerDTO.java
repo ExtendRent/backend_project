@@ -1,7 +1,7 @@
 package source_files.data.DTO.userDTOs;
 
 import lombok.*;
-import source_files.data.types.userTypes.UserRole;
+import source_files.data.enums.types.userTypes.UserRole;
 
 import java.util.List;
 
