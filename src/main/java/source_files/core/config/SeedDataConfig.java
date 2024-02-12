@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.Status.DefaultVehicleStatus;
+import source_files.data.enums.DefaultCarSegment;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.requests.CreateDrivingLicenseTypeRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
@@ -18,6 +19,7 @@ import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarSegmentRequests.CreateCarSegmentRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
@@ -63,6 +65,8 @@ public class SeedDataConfig implements CommandLineRunner {
     private final FuelTypeService fuelTypeService;
     private final VehicleStatusService vehicleStatusService;
 
+    private final CarSegmentService carSegmentService;
+
     @Override
     public void run(String... args) {
         try {
@@ -70,6 +74,14 @@ public class SeedDataConfig implements CommandLineRunner {
         } catch (DataNotFoundException e) {
             for (DefaultPaymentType paymentType : DefaultPaymentType.getAll()) {
                 paymentTypeService.create(new CreatePaymentTypeRequest(paymentType.getLabel(), paymentType, true));
+            }
+        }
+
+        try {
+            carSegmentService.getAll();
+        } catch (DataNotFoundException e) {
+            for (DefaultCarSegment carSegment : DefaultCarSegment.getAll()) {
+                carSegmentService.create(new CreateCarSegmentRequest(carSegment.getLabel()));
             }
         }
 
