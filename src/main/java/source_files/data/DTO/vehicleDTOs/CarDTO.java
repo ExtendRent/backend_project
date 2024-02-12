@@ -20,8 +20,10 @@ public class CarDTO {
     int carBodyTypeEntityId;
     int expectedMinDrivingLicenseTypeId;
     int vehicleStatusEntityId;
+    int carSegmentEntityId;
 
-    String VehicleStatusEntityName;
+    String carSegmentEntityName;
+    String vehicleStatusEntityName;
     Boolean isLicenseTypeSuitable = true;
     String carModelEntityBrandEntityName;
     String carModelEntityName;

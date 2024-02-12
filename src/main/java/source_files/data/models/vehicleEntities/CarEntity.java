@@ -9,6 +9,7 @@ import source_files.data.models.baseEntities.Vehicle;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
+import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarSegmentEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 
 import java.util.List;
@@ -29,6 +30,10 @@ public class CarEntity extends Vehicle {
     @JoinColumn(name = "body_type_id")
     private CarBodyTypeEntity carBodyTypeEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "car_segment_id")
+    private CarSegmentEntity carSegmentEntity;
+
     @Column(name = "license_plate", unique = true)
     private String licensePlate;
 
@@ -41,8 +46,5 @@ public class CarEntity extends Vehicle {
 
     @OneToMany(mappedBy = "carEntity", fetch = FetchType.EAGER)
     private List<RentalEntity> rentalList;
-
-    //todo : shot tipinde minFindexRate diye bir alan ekledi hoca araba kiralamalarda kullanılıyormuş
-
 
 }

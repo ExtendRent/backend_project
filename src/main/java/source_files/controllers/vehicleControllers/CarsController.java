@@ -54,7 +54,7 @@ public class CarsController {
         );
     }
 
-    @GetMapping("/filtered")
+    @GetMapping("/filter")
     public ResponseEntity<TResponse<List<CarDTO>>> getAllFiltered(
             @RequestParam(name = "customerId", required = false) Integer customerId,
             @RequestParam(name = "licenseSuitable", required = false) Boolean licenseSuitable,
@@ -72,7 +72,8 @@ public class CarsController {
             @RequestParam(name = "startYear", required = false) Integer startYear,
             @RequestParam(name = "endYear", required = false) Integer endYear,
             @RequestParam(name = "isDeleted", required = false) Boolean isDeleted,
-            @RequestParam(name = "statusId", required = false) Integer statusId
+            @RequestParam(name = "statusId", required = false) Integer statusId,
+            @RequestParam(name = "segmentId", required = false) Integer segmentId
 
     ) {
         List<CarDTO> filteredCars = carService.getAllFiltered(
@@ -82,7 +83,7 @@ public class CarsController {
                 statusId, colorId, seat, luggage,
                 modelId, startYear, endYear,
                 brandId, fuelTypeId,
-                shiftTypeId);
+                shiftTypeId, segmentId);
         return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
                 .response(filteredCars)
                 .build(), HttpStatus.OK

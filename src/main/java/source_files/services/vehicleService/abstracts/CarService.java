@@ -26,7 +26,7 @@ public interface CarService {
                                 Boolean isDeleted, Integer statusId,
                                 Integer colorId, Integer seat, Integer luggage, Integer modelId,
                                 Integer startYear, Integer endYear,
-                                Integer brandId, Integer fuelTypeID, Integer shiftTypeID);
+                                Integer brandId, Integer fuelTypeID, Integer shiftTypeID, Integer segmentId);
 
     List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId);
 

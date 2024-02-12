@@ -30,6 +30,10 @@ public class UpdateCarRequest {
     @Min(1)
     int colorEntityId;
 
+    @NotNull(message = "segmentId null olamaz")
+    @Min(1)
+    int carSegmentEntityId;
+
     @NotNull(message = "yıl null olamaz.")
     @Min(value = 2005, message = "Yıl en düşük 2005 olmalıdır.")
     @Max(value = 2024, message = "Yıl en yüksek 2024 olmalıdır.")

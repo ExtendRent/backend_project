@@ -82,14 +82,15 @@ public class CarEntityManager implements CarEntityService {
             Integer colorId, Integer seat,
             Integer luggage, Integer modelId,
             Integer startYear, Integer endYear, Integer brandId,
-            Integer fuelTypeId, Integer shiftTypeId) {
+            Integer fuelTypeId, Integer shiftTypeId, Integer segmentId) {
 
         return carRepository.findAllFiltered(
                 startPrice, endPrice,
                 statusId, colorId,
                 seat, luggage,
                 modelId, startYear,
-                endYear, brandId, fuelTypeId, shiftTypeId);
+                endYear, brandId, fuelTypeId,
+                shiftTypeId, segmentId);
     }
 
     @Override

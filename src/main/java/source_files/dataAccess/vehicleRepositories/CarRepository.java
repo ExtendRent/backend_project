@@ -22,7 +22,8 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
             "(:endYear IS NULL OR :endYear >= c.year) AND " +
             "(:brandId IS NULL OR :brandId = c.carModelEntity.brandEntity.id) AND " +
             "(:fuelTypeId IS NULL OR :fuelTypeId = c.fuelTypeEntity.id) AND " +
-            "(:shiftTypeId IS NULL OR :shiftTypeId = c.shiftTypeEntity.id)")
+            "(:shiftTypeId IS NULL OR :shiftTypeId = c.shiftTypeEntity.id) AND " +
+            "(:segmentId IS NULL OR :segmentId = c.carSegmentEntity.id)")
     List<CarEntity> findAllFiltered(
 
             @Param("startPrice") Integer startPrice,
@@ -36,7 +37,8 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
             @Param("endYear") Integer endYear,
             @Param("brandId") Integer brandId,
             @Param("fuelTypeId") Integer fuelTypeId,
-            @Param("shiftTypeId") Integer shiftTypeId);
+            @Param("shiftTypeId") Integer shiftTypeId,
+            @Param("segmentId") Integer segmentId);
 
     List<CarEntity> findAllByCarModelEntity_BrandEntity_Id(int brandEntityId);
 

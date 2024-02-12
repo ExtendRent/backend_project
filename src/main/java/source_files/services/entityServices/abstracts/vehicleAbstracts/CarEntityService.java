@@ -30,10 +30,10 @@ public interface CarEntityService {
 
     List<CarEntity> getAllFiltered(
             Integer startPrice, Integer endPrice,
-             Integer statusId, Integer colorId,
+            Integer statusId, Integer colorId,
             Integer seat, Integer luggage, Integer modelId,
             Integer startYear, Integer endYear, Integer brandId,
-            Integer fuelTypeId, Integer shiftTypeId);
+            Integer fuelTypeId, Integer shiftTypeId, Integer segmentId);
 
     void delete(CarEntity carEntity);
 }

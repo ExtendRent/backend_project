@@ -195,6 +195,7 @@ public class SeedDataConfig implements CommandLineRunner {
                         .vehicleStatusEntityId(1)
                         .isAvailable(true)
                         .expectedMinDrivingLicenseTypeId(x)
+                        .carSegmentEntityId(i)
                         .build());
             }
         }

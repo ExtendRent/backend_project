@@ -146,7 +146,7 @@ public class CarManager implements CarService {
                                        Integer colorId,
                                        Integer seat, Integer luggage, Integer modelId,
                                        Integer startYear, Integer endYear, Integer brandId,
-                                       Integer fuelTypeId, Integer shiftTypeId) {
+                                       Integer fuelTypeId, Integer shiftTypeId, Integer segmentId) {
 
         List<CarEntity> filteredCars = carEntityService.getAllFiltered(
                 startPrice, endPrice,
@@ -154,7 +154,7 @@ public class CarManager implements CarService {
                 colorId, seat, luggage,
                 modelId, startYear,
                 endYear, brandId,
-                fuelTypeId, shiftTypeId);
+                fuelTypeId, shiftTypeId, segmentId);
 
         filteredCars = filterAvailableCars(filteredCars, startDate, endDate);
         filteredCars = filterDeletedCars(filteredCars, isDeleted);

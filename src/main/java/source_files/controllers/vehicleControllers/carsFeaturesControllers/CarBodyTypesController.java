@@ -37,7 +37,7 @@ public class CarBodyTypesController {
         );
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<TResponse<List<CarBodyTypeDTO>>> getAll() {
         return new ResponseEntity<>(TResponse.<List<CarBodyTypeDTO>>tResponseBuilder()
                 .response(this.carBodyTypeService.getAll())
@@ -62,7 +62,7 @@ public class CarBodyTypesController {
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping({"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
         this.carBodyTypeService.delete(id, isHardDelete);
