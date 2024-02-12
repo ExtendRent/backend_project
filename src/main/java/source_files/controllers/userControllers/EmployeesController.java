@@ -36,7 +36,7 @@ public class EmployeesController {
         );
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<TResponse<List<EmployeeDTO>>> getAll() {
         return new ResponseEntity<>(TResponse.<List<EmployeeDTO>>tResponseBuilder()
                 .response(this.employeeService.getAll())

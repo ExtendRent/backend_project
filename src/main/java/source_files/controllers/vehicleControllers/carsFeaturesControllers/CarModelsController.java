@@ -44,7 +44,7 @@ public class CarModelsController {
         );
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<TResponse<List<CarModelDTO>>> getAll() {
         return new ResponseEntity<>(TResponse.<List<CarModelDTO>>tResponseBuilder()
                 .response(this.carModelService.getAll())

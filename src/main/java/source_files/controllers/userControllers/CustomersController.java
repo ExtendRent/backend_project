@@ -36,7 +36,7 @@ public class CustomersController {
         );
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<TResponse<List<CustomerDTO>>> getAll() {
         return new ResponseEntity<>(TResponse.<List<CustomerDTO>>tResponseBuilder()
                 .response(this.customerService.getAll())

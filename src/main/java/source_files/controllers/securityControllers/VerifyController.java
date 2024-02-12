@@ -12,7 +12,6 @@ import source_files.data.responses.TResponse;
 @RequiredArgsConstructor
 public class VerifyController {
 
-    //TODO verify email endpointi.
     @GetMapping("/email")
     ResponseEntity<TResponse<JwtToken>> verifyEmailAddress(@RequestParam("token") String token) {
 
