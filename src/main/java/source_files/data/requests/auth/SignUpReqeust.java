@@ -3,10 +3,7 @@ package source_files.data.requests.auth;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import source_files.data.enums.types.itemTypes.DefaultCarDrivingLicenseType;
 import source_files.data.enums.types.userTypes.UserRole;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -37,7 +34,7 @@ public class SignUpReqeust {
 
     String drivingLicenseNumber;
 
-    List<DefaultCarDrivingLicenseType> defaultCarDrivingLicenseTypes;
+    int drivingLicenseTypeEntityId;
 
     @NotBlank
     @NotNull
