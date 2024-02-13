@@ -123,10 +123,10 @@ public class RentalManager implements RentalService {
 
     @Override
     public RentalDTO update(UpdateRentalRequest updateRentalRequest) {
-        return
-                mapper.forResponse().map(
-                        entityService.update(mapper.forRequest()
-                                .map(updateRentalRequest, RentalEntity.class)), RentalDTO.class);
+        RentalEntity rentalEntity = mapper.forRequest().map(updateRentalRequest, RentalEntity.class);
+        rentalEntity.setPaymentDetailsEntity(sysPaymentDetailsService.getById(
+                rentalEntity.getPaymentDetailsEntity().getId()));
+        return mapToDTO(entityService.update(rentalEntity));
     }
 
     @Override

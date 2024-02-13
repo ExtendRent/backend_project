@@ -1,10 +1,18 @@
 package source_files.data.requests.paperworkRequests.RentalRequests;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
+import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
+import source_files.data.models.userEntities.CustomerEntity;
+import source_files.data.models.vehicleEntities.CarEntity;
 
 import java.time.LocalDate;
 
@@ -17,26 +25,33 @@ public class UpdateRentalRequest {
     @NotNull(message = "id cannot be null")
     @Min(1)
     int id;
-
-    @NotNull(message = "CustomerId cannot be null")
-    @Min(value = 1, message = "CustomerId must be greater than 0")
-    private int customerEntityId;
-
-    @NotNull(message = "CarId cannot be null")
-    @Min(value = 1, message = "CarId must be greater than 0")
-    private int carEntityId;
-
-    @NotNull(message = "StartDate cannot be null")
-    @FutureOrPresent(message = "StartDate must be a future or present date")
-    private LocalDate startDate;
+    @Min(1)
+    @NotNull(message = "customer id cannot be null")
+    private int customerEntityId;//input olarak alınmayacak !!
+    @Min(1)
+    @NotNull(message = "car id cannot be null")
+    private int carEntityId;//input olarak alınmayacak !!
 
 
-    @NotNull(message = "EndDate cannot be null")
-    @FutureOrPresent(message = "EndDate must be a future or present date")
-    private LocalDate endDate;
+    @Min(1)
+    @NotNull(message = "payment details id cannot be null")
+    private int paymentDetailsEntityId; //input olarak alınmayacak !!
 
-    @NotNull(message = "StartKilometer cannot be null")
-    @Min(value = 0, message = "StartKilometer must be greater than or equal to 0")
-    @Pattern(regexp = "^[0-9]+$", message = "Kilometre sadece sayılardan oluşmalıdır.")
-    private int startKilometer;
+    @NotNull(message = "start date cannot be null")
+    private LocalDate startDate;//input olarak alınmayacak !!
+
+    @NotNull(message = "end date cannot be null")
+    private LocalDate endDate;//input olarak alınmayacak !!
+
+    private LocalDate returnDate;//input olarak alınmayacak !!
+
+    private Integer startKilometer;
+
+    private Integer endKilometer;
+
+    private Integer discountEntityId;//input olarak alınmayacak !!
+
+    @NotNull(message = "is active cannot be null")
+    private boolean isActive;
+
 }
