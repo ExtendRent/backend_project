@@ -18,7 +18,6 @@ public class SysPaymentDetailsManager implements SysPaymentDetailsService {
 
     @Override
     public PaymentDetailsEntity create(PaymentDetailsEntity paymentDetailsEntity) {
-        paymentDetailsEntity.setItemType(PAYMENT_DETAILS);
         return repository.save(paymentDetailsEntity);
     }
 
