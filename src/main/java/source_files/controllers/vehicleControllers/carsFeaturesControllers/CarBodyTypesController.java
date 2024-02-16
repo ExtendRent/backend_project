@@ -62,7 +62,7 @@ public class CarBodyTypesController {
         );
     }
 
-    @DeleteMapping({"id", "isHardDelete"})
+    @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
         this.carBodyTypeService.delete(id, isHardDelete);

@@ -44,11 +44,6 @@ public class AdminEntityManager implements AdminEntityService {
     }
 
     @Override
-    public List<AdminEntity> getAllBySalaryGreaterThanEqual(Double salary) {
-        return this.adminRepository.findBySalaryGreaterThanEqual(salary);
-    }
-
-    @Override
     public List<AdminEntity> getAllByDeletedState(boolean isDeleted) {
         return this.adminRepository.findAllByIsDeleted(isDeleted);
     }
@@ -58,13 +53,6 @@ public class AdminEntityManager implements AdminEntityService {
     public void delete(AdminEntity adminEntity) {
 
         this.adminRepository.delete(adminEntity);
-    }
-
-    @Override
-    public AdminEntity getByPhoneNumber(String phoneNumber) {
-        return this.adminRepository.findByPhoneNumber(phoneNumber).orElseThrow(
-                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı admin bulunamadı")
-        );
     }
 
     @Override

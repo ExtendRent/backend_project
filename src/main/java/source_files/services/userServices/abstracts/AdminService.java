@@ -16,10 +16,6 @@ public interface AdminService {
 
     List<AdminDTO> getAll();
 
-    List<AdminDTO> getAllBySalaryGreaterThanEqual(Double salary);
-
-    AdminDTO getByPhoneNumber(String phoneNumber);
-
     AdminDTO getByEmailAddress(String emailAddress);
 
     List<AdminDTO> getAllByDeletedState(boolean isDeleted);

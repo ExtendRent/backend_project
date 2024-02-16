@@ -61,11 +61,6 @@ public class BrandManager implements BrandService {
     }
 
     @Override
-    public BrandDTO getByName(String brandName) {
-        return modelMapperService.forResponse().map(entityService.getByName(brandName), BrandDTO.class);
-    }
-
-    @Override
     public List<BrandDTO> getAll() {
         return brandBusinessRules.checkDataList(entityService.getAll())
                 .stream().map(brand -> modelMapperService.forResponse()

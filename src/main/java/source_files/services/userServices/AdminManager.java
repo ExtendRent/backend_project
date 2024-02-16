@@ -73,20 +73,6 @@ public class AdminManager implements AdminService {
                         .map(admin, AdminDTO.class)).collect(Collectors.toList());
     }
 
-
-    @Override
-    public List<AdminDTO> getAllBySalaryGreaterThanEqual(Double salary) {
-        return this.rules.checkDataList(this.entityService.getAllBySalaryGreaterThanEqual(salary))
-                .stream().map(adminEntity -> mapper.forResponse().map(adminEntity, AdminDTO.class)).toList();
-    }
-
-
-    @Override
-    public AdminDTO getByPhoneNumber(String phoneNumber) {
-
-        return this.mapper.forResponse().map(entityService.getByPhoneNumber(phoneNumber), AdminDTO.class);
-    }
-
     @Override
     public AdminDTO getByEmailAddress(String emailAddress) {
         return this.mapper.forResponse()

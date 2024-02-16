@@ -52,14 +52,6 @@ public class BrandsController {
         );
     }
 
-    @GetMapping("/{brandName}")
-    public ResponseEntity<TResponse<BrandDTO>> getByBrandName(@PathVariable String brandName) {
-        return new ResponseEntity<>(TResponse.<BrandDTO>tResponseBuilder()
-                .response(this.brandService.getByName(brandName))
-                .build(), HttpStatus.OK
-        );
-    }
-
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<BrandDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
@@ -69,8 +61,8 @@ public class BrandsController {
         );
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> delete(
+    @DeleteMapping(params = {"id", "isHardDelete"})
+    public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
         this.brandService.delete(id, isHardDelete);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

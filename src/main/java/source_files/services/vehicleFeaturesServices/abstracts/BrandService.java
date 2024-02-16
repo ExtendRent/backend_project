@@ -14,8 +14,6 @@ public interface BrandService {
 
     BrandDTO getById(int id);
 
-    BrandDTO getByName(String brandName);
-
     List<BrandDTO> getAll();
 
     List<BrandDTO> getAllByDeletedState(boolean isDeleted);

@@ -47,7 +47,7 @@ public class DiscountsController {
         );
     }
 
-    @GetMapping("/{discountCode}")
+    @GetMapping("/code/{discountCode}")
     public ResponseEntity<TResponse<DiscountDTO>> getDiscountCodeByDiscountCodeStr(@PathVariable String discountCode) {
         return new ResponseEntity<>(TResponse.<DiscountDTO>tResponseBuilder()
                 .response(this.discountService.getByDiscountCode(discountCode))

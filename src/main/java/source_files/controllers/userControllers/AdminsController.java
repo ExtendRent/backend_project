@@ -50,24 +50,6 @@ public class AdminsController {
         );
     }
 
-    @GetMapping("/{phoneNumber}")
-    public ResponseEntity<TResponse<AdminDTO>> getByPhoneNumber(@PathVariable String phoneNumber) {
-        return ResponseEntity.ok(TResponse.<AdminDTO>tResponseBuilder()
-                .response(adminService.getByPhoneNumber(phoneNumber))
-                .build()
-        );
-    }
-
-    @GetMapping("/{salary}")
-    public ResponseEntity<TResponse<List<AdminDTO>>> getAllBySalaryGreaterThanEqual(@PathVariable Double salary) {
-        return new ResponseEntity<>(
-                TResponse.<List<AdminDTO>>tResponseBuilder().response(
-                        adminService.getAllBySalaryGreaterThanEqual(salary)
-                ).build(), HttpStatus.OK
-        );
-    }
-
-
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<AdminDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {

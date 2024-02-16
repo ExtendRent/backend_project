@@ -12,13 +12,9 @@ public interface AdminEntityService {
 
     AdminEntity getById(int id);
 
-    AdminEntity getByPhoneNumber(String phoneNumber);
-
     AdminEntity getByEmailAddress(String emailAddress);
 
     List<AdminEntity> getAll();
-
-    List<AdminEntity> getAllBySalaryGreaterThanEqual(Double salary);
 
     List<AdminEntity> getAllByDeletedState(boolean isDeleted);
 

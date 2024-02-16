@@ -44,7 +44,7 @@ public class ColorsController {
         );
     }
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<TResponse<List<ColorDTO>>> getAll() throws Exception {
         return new ResponseEntity<>(TResponse.<List<ColorDTO>>tResponseBuilder()
                 .response(this.colorService.getAll())

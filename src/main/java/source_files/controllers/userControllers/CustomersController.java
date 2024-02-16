@@ -53,7 +53,7 @@ public class CustomersController {
         );
     }
 
-    @GetMapping("/rentals/rentalHistory{customerId}")
+    @GetMapping("/rentals/{customerId}")
     public ResponseEntity<TResponse<List<RentalDTO>>> getRentalHistory(@PathVariable int customerId) {
         return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
                 .response(this.customerService.getRentalHistory(customerId))

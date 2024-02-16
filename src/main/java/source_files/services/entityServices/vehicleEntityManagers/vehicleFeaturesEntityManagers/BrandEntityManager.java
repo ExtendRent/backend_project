@@ -38,11 +38,6 @@ public class BrandEntityManager implements BrandEntityService {
     }
 
     @Override
-    public BrandEntity getByName(String brandName) {
-        return brandRespository.findByName(brandName);
-    }
-
-    @Override
     public void delete(BrandEntity brandEntity) {
         brandRespository.delete(brandEntity);
     }

@@ -12,8 +12,6 @@ public interface BrandEntityService {
 
     BrandEntity getById(int id);
 
-    BrandEntity getByName(String brandName);
-
     List<BrandEntity> getAll();
 
     List<BrandEntity> getAllByDeletedState(boolean isDeleted);

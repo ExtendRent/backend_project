@@ -113,13 +113,6 @@ public class RentalManager implements RentalService {
     }
 
     @Override
-    public List<RentalDTO> getAllByCustomerId(int customerId) {
-        return rules.checkDataList(entityService.getAllByCustomerId(customerId)).stream().map(
-                rentalEntity -> mapper.forResponse().map(rentalEntity, RentalDTO.class)
-        ).toList();
-    }
-
-    @Override
     public RentalDTO update(UpdateRentalRequest updateRentalRequest) {
         RentalEntity rentalEntity = mapper.forRequest().map(updateRentalRequest, RentalEntity.class);
         rentalEntity.setPaymentDetailsEntity(sysPaymentDetailsService.getById(

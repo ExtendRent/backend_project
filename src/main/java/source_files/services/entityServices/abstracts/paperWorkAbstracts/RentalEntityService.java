@@ -21,5 +21,4 @@ public interface RentalEntityService {
 
     List<RentalEntity> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate);
 
-    List<RentalEntity> getAllByCustomerId(int customerId);
 }

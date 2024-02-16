@@ -18,7 +18,6 @@ public class RentalEntityManager implements RentalEntityService {
 
     private final RentalRepository repository;
 
-
     @Override
     public RentalEntity create(RentalEntity rentalEntity) {
         return this.repository.save(rentalEntity);
@@ -54,10 +53,4 @@ public class RentalEntityManager implements RentalEntityService {
     public List<RentalEntity> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
         return repository.findOverlappingRentals(startDate, endDate);
     }
-
-    @Override
-    public List<RentalEntity> getAllByCustomerId(int customerId) {
-        return repository.findAllByCustomerEntity_Id(customerId);
-    }
-
 }

@@ -20,7 +20,6 @@ public interface RentalService {
 
     RentalDTO startRental(int rentalId);
 
-    List<RentalDTO> getAllByCustomerId(int customerId);
 
     RentalDTO update(UpdateRentalRequest updateRentalRequest);
 

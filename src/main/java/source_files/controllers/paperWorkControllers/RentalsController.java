@@ -27,7 +27,6 @@ public class RentalsController {
     PaymentTypeEntityService paymentTypeService;
     private RentalService rentalService;
 
-
     @PostMapping
     public ResponseEntity<Void> createRental(
             @Valid @RequestBody CreateRentalRequest createRentalRequest) {
@@ -56,14 +55,6 @@ public class RentalsController {
     public ResponseEntity<TResponse<List<RentalDTO>>> getAllRentals() {
         return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
                 .response(this.rentalService.getAll())
-                .build(), HttpStatus.OK
-        );
-    }
-
-    @GetMapping("/customers/{customerId}")
-    public ResponseEntity<TResponse<List<RentalDTO>>> getAllByCustomerId(@PathVariable Integer customerId) {
-        return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
-                .response(this.rentalService.getAllByCustomerId(customerId))
                 .build(), HttpStatus.OK
         );
     }
