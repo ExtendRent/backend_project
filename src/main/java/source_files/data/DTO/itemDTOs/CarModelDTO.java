@@ -14,4 +14,5 @@ public class CarModelDTO {
     int id;
     String name;
     String brandEntityName;
+    boolean isDeleted;
 }

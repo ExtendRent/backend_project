@@ -1,22 +1,23 @@
 package source_files.services.vehicleService.abstracts;
 
 import source_files.data.DTO.vehicleDTOs.CarDTO;
-import source_files.data.enums.Status.DefaultVehicleStatus;
+import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 public interface CarService {
 
-    void create(CreateCarRequest createCarRequest);
+    void create(CreateCarRequest createCarRequest) throws IOException;
 
     CarDTO getById(int id);
 
-    CarDTO update(UpdateCarRequest updateCarRequest);
+    CarDTO update(UpdateCarRequest updateCarRequest) throws IOException;
 
     List<CarDTO> getAll();
 
@@ -48,7 +49,7 @@ public interface CarService {
 
     boolean isCarAvailableBetween(int carId, LocalDate startDate, LocalDate endDate);
 
-    void delete(int id, boolean hardDelete);
+    void delete(int id, boolean hardDelete) throws IOException;
 
     void softDelete(int id);
 

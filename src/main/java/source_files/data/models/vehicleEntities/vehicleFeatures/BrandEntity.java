@@ -1,13 +1,12 @@
 package source_files.data.models.vehicleEntities.vehicleFeatures;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.Item;
+import source_files.data.models.imageEntities.BrandImageEntity;
 
 @Getter
 @Setter
@@ -21,6 +20,7 @@ public class BrandEntity extends Item {
     @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name = "logo_path")
-    private String logoImagePath;
+    @ManyToOne
+    @JoinColumn(name = "logo_path")
+    private BrandImageEntity brandImageEntity;
 }

@@ -1,4 +1,4 @@
-package source_files.data.enums.Status;
+package source_files.data.enums.defaultDataEnums.Status;
 
 public enum DefaultUserStatus {
     PENDING_VERIFYING("Onay Bekleniyor"),

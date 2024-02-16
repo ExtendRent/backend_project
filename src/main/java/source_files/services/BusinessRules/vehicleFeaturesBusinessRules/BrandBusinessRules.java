@@ -55,7 +55,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
 
     @Override
     public String fixName(String name) {
-        return name.trim().toLowerCase();
+        return name;
     }
 
     public void existsByName(String name) {

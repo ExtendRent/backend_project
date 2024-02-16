@@ -10,4 +10,5 @@ import lombok.*;
 public class CarBodyTypeDTO {
     int id;
     String name;
+    boolean isDeleted;
 }

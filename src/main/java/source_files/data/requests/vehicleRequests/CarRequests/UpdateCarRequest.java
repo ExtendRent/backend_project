@@ -3,8 +3,6 @@ package source_files.data.requests.vehicleRequests.CarRequests;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -54,8 +52,8 @@ public class UpdateCarRequest {
     @Min(value = 1, message = "Kilometre 1 den küçük olamaz.")
     int kilometer;
 
-    @NotNull(message = "imagePaths null olamaz")
-    List<String> imagePaths;
+    @NotNull(message = "imageId null olamaz")
+    int carImageEntityId;
 
     @NotNull(message = "beklenen ehliyet sınıfı null olamaz")
     int expectedMinDrivingLicenseTypeId;

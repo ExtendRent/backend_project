@@ -10,4 +10,5 @@ import lombok.*;
 public class ShiftTypeDTO {
     int id;
     String name;
+    boolean isDeleted;
 }

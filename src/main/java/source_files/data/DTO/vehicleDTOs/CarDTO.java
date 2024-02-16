@@ -2,8 +2,6 @@ package source_files.data.DTO.vehicleDTOs;
 
 import lombok.*;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -39,6 +37,7 @@ public class CarDTO {
     String licensePlate;
     int kilometer;
     String expectedMinDrivingLicenseTypeName;
-    List<String> imagesEntityImagePaths;
-
+    String imageEntityImageUrl;
+    boolean isDeleted;
+    boolean isAvailable;
 }

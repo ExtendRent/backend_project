@@ -1,0 +1,23 @@
+package source_files.exception;
+
+import lombok.Getter;
+import source_files.exception.exceptionTypes.FileExceptionType;
+
+@Getter
+public class FileException extends RuntimeException {
+
+    private final FileExceptionType fileExceptionType;
+
+    private String detail;
+
+    public FileException(FileExceptionType fileExceptionType, String detail) {
+        super(fileExceptionType.getMessage());
+        this.fileExceptionType = fileExceptionType;
+        this.detail = detail;
+    }
+
+    public FileException(FileExceptionType fileExceptionType) {
+        super(fileExceptionType.getMessage());
+        this.fileExceptionType = fileExceptionType;
+    }
+}

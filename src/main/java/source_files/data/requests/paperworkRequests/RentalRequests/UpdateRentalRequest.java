@@ -1,18 +1,8 @@
 package source_files.data.requests.paperworkRequests.RentalRequests;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.*;
-import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
-import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
-import source_files.data.models.userEntities.CustomerEntity;
-import source_files.data.models.vehicleEntities.CarEntity;
 
 import java.time.LocalDate;
 

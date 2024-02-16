@@ -39,4 +39,6 @@ public class SignUpReqeust {
     @NotBlank
     @NotNull
     UserRole authority;
+
+    int userImageEntityId;
 }

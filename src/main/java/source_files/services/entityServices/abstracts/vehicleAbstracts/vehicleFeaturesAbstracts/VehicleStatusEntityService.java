@@ -1,6 +1,6 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
-import source_files.data.enums.Status.DefaultVehicleStatus;
+import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
 
 import java.util.List;

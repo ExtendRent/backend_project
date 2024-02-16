@@ -15,64 +15,64 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_DA
 @Service
 public class CarEntityManager implements CarEntityService {
 
-    private final CarRepository carRepository;
+    private final CarRepository repository;
 
 
     @Override
-    public void create(CarEntity carEntity) {
-        this.carRepository.save(carEntity);
+    public CarEntity create(CarEntity carEntity) {
+        return repository.save(carEntity);
     }
 
     @Override
     public CarEntity update(CarEntity carEntity) {
-        return this.carRepository.save(carEntity);
+        return repository.save(carEntity);
     }
 
     @Override
     public CarEntity getById(int id) {
-        return this.carRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(CAR_DATA_NOT_FOUND, "Araç Bulunamadı"));
     }
 
     @Override
     public List<CarEntity> getAll() {
-        return this.carRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public List<CarEntity> getAllByDeletedState(boolean isDeleted) {
-        return this.carRepository.findAllByIsDeleted(isDeleted);
+        return repository.findAllByIsDeleted(isDeleted);
     }
 
     @Override
     public List<CarEntity> getAllByStatus(Integer statusId) {
-        return this.carRepository.findAllByVehicleStatusEntityId(statusId);
+        return repository.findAllByVehicleStatusEntityId(statusId);
     }
 
     @Override
     public List<CarEntity> getAllByColorId(int id) {
-        return this.carRepository.findAllByColorEntity_Id(id);
+        return repository.findAllByColorEntity_Id(id);
     }
 
     @Override
     public List<CarEntity> getAllByRentalPriceBetween(double startPrice, double endPrice) {
-        return this.carRepository.findAllByRentalPriceBetween(startPrice, endPrice);
+        return repository.findAllByRentalPriceBetween(startPrice, endPrice);
     }
 
 
     @Override
     public List<CarEntity> getAllByModelId(int id) {
-        return this.carRepository.findAllByCarModelEntity_Id(id);
+        return repository.findAllByCarModelEntity_Id(id);
     }
 
     @Override
     public List<CarEntity> getAllByYearBetween(int year1, int year2) {
-        return this.carRepository.findAllByYearBetween(year1, year2);
+        return repository.findAllByYearBetween(year1, year2);
     }
 
     @Override
     public List<CarEntity> getAllByBrandId(int brandId) {
-        return this.carRepository.findAllByCarModelEntity_BrandEntity_Id(brandId);
+        return repository.findAllByCarModelEntity_BrandEntity_Id(brandId);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class CarEntityManager implements CarEntityService {
             Integer startYear, Integer endYear, Integer brandId,
             Integer fuelTypeId, Integer shiftTypeId, Integer segmentId) {
 
-        return carRepository.findAllFiltered(
+        return repository.findAllFiltered(
                 startPrice, endPrice,
                 statusId, colorId,
                 seat, luggage,
@@ -95,6 +95,6 @@ public class CarEntityManager implements CarEntityService {
 
     @Override
     public void delete(CarEntity carEntity) {
-        this.carRepository.delete(carEntity);
+        repository.delete(carEntity);
     }
 }

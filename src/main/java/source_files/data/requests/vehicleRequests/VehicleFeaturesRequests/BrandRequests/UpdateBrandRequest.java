@@ -24,5 +24,5 @@ public class UpdateBrandRequest {
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Marka sadece harflerden oluşmalıdır.")
     String name;
 
-    String logoImagePath;
+    int brandImageEntityId;
 }

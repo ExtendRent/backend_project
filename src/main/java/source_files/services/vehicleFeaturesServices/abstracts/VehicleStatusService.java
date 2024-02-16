@@ -1,7 +1,7 @@
 package source_files.services.vehicleFeaturesServices.abstracts;
 
 import source_files.data.DTO.itemDTOs.VehicleStatusDTO;
-import source_files.data.enums.Status.DefaultVehicleStatus;
+import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
 

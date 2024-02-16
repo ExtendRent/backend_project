@@ -1,16 +1,13 @@
 package source_files.data.models.vehicleEntities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import source_files.data.models.baseEntities.Vehicle;
+import source_files.data.models.imageEntities.CarImageEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarSegmentEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 
 import java.util.List;
 
@@ -19,6 +16,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "cars")
 public class CarEntity extends Vehicle {
 
@@ -40,9 +38,9 @@ public class CarEntity extends Vehicle {
     @Column(name = "kilometer")
     private int kilometer;
 
-    @OneToOne(mappedBy = "carEntity"
-            , cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    private ImagesEntity imagesEntity;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "image_id")
+    private CarImageEntity carImageEntity;
 
     @OneToMany(mappedBy = "carEntity", fetch = FetchType.EAGER)
     private List<RentalEntity> rentalList;

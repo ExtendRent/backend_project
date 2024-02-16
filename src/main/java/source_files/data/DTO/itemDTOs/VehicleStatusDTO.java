@@ -10,4 +10,5 @@ import lombok.*;
 public class VehicleStatusDTO {
     int id;
     String name;
+    boolean isDeleted;
 }

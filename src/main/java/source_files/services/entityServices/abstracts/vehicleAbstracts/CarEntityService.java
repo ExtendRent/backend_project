@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CarEntityService {
 
-    void create(CarEntity carEntity);
+    CarEntity create(CarEntity carEntity);
 
     CarEntity update(CarEntity carEntity);
 

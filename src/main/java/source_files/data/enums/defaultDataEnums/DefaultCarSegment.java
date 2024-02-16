@@ -1,4 +1,4 @@
-package source_files.data.enums;
+package source_files.data.enums.defaultDataEnums;
 
 public enum DefaultCarSegment {
 
@@ -6,8 +6,7 @@ public enum DefaultCarSegment {
     BUSINESS("Ticari"),
     PREMIUM("Premium"),
     VAN("Van"),
-    SPORT("Spor"),
-    LAND("Arazi");
+    SPORT("Spor");
 
     private final String label;
 

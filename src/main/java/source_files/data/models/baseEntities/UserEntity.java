@@ -4,8 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import source_files.data.enums.Status.DefaultUserStatus;
+import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.enums.types.userTypes.UserRole;
+import source_files.data.models.imageEntities.UserImageEntity;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,8 +46,9 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private DefaultUserStatus status;
 
-    @Column(name = "image_path")
-    private String imagePath;
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private UserImageEntity userImageEntity;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(authority);

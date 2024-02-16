@@ -33,6 +33,14 @@ public class CustomExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(FileException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public TResponse<?> handleFileException(FileException e) {
+        return TResponse.tResponseBuilder()
+                .response(new ErrorResponse(e.getFileExceptionType(), Collections.singletonList(e.getDetail())))
+                .build();
+    }
+
     @ExceptionHandler(AlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TResponse<?> handleAlreadyExistsException(AlreadyExistsException e) {
@@ -50,8 +58,8 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler(NotSuitableException.class)
-    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-    public TResponse<?> handleAlreadyExistsException(NotSuitableException e) {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public TResponse<?> handleNotSuitableException(NotSuitableException e) {
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getNotSuitableExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();

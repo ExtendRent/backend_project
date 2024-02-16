@@ -1,0 +1,22 @@
+package source_files.data.enums.defaultDataEnums;
+
+public enum DefaultDiscount {
+
+    DEFAULT(5),
+    PAIR5(20),
+    HOSGELDIN(10);
+
+    private final int percentage;
+
+    DefaultDiscount(int percentage) {
+        this.percentage = percentage;
+    }
+
+    public static DefaultDiscount[] getAll() {
+        return values();
+    }
+
+    public int getPercentage() {
+        return percentage;
+    }
+}

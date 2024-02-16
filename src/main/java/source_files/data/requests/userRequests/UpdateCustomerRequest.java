@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.enums.Status.DefaultUserStatus;
-import source_files.data.requests.BaseRequest;
+import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.enums.types.userTypes.UserRole;
+import source_files.data.requests.BaseRequest;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,6 +15,7 @@ import source_files.data.enums.types.userTypes.UserRole;
 @Setter
 public class UpdateCustomerRequest extends BaseRequest {
 
+    private static UserRole authority = UserRole.CUSTOMER;
     @NotNull(message = "Müşteri id null olamaz")
     int id;
     @NotNull
@@ -47,5 +48,5 @@ public class UpdateCustomerRequest extends BaseRequest {
     private String drivingLicenseNumber;
     private String imagePath;
     private DefaultUserStatus status;
-    private UserRole authority = UserRole.CUSTOMER;
+    private int userImageEntityId;
 }

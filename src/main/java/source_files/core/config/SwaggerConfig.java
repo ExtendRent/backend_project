@@ -20,8 +20,8 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI openAPI() {
-        return new OpenAPI().addSecurityItem(new SecurityRequirement().
-                        addList("Bearer Authentication"))
+        return new OpenAPI().addSecurityItem(new SecurityRequirement()
+                        .addList("Bearer Authentication"))
                 .components(new Components().addSecuritySchemes
                         ("Bearer Authentication", createAPIKeyScheme()))
                 .info(new Info().title("ExtendRent API")
@@ -29,4 +29,6 @@ public class SwaggerConfig {
                         .version("1.0").contact(new Contact().name("Gökhan Asiltürk")
                                 .email("gokhanasilturkk@gmail.com").url("gokhanasilturkk@gmail.com")));
     }
+
+
 }

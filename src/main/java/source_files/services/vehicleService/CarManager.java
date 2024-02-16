@@ -4,24 +4,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
-import source_files.data.enums.Status.DefaultVehicleStatus;
+import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
+import source_files.data.models.imageEntities.CarImageEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.ImagesEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.VehicleStatusEntityManager;
+import source_files.services.systemServices.ImageServices.CarImageService;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.enums.Status.DefaultVehicleStatus.*;
+import static source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus.*;
 import static source_files.data.enums.types.itemTypes.VehicleType.CAR;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICLE_STATUS_NOT_FOUND;
 
@@ -30,48 +32,53 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICL
 public class CarManager implements CarService {
 
     private final ModelMapperService mapper;
-    private final CarEntityService carEntityService;
+    private final CarEntityService entityService;
     private final CarBusinessRules rules;
     private final VehicleStatusEntityManager vehicleStatusManager;
+    private final CarImageService carImageService;
 
     @Override
-    public void create(CreateCarRequest createCarRequest) {
+    public void create(CreateCarRequest createCarRequest) throws IOException {
+        try {
+            CarEntity carEntity = mapper.forRequest().map(rules
+                    .checkCreateCarRequest(rules.fixCreateCarRequest(createCarRequest)), CarEntity.class);
 
-        CarEntity carEntity = mapper.forRequest().map(rules
-                .checkCreateCarRequest(rules.fixCreateCarRequest(createCarRequest)), CarEntity.class);
+            carEntity.setVehicleType(CAR);
 
-        carEntity.setVehicleType(CAR);
-
-        //ImagesEntity içerisinde kullandığımız oneToOne bağlantısındaki cascade sayesinde, CarEntity üzerinden
-        //yapılan ImagesEntity değişiklikleri ana klastaki(ImagesEntity) de de değişecek.
-        //Yani carEntity ye ImagesEntity set ettiğimizde, database e de eklenecek ve içindeki CarEntity otomatik oluşacak.
-        carEntity.setImagesEntity(new ImagesEntity(carEntity, createCarRequest.getImagePaths()));
-
-        carEntityService.create(carEntity);
+            entityService.create(carEntity);
+        } catch (Exception e) {
+            carImageService.delete(createCarRequest.getCarImageEntityId());
+            throw e;
+        }
     }
 
     @Override
     public CarDTO getById(int id) {
-        return mapToDTO(carEntityService.getById(id));
+        return mapToDTO(entityService.getById(id));
     }
 
     @Override
-    public CarDTO update(UpdateCarRequest updateCarRequest) {
-        CarEntity carEntity = mapper.forRequest().map(
+    public CarDTO update(UpdateCarRequest updateCarRequest) throws IOException {
+        CarEntity carEntity = entityService.getById(updateCarRequest.getId());
+        CarImageEntity carImage = carEntity.getCarImageEntity();
+
+        if (carImage.getId() != updateCarRequest.getCarImageEntityId()) {
+            carImageService.delete(carImage.getId());
+        }
+
+        carEntity = mapper.forRequest().map(
                 rules.checkUpdateCarRequest(
                         rules.fixUpdateCarRequest(updateCarRequest)
                 ), CarEntity.class
         );
         carEntity.setVehicleType(CAR);
-        return
-                this.mapToDTO(carEntityService.update(carEntity));
-
+        return this.mapToDTO(entityService.update(carEntity));
     }
 
     @Override
     public List<CarDTO> getAll() {
         //bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
-        return rules.checkDataList(carEntityService.getAll())
+        return rules.checkDataList(entityService.getAll())
                 .stream()
                 .map(car -> mapper.forResponse().map(car, CarDTO.class))
                 .collect(Collectors.toList());
@@ -80,51 +87,51 @@ public class CarManager implements CarService {
 
     @Override
     public List<CarDTO> getAllByDeletedState(boolean isDeleted) {
-        return rules.checkDataList(carEntityService.getAllByDeletedState(isDeleted))
+        return rules.checkDataList(entityService.getAllByDeletedState(isDeleted))
                 .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByStatus(Integer statusId) {
         return rules.checkDataList(
-                        carEntityService.getAllByStatus(statusId)).stream()
+                        entityService.getAllByStatus(statusId)).stream()
                 .map(car -> mapper.forResponse().map(car, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByColorId(int id) {
-        return rules.checkDataList(carEntityService.getAllByColorId(id))
+        return rules.checkDataList(entityService.getAllByColorId(id))
                 .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByModelId(int id) {
-        return rules.checkDataList(carEntityService.getAllByModelId(id))
+        return rules.checkDataList(entityService.getAllByModelId(id))
                 .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByBrandId(int brandId) {
-        return rules.checkDataList(carEntityService.getAllByBrandId(brandId))
+        return rules.checkDataList(entityService.getAllByBrandId(brandId))
                 .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByYearBetween(int startYear, int endYear) {
-        return rules.checkDataList(carEntityService.getAllByYearBetween(startYear, endYear))
+        return rules.checkDataList(entityService.getAllByYearBetween(startYear, endYear))
                 .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByRentalPriceBetween(double startPrice, double endPrice) {
-        return rules.checkDataList(carEntityService.getAllByRentalPriceBetween(startPrice, endPrice))
+        return rules.checkDataList(entityService.getAllByRentalPriceBetween(startPrice, endPrice))
                 .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
     @Override
     public List<CarDTO> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate) {
 
-        List<CarEntity> allCars = carEntityService.getAll();
+        List<CarEntity> allCars = entityService.getAll();
         List<CarEntity> availableCars = filterAvailableCars(allCars, startDate, endDate);
 
         rules.checkDataList(availableCars);
@@ -134,7 +141,7 @@ public class CarManager implements CarService {
     @Override
     public List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId) {
         return rules.checkDataList(
-                getCarEntityListByDrivingLicenseSuitable(carEntityService.getAll(), customerId)).stream().map(
+                getCarEntityListByDrivingLicenseSuitable(entityService.getAll(), customerId)).stream().map(
                 carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
     }
 
@@ -148,7 +155,7 @@ public class CarManager implements CarService {
                                        Integer startYear, Integer endYear, Integer brandId,
                                        Integer fuelTypeId, Integer shiftTypeId, Integer segmentId) {
 
-        List<CarEntity> filteredCars = carEntityService.getAllFiltered(
+        List<CarEntity> filteredCars = entityService.getAllFiltered(
                 startPrice, endPrice,
                 statusId,
                 colorId, seat, luggage,
@@ -168,10 +175,12 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public void delete(int id, boolean hardDelete) {
+    public void delete(int id, boolean hardDelete) throws IOException {
 
         if (hardDelete) {
-            carEntityService.delete(carEntityService.getById(id));
+            CarEntity carEntity = entityService.getById(id);
+            entityService.delete(carEntity);
+            carImageService.delete(carEntity.getCarImageEntity().getId());
         } else {
             softDelete(id);
         }
@@ -179,25 +188,25 @@ public class CarManager implements CarService {
 
     @Override
     public void softDelete(int id) {
-        this.changeStatus(carEntityService.getById(id), DELETED);
+        this.changeStatus(entityService.getById(id), DELETED);
     }
 
     @Override
     public void addRental(int carId, RentalEntity rentalEntity) {
-        CarEntity carEntity = carEntityService.getById(carId);
+        CarEntity carEntity = entityService.getById(carId);
         carEntity.getRentalList().add(rentalEntity);
-        carEntityService.update(carEntity);
+        entityService.update(carEntity);
         this.changeStatus(carEntity, BOOKED);
     }
 
     @Override
     public void removeRental(int carId, RentalEntity rentalEntity) {
-        CarEntity carEntity = carEntityService.getById(carId);
+        CarEntity carEntity = entityService.getById(carId);
         carEntity.getRentalList().remove(rentalEntity);
         if (carEntity.getRentalList().isEmpty()) {
             this.changeStatus(carEntity, AVAILABLE);
         }
-        carEntityService.update(carEntity);
+        entityService.update(carEntity);
     }
 
     //---------------------------------Local Methods------------------------------------------------------
@@ -237,7 +246,7 @@ public class CarManager implements CarService {
         endDate = rules.fixEndDate(startDate, endDate);
         rules.checkDates(startDate, endDate);
 
-        CarEntity car = carEntityService.getById(carId);
+        CarEntity car = entityService.getById(carId);
         List<RentalEntity> rentalList = car.getRentalList();
         if (car.isAvailable()) {
             for (RentalEntity rental : rentalList) {
@@ -275,7 +284,7 @@ public class CarManager implements CarService {
         }
         carEntity.setVehicleStatusEntity(vehicleStatusManager.getByStatus(status));
         carEntity.setAvailable(available);
-        carEntityService.update(carEntity);
+        entityService.update(carEntity);
     }
 
     private List<CarDTO> mapToDTOList(List<CarEntity> cars) {
@@ -288,27 +297,5 @@ public class CarManager implements CarService {
         return mapper.forResponse().map(car, CarDTO.class);
     }
 
-    public UpdateCarRequest convertToUpdateRequest(int id) {
-        CarEntity carEntity = carEntityService.getById(id);
-        return UpdateCarRequest.builder()
-                .id(carEntity.getId())
-                .brandEntityId(carEntity.getCarModelEntity().getBrandEntity().getId())
-                .carModelEntityId(carEntity.getCarModelEntity().getId())
-                .carBodyTypeEntityId(carEntity.getCarBodyTypeEntity().getId())
-                .licensePlate(carEntity.getLicensePlate())
-                .kilometer(carEntity.getKilometer())
-                .imagePaths(carEntity.getImagesEntity().getImagePaths())
-                .year(carEntity.getYear())
-                .seat(carEntity.getSeat())
-                .rentalPrice(carEntity.getRentalPrice())
-                .details(carEntity.getDetails())
-                .luggage(carEntity.getLuggage())
-                .expectedMinDrivingLicenseTypeId(carEntity.getExpectedMinDrivingLicenseType().getId())
-                .colorEntityId(carEntity.getColorEntity().getId())
-                .fuelTypeEntityId(carEntity.getFuelTypeEntity().getId())
-                .shiftTypeEntityId(carEntity.getShiftTypeEntity().getId())
-                .vehicleStatusEntityId(carEntity.getVehicleStatusEntity().getId())
-                .build();
-    }
 
 }

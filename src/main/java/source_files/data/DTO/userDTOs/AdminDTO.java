@@ -1,6 +1,7 @@
 package source_files.data.DTO.userDTOs;
 
 import lombok.*;
+import source_files.data.enums.types.userTypes.UserRole;
 
 @Builder
 @Getter
@@ -14,4 +15,7 @@ public class AdminDTO {
     String email;
     String phoneNumber;
     double salary;
+    String userImageEntityImageUrl;
+    boolean isDeleted;
+    UserRole authority;
 }

@@ -1,6 +1,7 @@
 package source_files.data.DTO.userDTOs;
 
 import lombok.*;
+import source_files.data.enums.types.userTypes.UserRole;
 
 @Builder
 @Getter
@@ -13,4 +14,7 @@ public class EmployeeDTO {
     String surname;
     String email;
     double salary;
+    String userImageEntityImageUrl;
+    boolean isDeleted;
+    UserRole authority;
 }

@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import source_files.core.config.SeedDataConfig;
 
+import java.io.IOException;
+
 @SpringBootApplication
 @ComponentScan("source_files")
 public class Application implements CommandLineRunner {
@@ -19,7 +21,7 @@ public class Application implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws IOException {
         seedDataConfig.run();
     }
 }

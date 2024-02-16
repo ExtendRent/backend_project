@@ -3,8 +3,6 @@ package source_files.data.DTO.userDTOs;
 import lombok.*;
 import source_files.data.enums.types.userTypes.UserRole;
 
-import java.util.List;
-
 @Builder
 @Getter
 @Setter
@@ -19,6 +17,8 @@ public class CustomerDTO {
     String name;
     String surname;
     String emailAddress;
-    List<UserRole> authorities;
+    String userImageEntityImageUrl;
+    boolean isDeleted;
+    UserRole authority;
 }
 

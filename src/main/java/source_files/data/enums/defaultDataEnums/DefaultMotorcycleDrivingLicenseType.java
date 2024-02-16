@@ -1,4 +1,4 @@
-package source_files.data.enums.types.itemTypes;
+package source_files.data.enums.defaultDataEnums;
 
 public enum DefaultMotorcycleDrivingLicenseType {
 

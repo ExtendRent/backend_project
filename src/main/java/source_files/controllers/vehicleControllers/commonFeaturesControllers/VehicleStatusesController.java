@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.data.DTO.itemDTOs.VehicleStatusDTO;
-import source_files.data.enums.Status.DefaultVehicleStatus;
+import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeaturesServices.abstracts.VehicleStatusService;

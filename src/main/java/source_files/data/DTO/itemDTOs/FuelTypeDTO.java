@@ -10,4 +10,5 @@ import lombok.*;
 public class FuelTypeDTO {
     int id;
     String name;
+    boolean isDeleted;
 }

@@ -26,7 +26,7 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public List<AdminEntity> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(ADMIN_LIST_NOT_FOUND, "Aradığınız kriterlere uygun admin bulunamadı");
+            throw new DataNotFoundException(ADMIN_LIST_NOT_FOUND);
         }
 
         return list.stream().map(adminEntity -> (AdminEntity) adminEntity).toList();

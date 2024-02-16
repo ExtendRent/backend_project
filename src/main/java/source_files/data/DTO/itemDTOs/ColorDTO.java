@@ -11,4 +11,5 @@ import source_files.data.DTO.BaseDTO;
 public class ColorDTO extends BaseDTO {
     int id;
     String name;
+    boolean isDeleted;
 }

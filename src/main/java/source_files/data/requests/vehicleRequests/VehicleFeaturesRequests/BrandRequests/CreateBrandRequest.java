@@ -18,8 +18,8 @@ public class CreateBrandRequest extends BaseRequest {
     @NotNull(message = "Marka null olamaz")
     @NotBlank(message = "Marka adı boş geçilemez")
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")
-    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Marka sadece harflerden oluşmalıdır.")
+    @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ-]+$", message = "Marka sadece harflerden oluşmalıdır.")
     String name;
-
-    String logoImagePath;
+    @NotNull(message = "Fotoğraf null olamaz")
+    int brandImageEntityId;
 }

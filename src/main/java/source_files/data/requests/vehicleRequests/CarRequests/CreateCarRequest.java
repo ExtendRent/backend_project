@@ -4,14 +4,16 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import source_files.data.requests.BaseRequest;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 public class CreateCarRequest extends BaseRequest {
+    @NotNull(message = "brandId null olamaz")
+    @Min(1)
+    int carImageEntityId;
+
     @NotNull(message = "brandId null olamaz")
     @Min(1)
     int brandEntityId;
@@ -53,10 +55,8 @@ public class CreateCarRequest extends BaseRequest {
     @Min(value = 1, message = "Kilometre 1 den küçük olamaz.")
     int kilometer;
 
-    @NotNull(message = "imagePaths null olamaz")
-    List<String> imagePaths;
-
     @NotNull(message = "beklenen ehliyet sınıfı null olamaz")
+    @Min(1)
     int expectedMinDrivingLicenseTypeId;
 
     @NotNull

@@ -6,12 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleService.abstracts.CarService;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,13 +27,14 @@ public class CarsController {
     private final CarService carService;
 
     @PostMapping
-    public ResponseEntity<Void> createCar(@Valid @RequestBody CreateCarRequest createCarRequest) {
+    public ResponseEntity<Void> createCar(@RequestBody CreateCarRequest createCarRequest) throws IOException {
         this.carService.create(createCarRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
-    public ResponseEntity<TResponse<CarDTO>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) {
+    public ResponseEntity<TResponse<CarDTO>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest,
+                                                       @RequestPart("file") MultipartFile file) throws IOException {
         return new ResponseEntity<>(TResponse.<CarDTO>tResponseBuilder()
                 .response(this.carService.update(updateCarRequest))
                 .build(), HttpStatus.OK
@@ -187,7 +190,7 @@ public class CarsController {
 
     @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
-            @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
+            @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) throws IOException {
         this.carService.delete(id, isHardDelete);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -12,4 +12,5 @@ public class DrivingLicenseTypeDTO {
     String name;
     String description;
     int licenseLevel;
+    boolean isDeleted;
 }

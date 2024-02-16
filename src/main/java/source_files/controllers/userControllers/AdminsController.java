@@ -35,7 +35,7 @@ public class AdminsController {
         );
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<TResponse<List<AdminDTO>>> getAll() {
         return new ResponseEntity<>(
                 TResponse.<List<AdminDTO>>tResponseBuilder().response(adminService.getAll()).build()

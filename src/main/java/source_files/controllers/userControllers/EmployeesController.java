@@ -62,7 +62,8 @@ public class EmployeesController {
 
     @GetMapping(params = {"startSalary", "endSalary"})
     public ResponseEntity<TResponse<List<EmployeeDTO>>> getAllBySalaryBetween(
-            @RequestParam(name = "startSalary") Double startSalary, @RequestParam(name = "endSalary") Double endSalary) {
+            @RequestParam(name = "startSalary", required = false) Double startSalary,
+            @RequestParam(name = "endSalary", required = false) Double endSalary) {
         return new ResponseEntity<>(TResponse.<List<EmployeeDTO>>tResponseBuilder()
                 .response(this.employeeService.getAllBySalaryBetween(startSalary, endSalary))
                 .build(), HttpStatus.OK

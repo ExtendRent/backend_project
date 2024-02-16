@@ -45,4 +45,8 @@ public class ErrorResponse {
     }
 
 
+    public ErrorResponse(FileExceptionType fileExceptionType, List<String> details) {
+        this.errorCode = fileExceptionType.getErrorCode();
+        this.details = details;
+    }
 }

@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.enums.Status.DefaultUserStatus;
-import source_files.data.requests.BaseRequest;
+import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.enums.types.userTypes.UserRole;
+import source_files.data.requests.BaseRequest;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +16,7 @@ import source_files.data.enums.types.userTypes.UserRole;
 public class UpdateAdminRequest extends BaseRequest {
 
 
+    private static UserRole authority = UserRole.ADMIN;
     @NotNull(message = "maaş null olamaz")
     @NotBlank(message = "maaş boş geçilemez")
     @Min(0)
@@ -45,7 +46,6 @@ public class UpdateAdminRequest extends BaseRequest {
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")
     private String phoneNumber;
-    private String imagePath;
     private DefaultUserStatus status;
-    private UserRole authority = UserRole.ADMIN;
+    private int userImageEntityId;
 }
