@@ -15,8 +15,6 @@ public interface CustomerEntityService {
 
     List<CustomerEntity> getAll();
 
-    CustomerEntity getByPhoneNumber(String phoneNumber);
-
     CustomerEntity getByEmailAddress(String emailAddress);
 
     List<CustomerEntity> getAllByDeletedState(boolean isDeleted);

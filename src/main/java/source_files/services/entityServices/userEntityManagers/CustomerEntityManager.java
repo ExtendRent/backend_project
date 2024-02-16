@@ -17,7 +17,6 @@ public class CustomerEntityManager implements CustomerEntityService {
 
     private final CustomerRepository customerRepository;
 
-
     @Override
     public CustomerEntity create(CustomerEntity customerEntity) {
 
@@ -34,13 +33,6 @@ public class CustomerEntityManager implements CustomerEntityService {
     public CustomerEntity getById(int id) {
         return this.customerRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(CUSTOMER_DATA_NOT_FOUND, "Müşteri bulunamadı"));
-    }
-
-    @Override
-    public CustomerEntity getByPhoneNumber(String phoneNumber) {
-        return this.customerRepository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new DataNotFoundException(
-                        CUSTOMER_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı müşteri bulunamadı"));
     }
 
     @Override

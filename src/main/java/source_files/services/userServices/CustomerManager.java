@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
+import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.models.imageEntities.UserImageEntity;
+import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
@@ -71,11 +73,6 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public CustomerDTO getByPhoneNumber(String phoneNumber) {
-        return modelMapperService.forResponse().map(entityService.getByPhoneNumber(phoneNumber), CustomerDTO.class);
-    }
-
-    @Override
     public CustomerDTO getByEmailAddress(String emailAddress) {
         return modelMapperService.forResponse()
                 .map(entityService.getByEmailAddress(emailAddress), CustomerDTO.class);
@@ -95,6 +92,20 @@ public class CustomerManager implements CustomerService {
                         .map(customerEntity, CustomerDTO.class)).toList();
     }
 
+    @Override
+    public void addRental(int customerId, RentalEntity rentalEntity) {
+        CustomerEntity customerEntity = entityService.getById(customerId);
+        customerEntity.getRentalHistory().add(rentalEntity);
+        entityService.update(customerEntity);
+    }
+
+    @Override
+    public void removeRental(int customerId, RentalEntity rentalEntity) {
+        CustomerEntity customerEntity = entityService.getById(customerId);
+        customerEntity.getRentalHistory().remove(rentalEntity);
+        entityService.update(customerEntity);
+    }
+
 
     @Override
     public void delete(int id, boolean hardDelete) {
@@ -105,6 +116,13 @@ public class CustomerManager implements CustomerService {
         } else {
             softDelete(id);
         }
+    }
+
+    @Override
+    public List<RentalDTO> getRentalHistory(int customerId) {
+        CustomerEntity customerEntity = entityService.getById(customerId);
+        return customerEntity.getRentalHistory().stream().map(rentalEntity -> modelMapperService.forResponse()
+                .map(rentalEntity, RentalDTO.class)).toList();
     }
 
     @Override

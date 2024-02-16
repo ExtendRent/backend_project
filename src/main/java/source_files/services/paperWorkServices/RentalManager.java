@@ -26,7 +26,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus.IN_USE;
-import static source_files.data.enums.types.itemTypes.ItemType.RENTAL;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @Service
@@ -70,17 +69,17 @@ public class RentalManager implements RentalService {
         }
 
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
-        rentalEntity.setItemType(RENTAL);
-
 
         entityService.create(rentalEntity);
         try {
             rentalEntity.setPaymentDetailsEntity(paymentService.pay(createRentalRequest, rentalEntity));
-            this.entityService.update(rentalEntity);
+            entityService.update(rentalEntity);
             carService.addRental(createRentalRequest.getCarEntityId(), rentalEntity);
+            customerService.addRental(createRentalRequest.getCustomerEntityId(), rentalEntity);
         } catch (Exception e) {
             this.softDelete(rentalEntity.getId());
             carService.removeRental(createRentalRequest.getCarEntityId(), rentalEntity);
+            customerService.removeRental(createRentalRequest.getCustomerEntityId(), rentalEntity);
         }
     }
 

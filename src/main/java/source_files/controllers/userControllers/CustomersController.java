@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.userDTOs.CustomerDTO;
 import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
@@ -52,10 +53,10 @@ public class CustomersController {
         );
     }
 
-    @GetMapping("/{phoneNumber}")
-    public ResponseEntity<TResponse<CustomerDTO>> getByPhoneNumber(@PathVariable String phoneNumber) {
-        return new ResponseEntity<>(TResponse.<CustomerDTO>tResponseBuilder()
-                .response(this.customerService.getByPhoneNumber(phoneNumber))
+    @GetMapping("/rentals/rentalHistory{customerId}")
+    public ResponseEntity<TResponse<List<RentalDTO>>> getRentalHistory(@PathVariable int customerId) {
+        return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
+                .response(this.customerService.getRentalHistory(customerId))
                 .build(), HttpStatus.OK
         );
     }

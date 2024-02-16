@@ -23,7 +23,7 @@ import java.util.List;
 //todo : CorporateCustomer diye bir class dha tanımlandı bizde gerek var mı ?
 public class CustomerEntity extends UserEntity {
 
-    @OneToMany(mappedBy = "customerEntity")
+    @OneToMany(mappedBy = "customerEntity", fetch = FetchType.EAGER)
     List<RentalEntity> rentalHistory;
 
     @Column(name = "customer_type")
