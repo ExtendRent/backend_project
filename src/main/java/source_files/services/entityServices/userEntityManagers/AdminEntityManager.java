@@ -17,7 +17,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_
 public class AdminEntityManager implements AdminEntityService {
 
     private final AdminRepository adminRepository;
-    AdminBusinessRules adminBusinessRules;
+    private final AdminBusinessRules adminBusinessRules;
 
     @Override
     public AdminEntity create(AdminEntity adminEntity) {

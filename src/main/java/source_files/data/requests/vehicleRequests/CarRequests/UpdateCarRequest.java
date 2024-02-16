@@ -2,6 +2,8 @@ package source_files.data.requests.vehicleRequests.CarRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
+import source_files.data.enums.types.itemTypes.ItemType;
+import source_files.data.enums.types.itemTypes.VehicleType;
 
 @Getter
 @Setter
@@ -9,6 +11,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class UpdateCarRequest {
+    private final ItemType itemType = ItemType.VEHICLE;
+    private final VehicleType vehicleType = VehicleType.CAR;
     @NotNull(message = "id null olamaz")
     int id;
 

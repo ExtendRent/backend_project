@@ -31,9 +31,6 @@ public class ColorManager implements ColorService {
                 .map(colorBusinessRules.checkCreateColorRequest(
                         colorBusinessRules.fixCreateColorRequest(createColorRequest)), ColorEntity.class
                 );
-
-        colorEntity.setItemType(ItemType.COLOR);
-
         this.colorEntityService.create(colorEntity);
 
     }

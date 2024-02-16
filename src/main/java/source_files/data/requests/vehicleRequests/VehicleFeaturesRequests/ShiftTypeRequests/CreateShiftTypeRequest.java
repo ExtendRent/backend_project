@@ -8,12 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.enums.types.itemTypes.ItemType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateShiftTypeRequest {
+    private final ItemType itemType = ItemType.SHIFT_TYPE;
     @NotNull(message = "Vites ismi null olamaz")
     @NotBlank(message = "Vites ismi boş geçilemez")
     @Size(min = 2, message = "Vites ismi en az 2 karakter olmalıdır.")

@@ -34,7 +34,6 @@ public class BrandManager implements BrandService {
             BrandEntity brandEntity = modelMapperService.forRequest()
                     .map(brandBusinessRules.checkCreateBrandRequest(
                             brandBusinessRules.fixCreateBrandRequest(createBrandRequest)), BrandEntity.class);
-            brandEntity.setItemType(BRAND);
             entityService.create(brandEntity);
         } catch (Exception e) {
             brandImageService.delete(createBrandRequest.getBrandImageEntityId());

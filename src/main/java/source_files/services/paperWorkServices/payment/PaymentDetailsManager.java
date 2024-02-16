@@ -17,21 +17,17 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static source_files.data.enums.types.itemTypes.ItemType.PAYMENT_DETAILS;
-
 @Service
 @RequiredArgsConstructor
 public class PaymentDetailsManager implements PaymentDetailsService {
 
     private final SysPaymentDetailsService entityService;
     private final ModelMapperService mapper;
-
     private final PaymentDetailsBusinessRules rules;
 
     @Override
     public PaymentDetailsDTO update(UpdatePaymentDetailsRequest updatePaymentDetailsRequest) {
         PaymentDetailsEntity paymentDetails = mapper.forRequest().map(updatePaymentDetailsRequest, PaymentDetailsEntity.class);
-        paymentDetails.setItemType(PAYMENT_DETAILS);
         return mapToDTO(entityService.update(paymentDetails));
     }
 

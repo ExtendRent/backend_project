@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.PENDING_VERIFYING;
-import static source_files.data.enums.types.userTypes.UserRole.CUSTOMER;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +40,6 @@ public class CustomerManager implements CustomerService {
                             rules.fixCreateCustomerRequest(createCustomerRequest)), CustomerEntity.class
                     );
             customerEntity.setPassword(passwordEncoder.encode(customerEntity.getPassword()));
-            customerEntity.setAuthority(CUSTOMER);
             customerEntity.setStatus(PENDING_VERIFYING);
             entityService.create(customerEntity);
         } catch (Exception e) {

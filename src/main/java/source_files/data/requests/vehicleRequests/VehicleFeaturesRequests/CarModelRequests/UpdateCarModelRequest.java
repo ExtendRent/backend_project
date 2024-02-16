@@ -6,13 +6,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import source_files.data.enums.types.itemTypes.ItemType;
 import source_files.data.requests.BaseRequest;
 
 @Getter
 @Setter
 @Builder
 public class UpdateCarModelRequest extends BaseRequest {
-
+    private final ItemType itemType = ItemType.CAR_MODEL;
     @NotNull(message = "id null olamaz")
     int carModelEntityId;
 

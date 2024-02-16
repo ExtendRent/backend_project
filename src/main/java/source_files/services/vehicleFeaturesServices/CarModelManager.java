@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.enums.types.itemTypes.ItemType.CAR_MODEL;
-
 @Service
 @RequiredArgsConstructor
 public class CarModelManager implements CarModelService {
@@ -32,9 +30,6 @@ public class CarModelManager implements CarModelService {
         CarModelEntity carModelEntity = modelMapperService.forRequest()
                 .map(carModelBusinessRules.checkCreateCarModelRequest(
                         carModelBusinessRules.fixCreateCarModelRequest(createCarModelRequest)), CarModelEntity.class);
-
-        carModelEntity.setItemType(CAR_MODEL);
-
         carModelEntityService.create(carModelEntity);
     }
 
@@ -44,7 +39,6 @@ public class CarModelManager implements CarModelService {
                 .map(carModelBusinessRules.checkUpdateCarModelRequest(
                         carModelBusinessRules.fixUpdateCarModelRequest(updateCarModelRequest)
                 ), CarModelEntity.class);
-        carModelEntity.setItemType(CAR_MODEL);
         return modelMapperService.forRequest().map(carModelEntityService.update(carModelEntity), CarModelDTO.class);
     }
 

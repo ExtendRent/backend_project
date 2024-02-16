@@ -8,12 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.enums.types.itemTypes.ItemType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateFuelTypeRequest {
+    private final ItemType itemType = ItemType.FUEL_TYPE;
     @NotNull(message = "Yakıt ismi null olamaz")
     @NotBlank(message = "Yakıt ismi boş geçilemez")
     @Size(min = 2, message = "Yakıt ismi en az 2 karakter olmalıdır.")

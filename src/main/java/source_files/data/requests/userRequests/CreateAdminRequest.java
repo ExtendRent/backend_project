@@ -11,7 +11,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @Builder
 public class CreateAdminRequest extends BaseRequest {
-    private static UserRole authority = UserRole.ADMIN;
+    private final UserRole authority = UserRole.ADMIN;
     @NotNull(message = "isim null olamaz")
     @NotBlank(message = "isim boş geçilemez")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")

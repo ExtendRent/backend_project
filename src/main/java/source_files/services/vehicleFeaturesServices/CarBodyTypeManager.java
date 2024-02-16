@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.CarBodyTypeDTO;
-import source_files.data.enums.types.itemTypes.ItemType;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
@@ -29,7 +28,6 @@ public class CarBodyTypeManager implements CarBodyTypeService {
         CarBodyTypeEntity carBodyTypeEntity = modelMapperService.forRequest().
                 map(carBodyTypeBusinessRules.checkCreateCarBodyTypeRequest
                         (carBodyTypeBusinessRules.fixCreateCarBodyTypeRequest(createCarBodyTypeRequest)), CarBodyTypeEntity.class);
-        carBodyTypeEntity.setItemType(ItemType.CAR_BODY_TYPE);
         this.carBodyTypeEntityService.create(carBodyTypeEntity);
     }
 
@@ -38,7 +36,6 @@ public class CarBodyTypeManager implements CarBodyTypeService {
         CarBodyTypeEntity carBodyTypeEntity = modelMapperService.forRequest()
                 .map(carBodyTypeBusinessRules.checkUpdateCarBodyTypeRequest(
                         carBodyTypeBusinessRules.fixUpdateCarBodyTypeRequest(updateCarBodyTypeRequest)), CarBodyTypeEntity.class);
-        carBodyTypeEntity.setItemType(ItemType.CAR_BODY_TYPE);
         return this.modelMapperService.forResponse().map(this.carBodyTypeEntityService.update(carBodyTypeEntity), CarBodyTypeDTO.class);
     }
 

@@ -19,7 +19,6 @@ import java.util.List;
 public class DiscountManager implements DiscountService {
     private final DiscountEntityService discountEntityService;
     private final ModelMapperService mapper;
-
     private final DiscountRules rules;
 
     @Override

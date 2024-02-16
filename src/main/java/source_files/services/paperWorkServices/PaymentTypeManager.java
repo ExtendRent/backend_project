@@ -14,8 +14,6 @@ import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static source_files.data.enums.types.itemTypes.ItemType.PAYMENT_TYPE;
-
 @Service
 @RequiredArgsConstructor
 public class PaymentTypeManager implements PaymentTypeService {
@@ -28,8 +26,6 @@ public class PaymentTypeManager implements PaymentTypeService {
     public void create(CreatePaymentTypeRequest createPaymentTypeRequest) {
         PaymentTypeEntity paymentTypeEntity = mapper.forRequest()
                 .map(createPaymentTypeRequest, PaymentTypeEntity.class);
-
-        paymentTypeEntity.setItemType(PAYMENT_TYPE);
         entityService.create(paymentTypeEntity);
     }
 

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.enums.types.itemTypes.ItemType;
 import source_files.data.requests.BaseRequest;
 
 @Getter
@@ -14,6 +15,7 @@ import source_files.data.requests.BaseRequest;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateCarModelRequest extends BaseRequest {
+    private final ItemType itemType = ItemType.CAR_MODEL;
     @NotNull(message = "Marka null olamaz")
     int brandEntityId;
 

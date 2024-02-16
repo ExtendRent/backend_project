@@ -14,7 +14,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 public class UpdateEmployeeRequest extends BaseRequest {
 
-    private static UserRole authority = UserRole.EMPLOYEE;
+    private final UserRole authority = UserRole.EMPLOYEE;
     @NotNull(message = "id cannot be null")
     int id;
     @NotNull(message = "id cannot be null")

@@ -42,9 +42,6 @@ public class CarManager implements CarService {
         try {
             CarEntity carEntity = mapper.forRequest().map(rules
                     .checkCreateCarRequest(rules.fixCreateCarRequest(createCarRequest)), CarEntity.class);
-
-            carEntity.setVehicleType(CAR);
-
             entityService.create(carEntity);
         } catch (Exception e) {
             carImageService.delete(createCarRequest.getCarImageEntityId());

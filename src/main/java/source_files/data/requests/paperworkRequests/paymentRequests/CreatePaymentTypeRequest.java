@@ -9,12 +9,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.enums.defaultDataEnums.DefaultPaymentType;
+import source_files.data.enums.types.itemTypes.ItemType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreatePaymentTypeRequest {
+    private final ItemType itemType = ItemType.PAYMENT_TYPE;
     @NotBlank(message = "Ödeme tipi boş geçilemez")
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "Ödeme tipi sadece harflerden oluşmalıdır.")

@@ -15,7 +15,7 @@ import source_files.data.requests.BaseRequest;
 @Setter
 public class UpdateCustomerRequest extends BaseRequest {
 
-    private static UserRole authority = UserRole.CUSTOMER;
+    private final UserRole authority = UserRole.CUSTOMER;
     @NotNull(message = "Müşteri id null olamaz")
     int id;
     @NotNull

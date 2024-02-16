@@ -3,6 +3,7 @@ package source_files.data.requests.paperworkRequests.RentalRequests;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import source_files.data.enums.types.itemTypes.ItemType;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class UpdateRentalRequest {
+    private final ItemType itemType = ItemType.RENTAL;
     @NotNull(message = "id cannot be null")
     @Min(1)
     int id;

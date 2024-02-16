@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.enums.types.itemTypes.ItemType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateVehicleStatusRequest {
+    private final ItemType itemType = ItemType.VEHICLE_STATUS;
     @NotNull
     @Min(1)
     int id;

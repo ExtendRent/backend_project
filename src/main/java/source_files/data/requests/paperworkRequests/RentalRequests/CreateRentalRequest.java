@@ -4,6 +4,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import source_files.data.enums.types.itemTypes.ItemType;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class CreateRentalRequest {
-
+    private final ItemType itemType = ItemType.RENTAL;
     @Min(value = 1, message = "CustomerId must be greater than 0")
     @NotNull(message = "CustomerId cannot be null")
     private int customerEntityId;

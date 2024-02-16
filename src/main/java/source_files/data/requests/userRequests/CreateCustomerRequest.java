@@ -12,7 +12,7 @@ import source_files.data.requests.BaseRequest;
 @Builder
 public class CreateCustomerRequest extends BaseRequest {
 
-    private static UserRole authority = UserRole.CUSTOMER;
+    private final UserRole authority = UserRole.CUSTOMER;
     @NotNull(message = "Müşteri adı null olamaz")
     @NotBlank(message = "Müşteri adı boş geçilemez")
     @Size(min = 2, max = 20)

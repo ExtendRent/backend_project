@@ -11,14 +11,12 @@ import lombok.Setter;
 import source_files.data.enums.types.itemTypes.ItemType;
 import source_files.data.requests.BaseRequest;
 
-import static source_files.data.enums.types.itemTypes.ItemType.COLOR;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateColorRequest extends BaseRequest {
-    static ItemType itemType = COLOR;
+    private final ItemType itemType = ItemType.COLOR;
     @NotNull(message = "Renk null olamaz")
     @NotBlank(message = "Renk adı boş geçilemez")
     @Size(min = 2, message = "Renk en az 2 karakter olmalıdır.")

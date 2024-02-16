@@ -61,7 +61,6 @@ public class RentalManager implements RentalService {
                                 rules.fixCreateRentalRequest(createRentalRequest))
                         , RentalEntity.class);
 
-
         String discountCode = createRentalRequest.getDiscountCode();
 
         if (rules.checkDiscountCodeIsNull(discountCode)) {

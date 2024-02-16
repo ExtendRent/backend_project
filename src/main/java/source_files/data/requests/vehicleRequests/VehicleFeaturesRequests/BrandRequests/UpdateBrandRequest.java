@@ -8,16 +8,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.enums.types.itemTypes.ItemType;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateBrandRequest {
-
+    private final ItemType itemType = ItemType.BRAND;
     @NotNull(message = "id null olamaz")
     int id;
-
     @NotNull(message = "Marka null olamaz")
     @NotBlank(message = "Marka adı boş geçilemez")
     @Size(min = 2, message = "Marka en az 2 karakter olmalıdır.")
