@@ -29,14 +29,6 @@ public class UsersController {
         );
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TResponse<UserDTO>> getById(@PathVariable int id) {
-        return new ResponseEntity<>(TResponse.<UserDTO>tResponseBuilder()
-                .response(this.userService.getById(id))
-                .build(), HttpStatus.OK
-        );
-    }
-
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<UserDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
@@ -45,5 +37,20 @@ public class UsersController {
                 .build(), HttpStatus.OK
         );
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TResponse<UserDTO>> getById(@PathVariable int id) {
+        return new ResponseEntity<>(TResponse.<UserDTO>tResponseBuilder()
+                .response(this.userService.getById(id))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/block/{id}")
+    public ResponseEntity<TResponse<Void>> blockUser(@PathVariable int id) {
+        this.userService.blockUser(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 }
