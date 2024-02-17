@@ -7,20 +7,15 @@ import source_files.data.enums.types.userTypes.UserRole;
 @Builder
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDTO {
+@NoArgsConstructor
+public class UserDTO {
     int id;
-    int drivingLicenseTypeId;
-    String phoneNumber;
-    String drivingLicenseNumber;
-    String drivingLicenseTypeEntityName;
     String name;
     String surname;
-    String emailAddress;
-    String userImageEntityImageUrl;
-    boolean isDeleted;
+    String email;
+    String userImageEntityUrl;
     UserRole authority;
     DefaultUserStatus status;
+    boolean isDeleted;
 }
-

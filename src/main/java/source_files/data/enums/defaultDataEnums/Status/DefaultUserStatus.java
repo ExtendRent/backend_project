@@ -3,10 +3,7 @@ package source_files.data.enums.defaultDataEnums.Status;
 public enum DefaultUserStatus {
     PENDING_VERIFYING("Onay Bekleniyor"),
     VERIFIED("Onaylandı"),
-    BLOCKED("Engelli"),
-    TIME_BLOCKED("Süre Engelli"),
-    TIME_RENTAL_BLOCKED("Süre Kiralama Engelli");
-
+    BLOCKED("Engellendi");
     private final String label;
 
     DefaultUserStatus(String label) {

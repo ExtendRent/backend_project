@@ -12,5 +12,4 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Optional<UserEntity> findByPhoneNumber(String phoneNumber);
 
     List<UserEntity> findAllByIsDeleted(boolean isDeleted);
-
 }

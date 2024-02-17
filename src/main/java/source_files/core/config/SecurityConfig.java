@@ -64,6 +64,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/paymentDetails/**").permitAll()
                         .requestMatchers("api/v1/car-segments/**").permitAll()
                         .requestMatchers("/api/v1/images/**").permitAll()
+                        .requestMatchers("/api/v1/users/**").permitAll()
 
                         .anyRequest().authenticated()
                 )

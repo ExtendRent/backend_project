@@ -12,6 +12,8 @@ import source_files.data.models.imageEntities.UserImageEntity;
 import java.util.Collection;
 import java.util.List;
 
+import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.BLOCKED;
+
 
 @Getter
 @Setter
@@ -47,9 +49,14 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Column(name = "password")
     private String password;
 
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private DefaultUserStatus status;
+
+    public DefaultUserStatus getStatus() {
+        return this.status;
+    }
 
     @ManyToOne
     @JoinColumn(name = "image_id")
@@ -71,10 +78,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return switch (this.status) {
-            case BLOCKED, TIME_BLOCKED -> false;
-            default -> true;
-        };
+        return this.status != BLOCKED;
     }
 
     @Override
@@ -84,6 +88,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !getIsDeleted();
     }
 }
