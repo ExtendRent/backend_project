@@ -1,6 +1,8 @@
 package source_files.controllers.userControllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -20,9 +22,9 @@ public class UsersController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<TResponse<List<UserDTO>>> getAll() {
-        return new ResponseEntity<>(TResponse.<List<UserDTO>>tResponseBuilder()
-                .response(this.userService.getAll())
+    public ResponseEntity<TResponse<Page<UserDTO>>> getAllUsers(Pageable pageable) {
+        return new ResponseEntity<>(TResponse.<Page<UserDTO>>tResponseBuilder()
+                .response(this.userService.getAll(pageable))
                 .build(), HttpStatus.OK
         );
     }
