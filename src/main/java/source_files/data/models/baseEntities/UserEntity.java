@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.enums.types.userTypes.UserRole;
+import source_files.data.enums.types.userTypes.UserType;
 import source_files.data.models.imageEntities.UserImageEntity;
 
 import java.util.Collection;
@@ -24,6 +25,13 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity implements UserDetails {
+    @Column(name = "authority")
+    @Enumerated(EnumType.STRING)
+    private UserRole authority;
+
+    @Column(name = "user_type")
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
     @Column(name = "name")
     private String name;
@@ -38,9 +46,6 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Column(name = "password")
     private String password;
-    @Column(name = "authority")
-    @Enumerated(EnumType.STRING)
-    private UserRole authority;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

@@ -2,7 +2,7 @@ package source_files.data.models.imageEntities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.baseEntities.UserEntity;
 
 @Getter
@@ -12,7 +12,7 @@ import source_files.data.models.baseEntities.UserEntity;
 @NoArgsConstructor
 @Builder
 @Table(name = "user_images")
-public class UserImageEntity extends Item {
+public class UserImageEntity extends BaseEntity {
     @JoinColumn(name = "user_id", unique = true)
     @OneToOne
     private UserEntity userEntity;

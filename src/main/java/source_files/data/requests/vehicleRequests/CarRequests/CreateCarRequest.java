@@ -2,7 +2,6 @@ package source_files.data.requests.vehicleRequests.CarRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.enums.types.itemTypes.ItemType;
 import source_files.data.enums.types.itemTypes.VehicleType;
 import source_files.data.requests.BaseRequest;
 
@@ -12,7 +11,6 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @Builder
 public class CreateCarRequest extends BaseRequest {
-    private final ItemType itemType = ItemType.VEHICLE;
     private final VehicleType vehicleType = VehicleType.CAR;
     @NotNull(message = "brandId null olamaz")
     @Min(1)

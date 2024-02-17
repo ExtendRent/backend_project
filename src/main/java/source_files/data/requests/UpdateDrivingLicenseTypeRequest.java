@@ -2,7 +2,6 @@ package source_files.data.requests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.enums.types.itemTypes.ItemType;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,7 +9,6 @@ import source_files.data.enums.types.itemTypes.ItemType;
 @Setter
 @Builder
 public class UpdateDrivingLicenseTypeRequest {
-    private final ItemType itemType = ItemType.DRIVING_LICENSE_TYPE;
     @Min(1)
     int id;
     @NotNull(message = "Driving license type name can not be null")

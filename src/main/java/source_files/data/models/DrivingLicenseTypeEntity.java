@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ import source_files.data.models.baseEntities.Item;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "driving_license_types")
-public class DrivingLicenseTypeEntity extends Item {
+public class DrivingLicenseTypeEntity extends BaseEntity {
 
     @Column(name = "name")
     String name;

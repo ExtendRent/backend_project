@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.*;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ import source_files.data.models.baseEntities.Item;
 @NoArgsConstructor
 @Builder
 @Table(name = "car_images")
-public class CarImageEntity extends Item {
+public class CarImageEntity extends BaseEntity {
 
     @Column(name = "name")
     private String name;

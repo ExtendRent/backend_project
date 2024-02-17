@@ -7,7 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
+import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ import source_files.data.models.baseEntities.Item;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "fuel_types")
-public class FuelTypeEntity extends Item {
+public class FuelTypeEntity extends BaseEntity {
 
     @Column(name = "name", unique = true)
     private String name;

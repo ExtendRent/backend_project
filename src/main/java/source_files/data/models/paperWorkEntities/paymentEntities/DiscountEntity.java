@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ import source_files.data.models.baseEntities.Item;
 @NoArgsConstructor
 @Entity
 @Table(name = "discount_codes")
-public class DiscountEntity extends Item {
+public class DiscountEntity extends BaseEntity {
     @Column(name = "discount_code")
     private String discountCode;
 

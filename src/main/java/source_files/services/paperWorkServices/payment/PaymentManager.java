@@ -14,18 +14,14 @@ import source_files.services.systemServices.SysPaymentDetailsManager;
 
 import java.time.LocalDateTime;
 
-import static source_files.data.enums.types.itemTypes.ItemType.PAYMENT_DETAILS;
 import static source_files.exception.exceptionTypes.PaymentExceptionType.*;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentManager implements PaymentService {
-
     private final PayWithCreditCard payWithCreditCard;
-
     private final PaymentBusinessRules paymentBusinessRules;
     private final PaymentTypeEntityService paymentTypeService;
-
     private final SysPaymentDetailsManager sysPaymentDetailsManager;
 
     public PaymentDetailsEntity pay(CreateRentalRequest createRentalRequest, RentalEntity rentalEntity) {
@@ -68,7 +64,6 @@ public class PaymentManager implements PaymentService {
                 createRentalRequest.getAmount(),
                 paymentTypeService.getById(createRentalRequest.getPaymentTypeId())
         );
-        paymentDetails.setItemType(PAYMENT_DETAILS);
         paymentDetails.setRentalEntity(rentalEntity);
         if (isRejected) {
             paymentDetails.setIsDeleted(true);

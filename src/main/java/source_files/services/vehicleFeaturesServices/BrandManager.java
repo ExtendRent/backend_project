@@ -17,8 +17,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static source_files.data.enums.types.itemTypes.ItemType.BRAND;
-
 @Service
 @RequiredArgsConstructor
 public class BrandManager implements BrandService {
@@ -51,7 +49,6 @@ public class BrandManager implements BrandService {
         brandEntity = modelMapperService.forRequest()
                 .map(brandBusinessRules.checkUpdateBrandRequest(
                         brandBusinessRules.fixUpdateBrandRequest(updateBrandRequest)), BrandEntity.class);
-        brandEntity.setItemType(BRAND);
         return modelMapperService.forResponse().map(entityService.update(brandEntity), BrandDTO.class);
     }
 

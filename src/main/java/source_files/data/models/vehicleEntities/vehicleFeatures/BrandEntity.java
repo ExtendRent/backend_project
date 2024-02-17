@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
+import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.imageEntities.BrandImageEntity;
 
 @Getter
@@ -15,7 +16,7 @@ import source_files.data.models.imageEntities.BrandImageEntity;
 @NoArgsConstructor
 //@SuperBuilder
 @Table(name = "brands")
-public class BrandEntity extends Item {
+public class BrandEntity extends BaseEntity {
 
     @Column(name = "name", unique = true)
     private String name;

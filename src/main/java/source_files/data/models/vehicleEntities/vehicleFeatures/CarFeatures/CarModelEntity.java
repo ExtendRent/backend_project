@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
 
 @Getter
@@ -15,7 +15,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
 @NoArgsConstructor
 //@SuperBuilder
 @Table(name = "car_models")
-public class CarModelEntity extends Item {
+public class CarModelEntity extends BaseEntity {
 
     @Column(name = "name", unique = true)
     private String name;

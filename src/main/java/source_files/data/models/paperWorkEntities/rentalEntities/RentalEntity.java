@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.userEntities.CustomerEntity;
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 //@Inheritance(strategy = InheritanceType.JOINED)
 //@SuperBuilder
 @Table(name = "rental")
-public class RentalEntity extends Item {
+public class RentalEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)

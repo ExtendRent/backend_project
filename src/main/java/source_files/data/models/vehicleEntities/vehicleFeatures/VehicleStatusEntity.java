@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ import source_files.data.models.baseEntities.Item;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "vehicle_statuses")
-public class VehicleStatusEntity extends Item {
+public class VehicleStatusEntity extends BaseEntity {
 
     @Column(name = "name")
     private String name;

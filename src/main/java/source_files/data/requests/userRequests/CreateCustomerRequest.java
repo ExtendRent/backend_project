@@ -3,6 +3,7 @@ package source_files.data.requests.userRequests;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import source_files.data.enums.types.userTypes.UserRole;
+import source_files.data.enums.types.userTypes.UserType;
 import source_files.data.requests.BaseRequest;
 
 @AllArgsConstructor
@@ -11,8 +12,6 @@ import source_files.data.requests.BaseRequest;
 @Setter
 @Builder
 public class CreateCustomerRequest extends BaseRequest {
-
-    private final UserRole authority = UserRole.CUSTOMER;
     @NotNull(message = "Müşteri adı null olamaz")
     @NotBlank(message = "Müşteri adı boş geçilemez")
     @Size(min = 2, max = 20)

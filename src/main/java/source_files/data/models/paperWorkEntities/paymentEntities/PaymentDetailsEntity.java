@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 
 @Getter
@@ -14,7 +14,7 @@ import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 @NoArgsConstructor
 @Entity
 @Table(name = "payment_details")
-public class PaymentDetailsEntity extends Item {
+public class PaymentDetailsEntity extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "rental_id", referencedColumnName = "id")
     private RentalEntity rentalEntity;

@@ -2,7 +2,6 @@ package source_files.data.requests.paperworkRequests.discountRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.enums.types.itemTypes.ItemType;
 
 @Getter
 @Setter
@@ -10,7 +9,6 @@ import source_files.data.enums.types.itemTypes.ItemType;
 @NoArgsConstructor
 @Builder
 public class CreateDiscountRequest {
-    private final ItemType itemType = ItemType.DISCOUNT;
     @NotBlank(message = "Discount code cannot be blank")
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Discount code must consist of letters and numbers only")

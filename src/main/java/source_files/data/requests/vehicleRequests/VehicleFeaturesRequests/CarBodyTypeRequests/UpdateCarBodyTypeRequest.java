@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.enums.types.itemTypes.ItemType;
 import source_files.data.requests.BaseRequest;
 
 @Getter
@@ -16,10 +15,8 @@ import source_files.data.requests.BaseRequest;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateCarBodyTypeRequest extends BaseRequest {
-    private final ItemType itemType = ItemType.CAR_BODY_TYPE;
     @NotNull(message = "id null olamaz")
     int id;
-
     @NotNull(message = "Body Type adı null olamaz")
     @NotBlank(message = "Body Type adı boş geçilemez")
     @Size(min = 2, message = "Body Type en az 2 karakter olmalıdır.")

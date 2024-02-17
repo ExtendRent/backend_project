@@ -125,7 +125,7 @@ public class ColorServiceTests {
         colorEntity.setId(colorId);
         colorEntity.setName("TestColor");
 
-        ColorDTO colorDTO = new ColorDTO(colorId, "TestColor");
+        ColorDTO colorDTO = new ColorDTO(colorId, "TestColor", false);
 
         Mockito.when(colorEntityManager.getById(eq(colorId))).thenReturn(colorEntity);
         Mockito.when(colorManager.getById(eq(colorId))).thenReturn(colorDTO);

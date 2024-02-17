@@ -12,7 +12,6 @@ import source_files.data.requests.BaseRequest;
 @Builder
 public class CreateEmployeeRequest extends BaseRequest {
 
-    private final UserRole authority = UserRole.EMPLOYEE;
     @NotNull(message = "isim null olamaz")
     @NotBlank(message = "isim boş geçilemez")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")

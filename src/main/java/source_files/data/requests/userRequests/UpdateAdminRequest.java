@@ -15,8 +15,6 @@ import source_files.data.requests.BaseRequest;
 @Setter
 public class UpdateAdminRequest extends BaseRequest {
 
-
-    private final UserRole authority = UserRole.ADMIN;
     @NotNull(message = "maaş null olamaz")
     @NotBlank(message = "maaş boş geçilemez")
     @Min(0)

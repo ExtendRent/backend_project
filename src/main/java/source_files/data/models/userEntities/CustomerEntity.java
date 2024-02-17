@@ -3,7 +3,6 @@ package source_files.data.models.userEntities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.enums.types.userTypes.CustomerType;
 import source_files.data.models.DrivingLicenseTypeEntity;
@@ -12,10 +11,11 @@ import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 
 import java.util.List;
 
+import static source_files.data.enums.types.userTypes.UserRole.CUSTOMER;
+
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 //@SuperBuilder
 @Table(name = "customers")
@@ -35,4 +35,8 @@ public class CustomerEntity extends UserEntity {
     @ManyToOne()
     @JoinColumn(name = "driving_license_type")
     private DrivingLicenseTypeEntity drivingLicenseTypeEntity;
+
+    CustomerEntity() {
+        this.setAuthority(CUSTOMER);
+    }
 }

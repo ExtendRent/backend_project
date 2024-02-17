@@ -2,7 +2,6 @@ package source_files.data.requests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.enums.types.itemTypes.ItemType;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,7 +9,6 @@ import source_files.data.enums.types.itemTypes.ItemType;
 @Setter
 @Builder
 public class CreateDrivingLicenseTypeRequest {
-    private final ItemType itemType = ItemType.DRIVING_LICENSE_TYPE;
     @NotNull(message = "Driving license type name can not be null")
     @NotBlank(message = "Driving license type name can not be blank")
     @Pattern(regexp = "^[A-Z]{1,3}$", message = "Invalid driving license type name")

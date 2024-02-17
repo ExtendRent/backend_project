@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.models.baseEntities.Item;
+import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
 @Setter
@@ -15,7 +15,7 @@ import source_files.data.models.baseEntities.Item;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "shift_types")
-public class ShiftTypeEntity extends Item {
+public class ShiftTypeEntity extends BaseEntity {
 
     @Column(name = "name", unique = true)
     private String name;
