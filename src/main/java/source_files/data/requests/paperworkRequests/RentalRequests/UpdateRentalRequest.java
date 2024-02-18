@@ -41,7 +41,9 @@ public class UpdateRentalRequest {
 
     private Integer discountEntityId;//input olarak alınmayacak !!
 
+    @NotNull
+    private int rentalStatusId;
+
     @NotNull(message = "is active cannot be null")
     private boolean isActive;
-
 }

@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.enums.defaultDataEnums.*;
+import source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
+import source_files.data.models.paperWorkEntities.rentalEntities.RentalStatusEntity;
 import source_files.data.requests.CreateDrivingLicenseTypeRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
@@ -32,6 +34,7 @@ import source_files.services.entityServices.abstracts.userAbstract.UserEntitySer
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
+import source_files.services.paperWorkServices.abstracts.RentalStatusService;
 import source_files.services.systemServices.ImageServices.BrandImageService;
 import source_files.services.systemServices.ImageServices.CarImageService;
 import source_files.services.systemServices.ImageServices.UserImageService;
@@ -74,6 +77,7 @@ public class SeedDataConfig implements CommandLineRunner {
     private final CarImageService carImageService;
     private final UserImageService userImageService;
     private final BrandImageService brandImageService;
+    private final RentalStatusService rentalStatusService;
 
     @Override
     public void run(String... args) throws IOException {
@@ -137,15 +141,6 @@ public class SeedDataConfig implements CommandLineRunner {
             }
         }
 
-
-        try {
-            discountService.getAll();
-        } catch (DataNotFoundException e) {
-            for (DefaultDiscount defaultDiscount : DefaultDiscount.getAll()) {
-                discountService.create(new CreateDiscountRequest(defaultDiscount.name(), defaultDiscount.getPercentage()));
-            }
-        }
-
         try {
             shiftTypeService.getAll();
         } catch (DataNotFoundException e) {
@@ -171,6 +166,14 @@ public class SeedDataConfig implements CommandLineRunner {
         }
 
         try {
+            discountService.getAll();
+        } catch (DataNotFoundException e) {
+            for (DefaultDiscount defaultDiscount : DefaultDiscount.getAll()) {
+                discountService.create(new CreateDiscountRequest(defaultDiscount.name(), defaultDiscount.getPercentage()));
+            }
+        }
+
+        try {
             drivingLicenseTypeService.getAll();
         } catch (DataNotFoundException e) {
             for (DefaultCarDrivingLicenseType defaultCarDrivingLicenseType : DefaultCarDrivingLicenseType.getAll()) {
@@ -179,6 +182,14 @@ public class SeedDataConfig implements CommandLineRunner {
                         defaultCarDrivingLicenseType.getLabel(),
                         defaultCarDrivingLicenseType.ordinal())
                 );
+            }
+        }
+
+        try {
+            rentalStatusService.getAll();
+        } catch (DataNotFoundException e) {
+            for (DefaultRentalStatus defaultRentalStatus : DefaultRentalStatus.getAll()) {
+                rentalStatusService.create(new RentalStatusEntity(defaultRentalStatus.getLabel(), defaultRentalStatus));
             }
         }
 

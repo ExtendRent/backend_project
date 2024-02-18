@@ -67,6 +67,13 @@ public class RentalsController {
         );
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TResponse<RentalDTO>> getRentalById(@PathVariable int id) {
+        return new ResponseEntity<>(TResponse.<RentalDTO>tResponseBuilder()
+                .response(rentalService.getById(id)).build(), HttpStatus.OK
+        );
+    }
+
     @PutMapping("/returnRental")
     public ResponseEntity<TResponse<?>> returnRental(@RequestBody ReturnRentalRequest returnRentalRequest) {
         return new ResponseEntity<>(TResponse.tResponseBuilder()

@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @Entity
 //@Inheritance(strategy = InheritanceType.JOINED)
 //@SuperBuilder
-@Table(name = "rental")
+@Table(name = "rentals")
 public class RentalEntity extends BaseEntity {
 
     @ManyToOne
@@ -51,6 +51,10 @@ public class RentalEntity extends BaseEntity {
 
     @Column(name = "return_date")
     private LocalDate returnDate = null;
+
+    @ManyToOne
+    @JoinColumn(name = "rental_status")
+    private RentalStatusEntity rentalStatusEntity;
 
     @Column(name = "is_active")
     private boolean isActive = true;

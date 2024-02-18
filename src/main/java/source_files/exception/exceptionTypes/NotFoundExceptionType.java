@@ -68,7 +68,10 @@ public enum NotFoundExceptionType {
     IMAGE_NOT_FOUND(1037, "Image Not Found"),
     IMAGE_LIST_NOT_FOUND(1038, "Image List is Empty"),
 
-    USER_ROLE_NOT_FOUND(1039, "User Role Not Found");
+    USER_ROLE_NOT_FOUND(1039, "User Role Not Found"),
+
+    RENTAL_STATUS_NOT_FOUND(1040, "Rental Status Not Found"),
+    RENTAL_STATUS_LIST_NOT_FOUND(1041, "Rental Status List is Empty");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

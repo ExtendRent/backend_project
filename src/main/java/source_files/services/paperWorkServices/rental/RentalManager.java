@@ -1,4 +1,4 @@
-package source_files.services.paperWorkServices;
+package source_files.services.paperWorkServices.rental;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,7 @@ import source_files.services.entityServices.abstracts.paperWorkAbstracts.Discoun
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
+import source_files.services.paperWorkServices.abstracts.RentalStatusService;
 import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus.*;
 import static source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus.IN_USE;
 import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
@@ -40,7 +42,7 @@ public class RentalManager implements RentalService {
     private final DiscountEntityService discountEntityService;
     private final RentalBusinessRules rules;
     private final PaymentService paymentService;
-
+    private final RentalStatusService rentalStatusService;
 
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
@@ -69,7 +71,7 @@ public class RentalManager implements RentalService {
         }
 
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());
-
+        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(WAITING));
         entityService.create(rentalEntity);
         try {
             rentalEntity.setPaymentDetailsEntity(paymentService.pay(createRentalRequest, rentalEntity));
@@ -95,6 +97,7 @@ public class RentalManager implements RentalService {
 
         rentalEntity.setEndKilometer(returnRentalRequest.getEndKilometer());
         rentalEntity.setActive(false);
+        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(FINISHED));
         carEntity.setKilometer(rentalEntity.getEndKilometer());
         if (rentalEntity.getCarEntity() != null) {
             carService.removeRental(carEntity.getId(), rentalEntity);
@@ -108,6 +111,7 @@ public class RentalManager implements RentalService {
         RentalEntity rentalEntity = entityService.getById(rentalId);
         CarEntity carEntity = rentalEntity.getCarEntity();
         rentalEntity.setStartKilometer(carEntity.getKilometer());
+        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(ACTIVE));
         carService.changeStatus(carEntity, IN_USE);
         return mapToDTO(entityService.update(rentalEntity));
     }
@@ -166,6 +170,7 @@ public class RentalManager implements RentalService {
     private RentalDTO mapToDTO(RentalEntity rentalEntity) {
         return mapper.forResponse().map(rentalEntity, RentalDTO.class);
     }
+
 
     private ShowRentalResponse convertToShowRentalResponse(ShowRentalRequest showRentalRequest) {
         // indirim işlemleri sonucu totalPrice hesaplama

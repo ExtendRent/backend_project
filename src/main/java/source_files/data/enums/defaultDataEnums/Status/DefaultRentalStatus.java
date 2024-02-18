@@ -1,19 +1,22 @@
 package source_files.data.enums.defaultDataEnums.Status;
 
-public enum DefaultUserStatus {
-    PENDING_VERIFYING("Onay Bekleniyor"),
-    VERIFIED("Onaylandı"),
-    BLOCKED("Engellendi");
+public enum DefaultRentalStatus {
+    WAITING("Beklemede"),
+    ACTIVE("Aktif"),
+    FINISHED("Tamamlandı");
     private final String label;
-    DefaultUserStatus(String label) {
+
+    DefaultRentalStatus(String label) {
         this.label = label;
     }
 
-    public static DefaultUserStatus[] getAll() {
+    public static DefaultRentalStatus[] getAll() {
         return values();
     }
 
     public String getLabel() {
         return label;
     }
+
+
 }

@@ -1,4 +1,4 @@
-package source_files.services.paperWorkServices;
+package source_files.services.paperWorkServices.payment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
