@@ -36,9 +36,9 @@ public class SignUpReqeust {
 
     int drivingLicenseTypeEntityId;
 
-    @NotBlank
     @NotNull
     UserRole authority;
 
+    @NotNull
     int userImageEntityId;
 }

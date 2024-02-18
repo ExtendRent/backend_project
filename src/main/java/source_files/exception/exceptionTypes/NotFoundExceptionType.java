@@ -66,8 +66,9 @@ public enum NotFoundExceptionType {
     CAR_SEGMENT_LIST_NOT_FOUND(1036, "Car Segment List is Empty"),
 
     IMAGE_NOT_FOUND(1037, "Image Not Found"),
+    IMAGE_LIST_NOT_FOUND(1038, "Image List is Empty"),
 
-    IMAGE_LIST_NOT_FOUND(1038, "Image List is Empty");
+    USER_ROLE_NOT_FOUND(1039, "User Role Not Found");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

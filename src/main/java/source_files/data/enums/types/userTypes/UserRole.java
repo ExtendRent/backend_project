@@ -9,11 +9,9 @@ public enum UserRole implements GrantedAuthority {
     CUSTOMER("Müşteri"),
     DEVELOPER("Geliştirici");
     private final String label;
-
     UserRole(String label) {
         this.label = label;
     }
-
     @Override
     public String getAuthority() {
         return name();

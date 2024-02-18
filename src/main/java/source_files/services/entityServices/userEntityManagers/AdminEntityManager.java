@@ -21,7 +21,7 @@ public class AdminEntityManager implements AdminEntityService {
 
     @Override
     public AdminEntity create(AdminEntity adminEntity) {
-
+        adminEntity.setId(0);
         return this.adminRepository.save(adminEntity);
     }
 

@@ -15,9 +15,12 @@ import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.responses.JwtToken;
+import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.externalServices.EmailService;
 import source_files.services.userServices.abstracts.*;
+
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_ROLE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -36,14 +39,20 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
 
     @Override
     public void signUp(SignUpReqeust request) {
+
         switch (request.getAuthority()) {
             case ADMIN:
                 this.adminService.create(this.mapper.forRequest().map(request, CreateAdminRequest.class));
+                break;
             case EMPLOYEE:
                 this.employeeService.create(this.mapper.forRequest().map(request, CreateEmployeeRequest.class));
+                break;
             case CUSTOMER:
                 this.customerService.create(this.mapper.forRequest().map(request, CreateCustomerRequest.class));
                 emailService.sendOtp(request.getEmailAddress());
+                break;
+            default:
+                throw new DataNotFoundException(USER_ROLE_NOT_FOUND);
         }
     }
 

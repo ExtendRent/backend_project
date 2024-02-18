@@ -18,7 +18,7 @@ public class EmployeeEntityManager implements EmployeeEntityService {
 
     @Override
     public EmployeeEntity create(EmployeeEntity employeeEntity) {
-
+        employeeEntity.setId(0);
         return this.employeeRepository.save(employeeEntity);
     }
 
