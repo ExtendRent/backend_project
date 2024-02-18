@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.BaseEntity;
-import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
 @Setter

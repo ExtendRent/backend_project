@@ -19,14 +19,13 @@ public class CustomerEntityManager implements CustomerEntityService {
 
     @Override
     public CustomerEntity create(CustomerEntity customerEntity) {
-
+        customerEntity.setId(0);
         return this.customerRepository.save(customerEntity);
     }
 
     @Override
     public CustomerEntity update(CustomerEntity customerEntity) {
-
-        return this.create(customerEntity);
+        return customerRepository.save(customerEntity);
     }
 
     @Override

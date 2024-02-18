@@ -36,7 +36,7 @@ public class CarImageManager implements CarImageService {
             return repository.save(CarImageEntity.builder()
                     .name(licensePlate)
                     .type(file.getContentType())
-                    .imageUrl(imageUrl)
+                    .url(imageUrl)
                     .imageData(ImageUtils.compressImage(decompressedData))
                     .build()
             );
@@ -69,7 +69,7 @@ public class CarImageManager implements CarImageService {
     @Override
     public void delete(int id) throws IOException {
         try {
-            if (cloudinaryService.deleteFile(this.getById(id).getImageUrl())) {
+            if (cloudinaryService.deleteFile(this.getById(id).getUrl())) {
                 repository.delete(this.getById(id));
             }
         } catch (Exception e) {

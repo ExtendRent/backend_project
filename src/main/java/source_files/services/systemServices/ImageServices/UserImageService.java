@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserImageService {
-    UserImageEntity create(MultipartFile file, String emailAddress) throws IOException;
+    int create(MultipartFile file, String emailAddress) throws IOException;
 
     byte[] downloadImage(String name);
 

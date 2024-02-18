@@ -25,5 +25,5 @@ public class CarImageEntity extends BaseEntity {
     private byte[] imageData;
 
     @Column(name = "image_Url", length = 1000)
-    private String imageUrl;
+    private String url;
 }

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import source_files.data.models.baseEntities.BaseEntity;
-import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.imageEntities.BrandImageEntity;
 
 @Getter
@@ -22,6 +21,6 @@ public class BrandEntity extends BaseEntity {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "logo_path")
+    @JoinColumn(name = "image_id")
     private BrandImageEntity brandImageEntity;
 }

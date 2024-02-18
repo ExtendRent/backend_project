@@ -83,7 +83,6 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
         PaymentDetailsEntity paymentDetailsEntity = rentalEntity.getPaymentDetailsEntity();
 
-        paymentDetailsEntity.setId(paymentDetailsEntity.getId());
         //TODO  calculate total final amount kısmında hata var. cezalı hesaplamayı yanlış yapıyor.
 
         paymentDetailsEntity.setAmount(

@@ -219,7 +219,6 @@ public class SeedDataConfig implements CommandLineRunner {
                         .expectedMinDrivingLicenseTypeId(x)
                         .carSegmentEntityId(i)
                         .build());
-
             }
         }
 
@@ -227,7 +226,6 @@ public class SeedDataConfig implements CommandLineRunner {
         //-------------------------------SEED USERS-----------------------------------------
 
         if (userEntityService.getAll().toArray().length == 0) {
-
             for (DefaultUserImageUrl defaultUserImageEnum : DefaultUserImageUrl.getAll()) {
                 URL url = new URL(defaultUserImageEnum.getUrl());
                 Path path = Paths.get("src/main/assets/default/user", defaultUserImageEnum.name() + ".jpg");
@@ -239,38 +237,15 @@ public class SeedDataConfig implements CommandLineRunner {
                         defaultUserImageEnum.name(), path.getFileName().toString(), "image/jpeg", Files.readAllBytes(path));
 
                 switch (defaultUserImageEnum) {
-                    case CUSTOMER_IMAGE -> {
-                        customerService.create(CreateCustomerRequest.builder()
-                                .name("customer")
-                                .surname("customer")
-                                .phoneNumber("11111111111")
-                                .emailAddress("customer@gmail.com")
-                                .password("pass")
-                                .drivingLicenseNumber("123456")
-                                .drivingLicenseTypeEntityId(2)
-                                .userImageEntityId(userImageService.create(file, "customer@gmail.com").getId())
-                                .build());
-                    }
-                    case DEFAULT_USER_IMAGE -> {
-                        customerService.create(CreateCustomerRequest.builder()
-                                .name("customer2")
-                                .surname("customer2")
-                                .phoneNumber("22222222222")
-                                .emailAddress("customer2@gmail.com")
-                                .password("pass")
-                                .drivingLicenseNumber("123457")
-                                .drivingLicenseTypeEntityId(3)
-                                .userImageEntityId(userImageService.create(file, "customer2@gmail.com").getId())
-                                .build());
-                    }
+
                     case ADMIN_IMAGE -> {
                         adminService.create(CreateAdminRequest.builder()
                                 .name("admin")
                                 .surname("admin")
-                                .phoneNumber("33333333333")
+                                .phoneNumber("11111111111")
                                 .emailAddress("admin@gmail.com")
                                 .password("pass")
-                                .userImageEntityId(userImageService.create(file, "admin@gmail.com").getId())
+                                .userImageEntityId(userImageService.create(file, "admin@gmail.com"))
                                 .salary(10000.00)
                                 .build());
                     }
@@ -278,13 +253,44 @@ public class SeedDataConfig implements CommandLineRunner {
                         employeeService.create(CreateEmployeeRequest.builder()
                                 .name("employee")
                                 .surname("employee")
-                                .phoneNumber("44444444444")
+                                .phoneNumber("22222222222")
                                 .emailAddress("employee@gmail.com")
                                 .password("pass")
-                                .userImageEntityId(userImageService.create(file, "employee@gmail.com").getId())
+                                .userImageEntityId(userImageService.create(file, "employee@gmail.com"))
                                 .salary(10000.00)
                                 .build()
                         );
+                    }
+                    case CUSTOMER_IMAGE -> {
+                        customerService.create(CreateCustomerRequest.builder()
+                                .name("customer")
+                                .surname("customer")
+                                .phoneNumber("33333333333")
+                                .emailAddress("customer@gmail.com")
+                                .password("pass")
+                                .drivingLicenseNumber("123456")
+                                .drivingLicenseTypeEntityId(3)
+                                .userImageEntityId(userImageService.create(file, "customer@gmail.com"))
+                                .build());
+                    }
+                    case DEFAULT_USER_IMAGE -> {
+                        int defaultImageID = userImageService.create(file, "default_user_image");
+                        for (int i = 1; i <= 20; i++) {
+                            String drivingLicenseNumber = String.valueOf((123456 + i));
+                            String name = "defcustomer" + i;
+                            String phoneNumber = String.valueOf(44444444444L + i);
+                            String emailAddress = name + "@gmail.com";
+                            customerService.create(CreateCustomerRequest.builder()
+                                    .name(name)
+                                    .surname(name)
+                                    .phoneNumber(phoneNumber)
+                                    .emailAddress(emailAddress)
+                                    .password("pass")
+                                    .drivingLicenseNumber(drivingLicenseNumber)
+                                    .drivingLicenseTypeEntityId(2)
+                                    .userImageEntityId(defaultImageID)
+                                    .build());
+                        }
                     }
                 }
             }
@@ -303,7 +309,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .expirationDate(LocalDate.parse("2024-09-01"))
                     .build();
             rentalService.create(CreateRentalRequest.builder()
-                    .customerEntityId(1).carEntityId(1)
+                    .customerEntityId(3).carEntityId(2)
                     .amount(1800.00)
                     .startDate(LocalDate.parse("2024-03-10"))
                     .endDate(LocalDate.parse("2024-03-15"))
@@ -312,9 +318,8 @@ public class SeedDataConfig implements CommandLineRunner {
                     .creditCardInformation(creditCardInformation)
                     .build());
 
-            //TODO burada hata var müşteri bulunamadı diyor. yukarıda müşteri kaydında bir sıkıntı olabilir.
             rentalService.create(CreateRentalRequest.builder()
-                    .customerEntityId(2).carEntityId(2)
+                    .customerEntityId(4).carEntityId(1)
                     .amount(1200.00)
                     .startDate(LocalDate.parse("2024-03-20"))
                     .endDate(LocalDate.parse("2024-03-25"))

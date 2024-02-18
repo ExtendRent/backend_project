@@ -2,8 +2,6 @@ package source_files.data.requests.userRequests;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
-import source_files.data.enums.types.userTypes.UserRole;
-import source_files.data.enums.types.userTypes.UserType;
 import source_files.data.requests.BaseRequest;
 
 @AllArgsConstructor
@@ -39,5 +37,6 @@ public class CreateCustomerRequest extends BaseRequest {
     String drivingLicenseNumber;
     @NotNull
     int drivingLicenseTypeEntityId;
+    @NotNull
     private int userImageEntityId;
 }

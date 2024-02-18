@@ -38,7 +38,7 @@ public class ImagesController {
             @RequestPart(value = "image", required = false) MultipartFile image,
             @RequestParam(value = "emailAddress", required = false) String emailAddress) throws IOException {
 
-        return new ResponseEntity<>(userImageService.create(image, emailAddress).getId(), HttpStatus.OK);
+        return new ResponseEntity<>(userImageService.create(image, emailAddress), HttpStatus.OK);
     }
 
     @PostMapping(value = "/brand", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})

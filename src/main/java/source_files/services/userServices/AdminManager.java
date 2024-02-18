@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.VERIFIED;
-import static source_files.data.enums.types.userTypes.UserType.ADMIN;
 
 @Service
 @RequiredArgsConstructor

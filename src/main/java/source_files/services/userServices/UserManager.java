@@ -2,6 +2,7 @@ package source_files.services.userServices;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import source_files.data.models.baseEntities.UserEntity;
 import source_files.dataAccess.userRepositories.UserRepository;
 import source_files.services.userServices.abstracts.UserService;
 
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.BLOCKED;

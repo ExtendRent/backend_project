@@ -1,9 +1,11 @@
 package source_files.data.models.imageEntities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import lombok.*;
 import source_files.data.models.baseEntities.BaseEntity;
-import source_files.data.models.baseEntities.UserEntity;
 
 @Getter
 @Setter
@@ -13,9 +15,7 @@ import source_files.data.models.baseEntities.UserEntity;
 @Builder
 @Table(name = "user_images")
 public class UserImageEntity extends BaseEntity {
-    @JoinColumn(name = "user_id", unique = true)
-    @OneToOne
-    private UserEntity userEntity;
+
     @Column(name = "name")
     private String name;
     @Column(name = "type")

@@ -41,6 +41,7 @@ public class CustomerManager implements CustomerService {
                     .map(rules.checkCreateCustomerRequest(
                             rules.fixCreateCustomerRequest(createCustomerRequest)), CustomerEntity.class
                     );
+            customerEntity.setUserImageEntity(userImageService.getById(createCustomerRequest.getUserImageEntityId()));
             customerEntity.setPassword(passwordEncoder.encode(customerEntity.getPassword()));
             customerEntity.setStatus(PENDING_VERIFYING);
             entityService.create(customerEntity);

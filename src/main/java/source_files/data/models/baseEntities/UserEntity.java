@@ -49,18 +49,16 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Column(name = "password")
     private String password;
 
-
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private DefaultUserStatus status;
+    @ManyToOne
+    @JoinColumn(name = "image_id")
+    private UserImageEntity userImageEntity;
 
     public DefaultUserStatus getStatus() {
         return this.status;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "image_id")
-    private UserImageEntity userImageEntity;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(authority);
