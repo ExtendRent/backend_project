@@ -32,6 +32,7 @@ public class AdminManager implements AdminService {
 
     @Override
     public void create(CreateAdminRequest createAdminRequest) {
+
         try {
             AdminEntity adminEntity = mapper.forRequest()
                     .map(rules.checkCreateAdminRequest
@@ -44,6 +45,7 @@ public class AdminManager implements AdminService {
             userImageService.delete(createAdminRequest.getUserImageEntityId());
             throw e;
         }
+
     }
 
     @Override

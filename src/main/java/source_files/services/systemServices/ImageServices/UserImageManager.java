@@ -28,6 +28,9 @@ public class UserImageManager implements UserImageService {
 
     @Override
     public int create(MultipartFile file, String emailAddress) throws IOException {
+        if (file == null) {
+            return getIdByName("default_user_image");
+        }
         try {
             byte[] newByte = ImageUtils.resizeImage(file.getBytes(), 400, 400);
             String url = cloudinaryService.uploadFileUser(file, emailAddress);
@@ -54,6 +57,11 @@ public class UserImageManager implements UserImageService {
     @Override
     public UserImageEntity getById(int id) {
         return repository.findById(id).orElseThrow(() -> new DataNotFoundException(IMAGE_NOT_FOUND));
+    }
+
+    @Override
+    public Integer getIdByName(String name) {
+        return repository.findIdByName(name);
     }
 
     @Override
