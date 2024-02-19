@@ -5,6 +5,7 @@ public enum DefaultUserStatus {
     VERIFIED("Onaylandı"),
     BLOCKED("Engellendi");
     private final String label;
+
     DefaultUserStatus(String label) {
         this.label = label;
     }

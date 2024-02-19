@@ -13,6 +13,7 @@ public interface CarModelRepository extends JpaRepository<CarModelEntity, Intege
     boolean existsByNameAndIdNot(String name, int id);
 
     Optional<CarModelEntity> findByName(String modelName);
+
     @Transactional
     List<CarModelEntity> findAllByBrandEntity_Id(int brandId);
 

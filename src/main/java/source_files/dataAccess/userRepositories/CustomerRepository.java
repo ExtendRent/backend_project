@@ -21,6 +21,7 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
     boolean existsByEmailAddress(String email);
 
     boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
+
     @Transactional
     List<CustomerEntity> findAllByIsDeleted(boolean isDeleted);
 }

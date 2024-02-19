@@ -14,6 +14,7 @@ public interface UserImageService {
     UserImageEntity getById(int id);
 
     Integer getIdByName(String name);
+
     List<UserImageEntity> getAll();
 
     void delete(int id);
