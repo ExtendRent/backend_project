@@ -52,9 +52,9 @@ public class EmployeesController {
         );
     }
 
-    @GetMapping("/{phoneNumber}")
-    public ResponseEntity<TResponse<?>> getByPhoneNumber(@PathVariable String phoneNumber) {
-        return new ResponseEntity<>(TResponse.tResponseBuilder()
+    @GetMapping("/phone/{phoneNumber}")
+    public ResponseEntity<TResponse<EmployeeDTO>> getByPhoneNumber(@PathVariable String phoneNumber) {
+        return new ResponseEntity<>(TResponse.<EmployeeDTO>tResponseBuilder()
                 .response(this.employeeService.getByPhoneNumber(phoneNumber))
                 .build(), HttpStatus.OK
         );

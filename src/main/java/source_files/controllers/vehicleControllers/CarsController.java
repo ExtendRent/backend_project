@@ -93,14 +93,6 @@ public class CarsController {
         );
     }
 
-    @GetMapping("/customers/{customerId}")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByDrivingLicenseSuitable(@PathVariable int customerId) {
-        return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByIsDrivingLicenseSuitable(customerId))
-                .build(), HttpStatus.OK
-        );
-    }
-
     @GetMapping(params = {"startDate", "endDate"})
     public ResponseEntity<TResponse<List<CarDTO>>> getAllByAvailabilityBetween(
             @RequestParam(name = "startDate", required = false) LocalDate startDate
@@ -112,26 +104,6 @@ public class CarsController {
         );
     }
 
-    @GetMapping(params = {"startPrice", "endPrice"})
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByPriceBetween(
-            @RequestParam(name = "startPrice", required = false) Integer startPrice,
-            @RequestParam(name = "endPrice", required = false) Integer endPrice) {
-
-        try {
-            // Başarılı yanıtı oluştur
-            List<CarDTO> carDTOList = this.carService.getAllByRentalPriceBetween(startPrice, endPrice);
-            return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                    .response(carDTOList)
-                    .build(), HttpStatus.OK
-            );
-        } catch (NumberFormatException e) {
-            // Sayıya çeviremezse hata mesajı döndür
-            return ResponseEntity.badRequest().body(TResponse.<List<CarDTO>>tResponseBuilder()
-                    .build()
-            );
-        }
-    }
-
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<CarDTO>>> getAllByDeletedState(
@@ -141,52 +113,6 @@ public class CarsController {
                 .build(), HttpStatus.OK
         );
     }
-
-    @GetMapping(params = "statusId")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByStatus(
-            @RequestParam(value = "statusId", required = false) Integer statusId) {
-        return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByStatus(statusId))
-                .build(), HttpStatus.OK
-        );
-    }
-
-
-    @GetMapping("/colors/{colorId}")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByColorId(@PathVariable int colorId) {
-        return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByColorId(colorId))
-                .build(), HttpStatus.OK
-        );
-    }
-
-    @GetMapping("/models/{modelId}")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByModelId(@PathVariable int modelId) {
-        return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByModelId(modelId))
-                .build(), HttpStatus.OK
-        );
-    }
-
-    @GetMapping(params = {"startYear", "endYear"})
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByYearBetween(
-            @RequestParam(name = "startYear", required = false) int startYear,
-            @RequestParam(value = "endYear", required = false) int endYear) {
-
-        return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByYearBetween(startYear, endYear))
-                .build(), HttpStatus.OK
-        );
-    }
-
-    @GetMapping("/brands/{brandId}")
-    public ResponseEntity<TResponse<List<CarDTO>>> getAllByBrandId(@PathVariable int brandId) {
-        return new ResponseEntity<>(TResponse.<List<CarDTO>>tResponseBuilder()
-                .response(this.carService.getAllByBrandId(brandId))
-                .build(), HttpStatus.OK
-        );
-    }
-
 
     @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(

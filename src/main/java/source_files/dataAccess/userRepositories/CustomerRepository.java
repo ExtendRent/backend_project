@@ -1,6 +1,7 @@
 package source_files.dataAccess.userRepositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 import source_files.data.models.userEntities.CustomerEntity;
 
 import java.util.List;
@@ -8,8 +9,6 @@ import java.util.Optional;
 
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
     Optional<CustomerEntity> findByEmailAddress(String emailAddress);
-
-    Optional<CustomerEntity> findByPhoneNumber(String phoneNumber);
 
     boolean existsByPhoneNumber(String phoneNumber);
 
@@ -22,6 +21,6 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
     boolean existsByEmailAddress(String email);
 
     boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
-
+    @Transactional
     List<CustomerEntity> findAllByIsDeleted(boolean isDeleted);
 }

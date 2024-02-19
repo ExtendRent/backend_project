@@ -2,6 +2,7 @@ package source_files.dataAccess.userRepositories;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 import source_files.data.models.userEntities.AdminEntity;
 
 import java.util.List;
@@ -9,9 +10,8 @@ import java.util.Optional;
 
 public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
 
+    @Transactional
     Optional<AdminEntity> findByEmailAddress(String emailAddress);
-
-    Optional<AdminEntity> findByPhoneNumber(String phoneNumber);
 
     boolean existsByPhoneNumber(String phoneNumber);
 
@@ -20,8 +20,6 @@ public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
     boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
 
     boolean existsByPhoneNumberAndIdNot(String phoneNumber, int id);
-
-    List<AdminEntity> findBySalaryGreaterThanEqual(Double salary);
 
     List<AdminEntity> findAllByIsDeleted(boolean isDeleted);
 

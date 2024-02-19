@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
-import source_files.dataAccess.vehicleFeaturesRespositories.BrandRespository;
+import source_files.dataAccess.vehicleFeaturesRespositories.BrandRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
@@ -17,7 +17,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.BRAND_
 @RequiredArgsConstructor
 @Service
 public class BrandBusinessRules implements BaseItemBusinessRulesService {
-    private final BrandRespository brandRespository;
+    private final BrandRepository brandRepository;
 
     @Override
     public List<?> checkDataList(List<?> list) {
@@ -59,7 +59,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     }
 
     public void existsByName(String name) {
-        if (brandRespository.existsByName(name)) {
+        if (brandRepository.existsByName(name)) {
             throw new AlreadyExistsException(BRAND_ALREADY_EXISTS, "This brand name already exist");
         }
     }
@@ -67,7 +67,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir isim ile aynı olup olmadığını kontrol etmek için
-        if (brandRespository.existsByNameAndIdNot(name, id)) {
+        if (brandRepository.existsByNameAndIdNot(name, id)) {
             throw new AlreadyExistsException(BRAND_ALREADY_EXISTS, "This brand already exist !");
         }
     }

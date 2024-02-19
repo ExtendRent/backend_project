@@ -3,13 +3,14 @@ package source_files.dataAccess.vehicleRepositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import source_files.data.models.vehicleEntities.CarEntity;
 
 import java.util.List;
 
 public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
-
+    @Transactional
     @Query("SELECT c FROM CarEntity c WHERE " +
             "(:startPrice IS NULL OR :startPrice <= c.rentalPrice) AND " +
             "(:endPrice IS NULL OR :endPrice >= c.rentalPrice) AND " +
@@ -46,6 +47,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
     boolean existsByLicensePlateAndIdNot(String plate, int id);
 
+    @Transactional
     List<CarEntity> findAllByIsDeleted(boolean isDeleted);
 
     List<CarEntity> findAllByVehicleStatusEntityId(Integer vehicleStatusId);

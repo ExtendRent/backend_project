@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;

@@ -3,6 +3,7 @@ package source_files.dataAccess.paperWorkRepositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public interface RentalRepository extends JpaRepository<RentalEntity, Integer> {
 
+    @Transactional
     List<RentalEntity> findAllByIsDeleted(boolean isDeleted);
 
     // Aktif ve çakışan rentalleri buluyoruz
@@ -22,7 +24,5 @@ public interface RentalRepository extends JpaRepository<RentalEntity, Integer> {
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate
     );
-
-    List<RentalEntity> findAllByCustomerEntity_Id(int customerId);
 
 }

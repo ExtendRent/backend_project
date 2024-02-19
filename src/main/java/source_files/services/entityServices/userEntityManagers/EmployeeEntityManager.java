@@ -2,6 +2,7 @@ package source_files.services.entityServices.userEntityManagers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import source_files.data.models.userEntities.EmployeeEntity;
 import source_files.dataAccess.userRepositories.EmployeeRepository;
 import source_files.exception.DataNotFoundException;
@@ -29,6 +30,7 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     }
 
     @Override
+    @Transactional
     public EmployeeEntity getById(int id) {
         return this.employeeRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Çalışan bulunamadı"));

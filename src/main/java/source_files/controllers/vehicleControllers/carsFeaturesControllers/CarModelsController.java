@@ -52,14 +52,6 @@ public class CarModelsController {
         );
     }
 
-    @GetMapping("/models/{modelName}")
-    public ResponseEntity<TResponse<?>> getByModelName(@PathVariable String modelName) {
-        return new ResponseEntity<>(TResponse.tResponseBuilder()
-                .response(this.carModelService.getByModelName(modelName))
-                .build(), HttpStatus.OK
-        );
-    }
-
     @GetMapping("/brands/{brandId}")
     public ResponseEntity<TResponse<?>> getByBrandId(@PathVariable int brandId) {
         return new ResponseEntity<>(TResponse.tResponseBuilder()
