@@ -50,6 +50,11 @@ public class RentalEntityManager implements RentalEntityService {
         return this.repository.findAllByIsDeleted(isDeleted);
     }
 
+    @Override
+    public List<RentalEntity> getAllByStatus(int statusId) {
+        return repository.findAllByRentalStatusEntity_Id(statusId);
+    }
+
     public List<RentalEntity> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
         return repository.findOverlappingRentals(startDate, endDate);
     }

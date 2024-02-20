@@ -32,6 +32,7 @@ public interface RentalService {
     List<RentalDTO> getAll();
 
     List<RentalDTO> getAllByDeletedState(boolean isDeleted);
+    List<RentalDTO> getAllByStatus(int isDeleted);
 
     List<RentalDTO> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate);
 }

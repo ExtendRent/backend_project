@@ -50,7 +50,7 @@ public class RentalEntity extends BaseEntity {
     private PaymentDetailsEntity paymentDetailsEntity;
 
     @Column(name = "return_date")
-    private LocalDate returnDate = null;
+    private LocalDate returnDate;
 
     @ManyToOne
     @JoinColumn(name = "rental_status")

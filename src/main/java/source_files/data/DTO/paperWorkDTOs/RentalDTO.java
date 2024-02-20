@@ -11,6 +11,7 @@ public class RentalDTO {
     int id;
     int customerEntityId;
     int discountEntityId;
+    int rentalStatusEntityId;
     String customerEntityName;
     String customerEntitySurname;
 
@@ -25,8 +26,11 @@ public class RentalDTO {
 
     LocalDate startDate;
     LocalDate endDate;
+    LocalDate returnDate;
 
     double paymentDetailsEntityAmount;
     String paymentDetailsEntityPaymentTypeEntityPaymentTypeName;
+    String rentalStatusEntityName;
     boolean isActive;
+    boolean isDeleted;
 }

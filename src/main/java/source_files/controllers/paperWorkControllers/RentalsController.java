@@ -91,6 +91,15 @@ public class RentalsController {
         );
     }
 
+    @GetMapping(params = "statusId")
+    public ResponseEntity<TResponse<List<RentalDTO>>> getAllByDeletedState(
+            @RequestParam(value = "statusId", required = false) Integer statusId) {
+        return new ResponseEntity<>(TResponse.<List<RentalDTO>>tResponseBuilder()
+                .response(this.rentalService.getAllByStatus(statusId))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {

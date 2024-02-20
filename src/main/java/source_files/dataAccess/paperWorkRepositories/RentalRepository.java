@@ -15,6 +15,9 @@ public interface RentalRepository extends JpaRepository<RentalEntity, Integer> {
     @Transactional
     List<RentalEntity> findAllByIsDeleted(boolean isDeleted);
 
+    @Transactional
+    List<RentalEntity> findAllByRentalStatusEntity_Id(int statusId);
+
     // Aktif ve çakışan rentalleri buluyoruz
     @Query("SELECT r FROM RentalEntity r " +
             "WHERE r.isActive = true " +

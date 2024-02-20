@@ -89,21 +89,15 @@ public class RentalManager implements RentalService {
     public RentalDTO returnCar(ReturnRentalRequest returnRentalRequest) {
         // ceza işlemleri , indirim işlemleri iptali kontrol edilecek sonuçta da totalPrice güncelleme
 
-        RentalEntity rentalEntity = entityService.getById(returnRentalRequest.getId());
+        RentalEntity rentalEntity = this.returnReqeustToEntity(returnRentalRequest);
         CarEntity carEntity = rentalEntity.getCarEntity();
 
-        rentalEntity.setPaymentDetailsEntity(sysPaymentDetailsService.update(
-                rules.updatePaymentDetailsToFinal(returnRentalRequest)));
-
-        rentalEntity.setEndKilometer(returnRentalRequest.getEndKilometer());
-        rentalEntity.setActive(false);
-        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(FINISHED));
         carEntity.setKilometer(rentalEntity.getEndKilometer());
         if (rentalEntity.getCarEntity() != null) {
             carService.removeRental(carEntity.getId(), rentalEntity);
         }
 
-        return mapper.forResponse().map(entityService.update(rentalEntity), RentalDTO.class);
+        return mapToDTO(entityService.update(rentalEntity));
     }
 
     @Override
@@ -154,9 +148,19 @@ public class RentalManager implements RentalService {
 
     @Override
     public List<RentalDTO> getAllByDeletedState(boolean isDeleted) {
-        return rules.checkDataList(entityService.getAllByDeletedState(isDeleted)).stream()
-                .map(rentalEntity -> mapper.forResponse()
-                        .map(rentalEntity, RentalDTO.class)).toList();
+        List<RentalDTO> rentalDTOList = entityService.getAllByDeletedState(isDeleted).stream()
+                .map(this::mapToDTO).toList();
+        rules.checkDataList(rentalDTOList);
+        return rentalDTOList;
+    }
+
+    @Override
+    public List<RentalDTO> getAllByStatus(int statusId) {
+        List<RentalDTO> rentalDTOList = entityService.getAllByStatus(statusId).stream()
+                .map(this::mapToDTO).toList();
+        List<RentalDTO> collectList = rentalDTOList.stream().filter(RentalDTO::isActive).toList();
+        rules.checkDataList(collectList);
+        return collectList;
     }
 
     @Override //Tarihler arasında çakışan ve aktif olan rental kayıtları.
@@ -184,15 +188,16 @@ public class RentalManager implements RentalService {
                 .build();
     }
 
-    private UpdateRentalRequest convertToUpdateRequest(RentalEntity rentalEntity) {
-        return UpdateRentalRequest.builder()
-                .id(rentalEntity.getId())
-                .carEntityId(rentalEntity.getCarEntity().getId())
-                .customerEntityId(rentalEntity.getCustomerEntity().getId())
-                .startKilometer(rentalEntity.getStartKilometer())
-                .endDate(rentalEntity.getEndDate())
-                .startDate(rentalEntity.getStartDate())
-                .build();
+    private RentalEntity returnReqeustToEntity(ReturnRentalRequest returnRentalRequest) {
+        RentalEntity rentalEntity = entityService.getById(returnRentalRequest.getId());
+        rentalEntity.setPaymentDetailsEntity(sysPaymentDetailsService.update(
+                rules.updatePaymentDetailsToFinal(returnRentalRequest)));
+
+        rentalEntity.setEndKilometer(returnRentalRequest.getEndKilometer());
+        rentalEntity.setActive(false);
+        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(FINISHED));
+        rentalEntity.setReturnDate(returnRentalRequest.getReturnDate());
+        return rentalEntity;
     }
 
 }
