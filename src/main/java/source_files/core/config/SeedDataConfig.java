@@ -321,7 +321,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     .build();
             rentalService.create(CreateRentalRequest.builder()
                     .customerEntityId(3).carEntityId(2)
-                    .amount(1800.00)
+                    .amount(1200.00)
                     .startDate(LocalDate.parse("2024-03-10"))
                     .endDate(LocalDate.parse("2024-03-15"))
                     .paymentTypeId(1)
@@ -331,7 +331,7 @@ public class SeedDataConfig implements CommandLineRunner {
 
             rentalService.create(CreateRentalRequest.builder()
                     .customerEntityId(4).carEntityId(1)
-                    .amount(1200.00)
+                    .amount(750.00)
                     .startDate(LocalDate.parse("2024-03-20"))
                     .endDate(LocalDate.parse("2024-03-25"))
                     .paymentTypeId(1)
