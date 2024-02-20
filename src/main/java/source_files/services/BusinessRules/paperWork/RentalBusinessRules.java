@@ -153,7 +153,11 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
 
     private double calculateTotalPriceWithDiscount(double baseTotalPrice, int discountPercent) {
-        return baseTotalPrice - (baseTotalPrice * discountPercent / 100);
+        // Discount yüzdesini ondalık formata çevir
+        double discountPercentage = (double) discountPercent / 100.0;
+
+        // İndirimi uygula
+        return baseTotalPrice - (baseTotalPrice * discountPercentage);
     }
 
     public double calculateReturnFinalAmount(ReturnRentalRequest returnRentalRequest, int totalRentalDays) {
@@ -173,25 +177,20 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     }
 
     public double calculateAmount(ShowRentalRequest showRentalRequest) {
-
+        double totalBasePrice = this.calculateTotalBasePrice(
+                this.calculateTotalRentalDays(showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
+                , this.carService.getById(showRentalRequest.getCarEntityId()).getRentalPrice()
+        );
         // Discount kodu boşsa, indirim yapılmasına gerek yok
         if (this.checkDiscountCodeIsNull(showRentalRequest.getDiscountCode())) {
-
             return this.calculateTotalPriceWithDiscount(
-                    this.calculateTotalBasePrice(
-                            this.calculateTotalRentalDays(showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
-                            , this.carService.getById(showRentalRequest.getCarEntityId()).getRentalPrice()
-                    )
-                    , this.discountService.getByDiscountCode(
+                    totalBasePrice,
+                    this.discountService.getByDiscountCode(
                             showRentalRequest.getDiscountCode()).getDiscountPercentage()
             );
         } else {
             // Discount kodu yoksa, direkt kira ücretini kullan
-
-            return this.calculateTotalBasePrice(
-                    this.calculateTotalRentalDays(showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
-                    , this.carService.getById(showRentalRequest.getCarEntityId()).getRentalPrice()
-            );
+            return totalBasePrice;
         }
     }
 }
