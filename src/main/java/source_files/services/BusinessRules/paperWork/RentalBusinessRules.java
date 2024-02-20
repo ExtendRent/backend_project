@@ -44,7 +44,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     //--------------------- AUTO FIX METHODS ---------------------
     public CreateRentalRequest fixCreateRentalRequest(CreateRentalRequest createRentalRequest) {
 
-        if (this.checkDiscountCodeIsNull(createRentalRequest.getDiscountCode())) {
+        if (this.discountCodeIsNotNull(createRentalRequest.getDiscountCode())) {
             createRentalRequest.setDiscountCode(this.fixName(createRentalRequest.getDiscountCode()));
         }
         return createRentalRequest;
@@ -123,7 +123,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     }
 
     public void checkDiscountCode(String discountCode) {
-        if (this.checkDiscountCodeIsNull(discountCode)) { //discountCode girilmiş mi
+        if (this.discountCodeIsNotNull(discountCode)) { //discountCode girilmiş mi
             if (!this.discountService.getByDiscountCode(discountCode).isActive()) // varsa aktifmi değilmi diye bakıyor.
             {
                 throw new ValidationException(VALIDATION_EXCEPTION, "Bu indirim kodu artık geçersizdir.");
@@ -131,7 +131,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         }
     }
 
-    public boolean checkDiscountCodeIsNull(String discountCode) {
+    public boolean discountCodeIsNotNull(String discountCode) {
         return discountCode != null && !discountCode.equals("");
     }
 
@@ -181,8 +181,8 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
                 this.calculateTotalRentalDays(showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
                 , this.carService.getById(showRentalRequest.getCarEntityId()).getRentalPrice()
         );
-        // Discount kodu boşsa, indirim yapılmasına gerek yok
-        if (this.checkDiscountCodeIsNull(showRentalRequest.getDiscountCode())) {
+
+        if (this.discountCodeIsNotNull(showRentalRequest.getDiscountCode())) {// Discount kodu doluysa
             return this.calculateTotalPriceWithDiscount(
                     totalBasePrice,
                     this.discountService.getByDiscountCode(

@@ -9,8 +9,10 @@ import java.util.List;
 public interface UserEntityService {
     @Transactional
     UserEntity create(UserEntity userEntity);
+
     @Transactional
     UserEntity update(UserEntity userEntity);
+
     @Transactional
     UserEntity getById(int id);
 

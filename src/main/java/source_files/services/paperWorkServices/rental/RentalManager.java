@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.DTO.paperWorkDTOs.ShowRentalResponse;
+import source_files.data.enums.defaultDataEnums.DefaultDiscount;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
@@ -64,10 +65,12 @@ public class RentalManager implements RentalService {
 
         String discountCode = createRentalRequest.getDiscountCode();
 
-        if (rules.checkDiscountCodeIsNull(discountCode)) {
+        if (rules.discountCodeIsNotNull(discountCode)) {
             rentalEntity.setDiscountEntity(discountEntityService
                     .getByDiscountCode(discountCode)
             );
+        } else {
+            rentalEntity.setDiscountEntity(discountEntityService.getByDiscountCode(DefaultDiscount.NONE.name()));
         }
 
         rentalEntity.setStartKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer());

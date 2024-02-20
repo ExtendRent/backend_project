@@ -56,6 +56,7 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
                 throw new DataNotFoundException(USER_ROLE_NOT_FOUND);
         }
     }
+
     @Transactional
     public JwtToken signIn(SignInRequest request) {
         UserEntity userEntity = userEntityService.getByEmailAddress(request.getEmail());

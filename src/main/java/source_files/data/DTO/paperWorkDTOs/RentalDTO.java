@@ -31,6 +31,7 @@ public class RentalDTO {
     double paymentDetailsEntityAmount;
     String paymentDetailsEntityPaymentTypeEntityPaymentTypeName;
     String rentalStatusEntityName;
+    String discountEntityDiscountCode;
     boolean isActive;
     boolean isDeleted;
 }

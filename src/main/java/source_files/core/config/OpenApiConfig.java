@@ -30,15 +30,11 @@ import org.springframework.context.annotation.Configuration;
                 @Server(
                         url = "http://localhost:8080",
                         description = "Local Development Environment"
-                ),
-                @Server(
-                        url = "https://api.extendrent.com/",
-                        description = "Production Environment"
                 )
         },
         security = {
                 @SecurityRequirement(
-                        name = "bearerAuth"
+                        name = "Bearer"
                 )
         }
 )

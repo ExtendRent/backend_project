@@ -18,6 +18,7 @@ public interface RentalEntityService {
     List<RentalEntity> getAll();
 
     List<RentalEntity> getAllByDeletedState(boolean isDeleted);
+
     List<RentalEntity> getAllByStatus(int statusId);
 
     List<RentalEntity> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate);

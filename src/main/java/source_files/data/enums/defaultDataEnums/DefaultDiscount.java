@@ -2,6 +2,7 @@ package source_files.data.enums.defaultDataEnums;
 
 public enum DefaultDiscount {
 
+    NONE(0),
     DEFAULT(5),
     PAIR5(20),
     HOSGELDIN(10);

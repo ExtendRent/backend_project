@@ -14,6 +14,7 @@ import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInfo
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalStatusEntity;
 import source_files.data.requests.CreateDrivingLicenseTypeRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
 import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.userRequests.CreateAdminRequest;
@@ -319,9 +320,44 @@ public class SeedDataConfig implements CommandLineRunner {
                     .cvc("111")
                     .expirationDate(LocalDate.parse("2024-09-01"))
                     .build();
+
+
+            //----------------------end rentals------------------------------------------
+            rentalService.create(CreateRentalRequest.builder()
+                    .customerEntityId(3).carEntityId(1)
+                    .amount(900.00)
+                    .startDate(LocalDate.parse("2024-02-07"))
+                    .endDate(LocalDate.parse("2024-02-12"))
+                    .paymentTypeId(1)
+                    .discountCode("HOSGELDIN")
+                    .creditCardInformation(creditCardInformation)
+                    .build());
+
+            rentalService.create(CreateRentalRequest.builder()
+                    .customerEntityId(5).carEntityId(2)
+                    .amount(1500.00)
+                    .startDate(LocalDate.parse("2024-02-10"))
+                    .endDate(LocalDate.parse("2024-02-15"))
+                    .paymentTypeId(1)
+                    .discountCode("")
+                    .creditCardInformation(creditCardInformation)
+                    .build());
+
+            rentalService.returnCar(ReturnRentalRequest.builder()
+                    .id(1)
+                    .returnDate(LocalDate.parse("2024-02-12"))
+                    .endKilometer(12000)
+                    .build());
+
+            rentalService.returnCar(ReturnRentalRequest.builder()
+                    .id(2)
+                    .returnDate(LocalDate.parse("2024-02-16"))
+                    .endKilometer(10000)
+                    .build());
+            //----------------------------------------------------------------
             rentalService.create(CreateRentalRequest.builder()
                     .customerEntityId(3).carEntityId(2)
-                    .amount(1200.00)
+                    .amount(1350.00)
                     .startDate(LocalDate.parse("2024-03-10"))
                     .endDate(LocalDate.parse("2024-03-15"))
                     .paymentTypeId(1)
@@ -331,7 +367,7 @@ public class SeedDataConfig implements CommandLineRunner {
 
             rentalService.create(CreateRentalRequest.builder()
                     .customerEntityId(4).carEntityId(1)
-                    .amount(750.00)
+                    .amount(800.00)
                     .startDate(LocalDate.parse("2024-03-20"))
                     .endDate(LocalDate.parse("2024-03-25"))
                     .paymentTypeId(1)
