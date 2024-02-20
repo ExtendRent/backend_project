@@ -16,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DrivingLicenseTypeManager implements DrivingLicenseTypeService {
     private final DrivingLicenseTypeEntityService entityService;
-
     private final DrivingLicenseTypeBusinessRules rules;
     private final ModelMapperService mapper;
 

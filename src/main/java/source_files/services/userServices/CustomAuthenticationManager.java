@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import source_files.core.services.JwtService;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.baseEntities.UserEntity;
@@ -55,9 +56,10 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
                 throw new DataNotFoundException(USER_ROLE_NOT_FOUND);
         }
     }
-
+    @Transactional
     public JwtToken signIn(SignInRequest request) {
         UserEntity userEntity = userEntityService.getByEmailAddress(request.getEmail());
+
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())

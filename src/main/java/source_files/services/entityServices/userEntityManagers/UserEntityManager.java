@@ -9,7 +9,6 @@ import source_files.services.entityServices.abstracts.userAbstract.UserEntitySer
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.EMPLOYEE_DATA_NOT_FOUND;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_DATA_NOT_FOUND;
 
 @Service
@@ -32,8 +31,7 @@ public class UserEntityManager implements UserEntityService {
     @Override
     public UserEntity getById(int id) {
         return this.userRepository.findById(id).orElseThrow(() -> new DataNotFoundException(
-                USER_DATA_NOT_FOUND, "Bu id'ye sahip kullanıcı bulunamadı"
-        ));
+                USER_DATA_NOT_FOUND));
     }
 
     @Override
@@ -47,25 +45,14 @@ public class UserEntityManager implements UserEntityService {
         return this.userRepository.findAllByIsDeleted(isDeleted);
     }
 
-
     @Override
     public void delete(UserEntity userEntity) {
-
         this.userRepository.delete(userEntity);
-    }
-
-    @Override
-    public UserEntity getByPhoneNumber(String phoneNumber) {
-        return this.userRepository.findByPhoneNumber(phoneNumber).orElseThrow(
-                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND,
-                        "Bu telefon numarasına kayıtlı kullanıcı bulunamadı")
-        );
     }
 
     @Override
     public UserEntity getByEmailAddress(String emailAddress) {
         return this.userRepository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
-                EMPLOYEE_DATA_NOT_FOUND, "Bu email adresine kayıtlı çalışan bulunamadı"
-        ));
+                USER_DATA_NOT_FOUND));
     }
 }
