@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CarModelDTO {
     int id;
+    int brandEntityId;
     String name;
     String brandEntityName;
     boolean isDeleted;
