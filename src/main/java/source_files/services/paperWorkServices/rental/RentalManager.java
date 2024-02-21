@@ -23,7 +23,6 @@ import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -166,10 +165,14 @@ public class RentalManager implements RentalService {
         return collectList;
     }
 
-    @Override //Tarihler arasında çakışan ve aktif olan rental kayıtları.
-    public List<RentalDTO> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
-        return rules.checkDataList(entityService.getAllOverlappingRentals(startDate, endDate)).stream().map(rentalEntity ->
-                mapper.forResponse().map(rentalEntity, RentalDTO.class)).toList();
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return entityService.getCountByDeletedState(isDeleted);
+    }
+
+    @Override
+    public int getCountByStatusId(int statusId) {
+        return entityService.getCountByStatusId(statusId);
     }
 
     //--------------------------------Local Methods--------------------------------

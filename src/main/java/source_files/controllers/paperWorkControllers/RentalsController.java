@@ -59,6 +59,22 @@ public class RentalsController {
         );
     }
 
+    @GetMapping("/count/{isDeleted}")
+    public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.rentalService.getCountByDeletedState(isDeleted))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/countByStatus/{status}")
+    public ResponseEntity<TResponse<Integer>> getCountByStatus(@PathVariable int status) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.rentalService.getCountByStatusId(status))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @PutMapping("/startRental/{rentalId}")
     public ResponseEntity<TResponse<RentalDTO>> startRental(@PathVariable int rentalId) {
         return new ResponseEntity<>(TResponse.<RentalDTO>tResponseBuilder()

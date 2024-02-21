@@ -24,5 +24,6 @@ public interface AdminService {
 
     void softDelete(int id);
 
+    int getCountByDeletedState(boolean isDeleted);
 
 }

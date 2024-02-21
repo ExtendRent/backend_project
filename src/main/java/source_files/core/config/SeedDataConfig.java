@@ -3,6 +3,8 @@ package source_files.core.config;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -236,8 +238,8 @@ public class SeedDataConfig implements CommandLineRunner {
 
 
         //-------------------------------SEED USERS-----------------------------------------
-
-        if (userEntityService.getAll().toArray().length == 0) {
+        Pageable pageable = PageRequest.of(0, 3);
+        if (userEntityService.getAll(pageable).toList().isEmpty()) {
             for (DefaultUserImageUrl defaultUserImageEnum : DefaultUserImageUrl.getAll()) {
                 URL url = new URL(defaultUserImageEnum.getUrl());
                 Path path = Paths.get("src/main/assets/default/user", defaultUserImageEnum.name() + ".jpg");

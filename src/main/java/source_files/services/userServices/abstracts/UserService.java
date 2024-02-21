@@ -19,4 +19,6 @@ public interface UserService extends UserDetailsService {
 
     List<UserDTO> getAllByDeletedState(boolean isDeleted);
 
+    int getCountByDeletedState(boolean isDeleted);
+
 }

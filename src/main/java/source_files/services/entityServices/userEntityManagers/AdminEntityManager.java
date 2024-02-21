@@ -16,48 +16,53 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_
 @RequiredArgsConstructor
 public class AdminEntityManager implements AdminEntityService {
 
-    private final AdminRepository adminRepository;
+    private final AdminRepository repository;
     private final AdminBusinessRules adminBusinessRules;
 
     @Override
     public AdminEntity create(AdminEntity adminEntity) {
         adminEntity.setId(0);
-        return this.adminRepository.save(adminEntity);
+        return repository.save(adminEntity);
     }
 
     @Override
     public AdminEntity update(AdminEntity adminEntity) {
 
-        return this.create(adminEntity);
+        return create(adminEntity);
     }
 
     @Override
     public AdminEntity getById(int id) {
-        return this.adminRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Admin bulunamadı"));
     }
 
     @Override
     public List<AdminEntity> getAll() {
 
-        return this.adminBusinessRules.checkDataList(this.adminRepository.findAll());
+        return adminBusinessRules.checkDataList(repository.findAll());
     }
 
     @Override
     public List<AdminEntity> getAllByDeletedState(boolean isDeleted) {
-        return this.adminRepository.findAllByIsDeleted(isDeleted);
+        return repository.findAllByIsDeleted(isDeleted);
     }
 
 
     @Override
     public void delete(AdminEntity adminEntity) {
 
-        this.adminRepository.delete(adminEntity);
+        repository.delete(adminEntity);
+    }
+
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return repository.countByIsDeleted(isDeleted);
     }
 
     @Override
     public AdminEntity getByEmailAddress(String emailAddress) {
-        return this.adminRepository.findByEmailAddress(emailAddress).orElseThrow(
+        return repository.findByEmailAddress(emailAddress).orElseThrow(
                 () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu email adresine kayıtlı admin bulunamadı")
         );
     }

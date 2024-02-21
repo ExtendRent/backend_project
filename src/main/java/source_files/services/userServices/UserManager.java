@@ -10,6 +10,8 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.UserDTO;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.dataAccess.userRepositories.UserRepository;
+import source_files.services.BusinessRules.userBusinessRuless.UserBusinessRules;
+import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.userServices.abstracts.UserService;
 
 import java.util.List;
@@ -22,32 +24,36 @@ public class UserManager implements UserService {
 
     private final UserRepository repository;
 
+    private final UserEntityService entityService;
     private final ModelMapperService mapper;
+
+    private final UserBusinessRules rules;
 
     @Override
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
-        return this.getEntity(emailAddress);
+        return entityService.getByEmailAddress(emailAddress);
     }
 
     @Override
     public void createUser(UserEntity user) {
-        repository.save(user);
+        entityService.create(user);
     }
 
     @Override
     public Page<UserDTO> getAll(Pageable pageable) {
-        return repository.findAll(pageable)
-                .map(entity -> mapper.forResponse().map(entity, UserDTO.class));
+        Page<UserDTO> users = entityService.getAll(pageable).map(this::mapToDto);
+        rules.checkDataList(users.toList());
+        return users;
     }
 
     @Override
     public UserDTO getById(int id) {
-        return mapper.forResponse().map(getEntity(id), UserDTO.class);
+        return mapToDto(entityService.getById(id));
     }
 
     @Override
     public void blockUser(int id) {
-        UserEntity user = getEntity(id);
+        UserEntity user = entityService.getById(id);
         user.setStatus(BLOCKED);
         repository.save(user);
     }
@@ -58,12 +64,12 @@ public class UserManager implements UserService {
                 .map(entity -> mapper.forResponse().map(entity, UserDTO.class)).toList();
     }
 
-    private UserEntity getEntity(int id) {
-        return repository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return entityService.getCountByDeletedState(isDeleted);
     }
 
-    private UserEntity getEntity(String emailAddress) {
-        return repository.findByEmailAddress(emailAddress)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+    private UserDTO mapToDto(UserEntity user) {
+        return mapper.forResponse().map(user, UserDTO.class);
     }
 }

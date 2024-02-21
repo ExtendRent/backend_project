@@ -16,37 +16,37 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICL
 @RequiredArgsConstructor
 public class VehicleStatusEntityManager implements VehicleStatusEntityService {
 
-    private final VehicleStatusRepository vehicleStatusRepository;
+    private final VehicleStatusRepository repository;
 
     @Override
     public VehicleStatusEntity create(VehicleStatusEntity vehicleStatusEntity) {
-        return vehicleStatusRepository.save(vehicleStatusEntity);
+        return repository.save(vehicleStatusEntity);
     }
 
     @Override
     public VehicleStatusEntity update(VehicleStatusEntity vehicleStatusEntity) {
-        return vehicleStatusRepository.save(vehicleStatusEntity);
+        return repository.save(vehicleStatusEntity);
     }
 
     @Override
     public VehicleStatusEntity getById(int id) {
-        return vehicleStatusRepository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 () -> new DataNotFoundException(VEHICLE_STATUS_NOT_FOUND, "Araç durumu bulunamadı."));
     }
 
     @Override
     public List<VehicleStatusEntity> getAll() {
-        return vehicleStatusRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public VehicleStatusEntity getByStatus(DefaultVehicleStatus status) {
-        return vehicleStatusRepository.findByVehicleStatus(status)
+        return repository.findByVehicleStatus(status)
                 .orElseThrow(() -> new DataNotFoundException(VEHICLE_STATUS_NOT_FOUND, "Araç durumu bulunamadı."));
     }
 
     @Override
     public void delete(VehicleStatusEntity vehicleStatusEntity) {
-        vehicleStatusRepository.delete(vehicleStatusEntity);
+        repository.delete(vehicleStatusEntity);
     }
 }

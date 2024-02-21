@@ -19,6 +19,9 @@ public interface CustomerEntityService {
 
     List<CustomerEntity> getAllByDeletedState(boolean isDeleted);
 
+    int getCountByDeletedState(boolean isDeleted);
+
+    int getCountByStatus(String status);
 
     void delete(CustomerEntity customerEntity);
 

@@ -36,4 +36,8 @@ public interface CarEntityService {
             Integer fuelTypeId, Integer shiftTypeId, Integer segmentId);
 
     void delete(CarEntity carEntity);
+
+    int getCountByDeletedState(boolean isDeleted);
+
+    int getCountByStatusId(int statusId);
 }

@@ -15,60 +15,65 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.EMPLOY
 @Service
 @RequiredArgsConstructor
 public class EmployeeEntityManager implements EmployeeEntityService {
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeRepository repository;
 
     @Override
     public EmployeeEntity create(EmployeeEntity employeeEntity) {
         employeeEntity.setId(0);
-        return this.employeeRepository.save(employeeEntity);
+        return repository.save(employeeEntity);
     }
 
     @Override
     public EmployeeEntity update(EmployeeEntity employeeEntity) {
 
-        return this.create(employeeEntity);
+        return create(employeeEntity);
     }
 
     @Override
     @Transactional
     public EmployeeEntity getById(int id) {
-        return this.employeeRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Çalışan bulunamadı"));
     }
 
     @Override
     public List<EmployeeEntity> getAllBySalaryBetween(double salary1, double salary2) {
-        return this.employeeRepository.findAllBySalaryBetween(salary1, salary2);
+        return repository.findAllBySalaryBetween(salary1, salary2);
     }
 
     @Override
     public List<EmployeeEntity> getAll() {
 
-        return this.employeeRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public List<EmployeeEntity> getAllByDeletedState(boolean isDeleted) {
-        return this.employeeRepository.findAllByIsDeleted(isDeleted);
+        return repository.findAllByIsDeleted(isDeleted);
     }
 
 
     @Override
     public void delete(EmployeeEntity employeeEntity) {
 
-        this.employeeRepository.delete(employeeEntity);
+        repository.delete(employeeEntity);
+    }
+
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return repository.countByIsDeleted(isDeleted);
     }
 
     @Override
     public EmployeeEntity getByPhoneNumber(String phoneNumber) {
-        return this.employeeRepository.findByPhoneNumber(phoneNumber).orElseThrow(
+        return repository.findByPhoneNumber(phoneNumber).orElseThrow(
                 () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı çalışan bulunamadı")
         );
     }
 
     @Override
     public EmployeeEntity getByEmailAddress(String emailAddress) {
-        return this.employeeRepository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
+        return repository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
                 EMPLOYEE_DATA_NOT_FOUND, "Bu email adresine kayıtlı çalışan bulunamadı"
         ));
     }

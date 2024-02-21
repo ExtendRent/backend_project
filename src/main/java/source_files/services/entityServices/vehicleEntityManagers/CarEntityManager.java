@@ -97,4 +97,14 @@ public class CarEntityManager implements CarEntityService {
     public void delete(CarEntity carEntity) {
         repository.delete(carEntity);
     }
+
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return repository.countByIsDeleted(isDeleted);
+    }
+
+    @Override
+    public int getCountByStatusId(int statusId) {
+        return repository.countByVehicleStatusEntity_Id(statusId);
+    }
 }

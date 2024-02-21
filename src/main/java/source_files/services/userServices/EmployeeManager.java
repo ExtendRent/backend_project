@@ -115,4 +115,9 @@ public class EmployeeManager implements EmployeeService {
         employeeEntity.setDeletedAt(LocalDateTime.now());
         entityService.update(employeeEntity);
     }
+
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return entityService.getCountByDeletedState(isDeleted);
+    }
 }

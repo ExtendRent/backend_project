@@ -59,4 +59,7 @@ public interface CarService {
 
     void changeStatus(CarEntity carEntity, DefaultVehicleStatus status);
 
+    int getCountByDeletedState(boolean isDeleted);
+
+    int getCountByStatusId(int statusId);
 }

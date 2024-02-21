@@ -284,6 +284,16 @@ public class CarManager implements CarService {
         entityService.update(carEntity);
     }
 
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return entityService.getCountByDeletedState(isDeleted);
+    }
+
+    @Override
+    public int getCountByStatusId(int statusId) {
+        return entityService.getCountByStatusId(statusId);
+    }
+
     private List<CarDTO> mapToDTOList(List<CarEntity> cars) {
         return cars.stream()
                 .map(car -> mapper.forResponse().map(car, CarDTO.class))

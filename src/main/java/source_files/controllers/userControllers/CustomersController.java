@@ -45,6 +45,22 @@ public class CustomersController {
         );
     }
 
+    @GetMapping("/count/{isDeleted}")
+    public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.customerService.getCountByDeletedState(isDeleted))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/countByStatus/{status}")
+    public ResponseEntity<TResponse<Integer>> getCountByStatus(@PathVariable String status) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.customerService.getCountByStatus(status))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<CustomerDTO>> getById(@PathVariable int id) {
         return new ResponseEntity<>(TResponse.<CustomerDTO>tResponseBuilder()

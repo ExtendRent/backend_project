@@ -57,6 +57,22 @@ public class CarsController {
         );
     }
 
+    @GetMapping("/count/{isDeleted}")
+    public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.carService.getCountByDeletedState(isDeleted))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/countByStatus/{statusId}")
+    public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable int statusId) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.carService.getCountByStatusId(statusId))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @GetMapping("/filter")
     public ResponseEntity<TResponse<List<CarDTO>>> getAllFiltered(
             @RequestParam(name = "customerId", required = false) Integer customerId,

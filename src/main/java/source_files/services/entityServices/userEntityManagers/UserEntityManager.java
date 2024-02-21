@@ -1,6 +1,8 @@
 package source_files.services.entityServices.userEntityManagers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.dataAccess.userRepositories.UserRepository;
@@ -35,14 +37,19 @@ public class UserEntityManager implements UserEntityService {
     }
 
     @Override
-    public List<UserEntity> getAll() {
+    public Page<UserEntity> getAll(Pageable pageable) {
 
-        return this.userRepository.findAll();
+        return this.userRepository.findAll(pageable);
     }
 
     @Override
     public List<UserEntity> getAllByDeletedState(boolean isDeleted) {
         return this.userRepository.findAllByIsDeleted(isDeleted);
+    }
+
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return userRepository.countByIsDeleted(isDeleted);
     }
 
     @Override

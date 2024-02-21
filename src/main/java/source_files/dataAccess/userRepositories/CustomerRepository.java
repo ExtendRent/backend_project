@@ -1,7 +1,10 @@
 package source_files.dataAccess.userRepositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.models.userEntities.CustomerEntity;
 
 import java.util.List;
@@ -24,4 +27,9 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
     @Transactional
     List<CustomerEntity> findAllByIsDeleted(boolean isDeleted);
+
+    int countByIsDeleted(boolean isDeleted);
+
+    @Query("SELECT COUNT(c) FROM CustomerEntity c WHERE c.status = :status")
+    int countByStatus(@Param("status") DefaultUserStatus status);
 }

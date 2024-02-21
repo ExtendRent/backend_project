@@ -107,4 +107,9 @@ public class AdminManager implements AdminService {
         this.entityService.update(adminEntity);
     }
 
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return entityService.getCountByDeletedState(isDeleted);
+    }
+
 }

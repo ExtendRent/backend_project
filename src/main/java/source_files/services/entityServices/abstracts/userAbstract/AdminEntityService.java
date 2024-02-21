@@ -20,5 +20,6 @@ public interface AdminEntityService {
 
     void delete(AdminEntity adminEntity);
 
+    int getCountByDeletedState(boolean isDeleted);
 
 }

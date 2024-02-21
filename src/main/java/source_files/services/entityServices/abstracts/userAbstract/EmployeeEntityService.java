@@ -25,5 +25,5 @@ public interface EmployeeEntityService {
 
     void delete(EmployeeEntity userEntity);
 
-
+    int getCountByDeletedState(boolean isDeleted);
 }

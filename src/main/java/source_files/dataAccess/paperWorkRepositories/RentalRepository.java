@@ -28,4 +28,8 @@ public interface RentalRepository extends JpaRepository<RentalEntity, Integer> {
             @Param("endDate") LocalDate endDate
     );
 
+    int countByIsDeleted(boolean isDeleted);
+
+    int countByRentalStatusEntity_Id(int statusId);
+
 }

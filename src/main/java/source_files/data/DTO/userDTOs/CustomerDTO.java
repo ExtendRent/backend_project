@@ -1,7 +1,6 @@
 package source_files.data.DTO.userDTOs;
 
 import lombok.*;
-import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.enums.types.userTypes.UserRole;
 
 @Builder
@@ -20,7 +19,7 @@ public class CustomerDTO {
     String emailAddress;
     String userImageEntityImageUrl;
     boolean isDeleted;
-    UserRole authority;
-    DefaultUserStatus status;
+    String authority;
+    String status;
 }
 

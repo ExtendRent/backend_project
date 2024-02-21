@@ -37,7 +37,7 @@ public class RentalEntityManager implements RentalEntityService {
     public RentalEntity getById(int id) {
         return this.repository
                 .findById(id).orElseThrow(() ->
-                        new DataNotFoundException(RENTAL_DATA_NOT_FOUND, "Kiralama kaydı bulunamadı"));
+                        new DataNotFoundException(RENTAL_DATA_NOT_FOUND));
     }
 
     @Override
@@ -57,5 +57,15 @@ public class RentalEntityManager implements RentalEntityService {
 
     public List<RentalEntity> getAllOverlappingRentals(LocalDate startDate, LocalDate endDate) {
         return repository.findOverlappingRentals(startDate, endDate);
+    }
+
+    @Override
+    public int getCountByDeletedState(boolean isDeleted) {
+        return repository.countByIsDeleted(isDeleted);
+    }
+
+    @Override
+    public int getCountByStatusId(int statusId) {
+        return repository.countByRentalStatusEntity_Id(statusId);
     }
 }

@@ -46,6 +46,14 @@ public class UsersController {
         );
     }
 
+    @GetMapping("/count/{isDeleted}")
+    public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.userService.getCountByDeletedState(isDeleted))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @PutMapping("/block/{id}")
     public ResponseEntity<TResponse<Void>> blockUser(@PathVariable int id) {
         this.userService.blockUser(id);

@@ -16,14 +16,25 @@ public class Application implements CommandLineRunner {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
     @Autowired
     private SeedDataConfig seedDataConfig;
-
     public static void main(String[] args) {
-
         SpringApplication.run(Application.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws IOException {
+        System.out.println(ANSI_BLUE + ANSI_BOLD + "\sApplication starting..." + ANSI_RESET);
+        seedDataConfig.run();
+
+        int additionalSpaces = 62;
+        String version = ANSI_BOLD + "(Version 1.0.1)" + ANSI_RESET;
+        version = String.format("%" + additionalSpaces + "s", version);
+        String start = ANSI_BOLD + "\sApplication started." + ANSI_RESET;
+        String description = "\sWelcome to our dark side :)";
+        String asciiText = drawLogo() + ANSI_GREEN + start + ANSI_RESET + version;
+        System.out.println(asciiText);
     }
 
     private static String drawLogo() {
@@ -52,24 +63,6 @@ public class Application implements CommandLineRunner {
                         "[_________|PAIR5|_________] \n" +
                         " ||||    ~~~~~~~~     ||||\n" +
                         " `--'                 `--'";
-    }
-
-    @Override
-    public void run(String... args) throws IOException {
-        try {
-            seedDataConfig.run();
-        } catch (Exception e) {
-            String errorText = "upps, it looks like you'll need to debug :(";
-            System.out.println(ANSI_RED + errorText + ANSI_RESET);
-            throw e;
-        }
-        int additionalSpaces = 62;
-        String version = ANSI_BOLD + "(Version 1.0.2)" + ANSI_RESET;
-        version = String.format("%" + additionalSpaces + "s", version);
-        String start = ANSI_BOLD + "\sApplication started." + ANSI_RESET;
-        String description = "\sWelcome to our dark side :)";
-        String asciiText = drawLogo() + ANSI_GREEN + start + ANSI_RESET + version;
-        System.out.println(asciiText);
     }
 }
 

@@ -1,6 +1,8 @@
 package source_files.services.entityServices.abstracts.userAbstract;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import source_files.data.models.baseEntities.UserEntity;
 
@@ -20,10 +22,12 @@ public interface UserEntityService {
     UserEntity getByEmailAddress(String emailAddress);
 
     @Transactional
-    List<UserEntity> getAll();
+    Page<UserEntity> getAll(Pageable pageable);
 
     @Transactional
     List<UserEntity> getAllByDeletedState(boolean isDeleted);
+
+    int getCountByDeletedState(boolean isDeleted);
 
     void delete(UserEntity userEntity);
 }

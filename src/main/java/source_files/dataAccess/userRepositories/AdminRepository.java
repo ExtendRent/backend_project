@@ -23,5 +23,6 @@ public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
 
     List<AdminEntity> findAllByIsDeleted(boolean isDeleted);
 
+    int countByIsDeleted(boolean isDeleted);
 
 }

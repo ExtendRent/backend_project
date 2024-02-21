@@ -44,6 +44,14 @@ public class EmployeesController {
         );
     }
 
+    @GetMapping("/count/{isDeleted}")
+    public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.employeeService.getCountByDeletedState(isDeleted))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<EmployeeDTO>> getById(@PathVariable int id) {
         return new ResponseEntity<>(TResponse.<EmployeeDTO>tResponseBuilder()

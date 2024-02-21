@@ -26,4 +26,6 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Intege
 
     @Transactional
     List<EmployeeEntity> findAllByIsDeleted(boolean isDeleted);
+
+    int countByIsDeleted(boolean isDeleted);
 }

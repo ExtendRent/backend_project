@@ -28,4 +28,6 @@ public interface EmployeeService {
     void delete(int id, boolean hardDelete);
 
     void softDelete(int id);
+
+    int getCountByDeletedState(boolean isDeleted);
 }

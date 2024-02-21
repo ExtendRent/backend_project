@@ -43,6 +43,14 @@ public class AdminsController {
         );
     }
 
+    @GetMapping("/count/{isDeleted}")
+    public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
+        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
+                .response(this.adminService.getCountByDeletedState(isDeleted))
+                .build(), HttpStatus.OK
+        );
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<AdminDTO>> getById(@PathVariable int id) {
         return new ResponseEntity<>(TResponse.<AdminDTO>tResponseBuilder()
