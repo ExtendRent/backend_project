@@ -21,4 +21,6 @@ public interface UserService extends UserDetailsService {
 
     int getCountByDeletedState(boolean isDeleted);
 
+    void updatePassword(int id, String password);
+
 }

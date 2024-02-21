@@ -24,7 +24,7 @@ public class UsersController {
     @GetMapping
     public ResponseEntity<TResponse<Page<UserDTO>>> getAllUsers(Pageable pageable) {
         return new ResponseEntity<>(TResponse.<Page<UserDTO>>tResponseBuilder()
-                .response(this.userService.getAll(pageable))
+                .response(userService.getAll(pageable))
                 .build(), HttpStatus.OK
         );
     }
@@ -33,7 +33,7 @@ public class UsersController {
     public ResponseEntity<TResponse<List<UserDTO>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
         return new ResponseEntity<>(TResponse.<List<UserDTO>>tResponseBuilder()
-                .response(this.userService.getAllByDeletedState(isDeleted))
+                .response(userService.getAllByDeletedState(isDeleted))
                 .build(), HttpStatus.OK
         );
     }
@@ -41,7 +41,7 @@ public class UsersController {
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<UserDTO>> getById(@PathVariable int id) {
         return new ResponseEntity<>(TResponse.<UserDTO>tResponseBuilder()
-                .response(this.userService.getById(id))
+                .response(userService.getById(id))
                 .build(), HttpStatus.OK
         );
     }
@@ -49,14 +49,23 @@ public class UsersController {
     @GetMapping("/count/{isDeleted}")
     public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
         return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
-                .response(this.userService.getCountByDeletedState(isDeleted))
+                .response(userService.getCountByDeletedState(isDeleted))
                 .build(), HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/updatePassword")
+    public ResponseEntity<TResponse<Void>> updatePassword(
+            @RequestParam int id, @RequestParam String password) {
+        userService.updatePassword(id, password);
+        return new ResponseEntity<>(TResponse.<Void>tResponseBuilder()
+                .build(), HttpStatus.NO_CONTENT
         );
     }
 
     @PutMapping("/block/{id}")
     public ResponseEntity<TResponse<Void>> blockUser(@PathVariable int id) {
-        this.userService.blockUser(id);
+        userService.blockUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

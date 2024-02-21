@@ -61,5 +61,6 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
     List<CarEntity> findAllByYearBetween(int year1, int year2);
 
     int countByIsDeleted(boolean isDeleted);
+
     int countByVehicleStatusEntity_Id(int vehicleStatusId);
 }

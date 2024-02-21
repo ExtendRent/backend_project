@@ -34,5 +34,14 @@ public class AuthenticationController {
         );
     }
 
+    @GetMapping("/isUserTrue")
+    public ResponseEntity<TResponse<Boolean>> isCustomerTrue(
+            @RequestParam String email, @RequestParam String password) {
+        return new ResponseEntity<>(TResponse.<Boolean>tResponseBuilder()
+                .response(authenticationService.isUserTrue(email, password))
+                .build(), HttpStatus.OK
+        );
+    }
+
 
 }

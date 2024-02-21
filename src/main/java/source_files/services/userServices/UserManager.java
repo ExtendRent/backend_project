@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.UserDTO;
@@ -21,13 +22,11 @@ import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.
 @Service
 @RequiredArgsConstructor
 public class UserManager implements UserService {
-
     private final UserRepository repository;
-
     private final UserEntityService entityService;
     private final ModelMapperService mapper;
-
     private final UserBusinessRules rules;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
@@ -67,6 +66,13 @@ public class UserManager implements UserService {
     @Override
     public int getCountByDeletedState(boolean isDeleted) {
         return entityService.getCountByDeletedState(isDeleted);
+    }
+
+    @Override
+    public void updatePassword(int id, String password) {
+        UserEntity userEntity = entityService.getById(id);
+        userEntity.setPassword(passwordEncoder.encode(password));
+        entityService.update(userEntity);
     }
 
     private UserDTO mapToDto(UserEntity user) {

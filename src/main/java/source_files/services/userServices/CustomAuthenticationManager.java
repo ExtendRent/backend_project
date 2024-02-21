@@ -27,15 +27,12 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_R
 @RequiredArgsConstructor
 public class CustomAuthenticationManager implements AuthenticationService, AccessTokenService {
     private final AdminService adminService;
-
     private final EmployeeService employeeService;
-
     private final CustomerService customerService;
     private final ModelMapperService mapper;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final UserEntityService userEntityService;
-
     private final EmailService emailService;
 
     @Override
@@ -61,12 +58,7 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
     public JwtToken signIn(SignInRequest request) {
         UserEntity userEntity = userEntityService.getByEmailAddress(request.getEmail());
 
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
-
-        if (authentication.isAuthenticated()) {
+        if (isUserTrue(request.getEmail(), request.getPassword())) {
             String token = jwtService.generateToken(userEntity);
             return JwtToken.builder().token(token).build();
         }
@@ -82,5 +74,13 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
             return JwtToken.builder().token(newAccessToken).build();
         }
         throw new RuntimeException("Bilgiler hatalı");
+    }
+
+    @Override
+    public boolean isUserTrue(String emailAddress, String password) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(emailAddress, password)
+        );
+        return authentication.isAuthenticated();
     }
 }

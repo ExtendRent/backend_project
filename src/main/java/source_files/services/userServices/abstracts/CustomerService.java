@@ -33,5 +33,6 @@ public interface CustomerService {
     void softDelete(int id);
 
     int getCountByDeletedState(boolean isDeleted);
+
     int getCountByStatus(String status);
 }

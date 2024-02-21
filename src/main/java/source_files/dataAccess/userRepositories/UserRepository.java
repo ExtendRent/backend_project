@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     Optional<UserEntity> findByEmailAddress(String emailAddress);
+
     int countByIsDeleted(boolean isDeleted);
+
     List<UserEntity> findAllByIsDeleted(boolean isDeleted);
 }

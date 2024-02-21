@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import source_files.core.config.SeedDataConfig;
+import source_files.utilities.ResponseTimeMeasurement;
 
 import java.io.IOException;
 
@@ -17,17 +18,20 @@ public class Application implements CommandLineRunner {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_BLUE = "\u001B[34m";
+
     @Autowired
     private SeedDataConfig seedDataConfig;
+
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-    @Override
-    public void run(String... args) throws IOException {
-        System.out.println(ANSI_BLUE + ANSI_BOLD + "\sApplication starting..." + ANSI_RESET);
-        seedDataConfig.run();
+    private static void processInfo(long duration) {
+        System.out.println("process completed in " + duration + " seconds");
+    }
 
+    private static void welcome() {
         int additionalSpaces = 62;
         String version = ANSI_BOLD + "(Version 1.0.1)" + ANSI_RESET;
         version = String.format("%" + additionalSpaces + "s", version);
@@ -63,6 +67,16 @@ public class Application implements CommandLineRunner {
                         "[_________|PAIR5|_________] \n" +
                         " ||||    ~~~~~~~~     ||||\n" +
                         " `--'                 `--'";
+    }
+
+    @Override
+    public void run(String... args) throws IOException {
+        System.out.println(ANSI_BLUE + ANSI_BOLD + "Application starting..." + ANSI_RESET);
+        ResponseTimeMeasurement.start();
+        seedDataConfig.runFirst();
+        long duration = ResponseTimeMeasurement.measure() / 1000;
+        processInfo(duration);
+        welcome();
     }
 }
 

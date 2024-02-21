@@ -61,6 +61,7 @@ public class CustomersController {
         );
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<CustomerDTO>> getById(@PathVariable int id) {
         return new ResponseEntity<>(TResponse.<CustomerDTO>tResponseBuilder()
