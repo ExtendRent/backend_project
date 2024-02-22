@@ -22,7 +22,7 @@ public class DiscountRules implements BaseItemBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(DISCOUNT_CODE_LIST_NOT_FOUND, "Aradığınız kriterlere uygun indirim kodu bulunamadı");
+            throw new DataNotFoundException(DISCOUNT_CODE_LIST_NOT_FOUND);
         }
         return list;
     }

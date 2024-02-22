@@ -31,7 +31,7 @@ public class ColorEntityManager implements ColorEntityService {
     @Override
     public ColorEntity getById(int id) {
         return this.colorRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(COLOR_DATA_NOT_FOUND, "Renk bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(COLOR_DATA_NOT_FOUND));
     }
 
     @Override

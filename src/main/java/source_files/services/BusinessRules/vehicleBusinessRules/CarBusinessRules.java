@@ -97,7 +97,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(CAR_LIST_NOT_FOUND, "Aradığınız kriterlere uygun araç bulunamadı");
+            throw new DataNotFoundException(CAR_LIST_NOT_FOUND);
         }
         return list;
     }
@@ -124,7 +124,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     private void checkLicensePlate(String licensePlate) {
 
         if (this.carRepository.existsByLicensePlate(licensePlate)) {
-            throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
+            throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS);
         }
 
 
@@ -132,7 +132,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
     private void checkLicensePlateAndIdNot(String licensePlate, int id) {
         if (this.carRepository.existsByLicensePlateAndIdNot(licensePlate, id)) {
-            throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS, "Bu plakaya tanımlı bir araç zaten bulunmaktadır");
+            throw new AlreadyExistsException(LICENSE_PLATE_ALREADY_EXISTS);
         }
     }
 

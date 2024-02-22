@@ -32,14 +32,13 @@ public class CustomerEntityManager implements CustomerEntityService {
     @Override
     public CustomerEntity getById(int id) {
         return repository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(CUSTOMER_DATA_NOT_FOUND, "Müşteri bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(CUSTOMER_DATA_NOT_FOUND));
     }
 
     @Override
     public CustomerEntity getByEmailAddress(String emailAddress) {
         return repository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
-                CUSTOMER_DATA_NOT_FOUND, "Bu email adresine kayıtlı müşteri bulunamadı"
-        ));
+                CUSTOMER_DATA_NOT_FOUND));
     }
 
     @Override

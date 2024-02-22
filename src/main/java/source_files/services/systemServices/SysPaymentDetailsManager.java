@@ -33,7 +33,7 @@ public class SysPaymentDetailsManager implements SysPaymentDetailsService {
     @Override
     public PaymentDetailsEntity getById(int id) {
         return repository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(PAYMENT_DETAILS_DATA_NOT_FOUND, "ödeme detayı bulunamadı"));
+                () -> new DataNotFoundException(PAYMENT_DETAILS_DATA_NOT_FOUND));
     }
 
     @Override

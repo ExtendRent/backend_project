@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.exception.DataNotFoundException;
+import source_files.exception.PaymentException;
+import source_files.exception.exceptionTypes.PaymentExceptionType;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 import source_files.services.systemServices.SysPaymentDetailsManager;
 
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.PaymentExceptionType.EXPIRY_DATE_HAS_EXPIRED;
 
 @RequiredArgsConstructor
 @Service
@@ -54,7 +57,7 @@ public class PaymentBusinessRules implements BaseBusinessRulesService {
 
     private void checkCreditCardExpirationDate(LocalDate expirationDate) {
         if (expirationDate.isAfter(LocalDate.now())) {
-            throw new IllegalStateException("Kart son kullanım tarihiniz geçmiş bir tarihtir.");
+            throw new PaymentException(EXPIRY_DATE_HAS_EXPIRED);
         }
     }
 
@@ -62,7 +65,7 @@ public class PaymentBusinessRules implements BaseBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(PAYMENT_DETAILS_LIST_NOT_FOUND, "Aradığınız kriterlere uygun ödeme kaydı bulunamadı");
+            throw new DataNotFoundException(PAYMENT_DETAILS_LIST_NOT_FOUND);
         }
         return list;
     }

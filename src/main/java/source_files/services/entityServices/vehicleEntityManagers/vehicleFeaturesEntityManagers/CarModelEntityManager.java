@@ -35,14 +35,14 @@ public class CarModelEntityManager implements CarModelEntityService {
     @Override
     public CarModelEntity getById(int id) {
         return this.carModelRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(MODEL_DATA_NOT_FOUND, "Model bulunamadı")
+                () -> new DataNotFoundException(MODEL_DATA_NOT_FOUND)
         );
     }
 
     @Override
     public CarModelEntity getByModelName(String modelName) {
         return this.carModelRepository.findByName(modelName)
-                .orElseThrow(() -> new DataNotFoundException(MODEL_DATA_NOT_FOUND, "Bu isimde model bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(MODEL_DATA_NOT_FOUND));
     }
 
 

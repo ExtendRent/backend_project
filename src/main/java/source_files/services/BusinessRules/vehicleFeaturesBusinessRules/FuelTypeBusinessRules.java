@@ -15,7 +15,7 @@ public class FuelTypeBusinessRules implements BaseBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(FUEL_TYPE_LIST_NOT_FOUND, "Aradığınız kriterlere uygun yakıt tipi bulunamadı");
+            throw new DataNotFoundException(FUEL_TYPE_LIST_NOT_FOUND);
         }
         return list;
     }

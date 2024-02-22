@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ValidationExceptionType {
 
-    VALIDATION_EXCEPTION(3000, "Validation Rejected !");
+    VALIDATION_EXCEPTION(3000, "Girilen bilgiler uygun deðil");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

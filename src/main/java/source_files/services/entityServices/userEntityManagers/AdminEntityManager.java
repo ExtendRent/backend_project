@@ -34,7 +34,7 @@ public class AdminEntityManager implements AdminEntityService {
     @Override
     public AdminEntity getById(int id) {
         return repository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Admin bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class AdminEntityManager implements AdminEntityService {
     @Override
     public AdminEntity getByEmailAddress(String emailAddress) {
         return repository.findByEmailAddress(emailAddress).orElseThrow(
-                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND, "Bu email adresine kayıtlı admin bulunamadı")
+                () -> new DataNotFoundException(ADMIN_DATA_NOT_FOUND)
         );
     }
 

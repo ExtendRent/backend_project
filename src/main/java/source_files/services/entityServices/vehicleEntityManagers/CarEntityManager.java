@@ -31,7 +31,7 @@ public class CarEntityManager implements CarEntityService {
     @Override
     public CarEntity getById(int id) {
         return repository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(CAR_DATA_NOT_FOUND, "Araç Bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(CAR_DATA_NOT_FOUND));
     }
 
     @Override

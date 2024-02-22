@@ -35,13 +35,13 @@ public class DiscountEntityManager implements DiscountEntityService {
     @Override
     public DiscountEntity getById(int id) {
         return repository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(DISCOUNT_CODE_NOT_FOUND, "Indirim kodu bulunamadı"));
+                () -> new DataNotFoundException(DISCOUNT_CODE_NOT_FOUND));
     }
 
     @Override
     public DiscountEntity getByDiscountCode(String discountCode) {
         return repository.findByDiscountCode(discountCode).orElseThrow(
-                () -> new DataNotFoundException(DISCOUNT_CODE_NOT_FOUND, "Indirim kodu bulunamadı")
+                () -> new DataNotFoundException(DISCOUNT_CODE_NOT_FOUND)
         );
     }
 

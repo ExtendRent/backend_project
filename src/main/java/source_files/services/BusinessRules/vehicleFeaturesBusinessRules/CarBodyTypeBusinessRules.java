@@ -55,7 +55,7 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(BODY_TYPE_LIST_NOT_FOUND, "Aradığınız kriterlere uygun araç kasası bulunamadı");
+            throw new DataNotFoundException(BODY_TYPE_LIST_NOT_FOUND);
         }
         return list;
     }
@@ -63,7 +63,7 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void existsByName(String name) {
         if (this.carBodyTypeRepository.existsByName(name)) {
-            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS, "This body type already exist");
+            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS);
         }
     }
 
@@ -71,7 +71,7 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir isim ile aynı olup olmadığını kontrol etmek için
         if (carBodyTypeRepository.existsByNameAndIdNot(name, id)) {
-            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS, "This body type already exist !");
+            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS);
         }
     }
 }

@@ -6,7 +6,7 @@ import source_files.exception.exceptionTypes.NotSuitableExceptionType;
 @Getter
 public class NotSuitableException extends RuntimeException {
     private final NotSuitableExceptionType notSuitableExceptionType;
-    private String detail;
+    private final String detail;
 
     public NotSuitableException(NotSuitableExceptionType notSuitableExceptionType, String detail) {
         super(notSuitableExceptionType.getMessage());
@@ -17,5 +17,6 @@ public class NotSuitableException extends RuntimeException {
     public NotSuitableException(NotSuitableExceptionType notSuitableExceptionType) {
         super(notSuitableExceptionType.getMessage());
         this.notSuitableExceptionType = notSuitableExceptionType;
+        this.detail = notSuitableExceptionType.getMessage();
     }
 }

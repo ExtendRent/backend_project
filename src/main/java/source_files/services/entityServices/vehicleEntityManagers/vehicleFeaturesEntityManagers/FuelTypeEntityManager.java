@@ -30,7 +30,7 @@ public class FuelTypeEntityManager implements FuelTypeEntityService {
     @Override
     public FuelTypeEntity getById(int id) {
         return fuelTypeRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(FUEL_TYPE_NOT_FOUND, "yakıt türü bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(FUEL_TYPE_NOT_FOUND));
     }
 
     @Override

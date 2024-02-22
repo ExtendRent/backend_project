@@ -82,7 +82,7 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByPhoneNumber(String phoneNumber) {
         if (adminRepository.existsByPhoneNumber(phoneNumber)) {
-            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number already exist");
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
         }
     }
 
@@ -90,7 +90,7 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
         if (adminRepository.existsByPhoneNumberAndIdNot(phoneNumber, id)) {
-            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This email address already exist !");
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
         }
     }
 
@@ -98,14 +98,14 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
         //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
         if (adminRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist !");
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByEmailAddress(String emailAddress) {
         if (adminRepository.existsByEmailAddress(emailAddress)) {
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist :)");
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
 

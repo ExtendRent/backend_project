@@ -33,7 +33,7 @@ public class BrandEntityManager implements BrandEntityService {
     public BrandEntity getById(int id) {
 
         return brandRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(BRAND_DATA_NOT_FOUND, "Marka bulunamadı")
+                () -> new DataNotFoundException(BRAND_DATA_NOT_FOUND)
         );
     }
 

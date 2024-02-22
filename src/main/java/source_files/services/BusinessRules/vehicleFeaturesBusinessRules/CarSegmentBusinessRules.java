@@ -15,7 +15,7 @@ public class CarSegmentBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(CAR_SEGMENT_LIST_NOT_FOUND, "Kriterlere uygun araba sınıfı bulunamadı");
+            throw new DataNotFoundException(CAR_SEGMENT_LIST_NOT_FOUND);
         }
         return list;
     }

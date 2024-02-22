@@ -15,7 +15,7 @@ public class PaymentDetailsBusinessRules implements BaseItemBusinessRulesService
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(PAYMENT_DETAILS_LIST_NOT_FOUND, "Aradığınız kriterlere uygun ödeme kaydı bulunamadı");
+            throw new DataNotFoundException(PAYMENT_DETAILS_LIST_NOT_FOUND);
         }
         return list;
     }

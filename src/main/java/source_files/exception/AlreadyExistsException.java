@@ -7,7 +7,7 @@ import source_files.exception.exceptionTypes.AlreadyExistsExceptionType;
 public class AlreadyExistsException extends RuntimeException {
 
     private final AlreadyExistsExceptionType alreadyExistsExceptionType;
-    private String detail;
+    private final String detail;
 
 
     public AlreadyExistsException(AlreadyExistsExceptionType alreadyExistsExceptionType, String detail) {
@@ -19,5 +19,6 @@ public class AlreadyExistsException extends RuntimeException {
     public AlreadyExistsException(AlreadyExistsExceptionType alreadyExistsExceptionType) {
         super(alreadyExistsExceptionType.getMessage());
         this.alreadyExistsExceptionType = alreadyExistsExceptionType;
+        this.detail = alreadyExistsExceptionType.getMessage();
     }
 }

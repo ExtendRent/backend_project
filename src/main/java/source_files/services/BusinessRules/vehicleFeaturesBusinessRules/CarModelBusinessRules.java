@@ -53,7 +53,7 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(CAR_LIST_NOT_FOUND, "Aradığınız kriterlere uygun araba modeli bulunamadı");
+            throw new DataNotFoundException(CAR_LIST_NOT_FOUND);
         }
         return list;
     }
@@ -66,14 +66,14 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void existsByName(String name) {
         if (carModelRepository.existsByName(name)) {
-            throw new IllegalStateException("This model already exist");
+            throw new IllegalStateException();
         }
     }
 
     @Override
     public void existsByNameAndIdNot(String name, int id) {
         if (carModelRepository.existsByNameAndIdNot(name, id)) {
-            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS, "This body type already exist !");
+            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS);
         }
     }
 

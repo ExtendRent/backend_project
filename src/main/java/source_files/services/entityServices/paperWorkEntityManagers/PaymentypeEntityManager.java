@@ -36,7 +36,7 @@ public class PaymentypeEntityManager implements PaymentTypeEntityService {
     @Override
     public PaymentTypeEntity getById(int id) {
         return repository.findById(id).orElseThrow(() ->
-                new DataNotFoundException(PAYMENT_TYPE_NOT_FOUND, "Payment type bulunamadı."));
+                new DataNotFoundException(PAYMENT_TYPE_NOT_FOUND));
     }
 
     @Override

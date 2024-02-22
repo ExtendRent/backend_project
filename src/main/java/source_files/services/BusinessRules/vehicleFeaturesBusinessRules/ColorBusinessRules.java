@@ -51,7 +51,7 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(COLOR_LIST_NOT_FOUND, "Aradığınız kriterlere uygun renk bulunamadı");
+            throw new DataNotFoundException(COLOR_LIST_NOT_FOUND);
         }
         return list;
     }
@@ -65,14 +65,14 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir rengin ismi ile aynı olup olmadığını kontrol etmek için
         if (colorRepository.existsByNameAndIdNot(name, id)) {
-            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist !");
+            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByName(String name) {
         if (colorRepository.existsByName(name)) {
-            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS, "This color already exist :)");
+            throw new AlreadyExistsException(COLOR_ALREADY_EXISTS);
         }
     }
 

@@ -15,7 +15,7 @@ public class PaymentTypeBusinessRules implements BaseBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(PAYMENT_TYPE_LIST_NOT_FOUND, "Aradığınız kriterlere uygun Ödeme şekli bulunamadı");
+            throw new DataNotFoundException(PAYMENT_TYPE_LIST_NOT_FOUND);
         }
         return list;
     }

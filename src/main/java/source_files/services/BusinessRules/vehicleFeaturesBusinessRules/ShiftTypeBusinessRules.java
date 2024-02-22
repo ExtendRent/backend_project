@@ -15,7 +15,7 @@ public class ShiftTypeBusinessRules implements BaseBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(SHIFT_TYPE_LIST_NOT_FOUND, "Aradığınız kriterlere uygun vites tipi bulunamadı");
+            throw new DataNotFoundException(SHIFT_TYPE_LIST_NOT_FOUND);
         }
         return list;
     }

@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum FileExceptionType {
 
-    PHOTO_UPLOAD_FAILED(6000, "Photo Upload Failed !"),
-    PHOTO_DELETE_FAILED(6001, "Photo Delete Failed !");
+    PHOTO_UPLOAD_FAILED(6000, "Fotoğraf yükleme başarısız"),
+    PHOTO_DELETE_FAILED(6001, "Fotoğraf silme başarısız");
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;

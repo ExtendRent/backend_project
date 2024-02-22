@@ -31,7 +31,7 @@ public class CarBodyTypeEntityManager implements CarBodyTypeEntityService {
     @Override
     public CarBodyTypeEntity getById(int id) {
         return carBodyTypeRepository.findById(id).orElseThrow(
-                () -> new DataNotFoundException(BODY_TYPE_DATA_NOT_FOUND, "Body Type bulunamadı.")
+                () -> new DataNotFoundException(BODY_TYPE_DATA_NOT_FOUND)
         );
     }
 

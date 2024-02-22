@@ -21,6 +21,7 @@ public class PaymentException extends RuntimeException {
     public PaymentException(PaymentExceptionType paymentExceptionType) {
         super(paymentExceptionType.getMessage());
         this.paymentExceptionType = paymentExceptionType;
+        this.detail = paymentExceptionType.getMessage();
     }
 }
 

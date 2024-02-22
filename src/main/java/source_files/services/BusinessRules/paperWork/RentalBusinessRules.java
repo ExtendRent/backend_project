@@ -96,14 +96,14 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         //Giriş yapmadan araç listeleyebilmek için customerId null verilebilmelidir.
         //CustomerId verilmiş ise ve beklenen ehliyet tipine uyuyorsa:
         if (!carRules.isDrivingLicenseTypeSuitable(carId, customerId)) {
-            throw new NotSuitableException(DRIVING_LICENSE_TYPE_NOT_SUITABLE, "Ehliyet tipi uygun değil");
+            throw new NotSuitableException(DRIVING_LICENSE_TYPE_NOT_SUITABLE);
         }
     }
 
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(RENTAL_LIST_NOT_FOUND, "Aradığınız kriterlere uygun kiralama kaydı bulunamadı");
+            throw new DataNotFoundException(RENTAL_LIST_NOT_FOUND);
         }
         return list;
     }
@@ -126,7 +126,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         if (this.discountCodeIsNotNull(discountCode)) { //discountCode girilmiş mi
             if (!this.discountService.getByDiscountCode(discountCode).isActive()) // varsa aktifmi değilmi diye bakıyor.
             {
-                throw new ValidationException(VALIDATION_EXCEPTION, "Bu indirim kodu artık geçersizdir.");
+                throw new ValidationException(VALIDATION_EXCEPTION);
             }
         }
     }

@@ -63,14 +63,14 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(EMPLOYEE_LIST_NOT_FOUND, "Aradığınız kriterlere uygun çalışan bulunamadı");
+            throw new DataNotFoundException(EMPLOYEE_LIST_NOT_FOUND);
         }
         return list;
     }
 
     public void checkSalary(double salary) {
         if (salary <= 0) {
-            throw new ValidationException(VALIDATION_EXCEPTION, "Salary must be greater than zero");
+            throw new ValidationException(VALIDATION_EXCEPTION);
         }
     }
 
@@ -83,14 +83,14 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByPhoneNumber(String phoneNumber) {
         if (employeeRepository.existsByPhoneNumber(phoneNumber)) {
-            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number already exist");
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByEmailAddress(String email) {
         if (employeeRepository.existsByEmailAddress(email)) {
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist");
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
 
@@ -98,7 +98,7 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
         //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
         if (employeeRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist !");
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
 
@@ -106,7 +106,7 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
         if (employeeRepository.existsByPhoneNumberAndIdNot(phoneNumber, id)) {
-            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number address already exist !");
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
         }
     }
 }

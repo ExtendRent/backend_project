@@ -30,7 +30,7 @@ public class ShiftTypeEntityManager implements ShiftTypeEntityService {
     @Override
     public ShiftTypeEntity getById(int id) {
         return shiftTypeRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(SHIFT_TYPE_NOT_FOUND, "Renk bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(SHIFT_TYPE_NOT_FOUND));
     }
 
     @Override

@@ -120,7 +120,9 @@ public class CustomerManager implements CustomerService {
     @Override
     public List<RentalDTO> getRentalHistory(int customerId) {
         CustomerEntity customerEntity = entityService.getById(customerId);
-        return customerEntity.getRentalHistory().stream().map(rentalEntity -> mapper.forResponse()
+        List<RentalEntity> rentalHistory = customerEntity.getRentalHistory();
+
+        return rentalHistory.stream().map(rentalEntity -> mapper.forResponse()
                 .map(rentalEntity, RentalDTO.class)).toList();
     }
 

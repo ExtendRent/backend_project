@@ -15,7 +15,7 @@ public class VehicleStatusBusinessRules implements BaseBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(VEHICLE_STATUS_LIST_NOT_FOUND, "Aradığınız kriterlere uygun araç durumu bulunamadı");
+            throw new DataNotFoundException(VEHICLE_STATUS_LIST_NOT_FOUND);
         }
         return list;
     }

@@ -2,6 +2,7 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.dataAccess.userRepositories.CustomerRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.*;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service
@@ -63,9 +65,15 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(CUSTOMER_LIST_NOT_FOUND, "Aradığınız kriterlere uygun müşteri bulunamadı");
+            throw new DataNotFoundException(CUSTOMER_LIST_NOT_FOUND);
         }
         return list;
+    }
+
+    public void checkRentalHistory(List<RentalEntity> rentalHistory) {
+        if (rentalHistory.isEmpty()) {
+            throw new DataNotFoundException(RENTAL_DATA_NOT_FOUND);//list not found dönmedik çünkü message ı uygun değil.
+        }
     }
 
 
@@ -84,26 +92,26 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
         if (customerRepository.existsByPhoneNumberAndIdNot(phoneNumber, id)) {
-            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS, "This phone number address already exist !");
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
         }
     }
 
     private void existsByDrivingLicenseNumber(String drivingLicenseNumber) {
         if (customerRepository.existsByDrivingLicenseNumber(drivingLicenseNumber)) {
-            throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS, "This driving license number already exist");
+            throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS);
         }
     }
 
     private void existsByDrivingLicenseNumberAndIdNot(String drivingLicenseNumber, int id) {
         if (customerRepository.existsByDrivingLicenseNumberAndIdNot(drivingLicenseNumber, id)) {
-            throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS, "This driving license number already exist");
+            throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByEmailAddress(String email) {
         if (customerRepository.existsByEmailAddress(email)) {
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist");
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
 
@@ -111,7 +119,7 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
         //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
         if (customerRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
-            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS, "This email address already exist !");
+            throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
 }

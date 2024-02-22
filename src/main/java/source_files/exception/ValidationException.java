@@ -22,5 +22,6 @@ public class ValidationException extends RuntimeException {
     public ValidationException(ValidationExceptionType validationExceptionType) {
         super(validationExceptionType.getMessage());
         this.validationExceptionType = validationExceptionType;
+        this.detail = validationExceptionType.getMessage();
     }
 }

@@ -54,7 +54,7 @@ public class PaymentManager implements PaymentService {
             return createPaymentDetailsEntity(createRentalRequest, rentalEntity, false);
         } else {
             createPaymentDetailsEntity(createRentalRequest, rentalEntity, true);
-            throw new PaymentException(PAYMENT_REJECTED, "Ödeme Banka Tarafından Reddedildi.");
+            throw new PaymentException(PAYMENT_REJECTED);
         }
     }
 

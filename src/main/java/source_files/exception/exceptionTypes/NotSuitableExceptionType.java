@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum NotSuitableExceptionType {
 
-    DRIVING_LICENSE_TYPE_NOT_SUITABLE(5000, "Driving License Type Not Suitable !");
+    DRIVING_LICENSE_TYPE_NOT_SUITABLE(5000, "Ehliyet tipi uygun değil");
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;

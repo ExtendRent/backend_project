@@ -33,7 +33,7 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     @Transactional
     public EmployeeEntity getById(int id) {
         return repository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Çalışan bulunamadı"));
+                .orElseThrow(() -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND));
     }
 
     @Override
@@ -67,14 +67,13 @@ public class EmployeeEntityManager implements EmployeeEntityService {
     @Override
     public EmployeeEntity getByPhoneNumber(String phoneNumber) {
         return repository.findByPhoneNumber(phoneNumber).orElseThrow(
-                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND, "Bu telefon numarasına kayıtlı çalışan bulunamadı")
+                () -> new DataNotFoundException(EMPLOYEE_DATA_NOT_FOUND)
         );
     }
 
     @Override
     public EmployeeEntity getByEmailAddress(String emailAddress) {
         return repository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
-                EMPLOYEE_DATA_NOT_FOUND, "Bu email adresine kayıtlı çalışan bulunamadı"
-        ));
+                EMPLOYEE_DATA_NOT_FOUND));
     }
 }

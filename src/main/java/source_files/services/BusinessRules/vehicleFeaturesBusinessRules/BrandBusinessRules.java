@@ -22,7 +22,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public List<?> checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(BRAND_LIST_NOT_FOUND, "Aradığınız kriterlere uygun marka bulunamadı");
+            throw new DataNotFoundException(BRAND_LIST_NOT_FOUND);
         }
         return list;
     }
@@ -60,7 +60,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
 
     public void existsByName(String name) {
         if (brandRepository.existsByName(name)) {
-            throw new AlreadyExistsException(BRAND_ALREADY_EXISTS, "This brand name already exist");
+            throw new AlreadyExistsException(BRAND_ALREADY_EXISTS);
         }
     }
 
@@ -68,7 +68,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir isim ile aynı olup olmadığını kontrol etmek için
         if (brandRepository.existsByNameAndIdNot(name, id)) {
-            throw new AlreadyExistsException(BRAND_ALREADY_EXISTS, "This brand already exist !");
+            throw new AlreadyExistsException(BRAND_ALREADY_EXISTS);
         }
     }
 

@@ -8,7 +8,7 @@ public class FileException extends RuntimeException {
 
     private final FileExceptionType fileExceptionType;
 
-    private String detail;
+    private final String detail;
 
     public FileException(FileExceptionType fileExceptionType, String detail) {
         super(fileExceptionType.getMessage());
@@ -19,5 +19,6 @@ public class FileException extends RuntimeException {
     public FileException(FileExceptionType fileExceptionType) {
         super(fileExceptionType.getMessage());
         this.fileExceptionType = fileExceptionType;
+        this.detail = fileExceptionType.getMessage();
     }
 }

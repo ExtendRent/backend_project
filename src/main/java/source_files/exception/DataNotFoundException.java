@@ -7,8 +7,7 @@ import source_files.exception.exceptionTypes.NotFoundExceptionType;
 public class DataNotFoundException extends RuntimeException {
 
     private final NotFoundExceptionType notFoundExceptionType;
-    private String detail;
-
+    private final String detail;
 
     public DataNotFoundException(NotFoundExceptionType notFoundExceptionType, String detail) {
         super(notFoundExceptionType.getMessage());
@@ -19,6 +18,7 @@ public class DataNotFoundException extends RuntimeException {
     public DataNotFoundException(NotFoundExceptionType notFoundExceptionType) {
         super(notFoundExceptionType.getMessage());
         this.notFoundExceptionType = notFoundExceptionType;
+        this.detail = notFoundExceptionType.getMessage();
     }
 
 
