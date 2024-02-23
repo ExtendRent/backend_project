@@ -1,10 +1,11 @@
 package source_files.data.DTO.paperWorkDTOs;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PaymentTypeDTO {
     int id;
     String name;

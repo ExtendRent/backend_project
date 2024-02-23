@@ -9,7 +9,7 @@ IF NOT EXISTS (select 1 from mail_templates where id = 1) THEN
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Kayıt Doğrulama</title>
+                <title>ExtendRent Kayıt Doğrulama</title>
                 <style>
                     body {
                         font-family: Arial, sans-serif;

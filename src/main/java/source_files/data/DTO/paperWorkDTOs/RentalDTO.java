@@ -1,5 +1,7 @@
 package source_files.data.DTO.paperWorkDTOs;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +9,8 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 public class RentalDTO {
     int id;
     int customerEntityId;

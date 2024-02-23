@@ -13,7 +13,6 @@ import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalR
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.data.responses.TResponse;
-import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
 
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.List;
 @Validated
 @CrossOrigin
 public class RentalsController {
-    PaymentTypeEntityService paymentTypeService;
     private RentalService rentalService;
 
     @PostMapping
