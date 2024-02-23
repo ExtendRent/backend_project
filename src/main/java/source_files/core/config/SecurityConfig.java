@@ -28,7 +28,8 @@ public class SecurityConfig {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/api/auth/**",
-            "/swagger-ui.html"
+            "/swagger-ui.html",
+            "/extendrent.azurewebsites.net/api/v1/**"
     };
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;

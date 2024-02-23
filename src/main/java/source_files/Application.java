@@ -36,7 +36,6 @@ public class Application implements CommandLineRunner {
         String version = ANSI_BOLD + "(Version 1.0.1)" + ANSI_RESET;
         version = String.format("%" + additionalSpaces + "s", version);
         String start = ANSI_BOLD + "\sApplication started." + ANSI_RESET;
-        String description = "\sWelcome to our dark side :)";
         String asciiText = drawLogo() + ANSI_GREEN + start + ANSI_RESET + version;
         System.out.println(asciiText);
     }

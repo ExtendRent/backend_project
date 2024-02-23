@@ -26,7 +26,7 @@ public class ImagesController {
     @PostMapping(value = "/car", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Integer> uploadCarImage(
-            @RequestPart("image") MultipartFile image,
+            @RequestPart(value = "image", required = false) MultipartFile image,
             @RequestParam("licensePlate") String licensePlate) throws IOException {
 
         return new ResponseEntity<>(carImageService.create(image, licensePlate).getId(), HttpStatus.OK);
