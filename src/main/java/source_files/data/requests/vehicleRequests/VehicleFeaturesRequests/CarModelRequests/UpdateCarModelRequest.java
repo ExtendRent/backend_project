@@ -3,14 +3,14 @@ package source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarMo
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import source_files.data.requests.BaseRequest;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateCarModelRequest extends BaseRequest {
     @NotNull(message = "id null olamaz")
     int carModelEntityId;

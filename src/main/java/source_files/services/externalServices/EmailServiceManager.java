@@ -30,6 +30,12 @@ public class EmailServiceManager implements EmailService {
 
     private final UserEntityService userEntityService;
 
+    @Value("${spring.mail.username}")
+    private String username;
+
+    @Value("${spring.mail.password}")
+    private String password;
+
     //@Value("${email.service.url}")
     //private final String emailServiceUrl;
 

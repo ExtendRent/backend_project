@@ -6,7 +6,6 @@ import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.PaymentException;
-import source_files.exception.exceptionTypes.PaymentExceptionType;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 import source_files.services.systemServices.SysPaymentDetailsManager;
 

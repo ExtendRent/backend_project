@@ -36,7 +36,7 @@ public class CustomerEntity extends UserEntity {
     @JoinColumn(name = "driving_license_type")
     private DrivingLicenseTypeEntity drivingLicenseTypeEntity;
 
-    CustomerEntity() {
+    public CustomerEntity() {
         this.setAuthority(CUSTOMER);
     }
 }

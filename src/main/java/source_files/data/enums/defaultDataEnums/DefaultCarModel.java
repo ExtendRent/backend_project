@@ -5,7 +5,7 @@ public enum DefaultCarModel {
     A4("A4"),
     M3("M3"),
     MODEL3("Model3"),
-    AMG_C43("AMG C43"),
+    GLE("AMG GLE"),
     COROLLA("Corolla");
 
     private final String label;

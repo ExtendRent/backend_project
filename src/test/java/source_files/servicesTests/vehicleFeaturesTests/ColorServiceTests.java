@@ -1,4 +1,4 @@
-package source_files.servicesTests;
+package source_files.servicesTests.vehicleFeaturesTests;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

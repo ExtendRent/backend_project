@@ -21,7 +21,7 @@ public class EmployeeEntity extends UserEntity {
     @Column(name = "salary")
     private double salary;
 
-    EmployeeEntity() {
+    public EmployeeEntity() {
         this.setAuthority(EMPLOYEE);
     }
 }

@@ -19,8 +19,7 @@ public class MailTemplateEntity extends BaseEntity {
     @Column(name = "template_name")
     private String templateName;
 
-    @Lob
-    @Column(nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
     @Column(name = "mail_subject")

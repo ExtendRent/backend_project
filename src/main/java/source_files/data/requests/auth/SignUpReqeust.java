@@ -2,11 +2,13 @@ package source_files.data.requests.auth;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import source_files.data.enums.types.userTypes.UserRole;
 
 @Data
 @AllArgsConstructor
+@Builder
 public class SignUpReqeust {
 
     @Size(min = 2, max = 20)

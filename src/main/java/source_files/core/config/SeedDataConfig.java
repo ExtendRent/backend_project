@@ -264,7 +264,7 @@ public class SeedDataConfig implements CommandLineRunner {
                             .rentalPrice(100 + i * 100).shiftTypeEntityId(i)
                             .vehicleStatusEntityId(1)
                             .isAvailable(true)
-                            .carImageEntityId(carImageService.create(file, "46kk35"+  + i).getId())
+                            .carImageEntityId(carImageService.create(file, "46kk35" + +i).getId())
                             .expectedMinDrivingLicenseTypeId(x)
                             .carSegmentEntityId(i)
                             .build());
