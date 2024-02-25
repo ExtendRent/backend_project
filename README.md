@@ -25,7 +25,7 @@ You can find the GitHub profiles of our team members who contributed to the proj
 
 - Regularly expanding product portfolio for rentals
 - Opportunity to rent desired products anytime, anywhere
-
-![resim_2024-02-25_170427378](https://github.com/ExtendRent/backend_project/assets/92371744/a3c0d759-c8ec-4090-a465-76ee67765d1b)
+## Home Page
+![homepage](https://github.com/ExtendRent/backend_project/assets/92371744/a3c0d759-c8ec-4090-a465-76ee67765d1b)
 ## ER Diagram:
-![ER Diagram](https://github.com/GokhanAsilturk/tobeto_rentAcar_crew_project/assets/92371744/0263efcb-78ca-4254-9b60-0c9c3a646b5b)
+![image](https://github.com/ExtendRent/backend_project/assets/92371744/4f49e5ec-7722-4423-a120-f509881c4a25)
