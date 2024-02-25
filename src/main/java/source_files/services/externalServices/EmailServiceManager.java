@@ -2,6 +2,7 @@ package source_files.services.externalServices;
 
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringSubstitutor;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,12 +30,6 @@ public class EmailServiceManager implements EmailService {
     private final MailTemplateEntityService mailTemplateEntityService;
 
     private final UserEntityService userEntityService;
-
-    @Value("${spring.mail.username}")
-    private String username;
-
-    @Value("${spring.mail.password}")
-    private String password;
 
     //@Value("${email.service.url}")
     //private final String emailServiceUrl;
