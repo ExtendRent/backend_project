@@ -19,6 +19,7 @@ public class CarDTO {
     int expectedMinDrivingLicenseTypeId;
     int vehicleStatusEntityId;
     int carSegmentEntityId;
+    int carImageEntityId;
 
     String carSegmentEntityName;
     String vehicleStatusEntityName;
