@@ -10,6 +10,7 @@ import lombok.*;
 public class CustomerDTO {
     int id;
     int drivingLicenseTypeId;
+    int userImageEntityId;
     String phoneNumber;
     String drivingLicenseNumber;
     String drivingLicenseTypeEntityName;

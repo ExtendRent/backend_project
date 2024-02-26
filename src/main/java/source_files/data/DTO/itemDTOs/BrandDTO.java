@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class BrandDTO {
     int id;
+    int brandImageEntityId;
     String name;
     String brandImageEntityUrl;
     boolean isDeleted;
