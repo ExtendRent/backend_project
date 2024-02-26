@@ -58,7 +58,7 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
 
     @Override
     public String fixName(String name) {
-        return name.replace(" ", "").toLowerCase();
+        return name;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class ImagesController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Integer> uploadBrandImage(
             @RequestPart("image") MultipartFile image,
-            @RequestParam("licensePlate") String brandName) throws IOException {
+            @RequestParam("brandName") String brandName) throws IOException {
 
         return new ResponseEntity<>(brandImageService.create(image, brandName).getId(), HttpStatus.OK);
     }

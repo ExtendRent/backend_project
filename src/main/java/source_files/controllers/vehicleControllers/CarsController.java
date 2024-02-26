@@ -32,16 +32,9 @@ public class CarsController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/withImage")
-    public ResponseEntity<Void> createCar(CreateCarRequest createCarRequest, @RequestPart("file") MultipartFile file) throws IOException {
-        this.carService.create(createCarRequest);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
 
     @PutMapping
-    public ResponseEntity<TResponse<CarDTO>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest,
-                                                       @RequestPart("file") MultipartFile file) throws IOException {
+    public ResponseEntity<TResponse<CarDTO>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) throws IOException {
         return new ResponseEntity<>(TResponse.<CarDTO>tResponseBuilder()
                 .response(this.carService.update(updateCarRequest))
                 .build(), HttpStatus.OK

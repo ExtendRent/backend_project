@@ -22,6 +22,6 @@ public class FuelTypeBusinessRules implements BaseBusinessRulesService {
 
     @Override
     public String fixName(String name) {
-        return null;
+        return name;
     }
 }
