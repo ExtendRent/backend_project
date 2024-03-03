@@ -22,7 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @AllArgsConstructor
 public class SecurityConfig {
 
-    private static final String[] WHITE_LIST_URLS = {
+    private static final String[] DEFAULT_WHITE_LIST_URLS = {
             "/swagger-ui/**",
             "/v2/api-docs",
             "/v3/api-docs",
@@ -31,6 +31,8 @@ public class SecurityConfig {
             "/swagger-ui.html",
             "/extendrent.azurewebsites.net/api/v1/**"
     };
+
+
     private final JwtAuthFilter jwtAuthFilter;
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userService;
@@ -44,7 +46,7 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .logout(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((req) -> req
-                        .requestMatchers(WHITE_LIST_URLS).permitAll()
+                        .requestMatchers(DEFAULT_WHITE_LIST_URLS).permitAll()
                         .requestMatchers("/api/v1/admins/**").permitAll()
                         .requestMatchers("/api/v1/employees/**").permitAll()
                         .requestMatchers("/api/v1/customers/**").permitAll()
