@@ -15,9 +15,7 @@ import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentService;
-import source_files.services.paperWorkServices.abstracts.RentalStatusService;
 import source_files.services.paperWorkServices.rental.RentalManager;
-import source_files.services.systemServices.SysPaymentDetailsService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
 
@@ -39,9 +37,6 @@ class RentalManagerTest {
     private CarService carService;
 
     @Mock
-    private SysPaymentDetailsService sysPaymentDetailsService;
-
-    @Mock
     private CustomerService customerService;
 
     @Mock
@@ -52,9 +47,6 @@ class RentalManagerTest {
 
     @Mock
     private PaymentService paymentService;
-
-    @Mock
-    private RentalStatusService rentalStatusService;
 
     @InjectMocks
     private RentalManager rentalManager;

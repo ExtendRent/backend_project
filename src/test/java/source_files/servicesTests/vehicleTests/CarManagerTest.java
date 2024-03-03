@@ -33,13 +33,6 @@ public class CarManagerTest {
 
     @Mock
     private CarBusinessRules rules;
-
-    @Mock
-    private VehicleStatusEntityManager vehicleStatusManager;
-
-    @Mock
-    private CarImageService carImageService;
-
     @InjectMocks
     private CarManager carManager;
 
