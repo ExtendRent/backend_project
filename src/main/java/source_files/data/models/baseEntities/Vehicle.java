@@ -17,9 +17,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEnt
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@SuperBuilder
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
-//@Inheritance(strategy = InheritanceType.JOINED) // kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 public class Vehicle extends BaseEntity {
 
     @ManyToOne
