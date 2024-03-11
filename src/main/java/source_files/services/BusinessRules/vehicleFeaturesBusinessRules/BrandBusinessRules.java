@@ -20,11 +20,11 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     private final BrandRepository brandRepository;
 
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(BRAND_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     //--------------------- AUTO FIX METHODS ---------------------

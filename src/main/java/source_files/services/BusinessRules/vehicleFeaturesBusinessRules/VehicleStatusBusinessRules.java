@@ -13,11 +13,11 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICL
 @Service
 public class VehicleStatusBusinessRules implements BaseBusinessRulesService {
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(VEHICLE_STATUS_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     @Override

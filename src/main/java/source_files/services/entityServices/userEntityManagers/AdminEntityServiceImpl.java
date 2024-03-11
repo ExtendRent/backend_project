@@ -7,7 +7,6 @@ import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.dataAccess.userRepositories.AdminRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules;
 import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
 import source_files.services.systemServices.ImageServices.UserImageService;
 
@@ -21,7 +20,6 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.ADMIN_
 public class AdminEntityServiceImpl implements AdminEntityService {
 
     private final AdminRepository repository;
-    private final AdminBusinessRules adminBusinessRules;
     private final UserImageService userImageService;
 
     @Override
@@ -69,7 +67,7 @@ public class AdminEntityServiceImpl implements AdminEntityService {
     @Override
     public List<AdminEntity> getAll() {
 
-        return adminBusinessRules.checkDataList(repository.findAll());
+        return repository.findAll();
     }
 
     @Override

@@ -13,11 +13,11 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.FUEL_T
 @Service
 public class FuelTypeBusinessRules implements BaseBusinessRulesService {
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(FUEL_TYPE_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     @Override

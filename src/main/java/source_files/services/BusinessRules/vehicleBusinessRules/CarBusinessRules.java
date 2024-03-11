@@ -92,11 +92,11 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     //----------------------------METHODS--------------------------------
 
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(CAR_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     public boolean isDrivingLicenseTypeSuitable(int carId, Integer customerId) {

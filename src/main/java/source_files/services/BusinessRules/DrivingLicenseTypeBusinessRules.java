@@ -14,12 +14,12 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.DRIVIN
 public class DrivingLicenseTypeBusinessRules implements BaseItemBusinessRulesService {
 
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(DRIVING_LICENSE_TYPE_LIST_NOT_FOUND
                     , "Aradığınız kriterlere uygun ehliyet tipi bulunamadı");
         }
-        return list;
+        
     }
 
     @Override

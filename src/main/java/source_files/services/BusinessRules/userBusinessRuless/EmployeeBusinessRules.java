@@ -59,11 +59,11 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     //----------------------------METHODS--------------------------------
 
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(EMPLOYEE_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     public void checkSalary(double salary) {

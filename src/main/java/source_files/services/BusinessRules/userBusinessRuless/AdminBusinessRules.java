@@ -24,12 +24,10 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     private final AdminRepository adminRepository;
 
     @Override
-    public List<AdminEntity> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(ADMIN_LIST_NOT_FOUND);
         }
-
-        return list.stream().map(adminEntity -> (AdminEntity) adminEntity).toList();
     }
 
     //--------------------- AUTO FIX METHODS ---------------------

@@ -49,11 +49,11 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     //----------------------------METHODS--------------------------------
 
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(COLOR_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     @Override

@@ -13,11 +13,10 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_L
 @Service
 public class UserBusinessRules implements BaseUserBusinessRulesService {
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(USER_LIST_NOT_FOUND);
         }
-        return list;
     }
 
     @Override

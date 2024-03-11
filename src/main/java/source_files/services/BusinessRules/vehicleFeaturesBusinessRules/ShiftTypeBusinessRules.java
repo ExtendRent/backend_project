@@ -13,11 +13,10 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.SHIFT_
 @Service
 public class ShiftTypeBusinessRules implements BaseBusinessRulesService {
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(SHIFT_TYPE_LIST_NOT_FOUND);
         }
-        return list;
     }
 
     @Override

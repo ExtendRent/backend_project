@@ -53,11 +53,11 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     }
 
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(BODY_TYPE_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     @Override

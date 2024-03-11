@@ -13,11 +13,11 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMEN
 @Service
 public class PaymentTypeBusinessRules implements BaseBusinessRulesService {
     @Override
-    public List<?> checkDataList(List<?> list) {
+    public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
             throw new DataNotFoundException(PAYMENT_TYPE_LIST_NOT_FOUND);
         }
-        return list;
+        
     }
 
     @Override
