@@ -6,7 +6,7 @@ import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInfo
 import source_files.exception.DataNotFoundException;
 import source_files.exception.PaymentException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
-import source_files.services.systemServices.SysPaymentDetailsManager;
+import source_files.services.systemServices.SysPaymentDetailsServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +18,7 @@ import static source_files.exception.exceptionTypes.PaymentExceptionType.EXPIRY_
 @Service
 public class PaymentBusinessRules implements BaseBusinessRulesService {
 
-    private final SysPaymentDetailsManager sysPaymentDetailsManager;
+    private final SysPaymentDetailsServiceImpl sysPaymentDetailsServiceImpl;
 
     //--------------------- AUTO FIX METHODS ---------------------
     public CreditCardInformation fixCreditCardInformation(CreditCardInformation creditCardInformation) {

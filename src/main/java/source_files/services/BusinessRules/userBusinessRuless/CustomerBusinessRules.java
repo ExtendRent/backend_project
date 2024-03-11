@@ -9,7 +9,7 @@ import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
-import source_files.services.entityServices.userEntityManagers.CustomerEntityManager;
+import source_files.services.entityServices.userEntityManagers.CustomerEntityServiceImpl;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL
 @Service
 public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     private final CustomerRepository customerRepository;
-    private final CustomerEntityManager customerEntityManager;
+    private final CustomerEntityServiceImpl customerEntityServiceImpl;
 
 
     //--------------------- AUTO FIX METHODS ---------------------

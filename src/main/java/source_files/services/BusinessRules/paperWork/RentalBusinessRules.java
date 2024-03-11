@@ -13,7 +13,7 @@ import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
 import source_files.services.DrivingLicenseTypeService;
-import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityManager;
+import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityServiceImpl;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.userServices.abstracts.CustomerService;
 import source_files.services.vehicleService.abstracts.CarService;
@@ -30,7 +30,7 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 @Service
 public class RentalBusinessRules implements BaseBusinessRulesService {
 
-    private final RentalEntityManager rentalEntityManager;
+    private final RentalEntityServiceImpl rentalEntityServiceImpl;
     private final DiscountService discountService;
     private final CarService carService;
     private final CustomerService customerService;
@@ -73,7 +73,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
 
     public PaymentDetailsEntity updatePaymentDetailsToFinal(ReturnRentalRequest returnRentalRequest) {
-        RentalEntity rentalEntity = this.rentalEntityManager.getById(returnRentalRequest.getId());
+        RentalEntity rentalEntity = this.rentalEntityServiceImpl.getById(returnRentalRequest.getId());
 
         PaymentDetailsEntity paymentDetailsEntity = rentalEntity.getPaymentDetailsEntity();
 
@@ -155,7 +155,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     }
 
     public double calculateReturnFinalAmount(ReturnRentalRequest returnRentalRequest, int totalRentalDays) {
-        RentalEntity rentalEntity = this.rentalEntityManager
+        RentalEntity rentalEntity = this.rentalEntityServiceImpl
                 .getById(returnRentalRequest.getId());
 
         double baseTotalPrice = calculateTotalBasePrice(totalRentalDays, rentalEntity.getCarEntity().getRentalPrice());

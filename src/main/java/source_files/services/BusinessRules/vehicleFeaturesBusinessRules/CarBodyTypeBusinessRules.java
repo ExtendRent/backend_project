@@ -8,7 +8,7 @@ import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepositor
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
-import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.CarBodyTypeEntityManager;
+import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.CarBodyTypeEntityServiceImpl;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.BODY_T
 @Service
 public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
 
-    private final CarBodyTypeEntityManager carBodyTypeEntityManager;
+    private final CarBodyTypeEntityServiceImpl carBodyTypeEntityServiceImpl;
     private final CarBodyTypeRepository carBodyTypeRepository;
 
     //--------------------- AUTO FIX METHODS ---------------------
@@ -41,7 +41,7 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
 
     public UpdateCarBodyTypeRequest checkUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         this.existsByName(updateCarBodyTypeRequest.getName());
-        updateCarBodyTypeRequest.setId(this.carBodyTypeEntityManager.getById(updateCarBodyTypeRequest.getId()).getId());
+        updateCarBodyTypeRequest.setId(this.carBodyTypeEntityServiceImpl.getById(updateCarBodyTypeRequest.getId()).getId());
         return updateCarBodyTypeRequest;
     }
 

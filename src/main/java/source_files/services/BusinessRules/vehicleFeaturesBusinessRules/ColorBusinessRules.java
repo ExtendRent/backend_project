@@ -8,7 +8,7 @@ import source_files.dataAccess.vehicleFeaturesRespositories.ColorRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
-import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.ColorEntityManager;
+import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.ColorEntityServiceImpl;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.COLOR_
 @Service
 public class ColorBusinessRules implements BaseItemBusinessRulesService {
     private final ColorRepository colorRepository;
-    private final ColorEntityManager colorEntityManager;
+    private final ColorEntityServiceImpl colorEntityServiceImpl;
 
     //--------------------- AUTO FIX METHODS ---------------------
     public CreateColorRequest fixCreateColorRequest(CreateColorRequest createColorRequest) {
@@ -41,7 +41,7 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     public UpdateColorRequest checkUpdateColorRequest(UpdateColorRequest updateColorRequest) {
 
         this.existsByNameAndIdNot(updateColorRequest.getName(), updateColorRequest.getId());
-        updateColorRequest.setId(this.colorEntityManager.getById(updateColorRequest.getId()).getId());
+        updateColorRequest.setId(this.colorEntityServiceImpl.getById(updateColorRequest.getId()).getId());
         return updateColorRequest;
     }
 

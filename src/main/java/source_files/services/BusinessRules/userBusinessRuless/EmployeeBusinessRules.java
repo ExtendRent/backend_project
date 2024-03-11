@@ -9,7 +9,7 @@ import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
-import source_files.services.entityServices.userEntityManagers.EmployeeEntityManager;
+import source_files.services.entityServices.userEntityManagers.EmployeeEntityServiceImpl;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 @Service
 public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     private final EmployeeRepository employeeRepository;
-    private final EmployeeEntityManager employeeEntityManager;
+    private final EmployeeEntityServiceImpl employeeEntityServiceImpl;
 
 
     //--------------------- AUTO FIX METHODS ---------------------
