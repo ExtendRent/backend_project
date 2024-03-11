@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.DTO.paperWorkDTOs.RentalStatusDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus;
 import source_files.data.models.baseEntities.BaseEntity;
 
@@ -21,4 +22,12 @@ public class RentalStatusEntity extends BaseEntity {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private DefaultRentalStatus status;
+
+    public RentalStatusDTO toModel() {
+        return RentalStatusDTO.builder()
+                .id(this.getId())
+                .name(this.getName())
+                .isDeleted(this.getIsDeleted())
+                .build();
+    }
 }

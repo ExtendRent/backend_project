@@ -1,9 +1,14 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import source_files.data.DTO.userDTOs.UserDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.enums.types.userTypes.UserRole;
 import source_files.data.enums.types.userTypes.UserType;
@@ -20,7 +25,7 @@ import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.
 @AllArgsConstructor
 @NoArgsConstructor
 //@SuperBuilder
-@Builder
+@SuperBuilder(builderMethodName = "userBuilder")
 //@MappedSuperclass//->Bu sınıf entity olduğu için bu anotasyonu KULLANAMAYIZ(artık bir üst sınıftaki kolonlar da bu sınıfa gelecek). !!!
 @Inheritance(strategy = InheritanceType.JOINED)
 //-> kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
@@ -58,7 +63,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private UserImageEntity userImageEntity;
 
     public DefaultUserStatus getStatus() {
-        return this.status;
+        return status;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -67,7 +72,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.emailAddress;
+        return emailAddress;
     }
 
     @Override
@@ -77,7 +82,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.status != BLOCKED;
+        return status != BLOCKED;
     }
 
     @Override
@@ -88,5 +93,17 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return !getIsDeleted();
+    }
+
+    public UserDTO toUserModel() {
+        return UserDTO.builder()
+                .id(getId())
+                .name(getName())
+                .surname(getSurname())
+                .email(getEmailAddress())
+                .userImageEntityUrl(getUserImageEntity().getUrl())
+                .isDeleted(getIsDeleted())
+                .authority(getAuthority())
+                .build();
     }
 }

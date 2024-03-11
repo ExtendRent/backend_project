@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import source_files.data.DTO.paperWorkDTOs.RentalDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
@@ -18,6 +20,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@SuperBuilder(builderMethodName = "rentalBuilder")
 //@Inheritance(strategy = InheritanceType.JOINED)
 //@SuperBuilder
 @Table(name = "rentals")
@@ -64,6 +67,30 @@ public class RentalEntity extends BaseEntity {
         if (carEntity != null) {
             carEntity.getRentalList().remove(this);
         }
+    }
+
+    public RentalDTO toModel() {
+        return RentalDTO.builder()
+                .id(getId())
+                .customerEntityId(getCustomerEntity().getId())
+                .carBodyTypeEntityName(getCarEntity().getCarBodyTypeEntity().getName())
+                .carEntityBrandEntityName(getCarEntity().getCarModelEntity().getBrandEntity().getName())
+                .carEntityColorEntityName(getCarEntity().getColorEntity().getName())
+                .carEntityId(getCarEntity().getId())
+                .carEntityLicensePlate(getCarEntity().getLicensePlate())
+                .carEntityModelEntityName(getCarEntity().getCarModelEntity().getName())
+                .carEntityRentalPrice(getCarEntity().getRentalPrice())
+                .carEntityYear(getCarEntity().getYear())
+                .discountEntityId(getDiscountEntity().getId())
+                .discountEntityDiscountCode(getDiscountEntity().getDiscountCode())
+                .endDate(getEndDate())
+                .paymentDetailsEntityAmount(getPaymentDetailsEntity().getAmount())
+                .paymentDetailsEntityPaymentTypeEntityPaymentTypeName(
+                        getPaymentDetailsEntity().getPaymentTypeEntity().getName())
+                .rentalStatusEntityId(getRentalStatusEntity().getId())
+                .rentalStatusEntityName(getRentalStatusEntity().getName())
+                .startDate(getStartDate())
+                .build();
     }
 
 }

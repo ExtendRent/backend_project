@@ -2,7 +2,6 @@ package source_files.services.vehicleFeaturesServices;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.VehicleStatusDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
@@ -18,55 +17,53 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class VehicleStatusManager implements VehicleStatusService {
-    private final VehicleStatusEntityService vehicleStatusEntityService;
-    private final ModelMapperService mapper;
+    private final VehicleStatusEntityService entityService;
     private final VehicleStatusBusinessRules rules;
 
     @Override
     public void create(CreateVehicleStatusRequest createVehicleStatusRequest) {
-        vehicleStatusEntityService.create(mapper.forRequest().map(createVehicleStatusRequest, VehicleStatusEntity.class));
+        entityService.create(createVehicleStatusRequest);
     }
 
     @Override
     public VehicleStatusDTO update(UpdateVehicleStatusRequest updateVehicleStatusRequest) {
-        VehicleStatusEntity vehicleStatusEntity = vehicleStatusEntityService.getById(updateVehicleStatusRequest.getId());
-        vehicleStatusEntity.setName(updateVehicleStatusRequest.getName());
-        return mapper.forResponse().map(vehicleStatusEntityService.update(vehicleStatusEntity), VehicleStatusDTO.class);
-
+        return entityService.update(updateVehicleStatusRequest).toModel();
     }
 
     @Override
     public VehicleStatusDTO getById(int id) {
-        return mapper.forResponse().map(vehicleStatusEntityService.getById(id), VehicleStatusDTO.class);
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public List<VehicleStatusDTO> getAll() {
-        return rules.checkDataList(vehicleStatusEntityService.getAll()).stream()
-                .map(statusEntity ->
-                        mapper.forResponse().map(statusEntity, VehicleStatusDTO.class)
-                ).toList();
+        return mapToDTOList(entityService.getAll());
     }
 
     @Override
     public VehicleStatusDTO getByStatus(DefaultVehicleStatus status) {
-        return mapper.forResponse().map(vehicleStatusEntityService.getByStatus(status), VehicleStatusDTO.class);
+        return entityService.getByStatus(status).toModel();
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
         if (hardDelete) {
-            this.vehicleStatusEntityService.delete(this.vehicleStatusEntityService.getById(id));
+            entityService.delete(entityService.getById(id));
         } else {
-            this.softDelete(id);
+            softDelete(id);
         }
     }
 
     @Override
     public void softDelete(int id) {
-        VehicleStatusEntity vehicleStatusEntity = this.vehicleStatusEntityService.getById(id);
+        VehicleStatusEntity vehicleStatusEntity = entityService.getById(id);
         vehicleStatusEntity.setIsDeleted(true);
         vehicleStatusEntity.setDeletedAt(LocalDateTime.now());
-        this.vehicleStatusEntityService.update(vehicleStatusEntity);
+        entityService.update(vehicleStatusEntity);
+    }
+
+    private List<VehicleStatusDTO> mapToDTOList(List<VehicleStatusEntity> vehicleStatusEntities) {
+        rules.checkDataList(vehicleStatusEntities);
+        return vehicleStatusEntities.stream().map(VehicleStatusEntity::toModel).toList();
     }
 }

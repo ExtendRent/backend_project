@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import source_files.data.DTO.itemDTOs.ColorDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
@@ -14,10 +16,17 @@ import source_files.data.models.baseEntities.BaseEntity;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder(builderMethodName = "colorBuilder")
 @Table(name = "colors")
 public class ColorEntity extends BaseEntity {
 
     @Column(name = "name", unique = true)
     private String name;
 
+    public ColorDTO toModel() {
+        return ColorDTO.builder()
+                .id(getId())
+                .name(getName())
+                .build();
+    }
 }

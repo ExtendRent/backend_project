@@ -7,10 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.UserDTO;
 import source_files.data.models.baseEntities.UserEntity;
-import source_files.dataAccess.userRepositories.UserRepository;
 import source_files.services.BusinessRules.userBusinessRuless.UserBusinessRules;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.userServices.abstracts.UserService;
@@ -22,9 +20,7 @@ import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.
 @Service
 @RequiredArgsConstructor
 public class UserManager implements UserService {
-    private final UserRepository repository;
     private final UserEntityService entityService;
-    private final ModelMapperService mapper;
     private final UserBusinessRules rules;
     private final PasswordEncoder passwordEncoder;
 
@@ -40,27 +36,26 @@ public class UserManager implements UserService {
 
     @Override
     public Page<UserDTO> getAll(Pageable pageable) {
-        Page<UserDTO> users = entityService.getAll(pageable).map(this::mapToDto);
+        Page<UserDTO> users = entityService.getAll(pageable).map(UserEntity::toUserModel);
         rules.checkDataList(users.toList());
         return users;
     }
 
     @Override
     public UserDTO getById(int id) {
-        return mapToDto(entityService.getById(id));
+        return entityService.getById(id).toUserModel();
     }
 
     @Override
     public void blockUser(int id) {
         UserEntity user = entityService.getById(id);
         user.setStatus(BLOCKED);
-        repository.save(user);
+        entityService.update(user);
     }
 
     @Override
     public List<UserDTO> getAllByDeletedState(boolean isDeleted) {
-        return repository.findAllByIsDeleted(isDeleted).stream()
-                .map(entity -> mapper.forResponse().map(entity, UserDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByDeletedState(isDeleted));
     }
 
     @Override
@@ -75,7 +70,8 @@ public class UserManager implements UserService {
         entityService.update(userEntity);
     }
 
-    private UserDTO mapToDto(UserEntity user) {
-        return mapper.forResponse().map(user, UserDTO.class);
+    private List<UserDTO> mapToDTOList(List<UserEntity> entities) {
+        rules.checkDataList(entities);
+        return entities.stream().map(UserEntity::toUserModel).toList();
     }
 }

@@ -1,13 +1,17 @@
 package source_files.services.entityServices.abstracts.paperWorkAbstracts;
 
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface RentalEntityService {
 
-    RentalEntity create(RentalEntity rentalEntity);
+    RentalEntity create(CreateRentalRequest createRentalRequest);
+
+    RentalEntity update(UpdateRentalRequest updateRentalRequest);
 
     RentalEntity update(RentalEntity rentalEntity);
 

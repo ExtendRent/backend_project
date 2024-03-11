@@ -33,7 +33,7 @@ public class CarImageManager implements CarImageService {
             byte[] newByte = ImageUtils.resizeImage(file.getBytes(), 1920, 1080);
             String imageUrl = cloudinaryService.uploadFileCar(file, licensePlate);
             byte[] decompressedData = ImageUtils.decompressImage(newByte);
-            return repository.save(CarImageEntity.builder()
+            return repository.save(CarImageEntity.carImageBuilder()
                     .name(licensePlate)
                     .type(file.getContentType())
                     .url(imageUrl)

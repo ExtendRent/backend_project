@@ -7,14 +7,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import source_files.core.services.JwtService;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.requests.auth.RefreshTokenRequest;
 import source_files.data.requests.auth.SignInRequest;
 import source_files.data.requests.auth.SignUpReqeust;
-import source_files.data.requests.userRequests.CreateAdminRequest;
-import source_files.data.requests.userRequests.CreateCustomerRequest;
-import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.responses.JwtToken;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
@@ -29,7 +25,6 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
     private final AdminService adminService;
     private final EmployeeService employeeService;
     private final CustomerService customerService;
-    private final ModelMapperService mapper;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final UserEntityService userEntityService;
@@ -40,13 +35,13 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
 
         switch (request.getAuthority()) {
             case ADMIN:
-                this.adminService.create(this.mapper.forRequest().map(request, CreateAdminRequest.class));
+                this.adminService.create(request.forAdmin());
                 break;
             case EMPLOYEE:
-                this.employeeService.create(this.mapper.forRequest().map(request, CreateEmployeeRequest.class));
+                this.employeeService.create(request.forEmployee());
                 break;
             case CUSTOMER:
-                this.customerService.create(this.mapper.forRequest().map(request, CreateCustomerRequest.class));
+                this.customerService.create(request.forCustomer());
                 emailService.sendOtp(request.getEmailAddress());
                 break;
             default:
@@ -63,7 +58,6 @@ public class CustomAuthenticationManager implements AuthenticationService, Acces
             return JwtToken.builder().token(token).build();
         }
         throw new RuntimeException("Bilgiler hatalı");
-
     }
 
     @Override

@@ -35,7 +35,7 @@ public class UserImageManager implements UserImageService {
             byte[] newByte = ImageUtils.resizeImage(file.getBytes(), 400, 400);
             String url = cloudinaryService.uploadFileUser(file, emailAddress);
             byte[] decompressedData = ImageUtils.decompressImage(newByte);
-            UserImageEntity savedImage = repository.save(UserImageEntity.builder()
+            UserImageEntity savedImage = repository.save(UserImageEntity.userImageBuilder()
                     .name(emailAddress)
                     .type(file.getContentType())
                     .url(url)

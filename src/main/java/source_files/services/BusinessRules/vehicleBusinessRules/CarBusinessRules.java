@@ -59,16 +59,15 @@ public class CarBusinessRules implements BaseBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public CreateCarRequest checkCreateCarRequest(CreateCarRequest createCarRequest) {
+    public void checkCreateCarRequest(CreateCarRequest createCarRequest) {
         this.checkLicensePlate(createCarRequest.getLicensePlate());
         this.checkModel(createCarRequest.getCarModelEntityId());
         this.checkColor(createCarRequest.getColorEntityId());
         this.checkBodyType(createCarRequest.getCarBodyTypeEntityId());
         this.checkBrand(createCarRequest.getBrandEntityId());
-        return createCarRequest;
     }
 
-    public UpdateCarRequest checkUpdateCarRequest(UpdateCarRequest updateCarRequest) {
+    public void checkUpdateCarRequest(UpdateCarRequest updateCarRequest) {
         if (!updateCarRequest.getLicensePlate().equals(
                 carEntityService.getById(updateCarRequest.getId()).getLicensePlate())) {
             this.checkLicensePlate(updateCarRequest.getLicensePlate());
@@ -76,8 +75,6 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         this.checkModel(updateCarRequest.getCarModelEntityId());
         this.checkColor(updateCarRequest.getColorEntityId());
         this.checkBodyType(updateCarRequest.getCarBodyTypeEntityId());
-        this.checkBrand(updateCarRequest.getBrandEntityId());
-        return updateCarRequest;
     }
 
     public void checkDates(LocalDate startDate, LocalDate endDate) {

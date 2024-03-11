@@ -11,7 +11,7 @@ import source_files.data.models.baseEntities.BaseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Builder(builderMethodName = "otpBuilder")
 @Table(name = "otp")
 public class OtpEntity extends BaseEntity {
 

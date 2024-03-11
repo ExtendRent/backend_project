@@ -2,7 +2,6 @@ package source_files.services.BusinessRules.paperWork;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.PaymentException;
@@ -19,7 +18,6 @@ import static source_files.exception.exceptionTypes.PaymentExceptionType.EXPIRY_
 @Service
 public class PaymentBusinessRules implements BaseBusinessRulesService {
 
-    private final ModelMapperService modelMapperService;
     private final SysPaymentDetailsManager sysPaymentDetailsManager;
 
     //--------------------- AUTO FIX METHODS ---------------------

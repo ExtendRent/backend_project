@@ -3,7 +3,6 @@ package source_files.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.DrivingLicenseTypeDTO;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.models.DrivingLicenseTypeEntity;
 import source_files.data.requests.CreateDrivingLicenseTypeRequest;
 import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
@@ -17,36 +16,30 @@ import java.util.List;
 public class DrivingLicenseTypeManager implements DrivingLicenseTypeService {
     private final DrivingLicenseTypeEntityService entityService;
     private final DrivingLicenseTypeBusinessRules rules;
-    private final ModelMapperService mapper;
 
     @Override
     public void create(CreateDrivingLicenseTypeRequest createDrivingLicenseTypeRequest) {
-        DrivingLicenseTypeEntity drivingLicenseTypeEntity = mapper.forRequest().map(createDrivingLicenseTypeRequest, DrivingLicenseTypeEntity.class);
-        entityService.create(drivingLicenseTypeEntity);
+        entityService.create(createDrivingLicenseTypeRequest);
     }
 
     @Override
     public DrivingLicenseTypeDTO update(UpdateDrivingLicenseTypeRequest updateDrivingLicenseTypeRequest) {
-        return mapper.forResponse().map(entityService.update(
-                        mapper.forRequest().map(updateDrivingLicenseTypeRequest, DrivingLicenseTypeEntity.class))
-                , DrivingLicenseTypeDTO.class);
+        return entityService.update(updateDrivingLicenseTypeRequest).toModel();
     }
 
     @Override
     public DrivingLicenseTypeDTO getById(int id) {
-        return mapper.forResponse().map(entityService.getById(id), DrivingLicenseTypeDTO.class);
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public List<DrivingLicenseTypeDTO> getAll() {
-        return rules.checkDataList(entityService.getAll()).stream().map(
-                entity -> mapper.forResponse().map(entity, DrivingLicenseTypeDTO.class)).toList();
+        return mapToDTOList(entityService.getAll());
     }
 
     @Override
     public List<DrivingLicenseTypeDTO> getAllByDeletedState(boolean isDeleted) {
-        return rules.checkDataList(entityService.getAll()).stream().map(entity ->
-                mapper.forResponse().map(entity, DrivingLicenseTypeDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByDeletedState(isDeleted));
     }
 
     @Override
@@ -63,5 +56,10 @@ public class DrivingLicenseTypeManager implements DrivingLicenseTypeService {
         DrivingLicenseTypeEntity entity = entityService.getById(id);
         entity.setIsDeleted(true);
         entityService.update(entity);
+    }
+
+    private List<DrivingLicenseTypeDTO> mapToDTOList(List<DrivingLicenseTypeEntity> entities) {
+        rules.checkDataList(entities);
+        return entities.stream().map(DrivingLicenseTypeEntity::toModel).toList();
     }
 }

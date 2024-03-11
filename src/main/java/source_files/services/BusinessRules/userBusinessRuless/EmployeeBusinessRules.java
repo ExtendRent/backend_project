@@ -44,17 +44,15 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public UpdateEmployeeRequest checkUpdateEmployeeRequest(UpdateEmployeeRequest updateEmployeeRequest) {
+    public void checkUpdateEmployeeRequest(UpdateEmployeeRequest updateEmployeeRequest) {
         this.existsByEmailAddress(updateEmployeeRequest.getEmailAddress());
         this.existsByPhoneNumber(updateEmployeeRequest.getPhoneNumber());
-        return updateEmployeeRequest;
     }
 
-    public CreateEmployeeRequest checkCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest) {
+    public void checkCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest) {
         this.checkSalary(createEmployeeRequest.getSalary());
         this.existsByEmailAddress(createEmployeeRequest.getEmailAddress());
         this.existsByPhoneNumber(createEmployeeRequest.getPhoneNumber());
-        return createEmployeeRequest;
     }
 
 

@@ -50,19 +50,15 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public CreateAdminRequest checkCreateAdminRequest(CreateAdminRequest createAdminRequest) {
+    public void checkCreateAdminRequest(CreateAdminRequest createAdminRequest) {
         this.checkSalary(createAdminRequest.getSalary());
         this.existsByEmailAddress(createAdminRequest.getEmailAddress());
         this.existsByPhoneNumber(createAdminRequest.getPhoneNumber());
-        return createAdminRequest;
     }
 
-    public UpdateAdminRequest checkUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
-
+    public void checkUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
         this.existsByEmailAddressAndIdNot(updateAdminRequest.getEmailAddress(), updateAdminRequest.getId());
         this.existsByPhoneNumberAndIdNot(updateAdminRequest.getPhoneNumber(), updateAdminRequest.getId());
-
-        return updateAdminRequest;
     }
 
 

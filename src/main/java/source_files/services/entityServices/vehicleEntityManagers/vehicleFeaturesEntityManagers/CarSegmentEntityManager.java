@@ -3,6 +3,8 @@ package source_files.services.entityServices.vehicleEntityManagers.vehicleFeatur
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarSegmentEntity;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarSegmentRequests.CreateCarSegmentRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarSegmentRequests.UpdateCarSegmentRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.CarSegmentRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarSegmentEntityService;
@@ -17,7 +19,19 @@ public class CarSegmentEntityManager implements CarSegmentEntityService {
     private final CarSegmentRepository repository;
 
     @Override
-    public CarSegmentEntity create(CarSegmentEntity carSegmentEntity) {
+    public CarSegmentEntity create(CreateCarSegmentRequest createCarSegmentRequest) {
+        CarSegmentEntity carSegmentEntity = CarSegmentEntity.carSegmentBuilder()
+                .name(createCarSegmentRequest.getName())
+                .build();
+        return repository.save(carSegmentEntity);
+    }
+
+    @Override
+    public CarSegmentEntity update(UpdateCarSegmentRequest updateCarSegmentRequest) {
+        CarSegmentEntity carSegmentEntity = CarSegmentEntity.carSegmentBuilder()
+                .id(updateCarSegmentRequest.getId())
+                .name(updateCarSegmentRequest.getName())
+                .build();
         return repository.save(carSegmentEntity);
     }
 

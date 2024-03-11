@@ -2,14 +2,18 @@ package source_files.services.entityServices.abstracts.userAbstract;
 
 
 import source_files.data.models.userEntities.EmployeeEntity;
+import source_files.data.requests.userRequests.CreateEmployeeRequest;
+import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 
 import java.util.List;
 
 public interface EmployeeEntityService {
 
-    EmployeeEntity create(EmployeeEntity userEntity);
+    EmployeeEntity create(CreateEmployeeRequest createEmployeeRequest);
 
-    EmployeeEntity update(EmployeeEntity userEntity);
+    EmployeeEntity update(UpdateEmployeeRequest updateEmployeeRequest);
+
+    EmployeeEntity update(EmployeeEntity employeeEntity);
 
     EmployeeEntity getById(int id);
 

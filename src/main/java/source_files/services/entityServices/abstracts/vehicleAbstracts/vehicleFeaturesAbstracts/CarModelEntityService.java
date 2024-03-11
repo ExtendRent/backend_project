@@ -1,11 +1,15 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
 
 import java.util.List;
 
 public interface CarModelEntityService {
-    CarModelEntity create(CarModelEntity carModelEntity);
+    CarModelEntity create(CreateCarModelRequest createCarModelRequest);
+
+    CarModelEntity update(UpdateCarModelRequest updateCarModelRequest);
 
     CarModelEntity update(CarModelEntity carModelEntity);
 

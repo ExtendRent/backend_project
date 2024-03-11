@@ -31,14 +31,10 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 public class RentalBusinessRules implements BaseBusinessRulesService {
 
     private final RentalEntityManager rentalEntityManager;
-
     private final DiscountService discountService;
     private final CarService carService;
-
     private final CustomerService customerService;
-
     private final DrivingLicenseTypeService drivingLicenseTypeService;
-
     private final CarBusinessRules carRules;
 
     //--------------------- AUTO FIX METHODS ---------------------
@@ -57,16 +53,14 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
 
     //---------------AUTO CHECKING METHODS--------------------------------
 
-    public ShowRentalRequest checkShowRentalRequest(ShowRentalRequest showRentalRequest) {
+    public void checkShowRentalRequest(ShowRentalRequest showRentalRequest) {
         this.checkDrivingLicenseType(showRentalRequest.getCarEntityId(), showRentalRequest.getCustomerEntityId());
         this.carExists(showRentalRequest.getCarEntityId());
         this.checkDiscountCode(showRentalRequest.getDiscountCode());
-        return showRentalRequest;
     }
 
-    public CreateRentalRequest checkCreateRentalRequest(CreateRentalRequest createRentalRequest) {
+    public void checkCreateRentalRequest(CreateRentalRequest createRentalRequest) {
         this.userExists(createRentalRequest.getCustomerEntityId());
-        return createRentalRequest;
     }
 
     public ReturnRentalRequest checkReturnRentalRequest(ReturnRentalRequest returnRentalRequest) {

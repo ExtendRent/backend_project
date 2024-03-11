@@ -2,7 +2,6 @@ package source_files.services.vehicleService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.imageEntities.CarImageEntity;
@@ -24,14 +23,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus.*;
-import static source_files.data.enums.types.itemTypes.VehicleType.CAR;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICLE_STATUS_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
 public class CarManager implements CarService {
 
-    private final ModelMapperService mapper;
     private final CarEntityService entityService;
     private final CarBusinessRules rules;
     private final VehicleStatusEntityManager vehicleStatusManager;
@@ -39,10 +36,10 @@ public class CarManager implements CarService {
 
     @Override
     public void create(CreateCarRequest createCarRequest) throws IOException {
+        createCarRequest = rules.fixCreateCarRequest(createCarRequest);
+        rules.checkCreateCarRequest(createCarRequest);
         try {
-            CarEntity carEntity = mapper.forRequest().map(rules
-                    .checkCreateCarRequest(rules.fixCreateCarRequest(createCarRequest)), CarEntity.class);
-            entityService.create(carEntity);
+            entityService.create(createCarRequest);
         } catch (Exception e) {
             carImageService.delete(createCarRequest.getCarImageEntityId());
             throw e;
@@ -51,95 +48,75 @@ public class CarManager implements CarService {
 
     @Override
     public CarDTO getById(int id) {
-        return mapToDTO(entityService.getById(id));
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public CarDTO update(UpdateCarRequest updateCarRequest) throws IOException {
-        CarEntity carEntity = entityService.getById(updateCarRequest.getId());
-        CarImageEntity carImage = carEntity.getCarImageEntity();
-
+        updateCarRequest = rules.fixUpdateCarRequest(updateCarRequest);
+        rules.checkUpdateCarRequest(updateCarRequest);
+        CarImageEntity carImage = carImageService.getById(updateCarRequest.getCarImageEntityId());
         if (carImage.getId() != updateCarRequest.getCarImageEntityId()) {
             carImageService.delete(carImage.getId());
         }
-
-        carEntity = mapper.forRequest().map(
-                rules.checkUpdateCarRequest(
-                        rules.fixUpdateCarRequest(updateCarRequest)
-                ), CarEntity.class
-        );
-        carEntity.setVehicleType(CAR);
-        return this.mapToDTO(entityService.update(carEntity));
+        return entityService.update(updateCarRequest).toModel();
     }
 
     @Override
     public List<CarDTO> getAll() {
-        //bilgi: önce gelen listenin boş olup olmadığını kontrol ediyoruz. boş değilse listeyi dönüyor.
-        return rules.checkDataList(entityService.getAll())
-                .stream()
-                .map(car -> mapper.forResponse().map(car, CarDTO.class))
-                .collect(Collectors.toList());
+        return mapToDTOList(entityService.getAll());
     }
 
 
     @Override
     public List<CarDTO> getAllByDeletedState(boolean isDeleted) {
-        return rules.checkDataList(entityService.getAllByDeletedState(isDeleted))
-                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByDeletedState(isDeleted));
     }
 
     @Override
     public List<CarDTO> getAllByStatus(Integer statusId) {
-        return rules.checkDataList(
-                        entityService.getAllByStatus(statusId)).stream()
-                .map(car -> mapper.forResponse().map(car, CarDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByStatus(statusId));
     }
 
     @Override
     public List<CarDTO> getAllByColorId(int id) {
-        return rules.checkDataList(entityService.getAllByColorId(id))
-                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByColorId(id));
     }
+
 
     @Override
     public List<CarDTO> getAllByModelId(int id) {
-        return rules.checkDataList(entityService.getAllByModelId(id))
-                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByModelId(id));
     }
 
     @Override
     public List<CarDTO> getAllByBrandId(int brandId) {
-        return rules.checkDataList(entityService.getAllByBrandId(brandId))
-                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByBrandId(brandId));
     }
 
     @Override
     public List<CarDTO> getAllByYearBetween(int startYear, int endYear) {
-        return rules.checkDataList(entityService.getAllByYearBetween(startYear, endYear))
-                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByYearBetween(startYear, endYear));
     }
 
     @Override
     public List<CarDTO> getAllByRentalPriceBetween(double startPrice, double endPrice) {
-        return rules.checkDataList(entityService.getAllByRentalPriceBetween(startPrice, endPrice))
-                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByRentalPriceBetween(startPrice, endPrice));
     }
 
     @Override
     public List<CarDTO> getAllByAvailabilityBetween(LocalDate startDate, LocalDate endDate) {
-
         List<CarEntity> allCars = entityService.getAll();
         List<CarEntity> availableCars = filterAvailableCars(allCars, startDate, endDate);
-
         rules.checkDataList(availableCars);
         return mapToDTOList(availableCars);
     }
 
     @Override
     public List<CarDTO> getAllByIsDrivingLicenseSuitable(Integer customerId) {
-        return rules.checkDataList(
-                getCarEntityListByDrivingLicenseSuitable(entityService.getAll(), customerId)).stream().map(
-                carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        List<CarEntity> allCars = entityService.getAll();
+        List<CarEntity> carsByDrivingLicenseSuitable = getCarEntityListByDrivingLicenseSuitable(allCars, customerId);
+        return mapToDTOList(carsByDrivingLicenseSuitable);
     }
 
     @Override
@@ -166,9 +143,7 @@ public class CarManager implements CarService {
         if (licenseSuitable != null && licenseSuitable) {
             filteredCars = getCarEntityListByDrivingLicenseSuitable(filteredCars, customerId);
         }
-
-        return rules.checkDataList(markAllForDrivingLicenseSuitable(filteredCars, customerId))
-                .stream().map(carEntity -> mapper.forResponse().map(carEntity, CarDTO.class)).toList();
+        return markAllForDrivingLicenseSuitable(filteredCars, customerId);
     }
 
     @Override
@@ -205,6 +180,7 @@ public class CarManager implements CarService {
         }
         entityService.update(carEntity);
     }
+
 
     //---------------------------------Local Methods------------------------------------------------------
 
@@ -295,14 +271,12 @@ public class CarManager implements CarService {
     }
 
     private List<CarDTO> mapToDTOList(List<CarEntity> cars) {
-        return cars.stream()
-                .map(car -> mapper.forResponse().map(car, CarDTO.class))
+        List<CarDTO> carDTOList = cars.stream()
+                .map(CarEntity::toModel)
                 .toList();
-    }
 
-    private CarDTO mapToDTO(CarEntity car) {
-        return mapper.forResponse().map(car, CarDTO.class);
+        rules.checkDataList(cars);
+        return carDTOList;
     }
-
 
 }

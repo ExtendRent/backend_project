@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.requests.BaseRequest;
 
 @AllArgsConstructor
@@ -41,5 +42,6 @@ public class UpdateEmployeeRequest extends BaseRequest {
     @NotNull(message = "maaş null olamaz")
     @Min(0)
     Double salary;
+    private DefaultUserStatus status;
     private int userImageEntityId;
 }

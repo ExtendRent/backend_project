@@ -4,12 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.models.userEntities.CustomerEntity;
+import source_files.data.requests.userRequests.CreateCustomerRequest;
+import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
+import source_files.services.systemServices.ImageServices.UserImageService;
 
 import java.util.List;
 
+import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.PENDING_VERIFYING;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_DATA_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -17,10 +22,42 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOM
 public class CustomerEntityManager implements CustomerEntityService {
 
     private final CustomerRepository repository;
+    private final DrivingLicenseTypeEntityService drivingLicenseTypeEntityService;
+    private final UserImageService userImageService;
 
     @Override
-    public CustomerEntity create(CustomerEntity customerEntity) {
-        customerEntity.setId(0);
+    public CustomerEntity create(CreateCustomerRequest createCustomerRequest) {
+        CustomerEntity customerEntity = CustomerEntity.customerBuilder()
+                .name(createCustomerRequest.getName())
+                .surname(createCustomerRequest.getSurname())
+                .emailAddress(createCustomerRequest.getEmailAddress())
+                .password(createCustomerRequest.getPassword())
+                .phoneNumber(createCustomerRequest.getPhoneNumber())
+                .drivingLicenseNumber(createCustomerRequest.getDrivingLicenseNumber())
+                .drivingLicenseTypeEntity(drivingLicenseTypeEntityService.getById(
+                        createCustomerRequest.getDrivingLicenseTypeEntityId()))
+                .userImageEntity(userImageService.getById(createCustomerRequest.getUserImageEntityId()))
+                .status(PENDING_VERIFYING)
+                .build();
+        return repository.save(customerEntity);
+    }
+
+    @Override
+    public CustomerEntity update(UpdateCustomerRequest updateCustomerRequest) {
+        CustomerEntity customerEntity = CustomerEntity.customerBuilder()
+                .id(updateCustomerRequest.getId())
+                .name(updateCustomerRequest.getName())
+                .surname(updateCustomerRequest.getSurname())
+                .emailAddress(updateCustomerRequest.getEmailAddress())
+                .password(updateCustomerRequest.getPassword())
+                .phoneNumber(updateCustomerRequest.getPhoneNumber())
+                .drivingLicenseNumber(updateCustomerRequest.getDrivingLicenseNumber())
+                .drivingLicenseTypeEntity(drivingLicenseTypeEntityService.getById(
+                        updateCustomerRequest.getDrivingLicenseTypeEntityId()))
+                .status(updateCustomerRequest.getStatus())
+                .userImageEntity(userImageService.getById(updateCustomerRequest.getUserImageEntityId()))
+                .status(PENDING_VERIFYING)
+                .build();
         return repository.save(customerEntity);
     }
 

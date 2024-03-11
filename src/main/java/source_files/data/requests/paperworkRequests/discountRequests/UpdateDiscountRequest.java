@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateDiscountRequest {
+
+
     @NotNull(message = "id null olamaz")
     int id;
 
@@ -27,4 +29,6 @@ public class UpdateDiscountRequest {
     int discountPercentage;
     @NotNull
     boolean isActive;
+
+
 }

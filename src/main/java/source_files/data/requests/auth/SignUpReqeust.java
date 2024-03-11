@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import source_files.data.enums.types.userTypes.UserRole;
+import source_files.data.requests.userRequests.CreateAdminRequest;
+import source_files.data.requests.userRequests.CreateCustomerRequest;
+import source_files.data.requests.userRequests.CreateEmployeeRequest;
 
 @Data
 @AllArgsConstructor
@@ -43,4 +46,41 @@ public class SignUpReqeust {
 
     @NotNull
     int userImageEntityId;
+
+    public CreateCustomerRequest forCustomer() {
+        return CreateCustomerRequest.builder()
+                .name(name)
+                .surname(surname)
+                .emailAddress(emailAddress)
+                .password(password)
+                .phoneNumber(phoneNumber)
+                .drivingLicenseNumber(drivingLicenseNumber)
+                .drivingLicenseTypeEntityId(drivingLicenseTypeEntityId)
+                .userImageEntityId(userImageEntityId)
+                .build();
+    }
+
+    public CreateAdminRequest forAdmin() {
+        return CreateAdminRequest.builder()
+                .name(name)
+                .surname(surname)
+                .emailAddress(emailAddress)
+                .password(password)
+                .phoneNumber(phoneNumber)
+                .salary(salary)
+                .userImageEntityId(userImageEntityId)
+                .build();
+    }
+
+    public CreateEmployeeRequest forEmployee() {
+        return CreateEmployeeRequest.builder()
+                .name(name)
+                .surname(surname)
+                .emailAddress(emailAddress)
+                .password(password)
+                .phoneNumber(phoneNumber)
+                .salary(salary)
+                .userImageEntityId(userImageEntityId)
+                .build();
+    }
 }

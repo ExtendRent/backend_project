@@ -2,7 +2,6 @@ package source_files.services.paperWorkServices.payment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentDetailsRequest;
@@ -22,24 +21,21 @@ import java.util.List;
 public class PaymentDetailsManager implements PaymentDetailsService {
 
     private final SysPaymentDetailsService entityService;
-    private final ModelMapperService mapper;
     private final PaymentDetailsBusinessRules rules;
 
     @Override
     public PaymentDetailsDTO update(UpdatePaymentDetailsRequest updatePaymentDetailsRequest) {
-        PaymentDetailsEntity paymentDetails = mapper.forRequest().map(updatePaymentDetailsRequest, PaymentDetailsEntity.class);
-        return mapToDTO(entityService.update(paymentDetails));
+        return entityService.update(updatePaymentDetailsRequest).toModel();
     }
 
     @Override
     public PaymentDetailsDTO getById(int id) {
-        return mapToDTO(entityService.getById(id));
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public List<PaymentDetailsDTO> getAll() {
-        return rules.checkDataList(entityService.getAll()).stream()
-                .map(o -> mapToDTO((PaymentDetailsEntity) o)).toList();
+        return mapToDTOList(entityService.getAll());
     }
 
     @Override
@@ -52,16 +48,12 @@ public class PaymentDetailsManager implements PaymentDetailsService {
         filteredEntities = this.filterByBetweenDates(filteredEntities, minDate, maxDate);
         filteredEntities = this.filterByIsDeleted(filteredEntities, isDeleted);
 
-        return rules.checkDataList(filteredEntities)
-                .stream()
-                .map(o -> mapToDTO((PaymentDetailsEntity) o))
-                .toList();
+        return mapToDTOList(filteredEntities);
     }
 
     @Override
     public Double getMonthlyIncome(LocalDate startDate, LocalDate endDate) {
         List<PaymentDetailsEntity> entityList = filterByBetweenDates(entityService.getAll(), startDate, endDate);
-
         return this.calculateTotalIncome(entityList);
     }
 
@@ -125,8 +117,10 @@ public class PaymentDetailsManager implements PaymentDetailsService {
                 .sum();
     }
 
-    private PaymentDetailsDTO mapToDTO(PaymentDetailsEntity paymentDetailsEntity) {
-        return mapper.forResponse().map(paymentDetailsEntity, PaymentDetailsDTO.class);
+    private List<PaymentDetailsDTO> mapToDTOList(List<PaymentDetailsEntity> entityList) {
+        rules.checkDataList(entityList);
+        return entityList.stream()
+                .map(PaymentDetailsEntity::toModel).toList();
     }
 
 }

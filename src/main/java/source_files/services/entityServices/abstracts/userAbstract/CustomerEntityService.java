@@ -1,13 +1,17 @@
 package source_files.services.entityServices.abstracts.userAbstract;
 
 import source_files.data.models.userEntities.CustomerEntity;
+import source_files.data.requests.userRequests.CreateCustomerRequest;
+import source_files.data.requests.userRequests.UpdateCustomerRequest;
 
 import java.util.List;
 
 
 public interface CustomerEntityService {
 
-    CustomerEntity create(CustomerEntity customerEntity);
+    CustomerEntity create(CreateCustomerRequest createCustomerRequest);
+
+    CustomerEntity update(UpdateCustomerRequest updateCustomerRequest);
 
     CustomerEntity update(CustomerEntity customerEntity);
 

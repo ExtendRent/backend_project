@@ -3,7 +3,6 @@ package source_files.services.userServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.AdminDTO;
 import source_files.data.models.imageEntities.UserImageEntity;
 import source_files.data.models.userEntities.AdminEntity;
@@ -16,75 +15,60 @@ import source_files.services.userServices.abstracts.AdminService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.VERIFIED;
 
 @Service
 @RequiredArgsConstructor
 public class AdminManager implements AdminService {
 
     private final AdminEntityService entityService;
-    private final ModelMapperService mapper;
     private final AdminBusinessRules rules;
     private final PasswordEncoder passwordEncoder;
     private final UserImageService userImageService;
 
     @Override
     public void create(CreateAdminRequest createAdminRequest) {
+        createAdminRequest = rules.fixCreateAdminRequest(createAdminRequest);
 
         try {
-            AdminEntity adminEntity = mapper.forRequest()
-                    .map(rules.checkCreateAdminRequest
-                            (rules.fixCreateAdminRequest(createAdminRequest)), AdminEntity.class);
-
-            adminEntity.setPassword(passwordEncoder.encode(createAdminRequest.getPassword()));
-            adminEntity.setStatus(VERIFIED);
-            this.entityService.create(adminEntity);
+            rules.checkCreateAdminRequest(createAdminRequest);
+            createAdminRequest.setPassword(passwordEncoder.encode(createAdminRequest.getPassword()));
+            this.entityService.create(createAdminRequest);
         } catch (Exception e) {
             userImageService.delete(createAdminRequest.getUserImageEntityId());
             throw e;
         }
-
     }
 
     @Override
     public AdminDTO update(UpdateAdminRequest updateAdminRequest) {
-        AdminEntity adminEntity = entityService.getById(updateAdminRequest.getId());
-        UserImageEntity userImage = adminEntity.getUserImageEntity();
+        updateAdminRequest = rules.fixUpdateAdminRequest(updateAdminRequest);
+        rules.checkUpdateAdminRequest(updateAdminRequest);
+        UserImageEntity userImage = entityService.getById(updateAdminRequest.getId()).getUserImageEntity();
+
         if (userImage.getId() != updateAdminRequest.getUserImageEntityId()) {
             userImageService.delete(userImage.getId());
         }
-        adminEntity = mapper.forRequest()
-                .map(rules.checkUpdateAdminRequest
-                        (rules.fixUpdateAdminRequest(updateAdminRequest)), AdminEntity.class);
-
-        return mapper.forResponse().map(this.entityService.create(adminEntity), AdminDTO.class);
+        return entityService.update(updateAdminRequest).toModel();
     }
 
     @Override
     public AdminDTO getById(int id) {
-        return this.mapper.forResponse().map(entityService.getById(id), AdminDTO.class);
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public List<AdminDTO> getAll() {
-        rules.checkDataList(entityService.getAll());
-        return entityService.getAll()
-                .stream().map(admin -> mapper.forResponse()
-                        .map(admin, AdminDTO.class)).collect(Collectors.toList());
+        return mapToDTOList(entityService.getAll());
     }
 
     @Override
     public AdminDTO getByEmailAddress(String emailAddress) {
-        return this.mapper.forResponse()
-                .map(entityService.getByEmailAddress(emailAddress), AdminDTO.class);
+        return entityService.getByEmailAddress(emailAddress).toModel();
     }
 
     @Override
     public List<AdminDTO> getAllByDeletedState(boolean isDeleted) {
-        return rules.checkDataList(entityService.getAllByDeletedState(isDeleted)).stream()
-                .map(admin -> mapper.forResponse().map(admin, AdminDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByDeletedState(isDeleted));
     }
 
     @Override
@@ -112,4 +96,8 @@ public class AdminManager implements AdminService {
         return entityService.getCountByDeletedState(isDeleted);
     }
 
+    private List<AdminDTO> mapToDTOList(List<AdminEntity> adminEntityList) {
+        rules.checkDataList(adminEntityList);
+        return adminEntityList.stream().map(AdminEntity::toModel).toList();
+    }
 }

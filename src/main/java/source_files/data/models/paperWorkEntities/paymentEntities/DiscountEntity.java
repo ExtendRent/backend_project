@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import source_files.data.DTO.paperWorkDTOs.DiscountDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
@@ -14,6 +16,7 @@ import source_files.data.models.baseEntities.BaseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@SuperBuilder(builderMethodName = "discountBuilder")
 @Table(name = "discount_codes")
 public class DiscountEntity extends BaseEntity {
     @Column(name = "discount_code")
@@ -24,5 +27,14 @@ public class DiscountEntity extends BaseEntity {
 
     @Column(name = "is_active")
     private boolean isActive = true;
+
+    public DiscountDTO toModel() {
+        return DiscountDTO.builder()
+                .id(getId())
+                .discountCode(getDiscountCode())
+                .discountPercentage(getDiscountPercentage())
+                .isActive(isActive())
+                .build();
+    }
 
 }

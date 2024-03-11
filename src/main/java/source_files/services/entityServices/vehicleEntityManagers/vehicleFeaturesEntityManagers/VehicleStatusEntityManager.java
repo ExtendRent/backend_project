@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.VehicleStatusRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.VehicleStatusEntityService;
@@ -19,7 +21,20 @@ public class VehicleStatusEntityManager implements VehicleStatusEntityService {
     private final VehicleStatusRepository repository;
 
     @Override
-    public VehicleStatusEntity create(VehicleStatusEntity vehicleStatusEntity) {
+    public VehicleStatusEntity create(CreateVehicleStatusRequest createVehicleStatusRequest) {
+        VehicleStatusEntity vehicleStatusEntity = VehicleStatusEntity.vehicleStatusBuilder()
+                .name(createVehicleStatusRequest.getName())
+                .vehicleStatus(createVehicleStatusRequest.getVehicleStatus())
+                .build();
+        return repository.save(vehicleStatusEntity);
+    }
+
+    @Override
+    public VehicleStatusEntity update(UpdateVehicleStatusRequest updateVehicleStatusRequest) {
+        VehicleStatusEntity vehicleStatusEntity = VehicleStatusEntity.vehicleStatusBuilder()
+                .id(updateVehicleStatusRequest.getId())
+                .name(updateVehicleStatusRequest.getName())
+                .build();
         return repository.save(vehicleStatusEntity);
     }
 

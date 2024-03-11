@@ -3,9 +3,12 @@ package source_files.services.entityServices.vehicleEntityManagers.vehicleFeatur
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.BrandRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
+import source_files.services.systemServices.ImageServices.BrandImageService;
 
 import java.util.List;
 
@@ -15,41 +18,54 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.BRAND_
 @RequiredArgsConstructor
 public class BrandEntityManager implements BrandEntityService {
 
-    private final BrandRepository brandRepository;
-
+    private final BrandRepository repository;
+    private final BrandImageService brandImageService;
 
     @Override
-    public BrandEntity create(BrandEntity brandEntity) {
-        return brandRepository.save(brandEntity);
+    public BrandEntity create(CreateBrandRequest createBrandRequest) {
+        BrandEntity brandEntity = BrandEntity.brandBuilder()
+                .name(createBrandRequest.getName())
+                .brandImageEntity(brandImageService.getById(createBrandRequest.getBrandImageEntityId()))
+                .build();
+        return repository.save(brandEntity);
+    }
+
+    @Override
+    public BrandEntity update(UpdateBrandRequest updateBrandRequest) {
+        BrandEntity brandEntity = BrandEntity.brandBuilder()
+                .id(updateBrandRequest.getId())
+                .name(updateBrandRequest.getName())
+                .brandImageEntity(brandImageService.getById(updateBrandRequest.getBrandImageEntityId()))
+                .build();
+        return repository.save(brandEntity);
     }
 
     @Override
     public BrandEntity update(BrandEntity brandEntity) {
-
-        return brandRepository.save(brandEntity);
+        return repository.save(brandEntity);
     }
 
     @Override
     public BrandEntity getById(int id) {
 
-        return brandRepository.findById(id).orElseThrow(
+        return repository.findById(id).orElseThrow(
                 () -> new DataNotFoundException(BRAND_DATA_NOT_FOUND)
         );
     }
 
     @Override
     public void delete(BrandEntity brandEntity) {
-        brandRepository.delete(brandEntity);
+        repository.delete(brandEntity);
     }
 
     @Override
     public List<BrandEntity> getAll() {
-        return brandRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public List<BrandEntity> getAllByDeletedState(boolean isDeleted) {
-        return brandRepository.findAllByIsDeleted(isDeleted);
+        return repository.findAllByIsDeleted(isDeleted);
     }
 
 }

@@ -14,4 +14,6 @@ public class UpdatePaymentDetailsRequest extends BaseRequest {
     private int id;
     @NotNull(message = "tutar null geçilemez")
     private double amount;
+
+
 }

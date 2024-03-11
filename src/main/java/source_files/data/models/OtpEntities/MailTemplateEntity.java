@@ -11,7 +11,7 @@ import source_files.data.models.baseEntities.BaseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Builder(builderMethodName = "mailTemplateBuilder")
 @Table(name = "mail_templates")
 public class MailTemplateEntity extends BaseEntity {
 

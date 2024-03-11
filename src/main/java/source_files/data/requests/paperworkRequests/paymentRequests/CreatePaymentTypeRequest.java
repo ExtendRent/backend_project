@@ -26,4 +26,5 @@ public class CreatePaymentTypeRequest {
 
     @NotNull
     private boolean isActive;
+
 }

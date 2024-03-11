@@ -2,13 +2,12 @@ package source_files.services.paperWorkServices.rental;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.paperWorkDTOs.RentalStatusDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalStatusEntity;
 import source_files.dataAccess.paperWorkRepositories.RentalStatusRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
+import source_files.services.BusinessRules.paperWork.PaymentBusinessRules;
 import source_files.services.paperWorkServices.abstracts.RentalStatusService;
 
 import java.util.List;
@@ -19,8 +18,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL
 @RequiredArgsConstructor
 public class RentalStatusManager implements RentalStatusService {
     private final RentalStatusRepository repository;
-    private final RentalBusinessRules rules;
-    private final ModelMapperService mapper;
+    private final PaymentBusinessRules rules;
 
     @Override
     public RentalStatusEntity create(RentalStatusEntity rentalStatusEntity) {
@@ -51,11 +49,8 @@ public class RentalStatusManager implements RentalStatusService {
 
     @Override
     public List<RentalStatusDTO> getAll() {
-        rules.checkDataList(repository.findAll());
-        return repository.findAll().stream().map(this::mapToDTO).toList();
-    }
-
-    private RentalStatusDTO mapToDTO(RentalStatusEntity rentalStatusEntity) {
-        return mapper.forResponse().map(rentalStatusEntity, RentalStatusDTO.class);
+        List<RentalStatusEntity> entities = repository.findAll();
+        rules.checkDataList(entities);
+        return entities.stream().map(RentalStatusEntity::toModel).toList();
     }
 }

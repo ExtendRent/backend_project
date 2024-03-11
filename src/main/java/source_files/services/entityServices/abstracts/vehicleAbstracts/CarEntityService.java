@@ -1,12 +1,16 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts;
 
 import source_files.data.models.vehicleEntities.CarEntity;
+import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
+import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 
 import java.util.List;
 
 public interface CarEntityService {
 
-    CarEntity create(CarEntity carEntity);
+    CarEntity create(CreateCarRequest createCarRequest);
+
+    CarEntity update(UpdateCarRequest updateCarRequest);
 
     CarEntity update(CarEntity carEntity);
 

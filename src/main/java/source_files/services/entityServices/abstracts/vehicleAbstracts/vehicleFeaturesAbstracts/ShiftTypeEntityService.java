@@ -1,11 +1,15 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
 import source_files.data.models.vehicleEntities.vehicleFeatures.ShiftTypeEntity;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.UpdateShiftTypeRequest;
 
 import java.util.List;
 
 public interface ShiftTypeEntityService {
-    ShiftTypeEntity create(ShiftTypeEntity shiftTypeEntity);
+    ShiftTypeEntity create(CreateShiftTypeRequest createShiftTypeRequest);
+
+    ShiftTypeEntity update(UpdateShiftTypeRequest updateShiftTypeRequest);
 
     ShiftTypeEntity update(ShiftTypeEntity shiftTypeEntity);
 

@@ -2,11 +2,15 @@ package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleF
 
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
 
 import java.util.List;
 
 public interface VehicleStatusEntityService {
-    VehicleStatusEntity create(VehicleStatusEntity vehicleStatusEntity);
+    VehicleStatusEntity create(CreateVehicleStatusRequest createVehicleStatusRequest);
+
+    VehicleStatusEntity update(UpdateVehicleStatusRequest updateVehicleStatusRequest);
 
     VehicleStatusEntity update(VehicleStatusEntity vehicleStatusEntity);
 

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 public class CreateRentalRequest {
+
     @Min(value = 1, message = "CustomerId must be greater than 0")
     @NotNull(message = "CustomerId cannot be null")
     private int customerEntityId;

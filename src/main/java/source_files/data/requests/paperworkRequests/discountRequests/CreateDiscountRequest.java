@@ -19,4 +19,6 @@ public class CreateDiscountRequest {
     @Pattern(regexp = "^[0-9]+$", message = "Discount percentage must consist of numbers only")
     @NotNull(message = "Discount percentage cannot be blank")
     int discountPercentage;
+
+
 }

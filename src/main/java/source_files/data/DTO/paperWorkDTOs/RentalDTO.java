@@ -17,7 +17,7 @@ public class RentalDTO {
     String customerEntityName;
     String customerEntitySurname;
 
-    int CarEntityId;
+    int carEntityId;
     String carEntityBrandEntityName;
     String carEntityModelEntityName;
     String carEntityColorEntityName;

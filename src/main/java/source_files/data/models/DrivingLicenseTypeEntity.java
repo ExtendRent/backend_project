@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import source_files.data.DTO.DrivingLicenseTypeDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter
@@ -14,6 +16,7 @@ import source_files.data.models.baseEntities.BaseEntity;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@SuperBuilder(builderMethodName = "drivingLicenseTypeBuilder")
 @Table(name = "driving_license_types")
 public class DrivingLicenseTypeEntity extends BaseEntity {
 
@@ -25,4 +28,14 @@ public class DrivingLicenseTypeEntity extends BaseEntity {
 
     @Column(name = "license_level")
     int licenseLevel;
+
+    public DrivingLicenseTypeDTO toModel() {
+        return DrivingLicenseTypeDTO.builder()
+                .id(getId())
+                .name(getName())
+                .description(getDescription())
+                .licenseLevel(getLicenseLevel())
+                .isDeleted(getIsDeleted())
+                .build();
+    }
 }

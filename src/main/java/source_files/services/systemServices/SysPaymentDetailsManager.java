@@ -3,6 +3,7 @@ package source_files.services.systemServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
+import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentDetailsRequest;
 import source_files.dataAccess.paperWorkRepositories.PaymentDetailsRepository;
 import source_files.exception.DataNotFoundException;
 
@@ -17,6 +18,15 @@ public class SysPaymentDetailsManager implements SysPaymentDetailsService {
 
     @Override
     public PaymentDetailsEntity create(PaymentDetailsEntity paymentDetailsEntity) {
+        return repository.save(paymentDetailsEntity);
+    }
+
+    @Override
+    public PaymentDetailsEntity update(UpdatePaymentDetailsRequest updatePaymentDetailsRequest) {
+        PaymentDetailsEntity paymentDetailsEntity = PaymentDetailsEntity.paymentDetailsBuilder()
+                .id(updatePaymentDetailsRequest.getId())
+                .amount(updatePaymentDetailsRequest.getAmount())
+                .build();
         return repository.save(paymentDetailsEntity);
     }
 
@@ -43,11 +53,8 @@ public class SysPaymentDetailsManager implements SysPaymentDetailsService {
 
     @Override
     public List<PaymentDetailsEntity> getAllFiltered(Double minAmount, Double maxAmount) {
-
         return repository.findAllFiltered(
                 minAmount, maxAmount);
-
-
     }
 
 }

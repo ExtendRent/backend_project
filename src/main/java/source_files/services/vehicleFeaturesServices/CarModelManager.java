@@ -2,8 +2,6 @@ package source_files.services.vehicleFeaturesServices;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
-import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.DTO.itemDTOs.CarModelDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
@@ -14,88 +12,75 @@ import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CarModelManager implements CarModelService {
 
-    private final CarModelEntityService carModelEntityService;
-    private final ModelMapperService modelMapperService;
-    private final CarModelBusinessRules carModelBusinessRules;
+    private final CarModelEntityService entityService;
+    private final CarModelBusinessRules rules;
 
     @Override
     public void create(CreateCarModelRequest createCarModelRequest) {
-
-        CarModelEntity carModelEntity = modelMapperService.forRequest()
-                .map(carModelBusinessRules.checkCreateCarModelRequest(
-                        carModelBusinessRules.fixCreateCarModelRequest(createCarModelRequest)), CarModelEntity.class);
-        carModelEntityService.create(carModelEntity);
+        createCarModelRequest = rules.fixCreateCarModelRequest(createCarModelRequest);
+        rules.checkCreateCarModelRequest(createCarModelRequest);
+        entityService.create(createCarModelRequest);
     }
 
     @Override
     public CarModelDTO update(UpdateCarModelRequest updateCarModelRequest) {
-        CarModelEntity carModelEntity = modelMapperService.forRequest()
-                .map(carModelBusinessRules.checkUpdateCarModelRequest(
-                        carModelBusinessRules.fixUpdateCarModelRequest(updateCarModelRequest)
-                ), CarModelEntity.class);
-        return modelMapperService.forRequest().map(carModelEntityService.update(carModelEntity), CarModelDTO.class);
+        updateCarModelRequest = rules.fixUpdateCarModelRequest(updateCarModelRequest);
+        rules.checkUpdateCarModelRequest(updateCarModelRequest);
+        return entityService.update(updateCarModelRequest).toModel();
     }
 
     @Override
     public CarModelDTO getById(int id) {
-        return modelMapperService.forResponse().map(carModelEntityService.getById(id), CarModelDTO.class);
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public CarModelDTO getByModelName(String modelName) {
-
-        return modelMapperService.forResponse()
-                .map(carModelEntityService
-                        .getByModelName(this.carModelBusinessRules.fixName(modelName)), CarModelDTO.class);
+        return entityService.getByModelName(modelName).toModel();
     }
 
     @Override
     public List<CarModelDTO> getAll() {
-        return carModelBusinessRules.checkDataList(carModelEntityService.getAll())
-                .stream().map(carModel ->
-                        modelMapperService.forResponse().map(carModel, CarModelDTO.class))
-                .collect(Collectors.toList());
+        return mapToDTOList(entityService.getAll());
     }
 
 
     @Override
     public List<CarModelDTO> getAllByDeletedState(boolean isDeleted) {
-        return carModelBusinessRules.checkDataList(carModelEntityService.getAllByDeletedState(isDeleted))
-                .stream().map(carModel ->
-                        modelMapperService.forResponse().map(carModel, CarModelDTO.class))
-                .collect(Collectors.toList());
+        return mapToDTOList(entityService.getAllByDeletedState(isDeleted));
     }
 
     @Override
     public void delete(int id, boolean hardDelete) {
 
         if (hardDelete) {
-            this.carModelEntityService.delete(this.carModelEntityService.getById(id));
+            entityService.delete(entityService.getById(id));
         } else {
-            this.softDelete(id);
+            softDelete(id);
         }
     }
 
     @Override
     public void softDelete(int id) {
-        CarModelEntity carModelEntity = this.carModelEntityService.getById(id);
+        CarModelEntity carModelEntity = entityService.getById(id);
         carModelEntity.setIsDeleted(true);
         carModelEntity.setDeletedAt(LocalDateTime.now());
-        this.carModelEntityService.update(carModelEntity);
+        entityService.update(carModelEntity);
     }
 
     @Override
-    public List<BrandDTO> getAllByBrandId(int brandId) {
-        return this.carModelBusinessRules.checkDataList(carModelEntityService.getAllByBrandId(brandId)).stream().map(
-                model -> modelMapperService.forResponse().map(model, BrandDTO.class)
-        ).collect(Collectors.toList());
+    public List<CarModelDTO> getAllByBrandId(int brandId) {
+        return mapToDTOList(entityService.getAllByBrandId(brandId));
+    }
 
+    private List<CarModelDTO> mapToDTOList(List<CarModelEntity> carModelEntities) {
+        rules.checkDataList(carModelEntities);
+        return carModelEntities.stream().map(CarModelEntity::toModel).toList();
     }
 
 }

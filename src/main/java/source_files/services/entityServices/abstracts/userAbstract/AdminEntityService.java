@@ -1,12 +1,16 @@
 package source_files.services.entityServices.abstracts.userAbstract;
 
 import source_files.data.models.userEntities.AdminEntity;
+import source_files.data.requests.userRequests.CreateAdminRequest;
+import source_files.data.requests.userRequests.UpdateAdminRequest;
 
 import java.util.List;
 
 public interface AdminEntityService {
 
-    AdminEntity create(AdminEntity adminEntity);
+    AdminEntity create(CreateAdminRequest createAdminRequest);
+
+    AdminEntity update(UpdateAdminRequest updateAdminRequest);
 
     AdminEntity update(AdminEntity adminEntity);
 

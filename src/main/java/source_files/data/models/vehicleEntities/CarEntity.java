@@ -1,7 +1,12 @@
 package source_files.data.models.vehicleEntities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import source_files.data.DTO.vehicleDTOs.CarDTO;
 import source_files.data.models.baseEntities.Vehicle;
 import source_files.data.models.imageEntities.CarImageEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
@@ -16,7 +21,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder(builderMethodName = "carBuilder")
 @Table(name = "cars")
 public class CarEntity extends Vehicle {
 
@@ -45,4 +50,41 @@ public class CarEntity extends Vehicle {
     @OneToMany(mappedBy = "carEntity", fetch = FetchType.EAGER)
     private List<RentalEntity> rentalList;
 
+
+    public CarDTO toModel() {
+        return CarDTO.builder()
+                .id(getId())
+                .carModelEntityBrandEntityId(carModelEntity.getBrandEntity().getId())
+                .carModelEntityId(carModelEntity.getId())
+                .colorEntityId(getColorEntity().getId())
+                .fuelTypeEntityId(getFuelTypeEntity().getId())
+                .shiftTypeEntityId(getShiftTypeEntity().getId())
+                .carBodyTypeEntityId(getCarBodyTypeEntity().getId())
+                .expectedMinDrivingLicenseTypeId(getExpectedMinDrivingLicenseType().getId())
+                .vehicleStatusEntityId(getVehicleStatusEntity().getId())
+                .carSegmentEntityId(getCarSegmentEntity().getId())
+                .carImageEntityId(getCarImageEntity().getId())
+
+                .carSegmentEntityName(getCarSegmentEntity().getName())
+                .vehicleStatusEntityName(getVehicleStatusEntity().getName())
+                .carModelEntityBrandEntityName(getCarModelEntity().getBrandEntity().getName())
+                .carModelEntityName(getCarModelEntity().getName())
+                .colorEntityName(getColorEntity().getName())
+                .carBodyTypeEntityName(getCarBodyTypeEntity().getName())
+                .fuelTypeEntityName(getFuelTypeEntity().getName())
+                .shiftTypeEntityName(getShiftTypeEntity().getName())
+                .expectedMinDrivingLicenseTypeName(getExpectedMinDrivingLicenseType().getName())
+                .imageEntityImageUrl(getCarImageEntity().getUrl())
+
+                .details(getDetails())
+                .rentalPrice(getRentalPrice())
+                .licensePlate(getLicensePlate())
+                .seat(getSeat())
+                .luggage(getLuggage())
+                .year(getYear())
+                .kilometer(getKilometer())
+                .isDeleted(getIsDeleted())
+                .isAvailable(isAvailable())
+                .build();
+    }
 }

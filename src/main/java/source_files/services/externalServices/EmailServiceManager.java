@@ -39,7 +39,7 @@ public class EmailServiceManager implements EmailService {
 
     @Override
     public void sendOtp(String email) {
-        OtpEntity otpEntity = OtpEntity.builder()
+        OtpEntity otpEntity = OtpEntity.otpBuilder()
                 .destination(email)
                 .verificationToken(UUID.randomUUID().toString())
                 .build();

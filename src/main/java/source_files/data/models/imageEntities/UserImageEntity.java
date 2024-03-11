@@ -12,7 +12,7 @@ import source_files.data.models.baseEntities.BaseEntity;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(builderMethodName = "userImageBuilder")
 @Table(name = "user_images")
 public class UserImageEntity extends BaseEntity {
 

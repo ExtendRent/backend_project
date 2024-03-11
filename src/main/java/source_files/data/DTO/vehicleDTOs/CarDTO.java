@@ -23,22 +23,25 @@ public class CarDTO {
 
     String carSegmentEntityName;
     String vehicleStatusEntityName;
-    Boolean isLicenseTypeSuitable = true;
     String carModelEntityBrandEntityName;
     String carModelEntityName;
     String colorEntityName;
-    int year;
+
     String carBodyTypeEntityName;
     String fuelTypeEntityName;
     String shiftTypeEntityName;
-    int seat;
-    int luggage;
+    String expectedMinDrivingLicenseTypeName;
+    String imageEntityImageUrl;
+
+    Boolean isLicenseTypeSuitable = true;
+
     String details;
     double rentalPrice;
     String licensePlate;
+    int seat;
+    int luggage;
+    int year;
     int kilometer;
-    String expectedMinDrivingLicenseTypeName;
-    String imageEntityImageUrl;
     boolean isDeleted;
     boolean isAvailable;
 }

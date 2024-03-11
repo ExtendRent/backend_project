@@ -1,12 +1,16 @@
 package source_files.services.entityServices.abstracts.paperWorkAbstracts;
 
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
+import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
+import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountRequest;
 
 import java.util.List;
 
 public interface DiscountEntityService {
 
-    DiscountEntity create(DiscountEntity discountEntity);
+    DiscountEntity create(CreateDiscountRequest createDiscountRequest);
+
+    DiscountEntity update(UpdateDiscountRequest updateDiscountRequest);
 
     DiscountEntity update(DiscountEntity discountEntity);
 
@@ -21,5 +25,4 @@ public interface DiscountEntityService {
     List<DiscountEntity> getAllByActiveState(boolean isActive);
 
     List<DiscountEntity> getAllByDeletedState(boolean isDeleted);
-
 }

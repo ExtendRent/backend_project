@@ -45,18 +45,16 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
 
     //--------------------- AUTO CHECK METHODS ---------------------
 
-    public CreateCustomerRequest checkCreateCustomerRequest(CreateCustomerRequest createCustomerRequest) {
+    public void checkCreateCustomerRequest(CreateCustomerRequest createCustomerRequest) {
         this.existsByPhoneNumber(createCustomerRequest.getPhoneNumber());
         this.existsByDrivingLicenseNumber(createCustomerRequest.getDrivingLicenseNumber());
         this.existsByEmailAddress(createCustomerRequest.getEmailAddress());
-        return createCustomerRequest;
     }
 
-    public UpdateCustomerRequest checkUpdateCustomerRequest(UpdateCustomerRequest updateCustomerRequest) {
+    public void checkUpdateCustomerRequest(UpdateCustomerRequest updateCustomerRequest) {
         this.existsByPhoneNumberAndIdNot(updateCustomerRequest.getPhoneNumber(), updateCustomerRequest.getId());
         this.existsByDrivingLicenseNumberAndIdNot(updateCustomerRequest.getDrivingLicenseNumber(), updateCustomerRequest.getId());
         this.existsByEmailAddressAndIdNot(updateCustomerRequest.getEmailAddress(), updateCustomerRequest.getId());
-        return updateCustomerRequest;
     }
 
 

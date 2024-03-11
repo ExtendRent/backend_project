@@ -29,7 +29,7 @@ public class BrandImageManager implements BrandImageService {
     public BrandImageEntity create(MultipartFile file, String brandName) throws IOException {
         try {
             String imageUrl = cloudinaryService.uploadFileBrand(file, brandName);
-            return repository.save(BrandImageEntity.builder()
+            return repository.save(BrandImageEntity.brandImageBuilder()
                     .name(brandName)
                     .type(file.getContentType())
                     .imageUrl(imageUrl)

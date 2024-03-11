@@ -3,13 +3,22 @@ package source_files.services.entityServices.paperWorkEntityManagers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
+import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
+import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.dataAccess.paperWorkRepositories.RentalRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
+import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
+import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
+import source_files.services.paperWorkServices.abstracts.RentalStatusService;
+import source_files.services.systemServices.SysPaymentDetailsService;
+import source_files.services.vehicleService.abstracts.CarService;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus.WAITING;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
 
 @Service
@@ -17,15 +26,46 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL
 public class RentalEntityManager implements RentalEntityService {
 
     private final RentalRepository repository;
+    private final CustomerEntityService customerEntityService;
+    private final CarEntityService carEntityService;
+    private final DiscountEntityService discountEntityService;
+    private final CarService carService;
+    private final RentalStatusService rentalStatusService;
+    private final SysPaymentDetailsService sysPaymentDetailsService;
 
     @Override
-    public RentalEntity create(RentalEntity rentalEntity) {
+    public RentalEntity create(CreateRentalRequest createRentalRequest) {
+        RentalEntity rentalEntity = RentalEntity.rentalBuilder()
+                .customerEntity(customerEntityService.getById(createRentalRequest.getCustomerEntityId()))
+                .carEntity(carEntityService.getById(createRentalRequest.getCarEntityId()))
+                .startDate(createRentalRequest.getStartDate())
+                .endDate(createRentalRequest.getEndDate())
+                .discountEntity(discountEntityService.getByDiscountCode(createRentalRequest.getDiscountCode()))
+                .startKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer())
+                .rentalStatusEntity(rentalStatusService.getByStatus(WAITING))
+                .build();
+
+        return this.repository.save(rentalEntity);
+    }
+
+    @Override
+    public RentalEntity update(UpdateRentalRequest updateRentalRequest) {
+        RentalEntity rentalEntity = RentalEntity.rentalBuilder()
+                .id(updateRentalRequest.getId())
+                .customerEntity(customerEntityService.getById(updateRentalRequest.getCustomerEntityId()))
+                .carEntity(carEntityService.getById(updateRentalRequest.getCarEntityId()))
+                .startDate(updateRentalRequest.getStartDate())
+                .endDate(updateRentalRequest.getEndDate())
+                .discountEntity(discountEntityService.getById(updateRentalRequest.getDiscountEntityId()))
+                .paymentDetailsEntity(sysPaymentDetailsService.getById(
+                        updateRentalRequest.getPaymentDetailsEntityId()))
+                .build();
         return this.repository.save(rentalEntity);
     }
 
     @Override
     public RentalEntity update(RentalEntity rentalEntity) {
-        return this.repository.save(rentalEntity);
+        return null;
     }
 
     @Override

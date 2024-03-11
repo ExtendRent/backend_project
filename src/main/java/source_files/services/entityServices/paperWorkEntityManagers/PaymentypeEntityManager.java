@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.enums.defaultDataEnums.DefaultPaymentType;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
+import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
+import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
 import source_files.dataAccess.paperWorkRepositories.PaymentTypeEntityRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
@@ -19,13 +21,28 @@ public class PaymentypeEntityManager implements PaymentTypeEntityService {
     private final PaymentTypeEntityRepository repository;
 
     @Override
-    public PaymentTypeEntity create(PaymentTypeEntity paymentTypeEntity) {
+    public PaymentTypeEntity create(CreatePaymentTypeRequest createPaymentTypeRequest) {
+        PaymentTypeEntity paymentTypeEntity = PaymentTypeEntity.paymentTypeBuilder()
+                .name(createPaymentTypeRequest.getPaymentTypeEntityName())
+                .paymentType(createPaymentTypeRequest.getPaymentType())
+                .isActive(createPaymentTypeRequest.isActive())
+                .build();
+        return repository.save(paymentTypeEntity);
+    }
+
+    @Override
+    public PaymentTypeEntity update(UpdatePaymentTypeRequest updatePaymentTypeRequest) {
+        PaymentTypeEntity paymentTypeEntity = PaymentTypeEntity.paymentTypeBuilder()
+                .id(updatePaymentTypeRequest.getId())
+                .name(updatePaymentTypeRequest.getName())
+                .isActive(updatePaymentTypeRequest.isActive())
+                .build();
         return repository.save(paymentTypeEntity);
     }
 
     @Override
     public PaymentTypeEntity update(PaymentTypeEntity paymentTypeEntity) {
-        return create(paymentTypeEntity);
+        return repository.save(paymentTypeEntity);
     }
 
     @Override

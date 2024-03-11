@@ -3,6 +3,8 @@ package source_files.services.entityServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.DrivingLicenseTypeEntity;
+import source_files.data.requests.CreateDrivingLicenseTypeRequest;
+import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
 import source_files.dataAccess.DrivingLicenseTypeRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
@@ -19,7 +21,23 @@ public class DrivingLicenseTypeEntityManager implements DrivingLicenseTypeEntity
 
 
     @Override
-    public DrivingLicenseTypeEntity create(DrivingLicenseTypeEntity drivingLicenseTypeEntity) {
+    public DrivingLicenseTypeEntity create(CreateDrivingLicenseTypeRequest createDrivingLicenseTypeRequest) {
+        DrivingLicenseTypeEntity drivingLicenseTypeEntity = DrivingLicenseTypeEntity.drivingLicenseTypeBuilder()
+                .name(createDrivingLicenseTypeRequest.getName())
+                .description(createDrivingLicenseTypeRequest.getDescription())
+                .licenseLevel(createDrivingLicenseTypeRequest.getLicenseLevel())
+                .build();
+        return repository.save(drivingLicenseTypeEntity);
+    }
+
+    @Override
+    public DrivingLicenseTypeEntity update(UpdateDrivingLicenseTypeRequest updateDrivingLicenseTypeRequest) {
+        DrivingLicenseTypeEntity drivingLicenseTypeEntity = DrivingLicenseTypeEntity.drivingLicenseTypeBuilder()
+                .id(updateDrivingLicenseTypeRequest.getId())
+                .name(updateDrivingLicenseTypeRequest.getName())
+                .description(updateDrivingLicenseTypeRequest.getDescription())
+                .licenseLevel(updateDrivingLicenseTypeRequest.getLicenseLevel())
+                .build();
         return repository.save(drivingLicenseTypeEntity);
     }
 

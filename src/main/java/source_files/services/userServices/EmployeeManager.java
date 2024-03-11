@@ -3,7 +3,6 @@ package source_files.services.userServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.userDTOs.EmployeeDTO;
 import source_files.data.models.imageEntities.UserImageEntity;
 import source_files.data.models.userEntities.EmployeeEntity;
@@ -16,29 +15,23 @@ import source_files.services.userServices.abstracts.EmployeeService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.PENDING_VERIFYING;
 
 @Service
 @RequiredArgsConstructor
 public class EmployeeManager implements EmployeeService {
 
     private final EmployeeEntityService entityService;
-    private final ModelMapperService modelMapperService;
-    private final EmployeeBusinessRules employeeBusinessRules;
+    private final EmployeeBusinessRules rules;
     private final PasswordEncoder passwordEncoder;
     private final UserImageService userImageService;
 
     @Override
     public void create(CreateEmployeeRequest createEmployeeRequest) {
         try {
-            EmployeeEntity employeeEntity = modelMapperService.forRequest()
-                    .map(employeeBusinessRules.checkCreateEmployeeRequest
-                            (employeeBusinessRules.fixCreateEmployeeRequest(createEmployeeRequest)), EmployeeEntity.class);
-            employeeEntity.setPassword(passwordEncoder.encode(createEmployeeRequest.getPassword()));
-            employeeEntity.setStatus(PENDING_VERIFYING);
-            entityService.create(employeeEntity);
+            createEmployeeRequest = rules.fixCreateEmployeeRequest(createEmployeeRequest);
+            rules.checkCreateEmployeeRequest(createEmployeeRequest);
+            createEmployeeRequest.setPassword(passwordEncoder.encode(createEmployeeRequest.getPassword()));
+            entityService.create(createEmployeeRequest);
         } catch (Exception e) {
             userImageService.delete(createEmployeeRequest.getUserImageEntityId());
             throw e;
@@ -47,54 +40,44 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public EmployeeDTO update(UpdateEmployeeRequest updateEmployeeRequest) {
-        EmployeeEntity employeeEntity = entityService.getById(updateEmployeeRequest.getId());
-        UserImageEntity userImage = employeeEntity.getUserImageEntity();
+        updateEmployeeRequest = rules.fixUpdateEmployeeRequest(updateEmployeeRequest);
+        rules.checkUpdateEmployeeRequest(updateEmployeeRequest);
+        UserImageEntity userImage = entityService.getById(updateEmployeeRequest.getId()).getUserImageEntity();
         if (userImage.getId() != updateEmployeeRequest.getUserImageEntityId()) {
             userImageService.delete(userImage.getId());
         }
-        employeeEntity = modelMapperService.forRequest()
-                .map(employeeBusinessRules.checkUpdateEmployeeRequest
-                        (employeeBusinessRules.fixUpdateEmployeeRequest(updateEmployeeRequest)), EmployeeEntity.class);
-
-        return modelMapperService.forResponse().map(entityService.create(employeeEntity), EmployeeDTO.class);
+        return entityService.update(updateEmployeeRequest).toModel();
     }
 
     @Override
     public EmployeeDTO getById(int id) {
-        return modelMapperService.forResponse().map(entityService.getById(id), EmployeeDTO.class);
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public List<EmployeeDTO> getAll() {
-        return employeeBusinessRules.checkDataList(entityService.getAll())
-                .stream().map(employeeEntity -> modelMapperService.forResponse()
-                        .map(employeeEntity, EmployeeDTO.class)).collect(Collectors.toList());
+        return mapToDTOList(entityService.getAll());
     }
 
     @Override
     public List<EmployeeDTO> getAllBySalaryBetween(double salary1, double salary2) {
-        return employeeBusinessRules.checkDataList(entityService.getAllBySalaryBetween(salary1, salary2))
-                .stream().map(employeeEntity -> modelMapperService.forResponse().map(employeeEntity, EmployeeDTO.class)).toList();
+        return mapToDTOList(entityService.getAllBySalaryBetween(salary1, salary2));
     }
 
     @Override
     public List<EmployeeDTO> getAllByDeletedState(boolean isDeleted) {
-        return employeeBusinessRules.checkDataList(entityService.getAllByDeletedState(isDeleted))
-                .stream().map(employeeEntity -> modelMapperService.forResponse()
-                        .map(employeeEntity, EmployeeDTO.class)).toList();
+        return mapToDTOList(entityService.getAllByDeletedState(isDeleted));
     }
 
 
     @Override
     public EmployeeDTO getByPhoneNumber(String phoneNumber) {
-        return modelMapperService.forResponse()
-                .map(entityService.getByPhoneNumber(phoneNumber), EmployeeDTO.class);
+        return entityService.getByPhoneNumber(phoneNumber).toModel();
     }
 
     @Override
     public EmployeeDTO getByEmailAddress(String emailAddress) {
-        return modelMapperService.forResponse()
-                .map(entityService.getByEmailAddress(emailAddress), EmployeeDTO.class);
+        return entityService.getByEmailAddress(emailAddress).toModel();
     }
 
     @Override
@@ -119,5 +102,10 @@ public class EmployeeManager implements EmployeeService {
     @Override
     public int getCountByDeletedState(boolean isDeleted) {
         return entityService.getCountByDeletedState(isDeleted);
+    }
+
+    private List<EmployeeDTO> mapToDTOList(List<EmployeeEntity> employeeEntities) {
+        rules.checkDataList(employeeEntities);
+        return employeeEntities.stream().map(EmployeeEntity::toModel).toList();
     }
 }

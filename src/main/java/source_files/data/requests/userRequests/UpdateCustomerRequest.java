@@ -44,7 +44,6 @@ public class UpdateCustomerRequest extends BaseRequest {
     @NotBlank(message = "Ehliyet numarası boş geçilemez")
     @Size(max = 6, message = "Ehliyet seri numarası 6 haneli olmalıdır.")
     private String drivingLicenseNumber;
-    private String imagePath;
     private DefaultUserStatus status;
     private int userImageEntityId;
 }

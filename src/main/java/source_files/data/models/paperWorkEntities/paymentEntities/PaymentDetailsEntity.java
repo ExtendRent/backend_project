@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 
@@ -13,6 +15,7 @@ import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@SuperBuilder(builderMethodName = "paymentDetailsBuilder")
 @Table(name = "payment_details")
 public class PaymentDetailsEntity extends BaseEntity {
     @OneToOne
@@ -27,5 +30,16 @@ public class PaymentDetailsEntity extends BaseEntity {
     public PaymentDetailsEntity(double amount, PaymentTypeEntity paymentTypeEntity) {
         this.amount = amount;
         this.paymentTypeEntity = paymentTypeEntity;
+    }
+
+    public PaymentDetailsDTO toModel() {
+        return PaymentDetailsDTO.builder()
+                .id(getId())
+                .amount(getAmount())
+                .paymentTypeEntityId(getPaymentTypeEntity().getId())
+                .PaymentTypeEntityName(getPaymentTypeEntity().getName())
+                .createdDate(getCreatedDate())
+                .isDeleted(getIsDeleted())
+                .build();
     }
 }

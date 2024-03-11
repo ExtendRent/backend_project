@@ -2,7 +2,6 @@ package source_files.services.vehicleFeaturesServices;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.Mappers.ModelMapperService;
 import source_files.data.DTO.itemDTOs.BrandDTO;
 import source_files.data.models.imageEntities.BrandImageEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
@@ -15,24 +14,21 @@ import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class BrandManager implements BrandService {
 
     private final BrandEntityService entityService;
-    private final ModelMapperService modelMapperService;
-    private final BrandBusinessRules brandBusinessRules;
+    private final BrandBusinessRules rules;
     private final BrandImageService brandImageService;
 
     @Override
     public void create(CreateBrandRequest createBrandRequest) {
         try {
-            BrandEntity brandEntity = modelMapperService.forRequest()
-                    .map(brandBusinessRules.checkCreateBrandRequest(
-                            brandBusinessRules.fixCreateBrandRequest(createBrandRequest)), BrandEntity.class);
-            entityService.create(brandEntity);
+            createBrandRequest = rules.fixCreateBrandRequest(createBrandRequest);
+            rules.checkCreateBrandRequest(createBrandRequest);
+            entityService.create(createBrandRequest);
         } catch (Exception e) {
             brandImageService.delete(createBrandRequest.getBrandImageEntityId());
             throw e;
@@ -41,35 +37,29 @@ public class BrandManager implements BrandService {
 
     @Override
     public BrandDTO update(UpdateBrandRequest updateBrandRequest) {
-        BrandEntity brandEntity = entityService.getById(updateBrandRequest.getId());
-        BrandImageEntity brandImage = brandEntity.getBrandImageEntity();
+        updateBrandRequest = rules.fixUpdateBrandRequest(updateBrandRequest);
+        rules.checkUpdateBrandRequest(updateBrandRequest);
+        BrandImageEntity brandImage = entityService.getById(updateBrandRequest.getId()).getBrandImageEntity();
+
         if (brandImage.getId() != updateBrandRequest.getBrandImageEntityId()) {
             brandImageService.delete(brandImage.getId());
         }
-        brandEntity = modelMapperService.forRequest()
-                .map(brandBusinessRules.checkUpdateBrandRequest(
-                        brandBusinessRules.fixUpdateBrandRequest(updateBrandRequest)), BrandEntity.class);
-        return modelMapperService.forResponse().map(entityService.update(brandEntity), BrandDTO.class);
+        return entityService.update(updateBrandRequest).toModel();
     }
 
     @Override
     public BrandDTO getById(int id) {
-        return modelMapperService.forResponse().map(entityService.getById(id), BrandDTO.class);
+        return entityService.getById(id).toModel();
     }
 
     @Override
     public List<BrandDTO> getAll() {
-        return brandBusinessRules.checkDataList(entityService.getAll())
-                .stream().map(brand -> modelMapperService.forResponse()
-                        .map(brand, BrandDTO.class)).collect(Collectors.toList());
+        return mapToDTOList(entityService.getAll());
     }
 
     @Override
     public List<BrandDTO> getAllByDeletedState(boolean isDeleted) {
-
-        return brandBusinessRules.checkDataList(entityService.getAllByDeletedState(isDeleted))
-                .stream().map(brand -> modelMapperService.forResponse()
-                        .map(brand, BrandDTO.class)).collect(Collectors.toList());
+        return mapToDTOList(entityService.getAllByDeletedState(isDeleted));
     }
 
     @Override
@@ -77,6 +67,7 @@ public class BrandManager implements BrandService {
 
         if (hardDelete) {
             entityService.delete(entityService.getById(id));
+            brandImageService.delete(entityService.getById(id).getBrandImageEntity().getId());
         } else {
             softDelete(id);
         }
@@ -88,5 +79,10 @@ public class BrandManager implements BrandService {
         brandEntity.setIsDeleted(true);
         brandEntity.setDeletedAt(LocalDateTime.now());
         entityService.update(brandEntity);
+    }
+
+    private List<BrandDTO> mapToDTOList(List<BrandEntity> brandEntities) {
+        rules.checkDataList(brandEntities);
+        return brandEntities.stream().map(BrandEntity::toModel).toList();
     }
 }

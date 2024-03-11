@@ -1,8 +1,11 @@
 package source_files.data.models.baseEntities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -10,6 +13,9 @@ import java.time.temporal.ChronoUnit;
 @Getter
 @Setter
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +23,7 @@ public class BaseEntity {
     private int id;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted = false;
+    private Boolean isDeleted;
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
@@ -27,14 +33,17 @@ public class BaseEntity {
     @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
 
+
     @PrePersist
-    private void beforeCreate() {
+    protected void beforeCreate() {
         createdDate = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        isDeleted = false;
     }
 
     @PreUpdate
-    private void beforeUpdate() {
+    protected void beforeUpdate() {
         lastModified = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        isDeleted = false;
     }
 
 }

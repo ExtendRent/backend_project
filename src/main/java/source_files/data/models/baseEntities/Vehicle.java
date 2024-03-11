@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import source_files.data.enums.types.itemTypes.VehicleType;
 import source_files.data.models.DrivingLicenseTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
@@ -18,6 +19,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEnt
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass //Alt klasların database tablosuna buradaki kolonları eklemek için kullanılır.
+@SuperBuilder(builderMethodName = "vehicleBuilder")
 public class Vehicle extends BaseEntity {
 
     @ManyToOne

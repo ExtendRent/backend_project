@@ -3,6 +3,8 @@ package source_files.services.entityServices.vehicleEntityManagers.vehicleFeatur
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
+import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
 import source_files.dataAccess.vehicleFeaturesRespositories.ColorRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
@@ -15,38 +17,50 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.COLOR_
 @RequiredArgsConstructor
 public class ColorEntityManager implements ColorEntityService {
 
-    private final ColorRepository colorRepository;
+    private final ColorRepository repository;
 
     @Override
-    public ColorEntity create(ColorEntity colorEntity) {
-        return colorRepository.save(colorEntity);
+    public ColorEntity create(CreateColorRequest createColorRequest) {
+        ColorEntity colorEntity = ColorEntity.colorBuilder()
+                .name(createColorRequest.getColorEntityName())
+                .build();
+        return repository.save(colorEntity);
+    }
+
+    @Override
+    public ColorEntity update(UpdateColorRequest updateColorRequest) {
+        ColorEntity colorEntity = ColorEntity.colorBuilder()
+                .id(updateColorRequest.getId())
+                .name(updateColorRequest.getName())
+                .build();
+        return repository.save(colorEntity);
     }
 
     @Override
     public ColorEntity update(ColorEntity colorEntity) {
-        return this.create(colorEntity);
+        return repository.save(colorEntity);
     }
 
 
     @Override
     public ColorEntity getById(int id) {
-        return this.colorRepository.findById(id)
+        return repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(COLOR_DATA_NOT_FOUND));
     }
 
     @Override
     public void delete(ColorEntity colorEntity) {
-        colorRepository.delete(colorEntity);
+        repository.delete(colorEntity);
     }
 
 
     @Override
     public List<ColorEntity> getAll() {
-        return colorRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public List<ColorEntity> getAllByDeletedState(boolean isDeleted) {
-        return colorRepository.findAllByIsDeleted(isDeleted);
+        return repository.findAllByIsDeleted(isDeleted);
     }
 }
