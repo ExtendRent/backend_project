@@ -18,9 +18,9 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Intege
 
     boolean existsByPhoneNumberAndIdNot(String phoneNumber, int id);
 
-    boolean existsByEmailAddress(String emailAddress);
+    boolean existsByEmailAddressIgnoreCase(String emailAddress);
 
-    boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
+    boolean existsByEmailAddressIgnoreCaseAndIdNot(String emailAddress, int id);
 
     List<EmployeeEntity> findAllBySalaryBetween(double salary1, double salary2);
 

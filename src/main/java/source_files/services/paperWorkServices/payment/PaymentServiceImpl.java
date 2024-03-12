@@ -2,6 +2,7 @@ package source_files.services.paperWorkServices.payment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
@@ -20,7 +21,7 @@ import static source_files.exception.exceptionTypes.PaymentExceptionType.*;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PayWithCreditCard payWithCreditCard;
-    private final PaymentBusinessRules paymentBusinessRules;
+    private final PaymentBusinessRules rules;
     private final PaymentTypeEntityService paymentTypeService;
     private final SysPaymentDetailsServiceImpl sysPaymentDetailsServiceImpl;
 
@@ -43,13 +44,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentDetailsEntity payWithCreditCard(CreateRentalRequest createRentalRequest, RentalEntity rentalEntity) {
+        CreditCardInformation creditCardInformation =
+                rules.fixCreditCardInformation(createRentalRequest.getCreditCardInformation());
+        rules.checkCreditCard(createRentalRequest.getCreditCardInformation());
 
-        if (payWithCreditCard.pay(
-                createRentalRequest.getAmount()
-                , paymentBusinessRules
-                        .checkCreditCard(
-                                paymentBusinessRules.fixCreditCardInformation(createRentalRequest.getCreditCardInformation())
-                        ))
+        if (payWithCreditCard.pay(createRentalRequest.getAmount(), creditCardInformation)
         ) {
             return createPaymentDetailsEntity(createRentalRequest, rentalEntity, false);
         } else {

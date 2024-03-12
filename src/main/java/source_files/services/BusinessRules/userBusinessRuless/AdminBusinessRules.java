@@ -2,7 +2,6 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
 import source_files.dataAccess.userRepositories.AdminRepository;
@@ -83,7 +82,7 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
 
     @Override
     public void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {
-        if (adminRepository.existsByPhoneNumberAndIdNot(phoneNumber, id)) {
+        if (adminRepository.existsByPhoneNumberIgnoreCaseAndIdNot(phoneNumber, id)) {
             throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
         }
     }
@@ -91,14 +90,14 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
         //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
-        if (adminRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
+        if (adminRepository.existsByEmailAddressIgnoreCaseAndIdNot(emailAddress, id)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByEmailAddress(String emailAddress) {
-        if (adminRepository.existsByEmailAddress(emailAddress)) {
+        if (adminRepository.existsByEmailAddressIgnoreCase(emailAddress)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }

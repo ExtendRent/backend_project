@@ -28,10 +28,9 @@ public class PaymentBusinessRules implements BaseBusinessRulesService {
     }
 
     //---------------AUTO CHECKING METHODS--------------------------------
-    public CreditCardInformation checkCreditCard(CreditCardInformation creditCardInformation) {
+    public void checkCreditCard(CreditCardInformation creditCardInformation) {
         this.checkCreditCardNumber(creditCardInformation.getCardNumber());
         this.checkOwnerOfCreditCardFullName(creditCardInformation.getCardOwnerName(), creditCardInformation.getCardOwnerSurname());
-        return creditCardInformation;
     }
 
 

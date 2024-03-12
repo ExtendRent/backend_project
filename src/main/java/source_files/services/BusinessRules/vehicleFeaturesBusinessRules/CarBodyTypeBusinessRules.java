@@ -34,15 +34,12 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public CreateCarBodyTypeRequest checkCreateCarBodyTypeRequest(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
+    public void checkCreateCarBodyTypeRequest(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
         this.existsByName(createCarBodyTypeRequest.getCarBodyTypeEntityName());
-        return createCarBodyTypeRequest;
     }
 
-    public UpdateCarBodyTypeRequest checkUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
+    public void checkUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         this.existsByName(updateCarBodyTypeRequest.getName());
-        updateCarBodyTypeRequest.setId(this.carBodyTypeEntityServiceImpl.getById(updateCarBodyTypeRequest.getId()).getId());
-        return updateCarBodyTypeRequest;
     }
 
     //----------------------------METHODS--------------------------------
@@ -62,7 +59,7 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
 
     @Override
     public void existsByName(String name) {
-        if (this.carBodyTypeRepository.existsByName(name)) {
+        if (this.carBodyTypeRepository.existsByNameIgnoreCase(name)) {
             throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS);
         }
     }
@@ -70,7 +67,7 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir isim ile aynı olup olmadığını kontrol etmek için
-        if (carBodyTypeRepository.existsByNameAndIdNot(name, id)) {
+        if (carBodyTypeRepository.existsByNameIgnoreCaseAndIdNot(name, id)) {
             throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS);
         }
     }

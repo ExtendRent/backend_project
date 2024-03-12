@@ -15,11 +15,11 @@ public interface AdminRepository extends JpaRepository<AdminEntity, Integer> {
 
     boolean existsByPhoneNumber(String phoneNumber);
 
-    boolean existsByEmailAddress(String email);
+    boolean existsByEmailAddressIgnoreCase(String email);
 
-    boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
+    boolean existsByEmailAddressIgnoreCaseAndIdNot(String emailAddress, int id);
 
-    boolean existsByPhoneNumberAndIdNot(String phoneNumber, int id);
+    boolean existsByPhoneNumberIgnoreCaseAndIdNot(String phoneNumber, int id);
 
     List<AdminEntity> findAllByIsDeleted(boolean isDeleted);
 

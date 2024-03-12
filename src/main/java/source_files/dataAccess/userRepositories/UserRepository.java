@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    Optional<UserEntity> findByEmailAddress(String emailAddress);
+    Optional<UserEntity> findByEmailAddressIgnoreCase(String emailAddress);
 
     int countByIsDeleted(boolean isDeleted);
 

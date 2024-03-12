@@ -17,13 +17,13 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Intege
 
     boolean existsByPhoneNumberAndIdNot(String phoneNumber, int id);
 
-    boolean existsByDrivingLicenseNumber(String drivingLicenseNumber);
+    boolean existsByDrivingLicenseNumberIgnoreCase(String drivingLicenseNumber);
 
-    boolean existsByDrivingLicenseNumberAndIdNot(String drivingLicenseNumber, int id);
+    boolean existsByDrivingLicenseNumberIgnoreCaseAndIdNot(String drivingLicenseNumber, int id);
 
-    boolean existsByEmailAddress(String email);
+    boolean existsByEmailAddressIgnoreCase(String email);
 
-    boolean existsByEmailAddressAndIdNot(String emailAddress, int id);
+    boolean existsByEmailAddressIgnoreCaseAndIdNot(String emailAddress, int id);
 
     @Transactional
     List<CustomerEntity> findAllByIsDeleted(boolean isDeleted);

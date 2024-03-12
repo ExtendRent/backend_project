@@ -63,9 +63,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         this.userExists(createRentalRequest.getCustomerEntityId());
     }
 
-    public ReturnRentalRequest checkReturnRentalRequest(ReturnRentalRequest returnRentalRequest) {
-
-        return returnRentalRequest;
+    public void checkReturnRentalRequest(ReturnRentalRequest returnRentalRequest) {
     }
 
 

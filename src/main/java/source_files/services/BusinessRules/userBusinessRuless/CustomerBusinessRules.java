@@ -95,20 +95,20 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     }
 
     private void existsByDrivingLicenseNumber(String drivingLicenseNumber) {
-        if (customerRepository.existsByDrivingLicenseNumber(drivingLicenseNumber)) {
+        if (customerRepository.existsByDrivingLicenseNumberIgnoreCase(drivingLicenseNumber)) {
             throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS);
         }
     }
 
     private void existsByDrivingLicenseNumberAndIdNot(String drivingLicenseNumber, int id) {
-        if (customerRepository.existsByDrivingLicenseNumberAndIdNot(drivingLicenseNumber, id)) {
+        if (customerRepository.existsByDrivingLicenseNumberIgnoreCaseAndIdNot(drivingLicenseNumber, id)) {
             throw new AlreadyExistsException(DRIVING_LICENSE_NUMBER_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByEmailAddress(String email) {
-        if (customerRepository.existsByEmailAddress(email)) {
+        if (customerRepository.existsByEmailAddressIgnoreCase(email)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
@@ -116,7 +116,7 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
         //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
-        if (customerRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
+        if (customerRepository.existsByEmailAddressIgnoreCaseAndIdNot(emailAddress, id)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }

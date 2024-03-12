@@ -59,7 +59,7 @@ public class UserEntityServiceImpl implements UserEntityService {
 
     @Override
     public UserEntity getByEmailAddress(String emailAddress) {
-        return this.userRepository.findByEmailAddress(emailAddress).orElseThrow(() -> new DataNotFoundException(
+        return this.userRepository.findByEmailAddressIgnoreCase(emailAddress).orElseThrow(() -> new DataNotFoundException(
                 USER_DATA_NOT_FOUND));
     }
 }

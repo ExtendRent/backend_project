@@ -13,6 +13,7 @@ import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFe
 import java.util.List;
 
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
+import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.MODEL_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -34,17 +35,15 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public CreateCarModelRequest checkCreateCarModelRequest(CreateCarModelRequest createCarModelRequest) {
+    public void checkCreateCarModelRequest(CreateCarModelRequest createCarModelRequest) {
         this.existsByName(createCarModelRequest.getCarModelEntityName());
         this.checkBrand(createCarModelRequest.getBrandEntityId());
-        return createCarModelRequest;
     }
 
 
-    public UpdateCarModelRequest checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
+    public void checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
         this.existsByName(updateCarModelRequest.getCarModelEntityName());
         this.checkBrand(updateCarModelRequest.getBrandEntityId());
-        return updateCarModelRequest;
     }
 
 
@@ -65,14 +64,14 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
 
     @Override
     public void existsByName(String name) {
-        if (carModelRepository.existsByName(name)) {
-            throw new IllegalStateException();
+        if (carModelRepository.existsByNameIgnoreCase(name)) {
+            throw new AlreadyExistsException(MODEL_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByNameAndIdNot(String name, int id) {
-        if (carModelRepository.existsByNameAndIdNot(name, id)) {
+        if (carModelRepository.existsByNameIgnoreCaseAndIdNot(name, id)) {
             throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS);
         }
     }

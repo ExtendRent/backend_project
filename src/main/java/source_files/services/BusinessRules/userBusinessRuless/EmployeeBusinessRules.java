@@ -87,7 +87,7 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
 
     @Override
     public void existsByEmailAddress(String email) {
-        if (employeeRepository.existsByEmailAddress(email)) {
+        if (employeeRepository.existsByEmailAddressIgnoreCase(email)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }
@@ -95,7 +95,7 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     @Override
     public void existsByEmailAddressAndIdNot(String emailAddress, int id) {
         //Kendisi hariç başka bir email ile aynı olup olmadığını kontrol etmek için
-        if (employeeRepository.existsByEmailAddressAndIdNot(emailAddress, id)) {
+        if (employeeRepository.existsByEmailAddressIgnoreCaseAndIdNot(emailAddress, id)) {
             throw new AlreadyExistsException(EMAIL_ADDRESS_ALREADY_EXISTS);
         }
     }

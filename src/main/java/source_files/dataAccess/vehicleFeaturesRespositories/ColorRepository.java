@@ -6,9 +6,9 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
 import java.util.List;
 
 public interface ColorRepository extends JpaRepository<ColorEntity, Integer> {
-    boolean existsByName(String name);
+    boolean existsByNameIgnoreCase(String name);
 
     List<ColorEntity> findAllByIsDeleted(boolean isDeleted);
 
-    boolean existsByNameAndIdNot(String name, int id);
+    boolean existsByNameIgnoreCaseAndIdNot(String name, int id);
 }

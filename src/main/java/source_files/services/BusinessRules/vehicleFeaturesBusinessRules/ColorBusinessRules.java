@@ -33,16 +33,13 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public CreateColorRequest checkCreateColorRequest(CreateColorRequest createColorRequest) {
+    public void checkCreateColorRequest(CreateColorRequest createColorRequest) {
         this.existsByName(createColorRequest.getColorEntityName());
-        return createColorRequest;
     }
 
-    public UpdateColorRequest checkUpdateColorRequest(UpdateColorRequest updateColorRequest) {
-
+    public void checkUpdateColorRequest(UpdateColorRequest updateColorRequest) {
         this.existsByNameAndIdNot(updateColorRequest.getName(), updateColorRequest.getId());
         updateColorRequest.setId(this.colorEntityServiceImpl.getById(updateColorRequest.getId()).getId());
-        return updateColorRequest;
     }
 
 
@@ -64,14 +61,14 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir rengin ismi ile aynı olup olmadığını kontrol etmek için
-        if (colorRepository.existsByNameAndIdNot(name, id)) {
+        if (colorRepository.existsByNameIgnoreCaseAndIdNot(name, id)) {
             throw new AlreadyExistsException(COLOR_ALREADY_EXISTS);
         }
     }
 
     @Override
     public void existsByName(String name) {
-        if (colorRepository.existsByName(name)) {
+        if (colorRepository.existsByNameIgnoreCase(name)) {
             throw new AlreadyExistsException(COLOR_ALREADY_EXISTS);
         }
     }

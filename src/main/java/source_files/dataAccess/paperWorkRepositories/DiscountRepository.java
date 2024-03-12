@@ -12,7 +12,6 @@ public interface DiscountRepository extends JpaRepository<DiscountEntity, Intege
 
     boolean existsById(int id);
 
-
     Optional<DiscountEntity> findByDiscountCode(String code);
 
     List<DiscountEntity> findAllByIsDeleted(boolean isDeleted);

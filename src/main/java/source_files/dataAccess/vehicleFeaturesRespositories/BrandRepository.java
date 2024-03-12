@@ -10,7 +10,7 @@ public interface BrandRepository extends JpaRepository<BrandEntity, Integer> {
     @Transactional
     List<BrandEntity> findAllByIsDeleted(boolean isDeleted);
 
-    boolean existsByName(String brandName);
+    boolean existsByNameIgnoreCase(String brandName);
 
-    boolean existsByNameAndIdNot(String name, int id);
+    boolean existsByNameIgnoreCaseAndIdNot(String name, int id);
 }

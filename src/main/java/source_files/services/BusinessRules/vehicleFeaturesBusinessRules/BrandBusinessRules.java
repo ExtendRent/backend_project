@@ -40,14 +40,12 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public CreateBrandRequest checkCreateBrandRequest(CreateBrandRequest createBrandRequest) {
+    public void checkCreateBrandRequest(CreateBrandRequest createBrandRequest) {
         this.existsByName(createBrandRequest.getName());
-        return createBrandRequest;
     }
 
-    public UpdateBrandRequest checkUpdateBrandRequest(UpdateBrandRequest updateBrandRequest) {
+    public void checkUpdateBrandRequest(UpdateBrandRequest updateBrandRequest) {
         this.existsByNameAndIdNot(updateBrandRequest.getName(), updateBrandRequest.getId());
-        return updateBrandRequest;
     }
 
 
@@ -59,7 +57,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     }
 
     public void existsByName(String name) {
-        if (brandRepository.existsByName(name)) {
+        if (brandRepository.existsByNameIgnoreCase(name)) {
             throw new AlreadyExistsException(BRAND_ALREADY_EXISTS);
         }
     }
@@ -67,7 +65,7 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void existsByNameAndIdNot(String name, int id) {
         //Kendisi hariç başka bir isim ile aynı olup olmadığını kontrol etmek için
-        if (brandRepository.existsByNameAndIdNot(name, id)) {
+        if (brandRepository.existsByNameIgnoreCaseAndIdNot(name, id)) {
             throw new AlreadyExistsException(BRAND_ALREADY_EXISTS);
         }
     }

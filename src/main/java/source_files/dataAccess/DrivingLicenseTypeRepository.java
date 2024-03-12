@@ -9,5 +9,8 @@ public interface DrivingLicenseTypeRepository extends JpaRepository<DrivingLicen
 
     List<DrivingLicenseTypeEntity> findAllByIsDeleted(boolean isDeleted);
 
+    boolean existsByNameIgnoreCaseAndIdNot(String name, int id);
+
+    boolean existsByNameIgnoreCase(String name);
 
 }

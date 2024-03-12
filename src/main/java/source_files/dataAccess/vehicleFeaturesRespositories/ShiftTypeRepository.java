@@ -9,4 +9,7 @@ public interface ShiftTypeRepository extends JpaRepository<ShiftTypeEntity, Inte
 
     List<ShiftTypeEntity> findAllByIsDeleted(boolean isDeleted);
 
+    boolean existsByNameIgnoreCaseAndIdNot(String name, int id);
+    boolean existsByNameIgnoreCase(String name);
+
 }
