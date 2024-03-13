@@ -42,6 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO update(UpdateEmployeeRequest updateEmployeeRequest) {
         updateEmployeeRequest = rules.fix(updateEmployeeRequest);
         rules.check(updateEmployeeRequest);
+        updateEmployeeRequest.setPassword(passwordEncoder.encode(updateEmployeeRequest.getPassword()));
         UserImageEntity userImage = entityService.getById(updateEmployeeRequest.getId()).getUserImageEntity();
         if (userImage.getId() != updateEmployeeRequest.getUserImageEntityId()) {
             userImageService.delete(userImage.getId());

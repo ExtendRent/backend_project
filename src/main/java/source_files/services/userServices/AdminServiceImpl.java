@@ -43,8 +43,8 @@ public class AdminServiceImpl implements AdminService {
     public AdminDTO update(UpdateAdminRequest updateAdminRequest) {
         updateAdminRequest = rules.fix(updateAdminRequest);
         rules.check(updateAdminRequest);
+        updateAdminRequest.setPassword(passwordEncoder.encode(updateAdminRequest.getPassword()));
         UserImageEntity userImage = entityService.getById(updateAdminRequest.getId()).getUserImageEntity();
-
         if (userImage.getId() != updateAdminRequest.getUserImageEntityId()) {
             userImageService.delete(userImage.getId());
         }

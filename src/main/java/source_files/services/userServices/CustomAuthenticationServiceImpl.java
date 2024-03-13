@@ -34,18 +34,13 @@ public class CustomAuthenticationServiceImpl implements AuthenticationService, A
     public void signUp(SignUpReqeust request) {
 
         switch (request.getAuthority()) {
-            case ADMIN:
-                this.adminService.create(request.forAdmin());
-                break;
-            case EMPLOYEE:
-                this.employeeService.create(request.forEmployee());
-                break;
-            case CUSTOMER:
+            case ADMIN -> this.adminService.create(request.forAdmin());
+            case EMPLOYEE -> this.employeeService.create(request.forEmployee());
+            case CUSTOMER -> {
                 this.customerService.create(request.forCustomer());
                 emailService.sendOtp(request.getEmailAddress());
-                break;
-            default:
-                throw new DataNotFoundException(USER_ROLE_NOT_FOUND);
+            }
+            default -> throw new DataNotFoundException(USER_ROLE_NOT_FOUND);
         }
     }
 

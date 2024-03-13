@@ -46,8 +46,8 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO update(UpdateCustomerRequest updateCustomerRequest) {
         updateCustomerRequest = rules.fix(updateCustomerRequest);
         rules.check(updateCustomerRequest);
+        updateCustomerRequest.setPassword(passwordEncoder.encode(updateCustomerRequest.getPassword()));
         UserImageEntity userImage = userImageService.getById(updateCustomerRequest.getUserImageEntityId());
-
         if (userImage.getId() != updateCustomerRequest.getUserImageEntityId()) {
             userImageService.delete(userImage.getId());
         }
