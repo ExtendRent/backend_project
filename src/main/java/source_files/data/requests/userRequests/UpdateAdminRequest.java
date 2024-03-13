@@ -15,7 +15,6 @@ import source_files.data.requests.BaseRequest;
 public class UpdateAdminRequest extends BaseRequest {
 
     @NotNull(message = "maaş null olamaz")
-    @NotBlank(message = "maaş boş geçilemez")
     @Min(0)
     Double salary;
     @NotNull(message = "id null olamaz")
