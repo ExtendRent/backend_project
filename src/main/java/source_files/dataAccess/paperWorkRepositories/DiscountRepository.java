@@ -10,7 +10,7 @@ public interface DiscountRepository extends JpaRepository<DiscountEntity, Intege
 
     boolean existsByDiscountCode(String code);
 
-    boolean existsById(int id);
+    boolean existsByDiscountCodeAndIdNot(String code, int id);
 
     Optional<DiscountEntity> findByDiscountCode(String code);
 
