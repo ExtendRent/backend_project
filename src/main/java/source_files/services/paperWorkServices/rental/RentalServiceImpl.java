@@ -43,7 +43,7 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
-        rules.checkShowRentalRequest(showRentalRequest);
+        rules.check(showRentalRequest);
         if (carService.isCarAvailableBetween(showRentalRequest.getCarEntityId(),
                 showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
         ) {
@@ -54,8 +54,8 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public void create(CreateRentalRequest createRentalRequest) {
-        createRentalRequest = rules.fixCreateRentalRequest(createRentalRequest);
-        rules.checkCreateRentalRequest(createRentalRequest);
+        createRentalRequest = rules.fix(createRentalRequest);
+        rules.check(createRentalRequest);
         String discountCode = createRentalRequest.getDiscountCode();
 
         if (!rules.discountCodeIsNotNull(discountCode)) {

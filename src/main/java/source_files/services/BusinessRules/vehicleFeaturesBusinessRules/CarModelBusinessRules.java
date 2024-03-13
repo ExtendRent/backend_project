@@ -12,9 +12,8 @@ import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFe
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.BODY_TYPE_ALREADY_EXISTS;
 import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.MODEL_ALREADY_EXISTS;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
+import static source_files.exception.exceptionTypes.NotFoundExceptionType.MODEL_LIST_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service
@@ -24,25 +23,25 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
 
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public CreateCarModelRequest fixCreateCarModelRequest(CreateCarModelRequest createCarModelRequest) {
+    public CreateCarModelRequest fix(CreateCarModelRequest createCarModelRequest) {
         createCarModelRequest.setCarModelEntityName(this.fixName(createCarModelRequest.getCarModelEntityName()));
         return createCarModelRequest;
     }
 
-    public UpdateCarModelRequest fixUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
+    public UpdateCarModelRequest fix(UpdateCarModelRequest updateCarModelRequest) {
         updateCarModelRequest.setCarModelEntityName(this.fixName(updateCarModelRequest.getCarModelEntityName()));
         return updateCarModelRequest;
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public void checkCreateCarModelRequest(CreateCarModelRequest createCarModelRequest) {
+    public void check(CreateCarModelRequest createCarModelRequest) {
         this.existsByName(createCarModelRequest.getCarModelEntityName());
         this.checkBrand(createCarModelRequest.getBrandEntityId());
     }
 
 
-    public void checkUpdateCarModelRequest(UpdateCarModelRequest updateCarModelRequest) {
-        this.existsByName(updateCarModelRequest.getCarModelEntityName());
+    public void check(UpdateCarModelRequest updateCarModelRequest) {
+        this.existsByNameAndIdNot(updateCarModelRequest.getCarModelEntityName(), updateCarModelRequest.getCarModelEntityId());
         this.checkBrand(updateCarModelRequest.getBrandEntityId());
     }
 
@@ -52,9 +51,8 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
-            throw new DataNotFoundException(CAR_LIST_NOT_FOUND);
+            throw new DataNotFoundException(MODEL_LIST_NOT_FOUND);
         }
-        
     }
 
     @Override
@@ -72,7 +70,7 @@ public class CarModelBusinessRules implements BaseItemBusinessRulesService {
     @Override
     public void existsByNameAndIdNot(String name, int id) {
         if (carModelRepository.existsByNameIgnoreCaseAndIdNot(name, id)) {
-            throw new AlreadyExistsException(BODY_TYPE_ALREADY_EXISTS);
+            throw new AlreadyExistsException(MODEL_ALREADY_EXISTS);
         }
     }
 

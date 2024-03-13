@@ -28,8 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void create(CreateEmployeeRequest createEmployeeRequest) {
         try {
-            createEmployeeRequest = rules.fixCreateEmployeeRequest(createEmployeeRequest);
-            rules.checkCreateEmployeeRequest(createEmployeeRequest);
+            createEmployeeRequest = rules.fix(createEmployeeRequest);
+            rules.check(createEmployeeRequest);
             createEmployeeRequest.setPassword(passwordEncoder.encode(createEmployeeRequest.getPassword()));
             entityService.create(createEmployeeRequest);
         } catch (Exception e) {
@@ -40,8 +40,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDTO update(UpdateEmployeeRequest updateEmployeeRequest) {
-        updateEmployeeRequest = rules.fixUpdateEmployeeRequest(updateEmployeeRequest);
-        rules.checkUpdateEmployeeRequest(updateEmployeeRequest);
+        updateEmployeeRequest = rules.fix(updateEmployeeRequest);
+        rules.check(updateEmployeeRequest);
         UserImageEntity userImage = entityService.getById(updateEmployeeRequest.getId()).getUserImageEntity();
         if (userImage.getId() != updateEmployeeRequest.getUserImageEntityId()) {
             userImageService.delete(userImage.getId());

@@ -63,7 +63,7 @@ public class PaymentBusinessRules implements BaseBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(PAYMENT_DETAILS_LIST_NOT_FOUND);
         }
-        
+
     }
 
     @Override

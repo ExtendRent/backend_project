@@ -29,6 +29,13 @@ public class PaymentTypesController {
         );
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TResponse<PaymentTypeDTO>> getById(@PathVariable int id) {
+        return new ResponseEntity<>(TResponse.<PaymentTypeDTO>tResponseBuilder()
+                .response(paymentTypeService.getById(id)).build(), HttpStatus.OK
+        );
+    }
+
     @GetMapping
     public ResponseEntity<TResponse<List<PaymentTypeDTO>>> GetAllPaymentTypes() {
         return new ResponseEntity<>(TResponse.<List<PaymentTypeDTO>>tResponseBuilder()

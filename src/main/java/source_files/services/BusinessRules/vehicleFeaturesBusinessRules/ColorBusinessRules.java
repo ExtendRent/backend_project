@@ -22,22 +22,22 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
     private final ColorEntityServiceImpl colorEntityServiceImpl;
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public CreateColorRequest fixCreateColorRequest(CreateColorRequest createColorRequest) {
+    public CreateColorRequest fix(CreateColorRequest createColorRequest) {
         createColorRequest.setColorEntityName(this.fixName(createColorRequest.getColorEntityName()));
         return createColorRequest;
     }
 
-    public UpdateColorRequest fixUpdateColorRequest(UpdateColorRequest updateColorRequest) {
+    public UpdateColorRequest fix(UpdateColorRequest updateColorRequest) {
         updateColorRequest.setName(this.fixName(updateColorRequest.getName()));
         return updateColorRequest;
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public void checkCreateColorRequest(CreateColorRequest createColorRequest) {
+    public void check(CreateColorRequest createColorRequest) {
         this.existsByName(createColorRequest.getColorEntityName());
     }
 
-    public void checkUpdateColorRequest(UpdateColorRequest updateColorRequest) {
+    public void check(UpdateColorRequest updateColorRequest) {
         this.existsByNameAndIdNot(updateColorRequest.getName(), updateColorRequest.getId());
         updateColorRequest.setId(this.colorEntityServiceImpl.getById(updateColorRequest.getId()).getId());
     }
@@ -50,7 +50,6 @@ public class ColorBusinessRules implements BaseItemBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(COLOR_LIST_NOT_FOUND);
         }
-        
     }
 
     @Override

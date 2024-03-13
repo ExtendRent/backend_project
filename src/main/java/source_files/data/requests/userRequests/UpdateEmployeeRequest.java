@@ -30,6 +30,7 @@ public class UpdateEmployeeRequest extends BaseRequest {
     @NotNull(message = "mail adresi null olamaz")
     @NotBlank(message = "Çalışan mail adresi boş geçilemez")
     String emailAddress;
+
     @Size(min = 8, max = 30)
     @NotNull(message = "Şifre null olamaz")
     @NotBlank(message = "Çalışan şifresi boş geçilemez")

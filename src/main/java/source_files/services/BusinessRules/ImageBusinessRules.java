@@ -17,7 +17,7 @@ public class ImageBusinessRules implements BaseBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(IMAGE_LIST_NOT_FOUND);
         }
-        
+
     }
 
     @Override

@@ -24,7 +24,6 @@ public class UpdateDiscountRequest {
 
     @Min(value = 5, message = "Discount percentage must be greater than or equal to 5")
     @Max(value = 90, message = "Discount percentage must be less than or equal to 90")
-    @Pattern(regexp = "^[0-9]+$", message = "Discount percentage must consist of numbers only")
     @NotNull(message = "Discount percentage cannot be blank")
     int discountPercentage;
     @NotNull

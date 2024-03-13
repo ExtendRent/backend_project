@@ -17,7 +17,7 @@ public class FuelTypeBusinessRules implements BaseBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(FUEL_TYPE_LIST_NOT_FOUND);
         }
-        
+
     }
 
     @Override

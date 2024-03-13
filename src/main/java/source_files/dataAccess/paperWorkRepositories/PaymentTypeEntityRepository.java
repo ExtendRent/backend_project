@@ -14,4 +14,8 @@ public interface PaymentTypeEntityRepository extends JpaRepository<PaymentTypeEn
 
     List<PaymentTypeEntity> findAllByIsActive(boolean isActive);
 
+    boolean existsByNameIgnoreCase(String name);
+
+    boolean existsByNameIgnoreCaseAndIdNot(String name, int id);
+
 }

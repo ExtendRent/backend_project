@@ -36,8 +36,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void create(CreateCarRequest createCarRequest) throws IOException {
-        createCarRequest = rules.fixCreateCarRequest(createCarRequest);
-        rules.checkCreateCarRequest(createCarRequest);
+        createCarRequest = rules.fix(createCarRequest);
+        rules.check(createCarRequest);
         try {
             entityService.create(createCarRequest);
         } catch (Exception e) {
@@ -53,8 +53,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarDTO update(UpdateCarRequest updateCarRequest) throws IOException {
-        updateCarRequest = rules.fixUpdateCarRequest(updateCarRequest);
-        rules.checkUpdateCarRequest(updateCarRequest);
+        updateCarRequest = rules.fix(updateCarRequest);
+        rules.check(updateCarRequest);
         CarImageEntity carImage = carImageService.getById(updateCarRequest.getCarImageEntityId());
         if (carImage.getId() != updateCarRequest.getCarImageEntityId()) {
             carImageService.delete(carImage.getId());

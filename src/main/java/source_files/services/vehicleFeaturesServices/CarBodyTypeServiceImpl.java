@@ -22,15 +22,15 @@ public class CarBodyTypeServiceImpl implements CarBodyTypeService {
 
     @Override
     public void create(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
-        createCarBodyTypeRequest = rules.fixCreateCarBodyTypeRequest(createCarBodyTypeRequest);
-        rules.checkCreateCarBodyTypeRequest(createCarBodyTypeRequest);
+        createCarBodyTypeRequest = rules.fix(createCarBodyTypeRequest);
+        rules.check(createCarBodyTypeRequest);
         entityService.create(createCarBodyTypeRequest);
     }
 
     @Override
     public CarBodyTypeDTO update(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
-        updateCarBodyTypeRequest = rules.fixUpdateCarBodyTypeRequest(updateCarBodyTypeRequest);
-        rules.checkUpdateCarBodyTypeRequest(updateCarBodyTypeRequest);
+        updateCarBodyTypeRequest = rules.fix(updateCarBodyTypeRequest);
+        rules.check(updateCarBodyTypeRequest);
         return entityService.update(updateCarBodyTypeRequest).toModel();
     }
 

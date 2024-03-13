@@ -17,12 +17,12 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.DISCOU
 public class DiscountRules implements BaseItemBusinessRulesService {
     private final DiscountEntityService discountEntityService;
 
-    public CreateDiscountRequest fixCreateDiscountRequest(CreateDiscountRequest createDiscountRequest) {
+    public CreateDiscountRequest fix(CreateDiscountRequest createDiscountRequest) {
         createDiscountRequest.setDiscountCode(this.fixName(createDiscountRequest.getDiscountCode().toUpperCase()));
         return createDiscountRequest;
     }
 
-    public UpdateDiscountRequest fixUpdateDiscountRequest(UpdateDiscountRequest updateDiscountRequest) {
+    public UpdateDiscountRequest fix(UpdateDiscountRequest updateDiscountRequest) {
         updateDiscountRequest.setDiscountCode(this.fixName(updateDiscountRequest.getDiscountCode().toUpperCase()));
         return updateDiscountRequest;
     }

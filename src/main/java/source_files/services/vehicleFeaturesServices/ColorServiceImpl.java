@@ -22,15 +22,15 @@ public class ColorServiceImpl implements ColorService {
 
     @Override
     public void create(CreateColorRequest createColorRequest) {
-        createColorRequest = rules.fixCreateColorRequest(createColorRequest);
-        rules.checkCreateColorRequest(createColorRequest);
+        createColorRequest = rules.fix(createColorRequest);
+        rules.check(createColorRequest);
         entityService.create(createColorRequest);
     }
 
     @Override
     public ColorDTO update(UpdateColorRequest updateColorRequest) {
-        updateColorRequest = rules.fixUpdateColorRequest(updateColorRequest);
-        rules.checkUpdateColorRequest(updateColorRequest);
+        updateColorRequest = rules.fix(updateColorRequest);
+        rules.check(updateColorRequest);
         return entityService.update(updateColorRequest).toModel();
     }
 

@@ -19,11 +19,15 @@ public class DrivingLicenseTypeServiceImpl implements DrivingLicenseTypeService 
 
     @Override
     public void create(CreateDrivingLicenseTypeRequest createDrivingLicenseTypeRequest) {
+        createDrivingLicenseTypeRequest = rules.fix(createDrivingLicenseTypeRequest);
+        rules.check(createDrivingLicenseTypeRequest);
         entityService.create(createDrivingLicenseTypeRequest);
     }
 
     @Override
     public DrivingLicenseTypeDTO update(UpdateDrivingLicenseTypeRequest updateDrivingLicenseTypeRequest) {
+        updateDrivingLicenseTypeRequest = rules.fix(updateDrivingLicenseTypeRequest);
+        rules.check(updateDrivingLicenseTypeRequest);
         return entityService.update(updateDrivingLicenseTypeRequest).toModel();
     }
 

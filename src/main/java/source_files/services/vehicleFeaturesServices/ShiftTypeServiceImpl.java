@@ -23,11 +23,15 @@ public class ShiftTypeServiceImpl implements ShiftTypeService {
 
     @Override
     public void create(CreateShiftTypeRequest createShiftTypeRequest) {
+        createShiftTypeRequest = rules.fix(createShiftTypeRequest);
+        rules.check(createShiftTypeRequest);
         entityService.create(createShiftTypeRequest);
     }
 
     @Override
     public ShiftTypeDTO update(UpdateShiftTypeRequest updateShiftTypeRequest) {
+        updateShiftTypeRequest = rules.fix(updateShiftTypeRequest);
+        rules.check(updateShiftTypeRequest);
         return entityService.update(updateShiftTypeRequest).toModel();
     }
 

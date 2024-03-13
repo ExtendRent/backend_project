@@ -9,4 +9,8 @@ import java.util.Optional;
 public interface VehicleStatusRepository extends JpaRepository<VehicleStatusEntity, Integer> {
 
     Optional<VehicleStatusEntity> findByVehicleStatus(DefaultVehicleStatus vehicleStatus);
+
+    boolean existsByNameIgnoreCase(String name);
+
+    boolean existsByNameIgnoreCaseAndIdNot(String name, int id);
 }

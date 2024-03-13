@@ -47,19 +47,19 @@ public class CarBusinessRules implements BaseBusinessRulesService {
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public CreateCarRequest fixCreateCarRequest(CreateCarRequest createCarRequest) {
+    public CreateCarRequest fix(CreateCarRequest createCarRequest) {
         createCarRequest.setLicensePlate(this.fixName(createCarRequest.getLicensePlate()));
         return createCarRequest;
     }
 
-    public UpdateCarRequest fixUpdateCarRequest(UpdateCarRequest updateCarRequest) {
+    public UpdateCarRequest fix(UpdateCarRequest updateCarRequest) {
         updateCarRequest.setLicensePlate(this.fixName(updateCarRequest.getLicensePlate()));
 
         return updateCarRequest;
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public void checkCreateCarRequest(CreateCarRequest createCarRequest) {
+    public void check(CreateCarRequest createCarRequest) {
         this.checkLicensePlate(createCarRequest.getLicensePlate());
         this.checkModel(createCarRequest.getCarModelEntityId());
         this.checkColor(createCarRequest.getColorEntityId());
@@ -67,7 +67,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         this.checkBrand(createCarRequest.getBrandEntityId());
     }
 
-    public void checkUpdateCarRequest(UpdateCarRequest updateCarRequest) {
+    public void check(UpdateCarRequest updateCarRequest) {
         if (!updateCarRequest.getLicensePlate().equals(
                 carEntityService.getById(updateCarRequest.getId()).getLicensePlate())) {
             this.checkLicensePlate(updateCarRequest.getLicensePlate());
@@ -96,7 +96,7 @@ public class CarBusinessRules implements BaseBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(CAR_LIST_NOT_FOUND);
         }
-        
+
     }
 
     public boolean isDrivingLicenseTypeSuitable(int carId, Integer customerId) {

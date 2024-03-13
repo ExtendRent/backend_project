@@ -21,13 +21,13 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public void create(CreateDiscountRequest createDiscountRequest) {
-        createDiscountRequest = rules.fixCreateDiscountRequest(createDiscountRequest);
+        createDiscountRequest = rules.fix(createDiscountRequest);
         entityService.create(createDiscountRequest);
     }
 
     @Override
     public DiscountDTO update(UpdateDiscountRequest updateDiscountRequest) {
-        updateDiscountRequest = rules.fixUpdateDiscountRequest(updateDiscountRequest);
+        updateDiscountRequest = rules.fix(updateDiscountRequest);
         return entityService.update(updateDiscountRequest).toModel();
     }
 

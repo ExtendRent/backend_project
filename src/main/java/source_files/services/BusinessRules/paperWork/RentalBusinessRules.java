@@ -12,7 +12,6 @@ import source_files.exception.NotSuitableException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
-import source_files.services.DrivingLicenseTypeService;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityServiceImpl;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -34,11 +33,10 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
     private final DiscountService discountService;
     private final CarService carService;
     private final CustomerService customerService;
-    private final DrivingLicenseTypeService drivingLicenseTypeService;
     private final CarBusinessRules carRules;
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public CreateRentalRequest fixCreateRentalRequest(CreateRentalRequest createRentalRequest) {
+    public CreateRentalRequest fix(CreateRentalRequest createRentalRequest) {
 
         if (this.discountCodeIsNotNull(createRentalRequest.getDiscountCode())) {
             createRentalRequest.setDiscountCode(this.fixName(createRentalRequest.getDiscountCode()));
@@ -46,24 +44,24 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         return createRentalRequest;
     }
 
-    public ReturnRentalRequest fixReturnRentalRequest(ReturnRentalRequest returnRentalRequest) {
+    public ReturnRentalRequest fix(ReturnRentalRequest returnRentalRequest) {
 
         return returnRentalRequest;
     }
 
     //---------------AUTO CHECKING METHODS--------------------------------
 
-    public void checkShowRentalRequest(ShowRentalRequest showRentalRequest) {
+    public void check(ShowRentalRequest showRentalRequest) {
         this.checkDrivingLicenseType(showRentalRequest.getCarEntityId(), showRentalRequest.getCustomerEntityId());
         this.carExists(showRentalRequest.getCarEntityId());
         this.checkDiscountCode(showRentalRequest.getDiscountCode());
     }
 
-    public void checkCreateRentalRequest(CreateRentalRequest createRentalRequest) {
+    public void check(CreateRentalRequest createRentalRequest) {
         this.userExists(createRentalRequest.getCustomerEntityId());
     }
 
-    public void checkReturnRentalRequest(ReturnRentalRequest returnRentalRequest) {
+    public void check(ReturnRentalRequest returnRentalRequest) {
     }
 
 
@@ -97,7 +95,7 @@ public class RentalBusinessRules implements BaseBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(RENTAL_LIST_NOT_FOUND);
         }
-        
+
     }
 
     @Override

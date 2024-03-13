@@ -26,7 +26,7 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public CreateCustomerRequest fixCreateCustomerRequest(CreateCustomerRequest createCustomerRequest) {
+    public CreateCustomerRequest fix(CreateCustomerRequest createCustomerRequest) {
         createCustomerRequest.setPhoneNumber(this.fixName(createCustomerRequest.getPhoneNumber()));
         createCustomerRequest.setName(this.fixName(createCustomerRequest.getName()));
         createCustomerRequest.setSurname(this.fixName(createCustomerRequest.getSurname()));
@@ -35,7 +35,7 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
         return createCustomerRequest;
     }
 
-    public UpdateCustomerRequest fixUpdateCustomerRequest(UpdateCustomerRequest updateCustomerRequest) {
+    public UpdateCustomerRequest fix(UpdateCustomerRequest updateCustomerRequest) {
         updateCustomerRequest.setPhoneNumber(this.fixName(updateCustomerRequest.getPhoneNumber()));
         updateCustomerRequest.setName(this.fixName(updateCustomerRequest.getName()));
         updateCustomerRequest.setSurname(this.fixName(updateCustomerRequest.getSurname()));
@@ -45,13 +45,13 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
 
     //--------------------- AUTO CHECK METHODS ---------------------
 
-    public void checkCreateCustomerRequest(CreateCustomerRequest createCustomerRequest) {
+    public void check(CreateCustomerRequest createCustomerRequest) {
         this.existsByPhoneNumber(createCustomerRequest.getPhoneNumber());
         this.existsByDrivingLicenseNumber(createCustomerRequest.getDrivingLicenseNumber());
         this.existsByEmailAddress(createCustomerRequest.getEmailAddress());
     }
 
-    public void checkUpdateCustomerRequest(UpdateCustomerRequest updateCustomerRequest) {
+    public void check(UpdateCustomerRequest updateCustomerRequest) {
         this.existsByPhoneNumberAndIdNot(updateCustomerRequest.getPhoneNumber(), updateCustomerRequest.getId());
         this.existsByDrivingLicenseNumberAndIdNot(updateCustomerRequest.getDrivingLicenseNumber(), updateCustomerRequest.getId());
         this.existsByEmailAddressAndIdNot(updateCustomerRequest.getEmailAddress(), updateCustomerRequest.getId());
@@ -65,7 +65,7 @@ public class CustomerBusinessRules implements BaseUserBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(CUSTOMER_LIST_NOT_FOUND);
         }
-        
+
     }
 
     public void checkRentalHistory(List<RentalEntity> rentalHistory) {

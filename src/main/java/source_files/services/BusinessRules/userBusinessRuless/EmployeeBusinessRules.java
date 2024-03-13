@@ -9,7 +9,6 @@ import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
-import source_files.services.entityServices.userEntityManagers.EmployeeEntityServiceImpl;
 
 import java.util.List;
 
@@ -22,37 +21,35 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 @Service
 public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
     private final EmployeeRepository employeeRepository;
-    private final EmployeeEntityServiceImpl employeeEntityServiceImpl;
-
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public CreateEmployeeRequest fixCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest) {
-        createEmployeeRequest.setPhoneNumber(this.fixName(createEmployeeRequest.getPhoneNumber()));
-        createEmployeeRequest.setName(this.fixName(createEmployeeRequest.getName()));
-        createEmployeeRequest.setSurname(this.fixName(createEmployeeRequest.getSurname()));
-        createEmployeeRequest.setEmailAddress(this.fixName(createEmployeeRequest.getEmailAddress()));
+    public CreateEmployeeRequest fix(CreateEmployeeRequest createEmployeeRequest) {
+        createEmployeeRequest.setPhoneNumber(fixName(createEmployeeRequest.getPhoneNumber()));
+        createEmployeeRequest.setName(fixName(createEmployeeRequest.getName()));
+        createEmployeeRequest.setSurname(fixName(createEmployeeRequest.getSurname()));
+        createEmployeeRequest.setEmailAddress(fixName(createEmployeeRequest.getEmailAddress()));
         return createEmployeeRequest;
     }
 
-    public UpdateEmployeeRequest fixUpdateEmployeeRequest(UpdateEmployeeRequest updateEmployeeRequest) {
-        updateEmployeeRequest.setPhoneNumber(this.fixName(updateEmployeeRequest.getPhoneNumber()));
-        updateEmployeeRequest.setName(this.fixName(updateEmployeeRequest.getName()));
-        updateEmployeeRequest.setSurname(this.fixName(updateEmployeeRequest.getSurname()));
-        updateEmployeeRequest.setEmailAddress(this.fixName(updateEmployeeRequest.getEmailAddress()));
+    public UpdateEmployeeRequest fix(UpdateEmployeeRequest updateEmployeeRequest) {
+        updateEmployeeRequest.setPhoneNumber(fixName(updateEmployeeRequest.getPhoneNumber()));
+        updateEmployeeRequest.setName(fixName(updateEmployeeRequest.getName()));
+        updateEmployeeRequest.setSurname(fixName(updateEmployeeRequest.getSurname()));
+        updateEmployeeRequest.setEmailAddress(fixName(updateEmployeeRequest.getEmailAddress()));
         return updateEmployeeRequest;
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public void checkUpdateEmployeeRequest(UpdateEmployeeRequest updateEmployeeRequest) {
-        this.existsByEmailAddress(updateEmployeeRequest.getEmailAddress());
-        this.existsByPhoneNumber(updateEmployeeRequest.getPhoneNumber());
+    public void check(CreateEmployeeRequest createEmployeeRequest) {
+        checkSalary(createEmployeeRequest.getSalary());
+        existsByEmailAddress(createEmployeeRequest.getEmailAddress());
+        existsByPhoneNumber(createEmployeeRequest.getPhoneNumber());
     }
 
-    public void checkCreateEmployeeRequest(CreateEmployeeRequest createEmployeeRequest) {
-        this.checkSalary(createEmployeeRequest.getSalary());
-        this.existsByEmailAddress(createEmployeeRequest.getEmailAddress());
-        this.existsByPhoneNumber(createEmployeeRequest.getPhoneNumber());
+    public void check(UpdateEmployeeRequest updateEmployeeRequest) {
+        existsByEmailAddressAndIdNot(updateEmployeeRequest.getEmailAddress(), updateEmployeeRequest.getId());
+        existsByPhoneNumberAndIdNot(updateEmployeeRequest.getPhoneNumber(), updateEmployeeRequest.getId());
     }
 
 
@@ -63,26 +60,18 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(EMPLOYEE_LIST_NOT_FOUND);
         }
-        
+
     }
 
     public void checkSalary(double salary) {
         if (salary <= 0) {
-            throw new ValidationException(VALIDATION_EXCEPTION);
+            throw new ValidationException(VALIDATION_EXCEPTION, "Maaş en 0 dan büyük olmalıdır.");
         }
     }
 
     @Override
     public String fixName(String name) {
         return name.trim().toLowerCase();
-    }
-
-
-    @Override
-    public void existsByPhoneNumber(String phoneNumber) {
-        if (employeeRepository.existsByPhoneNumber(phoneNumber)) {
-            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
-        }
     }
 
     @Override
@@ -100,6 +89,12 @@ public class EmployeeBusinessRules implements BaseUserBusinessRulesService {
         }
     }
 
+    @Override
+    public void existsByPhoneNumber(String phoneNumber) {
+        if (employeeRepository.existsByPhoneNumber(phoneNumber)) {
+            throw new AlreadyExistsException(PHONE_NUMBER_ALREADY_EXISTS);
+        }
+    }
 
     @Override
     public void existsByPhoneNumberAndIdNot(String phoneNumber, int id) {

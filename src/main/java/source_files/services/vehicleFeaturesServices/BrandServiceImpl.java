@@ -26,8 +26,8 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void create(CreateBrandRequest createBrandRequest) {
         try {
-            createBrandRequest = rules.fixCreateBrandRequest(createBrandRequest);
-            rules.checkCreateBrandRequest(createBrandRequest);
+            createBrandRequest = rules.fix(createBrandRequest);
+            rules.check(createBrandRequest);
             entityService.create(createBrandRequest);
         } catch (Exception e) {
             brandImageService.delete(createBrandRequest.getBrandImageEntityId());
@@ -37,8 +37,8 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public BrandDTO update(UpdateBrandRequest updateBrandRequest) {
-        updateBrandRequest = rules.fixUpdateBrandRequest(updateBrandRequest);
-        rules.checkUpdateBrandRequest(updateBrandRequest);
+        updateBrandRequest = rules.fix(updateBrandRequest);
+        rules.check(updateBrandRequest);
         BrandImageEntity brandImage = entityService.getById(updateBrandRequest.getId()).getBrandImageEntity();
 
         if (brandImage.getId() != updateBrandRequest.getBrandImageEntityId()) {

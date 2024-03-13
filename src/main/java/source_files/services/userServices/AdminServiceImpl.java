@@ -27,10 +27,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void create(CreateAdminRequest createAdminRequest) {
-        createAdminRequest = rules.fixCreateAdminRequest(createAdminRequest);
+        createAdminRequest = rules.fix(createAdminRequest);
 
         try {
-            rules.checkCreateAdminRequest(createAdminRequest);
+            rules.check(createAdminRequest);
             createAdminRequest.setPassword(passwordEncoder.encode(createAdminRequest.getPassword()));
             this.entityService.create(createAdminRequest);
         } catch (Exception e) {
@@ -41,8 +41,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public AdminDTO update(UpdateAdminRequest updateAdminRequest) {
-        updateAdminRequest = rules.fixUpdateAdminRequest(updateAdminRequest);
-        rules.checkUpdateAdminRequest(updateAdminRequest);
+        updateAdminRequest = rules.fix(updateAdminRequest);
+        rules.check(updateAdminRequest);
         UserImageEntity userImage = entityService.getById(updateAdminRequest.getId()).getUserImageEntity();
 
         if (userImage.getId() != updateAdminRequest.getUserImageEntityId()) {

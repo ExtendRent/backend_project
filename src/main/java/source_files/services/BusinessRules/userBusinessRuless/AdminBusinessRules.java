@@ -30,7 +30,7 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     }
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public CreateAdminRequest fixCreateAdminRequest(CreateAdminRequest createAdminRequest) {
+    public CreateAdminRequest fix(CreateAdminRequest createAdminRequest) {
         createAdminRequest.setPhoneNumber(this.fixName(createAdminRequest.getPhoneNumber()));
         createAdminRequest.setName(this.fixName(createAdminRequest.getName()));
         createAdminRequest.setSurname(this.fixName(createAdminRequest.getSurname()));
@@ -38,7 +38,7 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
         return createAdminRequest;
     }
 
-    public UpdateAdminRequest fixUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
+    public UpdateAdminRequest fix(UpdateAdminRequest updateAdminRequest) {
         updateAdminRequest.setPhoneNumber(this.fixName(updateAdminRequest.getPhoneNumber()));
         updateAdminRequest.setName(this.fixName(updateAdminRequest.getName()));
         updateAdminRequest.setSurname(this.fixName(updateAdminRequest.getSurname()));
@@ -47,13 +47,13 @@ public class AdminBusinessRules implements BaseUserBusinessRulesService {
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public void checkCreateAdminRequest(CreateAdminRequest createAdminRequest) {
+    public void check(CreateAdminRequest createAdminRequest) {
         this.checkSalary(createAdminRequest.getSalary());
         this.existsByEmailAddress(createAdminRequest.getEmailAddress());
         this.existsByPhoneNumber(createAdminRequest.getPhoneNumber());
     }
 
-    public void checkUpdateAdminRequest(UpdateAdminRequest updateAdminRequest) {
+    public void check(UpdateAdminRequest updateAdminRequest) {
         this.existsByEmailAddressAndIdNot(updateAdminRequest.getEmailAddress(), updateAdminRequest.getId());
         this.existsByPhoneNumberAndIdNot(updateAdminRequest.getPhoneNumber(), updateAdminRequest.getId());
     }

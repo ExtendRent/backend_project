@@ -21,11 +21,15 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
 
     @Override
     public void create(CreatePaymentTypeRequest createPaymentTypeRequest) {
+        createPaymentTypeRequest = rules.fix(createPaymentTypeRequest);
+        rules.check(createPaymentTypeRequest);
         entityService.create(createPaymentTypeRequest);
     }
 
     @Override
     public PaymentTypeDTO update(UpdatePaymentTypeRequest updatePaymentTypeRequest) {
+        updatePaymentTypeRequest = rules.fix(updatePaymentTypeRequest);
+        rules.check(updatePaymentTypeRequest);
         return entityService.update(updatePaymentTypeRequest).toModel();
     }
 

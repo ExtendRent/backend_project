@@ -32,8 +32,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void create(CreateCustomerRequest createCustomerRequest) {
         try {
-            createCustomerRequest = rules.fixCreateCustomerRequest(createCustomerRequest);
-            rules.checkCreateCustomerRequest(createCustomerRequest);
+            createCustomerRequest = rules.fix(createCustomerRequest);
+            rules.check(createCustomerRequest);
             createCustomerRequest.setPassword(passwordEncoder.encode(createCustomerRequest.getPassword()));
             entityService.create(createCustomerRequest);
         } catch (Exception e) {
@@ -44,8 +44,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO update(UpdateCustomerRequest updateCustomerRequest) {
-        updateCustomerRequest = rules.fixUpdateCustomerRequest(updateCustomerRequest);
-        rules.checkUpdateCustomerRequest(updateCustomerRequest);
+        updateCustomerRequest = rules.fix(updateCustomerRequest);
+        rules.check(updateCustomerRequest);
         UserImageEntity userImage = userImageService.getById(updateCustomerRequest.getUserImageEntityId());
 
         if (userImage.getId() != updateCustomerRequest.getUserImageEntityId()) {

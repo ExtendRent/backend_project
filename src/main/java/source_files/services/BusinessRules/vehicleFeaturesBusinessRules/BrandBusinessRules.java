@@ -24,27 +24,27 @@ public class BrandBusinessRules implements BaseItemBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(BRAND_LIST_NOT_FOUND);
         }
-        
+
     }
 
     //--------------------- AUTO FIX METHODS ---------------------
 
-    public CreateBrandRequest fixCreateBrandRequest(CreateBrandRequest createBrandRequest) {
+    public CreateBrandRequest fix(CreateBrandRequest createBrandRequest) {
         createBrandRequest.setName(this.fixName(createBrandRequest.getName()));
         return createBrandRequest;
     }
 
-    public UpdateBrandRequest fixUpdateBrandRequest(UpdateBrandRequest updateBrandRequest) {
+    public UpdateBrandRequest fix(UpdateBrandRequest updateBrandRequest) {
         updateBrandRequest.setName(this.fixName(updateBrandRequest.getName()));
         return updateBrandRequest;
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public void checkCreateBrandRequest(CreateBrandRequest createBrandRequest) {
+    public void check(CreateBrandRequest createBrandRequest) {
         this.existsByName(createBrandRequest.getName());
     }
 
-    public void checkUpdateBrandRequest(UpdateBrandRequest updateBrandRequest) {
+    public void check(UpdateBrandRequest updateBrandRequest) {
         this.existsByNameAndIdNot(updateBrandRequest.getName(), updateBrandRequest.getId());
     }
 

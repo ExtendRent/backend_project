@@ -21,11 +21,15 @@ public class CarSegmentServiceImpl implements CarSegmentService {
 
     @Override
     public CarSegmentDTO create(CreateCarSegmentRequest createCarSegmentRequest) {
+        createCarSegmentRequest = rules.fix(createCarSegmentRequest);
+        rules.check(createCarSegmentRequest);
         return entityService.create(createCarSegmentRequest).toModel();
     }
 
     @Override
     public CarSegmentDTO update(UpdateCarSegmentRequest updateCarSegmentRequest) {
+        updateCarSegmentRequest = rules.fix(updateCarSegmentRequest);
+        rules.check(updateCarSegmentRequest);
         return entityService.update(updateCarSegmentRequest).toModel();
     }
 

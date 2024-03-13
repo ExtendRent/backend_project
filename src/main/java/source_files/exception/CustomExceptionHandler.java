@@ -65,6 +65,14 @@ public class CustomExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(ValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public TResponse<?> handleValidationException(ValidationException e) {
+        return TResponse.tResponseBuilder()
+                .response(new ErrorResponse(e.getValidationExceptionType(), Collections.singletonList(e.getDetail())))
+                .build();
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

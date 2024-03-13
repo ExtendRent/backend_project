@@ -17,7 +17,7 @@ public class PaymentDetailsBusinessRules implements BaseItemBusinessRulesService
         if (list.isEmpty()) {
             throw new DataNotFoundException(PAYMENT_DETAILS_LIST_NOT_FOUND);
         }
-        
+
     }
 
 

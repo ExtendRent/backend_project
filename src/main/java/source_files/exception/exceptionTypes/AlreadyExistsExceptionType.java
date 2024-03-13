@@ -35,12 +35,16 @@ public enum AlreadyExistsExceptionType {
     DISCOUNT_ALREADY_EXISTS(2012, "İndirim zaten mevcut"),
 
     LICENSE_PLATE_ALREADY_EXISTS(2013, "Plaka zaten mevcut"),
-
     PHONE_NUMBER_ALREADY_EXISTS(2014, "Bu telefon numarası zaten mevcut"),
-
     DRIVING_LICENSE_NUMBER_ALREADY_EXISTS(2015, "geçerli bir ehliyet numarası giriniz"),
+    DRIVING_LICENSE_TYPE_ALREADY_EXISTS(2016, "Ehliyet tipi zaten mevcut"),
+    SHIFT_TYPE_ALREADY_EXISTS(2017, "Vites tipi zaten mevcut"),
+    VEHICLE_STATUS_ALREADY_EXISTS(2018, "Araç durumu zaten mevcut"),
 
-    EMAIL_ADDRESS_ALREADY_EXISTS(2016, "Bu email zaten mevcut");
+    CAR_SEGMENT_ALREADY_EXSISTS(2019, "Araç segmenti zaten mevcut"),
+
+    PAYMENT_TYPE_ALREADY_EXISTS(2020, "Ödeme tipi zaten mevcut"),
+    EMAIL_ADDRESS_ALREADY_EXISTS(2021, "Bu email zaten mevcut");
 
     //------------------------------------------------------------------
     private final Integer errorCode;

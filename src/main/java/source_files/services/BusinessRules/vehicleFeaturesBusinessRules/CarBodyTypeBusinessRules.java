@@ -8,7 +8,6 @@ import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepositor
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
-import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.CarBodyTypeEntityServiceImpl;
 
 import java.util.List;
 
@@ -18,27 +17,25 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.BODY_T
 @RequiredArgsConstructor
 @Service
 public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
-
-    private final CarBodyTypeEntityServiceImpl carBodyTypeEntityServiceImpl;
     private final CarBodyTypeRepository carBodyTypeRepository;
 
     //--------------------- AUTO FIX METHODS ---------------------
-    public CreateCarBodyTypeRequest fixCreateCarBodyTypeRequest(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
+    public CreateCarBodyTypeRequest fix(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
         createCarBodyTypeRequest.setCarBodyTypeEntityName(this.fixName(createCarBodyTypeRequest.getCarBodyTypeEntityName()));
         return createCarBodyTypeRequest;
     }
 
-    public UpdateCarBodyTypeRequest fixUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
+    public UpdateCarBodyTypeRequest fix(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         updateCarBodyTypeRequest.setName(this.fixName(updateCarBodyTypeRequest.getName()));
         return updateCarBodyTypeRequest;
     }
 
     //--------------------- AUTO CHECK METHODS ---------------------
-    public void checkCreateCarBodyTypeRequest(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
+    public void check(CreateCarBodyTypeRequest createCarBodyTypeRequest) {
         this.existsByName(createCarBodyTypeRequest.getCarBodyTypeEntityName());
     }
 
-    public void checkUpdateCarBodyTypeRequest(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
+    public void check(UpdateCarBodyTypeRequest updateCarBodyTypeRequest) {
         this.existsByName(updateCarBodyTypeRequest.getName());
     }
 
@@ -54,7 +51,7 @@ public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
         if (list.isEmpty()) {
             throw new DataNotFoundException(BODY_TYPE_LIST_NOT_FOUND);
         }
-        
+
     }
 
     @Override

@@ -10,5 +10,6 @@ public interface CarSegmentRepository extends JpaRepository<CarSegmentEntity, In
     List<CarSegmentEntity> findAllByIsDeleted(boolean isDeleted);
 
     boolean existsByNameIgnoreCaseAndIdNot(String name, int id);
+
     boolean existsByNameIgnoreCase(String name);
 }
