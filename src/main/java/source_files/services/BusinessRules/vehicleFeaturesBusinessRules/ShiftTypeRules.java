@@ -7,7 +7,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftT
 import source_files.dataAccess.vehicleFeaturesRespositories.ShiftTypeRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.SHIFT_
 
 @RequiredArgsConstructor
 @Service
-public class ShiftTypeBusinessRules implements BaseItemBusinessRulesService {
+public class ShiftTypeRules implements BaseItemRules {
     private final ShiftTypeRepository repository;
 
     public CreateShiftTypeRequest fix(CreateShiftTypeRequest createShiftTypeRequest) {

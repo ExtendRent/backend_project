@@ -8,7 +8,7 @@ import source_files.data.models.imageEntities.UserImageEntity;
 import source_files.data.models.userEntities.AdminEntity;
 import source_files.data.requests.userRequests.CreateAdminRequest;
 import source_files.data.requests.userRequests.UpdateAdminRequest;
-import source_files.services.BusinessRules.userBusinessRuless.AdminBusinessRules;
+import source_files.services.BusinessRules.userBusinessRuless.AdminRules;
 import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
 import source_files.services.systemServices.ImageServices.UserImageService;
 import source_files.services.userServices.abstracts.AdminService;
@@ -21,7 +21,7 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
 
     private final AdminEntityService entityService;
-    private final AdminBusinessRules rules;
+    private final AdminRules rules;
     private final PasswordEncoder passwordEncoder;
     private final UserImageService userImageService;
 

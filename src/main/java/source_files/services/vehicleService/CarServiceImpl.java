@@ -10,7 +10,7 @@ import source_files.data.models.vehicleEntities.CarEntity;
 import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
 import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
+import source_files.services.BusinessRules.vehicleBusinessRules.CarRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.VehicleStatusEntityServiceImpl;
 import source_files.services.systemServices.ImageServices.CarImageService;
@@ -30,7 +30,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICL
 public class CarServiceImpl implements CarService {
 
     private final CarEntityService entityService;
-    private final CarBusinessRules rules;
+    private final CarRules rules;
     private final VehicleStatusEntityServiceImpl vehicleStatusManager;
     private final CarImageService carImageService;
 

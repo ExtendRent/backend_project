@@ -7,8 +7,8 @@ import source_files.data.models.imageEntities.BrandImageEntity;
 import source_files.dataAccess.imageRepositories.BrandImageRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.FileException;
-import source_files.services.BusinessRules.ImageBusinessRules;
-import source_files.services.externalServices.CloudinaryService;
+import source_files.services.BusinessRules.ImageRules;
+import source_files.services.externalServices.CloudinaryServiceImpl;
 import source_files.utilities.ImageUtils;
 
 import java.io.IOException;
@@ -22,13 +22,13 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.IMAGE_
 @RequiredArgsConstructor
 public class BrandImageServiceImpl implements BrandImageService {
     private final BrandImageRepository repository;
-    private final ImageBusinessRules rules;
-    private final CloudinaryService cloudinaryService;
+    private final ImageRules rules;
+    private final CloudinaryServiceImpl cloudinaryServiceImpl;
 
     @Override
     public BrandImageEntity create(MultipartFile file, String brandName) throws IOException {
         try {
-            String imageUrl = cloudinaryService.uploadFileBrand(file, brandName);
+            String imageUrl = cloudinaryServiceImpl.uploadFileBrand(file, brandName);
             return repository.save(BrandImageEntity.brandImageBuilder()
                     .name(brandName)
                     .type(file.getContentType())
@@ -64,7 +64,7 @@ public class BrandImageServiceImpl implements BrandImageService {
     @Override
     public void delete(int id) {
         try {
-            if (cloudinaryService.deleteFile(this.getById(id).getImageUrl())) {
+            if (cloudinaryServiceImpl.deleteFile(this.getById(id).getImageUrl())) {
                 repository.delete(this.getById(id));
             }
         } catch (Exception e) {

@@ -6,7 +6,7 @@ import source_files.data.DTO.itemDTOs.ShiftTypeDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.ShiftTypeEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.UpdateShiftTypeRequest;
-import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ShiftTypeBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ShiftTypeRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ShiftTypeEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ShiftTypeService;
 
@@ -19,7 +19,7 @@ public class ShiftTypeServiceImpl implements ShiftTypeService {
 
     private final ShiftTypeEntityService entityService;
 
-    private final ShiftTypeBusinessRules rules;
+    private final ShiftTypeRules rules;
 
     @Override
     public void create(CreateShiftTypeRequest createShiftTypeRequest) {

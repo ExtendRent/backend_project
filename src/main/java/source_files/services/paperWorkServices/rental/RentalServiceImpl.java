@@ -12,7 +12,7 @@ import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalR
 import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.data.requests.paperworkRequests.RentalRequests.UpdateRentalRequest;
 import source_files.exception.ValidationException;
-import source_files.services.BusinessRules.paperWork.RentalBusinessRules;
+import source_files.services.BusinessRules.paperWork.RentalRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentService;
 import source_files.services.paperWorkServices.abstracts.RentalService;
@@ -37,7 +37,7 @@ public class RentalServiceImpl implements RentalService {
     private final CarService carService;
     private final SysPaymentDetailsService sysPaymentDetailsService;
     private final CustomerService customerService;
-    private final RentalBusinessRules rules;
+    private final RentalRules rules;
     private final PaymentService paymentService;
     private final RentalStatusService rentalStatusService;
 

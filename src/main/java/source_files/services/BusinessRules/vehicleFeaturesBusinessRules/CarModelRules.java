@@ -7,7 +7,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarMod
 import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.MODEL_
 
 @RequiredArgsConstructor
 @Service
-public class CarModelBusinessRules implements BaseItemBusinessRulesService {
+public class CarModelRules implements BaseItemRules {
     private final CarModelRepository carModelRepository;
     private final BrandEntityService brandEntityService;
 

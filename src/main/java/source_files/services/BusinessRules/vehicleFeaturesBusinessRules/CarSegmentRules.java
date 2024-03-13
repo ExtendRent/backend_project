@@ -7,7 +7,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarSeg
 import source_files.dataAccess.vehicleFeaturesRespositories.CarSegmentRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_SE
 
 @RequiredArgsConstructor
 @Service
-public class CarSegmentBusinessRules implements BaseItemBusinessRulesService {
+public class CarSegmentRules implements BaseItemRules {
     private final CarSegmentRepository repository;
 
     public CreateCarSegmentRequest fix(CreateCarSegmentRequest createCarSegmentRequest) {

@@ -8,7 +8,7 @@ import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserRules;
 import source_files.services.entityServices.userEntityManagers.CustomerEntityServiceImpl;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL
 
 @RequiredArgsConstructor
 @Service
-public class CustomerBusinessRules implements BaseUserBusinessRulesService {
+public class CustomerRules implements BaseUserRules {
     private final CustomerRepository customerRepository;
     private final CustomerEntityServiceImpl customerEntityServiceImpl;
 

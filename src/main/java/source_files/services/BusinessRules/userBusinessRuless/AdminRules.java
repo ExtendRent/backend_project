@@ -8,7 +8,7 @@ import source_files.dataAccess.userRepositories.AdminRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserRules;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 
 @RequiredArgsConstructor
 @Service
-public class AdminBusinessRules implements BaseUserBusinessRulesService {
+public class AdminRules implements BaseUserRules {
     private final AdminRepository adminRepository;
 
     @Override

@@ -6,7 +6,7 @@ import source_files.data.requests.paperworkRequests.discountRequests.CreateDisco
 import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountRequest;
 import source_files.dataAccess.paperWorkRepositories.DiscountRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.DISCOU
 
 @RequiredArgsConstructor
 @Service
-public class DiscountRules implements BaseItemBusinessRulesService {
+public class DiscountRules implements BaseItemRules {
     private final DiscountRepository repository;
 
     public CreateDiscountRequest fix(CreateDiscountRequest createDiscountRequest) {

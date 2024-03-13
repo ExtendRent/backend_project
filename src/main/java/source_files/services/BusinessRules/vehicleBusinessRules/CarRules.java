@@ -10,7 +10,7 @@ import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
 import source_files.services.DrivingLicenseTypeService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
@@ -30,7 +30,7 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 
 @RequiredArgsConstructor
 @Service
-public class CarBusinessRules implements BaseBusinessRulesService {
+public class CarRules implements BaseRules {
     private final CarRepository carRepository;
 
     private final CarEntityService carEntityService;

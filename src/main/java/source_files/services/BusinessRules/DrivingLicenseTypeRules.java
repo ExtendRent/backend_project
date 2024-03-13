@@ -7,7 +7,7 @@ import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
 import source_files.dataAccess.DrivingLicenseTypeRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.DRIVIN
 
 @RequiredArgsConstructor
 @Service
-public class DrivingLicenseTypeBusinessRules implements BaseItemBusinessRulesService {
+public class DrivingLicenseTypeRules implements BaseItemRules {
 
     private final DrivingLicenseTypeRepository repository;
 

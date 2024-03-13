@@ -8,7 +8,7 @@ import source_files.data.models.imageEntities.UserImageEntity;
 import source_files.data.models.userEntities.EmployeeEntity;
 import source_files.data.requests.userRequests.CreateEmployeeRequest;
 import source_files.data.requests.userRequests.UpdateEmployeeRequest;
-import source_files.services.BusinessRules.userBusinessRuless.EmployeeBusinessRules;
+import source_files.services.BusinessRules.userBusinessRuless.EmployeeRules;
 import source_files.services.entityServices.abstracts.userAbstract.EmployeeEntityService;
 import source_files.services.systemServices.ImageServices.UserImageService;
 import source_files.services.userServices.abstracts.EmployeeService;
@@ -21,7 +21,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeEntityService entityService;
-    private final EmployeeBusinessRules rules;
+    private final EmployeeRules rules;
     private final PasswordEncoder passwordEncoder;
     private final UserImageService userImageService;
 

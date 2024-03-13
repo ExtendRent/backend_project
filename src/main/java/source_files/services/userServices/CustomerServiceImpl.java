@@ -11,7 +11,7 @@ import source_files.data.models.userEntities.CustomerEntity;
 import source_files.data.requests.userRequests.CreateCustomerRequest;
 import source_files.data.requests.userRequests.UpdateCustomerRequest;
 import source_files.dataAccess.userRepositories.CustomerRepository;
-import source_files.services.BusinessRules.userBusinessRuless.CustomerBusinessRules;
+import source_files.services.BusinessRules.userBusinessRuless.CustomerRules;
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
 import source_files.services.systemServices.ImageServices.UserImageService;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -24,7 +24,7 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final CustomerBusinessRules rules;
+    private final CustomerRules rules;
     private final CustomerEntityService entityService;
     private final PasswordEncoder passwordEncoder;
     private final UserImageService userImageService;

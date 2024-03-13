@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class CloudinaryService implements FileUploadService {
+public class CloudinaryServiceImpl implements FileUploadService {
     private final Cloudinary cloudinary;
 
     @Override

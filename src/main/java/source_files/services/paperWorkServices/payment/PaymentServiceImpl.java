@@ -8,7 +8,7 @@ import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEnt
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
 import source_files.exception.PaymentException;
-import source_files.services.BusinessRules.paperWork.PaymentBusinessRules;
+import source_files.services.BusinessRules.paperWork.PaymentRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentService;
 import source_files.services.systemServices.SysPaymentDetailsServiceImpl;
@@ -21,7 +21,7 @@ import static source_files.exception.exceptionTypes.PaymentExceptionType.*;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PayWithCreditCard payWithCreditCard;
-    private final PaymentBusinessRules rules;
+    private final PaymentRules rules;
     private final PaymentTypeEntityService paymentTypeService;
     private final SysPaymentDetailsServiceImpl sysPaymentDetailsServiceImpl;
 

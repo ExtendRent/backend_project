@@ -3,7 +3,7 @@ package source_files.services.BusinessRules.userBusinessRuless;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserRules;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_L
 
 @RequiredArgsConstructor
 @Service
-public class UserBusinessRules implements BaseUserBusinessRulesService {
+public class UserRules implements BaseUserRules {
     @Override
     public void checkDataList(List<?> list) {
         if (list.isEmpty()) {

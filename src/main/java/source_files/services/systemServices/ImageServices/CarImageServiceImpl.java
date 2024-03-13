@@ -7,8 +7,8 @@ import source_files.data.models.imageEntities.CarImageEntity;
 import source_files.dataAccess.imageRepositories.CarImageRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.FileException;
-import source_files.services.BusinessRules.ImageBusinessRules;
-import source_files.services.externalServices.CloudinaryService;
+import source_files.services.BusinessRules.ImageRules;
+import source_files.services.externalServices.CloudinaryServiceImpl;
 import source_files.utilities.ImageUtils;
 
 import java.io.IOException;
@@ -23,15 +23,15 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.IMAGE_
 public class CarImageServiceImpl implements CarImageService {
 
     private final CarImageRepository repository;
-    private final ImageBusinessRules rules;
-    private final CloudinaryService cloudinaryService;
+    private final ImageRules rules;
+    private final CloudinaryServiceImpl cloudinaryServiceImpl;
 
     @Override
     public CarImageEntity create(MultipartFile file, String licensePlate) throws IOException {
 
         try {
             byte[] newByte = ImageUtils.resizeImage(file.getBytes(), 1920, 1080);
-            String imageUrl = cloudinaryService.uploadFileCar(file, licensePlate);
+            String imageUrl = cloudinaryServiceImpl.uploadFileCar(file, licensePlate);
             byte[] decompressedData = ImageUtils.decompressImage(newByte);
             return repository.save(CarImageEntity.carImageBuilder()
                     .name(licensePlate)
@@ -69,7 +69,7 @@ public class CarImageServiceImpl implements CarImageService {
     @Override
     public void delete(int id) throws IOException {
         try {
-            if (cloudinaryService.deleteFile(this.getById(id).getUrl())) {
+            if (cloudinaryServiceImpl.deleteFile(this.getById(id).getUrl())) {
                 repository.delete(this.getById(id));
             }
         } catch (Exception e) {

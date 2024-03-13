@@ -7,7 +7,7 @@ import source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalStatusEntity;
 import source_files.dataAccess.paperWorkRepositories.RentalStatusRepository;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.paperWork.PaymentBusinessRules;
+import source_files.services.BusinessRules.paperWork.PaymentRules;
 import source_files.services.paperWorkServices.abstracts.RentalStatusService;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL
 @RequiredArgsConstructor
 public class RentalStatusServiceImpl implements RentalStatusService {
     private final RentalStatusRepository repository;
-    private final PaymentBusinessRules rules;
+    private final PaymentRules rules;
 
     @Override
     public RentalStatusEntity create(RentalStatusEntity rentalStatusEntity) {

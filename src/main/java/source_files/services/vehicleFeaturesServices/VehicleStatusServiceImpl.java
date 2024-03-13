@@ -7,7 +7,7 @@ import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
-import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.VehicleStatusBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.VehicleStatusRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.VehicleStatusEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.VehicleStatusService;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VehicleStatusServiceImpl implements VehicleStatusService {
     private final VehicleStatusEntityService entityService;
-    private final VehicleStatusBusinessRules rules;
+    private final VehicleStatusRules rules;
 
     @Override
     public void create(CreateVehicleStatusRequest createVehicleStatusRequest) {

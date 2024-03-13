@@ -6,7 +6,7 @@ import source_files.data.DTO.DrivingLicenseTypeDTO;
 import source_files.data.models.DrivingLicenseTypeEntity;
 import source_files.data.requests.CreateDrivingLicenseTypeRequest;
 import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
-import source_files.services.BusinessRules.DrivingLicenseTypeBusinessRules;
+import source_files.services.BusinessRules.DrivingLicenseTypeRules;
 import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DrivingLicenseTypeServiceImpl implements DrivingLicenseTypeService {
     private final DrivingLicenseTypeEntityService entityService;
-    private final DrivingLicenseTypeBusinessRules rules;
+    private final DrivingLicenseTypeRules rules;
 
     @Override
     public void create(CreateDrivingLicenseTypeRequest createDrivingLicenseTypeRequest) {

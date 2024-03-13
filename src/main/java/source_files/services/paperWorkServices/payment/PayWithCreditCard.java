@@ -9,7 +9,7 @@ public class PayWithCreditCard implements PayService {
 
     public boolean pay(double amount, CreditCardInformation creditCardInformation) {
 
-        //ÖDEME İŞLEMLERİ...
+        //PAYMENT METHODS...
         return true;
     }
 }

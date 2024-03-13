@@ -6,7 +6,7 @@ import source_files.data.DTO.paperWorkDTOs.PaymentTypeDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
-import source_files.services.BusinessRules.paperWork.PaymentTypeBusinessRules;
+import source_files.services.BusinessRules.paperWork.PaymentTypeRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentTypeServiceImpl implements PaymentTypeService {
     private final PaymentTypeEntityService entityService;
-    private final PaymentTypeBusinessRules rules;
+    private final PaymentTypeRules rules;
 
     @Override
     public void create(CreatePaymentTypeRequest createPaymentTypeRequest) {

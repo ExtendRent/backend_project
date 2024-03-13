@@ -3,7 +3,7 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.FUEL_T
 
 @RequiredArgsConstructor
 @Service
-public class FuelTypeBusinessRules implements BaseBusinessRulesService {
+public class FuelTypeRules implements BaseRules {
     @Override
     public void checkDataList(List<?> list) {
         if (list.isEmpty()) {

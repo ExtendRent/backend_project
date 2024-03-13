@@ -7,7 +7,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandR
 import source_files.dataAccess.vehicleFeaturesRespositories.BrandRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.BRAND_
 
 @RequiredArgsConstructor
 @Service
-public class BrandBusinessRules implements BaseItemBusinessRulesService {
+public class BrandRules implements BaseItemRules {
     private final BrandRepository brandRepository;
 
     @Override

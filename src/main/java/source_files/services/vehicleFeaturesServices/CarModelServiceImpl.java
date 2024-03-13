@@ -6,7 +6,7 @@ import source_files.data.DTO.itemDTOs.CarModelDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarModelEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
-import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarModelBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarModelRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarModelService;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class CarModelServiceImpl implements CarModelService {
 
     private final CarModelEntityService entityService;
-    private final CarModelBusinessRules rules;
+    private final CarModelRules rules;
 
     @Override
     public void create(CreateCarModelRequest createCarModelRequest) {

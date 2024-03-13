@@ -10,8 +10,8 @@ import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalReq
 import source_files.exception.DataNotFoundException;
 import source_files.exception.NotSuitableException;
 import source_files.exception.ValidationException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
-import source_files.services.BusinessRules.vehicleBusinessRules.CarBusinessRules;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
+import source_files.services.BusinessRules.vehicleBusinessRules.CarRules;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityServiceImpl;
 import source_files.services.paperWorkServices.abstracts.DiscountService;
 import source_files.services.userServices.abstracts.CustomerService;
@@ -27,13 +27,13 @@ import static source_files.exception.exceptionTypes.ValidationExceptionType.VALI
 
 @RequiredArgsConstructor
 @Service
-public class RentalBusinessRules implements BaseBusinessRulesService {
+public class RentalRules implements BaseRules {
 
     private final RentalEntityServiceImpl rentalEntityServiceImpl;
     private final DiscountService discountService;
     private final CarService carService;
     private final CustomerService customerService;
-    private final CarBusinessRules carRules;
+    private final CarRules carRules;
 
     //--------------------- AUTO FIX METHODS ---------------------
     public CreateRentalRequest fix(CreateRentalRequest createRentalRequest) {

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentDetailsRequest;
-import source_files.services.BusinessRules.paperWork.PaymentDetailsBusinessRules;
+import source_files.services.BusinessRules.paperWork.PaymentDetailsRules;
 import source_files.services.paperWorkServices.abstracts.PaymentDetailsService;
 import source_files.services.systemServices.SysPaymentDetailsService;
 
@@ -21,7 +21,7 @@ import java.util.List;
 public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 
     private final SysPaymentDetailsService entityService;
-    private final PaymentDetailsBusinessRules rules;
+    private final PaymentDetailsRules rules;
 
     @Override
     public PaymentDetailsDTO update(UpdatePaymentDetailsRequest updatePaymentDetailsRequest) {

@@ -7,8 +7,8 @@ import source_files.data.models.imageEntities.UserImageEntity;
 import source_files.dataAccess.imageRepositories.UserImageRepository;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.FileException;
-import source_files.services.BusinessRules.ImageBusinessRules;
-import source_files.services.externalServices.CloudinaryService;
+import source_files.services.BusinessRules.ImageRules;
+import source_files.services.externalServices.CloudinaryServiceImpl;
 import source_files.utilities.ImageUtils;
 
 import java.io.IOException;
@@ -23,8 +23,8 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.IMAGE_
 @RequiredArgsConstructor
 public class UserImageServiceImpl implements UserImageService {
     private final UserImageRepository repository;
-    private final CloudinaryService cloudinaryService;
-    private final ImageBusinessRules rules;
+    private final CloudinaryServiceImpl cloudinaryServiceImpl;
+    private final ImageRules rules;
 
     @Override
     public int create(MultipartFile file, String emailAddress) throws IOException {
@@ -33,7 +33,7 @@ public class UserImageServiceImpl implements UserImageService {
         }
         try {
             byte[] newByte = ImageUtils.resizeImage(file.getBytes(), 400, 400);
-            String url = cloudinaryService.uploadFileUser(file, emailAddress);
+            String url = cloudinaryServiceImpl.uploadFileUser(file, emailAddress);
             byte[] decompressedData = ImageUtils.decompressImage(newByte);
             UserImageEntity savedImage = repository.save(UserImageEntity.userImageBuilder()
                     .name(emailAddress)
@@ -76,7 +76,7 @@ public class UserImageServiceImpl implements UserImageService {
         UserImageEntity image = this.getById(id);
         try {
             if (!image.getName().equals("default_user_image")) {
-                cloudinaryService.deleteFile(image.getUrl());
+                cloudinaryServiceImpl.deleteFile(image.getUrl());
                 repository.delete(image);
             }
         } catch (Exception e) {

@@ -7,7 +7,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorR
 import source_files.dataAccess.vehicleFeaturesRespositories.ColorRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 import source_files.services.entityServices.vehicleEntityManagers.vehicleFeaturesEntityManagers.ColorEntityServiceImpl;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.COLOR_
 
 @RequiredArgsConstructor
 @Service
-public class ColorBusinessRules implements BaseItemBusinessRulesService {
+public class ColorRules implements BaseItemRules {
     private final ColorRepository colorRepository;
     private final ColorEntityServiceImpl colorEntityServiceImpl;
 

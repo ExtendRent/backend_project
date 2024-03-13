@@ -6,7 +6,7 @@ import source_files.data.DTO.itemDTOs.FuelTypeDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.FuelTypeEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.UpdateFuelTypeRequest;
-import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.FuelTypeBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.FuelTypeRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.FuelTypeEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.FuelTypeService;
 
@@ -19,7 +19,7 @@ public class FuelTypeServiceImpl implements FuelTypeService {
 
     private final FuelTypeEntityService entityService;
 
-    private final FuelTypeBusinessRules rules;
+    private final FuelTypeRules rules;
 
     @Override
     public void create(CreateFuelTypeRequest createFuelTypeRequest) {

@@ -1,6 +1,6 @@
 package source_files.services.BusinessRules.abstractsBusinessRules;
 
-public interface BaseItemBusinessRulesService extends BaseBusinessRulesService {
+public interface BaseItemRules extends BaseRules {
 
     void existsByName(String name);
 

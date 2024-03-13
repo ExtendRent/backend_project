@@ -6,7 +6,7 @@ import source_files.data.DTO.itemDTOs.CarSegmentDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarSegmentEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarSegmentRequests.CreateCarSegmentRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarSegmentRequests.UpdateCarSegmentRequest;
-import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarSegmentBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.CarSegmentRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarSegmentEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.CarSegmentService;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CarSegmentServiceImpl implements CarSegmentService {
     private final CarSegmentEntityService entityService;
-    private final CarSegmentBusinessRules rules;
+    private final CarSegmentRules rules;
 
     @Override
     public CarSegmentDTO create(CreateCarSegmentRequest createCarSegmentRequest) {

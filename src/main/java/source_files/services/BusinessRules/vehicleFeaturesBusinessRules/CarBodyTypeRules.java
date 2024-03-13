@@ -7,7 +7,7 @@ import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBod
 import source_files.dataAccess.vehicleFeaturesRespositories.CarBodyTypeRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.BODY_T
 
 @RequiredArgsConstructor
 @Service
-public class CarBodyTypeBusinessRules implements BaseItemBusinessRulesService {
+public class CarBodyTypeRules implements BaseItemRules {
     private final CarBodyTypeRepository carBodyTypeRepository;
 
     //--------------------- AUTO FIX METHODS ---------------------

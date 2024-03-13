@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import source_files.data.DTO.userDTOs.UserDTO;
 import source_files.data.models.baseEntities.UserEntity;
-import source_files.services.BusinessRules.userBusinessRuless.UserBusinessRules;
+import source_files.services.BusinessRules.userBusinessRuless.UserRules;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.userServices.abstracts.UserService;
 
@@ -21,7 +21,7 @@ import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserEntityService entityService;
-    private final UserBusinessRules rules;
+    private final UserRules rules;
     private final PasswordEncoder passwordEncoder;
 
     @Override

@@ -7,7 +7,7 @@ import source_files.data.models.imageEntities.BrandImageEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
-import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.BrandBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.BrandRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 import source_files.services.systemServices.ImageServices.BrandImageService;
 import source_files.services.vehicleFeaturesServices.abstracts.BrandService;
@@ -20,7 +20,7 @@ import java.util.List;
 public class BrandServiceImpl implements BrandService {
 
     private final BrandEntityService entityService;
-    private final BrandBusinessRules rules;
+    private final BrandRules rules;
     private final BrandImageService brandImageService;
 
     @Override

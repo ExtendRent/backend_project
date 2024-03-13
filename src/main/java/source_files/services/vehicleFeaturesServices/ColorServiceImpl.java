@@ -6,7 +6,7 @@ import source_files.data.DTO.itemDTOs.ColorDTO;
 import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
 import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
-import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorBusinessRules;
+import source_files.services.BusinessRules.vehicleFeaturesBusinessRules.ColorRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
 import source_files.services.vehicleFeaturesServices.abstracts.ColorService;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class ColorServiceImpl implements ColorService {
 
     private final ColorEntityService entityService;
-    private final ColorBusinessRules rules;
+    private final ColorRules rules;
 
     @Override
     public void create(CreateColorRequest createColorRequest) {
