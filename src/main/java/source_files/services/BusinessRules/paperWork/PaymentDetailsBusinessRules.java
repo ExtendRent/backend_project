@@ -3,7 +3,7 @@ package source_files.services.BusinessRules.paperWork;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.exception.DataNotFoundException;
-import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemBusinessRulesService;
+import source_files.services.BusinessRules.abstractsBusinessRules.BaseBusinessRulesService;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMEN
 
 @RequiredArgsConstructor
 @Service
-public class PaymentDetailsBusinessRules implements BaseItemBusinessRulesService {
+public class PaymentDetailsBusinessRules implements BaseBusinessRulesService {
     @Override
     public void checkDataList(List<?> list) {
         if (list.isEmpty()) {
@@ -20,19 +20,8 @@ public class PaymentDetailsBusinessRules implements BaseItemBusinessRulesService
 
     }
 
-
     @Override
     public String fixName(String name) {
-        return null;
-    }
-
-    @Override
-    public void existsByName(String name) {
-
-    }
-
-    @Override
-    public void existsByNameAndIdNot(String name, int id) {
-
+        return name;
     }
 }
