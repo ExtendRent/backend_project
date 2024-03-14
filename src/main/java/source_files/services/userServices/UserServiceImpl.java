@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
+        rules.checkEmail(emailAddress);
         return entityService.getByEmailAddress(emailAddress);
     }
 

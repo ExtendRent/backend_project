@@ -69,11 +69,8 @@ public enum NotFoundExceptionType {
 
     RENTAL_STATUS_NOT_FOUND(1040, "Kiralama durumu bulunamadı"),
     RENTAL_STATUS_LIST_NOT_FOUND(1041, "Aradığınız kriterlerde kiralama durumu bulunamadı"),
-    ;
-
+    EMAIL_ADDRESS_NOT_FOUND(1042, "Bu email adresine ait kullanıcı bulunamadı");
     //------------------------------------------------------------------
     private final Integer errorCode;
     private final String message;
-
-
 }
