@@ -1,8 +1,8 @@
 package source_files.services;
 
-import source_files.data.DTO.DrivingLicenseTypeDTO;
-import source_files.data.requests.CreateDrivingLicenseTypeRequest;
-import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
+import source_files.controllers.item.dtos.DrivingLicenseTypeDTO;
+import source_files.controllers.item.requests.CreateDrivingLicenseTypeRequest;
+import source_files.controllers.item.requests.UpdateDrivingLicenseTypeRequest;
 
 import java.util.List;
 

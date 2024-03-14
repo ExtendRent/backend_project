@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.DrivingLicenseTypeDTO;
+import source_files.controllers.item.dtos.DrivingLicenseTypeDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter

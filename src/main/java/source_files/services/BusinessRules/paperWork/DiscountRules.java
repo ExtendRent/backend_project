@@ -2,10 +2,10 @@ package source_files.services.BusinessRules.paperWork;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
-import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountRequest;
-import source_files.dataAccess.paperWorkRepositories.DiscountRepository;
+import source_files.controllers.paperWork.requests.discountRequests.CreateDiscountRequest;
+import source_files.controllers.paperWork.requests.discountRequests.UpdateDiscountRequest;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.paperWork.DiscountRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;

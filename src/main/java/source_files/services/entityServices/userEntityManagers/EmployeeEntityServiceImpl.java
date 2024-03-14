@@ -3,13 +3,13 @@ package source_files.services.entityServices.userEntityManagers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import source_files.controllers.user.requests.CreateEmployeeRequest;
+import source_files.controllers.user.requests.UpdateEmployeeRequest;
 import source_files.data.models.userEntities.EmployeeEntity;
-import source_files.data.requests.userRequests.CreateEmployeeRequest;
-import source_files.data.requests.userRequests.UpdateEmployeeRequest;
-import source_files.dataAccess.userRepositories.EmployeeRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.user.EmployeeRepository;
+import source_files.services.Image.UserImageService;
 import source_files.services.entityServices.abstracts.userAbstract.EmployeeEntityService;
-import source_files.services.systemServices.ImageServices.UserImageService;
 
 import java.util.List;
 

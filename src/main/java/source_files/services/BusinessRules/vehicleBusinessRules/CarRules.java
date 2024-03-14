@@ -2,14 +2,14 @@ package source_files.services.BusinessRules.vehicleBusinessRules;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.userDTOs.CustomerDTO;
+import source_files.controllers.user.dtos.CustomerDTO;
+import source_files.controllers.vehicle.requests.CarRequests.CreateCarRequest;
+import source_files.controllers.vehicle.requests.CarRequests.UpdateCarRequest;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
-import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
-import source_files.dataAccess.vehicleRepositories.CarRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.ValidationException;
+import source_files.repositories.vehicle.CarRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
 import source_files.services.DrivingLicenseTypeService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
@@ -17,7 +17,7 @@ import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFe
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarModelEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.ColorEntityService;
-import source_files.services.userServices.abstracts.CustomerService;
+import source_files.services.user.abstracts.CustomerService;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

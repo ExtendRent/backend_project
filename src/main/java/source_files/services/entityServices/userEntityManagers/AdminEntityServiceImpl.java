@@ -2,13 +2,13 @@ package source_files.services.entityServices.userEntityManagers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.controllers.user.requests.CreateAdminRequest;
+import source_files.controllers.user.requests.UpdateAdminRequest;
 import source_files.data.models.userEntities.AdminEntity;
-import source_files.data.requests.userRequests.CreateAdminRequest;
-import source_files.data.requests.userRequests.UpdateAdminRequest;
-import source_files.dataAccess.userRepositories.AdminRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.user.AdminRepository;
+import source_files.services.Image.UserImageService;
 import source_files.services.entityServices.abstracts.userAbstract.AdminEntityService;
-import source_files.services.systemServices.ImageServices.UserImageService;
 
 import java.util.List;
 

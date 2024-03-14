@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.userDTOs.CustomerDTO;
+import source_files.controllers.user.dtos.CustomerDTO;
 import source_files.data.enums.types.userTypes.CustomerType;
 import source_files.data.models.DrivingLicenseTypeEntity;
 import source_files.data.models.baseEntities.UserEntity;

@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import source_files.data.DTO.userDTOs.UserDTO;
+import source_files.controllers.user.dtos.UserDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.enums.types.userTypes.UserRole;
 import source_files.data.enums.types.userTypes.UserType;

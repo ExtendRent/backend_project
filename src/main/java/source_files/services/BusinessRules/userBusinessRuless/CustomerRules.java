@@ -2,12 +2,12 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.controllers.user.requests.CreateCustomerRequest;
+import source_files.controllers.user.requests.UpdateCustomerRequest;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.requests.userRequests.CreateCustomerRequest;
-import source_files.data.requests.userRequests.UpdateCustomerRequest;
-import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.user.CustomerRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserRules;
 import source_files.services.entityServices.userEntityManagers.CustomerEntityServiceImpl;
 

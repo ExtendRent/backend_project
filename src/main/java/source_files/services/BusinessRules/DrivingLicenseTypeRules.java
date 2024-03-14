@@ -2,11 +2,11 @@ package source_files.services.BusinessRules;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.CreateDrivingLicenseTypeRequest;
-import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
-import source_files.dataAccess.DrivingLicenseTypeRepository;
+import source_files.controllers.item.requests.CreateDrivingLicenseTypeRequest;
+import source_files.controllers.item.requests.UpdateDrivingLicenseTypeRequest;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.DrivingLicenseTypeRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;

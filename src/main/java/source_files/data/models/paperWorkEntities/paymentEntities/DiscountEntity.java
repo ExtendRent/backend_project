@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.paperWorkDTOs.DiscountDTO;
+import source_files.controllers.paperWork.dtos.DiscountDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter

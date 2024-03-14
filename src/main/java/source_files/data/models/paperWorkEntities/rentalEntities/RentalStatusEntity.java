@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.data.DTO.paperWorkDTOs.RentalStatusDTO;
+import source_files.controllers.paperWork.dtos.RentalStatusDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus;
 import source_files.data.models.baseEntities.BaseEntity;
 

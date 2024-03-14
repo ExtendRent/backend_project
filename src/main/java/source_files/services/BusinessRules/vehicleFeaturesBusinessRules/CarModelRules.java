@@ -2,11 +2,11 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
-import source_files.dataAccess.vehicleFeaturesRespositories.CarModelRepository;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.vehicleFeatures.CarModelRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.paperWorkDTOs.RentalDTO;
+import source_files.controllers.paperWork.dtos.RentalDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;

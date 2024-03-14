@@ -1,8 +1,8 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts;
 
+import source_files.controllers.vehicle.requests.CarRequests.CreateCarRequest;
+import source_files.controllers.vehicle.requests.CarRequests.UpdateCarRequest;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
-import source_files.data.requests.vehicleRequests.CarRequests.UpdateCarRequest;
 
 import java.util.List;
 

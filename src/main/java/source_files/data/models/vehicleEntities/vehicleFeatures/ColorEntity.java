@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.itemDTOs.ColorDTO;
+import source_files.controllers.vehicle.dtos.ColorDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 
 @Getter

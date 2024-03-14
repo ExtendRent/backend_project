@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import source_files.data.models.baseEntities.UserEntity;
-import source_files.dataAccess.userRepositories.UserRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.user.UserRepository;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 
 import java.util.List;

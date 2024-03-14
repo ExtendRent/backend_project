@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.itemDTOs.BrandDTO;
+import source_files.controllers.vehicle.dtos.BrandDTO;
 import source_files.data.models.baseEntities.BaseEntity;
 import source_files.data.models.imageEntities.BrandImageEntity;
 

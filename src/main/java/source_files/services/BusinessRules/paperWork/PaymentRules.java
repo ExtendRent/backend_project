@@ -6,7 +6,7 @@ import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInfo
 import source_files.exception.DataNotFoundException;
 import source_files.exception.PaymentException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
-import source_files.services.systemServices.SysPaymentDetailsServiceImpl;
+import source_files.services.system.SysPaymentDetailsServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;

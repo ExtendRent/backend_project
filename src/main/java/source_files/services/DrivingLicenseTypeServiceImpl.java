@@ -2,10 +2,10 @@ package source_files.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.DTO.DrivingLicenseTypeDTO;
+import source_files.controllers.item.dtos.DrivingLicenseTypeDTO;
+import source_files.controllers.item.requests.CreateDrivingLicenseTypeRequest;
+import source_files.controllers.item.requests.UpdateDrivingLicenseTypeRequest;
 import source_files.data.models.DrivingLicenseTypeEntity;
-import source_files.data.requests.CreateDrivingLicenseTypeRequest;
-import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
 import source_files.services.BusinessRules.DrivingLicenseTypeRules;
 import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
 

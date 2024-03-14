@@ -2,20 +2,20 @@ package source_files.services.BusinessRules.paperWork;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.RentalRequests.ReturnRentalRequest;
+import source_files.controllers.paperWork.requests.RentalRequests.ShowRentalRequest;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
-import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
-import source_files.data.requests.paperworkRequests.RentalRequests.ShowRentalRequest;
 import source_files.exception.DataNotFoundException;
 import source_files.exception.NotSuitableException;
 import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarRules;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityServiceImpl;
-import source_files.services.paperWorkServices.abstracts.DiscountService;
-import source_files.services.userServices.abstracts.CustomerService;
-import source_files.services.vehicleService.abstracts.CarService;
+import source_files.services.paperWork.abstracts.DiscountService;
+import source_files.services.user.abstracts.CustomerService;
+import source_files.services.vehicle.abstracts.CarService;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

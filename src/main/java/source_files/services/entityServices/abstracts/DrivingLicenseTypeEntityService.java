@@ -1,8 +1,8 @@
 package source_files.services.entityServices.abstracts;
 
+import source_files.controllers.item.requests.CreateDrivingLicenseTypeRequest;
+import source_files.controllers.item.requests.UpdateDrivingLicenseTypeRequest;
 import source_files.data.models.DrivingLicenseTypeEntity;
-import source_files.data.requests.CreateDrivingLicenseTypeRequest;
-import source_files.data.requests.UpdateDrivingLicenseTypeRequest;
 
 import java.util.List;
 

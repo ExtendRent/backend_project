@@ -2,11 +2,11 @@ package source_files.services.BusinessRules.paperWork;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
-import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentTypeRequest;
-import source_files.dataAccess.paperWorkRepositories.PaymentTypeEntityRepository;
+import source_files.controllers.paperWork.requests.paymentRequests.CreatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentTypeRequest;
 import source_files.exception.AlreadyExistsException;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.paperWork.PaymentTypeEntityRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;

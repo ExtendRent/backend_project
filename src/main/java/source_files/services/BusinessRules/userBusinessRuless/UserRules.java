@@ -2,8 +2,8 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.dataAccess.userRepositories.UserRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.user.UserRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserRules;
 
 import java.util.List;

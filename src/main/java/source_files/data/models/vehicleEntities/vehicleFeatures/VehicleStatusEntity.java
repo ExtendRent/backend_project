@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.itemDTOs.VehicleStatusDTO;
+import source_files.controllers.vehicle.dtos.VehicleStatusDTO;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.baseEntities.BaseEntity;
 

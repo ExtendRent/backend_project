@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import source_files.data.DTO.vehicleDTOs.CarDTO;
+import source_files.controllers.vehicle.dtos.CarDTO;
 import source_files.data.models.baseEntities.Vehicle;
 import source_files.data.models.imageEntities.CarImageEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;

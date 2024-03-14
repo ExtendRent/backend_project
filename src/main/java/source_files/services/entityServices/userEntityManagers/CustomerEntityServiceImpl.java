@@ -2,15 +2,15 @@ package source_files.services.entityServices.userEntityManagers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import source_files.controllers.user.requests.CreateCustomerRequest;
+import source_files.controllers.user.requests.UpdateCustomerRequest;
 import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.models.userEntities.CustomerEntity;
-import source_files.data.requests.userRequests.CreateCustomerRequest;
-import source_files.data.requests.userRequests.UpdateCustomerRequest;
-import source_files.dataAccess.userRepositories.CustomerRepository;
 import source_files.exception.DataNotFoundException;
+import source_files.repositories.user.CustomerRepository;
+import source_files.services.Image.UserImageService;
 import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
 import source_files.services.entityServices.abstracts.userAbstract.CustomerEntityService;
-import source_files.services.systemServices.ImageServices.UserImageService;
 
 import java.util.List;
 

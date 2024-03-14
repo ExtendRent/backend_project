@@ -3,11 +3,11 @@ package source_files.controllerTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import source_files.controllers.paperWorkControllers.PaymentDetailsController;
-import source_files.data.DTO.paperWorkDTOs.PaymentDetailsDTO;
-import source_files.data.requests.paperworkRequests.paymentRequests.UpdatePaymentDetailsRequest;
+import source_files.controllers.paperWork.PaymentDetailsController;
+import source_files.controllers.paperWork.dtos.PaymentDetailsDTO;
+import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentDetailsRequest;
 import source_files.data.responses.TResponse;
-import source_files.services.paperWorkServices.abstracts.PaymentDetailsService;
+import source_files.services.paperWork.abstracts.PaymentDetailsService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;

@@ -1,8 +1,8 @@
 package source_files.services.entityServices.abstracts.paperWorkAbstracts;
 
+import source_files.controllers.paperWork.requests.discountRequests.CreateDiscountRequest;
+import source_files.controllers.paperWork.requests.discountRequests.UpdateDiscountRequest;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
-import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
-import source_files.data.requests.paperworkRequests.discountRequests.UpdateDiscountRequest;
 
 import java.util.List;
 

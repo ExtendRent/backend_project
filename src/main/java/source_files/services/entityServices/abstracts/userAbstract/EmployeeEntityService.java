@@ -1,9 +1,9 @@
 package source_files.services.entityServices.abstracts.userAbstract;
 
 
+import source_files.controllers.user.requests.CreateEmployeeRequest;
+import source_files.controllers.user.requests.UpdateEmployeeRequest;
 import source_files.data.models.userEntities.EmployeeEntity;
-import source_files.data.requests.userRequests.CreateEmployeeRequest;
-import source_files.data.requests.userRequests.UpdateEmployeeRequest;
 
 import java.util.List;
 

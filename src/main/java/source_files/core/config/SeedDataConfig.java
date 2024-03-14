@@ -9,44 +9,44 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import source_files.data.DTO.itemDTOs.BrandDTO;
+import source_files.controllers.item.requests.CreateDrivingLicenseTypeRequest;
+import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.RentalRequests.ReturnRentalRequest;
+import source_files.controllers.paperWork.requests.discountRequests.CreateDiscountRequest;
+import source_files.controllers.paperWork.requests.paymentRequests.CreatePaymentTypeRequest;
+import source_files.controllers.user.requests.CreateAdminRequest;
+import source_files.controllers.user.requests.CreateCustomerRequest;
+import source_files.controllers.user.requests.CreateEmployeeRequest;
+import source_files.controllers.vehicle.dtos.BrandDTO;
+import source_files.controllers.vehicle.requests.CarRequests.CreateCarRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarSegmentRequests.CreateCarSegmentRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
 import source_files.data.enums.defaultDataEnums.*;
 import source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalStatusEntity;
-import source_files.data.requests.CreateDrivingLicenseTypeRequest;
-import source_files.data.requests.paperworkRequests.RentalRequests.CreateRentalRequest;
-import source_files.data.requests.paperworkRequests.RentalRequests.ReturnRentalRequest;
-import source_files.data.requests.paperworkRequests.discountRequests.CreateDiscountRequest;
-import source_files.data.requests.paperworkRequests.paymentRequests.CreatePaymentTypeRequest;
-import source_files.data.requests.userRequests.CreateAdminRequest;
-import source_files.data.requests.userRequests.CreateCustomerRequest;
-import source_files.data.requests.userRequests.CreateEmployeeRequest;
-import source_files.data.requests.vehicleRequests.CarRequests.CreateCarRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.CarSegmentRequests.CreateCarSegmentRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
-import source_files.data.requests.vehicleRequests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
 import source_files.exception.DataNotFoundException;
 import source_files.services.DrivingLicenseTypeService;
+import source_files.services.Image.BrandImageService;
+import source_files.services.Image.CarImageService;
+import source_files.services.Image.UserImageService;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
-import source_files.services.paperWorkServices.abstracts.DiscountService;
-import source_files.services.paperWorkServices.abstracts.PaymentTypeService;
-import source_files.services.paperWorkServices.abstracts.RentalService;
-import source_files.services.paperWorkServices.abstracts.RentalStatusService;
-import source_files.services.systemServices.ImageServices.BrandImageService;
-import source_files.services.systemServices.ImageServices.CarImageService;
-import source_files.services.systemServices.ImageServices.UserImageService;
-import source_files.services.userServices.abstracts.AdminService;
-import source_files.services.userServices.abstracts.CustomerService;
-import source_files.services.userServices.abstracts.EmployeeService;
-import source_files.services.vehicleFeaturesServices.abstracts.*;
-import source_files.services.vehicleService.abstracts.CarService;
+import source_files.services.paperWork.abstracts.DiscountService;
+import source_files.services.paperWork.abstracts.PaymentTypeService;
+import source_files.services.paperWork.abstracts.RentalService;
+import source_files.services.paperWork.abstracts.RentalStatusService;
+import source_files.services.user.abstracts.AdminService;
+import source_files.services.user.abstracts.CustomerService;
+import source_files.services.user.abstracts.EmployeeService;
+import source_files.services.vehicle.abstracts.CarService;
+import source_files.services.vehicleFeatures.abstracts.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -101,7 +101,7 @@ public class SeedDataConfig implements CommandLineRunner {
                 progress.setExtraMessage("Creating default brands...");
                 for (DefaultBrand brandEnum : DefaultBrand.getAll()) {
                     URL url = new URL(brandEnum.getImageUrl());
-                    Path path = Paths.get("src/main/assets/default/brand", brandEnum.name() + ".jpg");
+                    Path path = Paths.get("src/main/resources/assets/default/brand", brandEnum.name() + ".jpg");
                     if (Files.exists(path)) {
                         Files.delete(path);
                     }
@@ -243,7 +243,7 @@ public class SeedDataConfig implements CommandLineRunner {
                     DefaultCarImageUrl defaultCarImageEnum = defaultCarImageEnums[i - 1];
 
                     URL url = new URL(defaultCarImageEnum.getLabel());
-                    Path path = Paths.get("src/main/assets/default/car", defaultCarImageEnum.name() + ".jpg");
+                    Path path = Paths.get("src/main/resources/assets/default/car", defaultCarImageEnum.name() + ".jpg");
                     if (Files.exists(path)) {
                         Files.delete(path);
                     }
@@ -279,7 +279,7 @@ public class SeedDataConfig implements CommandLineRunner {
                 progress.setExtraMessage("Creating default users...");
                 for (DefaultUserImageUrl defaultUserImageEnum : DefaultUserImageUrl.getAll()) {
                     URL url = new URL(defaultUserImageEnum.getUrl());
-                    Path path = Paths.get("src/main/assets/default/user", defaultUserImageEnum.name() + ".jpg");
+                    Path path = Paths.get("src/main/resources/assets/default/user", defaultUserImageEnum.name() + ".jpg");
                     if (Files.exists(path)) {
                         Files.delete(path);
                     }

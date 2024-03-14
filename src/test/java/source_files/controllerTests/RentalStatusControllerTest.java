@@ -3,10 +3,10 @@ package source_files.controllerTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import source_files.controllers.paperWorkControllers.RentalStatusesController;
-import source_files.data.DTO.paperWorkDTOs.RentalStatusDTO;
+import source_files.controllers.paperWork.RentalStatusesController;
+import source_files.controllers.paperWork.dtos.RentalStatusDTO;
 import source_files.data.responses.TResponse;
-import source_files.services.paperWorkServices.abstracts.RentalStatusService;
+import source_files.services.paperWork.abstracts.RentalStatusService;
 
 import java.util.ArrayList;
 import java.util.List;
