@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.paperWork.dtos.DiscountDTO;
-import source_files.controllers.paperWork.requests.discountRequests.CreateDiscountRequest;
-import source_files.controllers.paperWork.requests.discountRequests.UpdateDiscountRequest;
+import source_files.controllers.paperWork.requests.discount.CreateDiscountRequest;
+import source_files.controllers.paperWork.requests.discount.UpdateDiscountRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWork.abstracts.DiscountService;
 

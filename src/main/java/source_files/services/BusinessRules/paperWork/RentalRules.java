@@ -2,14 +2,14 @@ package source_files.services.BusinessRules.paperWork;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.ReturnRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.ShowRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.ReturnRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.ShowRentalRequest;
+import source_files.core.exception.DataNotFoundException;
+import source_files.core.exception.NotSuitableException;
+import source_files.core.exception.ValidationException;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.exception.DataNotFoundException;
-import source_files.exception.NotSuitableException;
-import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarRules;
 import source_files.services.entityServices.paperWorkEntityManagers.RentalEntityServiceImpl;
@@ -21,9 +21,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
-import static source_files.exception.exceptionTypes.NotSuitableExceptionType.DRIVING_LICENSE_TYPE_NOT_SUITABLE;
-import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotSuitableExceptionType.DRIVING_LICENSE_TYPE_NOT_SUITABLE;
+import static source_files.core.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @RequiredArgsConstructor
 @Service

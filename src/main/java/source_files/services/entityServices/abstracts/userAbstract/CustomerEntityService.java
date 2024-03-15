@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.userAbstract;
 
-import source_files.controllers.user.requests.CreateCustomerRequest;
-import source_files.controllers.user.requests.UpdateCustomerRequest;
+import source_files.controllers.user.requests.customer.CreateCustomerRequest;
+import source_files.controllers.user.requests.customer.UpdateCustomerRequest;
 import source_files.data.models.userEntities.CustomerEntity;
 
 import java.util.List;

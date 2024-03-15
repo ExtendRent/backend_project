@@ -1,8 +1,8 @@
 package source_files.services.vehicleFeatures.abstracts;
 
 import source_files.controllers.vehicle.dtos.VehicleStatusDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.vehicleStatus.CreateVehicleStatusRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.vehicleStatus.UpdateVehicleStatusRequest;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 
 import java.util.List;

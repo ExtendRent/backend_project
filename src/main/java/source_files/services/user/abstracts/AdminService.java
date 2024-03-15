@@ -1,8 +1,8 @@
 package source_files.services.user.abstracts;
 
 import source_files.controllers.user.dtos.AdminDTO;
-import source_files.controllers.user.requests.CreateAdminRequest;
-import source_files.controllers.user.requests.UpdateAdminRequest;
+import source_files.controllers.user.requests.admin.CreateAdminRequest;
+import source_files.controllers.user.requests.admin.UpdateAdminRequest;
 
 import java.util.List;
 

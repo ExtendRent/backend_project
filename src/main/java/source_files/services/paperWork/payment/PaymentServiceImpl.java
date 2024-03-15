@@ -2,12 +2,12 @@ package source_files.services.paperWork.payment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.CreateRentalRequest;
+import source_files.core.exception.PaymentException;
 import source_files.data.models.paperWorkEntities.paymentEntities.CreditCardInformation;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.exception.PaymentException;
 import source_files.services.BusinessRules.paperWork.PaymentRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 import source_files.services.paperWork.abstracts.PaymentService;
@@ -15,7 +15,7 @@ import source_files.services.system.SysPaymentDetailsServiceImpl;
 
 import java.time.LocalDateTime;
 
-import static source_files.exception.exceptionTypes.PaymentExceptionType.*;
+import static source_files.core.exception.exceptionTypes.PaymentExceptionType.*;
 
 @Service
 @RequiredArgsConstructor

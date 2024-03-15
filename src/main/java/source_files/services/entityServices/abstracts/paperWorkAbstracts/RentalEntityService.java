@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.paperWorkAbstracts;
 
-import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.UpdateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.UpdateRentalRequest;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 
 import java.time.LocalDate;

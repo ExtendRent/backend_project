@@ -2,17 +2,17 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarSegmentRequests.CreateCarSegmentRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarSegmentRequests.UpdateCarSegmentRequest;
-import source_files.exception.AlreadyExistsException;
-import source_files.exception.DataNotFoundException;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carSegment.CreateCarSegmentRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carSegment.UpdateCarSegmentRequest;
+import source_files.core.exception.AlreadyExistsException;
+import source_files.core.exception.DataNotFoundException;
 import source_files.repositories.vehicleFeatures.CarSegmentRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.CAR_SEGMENT_ALREADY_EXSISTS;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_SEGMENT_LIST_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.AlreadyExistsExceptionType.CAR_SEGMENT_ALREADY_EXSISTS;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.CAR_SEGMENT_LIST_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service

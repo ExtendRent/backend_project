@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.vehicle.dtos.BrandDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.CreateBrandRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.UpdateBrandRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeatures.abstracts.BrandService;
 

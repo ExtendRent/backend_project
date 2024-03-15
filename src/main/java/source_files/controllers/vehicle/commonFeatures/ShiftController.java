@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.vehicle.dtos.ShiftTypeDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.UpdateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.CreateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.UpdateShiftTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeatures.abstracts.ShiftTypeService;
 

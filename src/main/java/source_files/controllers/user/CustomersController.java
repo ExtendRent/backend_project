@@ -8,8 +8,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.paperWork.dtos.RentalDTO;
 import source_files.controllers.user.dtos.CustomerDTO;
-import source_files.controllers.user.requests.CreateCustomerRequest;
-import source_files.controllers.user.requests.UpdateCustomerRequest;
+import source_files.controllers.user.requests.customer.CreateCustomerRequest;
+import source_files.controllers.user.requests.customer.UpdateCustomerRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.user.abstracts.CustomerService;
 

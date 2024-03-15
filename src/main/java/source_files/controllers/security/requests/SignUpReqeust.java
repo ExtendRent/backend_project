@@ -4,9 +4,9 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import source_files.controllers.user.requests.CreateAdminRequest;
-import source_files.controllers.user.requests.CreateCustomerRequest;
-import source_files.controllers.user.requests.CreateEmployeeRequest;
+import source_files.controllers.user.requests.admin.CreateAdminRequest;
+import source_files.controllers.user.requests.customer.CreateCustomerRequest;
+import source_files.controllers.user.requests.employee.CreateEmployeeRequest;
 import source_files.data.enums.types.userTypes.UserRole;
 
 @Data

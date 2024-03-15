@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.user.dtos.AdminDTO;
-import source_files.controllers.user.requests.CreateAdminRequest;
-import source_files.controllers.user.requests.UpdateAdminRequest;
+import source_files.controllers.user.requests.admin.CreateAdminRequest;
+import source_files.controllers.user.requests.admin.UpdateAdminRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.user.abstracts.AdminService;
 

@@ -1,8 +1,8 @@
 package source_files.services.vehicleFeatures.abstracts;
 
 import source_files.controllers.vehicle.dtos.ColorDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.color.CreateColorRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.color.UpdateColorRequest;
 
 import java.util.List;
 

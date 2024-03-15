@@ -1,6 +1,6 @@
 package source_files.services.system;
 
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentDetailsRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentDetailsRequest;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 
 import java.util.List;

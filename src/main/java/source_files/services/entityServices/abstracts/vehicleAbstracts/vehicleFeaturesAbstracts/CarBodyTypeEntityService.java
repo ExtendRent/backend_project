@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carBodyType.CreateCarBodyTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carBodyType.UpdateCarBodyTypeRequest;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
 
 import java.util.List;

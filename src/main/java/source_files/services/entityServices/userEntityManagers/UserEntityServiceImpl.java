@@ -4,14 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.baseEntities.UserEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.user.UserRepository;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_DATA_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.USER_DATA_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

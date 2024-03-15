@@ -1,8 +1,8 @@
 package source_files.services.vehicleFeatures.abstracts;
 
 import source_files.controllers.vehicle.dtos.ShiftTypeDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.UpdateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.CreateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.UpdateShiftTypeRequest;
 
 import java.util.List;
 

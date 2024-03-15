@@ -1,7 +1,7 @@
 package source_files.services.paperWork.abstracts;
 
 import source_files.controllers.paperWork.dtos.PaymentDetailsDTO;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentDetailsRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentDetailsRequest;
 
 import java.time.LocalDate;
 import java.util.List;

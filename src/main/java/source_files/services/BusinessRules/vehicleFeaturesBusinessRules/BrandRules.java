@@ -2,17 +2,17 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
-import source_files.exception.AlreadyExistsException;
-import source_files.exception.DataNotFoundException;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.CreateBrandRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.UpdateBrandRequest;
+import source_files.core.exception.AlreadyExistsException;
+import source_files.core.exception.DataNotFoundException;
 import source_files.repositories.vehicleFeatures.BrandRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.BRAND_ALREADY_EXISTS;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.BRAND_LIST_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.AlreadyExistsExceptionType.BRAND_ALREADY_EXISTS;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.BRAND_LIST_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service

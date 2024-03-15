@@ -4,14 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.controllers.paperWork.dtos.RentalDTO;
 import source_files.controllers.paperWork.dtos.ShowRentalResponse;
-import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.ReturnRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.ShowRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.UpdateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.ReturnRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.ShowRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.UpdateRentalRequest;
+import source_files.core.exception.ValidationException;
 import source_files.data.enums.defaultDataEnums.DefaultDiscount;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.exception.ValidationException;
 import source_files.services.BusinessRules.paperWork.RentalRules;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
 import source_files.services.paperWork.abstracts.PaymentService;
@@ -24,10 +24,10 @@ import source_files.services.vehicle.abstracts.CarService;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static source_files.core.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 import static source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus.ACTIVE;
 import static source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus.FINISHED;
 import static source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus.IN_USE;
-import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @Service
 @RequiredArgsConstructor

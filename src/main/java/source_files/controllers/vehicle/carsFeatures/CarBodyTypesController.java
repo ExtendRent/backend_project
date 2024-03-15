@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.vehicle.dtos.CarBodyTypeDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carBodyType.CreateCarBodyTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carBodyType.UpdateCarBodyTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeatures.abstracts.CarBodyTypeService;
 

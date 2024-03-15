@@ -1,8 +1,8 @@
 package source_files.services.paperWork.abstracts;
 
 import source_files.controllers.paperWork.dtos.DiscountDTO;
-import source_files.controllers.paperWork.requests.discountRequests.CreateDiscountRequest;
-import source_files.controllers.paperWork.requests.discountRequests.UpdateDiscountRequest;
+import source_files.controllers.paperWork.requests.discount.CreateDiscountRequest;
+import source_files.controllers.paperWork.requests.discount.UpdateDiscountRequest;
 
 import java.util.List;
 

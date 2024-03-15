@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.userAbstract;
 
-import source_files.controllers.user.requests.CreateAdminRequest;
-import source_files.controllers.user.requests.UpdateAdminRequest;
+import source_files.controllers.user.requests.admin.CreateAdminRequest;
+import source_files.controllers.user.requests.admin.UpdateAdminRequest;
 import source_files.data.models.userEntities.AdminEntity;
 
 import java.util.List;

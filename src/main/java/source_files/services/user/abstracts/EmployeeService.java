@@ -2,8 +2,8 @@ package source_files.services.user.abstracts;
 
 
 import source_files.controllers.user.dtos.EmployeeDTO;
-import source_files.controllers.user.requests.CreateEmployeeRequest;
-import source_files.controllers.user.requests.UpdateEmployeeRequest;
+import source_files.controllers.user.requests.employee.CreateEmployeeRequest;
+import source_files.controllers.user.requests.employee.UpdateEmployeeRequest;
 
 import java.util.List;
 

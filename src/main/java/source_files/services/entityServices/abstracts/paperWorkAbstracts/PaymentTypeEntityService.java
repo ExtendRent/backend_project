@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.paperWorkAbstracts;
 
-import source_files.controllers.paperWork.requests.paymentRequests.CreatePaymentTypeRequest;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.CreatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentTypeRequest;
 import source_files.data.enums.defaultDataEnums.DefaultPaymentType;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
 

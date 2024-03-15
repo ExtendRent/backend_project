@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import source_files.controllers.paperWork.PaymentTypesController;
 import source_files.controllers.paperWork.dtos.PaymentTypeDTO;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWork.abstracts.PaymentTypeService;
 

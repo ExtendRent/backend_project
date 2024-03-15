@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.vehicle.dtos.FuelTypeDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.FuelTypeRequests.UpdateFuelTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.fuelType.CreateFuelTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.fuelType.UpdateFuelTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.vehicleFeatures.abstracts.FuelTypeService;
 

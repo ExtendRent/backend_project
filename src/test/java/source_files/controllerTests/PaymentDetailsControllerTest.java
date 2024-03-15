@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import source_files.controllers.paperWork.PaymentDetailsController;
 import source_files.controllers.paperWork.dtos.PaymentDetailsDTO;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentDetailsRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentDetailsRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWork.abstracts.PaymentDetailsService;
 

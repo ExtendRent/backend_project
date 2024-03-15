@@ -3,7 +3,7 @@ package source_files.data.responses;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import source_files.exception.exceptionTypes.*;
+import source_files.core.exception.exceptionTypes.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

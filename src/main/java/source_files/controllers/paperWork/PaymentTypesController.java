@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.paperWork.dtos.PaymentTypeDTO;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentTypeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWork.abstracts.PaymentTypeService;
 

@@ -4,14 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.controllers.item.requests.CreateDrivingLicenseTypeRequest;
 import source_files.controllers.item.requests.UpdateDrivingLicenseTypeRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.DrivingLicenseTypeEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.DrivingLicenseTypeRepository;
 import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.DRIVING_LICENSE_TYPE_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.DRIVING_LICENSE_TYPE_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service

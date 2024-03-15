@@ -2,16 +2,16 @@ package source_files.services.entityServices.vehicleEntityManagers.vehicleFeatur
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarBodyTypeRequests.CreateCarBodyTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarBodyTypeRequests.UpdateCarBodyTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carBodyType.CreateCarBodyTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carBodyType.UpdateCarBodyTypeRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.vehicleEntities.vehicleFeatures.CarFeatures.CarBodyTypeEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.vehicleFeatures.CarBodyTypeRepository;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.CarBodyTypeEntityService;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.BODY_TYPE_DATA_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.BODY_TYPE_DATA_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

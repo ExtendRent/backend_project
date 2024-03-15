@@ -1,6 +1,6 @@
 package source_files.services.paperWork.abstracts;
 
-import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.CreateRentalRequest;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 

@@ -2,17 +2,17 @@ package source_files.services.entityServices.vehicleEntityManagers.vehicleFeatur
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.CreateBrandRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.UpdateBrandRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.vehicleEntities.vehicleFeatures.BrandEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.vehicleFeatures.BrandRepository;
 import source_files.services.Image.BrandImageService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.BrandEntityService;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.BRAND_DATA_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.BRAND_DATA_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

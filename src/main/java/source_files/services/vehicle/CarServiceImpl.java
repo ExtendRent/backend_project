@@ -3,13 +3,13 @@ package source_files.services.vehicle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.controllers.vehicle.dtos.CarDTO;
-import source_files.controllers.vehicle.requests.CarRequests.CreateCarRequest;
-import source_files.controllers.vehicle.requests.CarRequests.UpdateCarRequest;
+import source_files.controllers.vehicle.requests.car.CreateCarRequest;
+import source_files.controllers.vehicle.requests.car.UpdateCarRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.imageEntities.CarImageEntity;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.services.BusinessRules.vehicleBusinessRules.CarRules;
 import source_files.services.Image.CarImageService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
@@ -22,8 +22,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.VEHICLE_STATUS_NOT_FOUND;
 import static source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus.*;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.VEHICLE_STATUS_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

@@ -2,14 +2,14 @@ package source_files.services.system;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentDetailsRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentDetailsRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentDetailsEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.paperWork.PaymentDetailsRepository;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_DATA_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_DETAILS_DATA_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

@@ -1,8 +1,8 @@
 package source_files.services.paperWork.abstracts;
 
 import source_files.controllers.paperWork.dtos.PaymentTypeDTO;
-import source_files.controllers.paperWork.requests.paymentRequests.CreatePaymentTypeRequest;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.CreatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentTypeRequest;
 
 import java.util.List;
 

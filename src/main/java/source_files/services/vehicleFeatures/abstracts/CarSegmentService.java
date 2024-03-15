@@ -1,8 +1,8 @@
 package source_files.services.vehicleFeatures.abstracts;
 
 import source_files.controllers.vehicle.dtos.CarSegmentDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarSegmentRequests.CreateCarSegmentRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarSegmentRequests.UpdateCarSegmentRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carSegment.CreateCarSegmentRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carSegment.UpdateCarSegmentRequest;
 
 import java.util.List;
 

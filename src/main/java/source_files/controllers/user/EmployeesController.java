@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import source_files.controllers.user.dtos.EmployeeDTO;
-import source_files.controllers.user.requests.CreateEmployeeRequest;
-import source_files.controllers.user.requests.UpdateEmployeeRequest;
+import source_files.controllers.user.requests.employee.CreateEmployeeRequest;
+import source_files.controllers.user.requests.employee.UpdateEmployeeRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.user.abstracts.EmployeeService;
 

@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.UpdateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.CreateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.UpdateShiftTypeRequest;
 import source_files.data.models.vehicleEntities.vehicleFeatures.ShiftTypeEntity;
 
 import java.util.List;

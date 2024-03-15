@@ -3,12 +3,12 @@ package source_files.services.BusinessRules.vehicleBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import source_files.controllers.user.dtos.CustomerDTO;
-import source_files.controllers.vehicle.requests.CarRequests.CreateCarRequest;
-import source_files.controllers.vehicle.requests.CarRequests.UpdateCarRequest;
+import source_files.controllers.vehicle.requests.car.CreateCarRequest;
+import source_files.controllers.vehicle.requests.car.UpdateCarRequest;
+import source_files.core.exception.AlreadyExistsException;
+import source_files.core.exception.DataNotFoundException;
+import source_files.core.exception.ValidationException;
 import source_files.data.models.vehicleEntities.CarEntity;
-import source_files.exception.AlreadyExistsException;
-import source_files.exception.DataNotFoundException;
-import source_files.exception.ValidationException;
 import source_files.repositories.vehicle.CarRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseRules;
 import source_files.services.DrivingLicenseTypeService;
@@ -24,9 +24,9 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.LICENSE_PLATE_ALREADY_EXISTS;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
-import static source_files.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
+import static source_files.core.exception.exceptionTypes.AlreadyExistsExceptionType.LICENSE_PLATE_ALREADY_EXISTS;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.CAR_LIST_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @RequiredArgsConstructor
 @Service

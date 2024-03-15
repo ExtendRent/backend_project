@@ -3,20 +3,20 @@ package source_files.services.Image;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import source_files.core.exception.DataNotFoundException;
+import source_files.core.exception.FileException;
+import source_files.core.utilities.ImageUtils;
 import source_files.data.models.imageEntities.CarImageEntity;
-import source_files.exception.DataNotFoundException;
-import source_files.exception.FileException;
 import source_files.repositories.image.CarImageRepository;
 import source_files.services.BusinessRules.ImageRules;
 import source_files.services.external.CloudinaryServiceImpl;
-import source_files.utilities.ImageUtils;
 
 import java.io.IOException;
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.FileExceptionType.PHOTO_DELETE_FAILED;
-import static source_files.exception.exceptionTypes.FileExceptionType.PHOTO_UPLOAD_FAILED;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.IMAGE_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.FileExceptionType.PHOTO_DELETE_FAILED;
+import static source_files.core.exception.exceptionTypes.FileExceptionType.PHOTO_UPLOAD_FAILED;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.IMAGE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -69,7 +69,7 @@ public class CarImageServiceImpl implements CarImageService {
     @Override
     public void delete(int id) throws IOException {
         try {
-            if (cloudinaryServiceImpl.deleteFile(this.getById(id).getUrl())) {
+            if (cloudinaryServiceImpl.deleteFile(this.getById(id).getName())) {
                 repository.delete(this.getById(id));
             }
         } catch (Exception e) {

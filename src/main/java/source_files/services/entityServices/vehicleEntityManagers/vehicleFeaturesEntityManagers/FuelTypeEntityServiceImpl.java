@@ -2,16 +2,16 @@ package source_files.services.entityServices.vehicleEntityManagers.vehicleFeatur
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.FuelTypeRequests.UpdateFuelTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.fuelType.CreateFuelTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.fuelType.UpdateFuelTypeRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.vehicleEntities.vehicleFeatures.FuelTypeEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.vehicleFeatures.FuelTypeRepository;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.FuelTypeEntityService;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.FUEL_TYPE_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.FUEL_TYPE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

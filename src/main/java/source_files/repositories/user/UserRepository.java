@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
     List<UserEntity> findAllByIsDeleted(boolean isDeleted);
 
-    boolean existsByEmailIgnoreCase(String email);
+    boolean existsByEmailAddressIgnoreCase(String email);
 }

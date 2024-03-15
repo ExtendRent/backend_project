@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.VehicleStatusRequests.CreateVehicleStatusRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.VehicleStatusRequests.UpdateVehicleStatusRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.vehicleStatus.CreateVehicleStatusRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.vehicleStatus.UpdateVehicleStatusRequest;
 import source_files.data.enums.defaultDataEnums.Status.DefaultVehicleStatus;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
 

@@ -1,8 +1,8 @@
 package source_files.services.vehicleFeatures.abstracts;
 
 import source_files.controllers.vehicle.dtos.CarModelDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarModelRequests.CreateCarModelRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.CarModelRequests.UpdateCarModelRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carModel.CreateCarModelRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.carModel.UpdateCarModelRequest;
 
 import java.util.List;
 

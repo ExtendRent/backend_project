@@ -67,7 +67,9 @@ public class CloudinaryServiceImpl implements FileUploadService {
                 .toString();
     }
 
-    public boolean deleteFile(String publicId) throws IOException {
+    public boolean deleteFile(String uniqColumn) throws IOException {
+        String publicId = CloudinaryConstants.BASE_PUBLIC_ID_CAR.getValue() + uniqColumn;
+
         Map result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
         return "ok".equals(result.get("result"));
     }

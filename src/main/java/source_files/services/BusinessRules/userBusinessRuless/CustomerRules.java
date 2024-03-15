@@ -2,20 +2,20 @@ package source_files.services.BusinessRules.userBusinessRuless;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.user.requests.CreateCustomerRequest;
-import source_files.controllers.user.requests.UpdateCustomerRequest;
+import source_files.controllers.user.requests.customer.CreateCustomerRequest;
+import source_files.controllers.user.requests.customer.UpdateCustomerRequest;
+import source_files.core.exception.AlreadyExistsException;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.exception.AlreadyExistsException;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.user.CustomerRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseUserRules;
 import source_files.services.entityServices.userEntityManagers.CustomerEntityServiceImpl;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.*;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_LIST_NOT_FOUND;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.AlreadyExistsExceptionType.*;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_LIST_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service

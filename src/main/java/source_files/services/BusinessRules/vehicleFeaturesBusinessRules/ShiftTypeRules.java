@@ -2,17 +2,17 @@ package source_files.services.BusinessRules.vehicleFeaturesBusinessRules;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.CreateShiftTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ShiftTypeRequests.UpdateShiftTypeRequest;
-import source_files.exception.AlreadyExistsException;
-import source_files.exception.DataNotFoundException;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.CreateShiftTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.shiftType.UpdateShiftTypeRequest;
+import source_files.core.exception.AlreadyExistsException;
+import source_files.core.exception.DataNotFoundException;
 import source_files.repositories.vehicleFeatures.ShiftTypeRepository;
 import source_files.services.BusinessRules.abstractsBusinessRules.BaseItemRules;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.AlreadyExistsExceptionType.SHIFT_TYPE_ALREADY_EXISTS;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.SHIFT_TYPE_LIST_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.AlreadyExistsExceptionType.SHIFT_TYPE_ALREADY_EXISTS;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.SHIFT_TYPE_LIST_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service

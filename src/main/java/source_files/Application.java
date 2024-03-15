@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import source_files.core.config.SeedDataConfig;
-import source_files.utilities.ResponseTimeMeasurement;
+import source_files.core.utilities.ResponseTimeMeasurement;
 
 import java.io.IOException;
 

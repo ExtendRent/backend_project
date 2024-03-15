@@ -1,8 +1,8 @@
 package source_files.services.vehicleFeatures.abstracts;
 
 import source_files.controllers.vehicle.dtos.BrandDTO;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.CreateBrandRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.BrandRequests.UpdateBrandRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.CreateBrandRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.brand.UpdateBrandRequest;
 
 import java.util.List;
 

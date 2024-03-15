@@ -2,10 +2,10 @@ package source_files.services.entityServices.paperWorkEntityManagers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.UpdateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.UpdateRentalRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.paperWork.RentalRepository;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.RentalEntityService;
@@ -18,8 +18,8 @@ import source_files.services.vehicle.abstracts.CarService;
 import java.time.LocalDate;
 import java.util.List;
 
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
 import static source_files.data.enums.defaultDataEnums.Status.DefaultRentalStatus.WAITING;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.RENTAL_DATA_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

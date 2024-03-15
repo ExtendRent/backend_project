@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.FuelTypeRequests.CreateFuelTypeRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.FuelTypeRequests.UpdateFuelTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.fuelType.CreateFuelTypeRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.fuelType.UpdateFuelTypeRequest;
 import source_files.data.models.vehicleEntities.vehicleFeatures.FuelTypeEntity;
 
 import java.util.List;

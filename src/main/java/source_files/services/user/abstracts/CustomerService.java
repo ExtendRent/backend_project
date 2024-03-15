@@ -2,8 +2,8 @@ package source_files.services.user.abstracts;
 
 import source_files.controllers.paperWork.dtos.RentalDTO;
 import source_files.controllers.user.dtos.CustomerDTO;
-import source_files.controllers.user.requests.CreateCustomerRequest;
-import source_files.controllers.user.requests.UpdateCustomerRequest;
+import source_files.controllers.user.requests.customer.CreateCustomerRequest;
+import source_files.controllers.user.requests.customer.UpdateCustomerRequest;
 import source_files.data.models.paperWorkEntities.rentalEntities.RentalEntity;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts;
 
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ColorRequests.CreateColorRequest;
-import source_files.controllers.vehicle.requests.VehicleFeaturesRequests.ColorRequests.UpdateColorRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.color.CreateColorRequest;
+import source_files.controllers.vehicle.requests.vehicleFeatures.color.UpdateColorRequest;
 import source_files.data.models.vehicleEntities.vehicleFeatures.ColorEntity;
 
 import java.util.List;

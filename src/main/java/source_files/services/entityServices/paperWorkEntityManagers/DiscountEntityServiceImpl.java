@@ -2,16 +2,16 @@ package source_files.services.entityServices.paperWorkEntityManagers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.paperWork.requests.discountRequests.CreateDiscountRequest;
-import source_files.controllers.paperWork.requests.discountRequests.UpdateDiscountRequest;
+import source_files.controllers.paperWork.requests.discount.CreateDiscountRequest;
+import source_files.controllers.paperWork.requests.discount.UpdateDiscountRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.paperWorkEntities.paymentEntities.DiscountEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.paperWork.DiscountRepository;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.DiscountEntityService;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.DISCOUNT_CODE_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.DISCOUNT_CODE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

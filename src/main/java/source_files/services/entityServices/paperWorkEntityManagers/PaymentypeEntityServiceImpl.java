@@ -2,17 +2,17 @@ package source_files.services.entityServices.paperWorkEntityManagers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.paperWork.requests.paymentRequests.CreatePaymentTypeRequest;
-import source_files.controllers.paperWork.requests.paymentRequests.UpdatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.CreatePaymentTypeRequest;
+import source_files.controllers.paperWork.requests.payment.UpdatePaymentTypeRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.enums.defaultDataEnums.DefaultPaymentType;
 import source_files.data.models.paperWorkEntities.paymentEntities.PaymentTypeEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.paperWork.PaymentTypeEntityRepository;
 import source_files.services.entityServices.abstracts.paperWorkAbstracts.PaymentTypeEntityService;
 
 import java.util.List;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_TYPE_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.PAYMENT_TYPE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

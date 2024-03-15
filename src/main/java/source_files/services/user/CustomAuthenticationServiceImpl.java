@@ -9,15 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 import source_files.controllers.security.requests.RefreshTokenRequest;
 import source_files.controllers.security.requests.SignInRequest;
 import source_files.controllers.security.requests.SignUpReqeust;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.models.baseEntities.UserEntity;
 import source_files.data.responses.JwtToken;
-import source_files.exception.DataNotFoundException;
 import source_files.security.JwtService;
 import source_files.services.entityServices.abstracts.userAbstract.UserEntityService;
 import source_files.services.external.EmailService;
 import source_files.services.user.abstracts.*;
 
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.USER_ROLE_NOT_FOUND;
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.USER_ROLE_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor

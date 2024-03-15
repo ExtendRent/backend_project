@@ -6,10 +6,10 @@ import org.springframework.http.ResponseEntity;
 import source_files.controllers.paperWork.RentalsController;
 import source_files.controllers.paperWork.dtos.RentalDTO;
 import source_files.controllers.paperWork.dtos.ShowRentalResponse;
-import source_files.controllers.paperWork.requests.RentalRequests.CreateRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.ReturnRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.ShowRentalRequest;
-import source_files.controllers.paperWork.requests.RentalRequests.UpdateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.CreateRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.ReturnRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.ShowRentalRequest;
+import source_files.controllers.paperWork.requests.Rental.UpdateRentalRequest;
 import source_files.data.responses.TResponse;
 import source_files.services.paperWork.abstracts.RentalService;
 

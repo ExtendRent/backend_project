@@ -2,11 +2,11 @@ package source_files.services.entityServices.userEntityManagers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import source_files.controllers.user.requests.CreateCustomerRequest;
-import source_files.controllers.user.requests.UpdateCustomerRequest;
+import source_files.controllers.user.requests.customer.CreateCustomerRequest;
+import source_files.controllers.user.requests.customer.UpdateCustomerRequest;
+import source_files.core.exception.DataNotFoundException;
 import source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus;
 import source_files.data.models.userEntities.CustomerEntity;
-import source_files.exception.DataNotFoundException;
 import source_files.repositories.user.CustomerRepository;
 import source_files.services.Image.UserImageService;
 import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
@@ -14,8 +14,8 @@ import source_files.services.entityServices.abstracts.userAbstract.CustomerEntit
 
 import java.util.List;
 
+import static source_files.core.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_DATA_NOT_FOUND;
 import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.PENDING_VERIFYING;
-import static source_files.exception.exceptionTypes.NotFoundExceptionType.CUSTOMER_DATA_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service
