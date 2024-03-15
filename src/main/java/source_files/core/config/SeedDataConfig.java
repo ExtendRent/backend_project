@@ -190,7 +190,7 @@ public class SeedDataConfig implements CommandLineRunner {
             } catch (DataNotFoundException e) {
                 progress.setExtraMessage("Creating default discounts...");
                 for (DefaultDiscount defaultDiscount : DefaultDiscount.getAll()) {
-                    discountService.create(new CreateDiscountRequest(defaultDiscount.name(), defaultDiscount.getPercentage()));
+                    discountService.create(new CreateDiscountRequest(defaultDiscount.name(), defaultDiscount.getPercentage(), true));
                     progress.step();
                 }
             }

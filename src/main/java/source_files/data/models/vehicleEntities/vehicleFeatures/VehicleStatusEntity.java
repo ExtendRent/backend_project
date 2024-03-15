@@ -28,6 +28,7 @@ public class VehicleStatusEntity extends BaseEntity {
 
     public VehicleStatusDTO toModel() {
         return VehicleStatusDTO.builder()
+                .id(getId())
                 .name(name)
                 .isDeleted(getIsDeleted())
                 .build();

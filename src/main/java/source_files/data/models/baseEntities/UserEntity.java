@@ -24,11 +24,8 @@ import static source_files.data.enums.defaultDataEnums.Status.DefaultUserStatus.
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@SuperBuilder
 @SuperBuilder(builderMethodName = "userBuilder")
-//@MappedSuperclass//->Bu sınıf entity olduğu için bu anotasyonu KULLANAMAYIZ(artık bir üst sınıftaki kolonlar da bu sınıfa gelecek). !!!
 @Inheritance(strategy = InheritanceType.JOINED)
-//-> kendini extend eden her klasa kendi değişkenlerini eklemesini sağlar.
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity implements UserDetails {
@@ -104,6 +101,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
                 .userImageEntityUrl(getUserImageEntity().getUrl())
                 .isDeleted(getIsDeleted())
                 .authority(getAuthority())
+                .status(getStatus().getLabel())
                 .build();
     }
 }

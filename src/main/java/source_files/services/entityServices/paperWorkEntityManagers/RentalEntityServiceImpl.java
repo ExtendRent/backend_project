@@ -65,7 +65,7 @@ public class RentalEntityServiceImpl implements RentalEntityService {
 
     @Override
     public RentalEntity update(RentalEntity rentalEntity) {
-        return null;
+        return this.repository.save(rentalEntity);
     }
 
     @Override

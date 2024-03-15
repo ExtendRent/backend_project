@@ -16,6 +16,7 @@ import source_files.data.models.vehicleEntities.vehicleFeatures.ShiftTypeEntity;
 import source_files.data.models.vehicleEntities.vehicleFeatures.VehicleStatusEntity;
 import source_files.repositories.vehicle.CarRepository;
 import source_files.services.Image.CarImageService;
+import source_files.services.entityServices.abstracts.DrivingLicenseTypeEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.CarEntityService;
 import source_files.services.entityServices.abstracts.vehicleAbstracts.vehicleFeaturesAbstracts.*;
 
@@ -37,6 +38,7 @@ public class CarEntityServiceImpl implements CarEntityService {
     private final ShiftTypeEntityService gearTypeEntityService;
     private final VehicleStatusEntityService vehicleStatusEntityService;
     private final CarImageService carImageService;
+    private final DrivingLicenseTypeEntityService drivingLicenseTypeService;
 
     @Override
     public CarEntity create(CreateCarRequest createCarRequest) {
@@ -66,6 +68,8 @@ public class CarEntityServiceImpl implements CarEntityService {
                 .luggage(createCarRequest.getLuggage())
                 .isAvailable(createCarRequest.isAvailable())
                 .details(createCarRequest.getDetails())
+                .expectedMinDrivingLicenseType(
+                        drivingLicenseTypeService.getById(createCarRequest.getExpectedMinDrivingLicenseTypeId()))
                 .vehicleType(CAR)
                 .build();
         return repository.save(carEntity);

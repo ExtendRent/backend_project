@@ -81,6 +81,8 @@ public class RentalEntity extends BaseEntity {
                 .carEntityModelEntityName(getCarEntity().getCarModelEntity().getName())
                 .carEntityRentalPrice(getCarEntity().getRentalPrice())
                 .carEntityYear(getCarEntity().getYear())
+                .customerEntityName(getCustomerEntity().getName())
+                .customerEntitySurname(getCustomerEntity().getSurname())
                 .discountEntityId(getDiscountEntity().getId())
                 .discountEntityDiscountCode(getDiscountEntity().getDiscountCode())
                 .endDate(getEndDate())

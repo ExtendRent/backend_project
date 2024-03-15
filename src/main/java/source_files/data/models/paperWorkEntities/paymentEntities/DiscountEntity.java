@@ -26,7 +26,7 @@ public class DiscountEntity extends BaseEntity {
     private int discountPercentage;
 
     @Column(name = "is_active")
-    private boolean isActive = true;
+    private boolean isActive;
 
     public DiscountDTO toModel() {
         return DiscountDTO.builder()

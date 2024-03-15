@@ -24,6 +24,7 @@ public class DiscountEntityServiceImpl implements DiscountEntityService {
         DiscountEntity discountEntity = DiscountEntity.discountBuilder()
                 .discountCode(createDiscountRequest.getDiscountCode())
                 .discountPercentage(createDiscountRequest.getDiscountPercentage())
+                .isActive(createDiscountRequest.isActive())
                 .build();
         return repository.save(discountEntity);
     }

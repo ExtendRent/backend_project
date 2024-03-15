@@ -64,7 +64,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDTO> getAll() {
-        return mapToDTOList(entityService.getAll());
+        return markAllForDrivingLicenseSuitable(entityService.getAll(), null);
     }
 
 

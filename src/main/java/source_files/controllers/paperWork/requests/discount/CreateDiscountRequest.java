@@ -19,5 +19,7 @@ public class CreateDiscountRequest {
     @NotNull(message = "Discount percentage cannot be blank")
     int discountPercentage;
 
+    @NotNull
+    boolean isActive;
 
 }
