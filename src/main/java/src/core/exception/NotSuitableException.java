@@ -1,0 +1,22 @@
+package src.core.exception;
+
+import lombok.Getter;
+import src.core.exception.exception_types.NotSuitableExceptionType;
+
+@Getter
+public class NotSuitableException extends RuntimeException {
+    private final NotSuitableExceptionType notSuitableExceptionType;
+    private final String detail;
+
+    public NotSuitableException(NotSuitableExceptionType notSuitableExceptionType, String detail) {
+        super(notSuitableExceptionType.getMessage());
+        this.notSuitableExceptionType = notSuitableExceptionType;
+        this.detail = detail;
+    }
+
+    public NotSuitableException(NotSuitableExceptionType notSuitableExceptionType) {
+        super(notSuitableExceptionType.getMessage());
+        this.notSuitableExceptionType = notSuitableExceptionType;
+        this.detail = notSuitableExceptionType.getMessage();
+    }
+}
