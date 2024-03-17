@@ -6,12 +6,12 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controllers.paperwork.DiscountsController;
-import src.controllers.paperwork.responses.DiscountResponse;
-import src.controllers.paperwork.requests.discount.CreateDiscountRequest;
-import src.controllers.paperwork.requests.discount.UpdateDiscountRequest;
-import src.data.global_responses.TResponse;
-import src.services.paperwork.discount.DiscountService;
+import src.controller.paperwork.discount.DiscountsController;
+import src.controller.paperwork.discount.responses.DiscountResponse;
+import src.controller.paperwork.discount.requests.CreateDiscountRequest;
+import src.controller.paperwork.discount.requests.UpdateDiscountRequest;
+import src.controller.TResponse;
+import src.service.paperwork.discount.DiscountService;
 
 public class DiscountControllerTest {
 

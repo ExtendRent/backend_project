@@ -3,10 +3,10 @@ package com.extendrent.controllerTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controllers.paperwork.RentalStatusesController;
-import src.controllers.paperwork.responses.RentalStatusResponse;
-import src.data.global_responses.TResponse;
-import src.services.paperwork.rental.RentalStatusService;
+import src.controller.paperwork.rental.RentalStatusesController;
+import src.controller.paperwork.rental.responses.RentalStatusResponse;
+import src.controller.TResponse;
+import src.service.paperwork.rental.status.RentalStatusService;
 
 import java.util.ArrayList;
 import java.util.List;

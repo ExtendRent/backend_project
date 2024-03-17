@@ -1,7 +1,7 @@
 package src.core.exception;
 
 import lombok.Getter;
-import src.core.exception.exception_types.NotFoundExceptionType;
+import src.core.exception.type.NotFoundExceptionType;
 
 @Getter
 public class DataNotFoundException extends RuntimeException {

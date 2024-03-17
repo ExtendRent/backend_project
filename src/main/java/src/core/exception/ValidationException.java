@@ -2,7 +2,7 @@ package src.core.exception;
 
 import lombok.Getter;
 import lombok.Setter;
-import src.core.exception.exception_types.ValidationExceptionType;
+import src.core.exception.type.ValidationExceptionType;
 
 @Getter
 @Setter

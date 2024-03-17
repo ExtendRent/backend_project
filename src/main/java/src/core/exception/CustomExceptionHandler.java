@@ -6,10 +6,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import src.core.exception.exception_types.NotFoundExceptionType;
-import src.core.exception.exception_types.ValidationExceptionType;
-import src.data.global_responses.ErrorResponse;
-import src.data.global_responses.TResponse;
+import src.controller.TResponse;
+import src.core.exception.response.ErrorResponse;
+import src.core.exception.type.NotFoundExceptionType;
+import src.core.exception.type.ValidationExceptionType;
 
 import java.util.ArrayList;
 import java.util.Collections;

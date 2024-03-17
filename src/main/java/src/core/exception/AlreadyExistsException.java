@@ -1,7 +1,7 @@
 package src.core.exception;
 
 import lombok.Getter;
-import src.core.exception.exception_types.AlreadyExistsExceptionType;
+import src.core.exception.type.AlreadyExistsExceptionType;
 
 @Getter
 public class AlreadyExistsException extends RuntimeException {

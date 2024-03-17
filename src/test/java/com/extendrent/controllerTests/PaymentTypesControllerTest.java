@@ -6,11 +6,11 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controllers.paperwork.PaymentTypesController;
-import src.controllers.paperwork.responses.PaymentTypeResponse;
-import src.controllers.paperwork.requests.payment.UpdatePaymentTypeRequest;
-import src.data.global_responses.TResponse;
-import src.services.paperwork.payment_type.PaymentTypeService;
+import src.controller.paperwork.payment.PaymentTypesController;
+import src.controller.paperwork.payment.responses.PaymentTypeResponse;
+import src.controller.paperwork.payment.requests.UpdatePaymentTypeRequest;
+import src.controller.TResponse;
+import src.service.paperwork.payment.type.PaymentTypeService;
 
 import java.util.ArrayList;
 import java.util.List;

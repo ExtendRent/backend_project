@@ -9,51 +9,62 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import src.controllers.item.requests.CreateDrivingLicenseTypeRequest;
-import src.controllers.paperwork.requests.Rental.CreateRentalRequest;
-import src.controllers.paperwork.requests.Rental.ReturnRentalRequest;
-import src.controllers.paperwork.requests.discount.CreateDiscountRequest;
-import src.controllers.paperwork.requests.payment.CreatePaymentTypeRequest;
-import src.controllers.user.requests.admin.CreateAdminRequest;
-import src.controllers.user.requests.customer.CreateCustomerRequest;
-import src.controllers.user.requests.employee.CreateEmployeeRequest;
-import src.controllers.vehicle.requests.car.CreateCarRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.brand.CreateBrandRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.carBodyType.CreateCarBodyTypeRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.carModel.CreateCarModelRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.carSegment.CreateCarSegmentRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.color.CreateColorRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.fuelType.CreateFuelTypeRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.shiftType.CreateShiftTypeRequest;
-import src.controllers.vehicle.requests.vehicleFeatures.vehicleStatus.CreateVehicleStatusRequest;
-import src.controllers.vehicle.responses.BrandResponse;
+import src.controller.item.license.requests.CreateDrivingLicenseTypeRequest;
+import src.controller.paperwork.discount.requests.CreateDiscountRequest;
+import src.controller.paperwork.payment.requests.CreatePaymentTypeRequest;
+import src.controller.paperwork.rental.requests.CreateRentalRequest;
+import src.controller.paperwork.rental.requests.ReturnRentalRequest;
+import src.controller.user.admin.requests.CreateAdminRequest;
+import src.controller.user.customer.requests.CreateCustomerRequest;
+import src.controller.user.employee.requests.CreateEmployeeRequest;
+import src.controller.vehicle.car.requests.CreateCarRequest;
+import src.controller.vehicle.features.car.body.requests.CreateCarBodyTypeRequest;
+import src.controller.vehicle.features.car.model.requests.CreateCarModelRequest;
+import src.controller.vehicle.features.car.segment.requests.CreateCarSegmentRequest;
+import src.controller.vehicle.features.common.brand.requests.CreateBrandRequest;
+import src.controller.vehicle.features.common.brand.responses.BrandResponse;
+import src.controller.vehicle.features.common.color.requests.CreateColorRequest;
+import src.controller.vehicle.features.common.fuel.requests.CreateFuelTypeRequest;
+import src.controller.vehicle.features.common.shift.requests.CreateShiftTypeRequest;
+import src.controller.vehicle.features.common.status.requests.CreateVehicleStatusRequest;
 import src.core.exception.DataNotFoundException;
-import src.data.enums.default_data_enums.*;
-import src.data.enums.default_data_enums.status.DefaultRentalStatus;
-import src.data.enums.default_data_enums.status.DefaultVehicleStatus;
-import src.data.models.paperwork_entities.paymentEntities.CreditCardInformation;
-import src.data.models.paperwork_entities.rentalEntities.RentalStatusEntity;
-import src.services.image.brand.BrandImageService;
-import src.services.image.car.CarImageService;
-import src.services.image.user.UserImageService;
-import src.services.item.driving_license.DrivingLicenseTypeService;
-import src.services.paperwork.discount.DiscountService;
-import src.services.paperwork.payment_type.PaymentTypeService;
-import src.services.paperwork.rental.RentalService;
-import src.services.paperwork.rental.RentalStatusService;
-import src.services.user.UserEntityService;
-import src.services.user.admin.AdminService;
-import src.services.user.customer.CustomerService;
-import src.services.user.employee.EmployeeService;
-import src.services.vehicle.car.CarService;
-import src.services.vehicle_features.car_features.car_body_type.CarBodyTypeService;
-import src.services.vehicle_features.car_features.car_model.CarModelService;
-import src.services.vehicle_features.car_features.car_segment.CarSegmentService;
-import src.services.vehicle_features.common_features.brand.BrandService;
-import src.services.vehicle_features.common_features.color.ColorService;
-import src.services.vehicle_features.common_features.fuel_type.FuelTypeService;
-import src.services.vehicle_features.common_features.shift_type.ShiftTypeService;
-import src.services.vehicle_features.common_features.vehicle_status.VehicleStatusService;
+import src.repository.paperwork.payment.CreditCardInformation;
+import src.repository.paperwork.rental.status.RentalStatusEntity;
+import src.repository.user.UserEntityService;
+import src.service.image.brand.BrandImageService;
+import src.service.image.car.CarImageService;
+import src.service.image.car.model.DefaultCarImage;
+import src.service.image.user.UserImageService;
+import src.service.image.user.model.DefaultUserImage;
+import src.service.item.license.DrivingLicenseTypeService;
+import src.service.item.license.model.DefaultCarDrivingLicenseType;
+import src.service.paperwork.discount.DiscountService;
+import src.service.paperwork.discount.model.DefaultDiscount;
+import src.service.paperwork.payment.type.PaymentTypeService;
+import src.service.paperwork.payment.type.model.DefaultPaymentType;
+import src.service.paperwork.rental.RentalService;
+import src.service.paperwork.rental.status.RentalStatusService;
+import src.service.paperwork.rental.status.model.DefaultRentalStatus;
+import src.service.user.admin.AdminService;
+import src.service.user.customer.CustomerService;
+import src.service.user.employee.EmployeeService;
+import src.service.vehicle.car.CarService;
+import src.service.vehicle.features.car.body.CarBodyTypeService;
+import src.service.vehicle.features.car.body.model.DefaultCarBodyType;
+import src.service.vehicle.features.car.model.CarModelService;
+import src.service.vehicle.features.car.model.model.DefaultCarModel;
+import src.service.vehicle.features.car.segment.CarSegmentService;
+import src.service.vehicle.features.car.segment.model.DefaultCarSegment;
+import src.service.vehicle.features.common.brand.BrandService;
+import src.service.vehicle.features.common.brand.model.DefaultBrand;
+import src.service.vehicle.features.common.color.ColorService;
+import src.service.vehicle.features.common.color.model.DefaultColors;
+import src.service.vehicle.features.common.fuel.FuelTypeService;
+import src.service.vehicle.features.common.fuel.model.DefaultFuelType;
+import src.service.vehicle.features.common.shift.ShiftTypeService;
+import src.service.vehicle.features.common.shift.model.DefaultShiftType;
+import src.service.vehicle.features.common.status.VehicleStatusService;
+import src.service.vehicle.features.common.status.model.DefaultVehicleStatus;
 
 import java.io.IOException;
 import java.net.URL;
@@ -241,15 +252,15 @@ public class SeedDataConfig implements CommandLineRunner {
                 carService.getAll();
             } catch (DataNotFoundException e) {
                 progress.setExtraMessage("Creating default cars...");
-                DefaultCarImageUrl[] defaultCarImageEnums = DefaultCarImageUrl.getAll();
+                DefaultCarImage[] defaultCarImageEnums = DefaultCarImage.getAll();
                 for (int i = 1; i <= 4; i++) {
                     int x = 2;
                     if (i == 3) {
                         x = 3;
                     }
-                    DefaultCarImageUrl defaultCarImageEnum = defaultCarImageEnums[i - 1];
+                    DefaultCarImage defaultCarImageEnum = defaultCarImageEnums[i - 1];
 
-                    URL url = new URL(defaultCarImageEnum.getLabel());
+                    URL url = new URL(defaultCarImageEnum.getUrl());
                     Path path = Paths.get("src/main/resources/assets/default/car", defaultCarImageEnum.name() + ".jpg");
                     if (Files.exists(path)) {
                         Files.delete(path);
@@ -284,7 +295,7 @@ public class SeedDataConfig implements CommandLineRunner {
             Pageable pageable = PageRequest.of(0, 3);
             if (userEntityService.getAll(pageable).toList().isEmpty()) {
                 progress.setExtraMessage("Creating default users...");
-                for (DefaultUserImageUrl defaultUserImageEnum : DefaultUserImageUrl.getAll()) {
+                for (DefaultUserImage defaultUserImageEnum : DefaultUserImage.getAll()) {
                     URL url = new URL(defaultUserImageEnum.getUrl());
                     Path path = Paths.get("src/main/resources/assets/default/user", defaultUserImageEnum.name() + ".jpg");
                     if (Files.exists(path)) {

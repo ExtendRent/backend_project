@@ -1,7 +1,7 @@
 package src.core.exception;
 
 import lombok.Getter;
-import src.core.exception.exception_types.NotSuitableExceptionType;
+import src.core.exception.type.NotSuitableExceptionType;
 
 @Getter
 public class NotSuitableException extends RuntimeException {
