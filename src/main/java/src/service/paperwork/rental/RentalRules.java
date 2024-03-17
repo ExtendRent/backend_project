@@ -10,7 +10,7 @@ import src.core.exception.NotSuitableException;
 import src.core.exception.ValidationException;
 import src.repository.paperwork.payment.detail.PaymentDetailsEntity;
 import src.repository.paperwork.rental.RentalEntity;
-import src.repository.paperwork.rental.RentalEntityServiceImpl;
+import src.repository.paperwork.rental.RentalEntityService;
 import src.service.businessrules.abstracts.BaseRules;
 import src.service.paperwork.discount.DiscountService;
 import src.service.user.customer.CustomerService;
@@ -23,13 +23,14 @@ import java.util.List;
 
 import static src.core.exception.type.NotFoundExceptionType.RENTAL_LIST_NOT_FOUND;
 import static src.core.exception.type.NotSuitableExceptionType.DRIVING_LICENSE_TYPE_NOT_SUITABLE;
+import static src.core.exception.type.NotSuitableExceptionType.RENTAL_IS_NOT_ACTIVE;
 import static src.core.exception.type.ValidationExceptionType.VALIDATION_EXCEPTION;
 
 @RequiredArgsConstructor
 @Service
 public class RentalRules implements BaseRules {
 
-    private final RentalEntityServiceImpl rentalEntityServiceImpl;
+    private final RentalEntityService entityService;
     private final DiscountService discountService;
     private final CarService carService;
     private final CustomerService customerService;
@@ -69,7 +70,7 @@ public class RentalRules implements BaseRules {
 
 
     public PaymentDetailsEntity updatePaymentDetailsToFinal(ReturnRentalRequest returnRentalRequest) {
-        RentalEntity rentalEntity = this.rentalEntityServiceImpl.getById(returnRentalRequest.getId());
+        RentalEntity rentalEntity = this.entityService.getById(returnRentalRequest.getId());
 
         PaymentDetailsEntity paymentDetailsEntity = rentalEntity.getPaymentDetailsEntity();
 
@@ -125,11 +126,17 @@ public class RentalRules implements BaseRules {
         return discountCode != null && !discountCode.equals("");
     }
 
+    public void checkIsActive(int rentalId) {
+        RentalEntity rentalEntity = entityService.getById(rentalId);
+        if (!rentalEntity.isActive()) {
+            throw new NotSuitableException(RENTAL_IS_NOT_ACTIVE);
+        }
+    }
 
     //----------------------------CALCULATING METHODS-------------------------------------
 
 
-    public int calculateTotalRentalDays(LocalDate startDate, LocalDate endDate) {
+    private int calculateTotalRentalDays(LocalDate startDate, LocalDate endDate) {
         return (int) ChronoUnit.DAYS.between(startDate, endDate);
     }
 
@@ -137,7 +144,7 @@ public class RentalRules implements BaseRules {
         return Math.toIntExact(ChronoUnit.DAYS.between(endDate, returnDate));
     }
 
-    public double calculateTotalBasePrice(int totalRentalDays, double rentalPrice) {
+    private double calculateTotalBasePrice(int totalRentalDays, double rentalPrice) {
         return totalRentalDays * rentalPrice;
     }
 
@@ -150,8 +157,8 @@ public class RentalRules implements BaseRules {
         return baseTotalPrice - (baseTotalPrice * discountPercentage);
     }
 
-    public double calculateReturnFinalAmount(ReturnRentalRequest returnRentalRequest, int totalRentalDays) {
-        RentalEntity rentalEntity = this.rentalEntityServiceImpl
+    private double calculateReturnFinalAmount(ReturnRentalRequest returnRentalRequest, int totalRentalDays) {
+        RentalEntity rentalEntity = this.entityService
                 .getById(returnRentalRequest.getId());
 
         double baseTotalPrice = calculateTotalBasePrice(totalRentalDays, rentalEntity.getCarEntity().getRentalPrice());

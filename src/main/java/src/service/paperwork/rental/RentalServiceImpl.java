@@ -2,6 +2,7 @@ package src.service.paperwork.rental;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.paperwork.rental.requests.CreateRentalRequest;
 import src.controller.paperwork.rental.requests.ReturnRentalRequest;
 import src.controller.paperwork.rental.requests.ShowRentalRequest;
@@ -23,8 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static src.core.exception.type.ValidationExceptionType.VALIDATION_EXCEPTION;
-import static src.service.paperwork.rental.status.model.DefaultRentalStatus.ACTIVE;
-import static src.service.paperwork.rental.status.model.DefaultRentalStatus.FINISHED;
+import static src.service.paperwork.rental.status.model.DefaultRentalStatus.*;
 import static src.service.vehicle.features.common.status.model.DefaultVehicleStatus.IN_USE;
 
 @Service
@@ -75,25 +75,39 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public RentalResponse returnCar(ReturnRentalRequest returnRentalRequest) {
         // ceza işlemleri , indirim işlemleri iptali kontrol edilecek sonuçta da totalPrice güncelleme
-
+        rules.checkIsActive(returnRentalRequest.getId());
         RentalEntity rentalEntity = this.returnReqeustToEntity(returnRentalRequest);
         CarEntity carEntity = rentalEntity.getCarEntity();
-
         carEntity.setKilometer(rentalEntity.getEndKilometer());
         if (rentalEntity.getCarEntity() != null) {
             carService.removeRental(carEntity.getId(), rentalEntity);
         }
-
         return entityService.update(rentalEntity).toModel();
     }
 
     @Override
     public RentalResponse startRental(int rentalId) {
+        rules.checkIsActive(rentalId);
         RentalEntity rentalEntity = entityService.getById(rentalId);
         CarEntity carEntity = rentalEntity.getCarEntity();
         rentalEntity.setStartKilometer(carEntity.getKilometer());
         rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(ACTIVE));
         carService.changeStatus(carEntity, IN_USE);
+        return entityService.update(rentalEntity).toModel();
+    }
+
+    @Transactional
+    @Override
+    public RentalResponse cancelRental(int rentalId) {
+        rules.checkIsActive(rentalId);
+        softDelete(rentalId);
+        RentalEntity rentalEntity = entityService.getById(rentalId);
+        CarEntity carEntity = rentalEntity.getCarEntity();
+        if (rentalEntity.getCarEntity() != null) {
+            carService.removeRental(carEntity.getId(), rentalEntity);
+        }
+        customerService.removeRental(rentalEntity.getCustomerEntity().getId(), rentalEntity);
+        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(CANCELED));
         return entityService.update(rentalEntity).toModel();
     }
 
@@ -122,6 +136,7 @@ public class RentalServiceImpl implements RentalService {
         carService.removeRental(rentalEntity.getCarEntity().getId(), rentalEntity);
         customerService.removeRental(rentalEntity.getCustomerEntity().getId(), rentalEntity);
         rentalEntity.setIsDeleted(true);
+        rentalEntity.setActive(false);
         rentalEntity.setDeletedAt(LocalDateTime.now());
         entityService.update(rentalEntity);
     }
@@ -153,6 +168,7 @@ public class RentalServiceImpl implements RentalService {
     public int getCountByStatusId(int statusId) {
         return entityService.getCountByStatusId(statusId);
     }
+
 
     //--------------------------------Local Methods--------------------------------
     private List<RentalResponse> mapToDTOList(List<RentalEntity> rentalEntityList) {

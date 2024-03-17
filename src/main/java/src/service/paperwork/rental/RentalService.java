@@ -19,6 +19,7 @@ public interface RentalService {
 
     RentalResponse startRental(int rentalId);
 
+    RentalResponse cancelRental(int rentalId);
 
     RentalResponse update(UpdateRentalRequest updateRentalRequest);
 

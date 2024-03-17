@@ -22,8 +22,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @SuperBuilder(builderMethodName = "rentalBuilder")
-//@Inheritance(strategy = InheritanceType.JOINED)
-//@SuperBuilder
 @Table(name = "rentals")
 public class RentalEntity extends BaseEntity {
 
@@ -61,7 +59,7 @@ public class RentalEntity extends BaseEntity {
     private RentalStatusEntity rentalStatusEntity;
 
     @Column(name = "is_active")
-    private boolean isActive = true;
+    private boolean isActive;
 
     @PreRemove
     private void preRemove() {
@@ -70,29 +68,38 @@ public class RentalEntity extends BaseEntity {
         }
     }
 
+    @PrePersist
+    private void prePersist() {
+        isActive = true;
+    }
+
+
     public RentalResponse toModel() {
         return RentalResponse.builder()
                 .id(getId())
-                .customerEntityId(getCustomerEntity().getId())
-                .carBodyTypeEntityName(getCarEntity().getCarBodyTypeEntity().getName())
-                .carEntityBrandEntityName(getCarEntity().getCarModelEntity().getBrandEntity().getName())
-                .carEntityColorEntityName(getCarEntity().getColorEntity().getName())
-                .carEntityId(getCarEntity().getId())
-                .carEntityLicensePlate(getCarEntity().getLicensePlate())
-                .carEntityModelEntityName(getCarEntity().getCarModelEntity().getName())
-                .carEntityRentalPrice(getCarEntity().getRentalPrice())
-                .carEntityYear(getCarEntity().getYear())
-                .customerEntityName(getCustomerEntity().getName())
-                .customerEntitySurname(getCustomerEntity().getSurname())
-                .discountEntityId(getDiscountEntity().getId())
-                .discountEntityDiscountCode(getDiscountEntity().getDiscountCode())
-                .endDate(getEndDate())
-                .paymentDetailsEntityAmount(getPaymentDetailsEntity().getAmount())
+                .customerEntityId(customerEntity.getId())
+                .carBodyTypeEntityName(carEntity.getCarBodyTypeEntity().getName())
+                .carEntityBrandEntityName(carEntity.getCarModelEntity().getBrandEntity().getName())
+                .carEntityColorEntityName(carEntity.getColorEntity().getName())
+                .carEntityId(carEntity.getId())
+                .carEntityLicensePlate(carEntity.getLicensePlate())
+                .carEntityModelEntityName(carEntity.getCarModelEntity().getName())
+                .carEntityRentalPrice(carEntity.getRentalPrice())
+                .carEntityYear(carEntity.getYear())
+                .customerEntityName(customerEntity.getName())
+                .customerEntitySurname(customerEntity.getSurname())
+                .discountEntityId(discountEntity.getId())
+                .discountEntityDiscountCode(discountEntity.getDiscountCode())
+                .endDate(endDate)
+                .paymentDetailsEntityAmount(paymentDetailsEntity.getAmount())
                 .paymentDetailsEntityPaymentTypeEntityPaymentTypeName(
                         getPaymentDetailsEntity().getPaymentTypeEntity().getName())
-                .rentalStatusEntityId(getRentalStatusEntity().getId())
-                .rentalStatusEntityName(getRentalStatusEntity().getName())
-                .startDate(getStartDate())
+                .rentalStatusEntityId(rentalStatusEntity.getId())
+                .rentalStatusEntityName(rentalStatusEntity.getName())
+                .startDate(startDate)
+                .returnDate(returnDate)
+                .isActive(isActive)
+                .isDeleted(getIsDeleted())
                 .build();
     }
 

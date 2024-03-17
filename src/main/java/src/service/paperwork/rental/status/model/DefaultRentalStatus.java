@@ -3,7 +3,8 @@ package src.service.paperwork.rental.status.model;
 public enum DefaultRentalStatus {
     WAITING("Beklemede"),
     ACTIVE("Aktif"),
-    FINISHED("Tamamlandı");
+    FINISHED("Tamamlandı"),
+    CANCELED("İptal");
     private final String label;
 
     DefaultRentalStatus(String label) {
@@ -17,6 +18,5 @@ public enum DefaultRentalStatus {
     public String getLabel() {
         return label;
     }
-
 
 }

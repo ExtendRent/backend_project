@@ -25,14 +25,6 @@ import java.util.List;
 public class RentalsController {
     private final RentalService rentalService;
 
-    @PostMapping
-    public ResponseEntity<Void> createRental(
-            @Valid @RequestBody CreateRentalRequest createRentalRequest) {
-        rentalService.create(createRentalRequest);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-
     @PostMapping("/showRental")
     public ResponseEntity<TResponse<ShowRentalResponse>> showRental(@Valid @RequestBody ShowRentalRequest showRentalRequest) {
         return new ResponseEntity<>(TResponse.<ShowRentalResponse>tResponseBuilder()
@@ -41,10 +33,42 @@ public class RentalsController {
         );
     }
 
+    @PostMapping
+    public ResponseEntity<Void> createRental(
+            @Valid @RequestBody CreateRentalRequest createRentalRequest) {
+        rentalService.create(createRentalRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
     @PutMapping
     public ResponseEntity<TResponse<RentalResponse>> updateRental(@RequestBody UpdateRentalRequest updateRentalRequest) {
         return new ResponseEntity<>(TResponse.<RentalResponse>tResponseBuilder()
                 .response(this.rentalService.update(updateRentalRequest))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/startRental/{rentalId}")
+    public ResponseEntity<TResponse<RentalResponse>> startRental(@PathVariable int rentalId) {
+        return new ResponseEntity<>(TResponse.<RentalResponse>tResponseBuilder()
+                .response(this.rentalService.startRental(rentalId))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/returnRental")
+    public ResponseEntity<TResponse<?>> returnRental(@RequestBody ReturnRentalRequest returnRentalRequest) {
+        return new ResponseEntity<>(TResponse.tResponseBuilder()
+                .response(this.rentalService.returnCar(returnRentalRequest))
+                .build(), HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/cancelRental/{rentalId}")
+    public ResponseEntity<TResponse<RentalResponse>> cancelRental(@PathVariable int rentalId) {
+        return new ResponseEntity<>(TResponse.<RentalResponse>tResponseBuilder()
+                .response(this.rentalService.cancelRental(rentalId))
                 .build(), HttpStatus.OK
         );
     }
@@ -73,14 +97,6 @@ public class RentalsController {
         );
     }
 
-    @PutMapping("/startRental/{rentalId}")
-    public ResponseEntity<TResponse<RentalResponse>> startRental(@PathVariable int rentalId) {
-        return new ResponseEntity<>(TResponse.<RentalResponse>tResponseBuilder()
-                .response(this.rentalService.startRental(rentalId))
-                .build(), HttpStatus.OK
-        );
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<RentalResponse>> getRentalById(@PathVariable int id) {
         return new ResponseEntity<>(TResponse.<RentalResponse>tResponseBuilder()
@@ -88,13 +104,6 @@ public class RentalsController {
         );
     }
 
-    @PutMapping("/returnRental")
-    public ResponseEntity<TResponse<?>> returnRental(@RequestBody ReturnRentalRequest returnRentalRequest) {
-        return new ResponseEntity<>(TResponse.tResponseBuilder()
-                .response(this.rentalService.returnCar(returnRentalRequest))
-                .build(), HttpStatus.OK
-        );
-    }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<RentalResponse>>> getAllByDeletedState(

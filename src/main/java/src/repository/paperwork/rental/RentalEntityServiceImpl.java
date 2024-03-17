@@ -40,6 +40,7 @@ public class RentalEntityServiceImpl implements RentalEntityService {
                 .discountEntity(discountEntityService.getByDiscountCode(createRentalRequest.getDiscountCode()))
                 .startKilometer(carService.getById(createRentalRequest.getCarEntityId()).getKilometer())
                 .rentalStatusEntity(rentalStatusService.getByStatus(WAITING))
+                .isActive(true)
                 .build();
 
         return this.repository.save(rentalEntity);
