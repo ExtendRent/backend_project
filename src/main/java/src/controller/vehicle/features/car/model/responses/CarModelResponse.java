@@ -14,4 +14,15 @@ public class CarModelResponse {
     String name;
     String brandEntityName;
     boolean isDeleted;
+
+    @Override
+    public String toString() {
+        return "CarModelResponse{" +
+                "id=" + id +
+                ", brandEntityId=" + brandEntityId +
+                ", name='" + name + '\'' +
+                ", brandEntityName='" + brandEntityName + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

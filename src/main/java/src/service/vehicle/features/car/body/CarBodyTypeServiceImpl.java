@@ -2,6 +2,7 @@ package src.service.vehicle.features.car.body;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.vehicle.features.car.body.requests.CreateCarBodyTypeRequest;
 import src.controller.vehicle.features.car.body.requests.UpdateCarBodyTypeRequest;
 import src.controller.vehicle.features.car.body.responses.CarBodyTypeResponse;
@@ -50,6 +51,7 @@ public class CarBodyTypeServiceImpl implements CarBodyTypeService {
             softDelete(id);
     }
 
+    @Transactional
     @Override
     public List<CarBodyTypeResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

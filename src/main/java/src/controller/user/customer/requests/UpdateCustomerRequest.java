@@ -44,4 +44,20 @@ public class UpdateCustomerRequest {
     private String drivingLicenseNumber;
     private DefaultUserStatus status;
     private int userImageEntityId;
+
+    @Override
+    public String toString() {
+        return "UpdateCustomerRequest{" +
+                "id=" + id +
+                ", drivingLicenseTypeEntityId=" + drivingLicenseTypeEntityId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
+                ", status=" + status +
+                ", userImageEntityId=" + userImageEntityId +
+                '}';
+    }
 }

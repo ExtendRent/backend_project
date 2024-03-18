@@ -22,4 +22,12 @@ public class CreateVehicleStatusRequest {
 
     @Pattern(regexp = "^[A-Z-_]+$", message = "Araç durumu tipi sadece büyük harflerden ve boşluksuz olmalıdır.")
     DefaultVehicleStatus vehicleStatus;
+
+    @Override
+    public String toString() {
+        return "CreateVehicleStatusRequest{" +
+                "name='" + name + '\'' +
+                ", vehicleStatus=" + vehicleStatus +
+                '}';
+    }
 }

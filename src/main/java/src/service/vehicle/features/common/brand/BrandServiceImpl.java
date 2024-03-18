@@ -2,6 +2,7 @@ package src.service.vehicle.features.common.brand;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.vehicle.features.common.brand.requests.CreateBrandRequest;
 import src.controller.vehicle.features.common.brand.requests.UpdateBrandRequest;
 import src.controller.vehicle.features.common.brand.responses.BrandResponse;
@@ -55,6 +56,7 @@ public class BrandServiceImpl implements BrandService {
         return mapToDTOList(entityService.getAll());
     }
 
+    @Transactional
     @Override
     public List<BrandResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

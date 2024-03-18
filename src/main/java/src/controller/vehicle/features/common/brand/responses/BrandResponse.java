@@ -13,4 +13,15 @@ public class BrandResponse {
     String name;
     String brandImageEntityUrl;
     boolean isDeleted;
+
+    @Override
+    public String toString() {
+        return "BrandResponse{" +
+                "id=" + id +
+                ", brandImageEntityId=" + brandImageEntityId +
+                ", name='" + name + '\'' +
+                ", brandImageEntityUrl='" + brandImageEntityUrl + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

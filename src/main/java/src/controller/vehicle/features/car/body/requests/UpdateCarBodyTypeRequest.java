@@ -20,4 +20,12 @@ public class UpdateCarBodyTypeRequest {
     @Size(min = 2, message = "Body Type en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "Body Type sadece harflerden oluşmalıdır.")
     String name;
+
+    @Override
+    public String toString() {
+        return "UpdateCarBodyTypeRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -16,4 +16,11 @@ public class CreateCarSegmentRequest {
     @NotBlank(message = "Segment adı boş geçilemez")
     @Size(min = 2, message = "Segment en az 2 karakter olmalıdır.")
     String name;
+
+    @Override
+    public String toString() {
+        return "CreateCarSegmentRequest{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

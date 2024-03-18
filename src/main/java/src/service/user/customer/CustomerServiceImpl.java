@@ -3,12 +3,13 @@ package src.service.user.customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import src.controller.paperwork.rental.responses.RentalResponse;
+import org.springframework.transaction.annotation.Transactional;
+import src.controller.rental.responses.RentalResponse;
 import src.controller.user.customer.requests.CreateCustomerRequest;
 import src.controller.user.customer.requests.UpdateCustomerRequest;
 import src.controller.user.customer.responses.CustomerResponse;
 import src.repository.image.UserImageEntity;
-import src.repository.paperwork.rental.RentalEntity;
+import src.repository.rental.RentalEntity;
 import src.repository.user.customer.CustomerEntity;
 import src.repository.user.customer.CustomerEntityService;
 import src.repository.user.customer.CustomerRepository;
@@ -52,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
         return entityService.update(updateCustomerRequest).toModel();
     }
 
+
     @Override
     public CustomerResponse getById(int id) {
         return entityService.getById(id).toModel();
@@ -68,6 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
         return mapToDTOList(entityService.getAll());
     }
 
+    @Transactional
     @Override
     public List<CustomerResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

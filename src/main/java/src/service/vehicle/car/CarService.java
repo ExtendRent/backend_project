@@ -3,7 +3,7 @@ package src.service.vehicle.car;
 import src.controller.vehicle.car.requests.CreateCarRequest;
 import src.controller.vehicle.car.requests.UpdateCarRequest;
 import src.controller.vehicle.car.responses.CarResponse;
-import src.repository.paperwork.rental.RentalEntity;
+import src.repository.rental.RentalEntity;
 import src.repository.vehicle.car.CarEntity;
 import src.service.vehicle.features.common.status.model.DefaultVehicleStatus;
 

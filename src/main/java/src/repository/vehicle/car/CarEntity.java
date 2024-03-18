@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import src.controller.vehicle.car.responses.CarResponse;
 import src.repository.image.CarImageEntity;
-import src.repository.paperwork.rental.RentalEntity;
+import src.repository.rental.RentalEntity;
 import src.repository.vehicle.Vehicle;
 import src.repository.vehicle.features.car.body.CarBodyTypeEntity;
 import src.repository.vehicle.features.car.model.CarModelEntity;

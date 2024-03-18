@@ -21,5 +21,11 @@ public class DataNotFoundException extends RuntimeException {
         this.detail = notFoundExceptionType.getMessage();
     }
 
-
+    @Override
+    public String toString() {
+        return "DataNotFoundException{" +
+                "errorCode=" + notFoundExceptionType.getErrorCode() +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

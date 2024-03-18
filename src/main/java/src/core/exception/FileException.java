@@ -21,4 +21,12 @@ public class FileException extends RuntimeException {
         this.fileExceptionType = fileExceptionType;
         this.detail = fileExceptionType.getMessage();
     }
+
+    @Override
+    public String toString() {
+        return "FileException{" +
+                "errorCode=" + fileExceptionType.getErrorCode() +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

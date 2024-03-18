@@ -73,11 +73,11 @@ public class UserImageServiceImpl implements UserImageService {
 
     @Override
     public void delete(int id) {
-        UserImageEntity image = this.getById(id);
+        UserImageEntity userImage = this.getById(id);
         try {
-            if (!image.getName().equals("default_user_image")) {
-                cloudinaryServiceImpl.deleteFile(image.getName());
-                repository.delete(image);
+            if (!userImage.getName().equals("default_user_image")) {
+                cloudinaryServiceImpl.deleteFile(userImage.getName());
+                repository.delete(userImage);
             }
         } catch (Exception e) {
             throw new FileException(PHOTO_DELETE_FAILED);

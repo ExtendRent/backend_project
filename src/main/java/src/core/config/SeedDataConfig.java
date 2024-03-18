@@ -9,11 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import src.controller.item.license.requests.CreateDrivingLicenseTypeRequest;
-import src.controller.paperwork.discount.requests.CreateDiscountRequest;
-import src.controller.paperwork.payment.requests.CreatePaymentTypeRequest;
-import src.controller.paperwork.rental.requests.CreateRentalRequest;
-import src.controller.paperwork.rental.requests.ReturnRentalRequest;
+import src.controller.discount.requests.CreateDiscountRequest;
+import src.controller.license.requests.CreateDrivingLicenseTypeRequest;
+import src.controller.payment.requests.CreatePaymentTypeRequest;
+import src.controller.rental.requests.CreateRentalRequest;
+import src.controller.rental.requests.ReturnRentalRequest;
 import src.controller.user.admin.requests.CreateAdminRequest;
 import src.controller.user.customer.requests.CreateCustomerRequest;
 import src.controller.user.employee.requests.CreateEmployeeRequest;
@@ -28,23 +28,23 @@ import src.controller.vehicle.features.common.fuel.requests.CreateFuelTypeReques
 import src.controller.vehicle.features.common.shift.requests.CreateShiftTypeRequest;
 import src.controller.vehicle.features.common.status.requests.CreateVehicleStatusRequest;
 import src.core.exception.DataNotFoundException;
-import src.repository.paperwork.payment.CreditCardInformation;
-import src.repository.paperwork.rental.status.RentalStatusEntity;
+import src.repository.payment.CreditCardInformation;
+import src.repository.rental.status.RentalStatusEntity;
 import src.repository.user.UserEntityService;
+import src.service.discount.DiscountService;
+import src.service.discount.model.DefaultDiscount;
 import src.service.image.brand.BrandImageService;
 import src.service.image.car.CarImageService;
 import src.service.image.car.model.DefaultCarImage;
 import src.service.image.user.UserImageService;
 import src.service.image.user.model.DefaultUserImage;
-import src.service.item.license.DrivingLicenseTypeService;
-import src.service.item.license.model.DefaultCarDrivingLicenseType;
-import src.service.paperwork.discount.DiscountService;
-import src.service.paperwork.discount.model.DefaultDiscount;
-import src.service.paperwork.payment.type.PaymentTypeService;
-import src.service.paperwork.payment.type.model.DefaultPaymentType;
-import src.service.paperwork.rental.RentalService;
-import src.service.paperwork.rental.status.RentalStatusService;
-import src.service.paperwork.rental.status.model.DefaultRentalStatus;
+import src.service.license.DrivingLicenseTypeService;
+import src.service.license.model.DefaultCarDrivingLicenseType;
+import src.service.payment.type.PaymentTypeService;
+import src.service.payment.type.model.DefaultPaymentType;
+import src.service.rental.RentalService;
+import src.service.rental.status.RentalStatusService;
+import src.service.rental.status.model.DefaultRentalStatus;
 import src.service.user.admin.AdminService;
 import src.service.user.customer.CustomerService;
 import src.service.user.employee.EmployeeService;
@@ -74,8 +74,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-
-import static src.Application.*;
 
 @Component
 @RequiredArgsConstructor
@@ -436,7 +434,7 @@ public class SeedDataConfig implements CommandLineRunner {
                         .build());
             }
             progress.stepTo(100);
-            progress.setExtraMessage(ANSI_GREEN + ANSI_BOLD + "✔..." + ANSI_RESET);
+            progress.setExtraMessage("✔");
             progress.close();
             isRunning = false;
         }

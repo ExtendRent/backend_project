@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import src.controller.user.customer.responses.CustomerResponse;
-import src.repository.item.license.DrivingLicenseTypeEntity;
-import src.repository.paperwork.rental.RentalEntity;
+import src.repository.license.DrivingLicenseTypeEntity;
+import src.repository.rental.RentalEntity;
 import src.repository.user.UserEntity;
 import src.service.user.model.CustomerType;
 

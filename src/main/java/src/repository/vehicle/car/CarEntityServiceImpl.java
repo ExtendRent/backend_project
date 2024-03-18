@@ -6,7 +6,7 @@ import src.controller.vehicle.car.requests.CreateCarRequest;
 import src.controller.vehicle.car.requests.UpdateCarRequest;
 import src.core.exception.DataNotFoundException;
 import src.repository.image.CarImageEntity;
-import src.repository.item.license.DrivingLicenseTypeEntityService;
+import src.repository.license.DrivingLicenseTypeEntityService;
 import src.repository.vehicle.features.car.body.CarBodyTypeEntity;
 import src.repository.vehicle.features.car.body.CarBodyTypeEntityService;
 import src.repository.vehicle.features.car.model.CarModelEntity;

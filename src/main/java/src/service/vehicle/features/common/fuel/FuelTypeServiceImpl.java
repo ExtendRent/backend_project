@@ -2,6 +2,7 @@ package src.service.vehicle.features.common.fuel;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.vehicle.features.common.fuel.requests.CreateFuelTypeRequest;
 import src.controller.vehicle.features.common.fuel.requests.UpdateFuelTypeRequest;
 import src.controller.vehicle.features.common.fuel.responses.FuelTypeResponse;
@@ -39,6 +40,7 @@ public class FuelTypeServiceImpl implements FuelTypeService {
         return mapToDTOList(entityService.getAll());
     }
 
+    @Transactional
     @Override
     public List<FuelTypeResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

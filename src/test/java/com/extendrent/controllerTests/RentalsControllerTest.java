@@ -3,15 +3,17 @@ package com.extendrent.controllerTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controller.paperwork.rental.RentalsController;
-import src.controller.paperwork.rental.responses.RentalResponse;
-import src.controller.paperwork.rental.responses.ShowRentalResponse;
-import src.controller.paperwork.rental.requests.CreateRentalRequest;
-import src.controller.paperwork.rental.requests.ReturnRentalRequest;
-import src.controller.paperwork.rental.requests.ShowRentalRequest;
-import src.controller.paperwork.rental.requests.UpdateRentalRequest;
+import src.controller.rental.RentalsController;
+import src.controller.rental.responses.RentalResponse;
+import src.controller.rental.responses.RentalStatusResponse;
+import src.controller.rental.responses.ShowRentalResponse;
+import src.controller.rental.requests.CreateRentalRequest;
+import src.controller.rental.requests.ReturnRentalRequest;
+import src.controller.rental.requests.ShowRentalRequest;
+import src.controller.rental.requests.UpdateRentalRequest;
 import src.controller.TResponse;
-import src.service.paperwork.rental.RentalService;
+import src.service.rental.RentalService;
+import src.service.rental.status.RentalStatusService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,8 @@ import static org.mockito.Mockito.*;
 public class RentalsControllerTest {
 
     private final RentalService rentalService = mock(RentalService.class);
-    private final RentalsController rentalController = new RentalsController(rentalService);
+    private final RentalStatusService rentalStatusService = mock(RentalStatusService.class);
+    private final RentalsController rentalController = new RentalsController(rentalService, rentalStatusService);
 
     @Test
     public void testCreateRental() {
@@ -82,6 +85,25 @@ public class RentalsControllerTest {
         // Then
         verify(rentalService, times(1)).getAll();
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    }
+
+    @Test
+    public void testGetAllStatuses() {
+        // Given
+        List<RentalStatusResponse> rentalStatusList = new ArrayList<>();
+        rentalStatusList.add(new RentalStatusResponse(1, "Active", true));
+        rentalStatusList.add(new RentalStatusResponse(2, "Inactive", false));
+
+        // Mock the behavior of the rentalStatusService
+        when(rentalStatusService.getAll()).thenReturn(rentalStatusList);
+
+        // When
+        ResponseEntity<TResponse<List<RentalStatusResponse>>> responseEntity = rentalController.getAllRentalStatuses();
+
+        // Then
+        verify(rentalStatusService, times(1)).getAll();
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(rentalStatusList, Objects.requireNonNull(responseEntity.getBody()).response());
     }
 
     @Test

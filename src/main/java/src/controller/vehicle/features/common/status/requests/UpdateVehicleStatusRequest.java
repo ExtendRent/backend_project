@@ -19,4 +19,12 @@ public class UpdateVehicleStatusRequest {
     @Size(min = 2, message = "Araç durumu ismi en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "Araç durumu ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
+
+    @Override
+    public String toString() {
+        return "UpdateVehicleStatusRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -10,7 +10,7 @@ public class ResponseTimeMeasurement {
         startTime = System.currentTimeMillis();
     }
 
-    public long measure() {
-        return System.currentTimeMillis() - startTime;
+    public double end() {
+        return (double) (System.currentTimeMillis() - startTime) / 1000;
     }
 }

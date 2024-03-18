@@ -2,6 +2,7 @@ package src.service.vehicle.features.car.segment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.vehicle.features.car.segment.requests.CreateCarSegmentRequest;
 import src.controller.vehicle.features.car.segment.requests.UpdateCarSegmentRequest;
 import src.controller.vehicle.features.car.segment.responses.CarSegmentResponse;
@@ -41,6 +42,7 @@ public class CarSegmentServiceImpl implements CarSegmentService {
         return mapToDTOList(entityService.getAll());
     }
 
+    @Transactional
     @Override
     public List<CarSegmentResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

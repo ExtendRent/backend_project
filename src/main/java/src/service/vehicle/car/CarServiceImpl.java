@@ -2,12 +2,13 @@ package src.service.vehicle.car;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.vehicle.car.requests.CreateCarRequest;
 import src.controller.vehicle.car.requests.UpdateCarRequest;
 import src.controller.vehicle.car.responses.CarResponse;
 import src.core.exception.DataNotFoundException;
 import src.repository.image.CarImageEntity;
-import src.repository.paperwork.rental.RentalEntity;
+import src.repository.rental.RentalEntity;
 import src.repository.vehicle.car.CarEntity;
 import src.repository.vehicle.car.CarEntityService;
 import src.repository.vehicle.features.common.status.VehicleStatusEntityServiceImpl;
@@ -65,7 +66,7 @@ public class CarServiceImpl implements CarService {
         return markAllForDrivingLicenseSuitable(entityService.getAll(), null);
     }
 
-
+    @Transactional
     @Override
     public List<CarResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

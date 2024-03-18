@@ -3,6 +3,7 @@ package src.service.user.admin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.user.admin.requests.CreateAdminRequest;
 import src.controller.user.admin.requests.UpdateAdminRequest;
 import src.controller.user.admin.responses.AdminResponse;
@@ -64,6 +65,7 @@ public class AdminServiceImpl implements AdminService {
         return entityService.getByEmailAddress(emailAddress).toModel();
     }
 
+    @Transactional
     @Override
     public List<AdminResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

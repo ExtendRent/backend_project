@@ -40,4 +40,19 @@ public class UpdateAdminRequest {
     private String phoneNumber;
     private DefaultUserStatus status;
     private int userImageEntityId;
+
+    @Override
+    public String toString() {
+        return "UpdateAdminRequest{" +
+                "salary=" + salary +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", status=" + status +
+                ", userImageEntityId=" + userImageEntityId +
+                '}';
+    }
 }

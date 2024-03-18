@@ -5,19 +5,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import src.core.config.SeedDataConfig;
 import src.core.utilities.ResponseTimeMeasurement;
 
 import java.io.IOException;
 
+import static src.controller.AnsiColorConstant.*;
+
 @SpringBootApplication
+@EnableAspectJAutoProxy
 @ComponentScan("src")
 public class Application implements CommandLineRunner {
-    public static final String ANSI_BOLD = "\u001B[1m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_BLUE = "\u001B[34m";
 
     @Autowired
     private SeedDataConfig seedDataConfig;
@@ -27,7 +26,7 @@ public class Application implements CommandLineRunner {
         SpringApplication.run(Application.class, args);
     }
 
-    private static void processInfo(long duration) {
+    private static void processInfo(double duration) {
         System.out.println("process completed in " + duration + " seconds");
     }
 
@@ -35,9 +34,9 @@ public class Application implements CommandLineRunner {
         int additionalSpaces = 62;
         String version = ANSI_BOLD + "(Version 1.0.1)" + ANSI_RESET;
         version = String.format("%" + additionalSpaces + "s", version);
-        String start = ANSI_BOLD + "\sApplication started." + ANSI_RESET;
+        String start = ANSI_BOLD + ANSI_GREEN + "\sApplication started." + ANSI_RESET;
 
-        String asciiText = drawLogo() + ANSI_GREEN + start + ANSI_RESET + version;
+        String asciiText = drawLogo() + start + ANSI_RESET + version;
         System.out.println(asciiText);
     }
 
@@ -71,10 +70,10 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws IOException {
-        System.out.println(ANSI_BLUE + ANSI_BOLD + "Application starting..." + ANSI_RESET);
+        System.out.println(ANSI_BOLD + ANSI_BLUE + "Application starting..." + ANSI_RESET);
         ResponseTimeMeasurement.start();
         seedDataConfig.runFirst();
-        long duration = ResponseTimeMeasurement.measure() / 1000;
+        double duration = ResponseTimeMeasurement.end();
         processInfo(duration);
         welcome();
     }

@@ -20,4 +20,11 @@ public class CreateCarModelRequest {
     @Size(min = 2, message = "Model en az 2 karakter olmalıdır.")
     String carModelEntityName;
 
+    @Override
+    public String toString() {
+        return "CreateCarModelRequest{" +
+                "brandEntityId=" + brandEntityId +
+                ", carModelEntityName='" + carModelEntityName + '\'' +
+                '}';
+    }
 }

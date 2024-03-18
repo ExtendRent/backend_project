@@ -3,11 +3,11 @@ package com.extendrent.controllerTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controller.paperwork.payment.PaymentDetailsController;
-import src.controller.paperwork.payment.responses.PaymentDetailsResponse;
-import src.controller.paperwork.payment.requests.UpdatePaymentDetailsRequest;
+import src.controller.payment.PaymentDetailsController;
+import src.controller.payment.responses.PaymentDetailsResponse;
+import src.controller.payment.requests.UpdatePaymentDetailsRequest;
 import src.controller.TResponse;
-import src.service.paperwork.payment.detail.PaymentDetailsService;
+import src.service.payment.detail.PaymentDetailsService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;

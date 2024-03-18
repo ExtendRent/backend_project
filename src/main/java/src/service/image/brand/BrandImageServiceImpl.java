@@ -63,8 +63,9 @@ public class BrandImageServiceImpl implements BrandImageService {
 
     @Override
     public void delete(int id) {
+        BrandImageEntity brandImage = this.getById(id);
         try {
-            if (cloudinaryServiceImpl.deleteFile(this.getById(id).getName())) {
+            if (cloudinaryServiceImpl.deleteFile(brandImage.getName())) {
                 repository.delete(this.getById(id));
             }
         } catch (Exception e) {

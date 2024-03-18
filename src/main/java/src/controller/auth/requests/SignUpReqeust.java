@@ -3,13 +3,15 @@ package src.controller.auth.requests;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import src.controller.user.admin.requests.CreateAdminRequest;
 import src.controller.user.customer.requests.CreateCustomerRequest;
 import src.controller.user.employee.requests.CreateEmployeeRequest;
 import src.service.user.model.UserRole;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Builder
 public class SignUpReqeust {
@@ -82,5 +84,21 @@ public class SignUpReqeust {
                 .salary(salary)
                 .userImageEntityId(userImageEntityId)
                 .build();
+    }
+
+    @Override
+    public String toString() {
+        return "SignUpReqeust{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", salary=" + salary +
+                ", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
+                ", drivingLicenseTypeEntityId=" + drivingLicenseTypeEntityId +
+                ", authority=" + authority +
+                ", userImageEntityId=" + userImageEntityId +
+                '}';
     }
 }

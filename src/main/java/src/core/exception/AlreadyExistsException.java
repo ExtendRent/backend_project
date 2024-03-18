@@ -21,4 +21,12 @@ public class AlreadyExistsException extends RuntimeException {
         this.alreadyExistsExceptionType = alreadyExistsExceptionType;
         this.detail = alreadyExistsExceptionType.getMessage();
     }
+
+    @Override
+    public String toString() {
+        return "AlreadyExistsException{" +
+                "errorCode=" + alreadyExistsExceptionType.getErrorCode() +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

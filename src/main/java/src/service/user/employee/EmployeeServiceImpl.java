@@ -3,6 +3,7 @@ package src.service.user.employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.user.employee.requests.CreateEmployeeRequest;
 import src.controller.user.employee.requests.UpdateEmployeeRequest;
 import src.controller.user.employee.responses.EmployeeResponse;
@@ -63,6 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return mapToDTOList(entityService.getAllBySalaryBetween(salary1, salary2));
     }
 
+    @Transactional
     @Override
     public List<EmployeeResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

@@ -1,10 +1,10 @@
 package src.service.user.customer;
 
-import src.controller.paperwork.rental.responses.RentalResponse;
+import src.controller.rental.responses.RentalResponse;
 import src.controller.user.customer.requests.CreateCustomerRequest;
 import src.controller.user.customer.requests.UpdateCustomerRequest;
 import src.controller.user.customer.responses.CustomerResponse;
-import src.repository.paperwork.rental.RentalEntity;
+import src.repository.rental.RentalEntity;
 
 import java.util.List;
 

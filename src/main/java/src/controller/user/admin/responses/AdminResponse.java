@@ -18,4 +18,19 @@ public class AdminResponse {
     String userImageEntityImageUrl;
     boolean isDeleted;
     UserRole authority;
+
+    @Override
+    public String toString() {
+        return "AdminResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", salary=" + salary +
+                ", userImageEntityImageUrl='" + userImageEntityImageUrl + '\'' +
+                ", isDeleted=" + isDeleted +
+                ", authority=" + authority +
+                '}';
+    }
 }

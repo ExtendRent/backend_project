@@ -23,4 +23,13 @@ public class UpdateBrandRequest {
     String name;
 
     int brandImageEntityId;
+
+    @Override
+    public String toString() {
+        return "UpdateBrandRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brandImageEntityId=" + brandImageEntityId +
+                '}';
+    }
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import src.controller.user.customer.requests.CreateCustomerRequest;
 import src.controller.user.customer.requests.UpdateCustomerRequest;
 import src.core.exception.DataNotFoundException;
-import src.repository.item.license.DrivingLicenseTypeEntityService;
+import src.repository.license.DrivingLicenseTypeEntityService;
 import src.service.image.user.UserImageService;
 import src.service.user.model.DefaultUserStatus;
 

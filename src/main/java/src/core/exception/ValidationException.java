@@ -24,4 +24,12 @@ public class ValidationException extends RuntimeException {
         this.validationExceptionType = validationExceptionType;
         this.detail = validationExceptionType.getMessage();
     }
+
+    @Override
+    public String toString() {
+        return "ValidationException{" +
+                "errorCode='" + validationExceptionType.getErrorCode() + '\'' +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

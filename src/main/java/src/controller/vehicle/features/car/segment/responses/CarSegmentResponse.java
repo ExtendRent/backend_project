@@ -11,4 +11,13 @@ public class CarSegmentResponse {
     int id;
     String name;
     boolean isDeleted;
+
+    @Override
+    public String toString() {
+        return "CarSegmentResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

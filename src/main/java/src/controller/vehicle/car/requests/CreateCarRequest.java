@@ -84,4 +84,29 @@ public class CreateCarRequest {
 
     @NotNull
     boolean isAvailable;
+
+    @Override
+    public String toString() {
+        return "CreateCarRequest{" +
+                "vehicleType=" + vehicleType +
+                ", carImageEntityId=" + carImageEntityId +
+                ", brandEntityId=" + brandEntityId +
+                ", carModelEntityId=" + carModelEntityId +
+                ", carBodyTypeEntityId=" + carBodyTypeEntityId +
+                ", colorEntityId=" + colorEntityId +
+                ", carSegmentEntityId=" + carSegmentEntityId +
+                ", year=" + year +
+                ", details='" + details + '\'' +
+                ", rentalPrice=" + rentalPrice +
+                ", licensePlate='" + licensePlate + '\'' +
+                ", kilometer=" + kilometer +
+                ", expectedMinDrivingLicenseTypeId=" + expectedMinDrivingLicenseTypeId +
+                ", shiftTypeEntityId=" + shiftTypeEntityId +
+                ", fuelTypeEntityId=" + fuelTypeEntityId +
+                ", seat=" + seat +
+                ", luggage=" + luggage +
+                ", vehicleStatusEntityId=" + vehicleStatusEntityId +
+                ", isAvailable=" + isAvailable +
+                '}';
+    }
 }

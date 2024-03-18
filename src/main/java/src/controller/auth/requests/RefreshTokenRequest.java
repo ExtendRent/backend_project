@@ -4,10 +4,12 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RefreshTokenRequest {
@@ -18,4 +20,12 @@ public class RefreshTokenRequest {
     @NotNull
     @NotBlank(message = "token boş geçilemez")
     private String token;
+
+    @Override
+    public String toString() {
+        return "RefreshTokenRequest{" +
+                "email='" + email + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

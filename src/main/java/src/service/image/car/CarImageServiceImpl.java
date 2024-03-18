@@ -68,8 +68,9 @@ public class CarImageServiceImpl implements CarImageService {
 
     @Override
     public void delete(int id) throws IOException {
+        CarImageEntity carImage = this.getById(id);
         try {
-            if (cloudinaryServiceImpl.deleteFile(this.getById(id).getName())) {
+            if (cloudinaryServiceImpl.deleteFile(carImage.getName())) {
                 repository.delete(this.getById(id));
             }
         } catch (Exception e) {

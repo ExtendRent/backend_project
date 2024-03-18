@@ -23,5 +23,13 @@ public class PaymentException extends RuntimeException {
         this.paymentExceptionType = paymentExceptionType;
         this.detail = paymentExceptionType.getMessage();
     }
+
+    @Override
+    public String toString() {
+        return "PaymentException{" +
+                "errorCode=" + paymentExceptionType.getErrorCode() +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }
 

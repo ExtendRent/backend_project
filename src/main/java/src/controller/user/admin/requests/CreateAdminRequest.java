@@ -33,4 +33,17 @@ public class CreateAdminRequest {
     @Min(0)
     private Double salary;
     private int userImageEntityId;
+
+    @Override
+    public String toString() {
+        return "CreateAdminRequest{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", salary=" + salary +
+                ", userImageEntityId=" + userImageEntityId +
+                '}';
+    }
 }

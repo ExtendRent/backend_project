@@ -18,4 +18,11 @@ public class CreateColorRequest {
     @Size(min = 2, message = "Renk en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$", message = "renk sadece harflerden oluşmalıdır.")
     String colorEntityName;
+
+    @Override
+    public String toString() {
+        return "CreateColorRequest{" +
+                "colorEntityName='" + colorEntityName + '\'' +
+                '}';
+    }
 }

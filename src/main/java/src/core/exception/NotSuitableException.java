@@ -19,4 +19,12 @@ public class NotSuitableException extends RuntimeException {
         this.notSuitableExceptionType = notSuitableExceptionType;
         this.detail = notSuitableExceptionType.getMessage();
     }
+
+    @Override
+    public String toString() {
+        return "NotSuitableException{" +
+                "errorCode=" + notSuitableExceptionType.getErrorCode() +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

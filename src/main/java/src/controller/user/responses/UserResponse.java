@@ -17,4 +17,18 @@ public class UserResponse {
     UserRole authority;
     String status;
     boolean isDeleted;
+
+    @Override
+    public String toString() {
+        return "UserResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", userImageEntityUrl='" + userImageEntityUrl + '\'' +
+                ", authority=" + authority +
+                ", status='" + status + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

@@ -44,4 +44,41 @@ public class CarResponse {
     int kilometer;
     boolean isDeleted;
     boolean isAvailable;
+
+    @Override
+    public String toString() {
+        return "CarResponse{" +
+                "id=" + id +
+                ", carModelEntityBrandEntityId=" + carModelEntityBrandEntityId +
+                ", carModelEntityId=" + carModelEntityId +
+                ", colorEntityId=" + colorEntityId +
+                ", fuelTypeEntityId=" + fuelTypeEntityId +
+                ", shiftTypeEntityId=" + shiftTypeEntityId +
+                ", carBodyTypeEntityId=" + carBodyTypeEntityId +
+                ", expectedMinDrivingLicenseTypeId=" + expectedMinDrivingLicenseTypeId +
+                ", vehicleStatusEntityId=" + vehicleStatusEntityId +
+                ", carSegmentEntityId=" + carSegmentEntityId +
+                ", carImageEntityId=" + carImageEntityId +
+                ", carSegmentEntityName='" + carSegmentEntityName + '\'' +
+                ", vehicleStatusEntityName='" + vehicleStatusEntityName + '\'' +
+                ", carModelEntityBrandEntityName='" + carModelEntityBrandEntityName + '\'' +
+                ", carModelEntityName='" + carModelEntityName + '\'' +
+                ", colorEntityName='" + colorEntityName + '\'' +
+                ", carBodyTypeEntityName='" + carBodyTypeEntityName + '\'' +
+                ", fuelTypeEntityName='" + fuelTypeEntityName + '\'' +
+                ", shiftTypeEntityName='" + shiftTypeEntityName + '\'' +
+                ", expectedMinDrivingLicenseTypeName='" + expectedMinDrivingLicenseTypeName + '\'' +
+                ", imageEntityImageUrl='" + imageEntityImageUrl + '\'' +
+                ", isLicenseTypeSuitable=" + isLicenseTypeSuitable +
+                ", details='" + details + '\'' +
+                ", rentalPrice=" + rentalPrice +
+                ", licensePlate='" + licensePlate + '\'' +
+                ", seat=" + seat +
+                ", luggage=" + luggage +
+                ", year=" + year +
+                ", kilometer=" + kilometer +
+                ", isDeleted=" + isDeleted +
+                ", isAvailable=" + isAvailable +
+                '}';
+    }
 }

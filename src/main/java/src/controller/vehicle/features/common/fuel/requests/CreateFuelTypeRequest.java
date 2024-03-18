@@ -18,4 +18,11 @@ public class CreateFuelTypeRequest {
     @Size(min = 2, message = "Yakıt ismi en az 2 karakter olmalıdır.")
     @Pattern(regexp = "^[a-zA-Z ]+$", message = "yakıt ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
+
+    @Override
+    public String toString() {
+        return "CreateFuelTypeRequest{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

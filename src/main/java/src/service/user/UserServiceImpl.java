@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.user.responses.UserResponse;
 import src.repository.user.UserEntity;
 import src.repository.user.UserEntityService;
@@ -52,6 +53,7 @@ public class UserServiceImpl implements UserService {
         entityService.update(user);
     }
 
+    @Transactional
     @Override
     public List<UserResponse> getAllByDeletedState(boolean isDeleted) {
         return mapToDTOList(entityService.getAllByDeletedState(isDeleted));

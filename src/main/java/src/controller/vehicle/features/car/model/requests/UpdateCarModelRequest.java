@@ -21,4 +21,13 @@ public class UpdateCarModelRequest {
 
     @NotNull(message = "Marka null olamaz")
     int brandEntityId;
+
+    @Override
+    public String toString() {
+        return "UpdateCarModelRequest{" +
+                "carModelEntityId=" + carModelEntityId +
+                ", carModelEntityName='" + carModelEntityName + '\'' +
+                ", brandEntityId=" + brandEntityId +
+                '}';
+    }
 }

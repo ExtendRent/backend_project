@@ -15,7 +15,7 @@ import static src.core.exception.type.NotFoundExceptionType.USER_LIST_NOT_FOUND;
 @Service
 public class UserRules implements BaseUserRules {
 
-    UserRepository repository;
+    private final UserRepository repository;
 
     @Override
     public void checkDataList(List<?> list) {

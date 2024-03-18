@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import src.controller.TResponse;
-import src.controller.paperwork.rental.responses.RentalResponse;
+import src.controller.rental.responses.RentalResponse;
 import src.controller.user.customer.requests.CreateCustomerRequest;
 import src.controller.user.customer.requests.UpdateCustomerRequest;
 import src.controller.user.customer.responses.CustomerResponse;

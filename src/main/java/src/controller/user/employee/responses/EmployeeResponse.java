@@ -17,4 +17,18 @@ public class EmployeeResponse {
     String userImageEntityImageUrl;
     boolean isDeleted;
     UserRole authority;
+
+    @Override
+    public String toString() {
+        return "EmployeeResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", salary=" + salary +
+                ", userImageEntityImageUrl='" + userImageEntityImageUrl + '\'' +
+                ", isDeleted=" + isDeleted +
+                ", authority=" + authority +
+                '}';
+    }
 }

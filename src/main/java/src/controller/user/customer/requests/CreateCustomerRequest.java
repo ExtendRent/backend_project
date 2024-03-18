@@ -36,4 +36,18 @@ public class CreateCustomerRequest {
     int drivingLicenseTypeEntityId;
     @NotNull
     private int userImageEntityId;
+
+    @Override
+    public String toString() {
+        return "CreateCustomerRequest{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
+                ", drivingLicenseTypeEntityId=" + drivingLicenseTypeEntityId +
+                ", userImageEntityId=" + userImageEntityId +
+                '}';
+    }
 }

@@ -19,4 +19,10 @@ public class CreateShiftTypeRequest {
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "Vites ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
 
+    @Override
+    public String toString() {
+        return "CreateShiftTypeRequest{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

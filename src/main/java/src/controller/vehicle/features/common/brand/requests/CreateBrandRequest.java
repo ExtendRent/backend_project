@@ -21,4 +21,12 @@ public class CreateBrandRequest {
     String name;
     @NotNull(message = "Fotoğraf null olamaz")
     int brandImageEntityId;
+
+    @Override
+    public String toString() {
+        return "CreateBrandRequest{" +
+                "name='" + name + '\'' +
+                ", brandImageEntityId=" + brandImageEntityId +
+                '}';
+    }
 }

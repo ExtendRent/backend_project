@@ -6,7 +6,7 @@ import src.controller.user.customer.requests.CreateCustomerRequest;
 import src.controller.user.customer.requests.UpdateCustomerRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
-import src.repository.paperwork.rental.RentalEntity;
+import src.repository.rental.RentalEntity;
 import src.repository.user.customer.CustomerEntityServiceImpl;
 import src.repository.user.customer.CustomerRepository;
 import src.service.businessrules.abstracts.BaseUserRules;

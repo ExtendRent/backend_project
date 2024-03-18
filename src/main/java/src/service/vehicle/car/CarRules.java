@@ -16,7 +16,7 @@ import src.repository.vehicle.features.car.model.CarModelEntityService;
 import src.repository.vehicle.features.common.brand.BrandEntityService;
 import src.repository.vehicle.features.common.color.ColorEntityService;
 import src.service.businessrules.abstracts.BaseRules;
-import src.service.item.license.DrivingLicenseTypeService;
+import src.service.license.DrivingLicenseTypeService;
 import src.service.user.customer.CustomerService;
 
 import java.time.LocalDate;

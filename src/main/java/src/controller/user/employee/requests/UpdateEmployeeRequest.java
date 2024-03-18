@@ -42,4 +42,19 @@ public class UpdateEmployeeRequest {
     Double salary;
     private DefaultUserStatus status;
     private int userImageEntityId;
+
+    @Override
+    public String toString() {
+        return "UpdateEmployeeRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", salary=" + salary +
+                ", status=" + status +
+                ", userImageEntityId=" + userImageEntityId +
+                '}';
+    }
 }
