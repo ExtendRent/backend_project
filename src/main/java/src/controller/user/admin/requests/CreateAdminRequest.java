@@ -24,7 +24,7 @@ public class CreateAdminRequest {
     @Size(min = 8, max = 30)
     @NotBlank(message = "Şifre boş geçilemez")
     private String password;
-    @NotNull(message = "telefon numarası null olamaz")
+
     @NotBlank(message = "Çalışan telefon numarası boş geçilemez")
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")

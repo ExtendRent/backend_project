@@ -16,7 +16,7 @@ public class UpdateEmployeeRequest {
 
     @NotNull(message = "id cannot be null")
     int id;
-    @NotNull(message = "id cannot be null")
+
     @NotBlank(message = "Çalışan adı boş geçilemez")
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "isim/soyisim sadece harflerden oluşmalıdır.")

@@ -46,7 +46,7 @@ public class UpdateCarRequest {
     @NotNull(message = "rentalPrice can not be null")
     double rentalPrice;
 
-    @NotNull(message = "License plate can not be null")
+    @NotBlank(message = "license plate can not be blank")
     @Pattern(regexp = "^(\\d{2}[ ]?[A-Za-z]{1,3}[ ]?\\d{2}|\\d{2}[ ]?[A-Za-z]{2}[ ]?\\d{3})$", message = "Invalid license plate format")
     String licensePlate;
 

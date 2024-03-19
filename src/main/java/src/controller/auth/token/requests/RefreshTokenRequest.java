@@ -15,9 +15,7 @@ import lombok.Setter;
 public class RefreshTokenRequest {
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.
     @NotBlank(message = "Mail adresi boş geçilemez")
-    @NotNull
     private String email;
-    @NotNull
     @NotBlank(message = "token boş geçilemez")
     private String token;
 

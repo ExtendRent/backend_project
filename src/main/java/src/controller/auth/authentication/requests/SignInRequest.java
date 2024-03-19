@@ -15,9 +15,7 @@ import lombok.Setter;
 public class SignInRequest {
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.
     @NotBlank(message = "Mail adresi boş geçilemez")
-    @NotNull
     private String email;
-    @NotNull
     @NotBlank(message = "Şifre boş geçilemez")
     private String password;
 

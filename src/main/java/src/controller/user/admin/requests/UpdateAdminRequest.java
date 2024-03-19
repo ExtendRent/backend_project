@@ -29,11 +29,11 @@ public class UpdateAdminRequest {
     @NotBlank(message = "Admin mail adresi boş geçilemez")
     @Email//-> Email alırken @gmail @hotmail gibi kullanımları denetler.
     private String emailAddress;
-    @NotNull(message = "Şifre null olamaz")
+
     @NotBlank(message = "Şifre boş geçilemez")
     @Size(min = 8, max = 30)
     private String password;
-    @NotNull(message = "telefon numarası null olamaz")
+
     @NotBlank(message = "Çalışan telefon numarası boş geçilemez")
     @Size(min = 10, max = 10, message = "Telefon numarası 10 hane olmalıdır.")
     @Pattern(regexp = "^[0-9]+$", message = "Telefon numarası sadece sayılardan oluşmalıdır.")

@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateCarModelRequest {
-    @NotNull(message = "Marka null olamaz")
+    @NotNull(message = "Marka id null olamaz")
     int brandEntityId;
 
     @NotBlank(message = "Model adı boş geçilemez")
