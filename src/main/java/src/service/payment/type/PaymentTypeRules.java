@@ -2,8 +2,8 @@ package src.service.payment.type;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.payment.type.requests.CreatePaymentTypeRequest;
-import src.controller.payment.type.requests.UpdatePaymentTypeRequest;
+import src.controller.payment.type.request.CreatePaymentTypeRequest;
+import src.controller.payment.type.request.UpdatePaymentTypeRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.repository.payment.type.PaymentTypeRepository;

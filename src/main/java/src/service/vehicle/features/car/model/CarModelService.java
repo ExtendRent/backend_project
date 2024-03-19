@@ -1,8 +1,8 @@
 package src.service.vehicle.features.car.model;
 
-import src.controller.vehicle.features.car.model.requests.CreateCarModelRequest;
-import src.controller.vehicle.features.car.model.requests.UpdateCarModelRequest;
-import src.controller.vehicle.features.car.model.responses.CarModelResponse;
+import src.controller.vehicle.features.car.model.request.CreateCarModelRequest;
+import src.controller.vehicle.features.car.model.request.UpdateCarModelRequest;
+import src.controller.vehicle.features.car.model.response.CarModelResponse;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.user.admin.responses.AdminResponse;
+import src.controller.user.admin.response.AdminResponse;
 import src.repository.user.UserEntity;
 
 import static src.service.user.model.UserRole.ADMIN;

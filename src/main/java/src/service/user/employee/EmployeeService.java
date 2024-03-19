@@ -1,9 +1,9 @@
 package src.service.user.employee;
 
 
-import src.controller.user.employee.requests.CreateEmployeeRequest;
-import src.controller.user.employee.requests.UpdateEmployeeRequest;
-import src.controller.user.employee.responses.EmployeeResponse;
+import src.controller.user.employee.request.CreateEmployeeRequest;
+import src.controller.user.employee.request.UpdateEmployeeRequest;
+import src.controller.user.employee.response.EmployeeResponse;
 
 import java.util.List;
 

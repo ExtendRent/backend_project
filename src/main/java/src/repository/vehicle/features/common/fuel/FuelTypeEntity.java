@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.vehicle.features.common.fuel.responses.FuelTypeResponse;
+import src.controller.vehicle.features.common.fuel.response.FuelTypeResponse;
 import src.repository.BaseEntity;
 
 @Getter

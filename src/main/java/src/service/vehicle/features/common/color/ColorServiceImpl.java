@@ -3,9 +3,9 @@ package src.service.vehicle.features.common.color;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.vehicle.features.common.color.requests.CreateColorRequest;
-import src.controller.vehicle.features.common.color.requests.UpdateColorRequest;
-import src.controller.vehicle.features.common.color.responses.ColorResponse;
+import src.controller.vehicle.features.common.color.request.CreateColorRequest;
+import src.controller.vehicle.features.common.color.request.UpdateColorRequest;
+import src.controller.vehicle.features.common.color.response.ColorResponse;
 import src.repository.vehicle.features.common.color.ColorEntity;
 import src.repository.vehicle.features.common.color.ColorEntityService;
 

@@ -2,9 +2,9 @@ package src.service.vehicle.car;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.user.customer.responses.CustomerResponse;
-import src.controller.vehicle.car.requests.CreateCarRequest;
-import src.controller.vehicle.car.requests.UpdateCarRequest;
+import src.controller.user.customer.response.CustomerResponse;
+import src.controller.vehicle.car.request.CreateCarRequest;
+import src.controller.vehicle.car.request.UpdateCarRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.core.exception.ValidationException;

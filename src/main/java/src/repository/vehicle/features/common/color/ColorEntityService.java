@@ -1,7 +1,7 @@
 package src.repository.vehicle.features.common.color;
 
-import src.controller.vehicle.features.common.color.requests.CreateColorRequest;
-import src.controller.vehicle.features.common.color.requests.UpdateColorRequest;
+import src.controller.vehicle.features.common.color.request.CreateColorRequest;
+import src.controller.vehicle.features.common.color.request.UpdateColorRequest;
 
 import java.util.List;
 

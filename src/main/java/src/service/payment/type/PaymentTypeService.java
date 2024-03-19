@@ -1,8 +1,8 @@
 package src.service.payment.type;
 
-import src.controller.payment.type.requests.CreatePaymentTypeRequest;
-import src.controller.payment.type.requests.UpdatePaymentTypeRequest;
-import src.controller.payment.type.responses.PaymentTypeResponse;
+import src.controller.payment.type.request.CreatePaymentTypeRequest;
+import src.controller.payment.type.request.UpdatePaymentTypeRequest;
+import src.controller.payment.type.response.PaymentTypeResponse;
 
 import java.util.List;
 

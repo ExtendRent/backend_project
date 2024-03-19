@@ -2,8 +2,8 @@ package src.repository.vehicle.features.common.color;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.common.color.requests.CreateColorRequest;
-import src.controller.vehicle.features.common.color.requests.UpdateColorRequest;
+import src.controller.vehicle.features.common.color.request.CreateColorRequest;
+import src.controller.vehicle.features.common.color.request.UpdateColorRequest;
 import src.core.exception.DataNotFoundException;
 
 import java.util.List;

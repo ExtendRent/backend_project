@@ -2,7 +2,7 @@ package src.repository.payment.detail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.payment.detail.requests.UpdatePaymentDetailsRequest;
+import src.controller.payment.detail.request.UpdatePaymentDetailsRequest;
 import src.core.exception.DataNotFoundException;
 import src.repository.discount.PaymentDetailsRepository;
 

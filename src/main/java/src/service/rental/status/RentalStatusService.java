@@ -1,6 +1,6 @@
 package src.service.rental.status;
 
-import src.controller.rental.responses.RentalStatusResponse;
+import src.controller.rental.response.RentalStatusResponse;
 import src.repository.rental.status.RentalStatusEntity;
 import src.service.rental.status.model.DefaultRentalStatus;
 

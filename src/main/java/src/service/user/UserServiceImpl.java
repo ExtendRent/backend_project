@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.user.responses.UserResponse;
+import src.controller.user.response.UserResponse;
 import src.repository.user.UserEntity;
 import src.repository.user.UserEntityService;
 

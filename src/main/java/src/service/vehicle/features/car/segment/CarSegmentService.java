@@ -1,8 +1,8 @@
 package src.service.vehicle.features.car.segment;
 
-import src.controller.vehicle.features.car.segment.requests.CreateCarSegmentRequest;
-import src.controller.vehicle.features.car.segment.requests.UpdateCarSegmentRequest;
-import src.controller.vehicle.features.car.segment.responses.CarSegmentResponse;
+import src.controller.vehicle.features.car.segment.request.CreateCarSegmentRequest;
+import src.controller.vehicle.features.car.segment.request.UpdateCarSegmentRequest;
+import src.controller.vehicle.features.car.segment.response.CarSegmentResponse;
 
 import java.util.List;
 

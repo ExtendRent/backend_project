@@ -3,9 +3,9 @@ package src.service.vehicle.features.common.shift;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.vehicle.features.common.shift.requests.CreateShiftTypeRequest;
-import src.controller.vehicle.features.common.shift.requests.UpdateShiftTypeRequest;
-import src.controller.vehicle.features.common.shift.responses.ShiftTypeResponse;
+import src.controller.vehicle.features.common.shift.request.CreateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.request.UpdateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.response.ShiftTypeResponse;
 import src.repository.vehicle.features.common.shift.ShiftTypeEntity;
 import src.repository.vehicle.features.common.shift.ShiftTypeEntityService;
 

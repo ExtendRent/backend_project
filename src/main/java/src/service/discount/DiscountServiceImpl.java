@@ -3,9 +3,9 @@ package src.service.discount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.discount.requests.CreateDiscountRequest;
-import src.controller.discount.requests.UpdateDiscountRequest;
-import src.controller.discount.responses.DiscountResponse;
+import src.controller.discount.request.CreateDiscountRequest;
+import src.controller.discount.request.UpdateDiscountRequest;
+import src.controller.discount.response.DiscountResponse;
 import src.repository.discount.DiscountEntity;
 import src.repository.discount.DiscountEntityService;
 

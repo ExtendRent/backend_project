@@ -2,8 +2,8 @@ package src.service.vehicle.features.car.model;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.car.model.requests.CreateCarModelRequest;
-import src.controller.vehicle.features.car.model.requests.UpdateCarModelRequest;
+import src.controller.vehicle.features.car.model.request.CreateCarModelRequest;
+import src.controller.vehicle.features.car.model.request.UpdateCarModelRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.repository.vehicle.features.car.model.CarModelRepository;

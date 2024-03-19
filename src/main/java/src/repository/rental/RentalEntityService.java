@@ -1,7 +1,7 @@
 package src.repository.rental;
 
-import src.controller.rental.requests.CreateRentalRequest;
-import src.controller.rental.requests.UpdateRentalRequest;
+import src.controller.rental.request.CreateRentalRequest;
+import src.controller.rental.request.UpdateRentalRequest;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -1,7 +1,7 @@
 package src.repository.vehicle.car;
 
-import src.controller.vehicle.car.requests.CreateCarRequest;
-import src.controller.vehicle.car.requests.UpdateCarRequest;
+import src.controller.vehicle.car.request.CreateCarRequest;
+import src.controller.vehicle.car.request.UpdateCarRequest;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package src.repository.user.admin;
 
-import src.controller.user.admin.requests.CreateAdminRequest;
-import src.controller.user.admin.requests.UpdateAdminRequest;
+import src.controller.user.admin.request.CreateAdminRequest;
+import src.controller.user.admin.request.UpdateAdminRequest;
 
 import java.util.List;
 

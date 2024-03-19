@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.vehicle.features.common.color.responses.ColorResponse;
+import src.controller.vehicle.features.common.color.response.ColorResponse;
 import src.repository.BaseEntity;
 
 @Getter

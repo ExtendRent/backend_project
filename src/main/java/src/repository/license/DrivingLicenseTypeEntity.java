@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.license.responses.DrivingLicenseTypeResponse;
+import src.controller.license.response.DrivingLicenseTypeResponse;
 import src.repository.BaseEntity;
 
 @Getter

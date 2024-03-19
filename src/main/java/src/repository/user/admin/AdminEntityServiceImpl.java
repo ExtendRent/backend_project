@@ -2,8 +2,8 @@ package src.repository.user.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.user.admin.requests.CreateAdminRequest;
-import src.controller.user.admin.requests.UpdateAdminRequest;
+import src.controller.user.admin.request.CreateAdminRequest;
+import src.controller.user.admin.request.UpdateAdminRequest;
 import src.core.exception.DataNotFoundException;
 import src.service.image.user.UserImageService;
 

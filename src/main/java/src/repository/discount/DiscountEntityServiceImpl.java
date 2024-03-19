@@ -2,8 +2,8 @@ package src.repository.discount;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.discount.requests.CreateDiscountRequest;
-import src.controller.discount.requests.UpdateDiscountRequest;
+import src.controller.discount.request.CreateDiscountRequest;
+import src.controller.discount.request.UpdateDiscountRequest;
 import src.core.exception.DataNotFoundException;
 
 import java.util.List;

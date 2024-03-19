@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.vehicle.car.responses.CarResponse;
+import src.controller.vehicle.car.response.CarResponse;
 import src.repository.image.CarImageEntity;
 import src.repository.rental.RentalEntity;
 import src.repository.vehicle.Vehicle;

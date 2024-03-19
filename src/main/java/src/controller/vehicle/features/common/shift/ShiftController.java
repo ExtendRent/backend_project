@@ -6,12 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import src.controller.TResponse;
-import src.controller.vehicle.features.common.shift.requests.CreateShiftTypeRequest;
-import src.controller.vehicle.features.common.shift.requests.UpdateShiftTypeRequest;
-import src.controller.vehicle.features.common.shift.responses.ShiftTypeResponse;
+import src.controller.vehicle.features.common.shift.request.CreateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.request.UpdateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.response.ShiftTypeResponse;
 import src.service.vehicle.features.common.shift.ShiftTypeService;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import static src.controller.vehicle.features.common.shift.LogConstant.*;
 @RestController
 @RequestMapping("api/v1/gearshifts")
 @RequiredArgsConstructor
-@Validated
+
 public class ShiftController {
 
     private final Logger logger = LoggerFactory.getLogger(ShiftController.class);

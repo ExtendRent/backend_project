@@ -1,7 +1,7 @@
 package src.repository.user.customer;
 
-import src.controller.user.customer.requests.CreateCustomerRequest;
-import src.controller.user.customer.requests.UpdateCustomerRequest;
+import src.controller.user.customer.request.CreateCustomerRequest;
+import src.controller.user.customer.request.UpdateCustomerRequest;
 
 import java.util.List;
 

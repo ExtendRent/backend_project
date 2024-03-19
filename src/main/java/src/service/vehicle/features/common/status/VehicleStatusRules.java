@@ -2,8 +2,8 @@ package src.service.vehicle.features.common.status;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.common.status.requests.CreateVehicleStatusRequest;
-import src.controller.vehicle.features.common.status.requests.UpdateVehicleStatusRequest;
+import src.controller.vehicle.features.common.status.request.CreateVehicleStatusRequest;
+import src.controller.vehicle.features.common.status.request.UpdateVehicleStatusRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.repository.vehicle.features.common.status.VehicleStatusRepository;

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.vehicle.features.common.brand.responses.BrandResponse;
+import src.controller.vehicle.features.common.brand.response.BrandResponse;
 import src.repository.BaseEntity;
 import src.repository.image.BrandImageEntity;
 

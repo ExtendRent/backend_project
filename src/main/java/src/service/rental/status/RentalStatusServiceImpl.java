@@ -3,7 +3,7 @@ package src.service.rental.status;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.rental.responses.RentalStatusResponse;
+import src.controller.rental.response.RentalStatusResponse;
 import src.core.exception.DataNotFoundException;
 import src.repository.rental.status.RentalStatusEntity;
 import src.repository.rental.status.RentalStatusRepository;

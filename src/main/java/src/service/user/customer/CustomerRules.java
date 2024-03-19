@@ -2,8 +2,8 @@ package src.service.user.customer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.user.customer.requests.CreateCustomerRequest;
-import src.controller.user.customer.requests.UpdateCustomerRequest;
+import src.controller.user.customer.request.CreateCustomerRequest;
+import src.controller.user.customer.request.UpdateCustomerRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.repository.rental.RentalEntity;

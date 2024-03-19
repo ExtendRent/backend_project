@@ -2,8 +2,8 @@ package src.service.user.employee;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.user.employee.requests.CreateEmployeeRequest;
-import src.controller.user.employee.requests.UpdateEmployeeRequest;
+import src.controller.user.employee.request.CreateEmployeeRequest;
+import src.controller.user.employee.request.UpdateEmployeeRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.core.exception.ValidationException;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import src.controller.TResponse;
-import src.controller.auth.token.requests.RefreshTokenRequest;
+import src.controller.auth.token.request.RefreshTokenRequest;
 import src.core.security.model.JwtToken;
 import src.service.auth.AccessTokenService;
 

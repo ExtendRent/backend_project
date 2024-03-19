@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.vehicle.features.car.body.responses.CarBodyTypeResponse;
+import src.controller.vehicle.features.car.body.response.CarBodyTypeResponse;
 import src.repository.BaseEntity;
 
 

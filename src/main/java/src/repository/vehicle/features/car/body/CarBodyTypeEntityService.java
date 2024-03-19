@@ -1,7 +1,7 @@
 package src.repository.vehicle.features.car.body;
 
-import src.controller.vehicle.features.car.body.requests.CreateCarBodyTypeRequest;
-import src.controller.vehicle.features.car.body.requests.UpdateCarBodyTypeRequest;
+import src.controller.vehicle.features.car.body.request.CreateCarBodyTypeRequest;
+import src.controller.vehicle.features.car.body.request.UpdateCarBodyTypeRequest;
 
 import java.util.List;
 

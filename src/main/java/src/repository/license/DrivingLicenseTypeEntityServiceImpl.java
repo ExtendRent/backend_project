@@ -2,8 +2,8 @@ package src.repository.license;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.license.requests.CreateDrivingLicenseTypeRequest;
-import src.controller.license.requests.UpdateDrivingLicenseTypeRequest;
+import src.controller.license.request.CreateDrivingLicenseTypeRequest;
+import src.controller.license.request.UpdateDrivingLicenseTypeRequest;
 import src.core.exception.DataNotFoundException;
 
 import java.util.List;

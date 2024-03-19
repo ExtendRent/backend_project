@@ -2,8 +2,8 @@ package src.repository.vehicle.features.car.body;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.car.body.requests.CreateCarBodyTypeRequest;
-import src.controller.vehicle.features.car.body.requests.UpdateCarBodyTypeRequest;
+import src.controller.vehicle.features.car.body.request.CreateCarBodyTypeRequest;
+import src.controller.vehicle.features.car.body.request.UpdateCarBodyTypeRequest;
 import src.core.exception.DataNotFoundException;
 
 import java.util.List;

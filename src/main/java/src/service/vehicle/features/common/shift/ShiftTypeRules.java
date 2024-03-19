@@ -2,8 +2,8 @@ package src.service.vehicle.features.common.shift;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.common.shift.requests.CreateShiftTypeRequest;
-import src.controller.vehicle.features.common.shift.requests.UpdateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.request.CreateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.request.UpdateShiftTypeRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.repository.vehicle.features.common.shift.ShiftTypeRepository;

@@ -1,11 +1,11 @@
 package src.service.rental;
 
-import src.controller.rental.requests.CreateRentalRequest;
-import src.controller.rental.requests.ReturnRentalRequest;
-import src.controller.rental.requests.ShowRentalRequest;
-import src.controller.rental.requests.UpdateRentalRequest;
-import src.controller.rental.responses.RentalResponse;
-import src.controller.rental.responses.ShowRentalResponse;
+import src.controller.rental.request.CreateRentalRequest;
+import src.controller.rental.request.ReturnRentalRequest;
+import src.controller.rental.request.ShowRentalRequest;
+import src.controller.rental.request.UpdateRentalRequest;
+import src.controller.rental.response.RentalResponse;
+import src.controller.rental.response.ShowRentalResponse;
 
 import java.util.List;
 

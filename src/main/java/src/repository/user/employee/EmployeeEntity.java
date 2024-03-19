@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.user.employee.responses.EmployeeResponse;
+import src.controller.user.employee.response.EmployeeResponse;
 import src.repository.user.UserEntity;
 
 import static src.service.user.model.UserRole.EMPLOYEE;

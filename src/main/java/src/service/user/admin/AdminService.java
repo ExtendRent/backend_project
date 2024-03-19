@@ -1,8 +1,8 @@
 package src.service.user.admin;
 
-import src.controller.user.admin.requests.CreateAdminRequest;
-import src.controller.user.admin.requests.UpdateAdminRequest;
-import src.controller.user.admin.responses.AdminResponse;
+import src.controller.user.admin.request.CreateAdminRequest;
+import src.controller.user.admin.request.UpdateAdminRequest;
+import src.controller.user.admin.response.AdminResponse;
 
 import java.util.List;
 

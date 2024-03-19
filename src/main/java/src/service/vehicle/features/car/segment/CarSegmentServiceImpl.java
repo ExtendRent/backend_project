@@ -3,9 +3,9 @@ package src.service.vehicle.features.car.segment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.vehicle.features.car.segment.requests.CreateCarSegmentRequest;
-import src.controller.vehicle.features.car.segment.requests.UpdateCarSegmentRequest;
-import src.controller.vehicle.features.car.segment.responses.CarSegmentResponse;
+import src.controller.vehicle.features.car.segment.request.CreateCarSegmentRequest;
+import src.controller.vehicle.features.car.segment.request.UpdateCarSegmentRequest;
+import src.controller.vehicle.features.car.segment.response.CarSegmentResponse;
 import src.repository.vehicle.features.car.segment.CarSegmentEntity;
 import src.repository.vehicle.features.car.segment.CarSegmentEntityService;
 

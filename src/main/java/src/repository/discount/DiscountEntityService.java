@@ -1,7 +1,7 @@
 package src.repository.discount;
 
-import src.controller.discount.requests.CreateDiscountRequest;
-import src.controller.discount.requests.UpdateDiscountRequest;
+import src.controller.discount.request.CreateDiscountRequest;
+import src.controller.discount.request.UpdateDiscountRequest;
 
 import java.util.List;
 

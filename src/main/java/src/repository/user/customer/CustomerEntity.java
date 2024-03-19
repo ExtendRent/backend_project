@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.controller.user.customer.responses.CustomerResponse;
+import src.controller.user.customer.response.CustomerResponse;
 import src.repository.license.DrivingLicenseTypeEntity;
 import src.repository.rental.RentalEntity;
 import src.repository.user.UserEntity;

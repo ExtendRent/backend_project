@@ -2,8 +2,8 @@ package src.service.vehicle.features.car.segment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.car.segment.requests.CreateCarSegmentRequest;
-import src.controller.vehicle.features.car.segment.requests.UpdateCarSegmentRequest;
+import src.controller.vehicle.features.car.segment.request.CreateCarSegmentRequest;
+import src.controller.vehicle.features.car.segment.request.UpdateCarSegmentRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.repository.vehicle.features.car.segment.CarSegmentRepository;

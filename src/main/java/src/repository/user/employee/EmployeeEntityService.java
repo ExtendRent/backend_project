@@ -1,8 +1,8 @@
 package src.repository.user.employee;
 
 
-import src.controller.user.employee.requests.CreateEmployeeRequest;
-import src.controller.user.employee.requests.UpdateEmployeeRequest;
+import src.controller.user.employee.request.CreateEmployeeRequest;
+import src.controller.user.employee.request.UpdateEmployeeRequest;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package src.repository.vehicle.features.common.shift;
 
-import src.controller.vehicle.features.common.shift.requests.CreateShiftTypeRequest;
-import src.controller.vehicle.features.common.shift.requests.UpdateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.request.CreateShiftTypeRequest;
+import src.controller.vehicle.features.common.shift.request.UpdateShiftTypeRequest;
 
 import java.util.List;
 

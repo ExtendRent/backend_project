@@ -3,7 +3,7 @@ package src.service.user;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import src.controller.user.responses.UserResponse;
+import src.controller.user.response.UserResponse;
 import src.repository.user.UserEntity;
 
 import java.util.List;

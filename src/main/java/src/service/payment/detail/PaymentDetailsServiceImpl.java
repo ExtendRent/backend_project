@@ -2,8 +2,8 @@ package src.service.payment.detail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.payment.detail.requests.UpdatePaymentDetailsRequest;
-import src.controller.payment.detail.responses.PaymentDetailsResponse;
+import src.controller.payment.detail.request.UpdatePaymentDetailsRequest;
+import src.controller.payment.detail.response.PaymentDetailsResponse;
 import src.repository.payment.detail.PaymentDetailsEntity;
 import src.repository.payment.detail.PaymentDetailsEntityService;
 

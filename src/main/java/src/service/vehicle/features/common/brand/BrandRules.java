@@ -2,8 +2,8 @@ package src.service.vehicle.features.common.brand;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.common.brand.requests.CreateBrandRequest;
-import src.controller.vehicle.features.common.brand.requests.UpdateBrandRequest;
+import src.controller.vehicle.features.common.brand.request.CreateBrandRequest;
+import src.controller.vehicle.features.common.brand.request.UpdateBrandRequest;
 import src.core.exception.AlreadyExistsException;
 import src.core.exception.DataNotFoundException;
 import src.repository.vehicle.features.common.brand.BrandRepository;

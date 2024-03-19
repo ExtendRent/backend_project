@@ -2,9 +2,9 @@ package src.service.rental;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.rental.requests.CreateRentalRequest;
-import src.controller.rental.requests.ReturnRentalRequest;
-import src.controller.rental.requests.ShowRentalRequest;
+import src.controller.rental.request.CreateRentalRequest;
+import src.controller.rental.request.ReturnRentalRequest;
+import src.controller.rental.request.ShowRentalRequest;
 import src.core.exception.DataNotFoundException;
 import src.core.exception.NotSuitableException;
 import src.core.exception.ValidationException;

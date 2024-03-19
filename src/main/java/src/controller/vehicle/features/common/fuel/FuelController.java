@@ -6,13 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import src.controller.TResponse;
-import src.controller.vehicle.features.common.color.ColorsController;
-import src.controller.vehicle.features.common.fuel.requests.CreateFuelTypeRequest;
-import src.controller.vehicle.features.common.fuel.requests.UpdateFuelTypeRequest;
-import src.controller.vehicle.features.common.fuel.responses.FuelTypeResponse;
+import src.controller.vehicle.features.common.color.ColorController;
+import src.controller.vehicle.features.common.fuel.request.CreateFuelTypeRequest;
+import src.controller.vehicle.features.common.fuel.request.UpdateFuelTypeRequest;
+import src.controller.vehicle.features.common.fuel.response.FuelTypeResponse;
 import src.service.vehicle.features.common.fuel.FuelTypeService;
 
 import java.util.List;
@@ -22,9 +21,9 @@ import static src.controller.vehicle.features.common.fuel.LogConstant.*;
 @RestController
 @RequestMapping("api/v1/fuels")
 @RequiredArgsConstructor
-@Validated
+
 public class FuelController {
-    private static final Logger logger = LoggerFactory.getLogger(ColorsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ColorController.class);
     private final FuelTypeService fuelService;
 
     @PostMapping

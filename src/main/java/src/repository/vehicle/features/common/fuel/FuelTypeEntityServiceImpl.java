@@ -2,8 +2,8 @@ package src.repository.vehicle.features.common.fuel;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.common.fuel.requests.CreateFuelTypeRequest;
-import src.controller.vehicle.features.common.fuel.requests.UpdateFuelTypeRequest;
+import src.controller.vehicle.features.common.fuel.request.CreateFuelTypeRequest;
+import src.controller.vehicle.features.common.fuel.request.UpdateFuelTypeRequest;
 import src.core.exception.DataNotFoundException;
 
 import java.util.List;

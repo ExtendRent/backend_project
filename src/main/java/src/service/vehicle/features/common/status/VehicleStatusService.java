@@ -1,8 +1,8 @@
 package src.service.vehicle.features.common.status;
 
-import src.controller.vehicle.features.common.status.requests.CreateVehicleStatusRequest;
-import src.controller.vehicle.features.common.status.requests.UpdateVehicleStatusRequest;
-import src.controller.vehicle.features.common.status.responses.VehicleStatusResponse;
+import src.controller.vehicle.features.common.status.request.CreateVehicleStatusRequest;
+import src.controller.vehicle.features.common.status.request.UpdateVehicleStatusRequest;
+import src.controller.vehicle.features.common.status.response.VehicleStatusResponse;
 import src.service.vehicle.features.common.status.model.DefaultVehicleStatus;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package src.service.discount;
 
-import src.controller.discount.requests.CreateDiscountRequest;
-import src.controller.discount.requests.UpdateDiscountRequest;
-import src.controller.discount.responses.DiscountResponse;
+import src.controller.discount.request.CreateDiscountRequest;
+import src.controller.discount.request.UpdateDiscountRequest;
+import src.controller.discount.response.DiscountResponse;
 
 import java.util.List;
 

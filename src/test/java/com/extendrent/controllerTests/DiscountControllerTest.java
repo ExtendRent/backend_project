@@ -6,17 +6,17 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controller.discount.DiscountsController;
-import src.controller.discount.responses.DiscountResponse;
-import src.controller.discount.requests.CreateDiscountRequest;
-import src.controller.discount.requests.UpdateDiscountRequest;
+import src.controller.discount.DiscountController;
+import src.controller.discount.response.DiscountResponse;
+import src.controller.discount.request.CreateDiscountRequest;
+import src.controller.discount.request.UpdateDiscountRequest;
 import src.controller.TResponse;
 import src.service.discount.DiscountService;
 
 public class DiscountControllerTest {
 
     private final DiscountService discountService = mock(DiscountService.class);
-    private final DiscountsController discountController = new DiscountsController(discountService);
+    private final DiscountController discountController = new DiscountController(discountService);
 
     @Test
     public void testCreateDiscountCode() {

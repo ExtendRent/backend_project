@@ -1,7 +1,7 @@
 package src.repository.vehicle.features.common.brand;
 
-import src.controller.vehicle.features.common.brand.requests.CreateBrandRequest;
-import src.controller.vehicle.features.common.brand.requests.UpdateBrandRequest;
+import src.controller.vehicle.features.common.brand.request.CreateBrandRequest;
+import src.controller.vehicle.features.common.brand.request.UpdateBrandRequest;
 
 import java.util.List;
 

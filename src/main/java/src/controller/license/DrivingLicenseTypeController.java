@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import src.controller.TResponse;
-import src.controller.license.requests.CreateDrivingLicenseTypeRequest;
-import src.controller.license.requests.UpdateDrivingLicenseTypeRequest;
-import src.controller.license.responses.DrivingLicenseTypeResponse;
+import src.controller.license.request.CreateDrivingLicenseTypeRequest;
+import src.controller.license.request.UpdateDrivingLicenseTypeRequest;
+import src.controller.license.response.DrivingLicenseTypeResponse;
 import src.service.license.DrivingLicenseTypeService;
 
 import java.util.List;

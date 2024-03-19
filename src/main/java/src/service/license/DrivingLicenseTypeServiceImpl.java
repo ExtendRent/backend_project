@@ -3,9 +3,9 @@ package src.service.license;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.license.requests.CreateDrivingLicenseTypeRequest;
-import src.controller.license.requests.UpdateDrivingLicenseTypeRequest;
-import src.controller.license.responses.DrivingLicenseTypeResponse;
+import src.controller.license.request.CreateDrivingLicenseTypeRequest;
+import src.controller.license.request.UpdateDrivingLicenseTypeRequest;
+import src.controller.license.response.DrivingLicenseTypeResponse;
 import src.repository.license.DrivingLicenseTypeEntity;
 import src.repository.license.DrivingLicenseTypeEntityService;
 

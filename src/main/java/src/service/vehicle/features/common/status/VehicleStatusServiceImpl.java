@@ -2,9 +2,9 @@ package src.service.vehicle.features.common.status;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.vehicle.features.common.status.requests.CreateVehicleStatusRequest;
-import src.controller.vehicle.features.common.status.requests.UpdateVehicleStatusRequest;
-import src.controller.vehicle.features.common.status.responses.VehicleStatusResponse;
+import src.controller.vehicle.features.common.status.request.CreateVehicleStatusRequest;
+import src.controller.vehicle.features.common.status.request.UpdateVehicleStatusRequest;
+import src.controller.vehicle.features.common.status.response.VehicleStatusResponse;
 import src.repository.vehicle.features.common.status.VehicleStatusEntity;
 import src.repository.vehicle.features.common.status.VehicleStatusEntityService;
 import src.service.vehicle.features.common.status.model.DefaultVehicleStatus;

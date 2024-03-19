@@ -1,8 +1,8 @@
 package src.service.vehicle.features.common.brand;
 
-import src.controller.vehicle.features.common.brand.requests.CreateBrandRequest;
-import src.controller.vehicle.features.common.brand.requests.UpdateBrandRequest;
-import src.controller.vehicle.features.common.brand.responses.BrandResponse;
+import src.controller.vehicle.features.common.brand.request.CreateBrandRequest;
+import src.controller.vehicle.features.common.brand.request.UpdateBrandRequest;
+import src.controller.vehicle.features.common.brand.response.BrandResponse;
 
 import java.util.List;
 

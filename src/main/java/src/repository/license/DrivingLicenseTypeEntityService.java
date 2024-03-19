@@ -1,7 +1,7 @@
 package src.repository.license;
 
-import src.controller.license.requests.CreateDrivingLicenseTypeRequest;
-import src.controller.license.requests.UpdateDrivingLicenseTypeRequest;
+import src.controller.license.request.CreateDrivingLicenseTypeRequest;
+import src.controller.license.request.UpdateDrivingLicenseTypeRequest;
 
 import java.util.List;
 
