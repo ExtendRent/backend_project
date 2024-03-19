@@ -1,7 +1,8 @@
 package src.controller.image;
 
-
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,13 @@ import src.service.image.user.UserImageService;
 
 import java.io.IOException;
 
+import static src.controller.image.LogConstant.*;
+
 @RestController
 @RequestMapping("/api/v1/images")
 @RequiredArgsConstructor
 public class ImagesController {
+    private static final Logger logger = LoggerFactory.getLogger(ImagesController.class);
     private final CarImageService carImageService;
     private final UserImageService userImageService;
     private final BrandImageService brandImageService;
@@ -26,7 +30,10 @@ public class ImagesController {
     public ResponseEntity<Integer> uploadCarImage(
             @RequestPart(value = "image", required = false) MultipartFile image,
             @RequestParam("licensePlate") String licensePlate) throws IOException {
-        return new ResponseEntity<>(carImageService.create(image, licensePlate).getId(), HttpStatus.OK);
+        logger.info(UPLOADING_CAR_IMAGE, licensePlate);
+        Integer imageId = carImageService.create(image, licensePlate).getId();
+        logger.info(CAR_IMAGE_UPLOADED_SUCCESSFULLY, licensePlate);
+        return new ResponseEntity<>(imageId, HttpStatus.OK);
     }
 
 
@@ -35,8 +42,10 @@ public class ImagesController {
     public ResponseEntity<Integer> uploadUserImage(
             @RequestPart(value = "image", required = false) MultipartFile image,
             @RequestParam(value = "emailAddress", required = false) String emailAddress) throws IOException {
-
-        return new ResponseEntity<>(userImageService.create(image, emailAddress), HttpStatus.OK);
+        logger.info(UPLOADING_USER_IMAGE, emailAddress);
+        Integer imageId = userImageService.create(image, emailAddress);
+        logger.info(USER_IMAGE_UPLOADED_SUCCESSFULLY, emailAddress);
+        return new ResponseEntity<>(imageId, HttpStatus.OK);
     }
 
     @PostMapping(value = "/brand", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -44,17 +53,9 @@ public class ImagesController {
     public ResponseEntity<Integer> uploadBrandImage(
             @RequestPart("image") MultipartFile image,
             @RequestParam("brandName") String brandName) throws IOException {
-
-        return new ResponseEntity<>(brandImageService.create(image, brandName).getId(), HttpStatus.OK);
+        logger.info(UPLOADING_BRAND_IMAGE, brandName);
+        Integer imageId = brandImageService.create(image, brandName).getId();
+        logger.info(BRAND_IMAGE_UPLOADED_SUCCESSFULLY, brandName);
+        return new ResponseEntity<>(imageId, HttpStatus.OK);
     }
-
-/*
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<byte[]> downloadImage(@PathVariable String name) {
-        return ResponseEntity.status(HttpStatus.OK).contentType(
-                MediaType.valueOf("image/png")).body(dataService.downloadImage(name));
-    }
-*/
-
 }

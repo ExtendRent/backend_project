@@ -6,9 +6,9 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controller.payment.PaymentTypesController;
-import src.controller.payment.responses.PaymentTypeResponse;
-import src.controller.payment.requests.UpdatePaymentTypeRequest;
+import src.controller.payment.type.PaymentTypesController;
+import src.controller.payment.type.responses.PaymentTypeResponse;
+import src.controller.payment.type.requests.UpdatePaymentTypeRequest;
 import src.controller.TResponse;
 import src.service.payment.type.PaymentTypeService;
 

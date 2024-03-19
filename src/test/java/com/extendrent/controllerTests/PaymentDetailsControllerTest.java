@@ -3,9 +3,9 @@ package com.extendrent.controllerTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import src.controller.payment.PaymentDetailsController;
-import src.controller.payment.responses.PaymentDetailsResponse;
-import src.controller.payment.requests.UpdatePaymentDetailsRequest;
+import src.controller.payment.detail.PaymentDetailsController;
+import src.controller.payment.detail.responses.PaymentDetailsResponse;
+import src.controller.payment.detail.requests.UpdatePaymentDetailsRequest;
 import src.controller.TResponse;
 import src.service.payment.detail.PaymentDetailsService;
 

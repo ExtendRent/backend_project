@@ -1,6 +1,6 @@
 package src.repository.payment.detail;
 
-import src.controller.payment.requests.UpdatePaymentDetailsRequest;
+import src.controller.payment.detail.requests.UpdatePaymentDetailsRequest;
 
 import java.util.List;
 

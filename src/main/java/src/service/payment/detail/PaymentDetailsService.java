@@ -1,7 +1,7 @@
 package src.service.payment.detail;
 
-import src.controller.payment.requests.UpdatePaymentDetailsRequest;
-import src.controller.payment.responses.PaymentDetailsResponse;
+import src.controller.payment.detail.requests.UpdatePaymentDetailsRequest;
+import src.controller.payment.detail.responses.PaymentDetailsResponse;
 
 import java.time.LocalDate;
 import java.util.List;

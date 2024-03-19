@@ -1,4 +1,4 @@
-package src.controller.payment.requests;
+package src.controller.payment.detail.requests;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

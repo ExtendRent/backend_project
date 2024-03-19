@@ -2,8 +2,8 @@ package src.repository.payment.type;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import src.controller.payment.requests.CreatePaymentTypeRequest;
-import src.controller.payment.requests.UpdatePaymentTypeRequest;
+import src.controller.payment.type.requests.CreatePaymentTypeRequest;
+import src.controller.payment.type.requests.UpdatePaymentTypeRequest;
 import src.core.exception.DataNotFoundException;
 import src.service.payment.type.model.DefaultPaymentType;
 

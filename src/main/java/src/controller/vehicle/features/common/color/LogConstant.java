@@ -15,12 +15,6 @@ public final class LogConstant {
     public static final String RETRIEVED_ALL_COLORS = ANSI_GREEN + "Retrieved all colors. " + ANSI_RESET + "quantity: " + ANSI_BOLD + "{}" + ANSI_RESET;
     public static final String RETRIEVING_COLORS_BY_DELETED_STATE = ANSI_BLUE + "Retrieving colors by deleted state: " + ANSI_RESET + ANSI_BOLD + "{}" + ANSI_RESET;
     public static final String RETRIEVED_COLORS_BY_DELETED_STATE = ANSI_GREEN + "Retrieved colors by deleted state. " + ANSI_RESET + "quantity: " + ANSI_BOLD + "{}" + ANSI_RESET;
-    public static final String DELETING_COLOR_WITH_ID = ANSI_BLUE + "Deleting color with id: " + ANSI_RESET + ANSI_BOLD + "{}" + ANSI_RESET;
+    public static final String DELETING_COLOR_WITH_ID = ANSI_BLUE + "Deleting color with id: " + ANSI_RESET + ANSI_BOLD + "{}" + ANSI_RESET + " , hard delete: " + ANSI_BOLD + "{}" + ANSI_RESET;
     public static final String COLOR_DELETED_SUCCESSFULLY_WITH_ID = ANSI_GREEN + "Color deleted successfully with id: " + ANSI_RESET + ANSI_BOLD + "{}" + ANSI_RESET;
-    public static final String ERROR_CREATING_COLOR = ANSI_RED + "An error occurred while creating the color" + ANSI_RESET;
-    public static final String ERROR_UPDATING_COLOR = ANSI_RED + "An error occurred while updating the color" + ANSI_RESET;
-    public static final String ERROR_GETTING_COLOR_DETAILS = ANSI_RED + "An error occurred while retrieving color details" + ANSI_RESET;
-    public static final String ERROR_RETRIEVING_ALL_COLORS = ANSI_RED + "An error occurred while retrieving all colors" + ANSI_RESET;
-    public static final String ERROR_RETRIEVING_COLORS_BY_DELETED_STATE = ANSI_RED + "An error occurred while retrieving colors by deleted state" + ANSI_RESET;
-    public static final String ERROR_DELETING_COLOR = ANSI_RED + "An error occurred while deleting color" + ANSI_RESET;
 }

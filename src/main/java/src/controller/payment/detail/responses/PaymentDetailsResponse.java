@@ -1,4 +1,4 @@
-package src.controller.payment.responses;
+package src.controller.payment.detail.responses;
 
 import lombok.Builder;
 import lombok.Getter;

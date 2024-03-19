@@ -2,6 +2,7 @@ package src.service.rental.status;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import src.controller.rental.responses.RentalStatusResponse;
 import src.core.exception.DataNotFoundException;
 import src.repository.rental.status.RentalStatusEntity;
@@ -40,6 +41,7 @@ public class RentalStatusServiceImpl implements RentalStatusService {
         return repository.findById(id).orElseThrow(() -> new DataNotFoundException(RENTAL_STATUS_NOT_FOUND));
     }
 
+    @Transactional
     @Override
     public RentalStatusEntity getByStatus(DefaultRentalStatus status) {
         return repository.findByStatus(status).orElseThrow(() -> new DataNotFoundException(RENTAL_STATUS_NOT_FOUND));

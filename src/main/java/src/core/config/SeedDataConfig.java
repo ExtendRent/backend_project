@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import src.controller.discount.requests.CreateDiscountRequest;
 import src.controller.license.requests.CreateDrivingLicenseTypeRequest;
-import src.controller.payment.requests.CreatePaymentTypeRequest;
+import src.controller.payment.type.requests.CreatePaymentTypeRequest;
 import src.controller.rental.requests.CreateRentalRequest;
 import src.controller.rental.requests.ReturnRentalRequest;
 import src.controller.user.admin.requests.CreateAdminRequest;

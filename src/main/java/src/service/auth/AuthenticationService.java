@@ -1,7 +1,7 @@
 package src.service.auth;
 
-import src.controller.auth.requests.SignInRequest;
-import src.controller.auth.requests.SignUpReqeust;
+import src.controller.auth.authentication.requests.SignInRequest;
+import src.controller.auth.authentication.requests.SignUpReqeust;
 import src.core.security.model.JwtToken;
 
 public interface AuthenticationService {

@@ -1,4 +1,4 @@
-package src.controller.payment.responses;
+package src.controller.payment.type.responses;
 
 import lombok.*;
 

@@ -1,5 +1,7 @@
 package src.core.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,11 +17,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static src.core.exception.ErrorLogConstant.*;
+
 @RestControllerAdvice
 public class CustomExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomExceptionHandler.class);
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public TResponse<?> handleException(Exception e) {
+        logger.error(ERROR_GENERIC_EXCEPTION, e.toString());
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(NotFoundExceptionType.GENERIC_EXCEPTION, Collections.singletonList(e.getMessage())))
                 .build();
@@ -28,6 +36,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(DataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public TResponse<?> handleDataNotFoundException(DataNotFoundException e) {
+        logger.error(ERROR_DATA_NOT_FOUND, e.toString());
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getNotFoundExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
@@ -36,6 +45,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(FileException.class)
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public TResponse<?> handleFileException(FileException e) {
+        logger.error(ERROR_FILE, e.toString());
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getFileExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
@@ -44,6 +54,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(AlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TResponse<?> handleAlreadyExistsException(AlreadyExistsException e) {
+        logger.error(ERROR_ALREADY_EXISTS, e.toString());
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getAlreadyExistsExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
@@ -52,6 +63,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(PaymentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TResponse<?> handlePaymentException(PaymentException e) {
+        logger.error(ERROR_PAYMENT, e.toString());
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getPaymentExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
@@ -60,6 +72,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(NotSuitableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TResponse<?> handleNotSuitableException(NotSuitableException e) {
+        logger.error(ERROR_NOT_SUITABLE, e.toString());
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getNotSuitableExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
@@ -68,6 +81,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TResponse<?> handleValidationException(ValidationException e) {
+        logger.error(ERROR_VALIDATION, e.toString());
         return TResponse.tResponseBuilder()
                 .response(new ErrorResponse(e.getValidationExceptionType(), Collections.singletonList(e.getDetail())))
                 .build();
@@ -89,6 +103,7 @@ public class CustomExceptionHandler {
         ValidationException validationException = new ValidationException(validationExceptionType, "Validation error");
         validationException.setDetail(validationErrors.toString());
 
+        logger.error(ERROR_VALIDATION, validationException.toString());
         ErrorResponse errorResponse = new ErrorResponse(validationExceptionType, Collections.singletonList("Validation error"));
         errorResponse.setDetails(validationErrors);
 
@@ -96,6 +111,4 @@ public class CustomExceptionHandler {
                 .response(errorResponse)
                 .build();
     }
-
-
 }

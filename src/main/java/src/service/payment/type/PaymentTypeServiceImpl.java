@@ -3,9 +3,9 @@ package src.service.payment.type;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.payment.requests.CreatePaymentTypeRequest;
-import src.controller.payment.requests.UpdatePaymentTypeRequest;
-import src.controller.payment.responses.PaymentTypeResponse;
+import src.controller.payment.type.requests.CreatePaymentTypeRequest;
+import src.controller.payment.type.requests.UpdatePaymentTypeRequest;
+import src.controller.payment.type.responses.PaymentTypeResponse;
 import src.repository.payment.type.PaymentTypeEntity;
 import src.repository.payment.type.PaymentTypeEntityService;
 

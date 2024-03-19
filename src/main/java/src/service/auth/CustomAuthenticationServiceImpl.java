@@ -6,9 +6,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import src.controller.auth.requests.RefreshTokenRequest;
-import src.controller.auth.requests.SignInRequest;
-import src.controller.auth.requests.SignUpReqeust;
+import src.controller.auth.authentication.requests.SignInRequest;
+import src.controller.auth.authentication.requests.SignUpReqeust;
+import src.controller.auth.token.requests.RefreshTokenRequest;
 import src.core.exception.DataNotFoundException;
 import src.core.security.JwtService;
 import src.core.security.model.JwtToken;

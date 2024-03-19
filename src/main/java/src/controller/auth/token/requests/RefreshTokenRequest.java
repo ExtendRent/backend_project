@@ -1,4 +1,4 @@
-package src.controller.auth.requests;
+package src.controller.auth.token.requests;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

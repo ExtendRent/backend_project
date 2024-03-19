@@ -1,4 +1,4 @@
-package src.controller.payment.requests;
+package src.controller.payment.type.requests;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

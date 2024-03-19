@@ -1,4 +1,4 @@
-package src.controller.auth.requests;
+package src.controller.auth.authentication.requests;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
