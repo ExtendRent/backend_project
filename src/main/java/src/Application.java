@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import src.core.config.SeedDataConfig;
 import src.core.utilities.ResponseTimeMeasurement;
+import src.core.utilities.logger.service.ServiceLogger;
 
 import java.io.IOException;
 
@@ -20,7 +21,8 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private SeedDataConfig seedDataConfig;
-
+    @Autowired
+    private ServiceLogger serviceLogger;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -51,31 +53,16 @@ public class Application implements CommandLineRunner {
                 """;
     }
 
-    private static String drawCar() {
-
-        return
-                "__-------__\n" +
-                        "      /__---------__ \\\n" +
-                        "     / /           \\ \\\n" +
-                        "     | |           | |\n" +
-                        "     |_|___________|_|\n" +
-                        " /-\\|                 |/-\\\n" +
-                        "| _ |\\       0       /| _ |\n" +
-                        "|(_)| \\      !      / |(_)|\n" +
-                        "|___|__\\_____!_____/__|___|\n" +
-                        "[_________|PAIR5|_________] \n" +
-                        " ||||    ~~~~~~~~     ||||\n" +
-                        " `--'                 `--'";
-    }
-
     @Override
     public void run(String... args) throws IOException {
+        serviceLogger.disable();
         System.out.println(ANSI_BOLD + ANSI_BLUE + "Application starting..." + ANSI_RESET);
         ResponseTimeMeasurement.start();
         seedDataConfig.runFirst();
         double duration = ResponseTimeMeasurement.end();
         processInfo(duration);
         welcome();
+        serviceLogger.enable();
     }
 }
 
