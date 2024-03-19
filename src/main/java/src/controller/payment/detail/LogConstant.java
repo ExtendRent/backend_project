@@ -1,13 +1,6 @@
 package src.controller.payment.detail;
-
+import static src.controller.AnsiColorConstant.*;
 public final class LogConstant {
-
-    // ANSI Color Codes
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_BOLD = "\033[0;1m";
-
     // Log Messages
     public static final String UPDATING_PAYMENT_DETAILS = ANSI_BLUE + "Updating payment details: " + ANSI_RESET + "{}";
     public static final String PAYMENT_DETAILS_UPDATED = ANSI_GREEN + "Payment details updated: " + ANSI_RESET + "{}";

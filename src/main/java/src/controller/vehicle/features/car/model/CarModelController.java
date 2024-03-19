@@ -14,52 +14,59 @@ import src.service.vehicle.features.car.model.CarModelService;
 
 import java.util.List;
 
+import static src.controller.vehicle.features.car.model.LogConstant.*;
+
 @RestController
 @RequestMapping("api/v1/carModels")
 @RequiredArgsConstructor
-
 public class CarModelController {
     private static final Logger logger = LoggerFactory.getLogger(CarModelController.class);
     private final CarModelService carModelService;
 
     @PostMapping
     public ResponseEntity<Void> createCarModel(@RequestBody CreateCarModelRequest createCarModelRequest) {
-        logger.info(LogConstant.CREATING_NEW_CAR_MODEL, createCarModelRequest.toString());
+        logger.info(CREATING_NEW_CAR_MODEL, createCarModelRequest.toString());
         this.carModelService.create(createCarModelRequest);
-        logger.info(LogConstant.CAR_MODEL_SUCCESSFULLY_CREATED);
+        logger.info(CAR_MODEL_SUCCESSFULLY_CREATED);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<CarModelResponse>> updateCarModel(@RequestBody UpdateCarModelRequest updateCarModelRequest) {
-        logger.info(LogConstant.UPDATING_CAR_MODEL, updateCarModelRequest.toString());
+        logger.info(UPDATING_CAR_MODEL, updateCarModelRequest.toString());
+        CarModelResponse response = carModelService.update(updateCarModelRequest);
+        logger.info(CAR_MODEL_UPDATED, response.toString());
         return new ResponseEntity<>(TResponse.<CarModelResponse>tResponseBuilder()
-                .response(carModelService.update(updateCarModelRequest))
+                .response(response)
                 .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<CarModelResponse>> getByCarModelId(@PathVariable int id) {
-        logger.info(LogConstant.GETTING_CAR_MODEL_DETAILS, id);
+        logger.info(GETTING_CAR_MODEL_DETAILS, id);
+        CarModelResponse response = this.carModelService.getById(id);
+        logger.info(RETRIEVED_CAR_MODEL_DETAILS, response.toString());
         return new ResponseEntity<>(TResponse.<CarModelResponse>tResponseBuilder()
-                .response(this.carModelService.getById(id))
+                .response(response)
                 .build(), HttpStatus.OK
         );
     }
 
     @GetMapping
     public ResponseEntity<TResponse<List<CarModelResponse>>> getAll() {
-        logger.info(LogConstant.RETRIEVING_ALL_CAR_MODELS);
+        logger.info(RETRIEVING_ALL_CAR_MODELS);
+        List<CarModelResponse> response = this.carModelService.getAll();
+        logger.info(RETRIEVED_ALL_CAR_MODELS, response.size());
         return new ResponseEntity<>(TResponse.<List<CarModelResponse>>tResponseBuilder()
-                .response(this.carModelService.getAll())
+                .response(response)
                 .build(), HttpStatus.OK
         );
     }
 
     @GetMapping("/brands/{brandId}")
     public ResponseEntity<TResponse<?>> getByBrandId(@PathVariable int brandId) {
-        logger.info(LogConstant.RETRIEVING_CAR_MODELS_BY_BRAND_ID, brandId);
+        logger.info(RETRIEVING_CAR_MODELS_BY_BRAND_ID, brandId);
         return new ResponseEntity<>(TResponse.tResponseBuilder()
                 .response(this.carModelService.getAllByBrandId(brandId))
                 .build(), HttpStatus.OK
@@ -69,9 +76,11 @@ public class CarModelController {
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<CarModelResponse>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        logger.info(LogConstant.RETRIEVING_CAR_MODELS_BY_DELETED_STATE, isDeleted);
+        logger.info(RETRIEVING_CAR_MODELS_BY_DELETED_STATE_BEFORE_CALL, isDeleted);
+        List<CarModelResponse> response = this.carModelService.getAllByDeletedState(isDeleted);
+        logger.info(RETRIEVING_CAR_MODELS_BY_DELETED_STATE_AFTER_CALL, response.size());
         return new ResponseEntity<>(TResponse.<List<CarModelResponse>>tResponseBuilder()
-                .response(this.carModelService.getAllByDeletedState(isDeleted))
+                .response(response)
                 .build(), HttpStatus.OK
         );
     }
@@ -79,9 +88,9 @@ public class CarModelController {
     @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
-        logger.info(LogConstant.DELETING_CAR_MODEL_WITH_ID, id, isHardDelete);
+        logger.info(DELETING_CAR_MODEL_WITH_ID, id, isHardDelete);
         this.carModelService.delete(id, isHardDelete);
-        logger.info(LogConstant.CAR_MODEL_DELETED_SUCCESSFULLY_WITH_ID, id);
+        logger.info(CAR_MODEL_DELETED_SUCCESSFULLY_WITH_ID, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
