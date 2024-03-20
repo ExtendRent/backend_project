@@ -1,5 +1,7 @@
 package src.controller.payment.detail;
+
 import static src.controller.AnsiColorConstant.*;
+
 public final class LogConstant {
     // Log Messages
     public static final String UPDATING_PAYMENT_DETAILS = ANSI_BLUE + "Updating payment details: " + ANSI_RESET + "{}";

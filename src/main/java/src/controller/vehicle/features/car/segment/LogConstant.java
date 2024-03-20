@@ -1,4 +1,5 @@
 package src.controller.vehicle.features.car.segment;
+
 import static src.controller.AnsiColorConstant.*;
 
 public final class LogConstant {

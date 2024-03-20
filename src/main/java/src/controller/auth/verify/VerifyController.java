@@ -1,8 +1,7 @@
 package src.controller.auth.verify;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +14,15 @@ import static src.controller.auth.verify.LogConstant.VERIFY_EMAIL_ADDRESS_REQUES
 import static src.controller.auth.verify.LogConstant.VERIFY_EMAIL_ADDRESS_SUCCESSFUL;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/v1/verify")
 @RequiredArgsConstructor
 public class VerifyController {
-    private static final Logger logger = LoggerFactory.getLogger(VerifyController.class);
 
     @GetMapping("/email")
     ResponseEntity<TResponse<JwtToken>> verifyEmailAddress(@RequestParam("token") String token) {
-        logger.info(VERIFY_EMAIL_ADDRESS_REQUEST_RECEIVED, token);
-        logger.info(VERIFY_EMAIL_ADDRESS_SUCCESSFUL);
+        log.info(VERIFY_EMAIL_ADDRESS_REQUEST_RECEIVED, token);
+        log.info(VERIFY_EMAIL_ADDRESS_SUCCESSFUL);
         return null;
     }
 }

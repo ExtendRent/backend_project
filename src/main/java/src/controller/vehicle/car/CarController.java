@@ -2,8 +2,7 @@ package src.controller.vehicle.car;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,27 +19,26 @@ import java.util.List;
 import static src.controller.vehicle.car.LogConstant.*;
 
 @RestController
+@Slf4j
 @RequestMapping("api/v1/cars")
 @RequiredArgsConstructor
-
 public class CarController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CarController.class);
     private final CarService carService;
 
     @PostMapping
     public ResponseEntity<Void> createCar(@RequestBody @Valid CreateCarRequest createCarRequest) throws IOException {
-        logger.info(CREATING_NEW_CAR, createCarRequest);
+        log.info(CREATING_NEW_CAR, createCarRequest);
         this.carService.create(createCarRequest);
-        logger.info(CAR_SUCCESSFULLY_CREATED);
+        log.info(CAR_SUCCESSFULLY_CREATED);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<CarResponse>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) throws IOException {
-        logger.info(UPDATING_CAR, updateCarRequest);
+        log.info(UPDATING_CAR, updateCarRequest);
         CarResponse updatedCar = this.carService.update(updateCarRequest);
-        logger.info(CAR_UPDATED, updatedCar);
+        log.info(CAR_UPDATED, updatedCar);
         return new ResponseEntity<>(TResponse.<CarResponse>tResponseBuilder()
                 .response(updatedCar)
                 .build(), HttpStatus.OK
@@ -49,9 +47,9 @@ public class CarController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<CarResponse>> getById(@PathVariable int id) {
-        logger.info(GETTING_CAR_DETAILS, id);
+        log.info(GETTING_CAR_DETAILS, id);
         CarResponse car = this.carService.getById(id);
-        logger.info(RETRIEVED_CAR_DETAILS, car);
+        log.info(RETRIEVED_CAR_DETAILS, car);
         return new ResponseEntity<>(TResponse.<CarResponse>tResponseBuilder()
                 .response(car)
                 .build(), HttpStatus.OK
@@ -60,9 +58,9 @@ public class CarController {
 
     @GetMapping
     public ResponseEntity<TResponse<List<CarResponse>>> getAll() {
-        logger.info(RETRIEVING_ALL_CARS);
+        log.info(RETRIEVING_ALL_CARS);
         List<CarResponse> cars = this.carService.getAll();
-        logger.info(RETRIEVED_ALL_CARS, cars.size());
+        log.info(RETRIEVED_ALL_CARS, cars.size());
         return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
                 .response(cars)
                 .build(), HttpStatus.OK
@@ -71,9 +69,9 @@ public class CarController {
 
     @GetMapping("/count/{isDeleted}")
     public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
-        logger.info(RETRIEVING_CAR_COUNT_BY_DELETED_STATE, isDeleted);
+        log.info(RETRIEVING_CAR_COUNT_BY_DELETED_STATE, isDeleted);
         int count = this.carService.getCountByDeletedState(isDeleted);
-        logger.info(RETRIEVED_CAR_COUNT_BY_DELETED_STATE, count);
+        log.info(RETRIEVED_CAR_COUNT_BY_DELETED_STATE, count);
         return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
                 .response(count)
                 .build(), HttpStatus.OK
@@ -82,9 +80,9 @@ public class CarController {
 
     @GetMapping("/countByStatus/{statusId}")
     public ResponseEntity<TResponse<Integer>> getCountByStatusId(@PathVariable int statusId) {
-        logger.info(RETRIEVING_CAR_COUNT_BY_STATUS_ID, statusId);
+        log.info(RETRIEVING_CAR_COUNT_BY_STATUS_ID, statusId);
         int count = this.carService.getCountByStatusId(statusId);
-        logger.info(RETRIEVED_CAR_COUNT_BY_STATUS_ID, count);
+        log.info(RETRIEVED_CAR_COUNT_BY_STATUS_ID, count);
         return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
                 .response(count)
                 .build(), HttpStatus.OK
@@ -112,7 +110,7 @@ public class CarController {
             @RequestParam(name = "statusId", required = false) Integer statusId,
             @RequestParam(name = "segmentId", required = false) Integer segmentId
     ) {
-        logger.info(FILTERING_CARS);
+        log.info(FILTERING_CARS);
         List<CarResponse> filteredCars = carService.getAllFiltered(
                 customerId, licenseSuitable, startDate,
                 endDate, startPrice,
@@ -121,7 +119,7 @@ public class CarController {
                 modelId, startYear, endYear,
                 brandId, fuelTypeId,
                 shiftTypeId, segmentId);
-        logger.info(FILTERED_CARS, filteredCars.size());
+        log.info(FILTERED_CARS, filteredCars.size());
         return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
                 .response(filteredCars)
                 .build(), HttpStatus.OK
@@ -132,9 +130,9 @@ public class CarController {
     public ResponseEntity<TResponse<List<CarResponse>>> getAllByAvailabilityBetween(
             @RequestParam(name = "startDate", required = false) LocalDate startDate,
             @RequestParam(name = "endDate", required = false) LocalDate endDate) {
-        logger.info(RETRIEVING_CARS_BY_AVAILABILITY, startDate, endDate);
+        log.info(RETRIEVING_CARS_BY_AVAILABILITY, startDate, endDate);
         List<CarResponse> cars = this.carService.getAllByAvailabilityBetween(startDate, endDate);
-        logger.info(RETRIEVED_CARS_BY_AVAILABILITY, cars.size());
+        log.info(RETRIEVED_CARS_BY_AVAILABILITY, cars.size());
         return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
                 .response(cars)
                 .build(), HttpStatus.OK
@@ -144,9 +142,9 @@ public class CarController {
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<CarResponse>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        logger.info(RETRIEVING_ALL_CARS_BY_DELETED_STATE, isDeleted);
+        log.info(RETRIEVING_ALL_CARS_BY_DELETED_STATE, isDeleted);
         List<CarResponse> cars = this.carService.getAllByDeletedState(isDeleted);
-        logger.info(RETRIEVED_ALL_CARS_BY_DELETED_STATE, cars.size());
+        log.info(RETRIEVED_ALL_CARS_BY_DELETED_STATE, cars.size());
         return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
                 .response(cars)
                 .build(), HttpStatus.OK
@@ -156,9 +154,9 @@ public class CarController {
     @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) throws IOException {
-        logger.info(DELETING_CAR_WITH_ID, id, isHardDelete);
+        log.info(DELETING_CAR_WITH_ID, id, isHardDelete);
         this.carService.delete(id, isHardDelete);
-        logger.info(CAR_DELETED_SUCCESSFULLY_WITH_ID, id);
+        log.info(CAR_DELETED_SUCCESSFULLY_WITH_ID, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

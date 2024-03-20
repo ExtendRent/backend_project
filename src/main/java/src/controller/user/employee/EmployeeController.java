@@ -2,8 +2,7 @@ package src.controller.user.employee;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,26 +17,25 @@ import java.util.List;
 import static src.controller.user.employee.LogConstant.*;
 
 @RestController
+@Slf4j
 @RequestMapping("api/v1/employees")
 @RequiredArgsConstructor
-
 public class EmployeeController {
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
     private final EmployeeService employeeService;
 
     @PostMapping
     public ResponseEntity<Void> createEmployee(@RequestBody @Valid CreateEmployeeRequest createEmployeeRequest) {
-        logger.info(CREATING_NEW_EMPLOYEE, createEmployeeRequest.toString());
+        log.info(CREATING_NEW_EMPLOYEE, createEmployeeRequest.toString());
         this.employeeService.create(createEmployeeRequest);
-        logger.info(EMPLOYEE_SUCCESSFULLY_CREATED);
+        log.info(EMPLOYEE_SUCCESSFULLY_CREATED);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<EmployeeResponse>> updateEmployee(@RequestBody @Valid UpdateEmployeeRequest updateEmployeeRequest) {
-        logger.info(UPDATING_EMPLOYEE, updateEmployeeRequest.toString());
+        log.info(UPDATING_EMPLOYEE, updateEmployeeRequest.toString());
         EmployeeResponse updatedEmployee = this.employeeService.update(updateEmployeeRequest);
-        logger.info(EMPLOYEE_UPDATED, updatedEmployee.toString());
+        log.info(EMPLOYEE_UPDATED, updatedEmployee.toString());
         return new ResponseEntity<>(TResponse.<EmployeeResponse>tResponseBuilder()
                 .response(updatedEmployee)
                 .build(), HttpStatus.OK
@@ -46,9 +44,9 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseEntity<TResponse<List<EmployeeResponse>>> getAll() {
-        logger.info(GETTING_ALL_EMPLOYEES);
+        log.info(GETTING_ALL_EMPLOYEES);
         List<EmployeeResponse> employees = this.employeeService.getAll();
-        logger.info(RETRIEVED_ALL_EMPLOYEES, employees.size());
+        log.info(RETRIEVED_ALL_EMPLOYEES, employees.size());
         return new ResponseEntity<>(TResponse.<List<EmployeeResponse>>tResponseBuilder()
                 .response(employees)
                 .build(), HttpStatus.OK
@@ -57,9 +55,9 @@ public class EmployeeController {
 
     @GetMapping("/count/{isDeleted}")
     public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
-        logger.info(GETTING_EMPLOYEE_COUNT_BY_DELETED_STATE, isDeleted);
+        log.info(GETTING_EMPLOYEE_COUNT_BY_DELETED_STATE, isDeleted);
         int count = this.employeeService.getCountByDeletedState(isDeleted);
-        logger.info(RETRIEVED_EMPLOYEE_COUNT_BY_DELETED_STATE, count);
+        log.info(RETRIEVED_EMPLOYEE_COUNT_BY_DELETED_STATE, count);
         return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
                 .response(count)
                 .build(), HttpStatus.OK
@@ -68,9 +66,9 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<EmployeeResponse>> getById(@PathVariable int id) {
-        logger.info(GETTING_EMPLOYEE_BY_ID, id);
+        log.info(GETTING_EMPLOYEE_BY_ID, id);
         EmployeeResponse employee = this.employeeService.getById(id);
-        logger.info(RETRIEVED_EMPLOYEE_BY_ID, id);
+        log.info(RETRIEVED_EMPLOYEE_BY_ID, id);
         return new ResponseEntity<>(TResponse.<EmployeeResponse>tResponseBuilder()
                 .response(employee)
                 .build(), HttpStatus.OK
@@ -79,9 +77,9 @@ public class EmployeeController {
 
     @GetMapping("/phone/{phoneNumber}")
     public ResponseEntity<TResponse<EmployeeResponse>> getByPhoneNumber(@PathVariable String phoneNumber) {
-        logger.info(GETTING_EMPLOYEE_BY_PHONE_NUMBER, phoneNumber);
+        log.info(GETTING_EMPLOYEE_BY_PHONE_NUMBER, phoneNumber);
         EmployeeResponse employee = this.employeeService.getByPhoneNumber(phoneNumber);
-        logger.info(RETRIEVED_EMPLOYEE_BY_PHONE_NUMBER, phoneNumber);
+        log.info(RETRIEVED_EMPLOYEE_BY_PHONE_NUMBER, phoneNumber);
         return new ResponseEntity<>(TResponse.<EmployeeResponse>tResponseBuilder()
                 .response(employee)
                 .build(), HttpStatus.OK
@@ -92,9 +90,9 @@ public class EmployeeController {
     public ResponseEntity<TResponse<List<EmployeeResponse>>> getAllBySalaryBetween(
             @RequestParam(name = "startSalary", required = false) Double startSalary,
             @RequestParam(name = "endSalary", required = false) Double endSalary) {
-        logger.info(GETTING_EMPLOYEES_BY_SALARY_BETWEEN, startSalary, endSalary);
+        log.info(GETTING_EMPLOYEES_BY_SALARY_BETWEEN, startSalary, endSalary);
         List<EmployeeResponse> employees = this.employeeService.getAllBySalaryBetween(startSalary, endSalary);
-        logger.info(RETRIEVED_EMPLOYEES_BY_SALARY_BETWEEN, employees.size());
+        log.info(RETRIEVED_EMPLOYEES_BY_SALARY_BETWEEN, employees.size());
         return new ResponseEntity<>(TResponse.<List<EmployeeResponse>>tResponseBuilder()
                 .response(employees)
                 .build(), HttpStatus.OK
@@ -104,9 +102,9 @@ public class EmployeeController {
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<EmployeeResponse>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
-        logger.info(GETTING_EMPLOYEES_BY_DELETED_STATE, isDeleted);
+        log.info(GETTING_EMPLOYEES_BY_DELETED_STATE, isDeleted);
         List<EmployeeResponse> employees = this.employeeService.getAllByDeletedState(isDeleted);
-        logger.info(RETRIEVED_EMPLOYEES_BY_DELETED_STATE, employees.size());
+        log.info(RETRIEVED_EMPLOYEES_BY_DELETED_STATE, employees.size());
         return new ResponseEntity<>(TResponse.<List<EmployeeResponse>>tResponseBuilder()
                 .response(employees)
                 .build(), HttpStatus.OK
@@ -116,9 +114,9 @@ public class EmployeeController {
     @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) {
-        logger.info(DELETING_EMPLOYEE_WITH_ID, id, isHardDelete);
+        log.info(DELETING_EMPLOYEE_WITH_ID, id, isHardDelete);
         this.employeeService.delete(id, isHardDelete);
-        logger.info(EMPLOYEE_DELETED_SUCCESSFULLY_WITH_ID, id);
+        log.info(EMPLOYEE_DELETED_SUCCESSFULLY_WITH_ID, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

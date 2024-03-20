@@ -1,8 +1,7 @@
 package src.controller.auth.token;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,18 +17,18 @@ import static src.controller.auth.token.LogConstant.REFRESH_TOKEN_REQUEST_RECEIV
 import static src.controller.auth.token.LogConstant.REFRESH_TOKEN_SUCCESSFUL;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/v1/refresh-token")
 @RequiredArgsConstructor
 public class RefreshTokenController {
-    private static final Logger logger = LoggerFactory.getLogger(RefreshTokenController.class);
 
     private final AccessTokenService accessTokenService;
 
     @PostMapping
     public ResponseEntity<TResponse<JwtToken>> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-        logger.info(REFRESH_TOKEN_REQUEST_RECEIVED, refreshTokenRequest.getToken());
+        log.info(REFRESH_TOKEN_REQUEST_RECEIVED, refreshTokenRequest.getToken());
         JwtToken refreshedToken = accessTokenService.refreshToken(refreshTokenRequest);
-        logger.info(REFRESH_TOKEN_SUCCESSFUL);
+        log.info(REFRESH_TOKEN_SUCCESSFUL);
         return new ResponseEntity<>(TResponse.<JwtToken>tResponseBuilder()
                 .response(refreshedToken).build(), HttpStatus.OK
         );
