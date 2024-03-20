@@ -1,7 +1,7 @@
 package src.service.payment;
 
 import org.springframework.stereotype.Service;
-import src.repository.payment.CreditCardInformation;
+import src.controller.payment.CreditCardInformation;
 
 @Service
 public class PayWithCreditCard implements PayService {

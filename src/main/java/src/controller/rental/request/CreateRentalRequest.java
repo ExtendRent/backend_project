@@ -4,7 +4,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import src.repository.payment.CreditCardInformation;
+import src.controller.payment.CreditCardInformation;
 
 import java.time.LocalDate;
 

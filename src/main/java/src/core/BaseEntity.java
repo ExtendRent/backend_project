@@ -1,4 +1,4 @@
-package src.repository;
+package src.core;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

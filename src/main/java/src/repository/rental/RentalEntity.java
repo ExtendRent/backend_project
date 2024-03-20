@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import src.controller.rental.response.RentalResponse;
-import src.repository.BaseEntity;
+import src.core.BaseEntity;
 import src.repository.discount.DiscountEntity;
 import src.repository.payment.detail.PaymentDetailsEntity;
 import src.repository.rental.status.RentalStatusEntity;

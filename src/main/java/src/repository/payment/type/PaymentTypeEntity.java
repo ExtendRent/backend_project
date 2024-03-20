@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import src.controller.payment.type.response.PaymentTypeResponse;
-import src.repository.BaseEntity;
+import src.core.BaseEntity;
 import src.service.payment.type.model.DefaultPaymentType;
 
 @Getter

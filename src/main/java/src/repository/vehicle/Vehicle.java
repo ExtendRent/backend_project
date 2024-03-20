@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import src.repository.BaseEntity;
+import src.core.BaseEntity;
 import src.repository.license.DrivingLicenseTypeEntity;
 import src.repository.vehicle.features.common.color.ColorEntity;
 import src.repository.vehicle.features.common.fuel.FuelTypeEntity;

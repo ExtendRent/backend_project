@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import src.controller.rental.response.RentalStatusResponse;
-import src.repository.BaseEntity;
+import src.core.BaseEntity;
 import src.service.rental.status.model.DefaultRentalStatus;
 
 @Getter

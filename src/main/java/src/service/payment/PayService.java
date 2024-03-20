@@ -1,6 +1,6 @@
 package src.service.payment;
 
-import src.repository.payment.CreditCardInformation;
+import src.controller.payment.CreditCardInformation;
 
 public interface PayService {
 

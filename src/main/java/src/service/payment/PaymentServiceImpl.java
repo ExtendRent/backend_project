@@ -2,9 +2,9 @@ package src.service.payment;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import src.controller.payment.CreditCardInformation;
 import src.controller.rental.request.CreateRentalRequest;
 import src.core.exception.PaymentException;
-import src.repository.payment.CreditCardInformation;
 import src.repository.payment.detail.PaymentDetailsEntity;
 import src.repository.payment.detail.PaymentDetailsEntityServiceImpl;
 import src.repository.payment.type.PaymentTypeEntity;

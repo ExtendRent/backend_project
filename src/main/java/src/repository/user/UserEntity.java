@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import src.controller.user.response.UserResponse;
-import src.repository.BaseEntity;
+import src.core.BaseEntity;
 import src.repository.image.UserImageEntity;
 import src.service.user.model.DefaultUserStatus;
 import src.service.user.model.UserRole;

@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.*;
-import src.repository.BaseEntity;
+import src.core.BaseEntity;
 
 @Getter
 @Setter

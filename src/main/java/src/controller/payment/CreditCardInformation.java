@@ -1,4 +1,4 @@
-package src.repository.payment;
+package src.controller.payment;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
