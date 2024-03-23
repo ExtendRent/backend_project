@@ -13,6 +13,7 @@ import src.repository.rental.RentalEntity;
 import src.repository.rental.RentalEntityService;
 import src.service.businessrules.abstracts.BaseRules;
 import src.service.discount.DiscountService;
+import src.service.discount.model.DefaultDiscount;
 import src.service.user.customer.CustomerService;
 import src.service.vehicle.car.CarRules;
 import src.service.vehicle.car.CarService;
@@ -38,10 +39,7 @@ public class RentalRules implements BaseRules {
 
     //--------------------- AUTO FIX METHODS ---------------------
     public CreateRentalRequest fix(CreateRentalRequest createRentalRequest) {
-
-        if (this.discountCodeIsNotNull(createRentalRequest.getDiscountCode())) {
-            createRentalRequest.setDiscountCode(this.fixName(createRentalRequest.getDiscountCode()));
-        }
+        createRentalRequest.setDiscountCode(fixDiscountCode(createRentalRequest.getDiscountCode()));
         return createRentalRequest;
     }
 
@@ -123,7 +121,7 @@ public class RentalRules implements BaseRules {
     }
 
     public boolean discountCodeIsNotNull(String discountCode) {
-        return discountCode != null && !discountCode.equals("");
+        return discountCode != null && !discountCode.equals("") && !discountCode.equals(DefaultDiscount.NONE.name());
     }
 
     public void checkIsActive(int rentalId) {
@@ -135,6 +133,12 @@ public class RentalRules implements BaseRules {
 
     //----------------------------CALCULATING METHODS-------------------------------------
 
+    private String fixDiscountCode(String discountCode) {
+        if (!discountCodeIsNotNull(discountCode)) {
+            return DefaultDiscount.NONE.name();
+        }
+        return discountCode;
+    }
 
     private int calculateTotalRentalDays(LocalDate startDate, LocalDate endDate) {
         return (int) ChronoUnit.DAYS.between(startDate, endDate);

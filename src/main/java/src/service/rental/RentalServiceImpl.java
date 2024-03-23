@@ -14,7 +14,6 @@ import src.repository.payment.detail.PaymentDetailsEntityService;
 import src.repository.rental.RentalEntity;
 import src.repository.rental.RentalEntityService;
 import src.repository.vehicle.car.CarEntity;
-import src.service.discount.model.DefaultDiscount;
 import src.service.payment.PaymentService;
 import src.service.rental.status.RentalStatusService;
 import src.service.rental.status.model.DefaultRentalStatus;
@@ -55,12 +54,6 @@ public class RentalServiceImpl implements RentalService {
     public void create(CreateRentalRequest createRentalRequest) {
         createRentalRequest = rules.fix(createRentalRequest);
         rules.check(createRentalRequest);
-        String discountCode = createRentalRequest.getDiscountCode();
-
-        if (!rules.discountCodeIsNotNull(discountCode)) {
-            discountCode = DefaultDiscount.NONE.name();
-        }
-        createRentalRequest.setDiscountCode(discountCode);
 
         RentalEntity rentalEntity = entityService.create(createRentalRequest);
         try {
