@@ -2,7 +2,7 @@ package src.controller.vehicle.features.car.model.response;
 
 import lombok.*;
 
-
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,14 +15,5 @@ public class CarModelResponse {
     String brandEntityName;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "CarModelResponse{" +
-                "id=" + id +
-                ", brandEntityId=" + brandEntityId +
-                ", name='" + name + '\'' +
-                ", brandEntityName='" + brandEntityName + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
+
 }

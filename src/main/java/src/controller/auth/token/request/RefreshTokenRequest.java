@@ -2,11 +2,9 @@ package src.controller.auth.token.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,11 +16,4 @@ public class RefreshTokenRequest {
     @NotBlank(message = "token boş geçilemez")
     private String token;
 
-    @Override
-    public String toString() {
-        return "RefreshTokenRequest{" +
-                "email='" + email + '\'' +
-                ", token='" + token + '\'' +
-                '}';
-    }
 }

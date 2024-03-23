@@ -3,6 +3,7 @@ package src.controller.user.admin.response;
 import lombok.*;
 import src.service.user.model.UserRole;
 
+@ToString
 @Builder
 @Getter
 @Setter
@@ -19,18 +20,4 @@ public class AdminResponse {
     boolean isDeleted;
     UserRole authority;
 
-    @Override
-    public String toString() {
-        return "AdminResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", salary=" + salary +
-                ", userImageEntityImageUrl='" + userImageEntityImageUrl + '\'' +
-                ", isDeleted=" + isDeleted +
-                ", authority=" + authority +
-                '}';
-    }
 }

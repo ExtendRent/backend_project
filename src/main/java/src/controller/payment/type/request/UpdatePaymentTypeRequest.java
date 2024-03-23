@@ -3,11 +3,9 @@ package src.controller.payment.type.request;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,12 +22,4 @@ public class UpdatePaymentTypeRequest {
     @NotNull
     private boolean isActive;
 
-    @Override
-    public String toString() {
-        return "UpdatePaymentTypeRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isActive=" + isActive +
-                '}';
-    }
 }

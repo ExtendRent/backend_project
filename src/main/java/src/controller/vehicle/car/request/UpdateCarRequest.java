@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import src.service.vehicle.model.VehicleType;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -84,29 +85,5 @@ public class UpdateCarRequest {
 
     boolean isAvailable;
 
-    @Override
-    public String toString() {
-        return "UpdateCarRequest{" +
-                "vehicleType=" + vehicleType +
-                ", id=" + id +
-                ", brandEntityId=" + brandEntityId +
-                ", carModelEntityId=" + carModelEntityId +
-                ", carBodyTypeEntityId=" + carBodyTypeEntityId +
-                ", colorEntityId=" + colorEntityId +
-                ", carSegmentEntityId=" + carSegmentEntityId +
-                ", year=" + year +
-                ", details='" + details + '\'' +
-                ", rentalPrice=" + rentalPrice +
-                ", licensePlate='" + licensePlate + '\'' +
-                ", kilometer=" + kilometer +
-                ", carImageEntityId=" + carImageEntityId +
-                ", expectedMinDrivingLicenseTypeId=" + expectedMinDrivingLicenseTypeId +
-                ", shiftTypeEntityId=" + shiftTypeEntityId +
-                ", fuelTypeEntityId=" + fuelTypeEntityId +
-                ", seat=" + seat +
-                ", luggage=" + luggage +
-                ", vehicleStatusEntityId=" + vehicleStatusEntityId +
-                ", isAvailable=" + isAvailable +
-                '}';
-    }
+
 }

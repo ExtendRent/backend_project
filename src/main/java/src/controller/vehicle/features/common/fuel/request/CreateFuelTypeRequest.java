@@ -3,11 +3,9 @@ package src.controller.vehicle.features.common.fuel.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,10 +17,4 @@ public class CreateFuelTypeRequest {
     @Pattern(regexp = "^[a-zA-Z ]+$", message = "yakıt ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
 
-    @Override
-    public String toString() {
-        return "CreateFuelTypeRequest{" +
-                "name='" + name + '\'' +
-                '}';
-    }
 }

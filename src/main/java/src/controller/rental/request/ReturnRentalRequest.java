@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -26,12 +27,4 @@ public class ReturnRentalRequest {
     @NotNull(message = "End kilometer cannot be null")
     private int endKilometer;
 
-    @Override
-    public String toString() {
-        return "ReturnRentalRequest{" +
-                "returnDate=" + returnDate +
-                ", id=" + id +
-                ", endKilometer=" + endKilometer +
-                '}';
-    }
 }

@@ -3,11 +3,13 @@ package src.controller.rental.response;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import src.controller.user.customer.response.CustomerResponse;
 import src.controller.vehicle.car.response.CarResponse;
 
 import java.time.LocalDate;
 
+@ToString
 @Getter
 @Setter
 @Builder
@@ -22,15 +24,5 @@ public class ShowRentalResponse {
     String discountCode;
     double amount;
 
-    @Override
-    public String toString() {
-        return "ShowRentalResponse{" +
-                "customerResponse=" + customerResponse +
-                ", carResponse=" + carResponse +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", discountCode='" + discountCode + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
+
 }

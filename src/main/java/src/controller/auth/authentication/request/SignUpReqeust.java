@@ -86,19 +86,4 @@ public class SignUpReqeust {
                 .build();
     }
 
-    @Override
-    public String toString() {
-        return "SignUpReqeust{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", salary=" + salary +
-                ", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
-                ", drivingLicenseTypeEntityId=" + drivingLicenseTypeEntityId +
-                ", authority=" + authority +
-                ", userImageEntityId=" + userImageEntityId +
-                '}';
-    }
 }

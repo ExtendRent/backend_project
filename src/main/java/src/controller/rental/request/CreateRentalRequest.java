@@ -8,6 +8,7 @@ import src.controller.payment.CreditCardInformation;
 
 import java.time.LocalDate;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -41,17 +42,4 @@ public class CreateRentalRequest {
 
     private CreditCardInformation creditCardInformation;
 
-    @Override
-    public String toString() {
-        return "CreateRentalRequest{" +
-                "customerEntityId=" + customerEntityId +
-                ", carEntityId=" + carEntityId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", paymentTypeId=" + paymentTypeId +
-                ", amount=" + amount +
-                ", discountCode='" + discountCode + '\'' +
-                ", creditCardInformation=" + creditCardInformation +
-                '}';
-    }
 }

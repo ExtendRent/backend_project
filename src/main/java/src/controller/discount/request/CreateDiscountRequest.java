@@ -3,6 +3,7 @@ package src.controller.discount.request;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,13 +22,4 @@ public class CreateDiscountRequest {
 
     @NotNull
     boolean isActive;
-
-    @Override
-    public String toString() {
-        return "CreateDiscountRequest{" +
-                "discountCode='" + discountCode + '\'' +
-                ", discountPercentage=" + discountPercentage +
-                ", isActive=" + isActive +
-                '}';
-    }
 }

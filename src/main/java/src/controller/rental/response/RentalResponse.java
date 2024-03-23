@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class RentalResponse {
     int id;
     int customerEntityId;
@@ -37,32 +38,4 @@ public class RentalResponse {
     boolean isActive;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "RentalResponse{" +
-                "id=" + id +
-                ", customerEntityId=" + customerEntityId +
-                ", discountEntityId=" + discountEntityId +
-                ", rentalStatusEntityId=" + rentalStatusEntityId +
-                ", customerEntityName='" + customerEntityName + '\'' +
-                ", customerEntitySurname='" + customerEntitySurname + '\'' +
-                ", carEntityId=" + carEntityId +
-                ", carEntityBrandEntityName='" + carEntityBrandEntityName + '\'' +
-                ", carEntityModelEntityName='" + carEntityModelEntityName + '\'' +
-                ", carEntityColorEntityName='" + carEntityColorEntityName + '\'' +
-                ", carBodyTypeEntityName='" + carBodyTypeEntityName + '\'' +
-                ", carEntityYear=" + carEntityYear +
-                ", carEntityRentalPrice=" + carEntityRentalPrice +
-                ", carEntityLicensePlate='" + carEntityLicensePlate + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", returnDate=" + returnDate +
-                ", paymentDetailsEntityAmount=" + paymentDetailsEntityAmount +
-                ", paymentDetailsEntityPaymentTypeEntityPaymentTypeName='" + paymentDetailsEntityPaymentTypeEntityPaymentTypeName + '\'' +
-                ", rentalStatusEntityName='" + rentalStatusEntityName + '\'' +
-                ", discountEntityDiscountCode='" + discountEntityDiscountCode + '\'' +
-                ", isActive=" + isActive +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

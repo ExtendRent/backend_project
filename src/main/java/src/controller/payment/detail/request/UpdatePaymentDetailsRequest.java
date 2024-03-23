@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,11 +17,4 @@ public class UpdatePaymentDetailsRequest {
     @Min(value = 0, message = "tutar 0'dan küçük olamaz")
     private double amount;
 
-    @Override
-    public String toString() {
-        return "UpdatePaymentDetailsRequest{" +
-                "id=" + id +
-                ", amount=" + amount +
-                '}';
-    }
 }

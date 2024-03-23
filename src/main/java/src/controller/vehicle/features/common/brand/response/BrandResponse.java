@@ -2,6 +2,7 @@ package src.controller.vehicle.features.common.brand.response;
 
 import lombok.*;
 
+@ToString
 @Builder
 @Getter
 @Setter
@@ -13,15 +14,4 @@ public class BrandResponse {
     String name;
     String brandImageEntityUrl;
     boolean isDeleted;
-
-    @Override
-    public String toString() {
-        return "BrandResponse{" +
-                "id=" + id +
-                ", brandImageEntityId=" + brandImageEntityId +
-                ", name='" + name + '\'' +
-                ", brandImageEntityUrl='" + brandImageEntityUrl + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

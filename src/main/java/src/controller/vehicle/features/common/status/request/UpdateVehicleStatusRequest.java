@@ -1,11 +1,9 @@
 package src.controller.vehicle.features.common.status.request;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,11 +18,4 @@ public class UpdateVehicleStatusRequest {
     @Pattern(regexp = "^[a-zA-ZğüşıöçĞÜŞİÖÇ\\s]+$", message = "Araç durumu ismi sadece harflerden ve boşluklardan oluşmalıdır.")
     String name;
 
-    @Override
-    public String toString() {
-        return "UpdateVehicleStatusRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

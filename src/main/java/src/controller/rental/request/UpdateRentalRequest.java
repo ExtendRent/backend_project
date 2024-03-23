@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -47,21 +48,4 @@ public class UpdateRentalRequest {
     @NotNull(message = "is active cannot be null")
     private boolean isActive;
 
-    @Override
-    public String toString() {
-        return "UpdateRentalRequest{" +
-                "id=" + id +
-                ", customerEntityId=" + customerEntityId +
-                ", carEntityId=" + carEntityId +
-                ", paymentDetailsEntityId=" + paymentDetailsEntityId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", returnDate=" + returnDate +
-                ", startKilometer=" + startKilometer +
-                ", endKilometer=" + endKilometer +
-                ", discountEntityId=" + discountEntityId +
-                ", rentalStatusId=" + rentalStatusId +
-                ", isActive=" + isActive +
-                '}';
-    }
 }

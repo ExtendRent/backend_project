@@ -7,17 +7,10 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ShiftTypeResponse {
     int id;
     String name;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "ShiftTypeResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

@@ -7,17 +7,11 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class RentalStatusResponse {
     int id;
     String name;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "RentalStatusResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
+
 }

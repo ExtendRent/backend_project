@@ -4,11 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,12 +22,5 @@ public class UpdateBrandRequest {
 
     int brandImageEntityId;
 
-    @Override
-    public String toString() {
-        return "UpdateBrandRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", brandImageEntityId=" + brandImageEntityId +
-                '}';
-    }
+
 }

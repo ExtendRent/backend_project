@@ -2,6 +2,7 @@ package src.controller.vehicle.features.common.status.response;
 
 import lombok.*;
 
+@ToString
 @Builder
 @Setter
 @Getter
@@ -12,12 +13,4 @@ public class VehicleStatusResponse {
     String name;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "VehicleStatusResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

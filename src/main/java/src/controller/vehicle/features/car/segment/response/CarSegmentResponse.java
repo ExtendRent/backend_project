@@ -2,6 +2,7 @@ package src.controller.vehicle.features.car.segment.response;
 
 import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,12 +13,5 @@ public class CarSegmentResponse {
     String name;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "CarSegmentResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
+
 }

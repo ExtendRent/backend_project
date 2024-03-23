@@ -3,6 +3,7 @@ package src.controller.license.request;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -23,13 +24,4 @@ public class UpdateDrivingLicenseTypeRequest {
     @Min(0)
     int licenseLevel;
 
-    @Override
-    public String toString() {
-        return "UpdateDrivingLicenseTypeRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", licenseLevel=" + licenseLevel +
-                '}';
-    }
 }

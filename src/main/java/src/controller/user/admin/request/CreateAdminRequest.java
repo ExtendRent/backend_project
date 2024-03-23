@@ -3,6 +3,7 @@ package src.controller.user.admin.request;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -34,16 +35,5 @@ public class CreateAdminRequest {
     private Double salary;
     private int userImageEntityId;
 
-    @Override
-    public String toString() {
-        return "CreateAdminRequest{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", salary=" + salary +
-                ", userImageEntityId=" + userImageEntityId +
-                '}';
-    }
+
 }

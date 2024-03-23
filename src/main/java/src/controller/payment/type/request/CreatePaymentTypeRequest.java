@@ -4,12 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import src.service.payment.type.model.DefaultPaymentType;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,12 +25,4 @@ public class CreatePaymentTypeRequest {
     @NotNull
     private boolean isActive;
 
-    @Override
-    public String toString() {
-        return "CreatePaymentTypeRequest{" +
-                "paymentTypeEntityName='" + paymentTypeEntityName + '\'' +
-                ", paymentType=" + paymentType +
-                ", isActive=" + isActive +
-                '}';
-    }
 }

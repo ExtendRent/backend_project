@@ -1,13 +1,10 @@
 package src.controller.user.customer.request;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import src.service.user.model.DefaultUserStatus;
 
-
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -45,19 +42,4 @@ public class UpdateCustomerRequest {
     private DefaultUserStatus status;
     private int userImageEntityId;
 
-    @Override
-    public String toString() {
-        return "UpdateCustomerRequest{" +
-                "id=" + id +
-                ", drivingLicenseTypeEntityId=" + drivingLicenseTypeEntityId +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
-                ", status=" + status +
-                ", userImageEntityId=" + userImageEntityId +
-                '}';
-    }
 }

@@ -3,6 +3,7 @@ package src.controller.payment.detail.response;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
+@ToString
 public class PaymentDetailsResponse {
     int id;
     int paymentTypeEntityId;
@@ -18,15 +20,4 @@ public class PaymentDetailsResponse {
     LocalDateTime createdDate;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "PaymentDetailsResponse{" +
-                "id=" + id +
-                ", paymentTypeEntityId=" + paymentTypeEntityId +
-                ", amount=" + amount +
-                ", PaymentTypeEntityName='" + PaymentTypeEntityName + '\'' +
-                ", createdDate=" + createdDate +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

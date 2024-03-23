@@ -3,6 +3,7 @@ package src.controller.user.employee.response;
 import lombok.*;
 import src.service.user.model.UserRole;
 
+@ToString
 @Builder
 @Getter
 @Setter
@@ -18,17 +19,5 @@ public class EmployeeResponse {
     boolean isDeleted;
     UserRole authority;
 
-    @Override
-    public String toString() {
-        return "EmployeeResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", salary=" + salary +
-                ", userImageEntityImageUrl='" + userImageEntityImageUrl + '\'' +
-                ", isDeleted=" + isDeleted +
-                ", authority=" + authority +
-                '}';
-    }
+
 }

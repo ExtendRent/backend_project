@@ -4,13 +4,11 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -36,14 +34,4 @@ public class ShowRentalRequest {
     @FutureOrPresent(message = "EndDate must be a future or present date")
     private LocalDate endDate;
 
-    @Override
-    public String toString() {
-        return "ShowRentalRequest{" +
-                "discountCode='" + discountCode + '\'' +
-                ", customerEntityId=" + customerEntityId +
-                ", carEntityId=" + carEntityId +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
 }

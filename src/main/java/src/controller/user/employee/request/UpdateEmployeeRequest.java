@@ -1,13 +1,10 @@
 package src.controller.user.employee.request;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import src.service.user.model.DefaultUserStatus;
 
-
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -43,18 +40,5 @@ public class UpdateEmployeeRequest {
     private DefaultUserStatus status;
     private int userImageEntityId;
 
-    @Override
-    public String toString() {
-        return "UpdateEmployeeRequest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", salary=" + salary +
-                ", status=" + status +
-                ", userImageEntityId=" + userImageEntityId +
-                '}';
-    }
+
 }

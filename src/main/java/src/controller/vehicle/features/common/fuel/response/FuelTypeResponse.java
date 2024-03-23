@@ -2,6 +2,7 @@ package src.controller.vehicle.features.common.fuel.response;
 
 import lombok.*;
 
+@ToString
 @Builder
 @Setter
 @Getter
@@ -12,12 +13,4 @@ public class FuelTypeResponse {
     String name;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "FuelTypeResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-
+@ToString
 @Getter
 @Setter
 @Builder
@@ -22,12 +22,5 @@ public class UpdateCarModelRequest {
     @NotNull(message = "Marka null olamaz")
     int brandEntityId;
 
-    @Override
-    public String toString() {
-        return "UpdateCarModelRequest{" +
-                "carModelEntityId=" + carModelEntityId +
-                ", carModelEntityName='" + carModelEntityName + '\'' +
-                ", brandEntityId=" + brandEntityId +
-                '}';
-    }
+
 }

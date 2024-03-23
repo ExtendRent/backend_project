@@ -3,12 +3,10 @@ package src.controller.vehicle.features.common.status.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import src.service.vehicle.features.common.status.model.DefaultVehicleStatus;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,11 +21,4 @@ public class CreateVehicleStatusRequest {
     @Pattern(regexp = "^[A-Z-_]+$", message = "Araç durumu tipi sadece büyük harflerden ve boşluksuz olmalıdır.")
     DefaultVehicleStatus vehicleStatus;
 
-    @Override
-    public String toString() {
-        return "CreateVehicleStatusRequest{" +
-                "name='" + name + '\'' +
-                ", vehicleStatus=" + vehicleStatus +
-                '}';
-    }
 }

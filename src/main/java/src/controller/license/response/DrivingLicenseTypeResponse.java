@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class DrivingLicenseTypeResponse {
     int id;
     String name;
@@ -14,14 +15,4 @@ public class DrivingLicenseTypeResponse {
     int licenseLevel;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "DrivingLicenseTypeResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", licenseLevel=" + licenseLevel +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

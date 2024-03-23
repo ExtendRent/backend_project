@@ -1,12 +1,10 @@
 package src.controller.user.admin.request;
 
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import src.service.user.model.DefaultUserStatus;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -41,18 +39,5 @@ public class UpdateAdminRequest {
     private DefaultUserStatus status;
     private int userImageEntityId;
 
-    @Override
-    public String toString() {
-        return "UpdateAdminRequest{" +
-                "salary=" + salary +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", status=" + status +
-                ", userImageEntityId=" + userImageEntityId +
-                '}';
-    }
+
 }

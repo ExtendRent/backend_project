@@ -2,6 +2,7 @@ package src.controller.vehicle.features.common.color.response;
 
 import lombok.*;
 
+@ToString
 @Builder
 @Setter
 @Getter
@@ -12,12 +13,4 @@ public class ColorResponse {
     String name;
     boolean isDeleted;
 
-    @Override
-    public String toString() {
-        return "ColorResponse{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

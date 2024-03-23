@@ -3,6 +3,7 @@ package src.controller.user.employee.request;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -34,16 +35,5 @@ public class CreateEmployeeRequest {
     private Double salary;
     private int userImageEntityId;
 
-    @Override
-    public String toString() {
-        return "CreateEmployeeRequest{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", salary=" + salary +
-                ", userImageEntityId=" + userImageEntityId +
-                '}';
-    }
+
 }

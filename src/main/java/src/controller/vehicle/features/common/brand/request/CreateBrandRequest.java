@@ -4,11 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,11 +20,5 @@ public class CreateBrandRequest {
     @NotNull(message = "Fotoğraf null olamaz")
     int brandImageEntityId;
 
-    @Override
-    public String toString() {
-        return "CreateBrandRequest{" +
-                "name='" + name + '\'' +
-                ", brandImageEntityId=" + brandImageEntityId +
-                '}';
-    }
+
 }
