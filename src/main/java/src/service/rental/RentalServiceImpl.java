@@ -1,6 +1,7 @@
 package src.service.rental;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import src.controller.rental.request.CreateRentalRequest;
@@ -23,11 +24,15 @@ import src.service.vehicle.car.CarService;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static src.controller.AnsiColorConstant.ANSI_BOLD;
+import static src.controller.AnsiColorConstant.ANSI_RESET;
 import static src.core.exception.type.ValidationExceptionType.VALIDATION_EXCEPTION;
+import static src.service.vehicle.features.common.status.model.DefaultVehicleStatus.AVAILABLE;
 import static src.service.vehicle.features.common.status.model.DefaultVehicleStatus.IN_USE;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RentalServiceImpl implements RentalService {
 
     private final RentalEntityService entityService;
@@ -41,6 +46,7 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public ShowRentalResponse showRentalDetails(ShowRentalRequest showRentalRequest) {
         rules.check(showRentalRequest);
+        log.info("checking car availability between {} and {}", showRentalRequest.getStartDate(), showRentalRequest.getEndDate());
         if (carService.isCarAvailableBetween(showRentalRequest.getCarEntityId(),
                 showRentalRequest.getStartDate(), showRentalRequest.getEndDate())
         ) {
@@ -57,6 +63,7 @@ public class RentalServiceImpl implements RentalService {
 
         RentalEntity rentalEntity = entityService.create(createRentalRequest);
         try {
+            log.info("trying to pay for rental: {}", createRentalRequest);
             rentalEntity.setPaymentDetailsEntity(paymentService.pay(createRentalRequest, rentalEntity));
             entityService.update(rentalEntity);
             carService.addRental(createRentalRequest.getCarEntityId(), rentalEntity);
@@ -69,7 +76,7 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public RentalResponse returnCar(ReturnRentalRequest returnRentalRequest) {
         // ceza işlemleri , indirim işlemleri iptali kontrol edilecek sonuçta da totalPrice güncelleme
-        rules.checkIsActive(returnRentalRequest.getId());
+        rules.check(returnRentalRequest);
         RentalEntity rentalEntity = this.returnReqeustToEntity(returnRentalRequest);
         CarEntity carEntity = rentalEntity.getCarEntity();
         carEntity.setKilometer(rentalEntity.getEndKilometer());
@@ -81,11 +88,12 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public RentalResponse startRental(int rentalId) {
+        log.info("checking rental status by id: {}", ANSI_BOLD + rentalId + ANSI_RESET);
         rules.checkIsActive(rentalId);
         RentalEntity rentalEntity = entityService.getById(rentalId);
         CarEntity carEntity = rentalEntity.getCarEntity();
         rentalEntity.setStartKilometer(carEntity.getKilometer());
-        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(DefaultRentalStatus.ACTIVE));
+        rentalEntity.setRentalStatusEntity(rentalStatusService.getByStatus(DefaultRentalStatus.STARTED));
         carService.changeStatus(carEntity, IN_USE);
         return entityService.update(rentalEntity).toModel();
     }

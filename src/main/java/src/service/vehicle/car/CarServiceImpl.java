@@ -1,6 +1,7 @@
 package src.service.vehicle.car;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import src.controller.vehicle.car.request.CreateCarRequest;
@@ -21,11 +22,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static src.controller.AnsiColorConstant.ANSI_BOLD;
+import static src.controller.AnsiColorConstant.ANSI_RESET;
 import static src.core.exception.type.NotFoundExceptionType.VEHICLE_STATUS_NOT_FOUND;
 import static src.service.vehicle.features.common.status.model.DefaultVehicleStatus.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CarServiceImpl implements CarService {
 
     private final CarEntityService entityService;
@@ -127,7 +131,7 @@ public class CarServiceImpl implements CarService {
                                             Integer seat, Integer luggage, Integer modelId,
                                             Integer startYear, Integer endYear, Integer brandId,
                                             Integer fuelTypeId, Integer shiftTypeId, Integer segmentId) {
-
+        log.info("filtering cars...");
         List<CarEntity> filteredCars = entityService.getAllFiltered(
                 startPrice, endPrice,
                 statusId,
@@ -159,7 +163,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void softDelete(int id) {
-        this.changeStatus(entityService.getById(id), DELETED);
+        changeStatus(entityService.getById(id), DELETED);
     }
 
     @Override
@@ -167,7 +171,7 @@ public class CarServiceImpl implements CarService {
         CarEntity carEntity = entityService.getById(carId);
         carEntity.getRentalList().add(rentalEntity);
         entityService.update(carEntity);
-        this.changeStatus(carEntity, BOOKED);
+        changeStatus(carEntity, BOOKED);
     }
 
     @Override
@@ -175,7 +179,7 @@ public class CarServiceImpl implements CarService {
         CarEntity carEntity = entityService.getById(carId);
         carEntity.getRentalList().remove(rentalEntity);
         if (carEntity.getRentalList().isEmpty()) {
-            this.changeStatus(carEntity, AVAILABLE);
+            changeStatus(carEntity, AVAILABLE);
         }
         entityService.update(carEntity);
     }
@@ -236,7 +240,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void changeStatus(CarEntity carEntity, DefaultVehicleStatus status) {
-
+        log.info("changing car status to {} by id: {}", ANSI_BOLD + status.getLabel(), carEntity.getId() + ANSI_RESET);
         boolean available;
         switch (status) {
             case AVAILABLE, BOOKED -> {

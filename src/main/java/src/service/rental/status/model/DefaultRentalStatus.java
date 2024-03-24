@@ -2,7 +2,7 @@ package src.service.rental.status.model;
 
 public enum DefaultRentalStatus {
     WAITING("Beklemede"),
-    ACTIVE("Aktif"),
+    STARTED("Başladı"),
     FINISHED("Tamamlandı"),
     CANCELED("İptal");
     private final String label;

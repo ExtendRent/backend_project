@@ -61,6 +61,7 @@ public class RentalRules implements BaseRules {
     }
 
     public void check(ReturnRentalRequest returnRentalRequest) {
+        checkIsActive(returnRentalRequest.getId());
     }
 
 

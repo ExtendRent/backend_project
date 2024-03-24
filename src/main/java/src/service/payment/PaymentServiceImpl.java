@@ -1,6 +1,7 @@
 package src.service.payment;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import src.controller.payment.CreditCardInformation;
 import src.controller.rental.request.CreateRentalRequest;
@@ -17,6 +18,7 @@ import static src.core.exception.type.PaymentExceptionType.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PaymentServiceImpl implements PaymentService {
     private final PayWithCreditCard payWithCreditCard;
     private final PaymentRules rules;
@@ -56,6 +58,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private PaymentDetailsEntity createPaymentDetailsEntity(CreateRentalRequest createRentalRequest,
                                                             RentalEntity rentalEntity, boolean isRejected) {
+        log.info("creating payment details...");
         PaymentDetailsEntity paymentDetails = new PaymentDetailsEntity(
                 createRentalRequest.getAmount(),
                 paymentTypeService.getById(createRentalRequest.getPaymentTypeId())
