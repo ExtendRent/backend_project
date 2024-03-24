@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import src.core.config.SeedDataConfig;
 import src.core.utilities.ResponseTimeMeasurement;
-import src.core.utilities.logger.service.ServiceLogger;
+import src.core.utilities.aspect.logger.service.ServiceLogger;
 
 import java.io.IOException;
 

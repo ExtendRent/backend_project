@@ -1,4 +1,4 @@
-package src.core.utilities.logger.service;
+package src.core.utilities.aspect.logger.service;
 
 public final class ServiceLogConstant {
     public static final String FIXING_REQUEST_MESSAGE = "Fixing request...";

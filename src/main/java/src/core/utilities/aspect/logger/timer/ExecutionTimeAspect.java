@@ -1,4 +1,4 @@
-package src.core.utilities.logger.timer;
+package src.core.utilities.aspect.logger.timer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.After;
