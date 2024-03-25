@@ -187,7 +187,7 @@ public class RentalControllerTest {
         when(rentalService.returnCar(returnRentalRequest)).thenReturn(RentalResponse.builder().build());
 
         // When
-        ResponseEntity<TResponse<?>> responseEntity = rentalController.returnRental(returnRentalRequest);
+        ResponseEntity<TResponse<RentalResponse>> responseEntity = rentalController.returnRental(returnRentalRequest);
 
         // Then
         verify(rentalService, times(1)).returnCar(returnRentalRequest);

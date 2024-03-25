@@ -30,23 +30,23 @@ public class AuthenticationController extends BaseController {
         log.info(USER_SIGN_UP_REQUEST_RECEIVED, request.getEmailAddress());
         authenticationService.signUp(request);
         log.info(USER_SIGN_UP_SUCCESSFUL, request.getEmailAddress());
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return answer(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/signin")
     ResponseEntity<TResponse<JwtToken>> signIn(@Valid @RequestBody SignInRequest request) {
         log.info(USER_SIGN_IN_REQUEST_RECEIVED, request.getEmail());
-        JwtToken jwtToken = authenticationService.signIn(request);
+        JwtToken response = authenticationService.signIn(request);
         log.info(USER_SIGN_IN_SUCCESSFUL, request.getEmail());
-        return answer(jwtToken, HttpStatus.OK);
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping("/isUserTrue")
     public ResponseEntity<TResponse<Boolean>> isCustomerTrue(
             @RequestParam String email, @RequestParam String password) {
         log.info(CHECKING_USER_CREDENTIALS, email);
-        boolean isAuthenticated = authenticationService.isUserTrue(email, password);
+        boolean response = authenticationService.isUserTrue(email, password);
         log.info(USER_CREDENTIALS_CHECKED, email);
-        return answer(isAuthenticated, HttpStatus.OK);
+        return answer(response, HttpStatus.OK);
     }
 }

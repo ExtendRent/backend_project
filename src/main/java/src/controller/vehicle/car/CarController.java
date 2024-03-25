@@ -10,6 +10,7 @@ import src.controller.TResponse;
 import src.controller.vehicle.car.request.CreateCarRequest;
 import src.controller.vehicle.car.request.UpdateCarRequest;
 import src.controller.vehicle.car.response.CarResponse;
+import src.core.rest.BaseController;
 import src.service.vehicle.car.CarService;
 
 import java.io.IOException;
@@ -22,71 +23,56 @@ import static src.controller.vehicle.car.LogConstant.*;
 @Slf4j
 @RequestMapping("api/v1/cars")
 @RequiredArgsConstructor
-public class CarController {
+public class CarController extends BaseController {
 
     private final CarService carService;
 
     @PostMapping
     public ResponseEntity<Void> createCar(@RequestBody @Valid CreateCarRequest createCarRequest) throws IOException {
         log.info(CREATING_NEW_CAR, createCarRequest);
-        this.carService.create(createCarRequest);
+        carService.create(createCarRequest);
         log.info(CAR_SUCCESSFULLY_CREATED);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return answer(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
     public ResponseEntity<TResponse<CarResponse>> updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) throws IOException {
         log.info(UPDATING_CAR, updateCarRequest);
-        CarResponse updatedCar = this.carService.update(updateCarRequest);
-        log.info(CAR_UPDATED, updatedCar);
-        return new ResponseEntity<>(TResponse.<CarResponse>tResponseBuilder()
-                .response(updatedCar)
-                .build(), HttpStatus.OK
-        );
+        CarResponse response = carService.update(updateCarRequest);
+        log.info(CAR_UPDATED, response);
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TResponse<CarResponse>> getById(@PathVariable int id) {
         log.info(GETTING_CAR_DETAILS, id);
-        CarResponse car = this.carService.getById(id);
-        log.info(RETRIEVED_CAR_DETAILS, car);
-        return new ResponseEntity<>(TResponse.<CarResponse>tResponseBuilder()
-                .response(car)
-                .build(), HttpStatus.OK
-        );
+        CarResponse response = carService.getById(id);
+        log.info(RETRIEVED_CAR_DETAILS, response);
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<TResponse<List<CarResponse>>> getAll() {
         log.info(RETRIEVING_ALL_CARS);
-        List<CarResponse> cars = this.carService.getAll();
-        log.info(RETRIEVED_ALL_CARS, cars.size());
-        return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
-                .response(cars)
-                .build(), HttpStatus.OK
-        );
+        List<CarResponse> response = carService.getAll();
+        log.info(RETRIEVED_ALL_CARS, response.size());
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping("/count/{isDeleted}")
     public ResponseEntity<TResponse<Integer>> getCountByDeletedState(@PathVariable boolean isDeleted) {
         log.info(RETRIEVING_CAR_COUNT_BY_DELETED_STATE, isDeleted);
-        int count = this.carService.getCountByDeletedState(isDeleted);
-        log.info(RETRIEVED_CAR_COUNT_BY_DELETED_STATE, count);
-        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
-                .response(count)
-                .build(), HttpStatus.OK
-        );
+        int response = carService.getCountByDeletedState(isDeleted);
+        log.info(RETRIEVED_CAR_COUNT_BY_DELETED_STATE, response);
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping("/countByStatus/{statusId}")
     public ResponseEntity<TResponse<Integer>> getCountByStatusId(@PathVariable int statusId) {
         log.info(RETRIEVING_CAR_COUNT_BY_STATUS_ID, statusId);
-        int count = this.carService.getCountByStatusId(statusId);
-        log.info(RETRIEVED_CAR_COUNT_BY_STATUS_ID, count);
-        return new ResponseEntity<>(TResponse.<Integer>tResponseBuilder()
-                .response(count)
-                .build(), HttpStatus.OK
-        );
+        int response = carService.getCountByStatusId(statusId);
+        log.info(RETRIEVED_CAR_COUNT_BY_STATUS_ID, response);
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping("/filter")
@@ -111,7 +97,7 @@ public class CarController {
             @RequestParam(name = "segmentId", required = false) Integer segmentId
     ) {
         log.info(FILTERING_CARS);
-        List<CarResponse> filteredCars = carService.getAllFiltered(
+        List<CarResponse> response = carService.getAllFiltered(
                 customerId, licenseSuitable, startDate,
                 endDate, startPrice,
                 endPrice, isDeleted,
@@ -119,11 +105,8 @@ public class CarController {
                 modelId, startYear, endYear,
                 brandId, fuelTypeId,
                 shiftTypeId, segmentId);
-        log.info(FILTERED_CARS, filteredCars.size());
-        return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
-                .response(filteredCars)
-                .build(), HttpStatus.OK
-        );
+        log.info(FILTERED_CARS, response.size());
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping(params = {"startDate", "endDate"})
@@ -131,32 +114,26 @@ public class CarController {
             @RequestParam(name = "startDate", required = false) LocalDate startDate,
             @RequestParam(name = "endDate", required = false) LocalDate endDate) {
         log.info(RETRIEVING_CARS_BY_AVAILABILITY, startDate, endDate);
-        List<CarResponse> cars = this.carService.getAllByAvailabilityBetween(startDate, endDate);
-        log.info(RETRIEVED_CARS_BY_AVAILABILITY, cars.size());
-        return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
-                .response(cars)
-                .build(), HttpStatus.OK
-        );
+        List<CarResponse> response = carService.getAllByAvailabilityBetween(startDate, endDate);
+        log.info(RETRIEVED_CARS_BY_AVAILABILITY, response.size());
+        return answer(response, HttpStatus.OK);
     }
 
     @GetMapping(params = "isDeleted")
     public ResponseEntity<TResponse<List<CarResponse>>> getAllByDeletedState(
             @RequestParam(value = "isDeleted", required = false) boolean isDeleted) {
         log.info(RETRIEVING_ALL_CARS_BY_DELETED_STATE, isDeleted);
-        List<CarResponse> cars = this.carService.getAllByDeletedState(isDeleted);
-        log.info(RETRIEVED_ALL_CARS_BY_DELETED_STATE, cars.size());
-        return new ResponseEntity<>(TResponse.<List<CarResponse>>tResponseBuilder()
-                .response(cars)
-                .build(), HttpStatus.OK
-        );
+        List<CarResponse> response = carService.getAllByDeletedState(isDeleted);
+        log.info(RETRIEVED_ALL_CARS_BY_DELETED_STATE, response.size());
+        return answer(response, HttpStatus.OK);
     }
 
     @DeleteMapping(params = {"id", "isHardDelete"})
     public ResponseEntity<Void> delete(
             @RequestParam(name = "id") int id, @RequestParam(value = "isHardDelete") boolean isHardDelete) throws IOException {
         log.info(DELETING_CAR_WITH_ID, id, isHardDelete);
-        this.carService.delete(id, isHardDelete);
+        carService.delete(id, isHardDelete);
         log.info(CAR_DELETED_SUCCESSFULLY_WITH_ID, id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return answer(HttpStatus.NO_CONTENT);
     }
 }
