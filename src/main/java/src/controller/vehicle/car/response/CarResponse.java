@@ -34,6 +34,7 @@ public class CarResponse {
     String expectedMinDrivingLicenseTypeName;
     String imageEntityImageUrl;
 
+    @Builder.Default
     Boolean isLicenseTypeSuitable = true;
 
     String details;
