@@ -14,6 +14,7 @@ import src.controller.rental.request.UpdateRentalRequest;
 import src.controller.rental.response.RentalResponse;
 import src.controller.rental.response.RentalStatusResponse;
 import src.controller.rental.response.ShowRentalResponse;
+import src.core.rest.BaseController;
 import src.service.rental.RentalService;
 import src.service.rental.status.RentalStatusService;
 
@@ -25,7 +26,7 @@ import static src.controller.rental.LogConstant.*;
 @Slf4j
 @RequestMapping("api/v1/rentals")
 @RequiredArgsConstructor
-public class RentalController {
+public class RentalController extends BaseController {
     private final RentalService rentalService;
     private final RentalStatusService rentalStatusService;
 
@@ -34,10 +35,7 @@ public class RentalController {
         log.info(SHOWING_RENTAL_DETAILS, showRentalRequest.toString());
         ShowRentalResponse response = this.rentalService.showRentalDetails(showRentalRequest);
         log.info(RENTAL_DETAILS_SHOWN);
-        return new ResponseEntity<>(TResponse.<ShowRentalResponse>tResponseBuilder()
-                .response(response)
-                .build(), HttpStatus.OK
-        );
+        return answer(response, HttpStatus.OK);
     }
 
     @PostMapping
@@ -46,7 +44,7 @@ public class RentalController {
         log.info(CREATING_NEW_RENTAL, createRentalRequest.toString());
         rentalService.create(createRentalRequest);
         log.info(RENTAL_SUCCESSFULLY_CREATED);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return answer(HttpStatus.NO_CONTENT);
     }
 
 
