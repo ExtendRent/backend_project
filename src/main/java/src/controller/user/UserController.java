@@ -18,7 +18,7 @@ import static src.controller.user.LogConstant.*;
 
 @RestController
 @Slf4j
-@RequestMapping("api/v1/response")
+@RequestMapping("api/v1/users")
 @RequiredArgsConstructor
 public class UserController extends BaseController {
     private final UserService userService;
