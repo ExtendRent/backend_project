@@ -1,10 +1,7 @@
 package src.repository.payment.type;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import src.controller.payment.type.response.PaymentTypeResponse;
 import src.core.BaseEntity;
@@ -26,6 +23,7 @@ public class PaymentTypeEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private DefaultPaymentType paymentType;
 
+    @Builder.Default
     @Column(name = "is_active")
     private boolean isActive = true;
 

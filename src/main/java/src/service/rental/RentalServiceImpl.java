@@ -27,7 +27,6 @@ import java.util.List;
 import static src.controller.AnsiColorConstant.ANSI_BOLD;
 import static src.controller.AnsiColorConstant.ANSI_RESET;
 import static src.core.exception.type.ValidationExceptionType.VALIDATION_EXCEPTION;
-import static src.service.vehicle.features.common.status.model.DefaultVehicleStatus.AVAILABLE;
 import static src.service.vehicle.features.common.status.model.DefaultVehicleStatus.IN_USE;
 
 @Service

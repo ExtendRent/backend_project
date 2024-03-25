@@ -1,10 +1,7 @@
 package src.repository.rental;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import src.controller.rental.response.RentalResponse;
 import src.core.BaseEntity;
@@ -32,9 +29,11 @@ public class RentalEntity extends BaseEntity {
     @JoinColumn(name = "car_id", nullable = false)
     private CarEntity carEntity;
 
+    @Builder.Default
     @Column(name = "start_kilometer") //EndKilometer ve ReturnDate null bırakılmalıdır.
     private Integer startKilometer = null;
 
+    @Builder.Default
     @Column(name = "end_kilometer")
     private Integer endKilometer = null;
 
