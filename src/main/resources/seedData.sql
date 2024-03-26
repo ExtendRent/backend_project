@@ -1,0 +1,25 @@
+
+--IF NOT EXISTS (SELECT 1 FROM colors WHERE id = 1) THEN
+--    INSERT INTO colors (id, name, is_deleted, deleted_at, last_modified, created_date) VALUES
+--    (1, 'WHITE', FALSE, NULL, NULL, NOW()),
+--    (2, 'BLACK', FALSE, NULL, NULL, NOW()),
+--    (3, 'RED', FALSE, NULL, NULL, NOW()),
+--    (4, 'GREY', FALSE, NULL, NULL, NOW()),
+--    (5, 'BLUE', FALSE, NULL, NULL, NOW());
+--END IF;
+--
+
+--IF NOT EXISTS (SELECT 1 FROM brands WHERE id = 1) THEN
+--    INSERT INTO brands (id, name, is_deleted, deleted_at, last_modified, created_date) VALUES
+--    (1, 'Brand1', FALSE, NULL, NULL, NOW()),
+--    (2, 'Brand2', FALSE, NULL, NULL, NOW()),
+--    (3, 'Brand3', FALSE, NULL, NULL, NOW());
+--END IF;
+--
+--
+--IF NOT EXISTS (SELECT 1 FROM fuel_types WHERE id = 1) THEN
+--        INSERT INTO fuel_types (id, name, is_deleted, deleted_at, last_modified, created_date) VALUES
+--        (1, 'FuelType1', FALSE, NULL, NULL, NOW()),
+--        (2, 'FuelType2', FALSE, NULL, NULL, NOW()),
+--        (3, 'FuelType3', FALSE, NULL, NULL, NOW());
+--    END IF;
