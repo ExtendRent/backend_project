@@ -43,7 +43,6 @@ public class BaseEntity {
     @PreUpdate
     protected void beforeUpdate() {
         lastModified = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-        isDeleted = false;
     }
 
 }
