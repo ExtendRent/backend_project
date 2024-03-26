@@ -11,7 +11,6 @@ import src.repository.image.UserImageRepository;
 import src.service.external.CloudinaryServiceImpl;
 import src.service.image.ImageRules;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +26,7 @@ public class UserImageServiceImpl implements UserImageService {
     private final ImageRules rules;
 
     @Override
-    public int create(MultipartFile file, String emailAddress) throws IOException {
+    public int create(MultipartFile file, String emailAddress) {
         if (file == null) {
             return getIdByName("default_user_image");
         }

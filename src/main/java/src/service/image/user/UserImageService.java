@@ -3,11 +3,10 @@ package src.service.image.user;
 import org.springframework.web.multipart.MultipartFile;
 import src.repository.image.UserImageEntity;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface UserImageService {
-    int create(MultipartFile file, String emailAddress) throws IOException;
+    int create(MultipartFile file, String emailAddress);
 
     byte[] downloadImage(String name);
 

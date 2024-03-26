@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CarImageService {
 
-    CarImageEntity create(MultipartFile file, String licensePlate) throws IOException;
+    CarImageEntity create(MultipartFile file, String licensePlate);
 
     byte[] downloadImage(String name);
 

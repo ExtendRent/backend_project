@@ -27,7 +27,7 @@ public class CarImageServiceImpl implements CarImageService {
     private final CloudinaryServiceImpl cloudinaryServiceImpl;
 
     @Override
-    public CarImageEntity create(MultipartFile file, String licensePlate) throws IOException {
+    public CarImageEntity create(MultipartFile file, String licensePlate) {
 
         try {
             byte[] newByte = ImageUtils.resizeImage(file.getBytes(), 1920, 1080);

@@ -13,8 +13,6 @@ import src.service.image.brand.BrandImageService;
 import src.service.image.car.CarImageService;
 import src.service.image.user.UserImageService;
 
-import java.io.IOException;
-
 import static src.controller.image.LogConstant.*;
 
 @RestController
@@ -30,7 +28,7 @@ public class ImageController extends BaseController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TResponse<Integer>> uploadCarImage(
             @RequestPart(value = "image", required = false) MultipartFile image,
-            @RequestParam("licensePlate") String licensePlate) throws IOException {
+            @RequestParam("licensePlate") String licensePlate) {
         log.info(UPLOADING_CAR_IMAGE, licensePlate);
         Integer response = carImageService.create(image, licensePlate).getId();
         log.info(CAR_IMAGE_UPLOADED_SUCCESSFULLY, licensePlate);
@@ -41,7 +39,7 @@ public class ImageController extends BaseController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TResponse<Integer>> uploadUserImage(
             @RequestPart(value = "image", required = false) MultipartFile image,
-            @RequestParam(value = "emailAddress", required = false) String emailAddress) throws IOException {
+            @RequestParam(value = "emailAddress", required = false) String emailAddress){
         log.info(UPLOADING_USER_IMAGE, emailAddress);
         Integer response = userImageService.create(image, emailAddress);
         log.info(USER_IMAGE_UPLOADED_SUCCESSFULLY, emailAddress);
@@ -52,7 +50,7 @@ public class ImageController extends BaseController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TResponse<Integer>> uploadBrandImage(
             @RequestPart("image") MultipartFile image,
-            @RequestParam("brandName") String brandName) throws IOException {
+            @RequestParam("brandName") String brandName){
         log.info(UPLOADING_BRAND_IMAGE, brandName);
         Integer response = brandImageService.create(image, brandName).getId();
         log.info(BRAND_IMAGE_UPLOADED_SUCCESSFULLY, brandName);

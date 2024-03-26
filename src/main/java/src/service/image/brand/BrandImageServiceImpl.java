@@ -11,7 +11,6 @@ import src.repository.image.BrandImageRepository;
 import src.service.external.CloudinaryServiceImpl;
 import src.service.image.ImageRules;
 
-import java.io.IOException;
 import java.util.List;
 
 import static src.core.exception.type.FileExceptionType.PHOTO_DELETE_FAILED;
@@ -26,7 +25,7 @@ public class BrandImageServiceImpl implements BrandImageService {
     private final CloudinaryServiceImpl cloudinaryServiceImpl;
 
     @Override
-    public BrandImageEntity create(MultipartFile file, String brandName) throws IOException {
+    public BrandImageEntity create(MultipartFile file, String brandName) {
         try {
             String imageUrl = cloudinaryServiceImpl.uploadFileBrand(file, brandName);
             return repository.save(BrandImageEntity.brandImageBuilder()
